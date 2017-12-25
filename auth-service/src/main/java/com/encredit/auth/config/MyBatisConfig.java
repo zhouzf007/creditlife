@@ -17,7 +17,6 @@ import javax.sql.DataSource;
  * Created by zhouzf on 2017/11/30.
  */
 @Configuration
-//加上这个注解，使得支持事务
 @EnableTransactionManagement
 public class MyBatisConfig implements TransactionManagementConfigurer {
     @Autowired
