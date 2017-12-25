@@ -1,0 +1,175 @@
+摘要
+
+Redis在项目中使用频率是很高的，使用的时候经常都是以Redis集群的形式。现整理一下Spring-Boot整合redis cluster最基础配置，方便以后查阅。
+依赖包
+
+下面2个依赖是spring-boot集成Redis的必备依赖。
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter</artifactId>
+    <version>${spring-boot.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-redis</artifactId>
+    <version>1.4.4.RELEASE</version>
+</dependency>
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+
+如果启用spring-boot单元测试，还需要加入下面的依赖。
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <version>${spring-boot.version}</version>
+    <scope>test</scope>
+</dependency>
+
+    1
+    2
+    3
+    4
+    5
+    6
+
+配置
+
+application.yml配置Redis集群节点信息
+
+spring:
+  redis:
+    cluster:
+      nodes:
+        - redis1.itclj.com:7000
+        - redis1.itclj.com:7001
+        - redis2.itclj.com:7002
+        - redis2.itclj.com:7003
+        - redis3.itclj.com:7004
+        - redis3.itclj.com:7005
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+
+初始化
+
+spring-boot默认都采用注解方式初始化bean。
+首先建一个redis集群配置bean，从配置文件中读取配置到配置bean里面。
+其次建一个redis Cluster初始化配置bean，用于初始化Redis Cluster。
+集群配置Bean
+
+由于复杂配置项，如数组不能通过@Value注解直接读取配置项，所有只能采用新建配置Bean通过@ConfigurationProperties注解读取。
+
+@Configuration
+@ConfigurationProperties(prefix = "spring.redis.cluster")
+public class RedisClusterProperties {
+
+    //集群节点
+    private List<String> nodes=new ArrayList<>();
+
+    public List<String> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(List<String> nodes) {
+        this.nodes = nodes;
+    }
+}
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    15
+
+初始化RedisCluster
+
+@Configuration
+@ConditionalOnClass(RedisClusterConfig.class)
+@EnableConfigurationProperties(RedisClusterProperties.class)
+public class RedisClusterConfig {
+
+    @Resource
+    private RedisClusterProperties redisClusterProperties;
+
+    @Bean
+    public JedisCluster redisCluster(){
+
+        Set<HostAndPort> nodes = new HashSet<>();
+        for (String node:redisClusterProperties.getNodes()){
+            String[] parts= StringUtils.split(node,":");
+            Assert.state(parts.length==2, "redis node shoule be defined as 'host:port', not '" + Arrays.toString(parts) + "'");
+            nodes.add(new HostAndPort(parts[0], Integer.valueOf(parts[1])));
+        }
+
+        return new JedisCluster(nodes);
+    }
+
+}
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    15
+    16
+    17
+    18
+    19
+    20
+    21
+    22
+
+测试
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class RedisTest {
+
+    @Autowired
+    private JedisCluster jedisCluster;
+
+    @Test
+    public void get(){
+       System.out.println("=============="+jedisCluster.get("youqian-spread-sync-to-mysql-date"));
+    }
+
+}
