@@ -39,10 +39,15 @@
                         <version>5.1.38</version>
                     </dependency>
                     <!--mybatis-generator扩展插件-->
-                    <dependency>
+                    <!--<dependency>
                         <groupId>com.newseax</groupId>
                         <artifactId>mybatisGeneratorExtPlugin</artifactId>
                         <version>1.0-SNAPSHOT</version>
+                    </dependency>-->
+                    <dependency>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>codeGeneratorExtPlugin</artifactId>
+                        <version>1.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
