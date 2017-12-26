@@ -40,6 +40,7 @@
         <docker.image.prefix>spring-boot-cloud</docker.image.prefix>
         <spring.cloud.version>Dalston.SR4</spring.cloud.version>
         <spring-boot-admin.version>1.5.4</spring-boot-admin.version>
+        <mybatis-spring-boot.version>1.3.1</mybatis-spring-boot.version>
     </properties>
 
     <dependencies>
