@@ -1,5 +1,6 @@
 package com.encredit.order;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 @EnableCircuitBreaker
 @EnableOAuth2Client
+@MapperScan(basePackages="com.encredit.order.dao",sqlSessionFactoryRef="sqlSessionFactory")
 public class OrderServiceApplication {
 
     public static void main(String[] args) {
