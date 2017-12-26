@@ -30,6 +30,7 @@
         <module>credit-service</module>
         <module>msg-service</module>
         <module>common</module>
+        <module>pojo</module>
     </modules>
 
     <properties>
