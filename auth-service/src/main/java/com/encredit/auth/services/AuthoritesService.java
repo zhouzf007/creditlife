@@ -1,9 +1,9 @@
 package com.encredit.auth.services;
 
-import com.encredit.auth.pojo.Authorities;
-import com.encredit.auth.pojo.AuthoritiesExample;
-import com.encredit.auth.pojo.Users;
-import com.encredit.auth.pojo.UsersExample;
+import com.entrobus.credit.auth.pojo.Authorities;
+import com.entrobus.credit.auth.pojo.AuthoritiesExample;
+import com.entrobus.credit.auth.pojo.Users;
+import com.entrobus.credit.auth.pojo.UsersExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.encredit.auth.dao;
 
-import com.encredit.auth.pojo.Users;
-import com.encredit.auth.pojo.UsersExample;
+import com.entrobus.credit.auth.pojo.Users;
+import com.entrobus.credit.auth.pojo.UsersExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
