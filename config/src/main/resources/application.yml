@@ -17,12 +17,25 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/zhouzf007/spring-boot-cloud
+          uri: https://gitlab.newseax.com/credit/creditlife
           search-paths: config-repo
+#server:
+#  port: 8088
+#spring:
+#  profiles:
+#    active: native
+#  cloud:
+#    config:
+#      server:
+#        health:
+#          enabled:  false
+#        native:
+#          searchLocations: D:/ideaprojects/cloud-config-repo
+
   rabbitmq:
     host: localhost
 
-security:
-  user:
-    name: user
-    password: ${CONFIG_SERVER_PASSWORD:password}
+#security:
+#  user:
+#    name: user
+#    password: ${CONFIG_SERVER_PASSWORD:password}
