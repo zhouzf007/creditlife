@@ -9,14 +9,22 @@ eureka:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
 
-#security:
-#  user:
-#    name: user
-#    password: password
-#  oauth2:
-#    client:
-#      clientId: order-service
-#      clientSecret: ${security.user.password}
-#      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
-#      grant-type: client_credentials
-#      scope: server
+security:
+  user:
+    name: user
+    password: password
+  oauth2:
+    client:
+      clientId: order-service
+      clientSecret: ${security.user.password}
+      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+spring:
+  datasource:
+    url: jdbc:mysql://119.29.177.249:3306/creditlife?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: phoenix
+    password: shangshangABCD123456
+#  jpa:
+#    show-sql: true
