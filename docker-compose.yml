@@ -29,7 +29,7 @@ services:
     image: spring-boot-cloud/auth-service
     ports:
       - "5000:5000"
-  svca-service:
-    image: spring-boot-cloud/svca-service
-  svcb-service:
-    image: spring-boot-cloud/svcb-service
+  user-service:
+    image: spring-boot-cloud/user-service
+  order-service:
+    image: spring-boot-cloud/order-service
