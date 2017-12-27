@@ -28,6 +28,15 @@ spring:
       enabled: false
     scheduled:
       skip-pattern: "^org.*HystrixStreamTask$"
+  redis:
+    cluster:
+      nodes:
+        - 10.1.1.241:7000
+        - 10.1.1.241:7001
+        - 10.1.1.241:7002
+        - 10.1.1.241:7003
+        - 10.1.1.241:7004
+        - 10.1.1.241:7005
 
 authserver:
     hostname: localhost
@@ -39,22 +48,5 @@ authserver:
 #    resource:
 #      user-info-uri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/current
 
-redis:
-  cluster:
-    nodes:
-      - 10.1.1.241:7000
-      - 10.1.1.241:7001
-      - 10.1.1.241:7002
-      - 10.1.1.241:7003
-      - 10.1.1.241:7004
-      - 10.1.1.241:7005
 
-#redis:
-#      host: localhost
-#      port: 6379
-#      password:
-#      pool:
-#        max-active: 8
-#        max-idle: 8
-#        min-idle: 0
-#        max-wait: 10000
+
