@@ -17,8 +17,11 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/zhouzf007/del
-#          search-paths: config-repo
+          uri: https://gitlab.newseax.com/credit/creditlife.git
+          search-paths: config-repo
+          username: root
+          password: KcjJb17151
+
 #server:
 #  port: 8088
 #spring:
