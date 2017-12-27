@@ -17,8 +17,8 @@ spring:
     config:
       server:
         git:
-          uri: https://gitlab.newseax.common/credit/creditlife
-          search-paths: config-repo
+          uri: https://github.com/zhouzf007/del
+#          search-paths: config-repo
 #server:
 #  port: 8088
 #spring:
@@ -30,12 +30,12 @@ spring:
 #        health:
 #          enabled:  false
 #        native:
-#          searchLocations: D:/ideaprojects/cloud-config-repo
+#          searchLocations: F:\newseax-git6\creditlife\config-repo
 
   rabbitmq:
     host: localhost
 
-#security:
-#  user:
-#    name: user
-#    password: ${CONFIG_SERVER_PASSWORD:password}
+security:
+  user:
+    name: user
+    password: ${CONFIG_SERVER_PASSWORD:password}
