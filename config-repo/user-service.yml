@@ -32,6 +32,14 @@ spring:
     password: shangshangABCD123456
 #    password: {cipher}AQBtJpXYlTqs+2UwUyAHTNTjzLajBb3mHcyCbNAz9AttYpXsraiF9jOF8zqFcF8eZUO3A3c0obmzA/n3NwH8pyZoo8d64q7SpI2DWjQ6Y3Twu6iA8YpGyajNOQCQpAX1JpP79ljEnfQzgAVFsDcW5G42jRyovi0s1seBqHaiUkqhUfnWiqh/6gEoNwBkrtDpURdQck57c39yRvS4HO8mgWbqF2YcnCxfub/OM+/CS89Z0PNp6APlZLWPubHD1iFhbhM2YSrGGH4cEOsMYXoiJs3MpEnl5LOrApxtWVZ+HlN52wI616HUku+BttaKhzZcoR4y39jSWGHuzm1WdIwDgIjeKQr4lpJMYkJLod0iGqnkUdjg7q9g3CkBJePc9afpAaJRVlvnP3zCKPq/amsnHPTd
     driver-class-name: com.mysql.jdbc.Driver
-
+  redis:
+    cluster:
+      nodes:
+        - 10.1.1.241:7000
+        - 10.1.1.241:7001
+        - 10.1.1.241:7002
+        - 10.1.1.241:7003
+        - 10.1.1.241:7004
+        - 10.1.1.241:7005
 #  jpa:
 #    show-sql: true
