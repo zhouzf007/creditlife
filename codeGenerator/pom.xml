@@ -45,7 +45,7 @@
                     </dependency>
                     <!--mybatis-generator扩展插件-->
                     <!--<dependency>
-                        <groupId>com.newseax</groupId>
+                        <groupId>common.newseax</groupId>
                         <artifactId>mybatisGeneratorExtPlugin</artifactId>
                         <version>1.0-SNAPSHOT</version>
                     </dependency>-->

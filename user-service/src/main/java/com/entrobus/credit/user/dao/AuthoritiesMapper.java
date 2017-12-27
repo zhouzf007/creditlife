@@ -1,4 +1,4 @@
-package com.entrobus.credit.auth.dao;
+package com.entrobus.credit.user.dao;
 
 import com.entrobus.credit.auth.pojo.Authorities;
 import com.entrobus.credit.auth.pojo.AuthoritiesExample;

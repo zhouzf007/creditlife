@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 @EnableCircuitBreaker
 @EnableOAuth2Client
-@MapperScan(basePackages="com.encredit.order.dao",sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages="com.entrobus.credit.order.dao",sqlSessionFactoryRef="sqlSessionFactory")
 public class OrderServiceApplication {
 
     public static void main(String[] args) {
