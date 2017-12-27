@@ -21,7 +21,7 @@ spring:
           search-paths: config-repo
           username: root
           password: KcjJb17151
-
+# 启用配置加密
 encrypt:
   key-store:
     alias: creditlife
