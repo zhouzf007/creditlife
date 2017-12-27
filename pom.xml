@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.encredit</groupId>
+    <groupId>com.entrobus</groupId>
     <artifactId>creditlife</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -18,6 +18,8 @@
     </parent>
 
     <modules>
+        <module>common</module>
+        <module>pojo</module>
         <module>config</module>
         <module>registry</module>
         <module>gateway</module>
@@ -26,11 +28,10 @@
         <module>order-service</module>
         <module>user-service</module>
         <module>zipkin</module>
-        <module>codegenerator</module>
-        <module>mybatisGeneratorExtPlugin</module>
+        <module>codeGenerator</module>
         <module>credit-service</module>
         <module>msg-service</module>
-        <module>common</module>
+
     </modules>
 
     <properties>
@@ -40,7 +41,63 @@
         <docker.image.prefix>spring-boot-cloud</docker.image.prefix>
         <spring.cloud.version>Dalston.SR4</spring.cloud.version>
         <spring-boot-admin.version>1.5.4</spring-boot-admin.version>
+        <mybatis-spring-boot.version>1.3.1</mybatis-spring-boot.version>
+        <commons-lang3.version>3.7</commons-lang3.version>
+        <!-- Maven私服Url地址-->
+        <nexus.url>http://10.1.1.89:8081</nexus.url>
     </properties>
+
+    <!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
+    <repositories>
+        <!--本地nexus私服仓库-->
+        <repository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>${nexus.url}/nexus/content/groups/public</url>
+        </repository>
+        <!--阿里云中央仓库-->
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Sonatype Nexus Staging</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>${nexus.url}/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <dependency>

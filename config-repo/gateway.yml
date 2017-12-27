@@ -30,3 +30,9 @@ zuul:
     order-service:
       path: /order/**
       sensitiveHeaders:
+    credit-service:
+      path: /credit/**
+      sensitiveHeaders:
+    msg-service:
+      path: /msg/**
+      sensitiveHeaders:

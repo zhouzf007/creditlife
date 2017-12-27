@@ -20,10 +20,28 @@
         <property name="endingDelimiter" value="`"/>
 
         <!--分页插件-->
-        <plugin type="com.newseax.plugin.PaginationPlugin" />
+        <plugin type="org.mybatis.generator.plugin.ext.PaginationPlugin" />
         <!--序列化插件-->
-        <plugin type="com.newseax.plugin.SerializablePlugin"/>
-
+        <plugin type="org.mybatis.generator.plugin.ext.SerializablePlugin"/>
+        <!--生成service插件-->
+        <plugin type="org.mybatis.generator.plugin.ext.ServicePlugin">
+            <property name="targetPackage" value="${service.package}" />
+            <property name="implementationPackage" value="${service.impl.package}" />
+            <property name="targetProject" value="${target.project}" />
+            <property name="enableAnnotation" value="true"/>
+            <property name="enableInsert" value="true" />
+            <property name="enableInsertSelective" value="true" />
+            <property name="enableDeleteByPrimaryKey" value="true" />
+            <property name="enableDeleteByExample" value="true" />
+            <property name="enableUpdateByPrimaryKeySelective" value="true" />
+            <property name="enableUpdateByExampleSelective" value="true" />
+            <property name="enableUpdateByPrimaryKey" value="true" />
+            <property name="enableUpdateByExample" value="true" />
+        </plugin>
+        <!--生成批量插入方法的插件-->
+        <plugin type="org.mybatis.generator.plugin.ext.BatchInsertPlugin"/>
+        <!--生成批量更新方法的插件-->
+        <plugin type="org.mybatis.generator.plugin.ext.BatchUpdatePlugin"/>
         <!-- 自动生成的注释配置
          配置文件中commentGenerator配置项最好不要设置为不生成注释，因为这样带来的问题是在自动生成的代码上不会存在@mbggenerated 这样的标记，
          这个标记是用来标注这些代码是代码生成器生成的，如果关闭了注释，我们在多次使用mybatis generator重新生成代码时会导致在已有生成的文件上追加生成重复的内容，
@@ -86,109 +104,19 @@
                              targetPackage="${dao.package}"
                              targetProject="${target.project}">
             <property name="enableSubPackages" value="true" />
-            <!--<property name="rootInterface" value="com.entrobus.dao.BaseVillageMapper"/>-->
         </javaClientGenerator>
 
          <!--tableName:④用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
          <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />//无论字段是什么类型，生成的类属性都是varchar。  -->
          <!--用的通配符匹配全部的表 -->
         <!--<table tableName="%"-->
-        <!--enableCountByExample="true"-->
-        <!--enableUpdateByExample="true"-->
-        <!--enableDeleteByExample="true"-->
-        <!--enableSelectByExample="true"-->
-        <!--selectByExampleQueryId="true">-->
-        <!--&lt;!&ndash; 配置自动返回主键 &ndash;&gt;-->
-        <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
-        <!--</table>-->
-
-        <table tableName="authorities" domainObjectName="Authorities"
+        <table tableName="users" domainObjectName="User"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
-            <!-- <columnOverride column="content" jdbcType="VARCHAR" />-->
         </table>
-        <!--<table tableName="regions" domainObjectName="Regions"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-             <!--&lt;!&ndash;配置自动返回主键 &ndash;&gt;-->
-            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
-        <!--</table>-->
-        <!--<table tableName="organization" domainObjectName="Organization"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-             <!--&lt;!&ndash;配置自动返回主键 &ndash;&gt;-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table tableName="user" domainObjectName="User"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-             <!--&lt;!&ndash;配置自动返回主键 &ndash;&gt;-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table tableName="visit_log" domainObjectName="VisitLog"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-             <!--&lt;!&ndash;配置自动返回主键 &ndash;&gt;-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table tableName="order_instances" domainObjectName="OrderInstances"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-        <!--</table>-->
-        <!--<table tableName="questions" domainObjectName="Questions"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-        <!--</table>-->
-        <!--<table tableName="sys_role" domainObjectName="SysRole"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-        <!--</table>-->
-        <!--<table tableName="sys_role_menu" domainObjectName="SysRoleMenu"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-        <!--</table>-->
-        <!--<table tableName="sys_user" domainObjectName="SysUser"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-        <!--</table>-->
-        <!--<table tableName="sys_user_role" domainObjectName="SysUserRole"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-        <!--</table>-->
-
     </context>
 
 </generatorConfiguration>

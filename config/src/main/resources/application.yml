@@ -17,8 +17,21 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/zhouzf007/spring-boot-cloud
-          search-paths: config-repo
+          uri: https://github.com/zhouzf007/del
+#          search-paths: config-repo
+#server:
+#  port: 8088
+#spring:
+#  profiles:
+#    active: native
+#  cloud:
+#    config:
+#      server:
+#        health:
+#          enabled:  false
+#        native:
+#          searchLocations: F:\newseax-git6\creditlife\config-repo
+
   rabbitmq:
     host: localhost
 
