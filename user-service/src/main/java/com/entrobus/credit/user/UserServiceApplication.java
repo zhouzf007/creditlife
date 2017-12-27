@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 @EnableCircuitBreaker
 @EnableOAuth2Client
-@MapperScan(basePackages="com.encredit.user.dao",sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages="com.entrobus.credit.user.dao",sqlSessionFactoryRef="sqlSessionFactory")
 public class UserServiceApplication {
 
     public static void main(String[] args) {
