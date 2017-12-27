@@ -27,6 +27,14 @@ spring:
     username: phoenix
     password: shangshangABCD123456
     driver-class-name: com.mysql.jdbc.Driver
-
+  redis:
+    cluster:
+      nodes:
+        - 10.1.1.241:7000
+        - 10.1.1.241:7001
+        - 10.1.1.241:7002
+        - 10.1.1.241:7003
+        - 10.1.1.241:7004
+        - 10.1.1.241:7005
 #  jpa:
 #    show-sql: true
