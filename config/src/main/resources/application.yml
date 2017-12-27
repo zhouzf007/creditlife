@@ -17,7 +17,7 @@ spring:
     config:
       server:
         git:
-          uri: https://gitlab.newseax.com/credit/creditlife
+          uri: https://gitlab.newseax.common/credit/creditlife
           search-paths: config-repo
 #server:
 #  port: 8088

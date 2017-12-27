@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan(basePackages="com.encredit.auth.dao",sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages="com.entrobus.credit.auth.dao",sqlSessionFactoryRef="sqlSessionFactory")
 public class AuthApplication {
 
     public static void main(String[] args) {
