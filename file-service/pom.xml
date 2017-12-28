@@ -16,19 +16,35 @@
             <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--FastDFS客户端-->
         <dependency>
             <groupId>com.smartfast4j</groupId>
             <artifactId>fastdfs-client</artifactId>
             <version>1.4</version>
             <exclusions>
-                <!--<exclusion>
+                <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>-->
-               <!-- <exclusion>
+                </exclusion>
+                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>-->
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.smartfast4j</groupId>
+            <artifactId>jsch</artifactId>
+            <version>1.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -97,4 +113,19 @@
 
     </dependencies>
 
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <!--在添加了该插件之后，当运行“mvn package”进行打包时，会打包成一个可以直接运行的 JAR 文件，使用“java -jar”命令就可以直接运行-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

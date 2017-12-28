@@ -1,4 +1,4 @@
-package com.entrobus.credit.file;
+package com.entrobus.credit.file.service;
 
 import com.entrobus.credit.file.bean.UploadResult;
 import org.springframework.web.multipart.MultipartFile;

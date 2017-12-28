@@ -1,4 +1,4 @@
-package com.entrobus.credit.file;
+package com.entrobus.credit.file.util;
 
 import java.io.*;
 import java.net.MalformedURLException;
