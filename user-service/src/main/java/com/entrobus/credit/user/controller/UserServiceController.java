@@ -25,8 +25,6 @@ public class UserServiceController {
     @Autowired
     RedisTemplate redisTemplate;
     @Autowired
-    private UsersMapper usersMapper;
-    @Autowired
     private UserCacheService userCacheService;
 
     @Autowired
