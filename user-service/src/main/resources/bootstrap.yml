@@ -18,15 +18,18 @@ spring:
     druid:
       filter:
         stat:
+          enabled: true
           db-type: mysql
           slow-sql-millis: 1000
           log-slow-sql: true
           merge-sql: true
-        log4j:
+        slf4j:
           statement-executable-sql-log-enable: true
+          enabled: true
         wall:
           config:
             multi-statement-allow: true
+          enabled: true
 #     配置初始化大小、最小、最大
       initial-size: 1
       min-idle: 2
@@ -43,6 +46,9 @@ spring:
 #      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
+#    配置mybatis mapper.xml
+mybatis:
+  mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 
 
 

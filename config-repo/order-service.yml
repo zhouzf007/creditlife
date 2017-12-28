@@ -32,13 +32,16 @@ spring:
     druid:
       filter:
         stat:
+          enabled: true
           db-type: mysql
           slow-sql-millis: 1000
           log-slow-sql: true
           merge-sql: true
-        log4j:
+        slf4j:
           statement-executable-sql-log-enable: true
+          enabled: true
         wall:
+          enabled: true
           config:
             multi-statement-allow: true
 #     配置初始化大小、最小、最大
