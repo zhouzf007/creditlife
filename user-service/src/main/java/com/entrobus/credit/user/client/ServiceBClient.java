@@ -12,11 +12,20 @@ public interface ServiceBClient {
     @GetMapping(value = "/")
     String printServiceB();
 
+    @GetMapping(value = "/test")
+    public String test() ;
+
     @Component
     class ServiceBClientFallback implements ServiceBClient {
 
         @Override
         public String printServiceB() {
+            LOGGER.info("异常发生，进入fallback方法");
+            return "SERVICE B FAILED! - FALLING BACK";
+        }
+
+        @Override
+        public String test() {
             LOGGER.info("异常发生，进入fallback方法");
             return "SERVICE B FAILED! - FALLING BACK";
         }
