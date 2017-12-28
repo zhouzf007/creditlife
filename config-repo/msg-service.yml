@@ -48,6 +48,15 @@ spring:
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
 #    配置mybatis mapper.xml
+  redis:
+    cluster:
+      nodes:
+        - 10.1.1.241:7000
+        - 10.1.1.241:7001
+        - 10.1.1.241:7002
+        - 10.1.1.241:7003
+        - 10.1.1.241:7004
+        - 10.1.1.241:7005
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 
