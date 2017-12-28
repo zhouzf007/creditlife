@@ -12,12 +12,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 import javax.sql.DataSource;
+/**
+ * 使用stater自动配置 ，这里废弃
+ */
 
 /**
  * Created by zhouzf on 2017/11/30.
  */
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
+    @Deprecated
 public class MyBatisConfig implements TransactionManagementConfigurer {
     @Autowired
     private DataSource dataSource;

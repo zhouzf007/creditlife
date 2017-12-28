@@ -123,7 +123,12 @@
             <artifactId>commons-pool</artifactId>
             <version>1.6</version>
         </dependency>
-
+        <!-- Druid https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.starter.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -138,6 +143,17 @@
                 <artifactId>docker-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

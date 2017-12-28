@@ -1,6 +1,7 @@
-package com.entrobus.credit.common.file;
+package com.entrobus.credit.file;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
  */
 public class FileServiceFactory {
 
-    private static Logger LOGGER = Logger.getLogger(FileServiceFactory.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(FileServiceFactory.class);
 
     private static class FileServiceFactoryHolder {
 

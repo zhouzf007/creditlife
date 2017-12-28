@@ -1,16 +1,20 @@
-package com.entrobus.credit.common.file;
+package com.entrobus.credit.file;
 
-import com.entrobus.credit.common.file.bean.UploadResult;
+
+import com.entrobus.credit.file.bean.UploadResult;
 import com.smartfast4j.fastdfs.FastdfsFileService;
 import com.smartfast4j.fastdfs.bean.FastDFSUploadResult;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +24,7 @@ import java.util.Map;
  */
 public class FastdfsFileServiceImpl implements FileService {
 
-    private static Logger logger = Logger.getLogger(FastdfsFileServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(FastdfsFileServiceImpl.class);
 
     /**
      * 文件上传后的存储方式
@@ -83,6 +87,35 @@ public class FastdfsFileServiceImpl implements FileService {
     public UploadResult uploadFile(InputStream inputStream, String fileName) {
         FastDFSUploadResult fastDFSUploadResult = fastdfsFileService.uploadFile(inputStream,fileName);
         return createResult(fastDFSUploadResult);
+    }
+
+    @Override
+    public UploadResult uploadFile(MultipartFile multipartFile) {
+        UploadResult uploadResult;
+        String fileName = multipartFile.getOriginalFilename();// 文件名
+        try {
+            uploadResult = uploadFile(multipartFile.getBytes(),fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            uploadResult = new UploadResult();
+            uploadResult.setOriginalFileName(fileName);
+            uploadResult.setIsUploadSuccess(false);
+        }
+        return uploadResult;
+    }
+
+    @Override
+    public List<UploadResult> uploadFile(List<MultipartFile> multipartFiles) {
+        Map<String, InputStream> inputStreamMap = new HashMap<>();
+        for(MultipartFile multipartFile:multipartFiles){
+            try {
+                inputStreamMap.put(multipartFile.getOriginalFilename(),multipartFile.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //一次性上传多个文件
+        return uploadFile(inputStreamMap);
     }
 
     @Override

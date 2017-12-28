@@ -4,8 +4,8 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      profile: dev
-#      label: dev
+#      profile: dev
+      label: dev
       fail-fast: true
       username: user
       password: ${CONFIG_SERVER_PASSWORD:password}
@@ -14,4 +14,7 @@ spring:
         max-interval: 10000
         multiplier: 2
         max-attempts: 10
+
+
+
 
