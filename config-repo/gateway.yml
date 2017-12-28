@@ -36,3 +36,6 @@ zuul:
     msg-service:
       path: /msg/**
       sensitiveHeaders:
+    file-service:
+      path: /file/**
+      sensitiveHeaders:

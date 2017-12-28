@@ -1,4 +1,4 @@
-package com.entrobus.credit.common.file.bean;
+package com.entrobus.credit.file.bean;
 
 import java.io.Serializable;
 import java.util.HashMap;
