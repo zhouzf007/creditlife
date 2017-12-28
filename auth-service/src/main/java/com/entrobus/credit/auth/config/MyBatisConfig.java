@@ -16,8 +16,9 @@ import javax.sql.DataSource;
 /**
  * Created by zhouzf on 2017/11/30.
  */
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
+    @Deprecated
 public class MyBatisConfig implements TransactionManagementConfigurer {
     @Autowired
     private DataSource dataSource;

@@ -1,6 +1,7 @@
 package com.entrobus.credit.user.controller;
 
 import com.entrobus.credit.common.util.RedisUtil;
+import com.entrobus.credit.user.dao.UsersMapper;
 import com.entrobus.credit.user.services.AService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 
 @RefreshScope
 @RestController
@@ -24,6 +26,8 @@ public class ServiceAController {
 
     @Autowired
     RedisTemplate redisTemplate;
+    @Autowired
+    private UsersMapper usersMapper;
 
     @GetMapping(value = "/")
     public String printServiceA() {
@@ -45,6 +49,11 @@ public class ServiceAController {
     @RequestMapping(value = "/getRedis")
     public String getRedis(String k) {
         return redisTemplate.opsForValue().get(k).toString();
+    }
+    @RequestMapping(value = "/datasource")
+    public String datasourceTest(String k) {
+        List list = usersMapper.selectByExample(null);
+        return list.toString();
     }
 
 
