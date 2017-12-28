@@ -5,6 +5,8 @@ import com.entrobus.credit.common.util.RedisUtil;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.vo.user.UserInfoCache;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserCacheServiceImpl implements UserCacheService {
+
+    private final static Logger logger = LoggerFactory.getLogger(UserCacheServiceImpl.class);
 
     @Autowired
     RedisTemplate redisTemplate;

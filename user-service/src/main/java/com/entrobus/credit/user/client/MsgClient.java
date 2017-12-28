@@ -3,10 +3,12 @@ package com.entrobus.credit.user.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by zhouzf on 2017/12/28.
@@ -14,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "msg-service", fallback = MsgClient.MsgClientFallback.class)
 public interface MsgClient {
 
-    @RequestMapping(value = "/verificationCode/{mobile}", method = RequestMethod.POST)
-    String sendVerificationCode(@PathVariable("mobile") String mobile, String content);
+    @RequestMapping(value = "/verificationCode/{mobile}", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    String sendVerificationCode(@PathVariable("mobile") String mobile,@RequestParam("content") String content);
 
-    @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST)
-    String sendMessage(@PathVariable("mobile") String mobile, String content);
+    @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    String sendMessage(@PathVariable("mobile") String mobile,@RequestParam("content") String content);
 
     @Component
     class MsgClientFallback implements MsgClient {
