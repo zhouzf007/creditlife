@@ -26,6 +26,12 @@
             <artifactId>pojo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

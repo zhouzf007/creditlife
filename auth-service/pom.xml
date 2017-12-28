@@ -123,7 +123,12 @@
             <artifactId>commons-pool</artifactId>
             <version>1.6</version>
         </dependency>
-
+        <!-- Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

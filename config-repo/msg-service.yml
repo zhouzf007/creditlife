@@ -8,6 +8,13 @@ eureka:
     metadata-map:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://119.29.177.249:3306/creditlife?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: phoenix
+    password: shangshangABCD123456
+    driver-class-name: com.mysql.jdbc.Driver
 
 security:
   user:

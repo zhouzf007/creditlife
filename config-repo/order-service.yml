@@ -23,6 +23,7 @@ security:
 
 spring:
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://119.29.177.249:3306/creditlife?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: phoenix
     password: shangshangABCD123456
