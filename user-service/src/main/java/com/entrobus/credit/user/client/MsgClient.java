@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by zhouzf on 2017/12/28.
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "msg-service", fallback = MsgClient.MsgClientFallback.class)
 public interface MsgClient {
 
-    String sendVerificationCode(String mobile, String content);
+    @RequestMapping(value = "/verificationCode/{mobile}", method = RequestMethod.POST)
+    String sendVerificationCode(@PathVariable("mobile") String mobile, String content);
 
-    String sendMessage(String mobile, String content);
+    @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST)
+    String sendMessage(@PathVariable("mobile") String mobile, String content);
 
     @Component
     class MsgClientFallback implements MsgClient {

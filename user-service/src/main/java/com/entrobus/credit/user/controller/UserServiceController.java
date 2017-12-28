@@ -36,7 +36,7 @@ public class UserServiceController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public WebResult getUserById(@PathVariable String id) {
+    public WebResult getUserById(@PathVariable("id") String id) {
         WebResult result = new WebResult();
         UserInfoCache userCache = userCacheService.getUserCache(id);
         Map rs = new HashMap<>();
@@ -45,7 +45,7 @@ public class UserServiceController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public WebResult addUser(@PathVariable String id, @ModelAttribute UserInfoCache user) {
+    public WebResult addUser(@PathVariable("id") String id, @ModelAttribute UserInfoCache user) {
         WebResult result = new WebResult();
         user.setId(id);
         userCacheService.setUserCache(user);
@@ -54,7 +54,7 @@ public class UserServiceController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    WebResult deleteUser(@PathVariable String id) {
+    WebResult deleteUser(@PathVariable("id") String id) {
         WebResult result = new WebResult();
         UserInfoCache userCache = userCacheService.getUserCache(id);
         userCacheService.removeUserCache(id);
