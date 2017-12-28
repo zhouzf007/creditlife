@@ -1,6 +1,7 @@
-package com.entrobus.credit.common.file;
+package com.entrobus.credit.file;
 
-import com.entrobus.credit.common.file.bean.UploadResult;
+import com.entrobus.credit.file.bean.UploadResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.InputStream;
@@ -36,6 +37,20 @@ public interface FileService {
      * @return UploadResult 上传结果
      */
     UploadResult uploadFile(InputStream inputStream, String fileName);
+
+    /**
+     * 上传文件
+     * @param multipartFile
+     * @return UploadResult 上传结果
+     */
+    UploadResult uploadFile(MultipartFile multipartFile);
+
+    /**
+     * 一次性上传多个文件
+     * @param multipartFiles
+     * @return
+     */
+    List<UploadResult> uploadFile(List<MultipartFile> multipartFiles);
 
     /**
      * 一次性上传多个文件
