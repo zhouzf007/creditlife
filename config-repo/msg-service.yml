@@ -60,10 +60,10 @@ spring:
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 
-#security:
-#  user:
-#    name: user
-#    password: password
+security:
+  user:
+    name: user
+    password: password
 #  oauth2:
 #    client:
 #      clientId: order-service
