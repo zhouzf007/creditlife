@@ -32,6 +32,7 @@
         <module>credit-service</module>
         <module>msg-service</module>
         <module>file-service</module>
+        <module>cache</module>
 
     </modules>
 
