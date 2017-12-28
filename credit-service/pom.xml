@@ -38,7 +38,7 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis-spring-boot.version}</version>
         </dependency>
-        <!-- Druid -->
+        <!-- Druid https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>

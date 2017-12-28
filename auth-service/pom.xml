@@ -123,7 +123,7 @@
             <artifactId>commons-pool</artifactId>
             <version>1.6</version>
         </dependency>
-        <!-- Druid -->
+        <!-- Druid https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
