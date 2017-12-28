@@ -30,7 +30,7 @@ public interface MsgClient {
         }
 
         @Override
-        public String sendMessage(@PathVariable String mobile, String content) {
+        public String sendMessage(String mobile, String content) {
             LOGGER.info("异常发生，进入fallback方法");
             return "SEND MESSAGE FAILED! - FALLING BACK";
         }

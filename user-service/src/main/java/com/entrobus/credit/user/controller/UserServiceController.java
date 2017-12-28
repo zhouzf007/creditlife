@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RefreshScope
 @RestController
+@RequestMapping("/user")
 public class UserServiceController {
 
     @Value("${name:unknown}")
