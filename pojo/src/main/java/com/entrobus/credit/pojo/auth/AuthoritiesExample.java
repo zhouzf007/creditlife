@@ -1,4 +1,4 @@
-package com.entrobus.credit.auth.pojo;
+package com.entrobus.credit.pojo.auth;
 
 import java.io.Serializable;
 import java.util.ArrayList;
