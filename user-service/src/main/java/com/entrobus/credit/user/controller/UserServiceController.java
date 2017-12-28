@@ -1,10 +1,8 @@
 package com.entrobus.credit.user.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.common.util.RedisUtil;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.dao.UsersMapper;
-import com.entrobus.credit.user.services.AService;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.vo.user.UserInfoCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +13,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RefreshScope
 @RestController
-public class ServiceAController {
+public class UserServiceController {
 
     @Value("${name:unknown}")
     private String name;
-
-    @Autowired
-    private AService aService;
 
     @Autowired
     RedisTemplate redisTemplate;
