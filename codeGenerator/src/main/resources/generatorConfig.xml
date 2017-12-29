@@ -110,12 +110,15 @@
          <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />//无论字段是什么类型，生成的类属性都是varchar。  -->
          <!--用的通配符匹配全部的表 -->
         <!--<table tableName="%"-->
-        <table tableName="users" domainObjectName="User"
+        <table tableName="sys_user" domainObjectName="SysUser"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
+
+            <!--  配置自动返回主键 -->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>
 
