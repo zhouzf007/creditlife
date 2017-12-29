@@ -17,7 +17,7 @@ public class MsgController {
     @Autowired
     private MsgService msgService;
 
-    @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST)
+    @RequestMapping(value = "/verificationCode/{mobile}", method = RequestMethod.POST)
     public String sendVerificationCode(@PathVariable String mobile, @RequestParam String content) {
         return msgService.sendVerificationCode(mobile,content);
     }
