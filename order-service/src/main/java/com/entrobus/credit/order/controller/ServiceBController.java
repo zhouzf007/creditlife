@@ -23,4 +23,8 @@ public class ServiceBController {
         ServiceInstance serviceInstance = discoveryClient.getLocalServiceInstance();
         return serviceInstance.getServiceId() + " (" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ")" + "===>Say " + msg;
     }
+    @GetMapping(value = "/test")
+    public String test() {
+        return "测试";
+    }
 }

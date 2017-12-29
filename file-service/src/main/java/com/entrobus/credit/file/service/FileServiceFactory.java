@@ -1,5 +1,7 @@
-package com.entrobus.credit.file;
+package com.entrobus.credit.file.service;
 
+import com.entrobus.credit.file.service.impl.FastdfsFileServiceImpl;
+import com.entrobus.credit.file.service.impl.SftpFileServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +21,14 @@ public class FileServiceFactory {
 
         static {
             fileServiceMap = new HashMap<>();
-            fileServiceMap.put("FASTDFS",FastdfsFileServiceImpl.getInstance());
+            fileServiceMap.put("FASTDFS", FastdfsFileServiceImpl.getInstance());
+            fileServiceMap.put("SFTP", SftpFileServiceImpl.getInstance());
         }
     }
 
     /**
      * 获取实例
-     * @param fileServiceName 实例名称，取值（FASTDFS、QINIU、SFTP）
+     * @param fileServiceName 实例名称，取值（FASTDFS、SFTP）
      * 单例模式是为确保一个类只有一个实例，并为整个系统提供一个全局访问点的一种模式方法。
      从概念中体现出了单例的一些特点：
      （1）、在任何情况下，单例类永远只有一个实例存在

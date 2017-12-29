@@ -1,7 +1,7 @@
 package com.entrobus.credit;
 
-import com.entrobus.credit.file.FileService;
-import com.entrobus.credit.file.FileServiceFactory;
+import com.entrobus.credit.file.service.FileService;
+import com.entrobus.credit.file.service.FileServiceFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;

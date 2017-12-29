@@ -1,4 +1,4 @@
-package com.entrobus.credit.common;
+package com.entrobus.credit.cache;
 
 /**
  * Created by zhouzf on 2017/12/28.

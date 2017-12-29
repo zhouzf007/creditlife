@@ -34,7 +34,7 @@ zuul:
       path: /credit/**
       sensitiveHeaders:
     msg-service:
-      path: /msg/**
+      path: /message/**
       sensitiveHeaders:
     file-service:
       path: /file/**
