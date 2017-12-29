@@ -26,4 +26,18 @@ public interface BsStaticsService {
     int insert(BsStatics record);
 
     int insertSelective(BsStatics record);
+
+    List<BsStatics> getByCodeType(String codeType);
+
+    BsStatics getByTypeAndValue(String codeType, String codeValue);
+
+    List<BsStatics> getByAll();
+
+    int add(BsStatics statics);
+
+    int saveUpdate(BsStatics statics);
+
+    int logicDel(Long id);
+
+    int batchLogicDel(List<Long> idList);
 }
