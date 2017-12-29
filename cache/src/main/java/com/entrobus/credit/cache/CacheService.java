@@ -348,14 +348,12 @@ public class CacheService {
      * @return
      */
     public static int deleteByKeyPrefix(RedisTemplate redisTemplate, String keyPrefix) {
-        int i = 0;
         Set<String> set = keys(redisTemplate, keyPrefix);
         if (set != null && set.size() > 0) {
-            for (String key : set) {
-                if (delete(redisTemplate, key)) i++;
-            }
+            bathDelete(redisTemplate, set);
+            return set.size();
         }
-        return i;
+        return 0;
     }
 
 
