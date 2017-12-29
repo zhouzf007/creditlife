@@ -1,4 +1,4 @@
-package com.entrobus.credit.common.util;
+package com.entrobus.credit.cache;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by zhouzf on 2017/12/27.
  */
-public class RedisUtil {
+public class CacheService {
 
-    private final static Logger logger = LoggerFactory.getLogger(RedisUtil.class);
+    private final static Logger logger = LoggerFactory.getLogger(CacheService.class);
 
     /**
      * 缓存字符串内容
@@ -348,14 +348,12 @@ public class RedisUtil {
      * @return
      */
     public static int deleteByKeyPrefix(RedisTemplate redisTemplate, String keyPrefix) {
-        int i = 0;
         Set<String> set = keys(redisTemplate, keyPrefix);
         if (set != null && set.size() > 0) {
-            for (String key : set) {
-                if (delete(redisTemplate, key)) i++;
-            }
+            bathDelete(redisTemplate, set);
+            return set.size();
         }
-        return i;
+        return 0;
     }
 
 

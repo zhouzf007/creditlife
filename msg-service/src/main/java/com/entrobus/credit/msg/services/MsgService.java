@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 public interface MsgService {
 
-    @RequestMapping(value = "/verificationCode/{mobile}", method = RequestMethod.POST)
     String sendVerificationCode(String mobile, String content);
 
-    @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST)
     String sendMessage(String mobile, String content);
 }

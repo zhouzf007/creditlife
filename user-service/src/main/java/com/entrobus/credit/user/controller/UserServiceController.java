@@ -2,7 +2,7 @@ package com.entrobus.credit.user.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.user.client.MsgClient;
-import com.entrobus.credit.user.dao.UsersMapper;
+import com.entrobus.credit.user.client.ServiceBClient;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.vo.user.UserInfoCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import java.util.Map;
 
 @RefreshScope
 @RestController
-@RequestMapping("/user")
 public class UserServiceController {
 
     @Value("${name:unknown}")
@@ -30,6 +29,9 @@ public class UserServiceController {
 
     @Autowired
     MsgClient msgClient;
+
+    @Autowired
+    private ServiceBClient serviceBClient;
 
     @GetMapping(path = "/current")
     public Principal getCurrentAccount(Principal principal) {
@@ -61,6 +63,12 @@ public class UserServiceController {
         userCacheService.removeUserCache(id);
         msgClient.sendMessage(userCache.getMobile(), "good bye");
         return result.ok();
+    }
+
+    @GetMapping(value = "/test")
+    WebResult test() {
+        String test = serviceBClient.test();
+        return WebResult.ok(test);
     }
 
 }
