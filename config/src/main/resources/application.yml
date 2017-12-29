@@ -12,20 +12,24 @@ eureka:
     service-url:
       defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
 
-spring:
-  cloud:
-    config:
-      server:
-        native:
-          search-paths: classpath:/shared
-  profiles:
-    active: native
+#spring:
+#  cloud:
+#    config:
+#      server:
 #        git:
 #          uri: https://gitlab.newseax.com/credit/creditlife.git
 #          search-paths: config-repo
 #          username: root
 #          password: KcjJb17151
 # 启用配置加密
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/shared
+  profiles:
+     active: native
 encrypt:
   key-store:
     alias: creditlife

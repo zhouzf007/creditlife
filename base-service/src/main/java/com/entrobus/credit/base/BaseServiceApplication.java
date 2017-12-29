@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableCircuitBreaker
 @EnableTransactionManagement//开启事务
-@MapperScan(basePackages="com.entrobus.credit.user.dao",sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages="com.entrobus.credit.base.dao",sqlSessionFactoryRef="sqlSessionFactory")
 public class BaseServiceApplication {
 
     public static void main(String[] args) {
