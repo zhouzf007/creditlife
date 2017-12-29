@@ -23,8 +23,7 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST)
-    public String sendMessage(@PathVariable String mobile,@RequestParam String content) {
+    public String sendMessage(String mobile,String content) {
         logger.info("mobile:"+mobile);
         logger.info("content:"+content);
         return content;
