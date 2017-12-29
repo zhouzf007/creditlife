@@ -147,7 +147,8 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
      * @return
      */
     private BsStaticVo getById(String id) {
-        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, id, BsStaticVo.class);
+        String key = getKey(id);
+        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, key, BsStaticVo.class);
         return cacheObj;
     }
 

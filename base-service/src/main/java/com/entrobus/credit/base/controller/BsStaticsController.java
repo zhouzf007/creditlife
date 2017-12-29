@@ -9,6 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/statics")
 public class BsStaticsController {
@@ -72,6 +75,30 @@ public class BsStaticsController {
         return i;
     }
     /**
+     * 获取列表
+     * @param codeType
+     * @return
+     */
+    @GetMapping("/")
+    public List<BsStaticVo> getList(@RequestParam(required = false) String codeType){
+        List<BsStaticVo> list = null;
+        if (StringUtils.isNotBlank(codeType)){
+            list = bsStaticsCacheService.getByType(codeType);
+            if (list == null) {
+                bsStaticsCacheService.cacheOrRefreshByType(codeType);
+                list = bsStaticsCacheService.getByType(codeType);
+            }
+        }else {
+            List<BsStatics> staticsList = bsStaticsService.getByAll();
+            list = staticsList.stream().map(statics -> {
+                BsStaticVo vo = new BsStaticVo();
+                BeanUtils.copyProperties(statics,vo);
+                return vo;
+            }).collect(Collectors.toList());
+        }
+        return list;
+    }
+    /**
      * 修改，并缓存
      * 暂时这样
      * @param vo
@@ -86,9 +113,9 @@ public class BsStaticsController {
             return 0;
         }
         BsStatics statics = new BsStatics();
-        statics.setId(id);
         BeanUtils.copyProperties(vo,statics);
-        int i = bsStaticsService.add(statics);
+        statics.setId(id);
+        int i = bsStaticsService.updateByPrimaryKeySelective(statics);
         if (i > 0) bsStaticsCacheService.cacheOrRefresh(statics.getId());
         return i;
     }
