@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
  * Created by zhouzf on 2017/12/28.
  */
 @Service
-@RestController
 public class MsgServiceImpl implements MsgService {
 
     private final static Logger logger = LoggerFactory.getLogger(MsgServiceImpl.class);
