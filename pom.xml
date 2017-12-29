@@ -20,6 +20,7 @@
     <modules>
         <module>common</module>
         <module>pojo</module>
+        <module>cache</module>
         <module>config</module>
         <module>registry</module>
         <module>gateway</module>
@@ -32,7 +33,7 @@
         <module>credit-service</module>
         <module>msg-service</module>
         <module>file-service</module>
-        <module>cache</module>
+
         <module>base-service</module>
         <module>payment-service</module>
         <module>manager-service</module>
