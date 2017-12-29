@@ -130,8 +130,8 @@ public class ManagerBaseController {
      * @return
      */
     protected Long getLoginUserId() {
-        //return Constants.SUPER_ADMIN;
-        return getCurrLoginUser().getId();
+        return 1L;
+        //return getCurrLoginUser().getId();
     }
 
 }

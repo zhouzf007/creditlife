@@ -1,7 +1,7 @@
 server:
-  port: 8094
-  
-msg: manager-service
+  port: 8093
+
+
 
 eureka:
   instance:
@@ -15,18 +15,23 @@ security:
     password: password
 #  oauth2:
 #    client:
-#      clientId: order-service
+#      clientId: user-service
 #      clientSecret: ${security.user.password}
 #      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
 #      grant-type: client_credentials
 #      scope: server
 
+#{cipher}前缀声明 加密数据 ,需要替换{}/jre/lib/security 目录（windows有两个jre）下的local_policy.jar和US_export_policy.jar
+# RSA
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://119.29.177.249:3306/creditlife?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+#    url: {cipher}AQAJsE5NTBj1VMLzGXG4O+WOGq9wdOTc+HnSmn0STCrLf6IWOtpJ/ciV87vkYycmTMsT59mZvHWrWYP3QPmn/BDzbQlMyIaaIEgtAFHyHVhl2D4Ht9zgecxdijRmG6o7ta1QPJ4f0oDzSyhYsBqvAS7mClKnGrsZcT3yT6ELSkCV928IPr6rj2DUjdV17cQsZrEtBpBX2cKqAzmqH2EPaPcDhzh7Y5CVoyEm4ISk11kl3ndak+i02WQtfaXcV0i6+ddrMXQgNc0PYYpWMMiu+mElG2gy6K0AKQizIGW2fIGkGJcQxCa2btEkKN1okJ5DVsNbr5XZbApP1tN5pzro4hEBEpWrdAg7/pbU4Dyk6E/W4jS1x4tcy8almVbjsIOa/iPudvAhdQlR84VLl+qf6kp9AgyEyJ0Y3VKJu1i2XZULs1nA+SYr7uhwxNRZG1i3eQ10SQmuKxCqlJjQy3i/qP+L8Mx603oRMdyOr57epc8HjwEexaPnpWS3Zpwopam+kF0Igl4VbxydicKA0h/ArcquQ3NslybIH3VGBhujTkyD9HhCIsyJVp+P/GY/1AYCh5599d6PT/5Gd/TgipQ+MZT1
     username: phoenix
+#    username: {cipher}AQBbblyymdI+Qv3iOuwge8U/DT/Zyv3iFHh6EkzaT5sX4vuTUyGQcxVHHZoeW0R6sTnNiT5qacBu88vsLQBgOu2JZB3uPMpg7dok8flgFG6HwkJbcW6gPLKQ0dL1GAfYHciLWTC0wuMcrGFmlBbQ+BYDS+uUOY664d/TjcC3P5v8KcQ1Yuu2NFMGFZEXkCib8rmLP/T5FgUqqSChEbuhLGwHJ7to9KBIO9Sco9Pd87201V0VBKUsMUitkO7FDk5NZqB1BXXkHBGKbvUPRnM7kTioXkPscxD427TLfiLr5sGm4Knb2nA9AWhBeEIps/T5SQlzI6+brFo+zi/ctLvMz1gwjYFqzMtW5dmZR4iBvY7ventVFBkZI+Mp4QY71OTN4Uk=
     password: shangshangABCD123456
+#    password: {cipher}AQBtJpXYlTqs+2UwUyAHTNTjzLajBb3mHcyCbNAz9AttYpXsraiF9jOF8zqFcF8eZUO3A3c0obmzA/n3NwH8pyZoo8d64q7SpI2DWjQ6Y3Twu6iA8YpGyajNOQCQpAX1JpP79ljEnfQzgAVFsDcW5G42jRyovi0s1seBqHaiUkqhUfnWiqh/6gEoNwBkrtDpURdQck57c39yRvS4HO8mgWbqF2YcnCxfub/OM+/CS89Z0PNp6APlZLWPubHD1iFhbhM2YSrGGH4cEOsMYXoiJs3MpEnl5LOrApxtWVZ+HlN52wI616HUku+BttaKhzZcoR4y39jSWGHuzm1WdIwDgIjeKQr4lpJMYkJLod0iGqnkUdjg7q9g3CkBJePc9afpAaJRVlvnP3zCKPq/amsnHPTd
     driver-class-name: com.mysql.jdbc.Driver
 #    druid 配置
     druid:
@@ -60,7 +65,6 @@ spring:
 #      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-
   redis:
     cluster:
       nodes:
@@ -71,7 +75,7 @@ spring:
         - 10.1.1.241:7004
         - 10.1.1.241:7005
 
-#  配置mybatis mapper.xml
+#    配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:

@@ -1,0 +1,41 @@
+server:
+  port: 8060
+
+management:
+  security:
+    enabled: false
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    auth-service:
+      path: /uaa/**
+      stripPrefix: false
+      sensitiveHeaders:
+    user-service:
+      path: /user/**
+      sensitiveHeaders:
+    order-service:
+      path: /order/**
+      sensitiveHeaders:
+    credit-service:
+      path: /credit/**
+      sensitiveHeaders:
+    msg-service:
+      path: /message/**
+      sensitiveHeaders:
+    file-service:
+      path: /file/**
+      sensitiveHeaders:

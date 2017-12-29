@@ -1,6 +1,6 @@
 package com.entrobus.credit.manager.sys.service.impl;
 
-import com.entrobus.credit.manager.sys.dao.SysUserMapper;
+import com.entrobus.credit.manager.dao.SysUserMapper;
 import com.entrobus.credit.manager.sys.service.SysUserService;
 import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.pojo.manager.SysUserExample;

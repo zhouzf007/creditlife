@@ -1,7 +1,7 @@
 server:
-  port: 8094
+  port: 8082
   
-msg: manager-service
+msg: Hello
 
 eureka:
   instance:
@@ -60,7 +60,7 @@ spring:
 #      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-
+#    配置mybatis mapper.xml
   redis:
     cluster:
       nodes:
@@ -70,8 +70,6 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
-
-#  配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:
