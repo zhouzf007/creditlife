@@ -1,13 +1,19 @@
 server:
-  port: 8083
-  
-msg: Hello
+  context-path: /uaa
+  port: 5000
+
+management:
+  security:
+    enabled: false
+  context-path: /mgmt
 
 eureka:
   instance:
+    health-check-url-path: ${server.context-path}${management.context-path}/health
+    status-page-url-path: ${server.context-path}${management.context-path}/info
     metadata-map:
-      user.name: ${security.user.name}
-      user.password: ${security.user.password}
+      management.context-path: ${server.context-path}${management.context-path}
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -48,26 +54,8 @@ spring:
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
 #    配置mybatis mapper.xml
-  redis:
-    cluster:
-      nodes:
-        - 10.1.1.241:7000
-        - 10.1.1.241:7001
-        - 10.1.1.241:7002
-        - 10.1.1.241:7003
-        - 10.1.1.241:7004
-        - 10.1.1.241:7005
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
+#  jpa:
+#    show-sql: true
 
-security:
-  user:
-    name: user
-    password: password
-  oauth2:
-    client:
-      clientId: msg-service
-      clientSecret: ${security.user.password}
-      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
-      grant-type: client_credentials
-      scope: server

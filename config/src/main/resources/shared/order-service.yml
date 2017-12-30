@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8082
   
 msg: Hello
 
@@ -8,6 +8,19 @@ eureka:
     metadata-map:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
+
+security:
+  user:
+    name: user
+    password: password
+#  oauth2:
+#    client:
+#      clientId: order-service
+#      clientSecret: ${security.user.password}
+#      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
+#      grant-type: client_credentials
+#      scope: server
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -59,15 +72,5 @@ spring:
         - 10.1.1.241:7005
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
-
-security:
-  user:
-    name: user
-    password: password
-  oauth2:
-    client:
-      clientId: msg-service
-      clientSecret: ${security.user.password}
-      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
-      grant-type: client_credentials
-      scope: server
+#  jpa:
+#    show-sql: true
