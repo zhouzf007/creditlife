@@ -17,15 +17,20 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class UserServiceConfiguration extends ResourceServerConfigurerAdapter {
 
     //请求中加入oauth信息
-    @Bean
-    public RequestInterceptor oauth2FeignRequestInterceptor(OAuth2ClientContext oauth2ClientContext,
-                                                            ClientCredentialsResourceDetails resource) {
-        return new OAuth2FeignRequestInterceptor(oauth2ClientContext, resource);
-    }
+//    @Bean
+//    public RequestInterceptor oauth2FeignRequestInterceptor(OAuth2ClientContext oauth2ClientContext,
+//                                                            ClientCredentialsResourceDetails resource) {
+//        return new OAuth2FeignRequestInterceptor(oauth2ClientContext, resource);
+//    }
 
+//    @Override
+//    public void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .anyRequest().authenticated();
+//    }
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().authenticated();
+    http.authorizeRequests()
+            .anyRequest().permitAll();
     }
 }
