@@ -58,4 +58,3 @@ mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:
 #    show-sql: true
-

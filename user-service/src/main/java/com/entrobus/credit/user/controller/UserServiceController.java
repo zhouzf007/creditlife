@@ -3,7 +3,6 @@ package com.entrobus.credit.user.controller;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.client.ServiceBClient;
-import com.entrobus.credit.user.dao.UsersMapper;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.vo.user.UserInfoCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +64,7 @@ public class UserServiceController {
         msgClient.sendMessage(userCache.getMobile(), "good bye");
         return result.ok();
     }
+
     @GetMapping(value = "/test")
     WebResult test() {
         String test = serviceBClient.test();

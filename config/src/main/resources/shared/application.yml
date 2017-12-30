@@ -29,25 +29,15 @@ spring:
     scheduled:
       skip-pattern: "^org.*HystrixStreamTask$"
 
-redis:
-  host: localhost
-  port: 6379
-  password:
-  pool:
-    max-active: 8
-    max-idle: 8
-    min-idle: 0
-    max-wait: 10000
-
 authserver:
     hostname: localhost
     port: 5000
     contextPath: /uaa
 
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/current
+#security:
+#  oauth2:
+#    resource:
+#      user-info-uri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/current
 
 
 

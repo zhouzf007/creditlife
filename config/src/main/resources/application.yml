@@ -21,28 +21,6 @@ eureka:
 #          search-paths: config-repo
 #          username: root
 #          password: KcjJb17151
-spring:
-  cloud:
-    config:
-      server:
-        native:
-          search-locations: classpath:/shared
-  profiles:
-     active: native
-
-security:
-  bas
-
-redis:
-  host: localhost
-  port: 6379
-  password:
-  pool:
-    max-active: 8
-    max-idle: 8
-    min-idle: 0
-    max-wait: 10000
-
 # 启用配置加密
 encrypt:
   key-store:
@@ -53,16 +31,16 @@ encrypt:
 
 #server:
 #  port: 8088
-#spring:
-#  profiles:
-#    active: native
-#  cloud:
-#    config:
-#      server:
-#        health:
-#          enabled:  false
-#        native:
-#          searchLocations: F:\newseax-git6\creditlife\config-repo
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        health:
+          enabled:  false
+        native:
+          searchLocations: classpath:/shared
 
   rabbitmq:
     host: localhost
@@ -71,8 +49,3 @@ security:
   user:
     name: user
     password: ${CONFIG_SERVER_PASSWORD:password}
-
-
-
-
-
