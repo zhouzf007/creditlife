@@ -1,7 +1,7 @@
 server:
   port: 8091
 
-name: 69
+name: 周镇峰
 
 eureka:
   instance:
