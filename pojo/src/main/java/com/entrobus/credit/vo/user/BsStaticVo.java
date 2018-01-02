@@ -1,12 +1,18 @@
-package com.entrobus.credit.vo;
+package com.entrobus.credit.vo.user;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 
 public class BsStaticVo implements Serializable {
     private Long id;
+    @NotBlank(message = "codeType 必填")
     private String codeType;
+    @NotBlank(message = "codeValue 必填")
     private String codeValue;
+    @NotBlank(message = "codeName 必填")
     private String codeName;
+    @NotBlank(message = "codeDesc 必填")
     private String codeDesc;
     private Integer sortId;
     private String ext;
