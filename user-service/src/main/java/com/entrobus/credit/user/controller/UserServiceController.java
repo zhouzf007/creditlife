@@ -51,6 +51,7 @@ public class UserServiceController {
     public WebResult addUser(@PathVariable("id") String id, @ModelAttribute UserInfoCache user) {
         WebResult result = new WebResult();
         user.setId(id);
+        user.setName(name);
         userCacheService.setUserCache(user);
         msgClient.sendMessage(user.getMobile(), "welcome");
         return result.ok();

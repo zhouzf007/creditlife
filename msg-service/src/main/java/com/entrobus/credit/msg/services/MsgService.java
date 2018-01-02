@@ -1,14 +1,11 @@
 package com.entrobus.credit.msg.services;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 /**
  * Created by zhouzf on 2017/12/28.
  */
 public interface MsgService {
 
-    String sendVerificationCode(String mobile, String content);
+    String sendVerificationCode(String areaCode,String mobile)throws Exception;
 
-    String sendMessage(String mobile, String content);
+    String sendMessage(String areaCode,String mobile, String content)throws Exception;
 }

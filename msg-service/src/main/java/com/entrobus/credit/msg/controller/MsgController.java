@@ -21,12 +21,12 @@ public class MsgController {
     private MsgService msgService;
 
     @RequestMapping(value = "/verificationCode/{mobile}", method = RequestMethod.POST)
-    public String sendVerificationCode(@PathVariable String mobile, @RequestParam String content) {
-        return msgService.sendVerificationCode(mobile,content);
+    public String sendVerificationCode(@PathVariable String mobile, @RequestParam(defaultValue = "86")  String areaCode) {
+        return msgService.sendVerificationCode(mobile,areaCode);
     }
 
     @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST)
-    public String sendMessage(@PathVariable String mobile, Principal principal, @RequestParam String content) {
-        return msgService.sendMessage(mobile,content);
+    public String sendMessage(@PathVariable String mobile, @RequestParam(defaultValue = "86")  String areaCode,@RequestParam String content) {
+        return msgService.sendMessage(areaCode,mobile,content);
     }
 }
