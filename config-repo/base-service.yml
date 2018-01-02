@@ -3,8 +3,8 @@ server:
 
 base:
   test:
-    name: test1
-    password: password1
+    name: test2
+    password: password2
 
 eureka:
   instance:
