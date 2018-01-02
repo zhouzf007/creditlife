@@ -1,4 +1,4 @@
-package com.entrobus.credit.manager.sys.dao;
+package com.entrobus.credit.manager.dao;
 
 import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.pojo.manager.SysUserExample;

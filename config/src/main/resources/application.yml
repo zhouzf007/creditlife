@@ -12,14 +12,10 @@ eureka:
     service-url:
       defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
 
-spring:
-  cloud:
-    config:
-      server:
-        native:
-          search-paths: classpath:/shared
-  profiles:
-    active: native
+#spring:
+#  cloud:
+#    config:
+#      server:
 #        git:
 #          uri: https://gitlab.newseax.com/credit/creditlife.git
 #          search-paths: config-repo
@@ -35,16 +31,16 @@ encrypt:
 
 #server:
 #  port: 8088
-#spring:
-#  profiles:
-#    active: native
-#  cloud:
-#    config:
-#      server:
-#        health:
-#          enabled:  false
-#        native:
-#          searchLocations: F:\newseax-git6\creditlife\config-repo
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        health:
+          enabled:  false
+        native:
+          searchLocations: classpath:/shared
 
   rabbitmq:
     host: localhost

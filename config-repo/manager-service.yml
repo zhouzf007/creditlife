@@ -73,6 +73,6 @@ spring:
 
 #  配置mybatis mapper.xml
 mybatis:
-  mapper-locations: classpath*:com/entrobus/credit/manager/*/dao/*/*.xml
+  mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:
 #    show-sql: true

@@ -39,3 +39,6 @@ zuul:
     file-service:
       path: /file/**
       sensitiveHeaders:
+    base-service:
+      path: /base/**
+      sensitiveHeaders:

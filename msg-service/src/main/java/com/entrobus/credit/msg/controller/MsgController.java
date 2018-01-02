@@ -6,7 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RefreshScope
@@ -23,7 +26,7 @@ public class MsgController {
     }
 
     @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST)
-    public String sendMessage(@PathVariable String mobile, @RequestParam String content) {
+    public String sendMessage(@PathVariable String mobile, Principal principal, @RequestParam String content) {
         return msgService.sendMessage(mobile,content);
     }
 }

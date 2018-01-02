@@ -1,5 +1,5 @@
 server:
-  port: 8094
+  port: 8095
   
 msg: manager-service
 
@@ -73,6 +73,6 @@ spring:
 
 #  配置mybatis mapper.xml
 mybatis:
-  mapper-locations: classpath*:com/entrobus/credit/manager/*/dao/*/*.xml
+  mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:
 #    show-sql: true

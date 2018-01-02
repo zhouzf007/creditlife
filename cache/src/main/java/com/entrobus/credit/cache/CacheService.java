@@ -2,6 +2,7 @@ package com.entrobus.credit.cache;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
@@ -17,6 +18,13 @@ import java.util.concurrent.TimeUnit;
 public class CacheService {
 
     private final static Logger logger = LoggerFactory.getLogger(CacheService.class);
+
+//    public static RedisTemplate redisTemplate;
+//
+//    static {
+//        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-context-jedis.xml");
+//        redisTemplate = applicationContext.getBean("redisTemplate", RedisTemplate.class);
+//    }
 
     /**
      * 缓存字符串内容
@@ -326,7 +334,7 @@ public class CacheService {
 
 
     /**
-     * 根据key获取无序集合
+     * 根据key前缀获取所有key
      *
      * @param key
      * @return

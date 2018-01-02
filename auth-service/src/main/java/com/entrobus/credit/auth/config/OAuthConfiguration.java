@@ -1,11 +1,10 @@
 package com.entrobus.credit.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +16,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import redis.clients.jedis.JedisCluster;
 
 import javax.sql.DataSource;
 
@@ -30,9 +28,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-
     @Autowired
-    private JedisCluster jedisCluster;
+    private Environment env;
 
     @Autowired
     private DataSource dataSource;
@@ -72,7 +69,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients)
             throws Exception {
 //        clients.jdbc(dataSource)
-//                .passwordEncoder(passwordEncoder)
+//           clients.inMemory()
 //                .withClient("client")
 //                .secret("secret")
 //                .authorizedGrantTypes("password", "refresh_token")
@@ -106,17 +103,18 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .accessTokenValiditySeconds(3600) // 1 hour
                 .refreshTokenValiditySeconds(2592000) // 30 days
                 .and()
-                .withClient("client3")
-                .secret(new BCryptPasswordEncoder().encode("secret3"))
-                        .authorizedGrantTypes("password", "refresh_token")
-                        .scopes("read", "write")
-                        .accessTokenValiditySeconds(3600) // 1 hour
-                        .refreshTokenValiditySeconds(2592000) // 30 days
-                        .and()
-                        .withClient("user-service")
-                        .secret("password")
-                        .authorizedGrantTypes("client_credentials", "refresh_token")
-                        .scopes("server")
+                .withClient("msg-service")
+//                .secret(env.getProperty("security.user.password"))
+                .secret(new BCryptPasswordEncoder().encode("password"))
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
+                .accessTokenValiditySeconds(3600) // 1 hour
+                .refreshTokenValiditySeconds(2592000) // 30 days
+                .and()
+                .withClient("user-service")
+                .secret(new BCryptPasswordEncoder().encode("password"))
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
 
         ;
     }
@@ -126,8 +124,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Order(-20)
     protected static class AuthenticationManagerConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
-        @Autowired
-        private DataSource dataSource;
+//        @Autowired
+//        private DataSource dataSource;
 
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {

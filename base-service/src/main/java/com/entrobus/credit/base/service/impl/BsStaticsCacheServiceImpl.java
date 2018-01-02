@@ -6,7 +6,7 @@ import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.pojo.base.BsStatics;
-import com.entrobus.credit.vo.BsStaticVo;
+import com.entrobus.credit.vo.user.BsStaticVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -147,7 +147,8 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
      * @return
      */
     private BsStaticVo getById(String id) {
-        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, id, BsStaticVo.class);
+        String key = getKey(id);
+        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, key, BsStaticVo.class);
         return cacheObj;
     }
 
