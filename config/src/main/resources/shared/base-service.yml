@@ -1,7 +1,10 @@
 server:
   port: 8093
 
-
+base:
+  test:
+    name: test24
+    password: password24
 
 eureka:
   instance:
