@@ -1,15 +1,14 @@
 package com.entrobus.credit.manager.sys.service.impl;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.manager.common.bean.SysMenu;
 import com.entrobus.credit.manager.common.bean.SysResourceVo;
 import com.entrobus.credit.manager.common.bean.ZtreeMenuVo;
 import com.entrobus.credit.manager.dao.SysResourceMapper;
 import com.entrobus.credit.manager.sys.service.SysResourceService;
 import com.entrobus.credit.manager.sys.service.SysRoleResourceService;
-import com.entrobus.credit.pojo.manager.SysResource;
-import com.entrobus.credit.pojo.manager.SysResourceExample;
-import com.entrobus.credit.pojo.manager.SysRoleResource;
-import com.entrobus.credit.pojo.manager.SysRoleResourceExample;
+import com.entrobus.credit.manager.sys.service.SysUserRoleService;
+import com.entrobus.credit.pojo.manager.*;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -30,6 +29,9 @@ public class SysResourceServiceImpl implements SysResourceService {
 
     @Autowired
     private SysRoleResourceService sysRoleResourceService;
+
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
 
     private static final Logger logger = LoggerFactory.getLogger(SysResourceServiceImpl.class);
 
@@ -204,6 +206,125 @@ public class SysResourceServiceImpl implements SysResourceService {
             }
         }
         return menuVoList;
+    }
+
+    @Override
+    public List<SysResource> getSysResourceByUserId(Long userId,Integer platform,Integer type) {
+        List<SysResource> sysResourceList = new ArrayList<>();
+        //1.查找该用户所属的角色
+        SysUserRoleExample userRoleExample = new SysUserRoleExample();
+        userRoleExample.createCriteria().andUserIdEqualTo(userId);
+        List<SysUserRole> sysUserRoleList = sysUserRoleService.selectByExample(userRoleExample);
+        if(CollectionUtils.isNotEmpty(sysUserRoleList)){
+            List<Long> roleIdList = new ArrayList<>();
+            for(SysUserRole userRole:sysUserRoleList){
+                roleIdList.add(userRole.getRoleId());
+            }
+            //2.查找角色所能访问的资源
+            SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
+            roleResourceExample.createCriteria().andRoleIdIn(roleIdList);
+            List<SysRoleResource> roleResourceList = sysRoleResourceService.selectByExample(roleResourceExample);
+            if(CollectionUtils.isNotEmpty(roleResourceList)){
+                List<Long> resourceIdList = new ArrayList<>();
+                for(SysRoleResource roleResource:roleResourceList){
+                    resourceIdList.add(roleResource.getResourceId());
+                }
+                //3.根据资源ID查找资源信息
+                SysResourceExample sysResourceExample = new SysResourceExample();
+                SysResourceExample.Criteria criteria = sysResourceExample.createCriteria();
+                criteria.andIdIn(resourceIdList);
+                if(platform != null){
+                    criteria.andPlatformEqualTo(platform);
+                }
+                if(type != null){
+                    criteria.andTypeEqualTo(type);
+                }
+                sysResourceList = selectByExample(sysResourceExample);
+            }
+        }
+        return sysResourceList;
+    }
+
+    @Override
+    public List<SysMenu> getNavMenu(Long userId, Integer platform) {
+        List<SysMenu> sysMenuList = new ArrayList<>();
+        List<SysResource> sysResourceList = getSysResourceByUserId(userId,platform, com.entrobus.credit.manager.common.Constants.RESOURCE_TYPE.MENU);
+        if(CollectionUtils.isNotEmpty(sysResourceList)){
+            //找出一级菜单
+            List<SysResource> firstLevelMenuList = new ArrayList<>();
+            for(SysResource resource : sysResourceList){
+                if(resource.getParentId() == null){
+                    firstLevelMenuList.add(resource);
+                }
+            }
+
+            for(SysResource resource : firstLevelMenuList){
+                SysMenu sysMenu = generateNavMenu(resource.getId(),sysResourceList);
+                sysMenuList.add(sysMenu);
+            }
+        }
+        return sysMenuList;
+    }
+
+    /**
+     * 递归生成导航菜单
+     * @param rootId 根节点ID
+     * @return SysMenu
+     */
+    private SysMenu generateNavMenu(Long rootId, List<SysResource> sysResourceList){
+        //获取根菜单
+        SysMenu menu = this.getMenuById(rootId, sysResourceList);
+        //获取根菜单下的子菜单
+        List<SysMenu> subMenuList = this.getChildrenMenuById(rootId, sysResourceList);
+        for (SysMenu item : subMenuList) {
+            //递归查找子菜单下的子菜单
+            SysMenu node = this.generateNavMenu(item.getId(), sysResourceList);
+            menu.getChildMenus().add(node);
+        }
+        return menu;
+    }
+
+    /**
+     * 获取SidebarMenu
+     * @param menuId 菜单ID
+     * @return SidebarMenu
+     */
+    private SysMenu getMenuById(Long menuId,List<SysResource> sysResourceList){
+        SysMenu menu = new SysMenu();
+        for(SysResource resource : sysResourceList){
+            if(resource.getId() == menuId){
+                menu.setId(resource.getId());
+                menu.setIcon(resource.getIcon());
+                menu.setMenuName(resource.getName());
+                menu.setHref(resource.getUrl());
+                menu.setPermission(resource.getPerms());
+                menu.setParentId(resource.getParentId());
+                break;
+            }
+        }
+        return menu;
+    }
+
+    /**
+     * 获取指定菜单下的子菜单
+     * @param menuId 菜单ID
+     * @return childrenTreeNode 子节点集合
+     */
+    private List<SysMenu> getChildrenMenuById(Long menuId,List<SysResource> sysResourceList){
+        List<SysMenu> subMenuList = new ArrayList<>();
+        for(SysResource resource : sysResourceList){
+            SysMenu menu = new SysMenu();
+            if(resource.getParentId() == menuId){
+                menu.setId(resource.getId());
+                menu.setIcon(resource.getIcon());
+                menu.setMenuName(resource.getName());
+                menu.setHref(resource.getUrl());
+                menu.setPermission(resource.getPerms());
+                menu.setParentId(resource.getParentId());
+                subMenuList.add(menu);
+            }
+        }
+        return subMenuList;
     }
 
     /**

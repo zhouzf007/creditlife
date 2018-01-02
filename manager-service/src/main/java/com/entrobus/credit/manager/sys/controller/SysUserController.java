@@ -83,7 +83,7 @@ public class SysUserController extends ManagerBaseController {
      */
     @RequestMapping(value = "/getLoginUserInfo")
     public WebResult getLoginUserInfo(){
-        //用户登录
+        //获取登录用户信息
         SysLoginUserInfo loginUserInfo = getCurrLoginUser();
         return WebResult.ok().put("loginUser",loginUserInfo);
     }

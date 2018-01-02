@@ -27,4 +27,18 @@ public interface SysRoleResourceService {
     int insert(SysRoleResource record);
 
     int insertSelective(SysRoleResource record);
+
+    /**
+     * 保存角色资源信息
+     * @param roleId
+     * @param resourceIdList
+     */
+    void save(Long roleId, List<Long> resourceIdList);
+
+    /**
+     * 通过角色ID删除资源
+     * @param roleId
+     * @return
+     */
+    int deleteByRoleId(Long roleId);
 }

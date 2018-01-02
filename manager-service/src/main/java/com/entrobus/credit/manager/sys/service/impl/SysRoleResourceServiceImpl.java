@@ -4,11 +4,14 @@ import com.entrobus.credit.manager.dao.SysRoleResourceMapper;
 import com.entrobus.credit.manager.sys.service.SysRoleResourceService;
 import com.entrobus.credit.pojo.manager.SysRoleResource;
 import com.entrobus.credit.pojo.manager.SysRoleResourceExample;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -62,5 +65,30 @@ public class SysRoleResourceServiceImpl implements SysRoleResourceService {
 
     public int insertSelective(SysRoleResource record) {
         return this.sysRoleResourceMapper.insertSelective(record);
+    }
+
+    @Override
+    public void save(Long roleId, List<Long> resourceIdList) {
+        //先删除角色与资源的关系
+        deleteByRoleId(roleId);
+        if(CollectionUtils.isNotEmpty(resourceIdList)){
+            List<SysRoleResource> roleResourceList = new ArrayList<>();
+            for(Long resourceId:resourceIdList){
+                SysRoleResource roleResource = new SysRoleResource();
+                roleResource.setResourceId(resourceId);
+                roleResource.setRoleId(roleId);
+                roleResource.setCreateTime(new Date());
+                roleResourceList.add(roleResource);
+            }
+            //批量保存角色能够查看的资源
+            sysRoleResourceMapper.insertBatchSelective(roleResourceList);
+        }
+    }
+
+    @Override
+    public int deleteByRoleId(Long roleId) {
+        SysRoleResourceExample example = new SysRoleResourceExample();
+        example.createCriteria().andRoleIdEqualTo(roleId);
+        return deleteByExample(example);
     }
 }

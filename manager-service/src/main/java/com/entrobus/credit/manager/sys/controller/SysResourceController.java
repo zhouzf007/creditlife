@@ -2,6 +2,8 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
+import com.entrobus.credit.manager.common.bean.SysMenu;
 import com.entrobus.credit.manager.common.bean.ZtreeMenuVo;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.SysResourceService;
@@ -129,12 +131,14 @@ public class SysResourceController extends ManagerBaseController {
     }
 
     /**
-     * 获取侧边栏导航菜单
+     * 获取导航菜单
      * @return
      */
-    @RequestMapping("/sidebarMenu")
-    public WebResult getSidebarMenu(){
-        return WebResult.ok();
+    @RequestMapping("/navMenu")
+    public WebResult getNavMenu(){
+        SysLoginUserInfo loginUserInfo = getCurrLoginUser();
+        List<SysMenu> sysMenuList = sysResourceService.getNavMenu(loginUserInfo.getId(),loginUserInfo.getPlatform());
+        return WebResult.ok(sysMenuList);
     }
 
     /**
