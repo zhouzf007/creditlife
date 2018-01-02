@@ -60,7 +60,7 @@ public class BsStaticsController {
      * @param vo
      * @return
      */
-    @PostMapping("/")
+    @PostMapping("")
     public int add(@RequestBody BsStaticVo vo){
         if (StringUtils.isBlank(vo.getCodeType())
                 || StringUtils.isBlank(vo.getCodeValue())
@@ -79,7 +79,7 @@ public class BsStaticsController {
      * @param codeType
      * @return
      */
-    @GetMapping("/")
+    @GetMapping("")
     public List<BsStaticVo> getList(@RequestParam(required = false) String codeType){
         List<BsStaticVo> list = null;
         if (StringUtils.isNotBlank(codeType)){
