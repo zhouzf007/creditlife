@@ -27,4 +27,23 @@ public interface SysUserRoleService {
     int insert(SysUserRole record);
 
     int insertSelective(SysUserRole record);
+
+    /**
+     * 保存用户角色信息
+     * @param userId
+     * @param roleIdList
+     */
+    void save(Long userId, List<Long> roleIdList);
+
+    /**
+     * 根据用户ID，获取角色ID列表
+     */
+    List<Long> getRoleIdList(Long userId);
+
+    /**
+     * 通过用户ID删除角色
+     * @param userId
+     * @return
+     */
+    int deleteByUserId(Long userId);
 }
