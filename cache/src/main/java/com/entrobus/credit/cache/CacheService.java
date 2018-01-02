@@ -327,7 +327,7 @@ public class CacheService {
 
 
     /**
-     * 根据key获取无序集合
+     * 根据key前缀获取所有key
      *
      * @param key
      * @return

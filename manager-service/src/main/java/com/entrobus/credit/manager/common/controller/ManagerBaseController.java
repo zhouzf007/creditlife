@@ -1,10 +1,13 @@
 package com.entrobus.credit.manager.common.controller;
 
+import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.util.WebUtil;
-import com.entrobus.credit.pojo.manager.SysUser;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -22,6 +25,10 @@ public class ManagerBaseController {
 
     //日志打印
     protected final Logger logger = LoggerFactory.getLogger(getClass());
+
+
+    @Autowired
+    protected RedisTemplate redisTemplate;
 
     /**
      * 获取当前请求对象
@@ -90,38 +97,13 @@ public class ManagerBaseController {
         return "forward:" + url;
     }
 
-    /** 基于@ExceptionHandler异常处理 */
-    /*@ExceptionHandler
-    @ResponseBody
-    public R exp(HttpServletResponse response,Exception ex) {
-        R r = new R();
-        try {
-            response.setContentType("application/json;charset=utf-8");
-            response.setCharacterEncoding("utf-8");
-            if (ex instanceof SmartFast4jException) {
-                r.setCode(((SmartFast4jException) ex).getCode());
-                r.setMsg(((SmartFast4jException) ex).getMessage());
-            }else if(ex instanceof DuplicateKeyException){
-                r = R.fail("数据库中已存在该记录");
-            }else if(ex instanceof AuthorizationException){
-                r = R.fail("没有权限，请联系管理员授权");
-            }else{
-                r = R.fail(ex);
-            }
-            //记录异常日志
-            logger.error(ex.getMessage(), ex);
-        } catch (Exception e) {
-            logger.error("ExceptionHandler 异常处理失败", e);
-        }
-        return r;
-    }*/
-
     /**
      * 获取当前登录的系统用户
      * @return
      */
-    protected SysUser getCurrLoginUser() {
-        SysUser loginUser = (SysUser) getRequest().getSession().getAttribute("loginUser");
+    protected SysLoginUserInfo getCurrLoginUser() {
+        String token = getRequest().getParameter("token");
+        SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
         return loginUser;
     }
 
@@ -130,8 +112,7 @@ public class ManagerBaseController {
      * @return
      */
     protected Long getLoginUserId() {
-        return 1L;
-        //return getCurrLoginUser().getId();
+        return getCurrLoginUser().getId();
     }
 
 }

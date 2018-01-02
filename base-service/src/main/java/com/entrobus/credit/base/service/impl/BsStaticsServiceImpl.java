@@ -92,6 +92,7 @@ public class BsStaticsServiceImpl implements BsStaticsService {
         if (record.getCreateTime() == null) record.setCreateTime(now);
         if (record.getUpdateTime() == null) record.setUpdateTime(now);
         if (record.getDeleteFlag() == null) record.setDeleteFlag(Constants.DeleteFlag.NO);
+        if (record.getSortId() == null) record.setSortId(100);
     }
     @Override
     public List<BsStatics> getByCodeType(String codeType){

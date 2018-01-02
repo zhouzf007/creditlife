@@ -38,6 +38,12 @@ public class WebResult extends HashMap<String, Object> {
 		webResult.put(MSG, msg);
 		return webResult;
 	}
+
+	public static  WebResult ok(Object data) {
+		WebResult webResult = new WebResult();
+		webResult.put(DATA, data);
+		return webResult;
+	}
 	
 	public static  WebResult ok(Map<String, Object> map) {
 		WebResult webResult = new WebResult();
