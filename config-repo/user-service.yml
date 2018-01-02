@@ -1,7 +1,7 @@
 server:
   port: 8091
 
-name: 67
+name: 69
 
 eureka:
   instance:
