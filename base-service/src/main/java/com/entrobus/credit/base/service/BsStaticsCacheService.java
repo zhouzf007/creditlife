@@ -1,6 +1,6 @@
 package com.entrobus.credit.base.service;
 
-import com.entrobus.credit.vo.BsStaticVo;
+import com.entrobus.credit.vo.user.BsStaticVo;
 
 import java.util.List;
 

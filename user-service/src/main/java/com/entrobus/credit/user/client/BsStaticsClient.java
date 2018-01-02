@@ -1,6 +1,6 @@
 package com.entrobus.credit.user.client;
 
-import com.entrobus.credit.vo.BsStaticVo;
+import com.entrobus.credit.vo.user.BsStaticVo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
