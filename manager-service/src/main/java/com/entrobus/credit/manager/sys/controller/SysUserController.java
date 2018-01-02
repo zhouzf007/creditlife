@@ -79,7 +79,7 @@ public class SysUserController extends ManagerBaseController {
     }
 
     /**
-     * 登录
+     * 获取登录用户信息
      */
     @RequestMapping(value = "/getLoginUserInfo")
     public WebResult getLoginUserInfo(){
@@ -110,7 +110,7 @@ public class SysUserController extends ManagerBaseController {
         }
         sysUser.setUpdateUser(getLoginUserId());
         sysUserService.update(sysUser);
-        return WebResult.ok();
+        return WebResult.ok("修改成功");
     }
 
     /**
