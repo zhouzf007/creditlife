@@ -19,13 +19,6 @@ public class CacheService {
 
     private final static Logger logger = LoggerFactory.getLogger(CacheService.class);
 
-//    public static RedisTemplate redisTemplate;
-//
-//    static {
-//        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-context-jedis.xml");
-//        redisTemplate = applicationContext.getBean("redisTemplate", RedisTemplate.class);
-//    }
-
     /**
      * 缓存字符串内容
      *

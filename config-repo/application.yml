@@ -40,4 +40,9 @@ security:
       user-info-uri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/current
 
 
+sms:
+  apikey: a56575f23e62f90992d9c22ebb17efa9
+  posturl: http://sms.yunpian.com/v2/sms/single_send.json
+
+
 
