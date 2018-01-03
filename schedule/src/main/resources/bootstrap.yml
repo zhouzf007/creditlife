@@ -18,6 +18,11 @@ feign:
   httpclient:
     enabled: true
 
+security:
+  basic:
+    enabled: false
+
+
 
 
 

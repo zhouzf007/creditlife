@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
-    @PostMapping("")
+    @PostMapping("/")
     public WebResult addJob(@RequestParam String jobName, @RequestParam String cron){
         boolean add = scheduleService.add(jobName, cron, DetailQuartzJobBean.class);
         return add ? WebResult.ok("成功") : WebResult.error("失败");
     }
-    @GetMapping("")
+    @GetMapping("/")
     public WebResult get(){
 
         return WebResult.ok("成功");
