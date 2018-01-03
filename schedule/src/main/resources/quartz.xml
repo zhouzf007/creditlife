@@ -14,17 +14,17 @@
         <property name="queueCapacity" value="500"/>
     </bean>
     <!--执行任务-->
-    <bean id="creditlifeJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-        <!-- durability 表示任务完成之后是否依然保留到数据库，默认false -->
-        <property name="durability" value="true" />
-        <property name="requestsRecovery" value="true" />
-        <property name="jobClass" value="com.entrobus.credit.schedule.job.DetailQuartzJobBean"/>
-    </bean>
+    <!--<bean id="creditlifeJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+        <!--&lt;!&ndash; durability 表示任务完成之后是否依然保留到数据库，默认false &ndash;&gt;-->
+        <!--<property name="durability" value="true" />-->
+        <!--<property name="requestsRecovery" value="true" />-->
+        <!--<property name="jobClass" value="com.entrobus.credit.schedule.job.DetailQuartzJobBean"/>-->
+    <!--</bean>-->
     <!--触发器-->
-    <bean id="creditlifeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="creditlifeJobDetail"/>
-        <property name="cronExpression" value="0/10 * * * * ?"/><!--每10秒钟执行一次 -->
-    </bean>
+    <!--<bean id="creditlifeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="creditlifeJobDetail"/>-->
+        <!--<property name="cronExpression" value="0/10 * * * * ?"/>&lt;!&ndash;每10秒钟执行一次 &ndash;&gt;-->
+    <!--</bean>-->
 
     <!--&lt;!&ndash; 设置调度 &ndash;&gt;-->
     <bean id="webScheduler"
@@ -46,12 +46,12 @@
         </property>
         <property name="triggers">
             <list>
-                <ref bean="creditlifeJobTrigger"/>
+                <!--<ref bean="creditlifeJobTrigger"/>-->
             </list>
         </property>
         <property name="jobDetails">
             <list>
-                <ref bean="creditlifeJobDetail"/>
+                <!--<ref bean="creditlifeJobDetail"/>-->
             </list>
         </property>
         <property name="taskExecutor" ref="executor"/>

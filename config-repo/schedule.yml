@@ -13,7 +13,7 @@ spring:
     password: shangshangABCD123456
 #    password: {cipher}AQBtJpXYlTqs+2UwUyAHTNTjzLajBb3mHcyCbNAz9AttYpXsraiF9jOF8zqFcF8eZUO3A3c0obmzA/n3NwH8pyZoo8d64q7SpI2DWjQ6Y3Twu6iA8YpGyajNOQCQpAX1JpP79ljEnfQzgAVFsDcW5G42jRyovi0s1seBqHaiUkqhUfnWiqh/6gEoNwBkrtDpURdQck57c39yRvS4HO8mgWbqF2YcnCxfub/OM+/CS89Z0PNp6APlZLWPubHD1iFhbhM2YSrGGH4cEOsMYXoiJs3MpEnl5LOrApxtWVZ+HlN52wI616HUku+BttaKhzZcoR4y39jSWGHuzm1WdIwDgIjeKQr4lpJMYkJLod0iGqnkUdjg7q9g3CkBJePc9afpAaJRVlvnP3zCKPq/amsnHPTd
     driver-class-name: com.mysql.jdbc.Driver
-#    druid \u914D\u7F6E
+#    druid 配置
     druid:
       filter:
         stat:
@@ -29,50 +29,38 @@ spring:
           enabled: true
           config:
             multi-statement-allow: true
-#     \u914D\u7F6E\u521D\u59CB\u5316\u5927\u5C0F\u3001\u6700\u5C0F\u3001\u6700\u5927
+#     配置初始化大小、最小、最大
       initial-size: 1
       min-idle: 2
       max-active: 5
-#      \u914D\u7F6E\u83B7\u53D6\u8FDE\u63A5\u7B49\u5F85\u8D85\u65F6\u7684\u65F6\u95F4
+#      配置获取连接等待超时的时间
       max-wait: 60000
-#     \u914D\u7F6E\u95F4\u9694\u591A\u4E45\u624D\u8FDB\u884C\u4E00\u6B21\u68C0\u6D4B\uFF0C\u68C0\u6D4B\u9700\u8981\u5173\u95ED\u7684\u7A7A\u95F2\u8FDE\u63A5\uFF0C\u5355\u4F4D\u662F\u6BEB\u79D2
+#     配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       time-between-eviction-runs-millis:  60000
       min-evictable-idle-time-millis: 120000
       validation-query: SELECT 'x'
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
-#      \u6253\u5F00PSCache\uFF0C\u5E76\u4E14\u6307\u5B9A\u6BCF\u4E2A\u8FDE\u63A5\u4E0APSCache\u7684\u5927\u5C0F ,mysql\u8BBE\u7F6E\u4E3Afalse
+#      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
+  redis:
+    cluster:
+      nodes:
+        - 10.1.1.241:7000
+        - 10.1.1.241:7001
+        - 10.1.1.241:7002
+        - 10.1.1.241:7003
+        - 10.1.1.241:7004
+        - 10.1.1.241:7005
 
 
-# \u6253\u5370\u65E5\u5FD7
-logging:
-  level:
-    root: INFO
-    org.hibernate: INFO
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-    com.springms: DEBUG
+security:
+  basic:
+    enabled: false
 
-
-#org:
-#  quartz:
-#    scheduler:
-#      instanceName: quartzScheduler
-#      instanceId: AUTO
-#    jobStore:
-#      class: org.quartz.impl.jdbcjobstore.JobStoreTX
-#      driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
-#      tablePrefix: QRTZ_
-#      isClustered: true
-#      useProperties: false
-#      clusterCheckinInterval: 20000
-#    threadPool:
-#      class: org.quartz.simpl.SimpleThreadPool
-#      threadCount: 10
-#      threadPriority: 5
-#      threadsInheritContextClassLoaderOfInitializingThread: true
-
+management:
+  security:
+    enabled: false
 
