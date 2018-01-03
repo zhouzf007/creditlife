@@ -1,9 +1,29 @@
 server:
   port: 8099
 
+name: 张三峰
+
+eureka:
+  instance:
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
+
+security:
+  user:
+    name: user
+    password: password
+  oauth2:
+    client:
+      clientId: user-service
+      clientSecret: ${security.user.password}
+      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
+      grant-type: client_credentials
+      scope: server
+  basic:
+    enabled: false
+
 spring:
-  application:
-    name: schedule
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://119.29.177.249:3306/test?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
