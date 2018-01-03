@@ -24,25 +24,25 @@ encrypt:
 #server:
 #  port: 8088
 spring:
-#  profiles:
-#    active: native
-#  cloud:
-#    config:
-#      server:
-#        health:
-#          enabled:  false
-#        native:
-##            使用classpath 修改配置需要重启config才生效
-#          searchLocations: classpath:/shared
-##          searchLocations: file:///D:/idea_project/creditlife/config/src/main/resources/shared
+  profiles:
+    active: native
   cloud:
     config:
       server:
-        git:
-          uri: https://gitlab.newseax.com/credit/creditlife.git
-          search-paths: config-repo
-          username: root
-          password: KcjJb17151
+        health:
+          enabled:  false
+        native:
+#            使用classpath 修改配置需要重启config才生效
+          searchLocations: classpath:/shared
+#          searchLocations: file:///D:/idea_project/creditlife/config/src/main/resources/shared
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://gitlab.newseax.com/credit/creditlife.git
+#          search-paths: config-repo
+#          username: root
+#          password: KcjJb17151
   rabbitmq:
     host: localhost
 
