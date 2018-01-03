@@ -1,7 +1,7 @@
 server:
   port: 8091
 
-name: 张三疯
+name: 张三峰
 
 eureka:
   instance:
@@ -20,6 +20,8 @@ security:
       accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
       grant-type: client_credentials
       scope: server
+  basic:
+    enabled: false
 
 #{cipher}前缀声明 加密数据 ,需要替换{}/jre/lib/security 目录（windows有两个jre）下的local_policy.jar和US_export_policy.jar
 # RSA
@@ -81,7 +83,7 @@ mybatis:
 #  jpa:
 #    show-sql: true
 
-
 management:
   security:
-  enabled: false
+    enabled: false
+
