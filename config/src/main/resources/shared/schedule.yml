@@ -1,0 +1,78 @@
+server:
+  port: 8099
+
+spring:
+  application:
+    name: schedule
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://119.29.177.249:3306/test?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+#    url: {cipher}AQAJsE5NTBj1VMLzGXG4O+WOGq9wdOTc+HnSmn0STCrLf6IWOtpJ/ciV87vkYycmTMsT59mZvHWrWYP3QPmn/BDzbQlMyIaaIEgtAFHyHVhl2D4Ht9zgecxdijRmG6o7ta1QPJ4f0oDzSyhYsBqvAS7mClKnGrsZcT3yT6ELSkCV928IPr6rj2DUjdV17cQsZrEtBpBX2cKqAzmqH2EPaPcDhzh7Y5CVoyEm4ISk11kl3ndak+i02WQtfaXcV0i6+ddrMXQgNc0PYYpWMMiu+mElG2gy6K0AKQizIGW2fIGkGJcQxCa2btEkKN1okJ5DVsNbr5XZbApP1tN5pzro4hEBEpWrdAg7/pbU4Dyk6E/W4jS1x4tcy8almVbjsIOa/iPudvAhdQlR84VLl+qf6kp9AgyEyJ0Y3VKJu1i2XZULs1nA+SYr7uhwxNRZG1i3eQ10SQmuKxCqlJjQy3i/qP+L8Mx603oRMdyOr57epc8HjwEexaPnpWS3Zpwopam+kF0Igl4VbxydicKA0h/ArcquQ3NslybIH3VGBhujTkyD9HhCIsyJVp+P/GY/1AYCh5599d6PT/5Gd/TgipQ+MZT1
+    username: phoenix
+#    username: {cipher}AQBbblyymdI+Qv3iOuwge8U/DT/Zyv3iFHh6EkzaT5sX4vuTUyGQcxVHHZoeW0R6sTnNiT5qacBu88vsLQBgOu2JZB3uPMpg7dok8flgFG6HwkJbcW6gPLKQ0dL1GAfYHciLWTC0wuMcrGFmlBbQ+BYDS+uUOY664d/TjcC3P5v8KcQ1Yuu2NFMGFZEXkCib8rmLP/T5FgUqqSChEbuhLGwHJ7to9KBIO9Sco9Pd87201V0VBKUsMUitkO7FDk5NZqB1BXXkHBGKbvUPRnM7kTioXkPscxD427TLfiLr5sGm4Knb2nA9AWhBeEIps/T5SQlzI6+brFo+zi/ctLvMz1gwjYFqzMtW5dmZR4iBvY7ventVFBkZI+Mp4QY71OTN4Uk=
+    password: shangshangABCD123456
+#    password: {cipher}AQBtJpXYlTqs+2UwUyAHTNTjzLajBb3mHcyCbNAz9AttYpXsraiF9jOF8zqFcF8eZUO3A3c0obmzA/n3NwH8pyZoo8d64q7SpI2DWjQ6Y3Twu6iA8YpGyajNOQCQpAX1JpP79ljEnfQzgAVFsDcW5G42jRyovi0s1seBqHaiUkqhUfnWiqh/6gEoNwBkrtDpURdQck57c39yRvS4HO8mgWbqF2YcnCxfub/OM+/CS89Z0PNp6APlZLWPubHD1iFhbhM2YSrGGH4cEOsMYXoiJs3MpEnl5LOrApxtWVZ+HlN52wI616HUku+BttaKhzZcoR4y39jSWGHuzm1WdIwDgIjeKQr4lpJMYkJLod0iGqnkUdjg7q9g3CkBJePc9afpAaJRVlvnP3zCKPq/amsnHPTd
+    driver-class-name: com.mysql.jdbc.Driver
+#    druid \u914D\u7F6E
+    druid:
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql
+          slow-sql-millis: 1000
+          log-slow-sql: true
+          merge-sql: true
+        slf4j:
+          statement-executable-sql-log-enable: true
+          enabled: true
+        wall:
+          enabled: true
+          config:
+            multi-statement-allow: true
+#     \u914D\u7F6E\u521D\u59CB\u5316\u5927\u5C0F\u3001\u6700\u5C0F\u3001\u6700\u5927
+      initial-size: 1
+      min-idle: 2
+      max-active: 5
+#      \u914D\u7F6E\u83B7\u53D6\u8FDE\u63A5\u7B49\u5F85\u8D85\u65F6\u7684\u65F6\u95F4
+      max-wait: 60000
+#     \u914D\u7F6E\u95F4\u9694\u591A\u4E45\u624D\u8FDB\u884C\u4E00\u6B21\u68C0\u6D4B\uFF0C\u68C0\u6D4B\u9700\u8981\u5173\u95ED\u7684\u7A7A\u95F2\u8FDE\u63A5\uFF0C\u5355\u4F4D\u662F\u6BEB\u79D2
+      time-between-eviction-runs-millis:  60000
+      min-evictable-idle-time-millis: 120000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+#      \u6253\u5F00PSCache\uFF0C\u5E76\u4E14\u6307\u5B9A\u6BCF\u4E2A\u8FDE\u63A5\u4E0APSCache\u7684\u5927\u5C0F ,mysql\u8BBE\u7F6E\u4E3Afalse
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+
+
+# \u6253\u5370\u65E5\u5FD7
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.springms: DEBUG
+
+
+#org:
+#  quartz:
+#    scheduler:
+#      instanceName: quartzScheduler
+#      instanceId: AUTO
+#    jobStore:
+#      class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#      driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#      tablePrefix: QRTZ_
+#      isClustered: true
+#      useProperties: false
+#      clusterCheckinInterval: 20000
+#    threadPool:
+#      class: org.quartz.simpl.SimpleThreadPool
+#      threadCount: 10
+#      threadPriority: 5
+#      threadsInheritContextClassLoaderOfInitializingThread: true
+
+
