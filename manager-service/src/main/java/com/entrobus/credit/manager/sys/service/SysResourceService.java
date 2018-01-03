@@ -7,6 +7,7 @@ import com.entrobus.credit.pojo.manager.SysResource;
 import com.entrobus.credit.pojo.manager.SysResourceExample;
 
 import java.util.List;
+import java.util.Set;
 
 public interface SysResourceService {
     int countByExample(SysResourceExample example);
@@ -75,4 +76,10 @@ public interface SysResourceService {
      * @return
      */
     List<SysMenu> getNavMenu(Long userId,Integer platform);
+
+    /**
+     * 获取用户权限
+     * @return
+     */
+    Set<String> getUserPerms(Long userId,Integer platform);
 }

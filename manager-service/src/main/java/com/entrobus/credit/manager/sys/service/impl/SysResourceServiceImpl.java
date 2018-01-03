@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.sys.service.impl;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysMenu;
 import com.entrobus.credit.manager.common.bean.SysResourceVo;
 import com.entrobus.credit.manager.common.bean.ZtreeMenuVo;
@@ -11,6 +12,7 @@ import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.pojo.manager.*;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SysResourceServiceImpl implements SysResourceService {
@@ -248,7 +248,7 @@ public class SysResourceServiceImpl implements SysResourceService {
     @Override
     public List<SysMenu> getNavMenu(Long userId, Integer platform) {
         List<SysMenu> sysMenuList = new ArrayList<>();
-        List<SysResource> sysResourceList = getSysResourceByUserId(userId,platform, com.entrobus.credit.manager.common.Constants.RESOURCE_TYPE.MENU);
+        List<SysResource> sysResourceList = getSysResourceByUserId(userId,platform, SysConstants.RESOURCE_TYPE.MENU);
         if(CollectionUtils.isNotEmpty(sysResourceList)){
             //找出一级菜单
             List<SysResource> firstLevelMenuList = new ArrayList<>();
@@ -264,6 +264,21 @@ public class SysResourceServiceImpl implements SysResourceService {
             }
         }
         return sysMenuList;
+    }
+
+    @Override
+    public Set<String> getUserPerms(Long userId, Integer platform) {
+        Set<String> permsSet = new HashSet<>();
+        List<SysResource> sysResourceList = getSysResourceByUserId(userId,platform,null);
+        if(CollectionUtils.isNotEmpty(sysResourceList)){
+            for(SysResource resource : sysResourceList){
+                if(StringUtils.isBlank(resource.getPerms())){
+                    continue;
+                }
+                permsSet.addAll(Arrays.asList(resource.getPerms().trim().split(",")));
+            }
+        }
+        return permsSet;
     }
 
     /**

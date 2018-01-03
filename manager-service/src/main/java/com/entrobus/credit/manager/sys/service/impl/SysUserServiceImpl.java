@@ -2,12 +2,14 @@ package com.entrobus.credit.manager.sys.service.impl;
 
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.Constants;
-import com.entrobus.credit.common.exception.CreditlifeException;
+import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.dao.SysUserMapper;
 import com.entrobus.credit.manager.sys.security.shiro.ShiroUtils;
+import com.entrobus.credit.manager.sys.service.SysResourceService;
 import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.manager.sys.service.SysUserService;
 import com.entrobus.credit.pojo.manager.SysUser;
@@ -29,6 +31,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -40,6 +43,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserRoleService sysUserRoleService;
+
+    @Autowired
+    private SysResourceService sysResourceService;
 
     private static final Logger logger = LoggerFactory.getLogger(SysUserServiceImpl.class);
 
@@ -199,26 +205,26 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public String login(String username, String password) {
+    public WebResult login(String username, String password,Integer platform) {
         //根据用户名查找用户
         SysUserExample userExample = new SysUserExample();
         userExample.createCriteria()
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
-                .andUsernameEqualTo(username);
+                .andUsernameEqualTo(username)
+                .andPlatformEqualTo(platform);
         List<SysUser> sysUserList = selectByExample(userExample);
         if(CollectionUtils.isEmpty(sysUserList)){
-            //用户名不正确
-            throw new CreditlifeException("用户名或者密码不正确");
+            return WebResult.error("用户名或者密码不正确");
         }
         SysUser sysUser = sysUserList.get(0);
         password = ShiroUtils.sha256(password,sysUser.getSalt());
         //密码错误
         if(!password.equals(sysUser.getPassword())) {
-            throw new CreditlifeException("用户名或者密码不正确");
+            return WebResult.error("用户名或者密码不正确");
         }
         //账号已经被禁用
-        if(sysUser.getStatus()== com.entrobus.credit.manager.common.Constants.USER_STATUS.FROZEN){
-            throw new CreditlifeException("账号已被锁定,请联系管理员");
+        if(sysUser.getStatus()== SysConstants.USER_STATUS.FROZEN){
+            return WebResult.error("账号已被锁定,请联系管理员");
         }
         //登录成功，生成登录token
         SysLoginUserInfo sysLoginUserInfo = new SysLoginUserInfo();
@@ -232,8 +238,11 @@ public class SysUserServiceImpl implements SysUserService {
         }
         //生成32位token
         String token = GUIDUtil.genRandomGUID();
+        //获取用户权限
+        Set<String> permsSet = sysResourceService.getUserPerms(sysUser.getId(),platform);
+        sysLoginUserInfo.setPerms(permsSet);
         //将登录信息缓存到redis
         CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
-        return token;
+        return WebResult.ok().put("token",token).put("perms",permsSet);
     }
 }

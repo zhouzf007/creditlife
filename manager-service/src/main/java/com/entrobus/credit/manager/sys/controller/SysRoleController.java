@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysRoleExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.SysRoleResourceService;
@@ -117,7 +118,7 @@ public class SysRoleController extends ManagerBaseController {
         SysRoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除(待优化，后期改成使用mybatis拦截器统一处理带delete_flag过滤条件的查询)
         //只有超级管理员，才能查看所有管理员列表
-        if (getLoginUserId() != com.entrobus.credit.manager.common.Constants.SUPER_ADMIN) {
+        if (getLoginUserId() != SysConstants.SUPER_ADMIN) {
             criteria.andCreateUserEqualTo(getLoginUserId());
         }
         List<SysRole> list = sysRoleService.selectByExample(roleExample);
@@ -138,7 +139,7 @@ public class SysRoleController extends ManagerBaseController {
         SysRoleExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除
         //只有超级管理员，才能查看所有管理员列表
-        if (getLoginUserId() != com.entrobus.credit.manager.common.Constants.SUPER_ADMIN) {
+        if (getLoginUserId() != SysConstants.SUPER_ADMIN) {
             criteria.andCreateUserEqualTo(getLoginUserId());
         }
         if(StringUtils.isNotEmpty(roleName)){

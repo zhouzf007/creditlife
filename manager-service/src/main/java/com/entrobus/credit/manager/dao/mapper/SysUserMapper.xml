@@ -26,6 +26,7 @@
     <result column="delete_user" property="deleteUser" jdbcType="BIGINT" />
     <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <!--
@@ -100,7 +101,7 @@
     -->
     id, org_id, username, `password`, salt, email, cellphone, real_name, sex, age, head_img, 
     `status`, create_time, create_user, update_time, update_user, delete_time, delete_user, 
-    delete_flag, remark
+    delete_flag, remark, platform
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.entrobus.credit.pojo.manager.SysUserExample" >
     <!--
@@ -166,14 +167,14 @@
       head_img, `status`, create_time, 
       create_user, update_time, update_user, 
       delete_time, delete_user, delete_flag, 
-      remark)
+      remark, platform)
     values (#{orgId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{cellphone,jdbcType=CHAR}, 
       #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, 
       #{headImg,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
       #{deleteTime,jdbcType=TIMESTAMP}, #{deleteUser,jdbcType=BIGINT}, #{deleteFlag,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR}, #{platform,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.entrobus.credit.pojo.manager.SysUser" >
     <!--
@@ -242,6 +243,9 @@
       <if test="remark != null" >
         remark,
       </if>
+      <if test="platform != null" >
+        platform,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orgId != null" >
@@ -300,6 +304,9 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -380,6 +387,9 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -410,7 +420,8 @@
       delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
       delete_user = #{record.deleteUser,jdbcType=BIGINT},
       delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
-      remark = #{record.remark,jdbcType=VARCHAR}
+      remark = #{record.remark,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -479,6 +490,9 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -506,7 +520,8 @@
       delete_time = #{deleteTime,jdbcType=TIMESTAMP},
       delete_user = #{deleteUser,jdbcType=BIGINT},
       delete_flag = #{deleteFlag,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <insert id="insertBatchSelective" parameterType="java.util.List" >
@@ -576,6 +591,9 @@
       <if test="list[0].remark!=null" >
         remark,
       </if>
+      <if test="list[0].platform!=null" >
+        platform,
+      </if>
     </trim>
      values 
     <foreach collection="list" index="index" item="item" separator="," >
@@ -639,6 +657,9 @@
         </if>
         <if test="item.remark!=null" >
           #{item.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="item.platform!=null" >
+          #{item.platform,jdbcType=INTEGER},
         </if>
       </trim>
     </foreach>
@@ -707,6 +728,9 @@
         </if>
         <if test="item.remark!=null" >
           remark=#{item.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="item.platform!=null" >
+          platform=#{item.platform,jdbcType=INTEGER},
         </if>
       </set>
       where 

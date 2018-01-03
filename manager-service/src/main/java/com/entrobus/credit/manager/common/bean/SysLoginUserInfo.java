@@ -1,7 +1,6 @@
 package com.entrobus.credit.manager.common.bean;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -36,10 +35,6 @@ public class SysLoginUserInfo implements Serializable {
      */
     private Set<String> perms;
 
-    /**
-     * 用户能够操作的菜单
-     */
-    private List<SysMenu> sysMenuList;
 
     public Long getId() {
         return id;
@@ -127,14 +122,6 @@ public class SysLoginUserInfo implements Serializable {
 
     public void setPerms(Set<String> perms) {
         this.perms = perms;
-    }
-
-    public List<SysMenu> getSysMenuList() {
-        return sysMenuList;
-    }
-
-    public void setSysMenuList(List<SysMenu> sysMenuList) {
-        this.sysMenuList = sysMenuList;
     }
 
     public Integer getPlatform() {
