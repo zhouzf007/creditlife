@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.common.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class SysMenu implements Serializable {
     /**
      * 菜单ID
      */
-    private Long menuId;
+    private Long id;
 
     /**
      * 父菜单ID
@@ -20,12 +21,7 @@ public class SysMenu implements Serializable {
     private Long parentId;
 
     /**
-     * 类型：1.菜单；2.功能；3.子功能；0.操作
-     */
-    private Integer menuType;
-
-    /**
-     * 权限名称
+     * 名称
      */
     private String menuName;
 
@@ -45,33 +41,14 @@ public class SysMenu implements Serializable {
     private String icon;
 
     /** 子菜单List */
-    private List<SysMenu> childMenus;
+    private List<SysMenu> childMenus = new ArrayList<>();//子菜单;
 
-    /** 是否选中 */
-    private boolean checked;
-
-    public List<SysMenu> getChildMenus() {
-        return childMenus;
+    public Long getId() {
+        return id;
     }
 
-    public void setChildMenus(List<SysMenu> childMenus) {
-        this.childMenus = childMenus;
-    }
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    public Long getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getParentId() {
@@ -80,14 +57,6 @@ public class SysMenu implements Serializable {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
-    }
-
-    public Integer getMenuType() {
-        return menuType;
-    }
-
-    public void setMenuType(Integer menuType) {
-        this.menuType = menuType;
     }
 
     public String getMenuName() {
@@ -120,5 +89,13 @@ public class SysMenu implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public List<SysMenu> getChildMenus() {
+        return childMenus;
+    }
+
+    public void setChildMenus(List<SysMenu> childMenus) {
+        this.childMenus = childMenus;
     }
 }

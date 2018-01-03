@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.sys.service;
 
+import com.entrobus.credit.manager.common.bean.SysRoleExt;
 import com.entrobus.credit.pojo.manager.SysRole;
 import com.entrobus.credit.pojo.manager.SysRoleExample;
 
@@ -27,4 +28,14 @@ public interface SysRoleService {
     int insert(SysRole record);
 
     int insertSelective(SysRole record);
+
+    void save(SysRoleExt role);
+
+    void update(SysRoleExt role);
+
+    /**
+     * 删除
+     * @param idList
+     */
+    void delete(Long deleteUserId,List<Long> idList);
 }

@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.common.bean;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * 系统登录用户信息
@@ -10,6 +11,8 @@ public class SysLoginUserInfo implements Serializable {
     private Long id;
 
     private Long orgId;
+
+    private Integer platform;
 
     private String username;
 
@@ -26,6 +29,12 @@ public class SysLoginUserInfo implements Serializable {
     private String headImg;
 
     private String remark;
+
+    /**
+     * 用户权限列表
+     */
+    private Set<String> perms;
+
 
     public Long getId() {
         return id;
@@ -105,5 +114,21 @@ public class SysLoginUserInfo implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Set<String> getPerms() {
+        return perms;
+    }
+
+    public void setPerms(Set<String> perms) {
+        this.perms = perms;
+    }
+
+    public Integer getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Integer platform) {
+        this.platform = platform;
     }
 }

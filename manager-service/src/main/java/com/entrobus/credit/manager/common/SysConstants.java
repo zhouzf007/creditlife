@@ -3,7 +3,7 @@ package com.entrobus.credit.manager.common;
 /**
  * 业务类常量
  */
-public interface Constants {
+public interface SysConstants {
 
     /** 超级管理员ID */
     Long SUPER_ADMIN = 1L;
@@ -15,6 +15,19 @@ public interface Constants {
         String INFO="loginUser";
     }
 
+    /**
+     * 所属平台
+     */
+    interface PLATFORM{
+        /**
+         * 0：信用贷后台
+         */
+        Integer CREDITLIFE = 0;
+        /**
+         * 1：银行后台
+         */
+        Integer BANK = 1;
+    }
 
     /**
      * 资源类型

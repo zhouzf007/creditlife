@@ -2,7 +2,7 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.manager.common.Constants;
+import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
@@ -52,7 +52,7 @@ public class SysUserController extends ManagerBaseController {
         SysUserExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(com.entrobus.credit.common.Constants.DeleteFlag.NO);
         //只有超级管理员，才能查看所有管理员列表
-        if (getLoginUserId() != Constants.SUPER_ADMIN) {
+        if (getLoginUserId() != SysConstants.SUPER_ADMIN) {
             criteria.andCreateUserEqualTo(getLoginUserId());
         }
         if(StringUtils.isNotEmpty(username)){
@@ -70,12 +70,12 @@ public class SysUserController extends ManagerBaseController {
 
     /**
      * 登录
+     * @param platform 用户所属平台(0：信用贷后台，1：银行后台)
      */
     @RequestMapping(value = "/login")
-    public WebResult login(String username, String password){
+    public WebResult login(String username, String password,Integer platform){
         //用户登录
-        String token = sysUserService.login(username,password);
-        return WebResult.ok().put("token",token);
+        return sysUserService.login(username,password,platform);
     }
 
     /**
@@ -83,7 +83,7 @@ public class SysUserController extends ManagerBaseController {
      */
     @RequestMapping(value = "/getLoginUserInfo")
     public WebResult getLoginUserInfo(){
-        //用户登录
+        //获取登录用户信息
         SysLoginUserInfo loginUserInfo = getCurrLoginUser();
         return WebResult.ok().put("loginUser",loginUserInfo);
     }
@@ -127,7 +127,7 @@ public class SysUserController extends ManagerBaseController {
                 idList.add(Long.parseLong(id));
             }
         }
-        if(idList.contains(Constants.SUPER_ADMIN)){
+        if(idList.contains(SysConstants.SUPER_ADMIN)){
             return WebResult.error("系统管理员不能删除");
         }
         if(idList.contains(getLoginUserId())){

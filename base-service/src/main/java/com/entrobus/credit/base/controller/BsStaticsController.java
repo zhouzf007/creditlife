@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/statics")
@@ -31,11 +30,13 @@ public class BsStaticsController {
      * @return
      */
     @PostMapping("/cache")
-    public int cacheOrRefreshAll(@RequestParam(required = false) String codeType) {
+    public WebResult cacheOrRefreshAll(@RequestParam(required = false) String codeType) {
         if (StringUtils.isNotBlank(codeType)) {
-            return bsStaticsCacheService.cacheOrRefreshByType(codeType);
+            bsStaticsCacheService.cacheOrRefreshByType(codeType);
+        }else {
+            bsStaticsCacheService.cacheOrRefreshAll();
         }
-        return bsStaticsCacheService.cacheOrRefreshAll();
+        return WebResult.ok();
     }
 
     /**
@@ -57,10 +58,7 @@ public class BsStaticsController {
      */
     @GetMapping("/{id}")
     public BsStaticVo getBsStatic(@PathVariable Long id) {
-        BsStaticVo vo = bsStaticsCacheService.getById(id);
-        if (vo == null) {
-            vo = bsStaticsCacheService.cacheOrRefresh(id);
-        }
+        BsStaticVo vo = bsStaticsCacheService.getOrCacheById(id);
         return vo;
     }
 
@@ -73,7 +71,8 @@ public class BsStaticsController {
     @PostMapping("")
     public WebResult add(@RequestBody @Validated BsStaticVo vo, BindingResult result) {
         if (result.hasErrors()) {
-            return WebResult.error(getValidationMsg(result));
+            String validationMsg = getValidationMsg(result);
+            return WebResult.error(validationMsg);
         }
         BsStatics statics = new BsStatics();
         BeanUtils.copyProperties(vo, statics);
@@ -92,28 +91,15 @@ public class BsStaticsController {
     }
 
     /**
-     * 获取列表
+     * 获取同类型的
      *
      * @param codeType
      * @return
      */
-    @GetMapping("")
-    public List<BsStaticVo> getList(@RequestParam(required = false) String codeType) {
+    @GetMapping("/similar")
+    public List<BsStaticVo> similar(@RequestParam String codeType) {
         List<BsStaticVo> list = null;
-        if (StringUtils.isNotBlank(codeType)) {
-            list = bsStaticsCacheService.getByType(codeType);
-            if (list == null) {
-                bsStaticsCacheService.cacheOrRefreshByType(codeType);
-                list = bsStaticsCacheService.getByType(codeType);
-            }
-        } else {
-            List<BsStatics> staticsList = bsStaticsService.getByAll();
-            list = staticsList.stream().map(statics -> {
-                BsStaticVo vo = new BsStaticVo();
-                BeanUtils.copyProperties(statics, vo);
-                return vo;
-            }).collect(Collectors.toList());
-        }
+        list = bsStaticsCacheService.getOrCacheByType(codeType);
         return list;
     }
 
@@ -127,7 +113,8 @@ public class BsStaticsController {
     @PutMapping("/{id}")
     public WebResult update(@PathVariable Long id, @RequestBody @Validated BsStaticVo vo, BindingResult result) {
         if (result.hasErrors()) {
-            return WebResult.error(getValidationMsg(result));
+            String validationMsg = getValidationMsg(result);
+            return WebResult.error(validationMsg);
         }
         BsStatics statics = new BsStatics();
         BeanUtils.copyProperties(vo, statics);
@@ -145,11 +132,11 @@ public class BsStaticsController {
      * @return
      */
     @DeleteMapping("/{id}")
-    public int del(@PathVariable Long id) {
+    public WebResult del(@PathVariable Long id) {
 
         int i = bsStaticsService.logicDel(id);
         if (i > 0) bsStaticsCacheService.cacheOrRefresh(id);
-        return i;
+        return WebResult.ok("操作成功");
     }
 
 

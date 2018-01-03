@@ -42,3 +42,6 @@ zuul:
     base-service:
       path: /base/**
       sensitiveHeaders:
+    config:
+      path: /config/**
+      sensitiveHeaders:
