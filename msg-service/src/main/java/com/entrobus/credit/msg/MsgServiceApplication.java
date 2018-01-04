@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableFeignClients
 @SpringBootApplication
 @EnableCircuitBreaker
-//@MapperScan(basePackages="com.entrobus.credit.user.dao",sqlSessionFactoryRef="sqlSessionFactory")
+//@MapperScan(basePackages="com.entrobus.credit.user.dao")
 public class MsgServiceApplication {
 
     public static void main(String[] args) {

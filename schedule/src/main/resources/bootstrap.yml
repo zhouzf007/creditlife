@@ -23,6 +23,13 @@ security:
     enabled: false
 
 
+creditlife:
+  schedule:
+    jobDetail:
+      basePackage: com.entrobus.credit.schedule.job
+
+
+
 
 
 
