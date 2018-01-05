@@ -1,7 +1,9 @@
 package com.entrobus.credit.manager.sys.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysMenu;
 import com.entrobus.credit.manager.common.bean.ZtreeMenuVo;
@@ -17,10 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 系统资源Controller
@@ -36,6 +35,11 @@ public class SysResourceController extends ManagerBaseController {
     public WebResult add(SysResource sysResource){
         sysResource.setCreateUser(getLoginUserId());
         sysResource.setUpdateUser(getLoginUserId());
+        sysResource.setCreateTime(new Date());
+        sysResource.setDeleteFlag(Constants.DeleteFlag.NO);
+        if(ConversionUtil.isEmptyParameter(sysResource.getLevel())){
+            sysResource.setLevel(1);
+        }
         sysResourceService.insertSelective(sysResource);
         return WebResult.ok("创建成功！");
     }
@@ -43,6 +47,10 @@ public class SysResourceController extends ManagerBaseController {
     @RequestMapping("/update")
     public WebResult update(SysResource sysResource){
         sysResource.setUpdateUser(getLoginUserId());
+        sysResource.setUpdateTime(new Date());
+        if(ConversionUtil.isEmptyParameter(sysResource.getLevel())){
+            sysResource.setLevel(1);
+        }
         sysResourceService.updateByPrimaryKeySelective(sysResource);
         return WebResult.ok("修改成功！");
     }
@@ -55,11 +63,8 @@ public class SysResourceController extends ManagerBaseController {
     @RequestMapping(value = "/delete")
     public WebResult delete(String ids){
         List<Long> idList = new ArrayList<>();
-        if(StringUtils.isNotEmpty(ids)){
-            String[] idArr = ids.split(",");
-            for(String id:idArr){
-                idList.add(Long.parseLong(id));
-            }
+        if(ConversionUtil.isNotEmptyParameter(ids)){
+            idList = JSONArray.parseArray(ids,Long.class);
         }
         //根据资源id删除
         sysResourceService.delete(getLoginUserId(), idList);

@@ -1,16 +1,16 @@
 package com.entrobus.credit.manager.sys.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysRoleExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.SysRoleResourceService;
 import com.entrobus.credit.manager.sys.service.SysRoleService;
-import com.entrobus.credit.pojo.manager.SysRole;
-import com.entrobus.credit.pojo.manager.SysRoleExample;
-import com.entrobus.credit.pojo.manager.SysRoleResource;
-import com.entrobus.credit.pojo.manager.SysRoleResourceExample;
+import com.entrobus.credit.manager.sys.service.SysUserService;
+import com.entrobus.credit.pojo.manager.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.beanutils.BeanUtils;
@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 系统角色Controller
@@ -39,6 +36,9 @@ public class SysRoleController extends ManagerBaseController {
 
     @Autowired
     private SysRoleResourceService sysRoleResourceService;
+
+    @Autowired
+    private SysUserService sysUserService;
 
 
     @RequestMapping("/add")
@@ -65,11 +65,8 @@ public class SysRoleController extends ManagerBaseController {
     @RequestMapping(value = "/delete")
     public WebResult delete(String ids){
         List<Long> idList = new ArrayList<>();
-        if(StringUtils.isNotEmpty(ids)){
-            String[] idArr = ids.split(",");
-            for(String id:idArr){
-                idList.add(Long.parseLong(id));
-            }
+        if(ConversionUtil.isNotEmptyParameter(ids)){
+            idList = JSONArray.parseArray(ids,Long.class);
         }
         //根据角色id删除
         sysRoleService.delete(getLoginUserId(),idList);
@@ -118,7 +115,7 @@ public class SysRoleController extends ManagerBaseController {
         SysRoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除(待优化，后期改成使用mybatis拦截器统一处理带delete_flag过滤条件的查询)
         //只有超级管理员，才能查看所有管理员列表
-        if (getLoginUserId() != SysConstants.SUPER_ADMIN) {
+        if (!getCurrLoginUser().getRoleIds().contains(SysConstants.LOGIN_USER_ROLE.SUPER_ADMIN)) {
             criteria.andCreateUserEqualTo(getLoginUserId());
         }
         List<SysRole> list = sysRoleService.selectByExample(roleExample);
@@ -139,7 +136,7 @@ public class SysRoleController extends ManagerBaseController {
         SysRoleExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除
         //只有超级管理员，才能查看所有管理员列表
-        if (getLoginUserId() != SysConstants.SUPER_ADMIN) {
+        if (!getCurrLoginUser().getRoleIds().contains(SysConstants.LOGIN_USER_ROLE.SUPER_ADMIN)) {
             criteria.andCreateUserEqualTo(getLoginUserId());
         }
         if(StringUtils.isNotEmpty(roleName)){
@@ -147,10 +144,19 @@ public class SysRoleController extends ManagerBaseController {
         }
         //只有紧跟在 PageHelper.startPage 方法后的第一个 MyBatis 的查询(select)方法会被分页。
         List<SysRole> sysRoleList = sysRoleService.selectByExample(example);
-        PageInfo<SysRole> pageInfo = new PageInfo<>(sysRoleList);
+        List<Map<String,Object>> resultList = new ArrayList<>();
+        for (SysRole role : sysRoleList){
+            Map<String,Object> map = ConversionUtil.beanToMap(role);
+            SysUser sysUser = sysUserService.selectByPrimaryKey(role.getUpdateUser());
+            if(ConversionUtil.isNotEmptyParameter(sysUser)){
+                map.put("updateUserName",sysUser.getRealName());
+            }
+            resultList.add(map);
+        }
+        PageInfo pageInfo = new PageInfo<>(resultList);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("total",pageInfo.getTotal());
-        dataMap.put("rows", pageInfo.getList());
+        dataMap.put("rows", resultList);
         //服务端分页，返回的结果必须包含total、rows两个参数。漏写或错写都会导致表格无法显示数据。
         return WebResult.ok(dataMap);
     }

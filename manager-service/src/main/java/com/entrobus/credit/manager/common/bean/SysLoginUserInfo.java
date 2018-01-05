@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.common.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,6 +30,8 @@ public class SysLoginUserInfo implements Serializable {
     private String headImg;
 
     private String remark;
+
+    private List<Long> roleIds;
 
     /**
      * 用户权限列表
@@ -130,5 +133,13 @@ public class SysLoginUserInfo implements Serializable {
 
     public void setPlatform(Integer platform) {
         this.platform = platform;
+    }
+
+    public List<Long> getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(List<Long> roleIds) {
+        this.roleIds = roleIds;
     }
 }
