@@ -14,7 +14,8 @@ import java.util.Date;
  * 后续可能会改为手动配置
  * @author laotou
  */
-@JobBean(jobName = "demoJobBean",groupName = "asda",cron = "0/5 * * * * ?")
+//@JobBean(jobName = "demoJobBean",groupName = "asda")
+@JobBean
 public class DemoJobBean extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {

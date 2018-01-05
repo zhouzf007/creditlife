@@ -17,4 +17,15 @@ public interface Constants {
         int NORMAL = 0;
         int DISABLE = 1;
     }
+
+    /**
+     * 调度任务分组
+     */
+    interface JobGroupName{
+        String DEFAULT = "creditlife_default";//默认分组
+    }
+
+    interface JobDataKey{
+        String CUSTOM = "customParam";
+    }
 }

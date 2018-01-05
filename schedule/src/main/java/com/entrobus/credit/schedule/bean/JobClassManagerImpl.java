@@ -9,7 +9,6 @@ import org.quartz.JobKey;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -20,11 +19,9 @@ import java.util.Set;
 
 @Component
 @Order(Ordered.LOWEST_PRECEDENCE)
-public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
+public class JobClassManagerImpl implements JobClassManager,InitializingBean{
     @Value("${creditlife.schedule.jobDetail.basePackage}")
     private String basePackage;
-    @Autowired
-    private ScheduleService scheduleService;
 
     private Map<JobKey,JobDetailMsg> classMap = new HashMap<>();
 
@@ -47,7 +44,7 @@ public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
                     JobDetailMsg msg = new JobDetailMsg();
                     msg.setJobName(jobName);
                     msg.setGroupName(group);
-                    msg.setCron(jobBean.cron());
+//                    msg.setCron(jobBean.cron());
                     msg.setJobClass(jobClass);
 
                     classMap.put(jobKey,msg);
@@ -56,30 +53,21 @@ public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
         }
     }
 
-
-
-    /**
-     * spring boot 应用启动完后执行
-     * Callback used to run the bean.
-     *
-     * @param args incoming main method arguments
-     * @throws Exception on error
-     */
-    @Override
-    public void run(String... args) throws Exception {
-        classMap.forEach((jobKey, msg) -> {
-            scheduleService.registry(msg.getJobName(),msg.getGroupName(),msg.getJobClass(),msg.getCron());
-        });
-    }
-
+//    @Override
     public JobDetailMsg getJobDetailMsg(JobKey jobKey){
         return classMap.get(jobKey);
     }
     public JobDetailMsg getJobDetailMsg(String jobName,String groupName){
         return getJobDetailMsg(JobKey.jobKey(jobName,groupName));
     }
-    public Class <? extends Job> getJobClass(String jobName,String groupName){
-        JobDetailMsg jobDetailMsg = getJobDetailMsg(JobKey.jobKey(jobName, groupName));
+    @Override
+    public Class <? extends Job> getJobClass(String jobName, String groupName){
+        JobDetailMsg jobDetailMsg = getJobDetailMsg(jobName, groupName);
+        return jobDetailMsg == null ? null : jobDetailMsg.getJobClass();
+    }
+    @Override
+    public Class <? extends Job> getJobClass(JobKey jobKey){
+        JobDetailMsg jobDetailMsg = getJobDetailMsg(jobKey);
         return jobDetailMsg == null ? null : jobDetailMsg.getJobClass();
     }
 
@@ -87,7 +75,7 @@ public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
 
     static class JobDetailMsg{
         private Class <? extends Job> jobClass;
-        private String cron;
+//        private String cron;
         private String jobName;
         private String groupName;
 
@@ -99,13 +87,13 @@ public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
             this.jobClass = jobClass;
         }
 
-        public String getCron() {
-            return cron;
-        }
-
-        public void setCron(String cron) {
-            this.cron = cron;
-        }
+//        public String getCron() {
+//            return cron;
+//        }
+//
+//        public void setCron(String cron) {
+//            this.cron = cron;
+//        }
 
         public String getJobName() {
             return jobName;
