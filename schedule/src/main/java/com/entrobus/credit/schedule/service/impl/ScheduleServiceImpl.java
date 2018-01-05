@@ -236,15 +236,15 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
     }
     /**
-     * @Description:关闭所有定时任务
+     * @Description:关闭并删除所有定时任务
      */
     @Override
-    public void resumeAll() {
+    public void clear() {
         try {
-            if (scheduler.isShutdown()) {
+            if (!scheduler.isStarted()) {
                 scheduler.start();
             }
-            scheduler.resumeAll();
+            scheduler.clear();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

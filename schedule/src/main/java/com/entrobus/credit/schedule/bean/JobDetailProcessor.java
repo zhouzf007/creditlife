@@ -70,8 +70,20 @@ public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
         classMap.forEach((jobKey, msg) -> {
             scheduleService.registry(msg.getJobName(),msg.getGroupName(),msg.getJobClass(),msg.getCron());
         });
-
     }
+
+    public JobDetailMsg getJobDetailMsg(JobKey jobKey){
+        return classMap.get(jobKey);
+    }
+    public JobDetailMsg getJobDetailMsg(String jobName,String groupName){
+        return getJobDetailMsg(JobKey.jobKey(jobName,groupName));
+    }
+    public Class <? extends Job> getJobClass(String jobName,String groupName){
+        JobDetailMsg jobDetailMsg = getJobDetailMsg(JobKey.jobKey(jobName, groupName));
+        return jobDetailMsg == null ? null : jobDetailMsg.getJobClass();
+    }
+
+
 
     static class JobDetailMsg{
         private Class <? extends Job> jobClass;

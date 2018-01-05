@@ -19,5 +19,5 @@ public interface ScheduleService {
 
     void modifyJobTime(String jobName, String groupName, String cron);
 
-    void resumeAll();
+    void clear();
 }
