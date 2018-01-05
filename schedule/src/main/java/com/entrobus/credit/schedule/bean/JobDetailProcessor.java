@@ -1,7 +1,7 @@
 package com.entrobus.credit.schedule.bean;
 
 import com.entrobus.credit.common.util.ClassUtils;
-import com.entrobus.credit.schedule.annotation.JobDetail;
+import com.entrobus.credit.schedule.annotation.JobBean;
 import com.entrobus.credit.schedule.service.ScheduleService;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.Job;
@@ -9,7 +9,6 @@ import org.quartz.JobKey;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -35,20 +34,20 @@ public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
         if (classNameSet != null && classNameSet.size() > 0){
             for (String className : classNameSet) {
                 Class<?> aClass = Class.forName(className);
-                JobDetail jobDetail = aClass.getAnnotation(JobDetail.class);
-                if (jobDetail != null && Job.class.isAssignableFrom(aClass)){
-                    String jobName = jobDetail.jobName();
+                JobBean jobBean = aClass.getAnnotation(JobBean.class);
+                if (jobBean != null && Job.class.isAssignableFrom(aClass)){
+                    String jobName = jobBean.jobName();
                     Class <? extends Job> jobClass = (Class <? extends Job>) aClass;
                     if (StringUtils.isBlank(jobName)) {
                         jobName = className.substring(0, 1).toLowerCase() + className.substring(1);
                     }
-                    String group = jobDetail.groupName();
+                    String group = jobBean.groupName();
                     JobKey jobKey = JobKey.jobKey(jobName, group);
 
                     JobDetailMsg msg = new JobDetailMsg();
                     msg.setJobName(jobName);
                     msg.setGroupName(group);
-                    msg.setCron(jobDetail.cron());
+                    msg.setCron(jobBean.cron());
                     msg.setJobClass(jobClass);
 
                     classMap.put(jobKey,msg);
@@ -60,6 +59,7 @@ public class JobDetailProcessor implements InitializingBean,CommandLineRunner {
 
 
     /**
+     * spring boot 应用启动完后执行
      * Callback used to run the bean.
      *
      * @param args incoming main method arguments

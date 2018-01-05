@@ -101,6 +101,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         try {
             // 任务名，任务组，任务执行类
             JobBuilder jobBuilder = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName);
+            jobBuilder.storeDurably(true);//持久化
+            jobBuilder.requestRecovery(true);//重写执行失败的任务,default=false
             if (jobData != null) jobBuilder.setJobData(jobData);
             JobDetail jobDetail= jobBuilder.build();
 
@@ -130,7 +132,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         JobKey jobKey = JobKey.jobKey(jobName,groupName);
         try {
             if (scheduler.checkExists(jobKey)){
-                modifyJobTime(jobName,groupName,cron);
+//                modifyJobTime(jobName,groupName,cron);
             }else {
                 addJob(jobName,groupName,jobClass,cron);
             }

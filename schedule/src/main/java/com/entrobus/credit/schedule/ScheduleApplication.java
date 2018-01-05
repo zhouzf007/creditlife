@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableCircuitBreaker
 @EnableTransactionManagement//开启事务
-@ImportResource("quartz.xml")
+//@ImportResource("quartz.xml")
 public class ScheduleApplication {
 
     public static void main(String[] args) {
