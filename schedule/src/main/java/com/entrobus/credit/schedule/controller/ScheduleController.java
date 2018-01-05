@@ -1,6 +1,7 @@
 package com.entrobus.credit.schedule.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.schedule.job.DemoJobBean;
 import com.entrobus.credit.schedule.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ public class ScheduleController {
     private ScheduleService scheduleService;
     @PostMapping("/")
     public WebResult addJob(@RequestParam String jobName, @RequestParam String cron){
-         scheduleService.addJob(jobName,  DemoJobDetail.class,cron);
+         scheduleService.addJob(jobName,  DemoJobBean.class,cron);
         return WebResult.ok("成功");
     }
     @GetMapping("/")
