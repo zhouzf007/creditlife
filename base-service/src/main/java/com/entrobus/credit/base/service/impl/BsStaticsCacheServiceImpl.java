@@ -65,10 +65,11 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
      * @return
      */
 //    @Override
-    public int cacheObjByType(List<BsStatics> list, String codeType) {
-        if (list == null) return 0;
+    public List<BsStaticVo> cacheObjByType(List<BsStatics> list, String codeType) {
+        if (list == null) return null;
        
         List<String> idList = new ArrayList<>();
+        List<BsStaticVo> voList = new ArrayList<>();
         for (BsStatics statics : list) {
             if(statics == null) continue;
             //跳过codeType不同的
@@ -85,9 +86,10 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
             if (vo == null) continue;
 
             idList.add(strId);
+            voList.add(vo);
         }
         cacheIdListByType(codeType, idList);
-        return idList.size();
+        return voList;
     }
 
     /**
@@ -105,7 +107,7 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
      * @return
      */
     public int delObj(BsStatics statics){
-        return delObj(statics.getId());
+        return statics == null ? 0 :delObj(statics.getId());
     }
     /**
      * 删除缓存
@@ -142,6 +144,21 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
         return statics;
     }
     /**
+     *  根据codeType和codeValue查找
+     * @param codeType
+     * @param codeValue
+     * @return
+     */
+    @Override
+    public BsStaticVo getOrCache(String codeType, String codeValue) {
+        BsStaticVo staticVo = getByTypeAndValue(codeType, codeValue);
+        if (staticVo == null) {
+            BsStatics statics = bsStaticsService.getByTypeAndValue(codeType, codeValue);
+            staticVo = cacheOrRefresh(statics);
+        }
+        return staticVo;
+    }
+    /**
      *   根据id查找
      * @param id
      * @return
@@ -161,6 +178,19 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
     public BsStaticVo getById(Long id) {
         return getById(String.valueOf(id));
     }
+    /**
+     *   根据id查找,如果没有，则从数据库更新至缓存
+     * @param id
+     * @return
+     */
+    @Override
+    public BsStaticVo getOrCacheById(Long id) {
+        BsStaticVo vo = getById(id);
+        if (vo == null)
+            vo = cacheOrRefresh(id);
+        return vo;
+    }
+
 
     /**
      * 根据codeType从缓存查找
@@ -179,7 +209,19 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
         }
         return list;
     }
-
+    /**
+     * 根据codeType从缓存查找,如果缓存中没有，则刷新缓存
+     * @param codeType
+     * @return
+     */
+    @Override
+    public List<BsStaticVo> getOrCacheByType(String codeType) {
+        List<BsStaticVo> byType = getByType(codeType);
+        if (byType == null || byType.isEmpty()){
+            byType = cacheOrRefreshByType(codeType);
+        }
+        return byType;
+    }
 
     /**
      * 清除所有缓存
@@ -199,24 +241,26 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
      * @return
      */
     @Override
-    public int cacheOrRefreshAll(){
+    public List<BsStaticVo> cacheOrRefreshAll(){
         //情况缓存
         clearCache();
         //从数据库查找所有数据
         List<BsStatics> list = bsStaticsService.getByAll();
-        if (list.isEmpty()) return 0;
+        if (list.isEmpty()) return new ArrayList<>();
         //根据codeType分组
         Map<String,List<BsStatics>> groupMap = list.stream()
                 .filter(this::isNormal)
                 .collect(Collectors.groupingBy(BsStatics::getCodeType));
-        if (groupMap.isEmpty()) return 0;
+        if (groupMap.isEmpty()) return new ArrayList<>();
         int n = 0;
         //根据分组缓存
+        List<BsStaticVo> voList = new ArrayList<>();
         for (String codeType : groupMap.keySet()) {
             List<BsStatics> listByType = groupMap.get(codeType);
-            n += cacheObjByType(listByType,codeType);
+            List<BsStaticVo> groupVoList = cacheObjByType(listByType, codeType);
+            voList.addAll(groupVoList);
         }
-        return n;
+        return voList;
     }
 
     /**
@@ -229,8 +273,14 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
         if (id == null) return null;
         //根据id从数据库查找
         BsStatics statics = bsStaticsService.selectByPrimaryKey(id);
+        return cacheOrRefresh(statics);
+
+    }
+
+    private BsStaticVo cacheOrRefresh( BsStatics statics) {
+        if (statics == null) return  null;
         //如果不可用，删除
-        if (!isNormal(statics)) delObj(id);
+        if (!isNormal(statics)) delObj(statics);
         //缓存对象，id
         BsStaticVo vo = cacheObjByTypeAndValue(statics);
         String codeType = statics.getCodeType();
@@ -260,8 +310,8 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
      * @return
      */
     @Override
-    public int cacheOrRefreshByType(String codeType){
-        if (codeType == null) return 0;
+    public List<BsStaticVo> cacheOrRefreshByType(String codeType){
+        if (codeType == null) return null;
         List<BsStatics> listByType = bsStaticsService.getByCodeType(codeType);
         return cacheObjByType(listByType,codeType);
 

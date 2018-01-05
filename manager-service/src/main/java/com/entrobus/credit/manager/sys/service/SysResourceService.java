@@ -1,11 +1,13 @@
 package com.entrobus.credit.manager.sys.service;
 
+import com.entrobus.credit.manager.common.bean.SysMenu;
 import com.entrobus.credit.manager.common.bean.SysResourceVo;
 import com.entrobus.credit.manager.common.bean.ZtreeMenuVo;
 import com.entrobus.credit.pojo.manager.SysResource;
 import com.entrobus.credit.pojo.manager.SysResourceExample;
 
 import java.util.List;
+import java.util.Set;
 
 public interface SysResourceService {
     int countByExample(SysResourceExample example);
@@ -57,4 +59,27 @@ public interface SysResourceService {
      * @return
      */
     List<ZtreeMenuVo> getCheckTreeList(Long roleId);
+
+    /**
+     * 通过用户ID查找用户能够使用的资源
+     * @param userId 用户ID
+     * @param platform 资源所属平台（0：信用贷后台，1：银行后台）
+     * @param type 类型（1：菜单   2：按钮）
+     * @return List<SysResource>
+     */
+    List<SysResource> getSysResourceByUserId(Long userId,Integer platform,Integer type);
+
+    /**
+     * 获取系统导航菜单
+     * @param userId
+     * @param platform
+     * @return
+     */
+    List<SysMenu> getNavMenu(Long userId,Integer platform);
+
+    /**
+     * 获取用户权限
+     * @return
+     */
+    Set<String> getUserPerms(Long userId,Integer platform);
 }
