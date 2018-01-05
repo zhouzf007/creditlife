@@ -1,4 +1,4 @@
-package com.entrobus.credit.vo.user;
+package com.entrobus.credit.vo.base;
 
 import org.hibernate.validator.constraints.NotBlank;
 

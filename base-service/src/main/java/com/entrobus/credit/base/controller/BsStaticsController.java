@@ -4,7 +4,7 @@ import com.entrobus.credit.base.service.BsStaticsCacheService;
 import com.entrobus.credit.base.service.BsStaticsService;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.base.BsStatics;
-import com.entrobus.credit.vo.user.BsStaticVo;
+import com.entrobus.credit.vo.base.BsStaticVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
