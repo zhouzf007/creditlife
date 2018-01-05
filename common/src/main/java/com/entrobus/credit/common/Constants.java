@@ -17,4 +17,9 @@ public interface Constants {
         int NORMAL = 0;
         int DISABLE = 1;
     }
+
+    interface SMS_TYPE{
+        int VERIFICATION = 0;
+        int INFORMATION = 1;
+    }
 }

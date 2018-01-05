@@ -57,6 +57,14 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
+
+  cloud:
+    stream:
+      bindings:
+        sms_subscribe:
+          destination: msg-stream
+          consumer:
+            durableSubscription: true
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 
@@ -64,10 +72,16 @@ security:
   user:
     name: user
     password: password
-#  oauth2:
-#    client:
-#      clientId: order-service
-#      clientSecret: ${security.user.password}
-#      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
-#      grant-type: client_credentials
-#      scope: server
+  oauth2:
+    client:
+      clientId: order-service
+      clientSecret: ${security.user.password}
+      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
+      grant-type: client_credentials
+      scope: server
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false

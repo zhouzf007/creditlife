@@ -18,14 +18,23 @@ public class SMSUtil {
     @Value("${sms:postUrl}")
     private static String postUrl;
     //http://sms.yunpian.com/v2/sms/single_send.json
-
-    public static Map smsSend(String areaCode, String mobile, String text) throws UnsupportedEncodingException {
+    /*{
+        "code": 0,
+            "msg": "发送成功",
+            "count": 1,
+            "fee": 0.05,
+            "unit": "RMB",
+            "mobile": "13200000000",
+            "sid": 3310228982
+    }
+    */
+    public static String smsSend(String areaCode, String mobile, String text) throws UnsupportedEncodingException {
         Map<String, String> params = new HashMap<>();//请求参数集合
         params.put("apikey", apikey);
         params.put("text", text);
         params.put("mobile", "+" + areaCode + mobile);
         String result = HttpClientUtil.doPost(postUrl, params);
-        Map smMap = JSON.parseObject(result);
-        return smMap;
+//        Map smMap = JSON.parseObject(result);
+        return result;
     }
 }
