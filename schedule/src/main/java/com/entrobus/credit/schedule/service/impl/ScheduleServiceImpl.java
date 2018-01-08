@@ -7,12 +7,15 @@ import com.entrobus.credit.schedule.service.ScheduleService;
 import com.entrobus.credit.vo.schedule.QuartzJobVo;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -26,33 +29,80 @@ public class ScheduleServiceImpl implements ScheduleService {
     private static final String TRIGGER_SUFFIX = "_trigger";
 
 
-
-    @Override
-    public boolean removeJob(String jobName){
-        return removeJob(jobName, Constants.JobGroupName.DEFAULT);
+    public List<String > groupNames() throws SchedulerException {
+        return scheduler.getJobGroupNames();
     }
     @Override
-    public boolean removeJob(String jobName, String groupName){
-        if(groupName == null) groupName = Constants.JobGroupName.DEFAULT;
-        JobKey jobKey = JobKey.jobKey(jobName,groupName);
+    public List<QuartzJobVo>  jobList(){
+        List<QuartzJobVo> voList = new ArrayList<>();
         try {
-            if (scheduler.checkExists(jobKey)){
-                List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
-                if (triggers != null && triggers.size() > 0){
-                    for (Trigger trigger : triggers) {
-                        scheduler.pauseTrigger(trigger.getKey());
-                        scheduler.unscheduleJob(trigger.getKey());
-                    }
-                }
+            GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
+//            matcher = GroupMatcher.jobGroupEquals();
+            Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);
+            for (JobKey jobKey : jobKeys) {
+                QuartzJobVo vo = new QuartzJobVo();
+                voList.add(vo);
 
-                scheduler.deleteJob(jobKey);
+                vo.setGroupName(jobKey.getGroup());
+                vo.setJobName(jobKey.getName());
+
+                List<? extends Trigger> triggersOfJob = scheduler.getTriggersOfJob(jobKey);
+                if (triggersOfJob != null && triggersOfJob.size() > 0){
+                    CronTrigger trigger = (CronTrigger) triggersOfJob.get(0);
+                    vo.setCron(trigger.getCronExpression());
+                    Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
+                    vo.setStateName(triggerStateName(triggerState));
+                }
+                JobDetail jobDetail = scheduler.getJobDetail(jobKey);
+                vo.setDescription(jobDetail.getDescription());
+                vo.setParam((String) jobDetail.getJobDataMap().get(Constants.JobDataKey.CUSTOM));
+
             }
         } catch (SchedulerException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
+        return voList;
+    }
+    private String triggerStateName(Trigger.TriggerState state){
+        switch (state){
+            case NONE:
+                return "不存在";
+            case ERROR:
+                return "异常";
+            case PAUSED:
+                return "暂停";
+            case BLOCKED:
+                return "阻塞";
+            case NORMAL:
+                return "正常";
+            case COMPLETE:
+                return "完成";
 
+        }
+        return "";
+    }
+
+    @Override
+    public WebResult removeJob(String jobName) throws SchedulerException {
+        return removeJob(jobName, Constants.JobGroupName.DEFAULT);
+    }
+    @Override
+    public WebResult removeJob(String jobName, String groupName) throws SchedulerException {
+        if(groupName == null) groupName = Constants.JobGroupName.DEFAULT;
+        JobKey jobKey = JobKey.jobKey(jobName,groupName);
+        if (scheduler.checkExists(jobKey)) {
+            List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+            if (triggers != null && triggers.size() > 0) {
+                for (Trigger trigger : triggers) {
+                    scheduler.pauseTrigger(trigger.getKey());
+                    scheduler.unscheduleJob(trigger.getKey());
+                }
+            }
+            scheduler.deleteJob(jobKey);
+        }else {
+            return WebResult.ok("任务不存在");
+        }
+        return WebResult.ok("操作成功");
     }
     @Override
     public void addJob(String jobName, String groupName, Class <? extends Job> jobClass, String cron) {
@@ -218,6 +268,28 @@ public class ScheduleServiceImpl implements ScheduleService {
                 scheduler.pauseJob(jobKey);
                 if (triggers != null && triggers.size() > 0) {
                     scheduler.pauseTrigger(triggers.get(0).getKey());
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    /**
+     * @Description: 恢复任务
+     *
+     * @param jobName
+     * @param jobGroupName
+     */
+    @Override
+    public void resumeJob(String jobName, String jobGroupName) {
+        try {
+           JobKey jobKey = JobKey.jobKey(jobName,jobGroupName);
+            List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+            if (!scheduler.isStarted()) {
+                scheduler.start();
+                scheduler.resumeJob(jobKey);
+                if (triggers != null && triggers.size() > 0) {
+                    scheduler.resumeTrigger(triggers.get(0).getKey());
                 }
             }
         } catch (Exception e) {

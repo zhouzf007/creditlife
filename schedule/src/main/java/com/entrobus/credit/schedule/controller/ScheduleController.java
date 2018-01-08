@@ -2,15 +2,17 @@ package com.entrobus.credit.schedule.controller;
 
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.schedule.bean.JobClassManager;
 import com.entrobus.credit.schedule.service.ScheduleService;
 import com.entrobus.credit.vo.schedule.QuartzJobVo;
 import org.apache.commons.lang3.StringUtils;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ScheduleController {
@@ -53,12 +55,14 @@ public class ScheduleController {
     }
     @GetMapping("/")
     public WebResult get(){
-        //todo
-        return WebResult.ok("成功");
+        List<QuartzJobVo> voList = scheduleService.jobList();
+        return WebResult.ok("成功").put("list",voList);
     }
     @DeleteMapping("/")
-    public WebResult clear(){
-        scheduleService.clear();
+    public WebResult removeJob(@RequestParam String jobName,@RequestParam String groupName) throws SchedulerException {
+        scheduleService.removeJob(jobName,groupName);
         return WebResult.ok("成功");
     }
+
+
 }
