@@ -34,6 +34,9 @@ public class ScheduleController {
             String validationMsg = getValidationMsg(result);
             return WebResult.error(validationMsg);
         }
+        if (StringUtils.isBlank(vo.getGroupName())){
+            vo.setGroupName(Constants.JobGroupName.DEFAULT);
+        }
         //todo cron校验
         return scheduleService.addJob(vo);
     }

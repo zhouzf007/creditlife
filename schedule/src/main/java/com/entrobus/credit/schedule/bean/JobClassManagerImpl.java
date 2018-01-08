@@ -34,7 +34,8 @@ public class JobClassManagerImpl implements JobClassManager,InitializingBean{
                     String jobName = jobBean.jobName();
                     Class <? extends Job> jobClass = (Class <? extends Job>) aClass;
                     if (StringUtils.isBlank(jobName)) {
-                        jobName = className.substring(0, 1).toLowerCase() + className.substring(1);
+                        String simpleName = jobClass.getSimpleName();
+                        jobName = simpleName.substring(0, 1).toLowerCase() + simpleName.substring(1);
                     }
                     if (classMap.containsKey(jobName)){
                         String msg = String.format("jobBean重复，类%s和%s有相同的jobName", classMap.get(jobName).getClass().getName(),jobClass.getName());
