@@ -16,6 +16,7 @@ public class CorsConf {
         corsConfiguration.addAllowedOrigin("*");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
+        corsConfiguration.addExposedHeader("loginStatus");//添加自定义输出请求头
         source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(source);
     }

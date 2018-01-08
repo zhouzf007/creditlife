@@ -46,13 +46,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
         if(loginUser == null){//用户未登录
             //1.判断是否为ajax请求
-            //Boolean ajaxRequest = request.getHeader("ajaxRequest");
-            if (request.getHeader("x-requested-with") != null
-                    && request.getHeader("x-requested-with")
-                    .equalsIgnoreCase("XMLHttpRequest"))//如果是ajax请求响应头会有，x-requested-with；
-            {
+            String ajaxRequest = request.getHeader("ajaxRequest");//自定义AJAX请求头，用于标识是否为ajax请求
+            if (StringUtils.isNotEmpty(ajaxRequest) && Boolean.valueOf(ajaxRequest)) {
                 logger.debug("----本次请求为AJAX请求-----");
-                response.setHeader("SessionStatus", "timeout");//在响应头设置session状态
+                response.setHeader("loginStatus", "timeout");//在响应头设置登录状态
             }else{
                 logger.debug("----本次请求为普通请求-----");
                 write(JSON.toJSONString(WebResult.error("用户未登录")),response);
@@ -60,7 +57,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
 
-        //request.getParameterMap().put("token",new String[]{token});
         return super.preHandle(request, response, handler);
     }
 
