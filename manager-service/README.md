@@ -13,3 +13,6 @@ https://www.cnblogs.com/520playboy/p/7306008.html
 ## 测试服务器Nginx目录 
 服务器IP地址：119.29.119.138
 /usr/local/data/nginx
+
+##  Spring Boot 允许跨域请求、自定义请求头
+http://blog.csdn.net/qq_19260029/article/details/78870330
