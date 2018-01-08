@@ -239,6 +239,7 @@ public class SysResourceServiceImpl implements SysResourceService {
                 if(type != null){
                     criteria.andTypeEqualTo(type);
                 }
+                sysResourceExample.setOrderByClause(" order_num asc , create_time desc ");
                 sysResourceList = selectByExample(sysResourceExample);
             }
         }

@@ -45,3 +45,6 @@ zuul:
     config:
       path: /config/**
       sensitiveHeaders:
+    schedule:
+      path: /schedule/**
+      sensitiveHeaders:

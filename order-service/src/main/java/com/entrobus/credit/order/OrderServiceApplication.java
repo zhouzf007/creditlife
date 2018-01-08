@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCircuitBreaker
 //@EnableOAuth2Client
 @EnableTransactionManagement//开启事务
-@MapperScan(basePackages="com.entrobus.credit.order.dao",sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages="com.entrobus.credit.order.dao")
 public class OrderServiceApplication {
 
     public static void main(String[] args) {
