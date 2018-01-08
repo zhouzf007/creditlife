@@ -42,11 +42,11 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
      * 配置跨域处理
      * @param registry
      */
-    @Override
+   /* @Override
     public void addCorsMappings(CorsRegistry registry) {
        // registry.addMapping("/**");
-        registry.addMapping("/**").allowedOrigins("*")
-                .allowedMethods("GET", "HEAD", "POST","PUT", "DELETE", "OPTIONS")
-                .allowCredentials(false).maxAge(3600);
-    }
+        registry.addMapping("/**").allowedOrigins("http://localhost:63343").allowedHeaders("*")
+                .allowedMethods("*")
+                .allowCredentials(true);
+    }*/
 }
