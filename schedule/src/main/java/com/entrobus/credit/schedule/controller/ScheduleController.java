@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
-    @Autowired
-    private JobClassManager jobDetailProcessor;
 
     private String getValidationMsg(BindingResult result) {
         StringBuilder sb = new StringBuilder();
