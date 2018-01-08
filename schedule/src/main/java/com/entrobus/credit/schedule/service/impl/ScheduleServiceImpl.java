@@ -12,11 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Transactional
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
@@ -28,7 +30,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 //    private static final String DEFAULT_GROUP_NAME = "creditlife_default";
     private static final String TRIGGER_SUFFIX = "_trigger";
 
-
+    @Override
     public List<String > groupNames() throws SchedulerException {
         return scheduler.getJobGroupNames();
     }
@@ -100,48 +102,9 @@ public class ScheduleServiceImpl implements ScheduleService {
             }
             scheduler.deleteJob(jobKey);
         }else {
-            return WebResult.ok("任务不存在");
+            return WebResult.error("任务不存在");
         }
         return WebResult.ok("操作成功");
-    }
-    @Override
-    public void addJob(String jobName, String groupName, Class <? extends Job> jobClass, String cron) {
-        addJob(jobName,groupName,getTriggerName(jobName),groupName,jobClass,null,cron);
-    }
-    @Override
-    public void addJob(String jobName, Class<? extends Job> jobClass, String cron) {
-        addJob(jobName,Constants.JobGroupName.DEFAULT,getTriggerName(jobName),Constants.JobGroupName.DEFAULT,jobClass,null,cron);
-    }
-    public void addJob(String jobName, String jobGroupName,
-                       String triggerName, String triggerGroupName, Class <? extends Job> jobClass,JobDataMap jobData, String cron) {
-        try {
-            // 任务名，任务组，任务执行类
-            JobBuilder jobBuilder = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName);
-            jobBuilder.storeDurably(true);//持久化
-            jobBuilder.requestRecovery(true);//重写执行失败的任务,default=false
-            if (jobData != null) jobBuilder.setJobData(jobData);
-            JobDetail jobDetail= jobBuilder.build();
-
-            // 触发器
-            TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
-            // 触发器名,触发器组
-            triggerBuilder.withIdentity(triggerName, triggerGroupName);
-            triggerBuilder.startNow();
-            // 触发器时间设定
-            triggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(cron));
-            // 创建Trigger对象
-            CronTrigger trigger = (CronTrigger) triggerBuilder.build();
-
-            // 调度容器设置JobDetail和Trigger
-            scheduler.scheduleJob(jobDetail, trigger);
-
-            // 启动
-            if (!scheduler.isStarted()) {
-                scheduler.start();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
     @Override
     public WebResult addJob(QuartzJobVo vo) {
@@ -190,19 +153,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         } catch (Exception e) {
             logger.error("schedule添加任务失败!",e);
             return WebResult.error("操作失败");
-        }
-    }
-    @Override
-    public void registry(String jobName, String groupName, Class<? extends Job> jobClass, String cron) {
-        JobKey jobKey = JobKey.jobKey(jobName,groupName);
-        try {
-            if (scheduler.checkExists(jobKey)){
-//                modifyJobTime(jobName,groupName,cron);
-            }else {
-                addJob(jobName,groupName,jobClass,cron);
-            }
-        } catch (SchedulerException e) {
-            e.printStackTrace();
         }
     }
 
@@ -255,46 +205,38 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
     /**
      * @Description: 暂停任务
-     *
-     * @param jobName
+     *@param jobName
      * @param jobGroupName
      */
     @Override
-    public void pauseJob(String jobName, String jobGroupName) {
-        try {
-           JobKey jobKey = JobKey.jobKey(jobName,jobGroupName);
-            List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
-            if (scheduler.isStarted()) {
-                scheduler.pauseJob(jobKey);
-                if (triggers != null && triggers.size() > 0) {
-                    scheduler.pauseTrigger(triggers.get(0).getKey());
-                }
+    public WebResult pauseJob(String jobName, String jobGroupName) throws SchedulerException {
+        JobKey jobKey = JobKey.jobKey(jobName, jobGroupName);
+        List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+        if (scheduler.isStarted()) {
+            scheduler.pauseJob(jobKey);
+            if (triggers != null && triggers.size() > 0) {
+                scheduler.pauseTrigger(triggers.get(0).getKey());
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
+        return WebResult.ok("操作成功");
     }
     /**
      * @Description: 恢复任务
-     *
-     * @param jobName
+     *@param jobName
      * @param jobGroupName
      */
     @Override
-    public void resumeJob(String jobName, String jobGroupName) {
-        try {
-           JobKey jobKey = JobKey.jobKey(jobName,jobGroupName);
-            List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
-            if (!scheduler.isStarted()) {
-                scheduler.start();
-                scheduler.resumeJob(jobKey);
-                if (triggers != null && triggers.size() > 0) {
-                    scheduler.resumeTrigger(triggers.get(0).getKey());
-                }
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public WebResult resumeJob(String jobName, String jobGroupName) throws SchedulerException {
+        JobKey jobKey = JobKey.jobKey(jobName, jobGroupName);
+        List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+        if (!scheduler.isStarted()) {
+            scheduler.start();
         }
+        scheduler.resumeJob(jobKey);
+        if (triggers != null && triggers.size() > 0) {
+            scheduler.resumeTrigger(triggers.get(0).getKey());
+        }
+        return WebResult.ok("操作成功");
     }
     /**
      * @Description: 修改一个任务

@@ -19,6 +19,11 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
+    /**
+     * 拼接参数校验错误信息
+     * @param result
+     * @return
+     */
     private String getValidationMsg(BindingResult result) {
         StringBuilder sb = new StringBuilder();
         for (ObjectError error : result.getAllErrors()) {
@@ -27,6 +32,13 @@ public class ScheduleController {
         }
         return sb.toString();
     }
+
+    /**
+     * 添加任务
+     * @param vo
+     * @param result
+     * @return
+     */
     @PostMapping("/")
     public WebResult addJob(@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
         //参数校验
@@ -40,6 +52,14 @@ public class ScheduleController {
         //todo cron校验
         return scheduleService.addJob(vo);
     }
+
+    /**
+     * 编辑任务
+     * 暂时仅支持编辑任务 cron
+     * @param vo
+     * @param result
+     * @return
+     */
     @PutMapping("/")
     public WebResult editJob(@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
         //参数校验
@@ -53,16 +73,61 @@ public class ScheduleController {
         }
         return scheduleService.modifyJobTime(vo.getJobName(),vo.getGroupName(),vo.getCron());
     }
+
+    /**
+     * 任务列表
+     * @return
+     */
     @GetMapping("/")
     public WebResult get(){
         List<QuartzJobVo> voList = scheduleService.jobList();
         return WebResult.ok("成功").put("list",voList);
     }
+    /**
+     * 任务列表
+     * @return
+     */
+    @GetMapping("/groupName")
+    public  List<String> groupNames() throws SchedulerException {
+        return   scheduleService.groupNames();
+    }
+
+    /**
+     * 删除任务
+     * @param jobName
+     * @param groupName
+     * @return
+     * @throws SchedulerException
+     */
     @DeleteMapping("/")
     public WebResult removeJob(@RequestParam String jobName,@RequestParam String groupName) throws SchedulerException {
-        scheduleService.removeJob(jobName,groupName);
-        return WebResult.ok("成功");
+        return scheduleService.removeJob(jobName,groupName);
     }
+
+    /**
+     * 暂停任务
+     * @param jobName
+     * @param groupName
+     * @return
+     * @throws SchedulerException
+     */
+    @PostMapping("/pauseJob")
+    public WebResult pauseJob(@RequestParam String jobName,@RequestParam String groupName) throws SchedulerException {
+        return scheduleService.pauseJob(jobName,groupName);
+    }
+
+    /**
+     * 恢复任务
+     * @param jobName
+     * @param groupName
+     * @return
+     * @throws SchedulerException
+     */
+    @PostMapping("/resumeJob")
+    public WebResult resumeJob(@RequestParam String jobName,@RequestParam String groupName) throws SchedulerException {
+        return scheduleService.resumeJob(jobName,groupName);
+    }
+
 
 
 }
