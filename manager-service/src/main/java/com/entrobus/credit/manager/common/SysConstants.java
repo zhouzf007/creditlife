@@ -5,8 +5,10 @@ package com.entrobus.credit.manager.common;
  */
 public interface SysConstants {
 
-    /** 超级管理员ID */
-    Long SUPER_ADMIN = 1L;
+    /** 系统管理员角色 */
+    interface LOGIN_USER_ROLE{
+        Long SUPER_ADMIN=1L; //超级管理员
+    }
 
     /**
      * 登录用户信息

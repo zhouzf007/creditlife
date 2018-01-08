@@ -1,5 +1,7 @@
 package com.entrobus.credit.schedule.service;
 
+import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.vo.schedule.QuartzJobVo;
 import org.quartz.Job;
 
 public interface ScheduleService {
@@ -13,11 +15,13 @@ public interface ScheduleService {
 
     void addJob(String jobName, Class<? extends Job> jobClass, String cron);
 
+    WebResult addJob(QuartzJobVo vo);
+
     void registry(String jobName, String groupName, Class<? extends Job> jobClass, String cron);
 
     void pauseJob(String jobName, String jobGroupName);
 
-    void modifyJobTime(String jobName, String groupName, String cron);
+    WebResult modifyJobTime(String jobName, String groupName, String cron);
 
-    void resumeAll();
+    void clear();
 }

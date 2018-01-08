@@ -3,6 +3,7 @@ package com.entrobus.credit.manager.sys.service.impl;
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
@@ -134,13 +135,13 @@ public class SysUserServiceImpl implements SysUserService {
             sysUser.setSalt(salt);
             //保存系统用户，保存成功后会返回主键的值
             insertSelective(sysUser);
-            if(StringUtils.isNotEmpty(sysUserExt.getRoleIds())){
-                List<Long> roleIdList = new ArrayList<>();
+            if(ConversionUtil.isNotEmptyParameter(sysUserExt.getRoleIdList())){
+                /*List<Long> roleIdList = new ArrayList<>();
                 String[] idArr = sysUserExt.getRoleIds().split(",");
                 for(String id : idArr){
                     roleIdList.add(Long.parseLong(id));
                 }
-                sysUserExt.setRoleIdList(roleIdList);
+                sysUserExt.setRoleIdList(roleIdList);*/
                 //保存用户与角色关系
                 sysUserRoleService.save(sysUser.getId(),sysUserExt.getRoleIdList());
             }
@@ -162,7 +163,7 @@ public class SysUserServiceImpl implements SysUserService {
                 //生成20位长度的随机数，用作密码加密的盐
                 String salt = RandomStringUtils.randomAlphanumeric(20);
                 //将密码使用sha256加密
-                sysUserExt.setPassword(ShiroUtils.sha256(sysUser.getPassword(),salt));
+                sysUserExt.setPassword(ShiroUtils.sha256(sysUserExt.getPassword(),salt));
                 sysUserExt.setSalt(salt);
             }
             //相同属性复制
@@ -170,16 +171,10 @@ public class SysUserServiceImpl implements SysUserService {
             sysUser.setUpdateTime(new Date());
             //修改系统用户
             updateByPrimaryKeySelective(sysUser);
-            if(StringUtils.isNotEmpty(sysUserExt.getRoleIds())){
-                List<Long> roleIdList = new ArrayList<>();
-                String[] idArr = sysUserExt.getRoleIds().split(",");
-                for(String id : idArr){
-                    roleIdList.add(Long.parseLong(id));
-                }
-                sysUserExt.setRoleIdList(roleIdList);
+            if(ConversionUtil.isNotEmptyParameter(sysUserExt.getRoleIdList())){
+                //保存用户与角色关系
+                sysUserRoleService.save(sysUser.getId(),sysUserExt.getRoleIdList());
             }
-            //保存用户与角色关系
-            sysUserRoleService.save(sysUser.getId(),sysUserExt.getRoleIdList());
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage(),e);
         } catch (InvocationTargetException e) {
@@ -241,6 +236,9 @@ public class SysUserServiceImpl implements SysUserService {
         //获取用户权限
         Set<String> permsSet = sysResourceService.getUserPerms(sysUser.getId(),platform);
         sysLoginUserInfo.setPerms(permsSet);
+        //获取用户角色集合
+        List<Long> roleList = sysUserRoleService.getRoleIdList(sysUser.getId());
+        sysLoginUserInfo.setRoleIds(roleList);
         //将登录信息缓存到redis
         CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
         return WebResult.ok().put("token",token).put("perms",permsSet);

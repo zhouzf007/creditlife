@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.sys.service.impl;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.bean.SysRoleExt;
 import com.entrobus.credit.manager.dao.SysRoleMapper;
 import com.entrobus.credit.manager.sys.service.SysRoleResourceService;
@@ -93,13 +94,13 @@ public class SysRoleServiceImpl implements SysRoleService {
             sysRole.setDeleteFlag(Constants.DeleteFlag.NO);
             //保存系统角色，保存成功后会返回主键的值
             insertSelective(sysRole);
-            if(StringUtils.isNotEmpty(role.getResourceIds())){
-                List<Long> resourceIdList = new ArrayList<>();
+            if(ConversionUtil.isNotEmptyParameter(role.getResourceIdList())){
+                /*List<Long> resourceIdList = new ArrayList<>();
                 String[] idArr = role.getResourceIds().split(",");
                 for(String id : idArr){
                     resourceIdList.add(Long.parseLong(id));
                 }
-                role.setResourceIdList(resourceIdList);
+                role.setResourceIdList(resourceIdList);*/
                 //保存角色与资源关系
                 sysRoleResourceService.save(sysRole.getId(),role.getResourceIdList());
             }

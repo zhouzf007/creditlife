@@ -18,6 +18,17 @@ public interface Constants {
         int DISABLE = 1;
     }
 
+    /**
+     * 调度任务分组
+     */
+    interface JobGroupName{
+        String DEFAULT = "creditlife_default";//默认分组
+    }
+
+    interface JobDataKey{
+        String CUSTOM = "customParam";
+    }
+
     interface SMS_TYPE{
         int VERIFICATION = 0;
         int INFORMATION = 1;

@@ -6,7 +6,7 @@ import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.pojo.base.BsStatics;
-import com.entrobus.credit.vo.user.BsStaticVo;
+import com.entrobus.credit.vo.base.BsStaticVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
