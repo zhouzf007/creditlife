@@ -74,6 +74,12 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
+#配置msg-stream topic 消费者
+  cloud:
+    stream:
+      bindings:
+        sms:
+          destination: msg-stream
 
 #    配置mybatis mapper.xml
 mybatis:

@@ -1,6 +1,7 @@
 package com.entrobus.credit.user.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.user.channel.MsgPublishChannel;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.client.ServiceBClient;
 import com.entrobus.credit.user.services.UserCacheService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -70,6 +73,16 @@ public class UserServiceController {
     WebResult test() {
         String test = serviceBClient.test();
         return WebResult.ok(test);
+    }
+
+
+    @Autowired
+    MsgPublishChannel msgChannel;
+
+    @RequestMapping(method = RequestMethod.POST, path = "/sendMsg")
+    public void sendCode(@RequestBody Map<String, Object> msg) {
+        Message<Map<String, Object>> msgs = MessageBuilder.withPayload(msg).build();
+        msgChannel.sendMsg().send(msgs);
     }
 
 }

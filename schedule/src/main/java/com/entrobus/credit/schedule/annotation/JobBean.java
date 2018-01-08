@@ -20,7 +20,7 @@ public @interface JobBean {
     //任务名称
     String jobName() default "";
     //分组名称
-    String groupName() default Constants.JobGroupName.DEFAULT;
+//    String groupName() default Constants.JobGroupName.DEFAULT;
     //cron 时间
 //    String cron() default "" ;
 }

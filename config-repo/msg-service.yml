@@ -57,6 +57,14 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
+#配置msg-stream topic 订阅者
+  cloud:
+    stream:
+      bindings:
+        sms_subscribe:
+          destination: msg-stream
+          consumer:
+            durableSubscription: true
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 

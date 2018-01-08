@@ -32,9 +32,7 @@ spring:
         health:
           enabled:  false
         native:
-#            使用classpath 修改配置需要重启config才生效
           searchLocations: classpath:/shared
-#          searchLocations: file:///D:/idea_project/creditlife/config/src/main/resources/shared
 #  cloud:
 #    config:
 #      server:
@@ -50,3 +48,9 @@ security:
   user:
     name: user
     password: ${CONFIG_SERVER_PASSWORD:password}
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false

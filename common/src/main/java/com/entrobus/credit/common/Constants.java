@@ -28,4 +28,9 @@ public interface Constants {
     interface JobDataKey{
         String CUSTOM = "customParam";
     }
+
+    interface SMS_TYPE{
+        int VERIFICATION = 0;
+        int INFORMATION = 1;
+    }
 }

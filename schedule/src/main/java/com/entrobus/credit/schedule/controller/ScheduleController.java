@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
-    @Autowired
-    private JobClassManager jobDetailProcessor;
 
     private String getValidationMsg(BindingResult result) {
         StringBuilder sb = new StringBuilder();
@@ -33,6 +31,9 @@ public class ScheduleController {
         if (result.hasErrors()) {
             String validationMsg = getValidationMsg(result);
             return WebResult.error(validationMsg);
+        }
+        if (StringUtils.isBlank(vo.getGroupName())){
+            vo.setGroupName(Constants.JobGroupName.DEFAULT);
         }
         //todo cron校验
         return scheduleService.addJob(vo);

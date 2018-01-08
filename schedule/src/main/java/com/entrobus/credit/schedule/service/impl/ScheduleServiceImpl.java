@@ -96,7 +96,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public WebResult addJob(QuartzJobVo vo) {
         JobKey jobKey = JobKey.jobKey(vo.getJobName(),vo.getGroupName());
-        Class<? extends Job> jobClass = jobClassManager.getJobClass(jobKey);
+        Class<? extends Job> jobClass = jobClassManager.getJobClass(vo.getJobName());
         if (jobClass == null){
             String msg = String.format("找不到%s对应的Java类，请确认jobName和groupName是否正确", vo.getJobName());
             return WebResult.error(msg);
