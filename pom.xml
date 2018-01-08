@@ -37,6 +37,7 @@
         <module>base-service</module>
         <module>payment-service</module>
         <module>manager-service</module>
+        <module>wechat-service</module>
 
     </modules>
 

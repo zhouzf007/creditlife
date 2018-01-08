@@ -9,3 +9,7 @@ mvn install -pl common -am -amd
 
 ## springboot中通过cors协议解决跨域问题
 https://www.cnblogs.com/520playboy/p/7306008.html
+
+## 测试服务器Nginx目录 
+服务器IP地址：119.29.119.138
+/usr/local/data/nginx

@@ -182,7 +182,7 @@ public class SysResourceServiceImpl implements SysResourceService {
                 ztreeMenuVo.setId(resource.getId());
                 ztreeMenuVo.setpId(resource.getParentId());
                 ztreeMenuVo.setName(resource.getName());
-                ztreeMenuVo.setMenuLevel(resource.getLevel().intValue());
+                ztreeMenuVo.setMenuLevel(resource.getLevel());
                 menuVoList.add(ztreeMenuVo);
             }
         }
@@ -232,7 +232,7 @@ public class SysResourceServiceImpl implements SysResourceService {
                 //3.根据资源ID查找资源信息
                 SysResourceExample sysResourceExample = new SysResourceExample();
                 SysResourceExample.Criteria criteria = sysResourceExample.createCriteria();
-                criteria.andIdIn(resourceIdList);
+                criteria.andIdIn(resourceIdList).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
                 if(platform != null){
                     criteria.andPlatformEqualTo(platform);
                 }
