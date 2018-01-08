@@ -1,6 +1,5 @@
 package com.entrobus.credit.manager.common.filter;
 
-import com.entrobus.credit.manager.interceptor.LoginInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +29,7 @@ public class ChangeParameterFilter implements Filter {
         ParameterRequestWrapper requestWrapper = new ParameterRequestWrapper(request);
         //从请求头中获取登录token
         String token = request.getHeader("token");
+        //将token作为请求参数放入到HttpServletRequest对象中，方便其他地方通过request.getParameter("token")去获取
         requestWrapper.addParameter("token",token);
         filterChain.doFilter(requestWrapper, servletResponse);
     }
