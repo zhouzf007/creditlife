@@ -272,7 +272,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 // 方式一 ：修改一个任务的触发时间
                 scheduler.rescheduleJob(triggerKey, trigger);
             }
-            return WebResult.error("操作成功");
+            return WebResult.ok("操作成功");
         } catch (Exception e) {
             logger.error("schedule修改任务时间失败！",e);
             return WebResult.error("操作失败！");
