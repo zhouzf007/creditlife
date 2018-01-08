@@ -5,7 +5,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author: zhouzf
+ * @Author: Leo
  * @CreateTime: 2018/01/04 10:29
  */
 @Component
