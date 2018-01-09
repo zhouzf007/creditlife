@@ -48,6 +48,9 @@ zuul:
     schedule:
       path: /schedule/**
       sensitiveHeaders:
-    schedule:
+    wechat-service:
       path: /wechat/**
+      sensitiveHeaders:
+    log-service:
+      path: /log/**
       sensitiveHeaders:
