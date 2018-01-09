@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.common.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +32,12 @@ public class ChangeParameterFilter implements Filter {
         String token = request.getHeader("token");
         //将token作为请求参数放入到HttpServletRequest对象中，方便其他地方通过request.getParameter("token")去获取
         requestWrapper.addParameter("token",token);
+        String platform = request.getParameter("platform");
+        if(StringUtils.isEmpty(platform)){
+            platform = request.getHeader("platform");
+            requestWrapper.addParameter("platform",platform);
+        }
+
         filterChain.doFilter(requestWrapper, servletResponse);
     }
 
@@ -39,6 +46,9 @@ public class ChangeParameterFilter implements Filter {
 
     }
 
+    /**
+     * HttpServletRequest请求参数包装类，用于添加额外请求参数
+     */
     public class ParameterRequestWrapper extends HttpServletRequestWrapper {
 
         private Map<String , String[]> params = new HashMap<String, String[]>();
