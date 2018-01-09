@@ -1,14 +1,18 @@
 package com.entrobus.credit.log.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.log.dao.OrderOperationLogMapper;
 import com.entrobus.credit.log.service.OrderOperationLogService;
 import com.entrobus.credit.pojo.log.OrderOperationLog;
 import com.entrobus.credit.pojo.log.OrderOperationLogExample;
+import com.entrobus.credit.vo.log.OrderLogMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -57,12 +61,21 @@ public class OrderOperationLogServiceImpl implements OrderOperationLogService {
     }
 
     public int insert(OrderOperationLog record) {
+        defaultValue(record);
         return this.orderOperationLogMapper.insert(record);
     }
 
     public int insertSelective(OrderOperationLog record) {
+        defaultValue(record);
         return this.orderOperationLogMapper.insertSelective(record);
     }
+
+    private void defaultValue(OrderOperationLog record) {
+        if (record.getId() == null) record.setId(GUIDUtil.genRandomGUID());
+        if (record.getCreateTime() == null) record.setCreateTime(new Date());
+//        if (record.getOperationTime() == null) record.setOperationTime(new Date());
+    }
+
     @Override
     public   List<OrderOperationLog> selectByExampleWithBLOBs(OrderOperationLogExample example){
         return this.orderOperationLogMapper.selectByExampleWithBLOBs(example);
@@ -76,5 +89,26 @@ public class OrderOperationLogServiceImpl implements OrderOperationLogService {
 //        return this.orderOperationLogMapper.updateByPrimaryKeyWithBLOBs(record);
 //    }
 
+    @Override
+    public int logMsg(OrderLogMsg msg){
+        OrderOperationLog log = new OrderOperationLog();
+        if (msg.getTime() != null) {
+            log.setOperationTime(new Date(msg.getTime()));
+        }else {
+            log.setOperationTime(new Date());
+        }
+
+        Object operationData = msg.getOperationData();
+        if (operationData != null) {
+            log.setOperationData(JSON.toJSONString(operationData));
+        }
+        log.setOperationDesc(msg.getDesc());
+        log.setOrderState(msg.getOrderState());
+        log.setRemark(msg.getRemark());
+        log.setOperatorId(msg.getOperatorId());
+        log.setOrderId(msg.getOrderId());
+        log.setOperationState(msg.getOperationState());
+        return insertSelective(log);
+    }
 
 }
