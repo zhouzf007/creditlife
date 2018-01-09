@@ -4,6 +4,7 @@ import com.entrobus.credit.common.util.ClassUtils;
 import com.entrobus.credit.schedule.annotation.JobBean;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.Job;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
@@ -39,7 +40,7 @@ public class JobClassManagerImpl implements JobClassManager,InitializingBean{
                     }
                     if (classMap.containsKey(jobName)){
                         String msg = String.format("jobBean重复，类%s和%s有相同的jobName", classMap.get(jobName).getClass().getName(),jobClass.getName());
-                        throw new Exception(msg);
+                        throw new SchedulerException(msg);
                     }
                     classMap.put(jobName,jobClass);
                 }

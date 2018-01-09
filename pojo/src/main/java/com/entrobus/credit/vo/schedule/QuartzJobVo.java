@@ -15,6 +15,15 @@ public class QuartzJobVo implements Serializable {
     private String param;
     @NotBlank(message = "description 必填")
     private String description;
+    private String stateName;
+    //任务状态
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
 
     public String getJobName() {
         return jobName;

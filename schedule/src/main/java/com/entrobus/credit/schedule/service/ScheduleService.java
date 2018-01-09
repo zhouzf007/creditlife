@@ -2,24 +2,27 @@ package com.entrobus.credit.schedule.service;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.vo.schedule.QuartzJobVo;
-import org.quartz.Job;
+import org.quartz.SchedulerException;
+
+import java.util.List;
 
 public interface ScheduleService {
-//    boolean add(String jobName, String cron, Class className);
 
-    boolean removeJob(String jobName);
+    List<String > groupNames() throws SchedulerException;
 
-    boolean removeJob(String jobName, String groupName);
+    List<QuartzJobVo> jobList();
 
-    void addJob(String jobName, String groupName, Class<? extends Job> jobClass, String cron);
+    WebResult removeJob(String jobName) throws SchedulerException;
 
-    void addJob(String jobName, Class<? extends Job> jobClass, String cron);
+    WebResult removeJob(String jobName, String groupName) throws SchedulerException;
+
 
     WebResult addJob(QuartzJobVo vo);
 
-    void registry(String jobName, String groupName, Class<? extends Job> jobClass, String cron);
 
-    void pauseJob(String jobName, String jobGroupName);
+    WebResult pauseJob(String jobName, String jobGroupName) throws SchedulerException;
+
+    WebResult resumeJob(String jobName, String jobGroupName) throws SchedulerException;
 
     WebResult modifyJobTime(String jobName, String groupName, String cron);
 

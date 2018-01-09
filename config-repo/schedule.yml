@@ -26,7 +26,7 @@ security:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://119.29.177.249:3306/test?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    url: jdbc:mysql://119.29.177.249:3306/creditlife_job?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
 #    url: {cipher}AQAJsE5NTBj1VMLzGXG4O+WOGq9wdOTc+HnSmn0STCrLf6IWOtpJ/ciV87vkYycmTMsT59mZvHWrWYP3QPmn/BDzbQlMyIaaIEgtAFHyHVhl2D4Ht9zgecxdijRmG6o7ta1QPJ4f0oDzSyhYsBqvAS7mClKnGrsZcT3yT6ELSkCV928IPr6rj2DUjdV17cQsZrEtBpBX2cKqAzmqH2EPaPcDhzh7Y5CVoyEm4ISk11kl3ndak+i02WQtfaXcV0i6+ddrMXQgNc0PYYpWMMiu+mElG2gy6K0AKQizIGW2fIGkGJcQxCa2btEkKN1okJ5DVsNbr5XZbApP1tN5pzro4hEBEpWrdAg7/pbU4Dyk6E/W4jS1x4tcy8almVbjsIOa/iPudvAhdQlR84VLl+qf6kp9AgyEyJ0Y3VKJu1i2XZULs1nA+SYr7uhwxNRZG1i3eQ10SQmuKxCqlJjQy3i/qP+L8Mx603oRMdyOr57epc8HjwEexaPnpWS3Zpwopam+kF0Igl4VbxydicKA0h/ArcquQ3NslybIH3VGBhujTkyD9HhCIsyJVp+P/GY/1AYCh5599d6PT/5Gd/TgipQ+MZT1
     username: phoenix
 #    username: {cipher}AQBbblyymdI+Qv3iOuwge8U/DT/Zyv3iFHh6EkzaT5sX4vuTUyGQcxVHHZoeW0R6sTnNiT5qacBu88vsLQBgOu2JZB3uPMpg7dok8flgFG6HwkJbcW6gPLKQ0dL1GAfYHciLWTC0wuMcrGFmlBbQ+BYDS+uUOY664d/TjcC3P5v8KcQ1Yuu2NFMGFZEXkCib8rmLP/T5FgUqqSChEbuhLGwHJ7to9KBIO9Sco9Pd87201V0VBKUsMUitkO7FDk5NZqB1BXXkHBGKbvUPRnM7kTioXkPscxD427TLfiLr5sGm4Knb2nA9AWhBeEIps/T5SQlzI6+brFo+zi/ctLvMz1gwjYFqzMtW5dmZR4iBvY7ventVFBkZI+Mp4QY71OTN4Uk=
