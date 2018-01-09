@@ -77,7 +77,14 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
-
+  cloud:
+    stream:
+      bindings:
+        order_operation_log_subscribe:
+          destination: order-operation-log-stream
+          content-type: application/json
+          consumer:
+            durableSubscription: true
 #    配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml

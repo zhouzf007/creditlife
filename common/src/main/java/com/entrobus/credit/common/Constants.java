@@ -25,6 +25,15 @@ public interface Constants {
         String DEFAULT = "creditlife_default";//默认分组
     }
 
+    /**
+     * 操作状态
+     */
+    interface  OperationState{
+        int SUCCESS = 0;//成功
+        int FAIL = 1;//失败
+        int ERROR = 2;//异常
+    }
+
     interface JobDataKey{
         String CUSTOM = "customParam";
     }
