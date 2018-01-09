@@ -32,11 +32,12 @@ public class SysResourceController extends ManagerBaseController {
     private SysResourceService sysResourceService;
 
     @RequestMapping("/add")
-    public WebResult add(SysResource sysResource){
+    public WebResult add(SysResource sysResource,Integer platform){
         sysResource.setCreateUser(getLoginUserId());
         sysResource.setUpdateUser(getLoginUserId());
         sysResource.setCreateTime(new Date());
         sysResource.setDeleteFlag(Constants.DeleteFlag.NO);
+        sysResource.setPlatform(platform);
         if(ConversionUtil.isEmptyParameter(sysResource.getLevel())){
             sysResource.setLevel(1);
         }
@@ -45,9 +46,10 @@ public class SysResourceController extends ManagerBaseController {
     }
 
     @RequestMapping("/update")
-    public WebResult update(SysResource sysResource){
+    public WebResult update(SysResource sysResource,Integer platform){
         sysResource.setUpdateUser(getLoginUserId());
         sysResource.setUpdateTime(new Date());
+        sysResource.setPlatform(platform);
         if(ConversionUtil.isEmptyParameter(sysResource.getLevel())){
             sysResource.setLevel(1);
         }
@@ -88,7 +90,7 @@ public class SysResourceController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/list")
-    public WebResult list(Integer offset, Integer limit,String name,Long id){
+    public WebResult list(Integer offset, Integer limit,String name,Long id,Integer platform){
         if (offset != null && limit != null) {
             //分页查询
             PageHelper.offsetPage(offset, limit);
@@ -96,6 +98,9 @@ public class SysResourceController extends ManagerBaseController {
         SysResourceExample resourceExample = new SysResourceExample();
         SysResourceExample.Criteria criteria = resourceExample.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        if(ConversionUtil.isNotEmptyParameter(platform)){
+            criteria.andPlatformEqualTo(platform);
+        }
         if(StringUtils.isNotEmpty(name)){
             criteria.andNameLike("%"+name+"%");
             //把该name下的子资源一起查询出来
@@ -106,6 +111,7 @@ public class SysResourceController extends ManagerBaseController {
             //把该Id下的子资源一起查询出来
             resourceExample.or().andParentIdsLike("%"+id+"%");
         }
+
         List<SysResource> sysResourceList = sysResourceService.selectByExample(resourceExample);
         //分页信息
         PageInfo<SysResource> pageInfo = new PageInfo(sysResourceList);

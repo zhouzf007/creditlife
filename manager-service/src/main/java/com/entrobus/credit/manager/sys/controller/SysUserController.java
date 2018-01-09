@@ -40,9 +40,10 @@ public class SysUserController extends ManagerBaseController {
 
 
     @RequestMapping("/add")
-    public WebResult add(SysUserExt sysUser) {
+    public WebResult add(SysUserExt sysUser,Integer platform) {
         sysUser.setCreateUser(getLoginUserId());//创建人的用户ID
         sysUser.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
+        sysUser.setPlatform(platform);
         sysUserService.save(sysUser);
         return WebResult.ok("创建成功！");
     }
@@ -55,7 +56,7 @@ public class SysUserController extends ManagerBaseController {
     public WebResult list(Integer offset, Integer limit,String username,String realName,String cellphone,Integer platform) {
         if (offset != null && limit != null) {
             //分页查询
-            PageHelper.offsetPage(offset, limit);
+            PageHelper.startPage(offset,limit);
         }
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria();
@@ -99,7 +100,7 @@ public class SysUserController extends ManagerBaseController {
             map.put("roleIdList",roleIdList);
             resultList.add(map);
         }
-        PageInfo pageInfo = new PageInfo<>(resultList);
+        PageInfo pageInfo = new PageInfo<>(sysUserList);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("total",pageInfo.getTotal());
         dataMap.put("rows", resultList);
@@ -143,10 +144,11 @@ public class SysUserController extends ManagerBaseController {
      * @return
      */
     @PostMapping("/update")
-    public WebResult update(SysUserExt sysUser){
+    public WebResult update(SysUserExt sysUser,Integer platform){
         if(StringUtils.isBlank(sysUser.getUsername())){
             return WebResult.error("用户名不能为空");
         }
+        sysUser.setPlatform(platform);
         sysUser.setUpdateUser(getLoginUserId());
         sysUserService.update(sysUser);
         return WebResult.ok("修改成功");
