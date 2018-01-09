@@ -52,13 +52,13 @@ public interface SysResourceService {
      * @param menuType 菜单类型（1：菜单   2：按钮）
      * @return
      */
-    List<ZtreeMenuVo> getZtreeMenu(Integer menuType);
+    List<ZtreeMenuVo> getZtreeMenu(Integer menuType,Integer platform);
 
     /**
      * 根据角色ID获取菜单树形列表
      * @return
      */
-    List<ZtreeMenuVo> getCheckTreeList(Long roleId);
+    List<ZtreeMenuVo> getCheckTreeList(Long roleId,Integer platform);
 
     /**
      * 通过用户ID查找用户能够使用的资源

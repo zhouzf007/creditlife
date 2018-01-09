@@ -54,7 +54,7 @@ public class SysUserController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/list")
-    public WebResult list(Integer offset, Integer limit,String username,String realName,String cellphone,Integer platform) {
+    public WebResult list(Integer offset, Integer limit,String username,String realName,String cellphone,CommonParameter commonParameter) {
         if (offset != null && limit != null) {
             //分页查询
             PageHelper.startPage(offset,limit);
@@ -62,10 +62,10 @@ public class SysUserController extends ManagerBaseController {
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(com.entrobus.credit.common.Constants.DeleteFlag.NO);
-        //只有超级管理员，才能查看所有管理员列表
+       /* //只有超级管理员，才能查看所有管理员列表
         if (!getCurrLoginUser().getRoleIds().contains(SysConstants.LOGIN_USER_ROLE.SUPER_ADMIN)) {
             criteria.andCreateUserEqualTo(getLoginUserId());
-        }
+        }*/
         if(StringUtils.isNotEmpty(username)){
             criteria.andUsernameLike("%"+username+"%");
         }
@@ -75,9 +75,7 @@ public class SysUserController extends ManagerBaseController {
         if(StringUtils.isNotEmpty(cellphone)){
             criteria.andCellphoneLike("%"+cellphone+"%");
         }
-        if(ConversionUtil.isNotEmptyParameter(platform)){
-            criteria.andPlatformEqualTo(platform);
-        }
+        criteria.andPlatformEqualTo(commonParameter.getPlatform());
         //只有紧跟在 PageHelper.startPage 方法后的第一个 MyBatis 的查询(select)方法会被分页。
         List<SysUser> sysUserList = sysUserService.selectByExample(example);
         List<Map<String,Object>> resultList = new ArrayList<>();
@@ -87,9 +85,13 @@ public class SysUserController extends ManagerBaseController {
 
             sysUserIdList.add(sysUser.getId());
         }
-        SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
-        sysUserRoleExample.createCriteria().andUserIdIn(sysUserIdList);
-        List<SysUserRole> roleList = sysUserRoleService.selectByExample(sysUserRoleExample);
+        List<SysUserRole> roleList = new ArrayList<>();
+        if(ConversionUtil.isNotEmptyParameter(sysUserIdList)){
+            SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+            sysUserRoleExample.createCriteria().andUserIdIn(sysUserIdList);
+            roleList = sysUserRoleService.selectByExample(sysUserRoleExample);
+        }
+
         for (SysUser sysUser: sysUserList){
             Map<String,Object> map = ConversionUtil.beanToMap(sysUser);
             List<Long> roleIdList = new ArrayList<>();
@@ -111,12 +113,12 @@ public class SysUserController extends ManagerBaseController {
 
     /**
      * 登录
-     * @param platform 用户所属平台(0：信用贷后台，1：银行后台)
+     * @param commonParameter 用户所属平台(0：信用贷后台，1：银行后台)
      */
     @RequestMapping(value = "/login")
-    public WebResult login(String username, String password,Integer platform){
+    public WebResult login(String username, String password,CommonParameter commonParameter){
         //用户登录
-        return sysUserService.login(username,password,platform);
+        return sysUserService.login(username,password,commonParameter.getPlatform());
     }
 
     /**
@@ -145,11 +147,11 @@ public class SysUserController extends ManagerBaseController {
      * @return
      */
     @PostMapping("/update")
-    public WebResult update(SysUserExt sysUser,Integer platform){
+    public WebResult update(SysUserExt sysUser,CommonParameter commonParameter){
         if(StringUtils.isBlank(sysUser.getUsername())){
             return WebResult.error("用户名不能为空");
         }
-        sysUser.setPlatform(platform);
+        sysUser.setPlatform(commonParameter.getPlatform());
         sysUser.setUpdateUser(getLoginUserId());
         sysUserService.update(sysUser);
         return WebResult.ok("修改成功");
