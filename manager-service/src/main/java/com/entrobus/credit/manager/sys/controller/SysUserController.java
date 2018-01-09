@@ -20,7 +20,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +52,7 @@ public class SysUserController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/list")
-    public WebResult list(Integer offset, Integer limit,String username,String realName,String cellphone) {
+    public WebResult list(Integer offset, Integer limit,String username,String realName,String cellphone,Integer platform) {
         if (offset != null && limit != null) {
             //分页查询
             PageHelper.offsetPage(offset, limit);
@@ -70,6 +72,9 @@ public class SysUserController extends ManagerBaseController {
         }
         if(StringUtils.isNotEmpty(cellphone)){
             criteria.andCellphoneLike("%"+cellphone+"%");
+        }
+        if(ConversionUtil.isNotEmptyParameter(platform)){
+            criteria.andPlatformEqualTo(platform);
         }
         //只有紧跟在 PageHelper.startPage 方法后的第一个 MyBatis 的查询(select)方法会被分页。
         List<SysUser> sysUserList = sysUserService.selectByExample(example);
