@@ -80,6 +80,17 @@ public class BsStaticsController {
         if (i > 0) bsStaticsCacheService.cacheOrRefresh(statics.getId());
         return WebResult.ok("操作成功");
     }
+    /**
+     * 添加，并缓存
+     *
+     * @param
+     * @return
+     */
+    @GetMapping("")
+    public WebResult list(BsStaticVo vo) {
+        //todo
+        return WebResult.ok("操作成功");
+    }
 
     private String getValidationMsg(BindingResult result) {
         StringBuilder sb = new StringBuilder();
