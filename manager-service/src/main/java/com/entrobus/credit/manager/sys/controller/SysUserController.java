@@ -44,7 +44,7 @@ public class SysUserController extends ManagerBaseController {
     public WebResult add(SysUserExt sysUser, CommonParameter commonParameter) {
         sysUser.setCreateUser(getLoginUserId());//创建人的用户ID
         sysUser.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
-        sysUser.setPlatform(platform);
+        sysUser.setPlatform(commonParameter.getPlatform());
         sysUserService.save(sysUser);
         return WebResult.ok("创建成功！");
     }
