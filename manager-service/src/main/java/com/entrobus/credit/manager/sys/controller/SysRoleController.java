@@ -42,17 +42,19 @@ public class SysRoleController extends ManagerBaseController {
 
 
     @RequestMapping("/add")
-    public WebResult add(SysRoleExt role){
+    public WebResult add(SysRoleExt role,Integer platform){
         role.setCreateUser(getLoginUserId());
         role.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
+        role.setPlatform(platform);
         sysRoleService.save(role);
         return WebResult.ok("添加成功");
     }
 
 
     @RequestMapping("/update")
-    public WebResult update(SysRoleExt role){
+    public WebResult update(SysRoleExt role,Integer platform){
         role.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
+        role.setPlatform(platform);
         sysRoleService.update(role);
         return WebResult.ok();
     }
@@ -110,9 +112,12 @@ public class SysRoleController extends ManagerBaseController {
      * 角色列表
      */
     @RequestMapping("/select")
-    public WebResult select(){
+    public WebResult select(Integer platform){
         SysRoleExample roleExample = new SysRoleExample();
         SysRoleExample.Criteria criteria = roleExample.createCriteria();
+        if(ConversionUtil.isNotEmptyParameter(platform)){
+            criteria.andPlatformEqualTo(platform);
+        }
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除(待优化，后期改成使用mybatis拦截器统一处理带delete_flag过滤条件的查询)
         //只有超级管理员，才能查看所有管理员列表
         if (!getCurrLoginUser().getRoleIds().contains(SysConstants.LOGIN_USER_ROLE.SUPER_ADMIN)) {
@@ -127,7 +132,7 @@ public class SysRoleController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/list")
-    public WebResult list(Integer offset, Integer limit,String roleName) {
+    public WebResult list(Integer offset, Integer limit,String roleName,Integer platform) {
         if (offset != null && limit != null) {
             //分页查询
             PageHelper.offsetPage(offset, limit);
@@ -142,6 +147,9 @@ public class SysRoleController extends ManagerBaseController {
         if(StringUtils.isNotEmpty(roleName)){
             criteria.andRoleNameLike("%"+roleName+"%");
         }
+        if(ConversionUtil.isNotEmptyParameter(platform)){
+            criteria.andPlatformEqualTo(platform);
+        }
         //只有紧跟在 PageHelper.startPage 方法后的第一个 MyBatis 的查询(select)方法会被分页。
         List<SysRole> sysRoleList = sysRoleService.selectByExample(example);
         List<Map<String,Object>> resultList = new ArrayList<>();
@@ -153,7 +161,7 @@ public class SysRoleController extends ManagerBaseController {
             }
             resultList.add(map);
         }
-        PageInfo pageInfo = new PageInfo<>(resultList);
+        PageInfo pageInfo = new PageInfo<>(sysRoleList);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("total",pageInfo.getTotal());
         dataMap.put("rows", resultList);
