@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.common.filter;
 
+import com.entrobus.credit.manager.common.bean.CommonParameter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,6 @@ public class ChangeParameterFilter implements Filter {
             platform = request.getHeader("platform");
             requestWrapper.addParameter("platform",platform);
         }
-
         filterChain.doFilter(requestWrapper, servletResponse);
     }
 

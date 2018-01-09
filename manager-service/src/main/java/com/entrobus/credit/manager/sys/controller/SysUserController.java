@@ -5,6 +5,7 @@ import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.SysConstants;
+import com.entrobus.credit.manager.common.bean.CommonParameter;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
@@ -40,7 +41,7 @@ public class SysUserController extends ManagerBaseController {
 
 
     @RequestMapping("/add")
-    public WebResult add(SysUserExt sysUser) {
+    public WebResult add(SysUserExt sysUser, CommonParameter commonParameter) {
         sysUser.setCreateUser(getLoginUserId());//创建人的用户ID
         sysUser.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
         sysUserService.save(sysUser);

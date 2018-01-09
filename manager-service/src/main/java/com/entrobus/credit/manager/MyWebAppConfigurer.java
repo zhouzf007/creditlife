@@ -3,9 +3,11 @@ package com.entrobus.credit.manager;
 import com.entrobus.credit.manager.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.List;
 
 /**
  * 处理跨域调用问题
@@ -36,6 +38,12 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
                 )
                 .addPathPatterns("/**");
         super.addInterceptors(registry);
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        // 注册公共参数分解器
+        argumentResolvers.add(new CommonArgumentResolver());
     }
 
     /**
