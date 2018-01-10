@@ -42,4 +42,12 @@ public interface Constants {
         int VERIFICATION = 0;
         int INFORMATION = 1;
     }
+
+    /**
+     * 管理系统所属平台类型
+     */
+    interface PLATFORM{
+        int creditlife = 0;//熵商后台
+        int bank = 1;//银行后台
+    }
 }

@@ -64,4 +64,12 @@ public interface SysUserService {
      * @return 登录token
      */
     WebResult login(String username, String password,Integer platform) ;
+
+    /**
+     * 检查对应平台账号是否重复 重复=true
+     * @param userName
+     * @param platform
+     * @return
+     */
+    boolean checkUserName(String userName,Integer platform);
 }

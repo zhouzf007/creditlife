@@ -43,6 +43,6 @@ public class CreditlifeExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public WebResult handleException(Exception e){
 		logger.error(e.getMessage(), e);
-		return WebResult.error(e.getMessage());
+		return WebResult.error("系统异常，请联系管理员");
 	}
 }

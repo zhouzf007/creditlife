@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.SysConstants;
@@ -62,10 +63,9 @@ public class SysUserController extends ManagerBaseController {
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(com.entrobus.credit.common.Constants.DeleteFlag.NO);
-       /* //只有超级管理员，才能查看所有管理员列表
-        if (!getCurrLoginUser().getRoleIds().contains(SysConstants.LOGIN_USER_ROLE.SUPER_ADMIN)) {
-            criteria.andCreateUserEqualTo(getLoginUserId());
-        }*/
+        if(commonParameter.getPlatform()== Constants.PLATFORM.bank){
+            criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
+        }
         if(StringUtils.isNotEmpty(username)){
             criteria.andUsernameLike("%"+username+"%");
         }

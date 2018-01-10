@@ -120,16 +120,16 @@
             <!--  配置自动返回主键 -->
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="sys_resource" domainObjectName="SysResource"
+        <!--<table tableName="sys_resource" domainObjectName="SysResource"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
 
-            <!--  配置自动返回主键 -->
+            &lt;!&ndash;  配置自动返回主键 &ndash;&gt;
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        </table>-->
         <table tableName="sys_role" domainObjectName="SysRole"
                enableCountByExample="true"
                enableUpdateByExample="true"
@@ -140,14 +140,14 @@
             <!--  配置自动返回主键 -->
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="sys_role_resource" domainObjectName="SysRoleResource"
+        <!--<table tableName="sys_role_resource" domainObjectName="SysRoleResource"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
 
-            <!--  配置自动返回主键 -->
+            &lt;!&ndash;  配置自动返回主键 &ndash;&gt;
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
         <table tableName="sys_user_role" domainObjectName="SysUserRole"
@@ -157,9 +157,9 @@
                enableSelectByExample="true"
                selectByExampleQueryId="true">
 
-            <!--  配置自动返回主键 -->
+            &lt;!&ndash;  配置自动返回主键 &ndash;&gt;
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        </table>-->
     </context>
 
 </generatorConfiguration>

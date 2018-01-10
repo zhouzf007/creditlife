@@ -136,12 +136,6 @@ public class SysUserServiceImpl implements SysUserService {
             //保存系统用户，保存成功后会返回主键的值
             insertSelective(sysUser);
             if(ConversionUtil.isNotEmptyParameter(sysUserExt.getRoleIdList())){
-                /*List<Long> roleIdList = new ArrayList<>();
-                String[] idArr = sysUserExt.getRoleIds().split(",");
-                for(String id : idArr){
-                    roleIdList.add(Long.parseLong(id));
-                }
-                sysUserExt.setRoleIdList(roleIdList);*/
                 //保存用户与角色关系
                 sysUserRoleService.save(sysUser.getId(),sysUserExt.getRoleIdList());
             }
@@ -242,5 +236,18 @@ public class SysUserServiceImpl implements SysUserService {
         //将登录信息缓存到redis
         CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
         return WebResult.ok().put("token",token).put("perms",permsSet);
+    }
+
+    @Override
+    public boolean checkUserName(String userName,Integer platform) {
+        SysUserExample example = new SysUserExample();
+        example.createCriteria().andUsernameEqualTo(userName)
+//                .andPlatformEqualTo(platform)
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        List<SysUser> sysUsers = this.selectByExample(example);
+        if(ConversionUtil.isNotEmptyParameter(sysUsers)){
+            return true;
+        }
+        return false;
     }
 }

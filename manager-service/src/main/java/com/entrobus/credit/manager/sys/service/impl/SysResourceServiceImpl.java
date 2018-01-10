@@ -287,6 +287,14 @@ public class SysResourceServiceImpl implements SysResourceService {
         return permsSet;
     }
 
+    @Override
+    public List<SysResource> getSysResourceByPlatform(Integer platform) {
+        SysResourceExample example = new SysResourceExample();
+        example.createCriteria().andPlatformEqualTo(platform)
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        return this.selectByExample(example);
+    }
+
     /**
      * 递归生成导航菜单
      * @param rootId 根节点ID

@@ -82,4 +82,11 @@ public interface SysResourceService {
      * @return
      */
     Set<String> getUserPerms(Long userId,Integer platform);
+
+    /**
+     * 获取平台类型的资源
+     * @param platform
+     * @return
+     */
+    List<SysResource> getSysResourceByPlatform(Integer platform);
 }

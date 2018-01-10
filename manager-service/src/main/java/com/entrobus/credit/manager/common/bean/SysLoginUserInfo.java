@@ -11,7 +11,7 @@ public class SysLoginUserInfo implements Serializable {
 
     private Long id;
 
-    private Long orgId;
+    private String orgId;
 
     private Integer platform;
 
@@ -47,11 +47,11 @@ public class SysLoginUserInfo implements Serializable {
         this.id = id;
     }
 
-    public Long getOrgId() {
+    public String getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(Long orgId) {
+    public void setOrgId(String orgId) {
         this.orgId = orgId;
     }
 
