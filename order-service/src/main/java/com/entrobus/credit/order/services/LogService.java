@@ -1,8 +1,8 @@
 package com.entrobus.credit.order.services;
 
-import com.entrobus.credit.vo.log.OrderLogMsg;
+import com.entrobus.credit.vo.log.OrderOperationMsg;
 
 public interface LogService {
 
-    void orderLog(OrderLogMsg msg);
+    void orderLog(OrderOperationMsg msg);
 }

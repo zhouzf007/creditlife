@@ -6,7 +6,7 @@ import com.entrobus.credit.log.dao.OrderOperationLogMapper;
 import com.entrobus.credit.log.service.OrderOperationLogService;
 import com.entrobus.credit.pojo.log.OrderOperationLog;
 import com.entrobus.credit.pojo.log.OrderOperationLogExample;
-import com.entrobus.credit.vo.log.OrderLogMsg;
+import com.entrobus.credit.vo.log.OrderOperationMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +90,7 @@ public class OrderOperationLogServiceImpl implements OrderOperationLogService {
 //    }
 
     @Override
-    public int logMsg(OrderLogMsg msg){
+    public int logMsg(OrderOperationMsg msg){
         OrderOperationLog log = new OrderOperationLog();
         if (msg.getTime() != null) {
             log.setOperationTime(new Date(msg.getTime()));

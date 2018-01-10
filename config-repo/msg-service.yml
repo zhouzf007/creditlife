@@ -24,7 +24,7 @@ spring:
           slow-sql-millis: 1000
           log-slow-sql: true
           merge-sql: true
-        slf4j:
+        log4j:
           statement-executable-sql-log-enable: true
           enabled: true
         wall:

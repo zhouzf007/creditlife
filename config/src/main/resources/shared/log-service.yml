@@ -41,7 +41,7 @@ spring:
           slow-sql-millis: 1000
           log-slow-sql: true
           merge-sql: true
-        slf4j:
+        log4j:
           statement-executable-sql-log-enable: true
           enabled: true
         wall:
@@ -79,6 +79,13 @@ spring:
         order_operation_log_subscribe:
           destination: order-operation-log-stream
           content-type: application/json
+          group: ${spring.application.name}
+          consumer:
+            durableSubscription: true
+        sys_lonin_log_subscribe:
+          destination: sys-lonin-log-stream
+          content-type: application/json
+          group: ${spring.application.name}
           consumer:
             durableSubscription: true
 #    配置mybatis mapper.xml

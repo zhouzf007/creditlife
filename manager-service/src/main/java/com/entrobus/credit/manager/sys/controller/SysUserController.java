@@ -5,13 +5,14 @@ import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
-import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.CommonParameter;
+import com.entrobus.credit.manager.common.bean.LoginVo;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.manager.sys.service.SysUserService;
+import com.entrobus.credit.manager.util.ServletUtil;
 import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.pojo.manager.SysUserExample;
 import com.entrobus.credit.pojo.manager.SysUserRole;
@@ -22,10 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -116,9 +116,13 @@ public class SysUserController extends ManagerBaseController {
      * @param commonParameter 用户所属平台(0：信用贷后台，1：银行后台)
      */
     @RequestMapping(value = "/login")
-    public WebResult login(String username, String password,CommonParameter commonParameter){
+    public WebResult login(LoginVo vo, CommonParameter commonParameter, HttpServletRequest request){
         //用户登录
-        return sysUserService.login(username,password,commonParameter.getPlatform());
+        vo.setAddress(ServletUtil.getIpAddr(request));
+        vo.setBrowser(ServletUtil.getUserBrowser(request));
+        vo.setOperationSystem(ServletUtil.getUserOperatingSystem(request));
+        vo.setPlatform(commonParameter.getPlatform());
+        return sysUserService.login(vo);
     }
 
     /**

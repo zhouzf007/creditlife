@@ -4,7 +4,7 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.order.services.LogService;
 import com.entrobus.credit.pojo.user.UserInfo;
-import com.entrobus.credit.vo.log.OrderLogMsg;
+import com.entrobus.credit.vo.log.OrderOperationMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -13,8 +13,6 @@ import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
 
 @RefreshScope
 @RestController
@@ -40,7 +38,7 @@ public class ServiceBController {
     @PostMapping("/log")
     public String log(){
         //订单操作 日志
-        OrderLogMsg msg = new OrderLogMsg();
+        OrderOperationMsg msg = new OrderOperationMsg();
         msg.setDesc("测试");//操作说明：自定义,如 提交申请（创建订单）、审核 等
 
         UserInfo userInfo = new UserInfo();//测试用
