@@ -2,6 +2,7 @@ package com.entrobus.credit.log.service;
 
 import com.entrobus.credit.pojo.log.SysLoginLog;
 import com.entrobus.credit.pojo.log.SysLoginLogExample;
+import com.entrobus.credit.vo.log.SysLoginMsg;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface SysLoginLogService {
     int insert(SysLoginLog record);
 
     int insertSelective(SysLoginLog record);
+
+    int log(SysLoginMsg msg);
 }

@@ -2,6 +2,7 @@ package com.entrobus.credit.log.service;
 
 import com.entrobus.credit.pojo.log.OrderOperationLog;
 import com.entrobus.credit.pojo.log.OrderOperationLogExample;
+import com.entrobus.credit.vo.log.OrderOperationMsg;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ public interface OrderOperationLogService {
     int insertSelective(OrderOperationLog record);
 
     List<OrderOperationLog> selectByExampleWithBLOBs(OrderOperationLogExample example);
+
+    int logMsg(OrderOperationMsg msg);
 
 //    int updateByExampleWithBLOBs(OrderOperationLog record, OrderOperationLogExample example);
 //

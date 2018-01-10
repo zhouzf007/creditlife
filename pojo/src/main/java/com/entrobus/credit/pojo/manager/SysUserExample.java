@@ -330,52 +330,62 @@ public class SysUserExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdEqualTo(Long value) {
+        public Criteria andOrgIdEqualTo(String value) {
             addCriterion("org_id =", value, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdNotEqualTo(Long value) {
+        public Criteria andOrgIdNotEqualTo(String value) {
             addCriterion("org_id <>", value, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdGreaterThan(Long value) {
+        public Criteria andOrgIdGreaterThan(String value) {
             addCriterion("org_id >", value, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andOrgIdGreaterThanOrEqualTo(String value) {
             addCriterion("org_id >=", value, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdLessThan(Long value) {
+        public Criteria andOrgIdLessThan(String value) {
             addCriterion("org_id <", value, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdLessThanOrEqualTo(Long value) {
+        public Criteria andOrgIdLessThanOrEqualTo(String value) {
             addCriterion("org_id <=", value, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdIn(List<Long> values) {
+        public Criteria andOrgIdLike(String value) {
+            addCriterion("org_id like", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdNotLike(String value) {
+            addCriterion("org_id not like", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdIn(List<String> values) {
             addCriterion("org_id in", values, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdNotIn(List<Long> values) {
+        public Criteria andOrgIdNotIn(List<String> values) {
             addCriterion("org_id not in", values, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdBetween(Long value1, Long value2) {
+        public Criteria andOrgIdBetween(String value1, String value2) {
             addCriterion("org_id between", value1, value2, "orgId");
             return (Criteria) this;
         }
 
-        public Criteria andOrgIdNotBetween(Long value1, Long value2) {
+        public Criteria andOrgIdNotBetween(String value1, String value2) {
             addCriterion("org_id not between", value1, value2, "orgId");
             return (Criteria) this;
         }

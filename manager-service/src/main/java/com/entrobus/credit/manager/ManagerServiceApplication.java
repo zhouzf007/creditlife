@@ -3,6 +3,7 @@ package com.entrobus.credit.manager;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.entrobus.credit.manager.channel.LogPublishChannel;
 import com.entrobus.credit.manager.common.filter.ChangeParameterFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -26,6 +28,7 @@ import javax.servlet.Filter;
 @EnableTransactionManagement//开启事务
 //@EnableOAuth2Client
 @MapperScan(basePackages="com.entrobus.credit.manager.dao")
+@EnableBinding(LogPublishChannel.class)
 public class ManagerServiceApplication {
 
 

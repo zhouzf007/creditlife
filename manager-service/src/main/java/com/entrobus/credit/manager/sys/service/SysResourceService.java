@@ -53,14 +53,14 @@ public interface SysResourceService {
      * @param filterResourceUrls 需要过滤掉的资源URL
      * @return
      */
-    List<ZtreeMenuVo> getZtreeMenu(Integer menuType,String filterResourceUrls);
+    List<ZtreeMenuVo> getZtreeMenu(Integer menuType,Integer platform,String filterResourceUrls);
 
     /**
      * 根据角色ID获取菜单树形列表
      * @param filterResourceUrls 需要过滤掉的资源URL
      * @return
      */
-    List<ZtreeMenuVo> getCheckTreeList(Long roleId,String filterResourceUrls);
+    List<ZtreeMenuVo> getCheckTreeList(Long roleId,Integer platform,String filterResourceUrls);
 
     /**
      * 通过用户ID查找用户能够使用的资源
@@ -84,4 +84,11 @@ public interface SysResourceService {
      * @return
      */
     Set<String> getUserPerms(Long userId,Integer platform);
+
+    /**
+     * 获取平台类型的资源
+     * @param platform
+     * @return
+     */
+    List<SysResource> getSysResourceByPlatform(Integer platform);
 }

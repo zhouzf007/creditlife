@@ -2,15 +2,17 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
-import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.CommonParameter;
+import com.entrobus.credit.manager.common.bean.LoginVo;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.manager.sys.service.SysUserService;
+import com.entrobus.credit.manager.util.ServletUtil;
 import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.pojo.manager.SysUserExample;
 import com.entrobus.credit.pojo.manager.SysUserRole;
@@ -21,10 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +54,7 @@ public class SysUserController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/list")
-    public WebResult list(Integer offset, Integer limit,String username,String realName,String cellphone,Integer platform) {
+    public WebResult list(Integer offset, Integer limit,String username,String realName,String cellphone,CommonParameter commonParameter) {
         if (offset != null && limit != null) {
             //分页查询
             PageHelper.startPage(offset,limit);
@@ -61,9 +62,8 @@ public class SysUserController extends ManagerBaseController {
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(com.entrobus.credit.common.Constants.DeleteFlag.NO);
-        //只有超级管理员，才能查看所有管理员列表
-        if (!getCurrLoginUser().getRoleIds().contains(SysConstants.LOGIN_USER_ROLE.SUPER_ADMIN)) {
-            criteria.andCreateUserEqualTo(getLoginUserId());
+        if(commonParameter.getPlatform()== Constants.PLATFORM.bank){
+            criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }
         if(StringUtils.isNotEmpty(username)){
             criteria.andUsernameLike("%"+username+"%");
@@ -74,9 +74,7 @@ public class SysUserController extends ManagerBaseController {
         if(StringUtils.isNotEmpty(cellphone)){
             criteria.andCellphoneLike("%"+cellphone+"%");
         }
-        if(ConversionUtil.isNotEmptyParameter(platform)){
-            criteria.andPlatformEqualTo(platform);
-        }
+        criteria.andPlatformEqualTo(commonParameter.getPlatform());
         //只有紧跟在 PageHelper.startPage 方法后的第一个 MyBatis 的查询(select)方法会被分页。
         List<SysUser> sysUserList = sysUserService.selectByExample(example);
         List<Map<String,Object>> resultList = new ArrayList<>();
@@ -86,9 +84,13 @@ public class SysUserController extends ManagerBaseController {
 
             sysUserIdList.add(sysUser.getId());
         }
-        SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
-        sysUserRoleExample.createCriteria().andUserIdIn(sysUserIdList);
-        List<SysUserRole> roleList = sysUserRoleService.selectByExample(sysUserRoleExample);
+        List<SysUserRole> roleList = new ArrayList<>();
+        if(ConversionUtil.isNotEmptyParameter(sysUserIdList)){
+            SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+            sysUserRoleExample.createCriteria().andUserIdIn(sysUserIdList);
+            roleList = sysUserRoleService.selectByExample(sysUserRoleExample);
+        }
+
         for (SysUser sysUser: sysUserList){
             Map<String,Object> map = ConversionUtil.beanToMap(sysUser);
             List<Long> roleIdList = new ArrayList<>();
@@ -110,12 +112,16 @@ public class SysUserController extends ManagerBaseController {
 
     /**
      * 登录
-     * @param platform 用户所属平台(0：信用贷后台，1：银行后台)
+     * @param commonParameter 用户所属平台(0：信用贷后台，1：银行后台)
      */
     @RequestMapping(value = "/login")
-    public WebResult login(String username, String password,Integer platform){
+    public WebResult login(LoginVo vo, CommonParameter commonParameter, HttpServletRequest request){
         //用户登录
-        return sysUserService.login(username,password,platform);
+        vo.setAddress(ServletUtil.getIpAddr(request));
+        vo.setBrowser(ServletUtil.getUserBrowser(request));
+        vo.setOperationSystem(ServletUtil.getUserOperatingSystem(request));
+        vo.setPlatform(commonParameter.getPlatform());
+        return sysUserService.login(vo);
     }
 
     /**
@@ -144,11 +150,11 @@ public class SysUserController extends ManagerBaseController {
      * @return
      */
     @PostMapping("/update")
-    public WebResult update(SysUserExt sysUser,Integer platform){
+    public WebResult update(SysUserExt sysUser,CommonParameter commonParameter){
         if(StringUtils.isBlank(sysUser.getUsername())){
             return WebResult.error("用户名不能为空");
         }
-        sysUser.setPlatform(platform);
+        sysUser.setPlatform(commonParameter.getPlatform());
         sysUser.setUpdateUser(getLoginUserId());
         return sysUserService.update(sysUser);
     }

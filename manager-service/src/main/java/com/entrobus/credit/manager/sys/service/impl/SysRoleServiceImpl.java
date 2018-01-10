@@ -95,12 +95,6 @@ public class SysRoleServiceImpl implements SysRoleService {
             //保存系统角色，保存成功后会返回主键的值
             insertSelective(sysRole);
             if(ConversionUtil.isNotEmptyParameter(role.getResourceIdList())){
-                /*List<Long> resourceIdList = new ArrayList<>();
-                String[] idArr = role.getResourceIds().split(",");
-                for(String id : idArr){
-                    resourceIdList.add(Long.parseLong(id));
-                }
-                role.setResourceIdList(resourceIdList);*/
                 //保存角色与资源关系
                 sysRoleResourceService.save(sysRole.getId(),role.getResourceIdList());
             }
