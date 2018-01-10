@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 @RefreshScope
 @RestController
 public class ServiceBController {
@@ -52,7 +54,7 @@ public class ServiceBController {
 //        msg.setRemark("dsds");//备注（1024）：自定义，如：超时、定时操作等
 
         msg.setRemark("dsds");//备注（1024）：自定义，如：超时、定时操作等
-        msg.setTime(System.currentTimeMillis());//操作时间
+        msg.setTime(new Date());//操作时间
         msg.setOperationState(Constants.OperationState.SUCCESS);//操作状态：0-成功，1-失败，2-异常
         logService.orderLog(msg);
         return "成功";

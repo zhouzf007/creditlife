@@ -15,11 +15,10 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public void login(SysLoginMsg msg) {
-        Message<SysLoginMsg> message = getBuildMessage(msg);
+        Message<SysLoginMsg> message = buildMessage(msg);
         logPublishChannel.sysLoginLog().send(message);
     }
-
-    private <T> Message<T> getBuildMessage(T msg) {
+    protected  <T> Message<T> buildMessage(T msg) {
         return MessageBuilder.withPayload(msg).build();
     }
 }

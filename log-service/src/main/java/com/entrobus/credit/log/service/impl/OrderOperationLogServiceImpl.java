@@ -92,11 +92,7 @@ public class OrderOperationLogServiceImpl implements OrderOperationLogService {
     @Override
     public int logMsg(OrderOperationMsg msg){
         OrderOperationLog log = new OrderOperationLog();
-        if (msg.getTime() != null) {
-            log.setOperationTime(new Date(msg.getTime()));
-        }else {
-            log.setOperationTime(new Date());
-        }
+        log.setOperationTime(msg.getTime());
 
         Object operationData = msg.getOperationData();
         if (operationData != null) {
