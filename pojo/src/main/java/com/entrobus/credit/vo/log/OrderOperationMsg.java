@@ -2,7 +2,7 @@ package com.entrobus.credit.vo.log;
 
 import java.io.Serializable;
 
-public class OrderLogMsg implements Serializable{
+public class OrderOperationMsg implements Serializable{
     /**
      * 订单id
      */

@@ -70,7 +70,12 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
-
+  cloud:
+    stream:
+      bindings:
+        sys_lonin_log_publish:
+          destination: sys-lonin-log-stream
+          content-type: application/json
 #  配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
