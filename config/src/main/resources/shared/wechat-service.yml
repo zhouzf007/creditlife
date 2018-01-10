@@ -86,6 +86,6 @@ wechat:
     #公众号 AES_KEY
     aesKey:
     #微信支付商户号
-    partener_id: 1461196702
+    partenerId: 1461196702
     #微信支付平台商户API密钥
-    partener_key: C644ED21DEB14FF6E909FCDA6B1B7BA8
+    partenerKey: C644ED21DEB14FF6E909FCDA6B1B7BA8

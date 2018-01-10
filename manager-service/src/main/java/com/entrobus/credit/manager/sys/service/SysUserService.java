@@ -43,13 +43,13 @@ public interface SysUserService {
      * 保存用户
      * @param sysUserExt
      */
-    void save(SysUserExt sysUserExt);
+    WebResult save(SysUserExt sysUserExt);
 
     /**
      * 更新用户
      * @param sysUserExt
      */
-    void update(SysUserExt sysUserExt);
+    WebResult update(SysUserExt sysUserExt);
 
     /**
      * 删除
@@ -64,4 +64,11 @@ public interface SysUserService {
      * @return 登录token
      */
     WebResult login(String username, String password,Integer platform) ;
+
+    /**
+     * 通过username获取用户
+     * @param username
+     * @return
+     */
+    SysUser getUserByUserName(String username);
 }

@@ -121,7 +121,12 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Transactional //开启事务（涉及到多表操作）
     @Override
-    public void save(SysUserExt sysUserExt) {
+    public WebResult save(SysUserExt sysUserExt) {
+        //判断要新增的用户的用户名是否已经存在
+        SysUser existUser = getUserByUserName(sysUserExt.getUsername());
+        if(existUser != null){
+            return WebResult.error("该用户已经存在，请不要重复创建！");
+        }
         SysUser sysUser = new SysUser();
         try {
             BeanUtils.copyProperties(sysUser,sysUserExt);
@@ -136,24 +141,27 @@ public class SysUserServiceImpl implements SysUserService {
             //保存系统用户，保存成功后会返回主键的值
             insertSelective(sysUser);
             if(ConversionUtil.isNotEmptyParameter(sysUserExt.getRoleIdList())){
-                /*List<Long> roleIdList = new ArrayList<>();
-                String[] idArr = sysUserExt.getRoleIds().split(",");
-                for(String id : idArr){
-                    roleIdList.add(Long.parseLong(id));
-                }
-                sysUserExt.setRoleIdList(roleIdList);*/
                 //保存用户与角色关系
                 sysUserRoleService.save(sysUser.getId(),sysUserExt.getRoleIdList());
             }
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         }
+        return WebResult.ok("创建成功");
     }
 
     @Override
-    public void update(SysUserExt sysUserExt) {
+    public WebResult update(SysUserExt sysUserExt) {
+        //判断要新增的用户的用户名是否已经存在
+        SysUser existUser = getUserByUserName(sysUserExt.getUsername());
+        //修改的不是同一个用户
+        if(existUser != null && existUser.getId() != sysUserExt.getId()){
+            return WebResult.error("该用户已经存在！");
+        }
         SysUser sysUser = new SysUser();
         try {
             if(StringUtils.isBlank(sysUserExt.getPassword())){
@@ -177,9 +185,12 @@ public class SysUserServiceImpl implements SysUserService {
             }
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         }
+        return WebResult.ok("修改成功");
     }
 
     @Transactional //开启事务（涉及到多表操作）
@@ -242,5 +253,19 @@ public class SysUserServiceImpl implements SysUserService {
         //将登录信息缓存到redis
         CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
         return WebResult.ok().put("token",token).put("perms",permsSet);
+    }
+
+    @Override
+    public SysUser getUserByUserName(String username) {
+        //根据用户名查找用户
+        SysUserExample userExample = new SysUserExample();
+        userExample.createCriteria()
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
+                .andUsernameEqualTo(username);
+        List<SysUser> sysUserList = selectByExample(userExample);
+        if(CollectionUtils.isNotEmpty(sysUserList)){
+            return sysUserList.get(0);
+        }
+        return null;
     }
 }

@@ -157,8 +157,8 @@ public class SysResourceController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/treeList")
-    public WebResult treeList(Integer menuType) {
-        List<ZtreeMenuVo> menuVoList = sysResourceService.getZtreeMenu(menuType);
+    public WebResult treeList(Integer menuType,String filterResourceUrls) {
+        List<ZtreeMenuVo> menuVoList = sysResourceService.getZtreeMenu(menuType,filterResourceUrls);
         return WebResult.ok(menuVoList);
     }
 
@@ -167,8 +167,8 @@ public class SysResourceController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/checkTreeList")
-    public WebResult checkTreeList(Long roleId) {
-        List<ZtreeMenuVo> menuVoList = sysResourceService.getCheckTreeList(roleId);
+    public WebResult checkTreeList(Long roleId,String filterResourceUrls) {
+        List<ZtreeMenuVo> menuVoList = sysResourceService.getCheckTreeList(roleId,filterResourceUrls);
         return WebResult.ok(menuVoList);
     }
 }

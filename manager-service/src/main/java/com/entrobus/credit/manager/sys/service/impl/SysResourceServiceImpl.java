@@ -166,7 +166,7 @@ public class SysResourceServiceImpl implements SysResourceService {
     }
 
     @Override
-    public List<ZtreeMenuVo> getZtreeMenu(Integer menuType) {
+    public List<ZtreeMenuVo> getZtreeMenu(Integer menuType,String filterResourceUrls) {
         List<ZtreeMenuVo> menuVoList = new ArrayList<>();
         //1.查询未删除的菜单
         SysResourceExample resourceExample = new SysResourceExample();
@@ -178,20 +178,23 @@ public class SysResourceServiceImpl implements SysResourceService {
         List<SysResource> sysResourceList = selectByExample(resourceExample);
         if(CollectionUtils.isNotEmpty(sysResourceList)){
             for(SysResource resource : sysResourceList){
-                ZtreeMenuVo ztreeMenuVo = new ZtreeMenuVo();
-                ztreeMenuVo.setId(resource.getId());
-                ztreeMenuVo.setpId(resource.getParentId());
-                ztreeMenuVo.setName(resource.getName());
-                ztreeMenuVo.setMenuLevel(resource.getLevel());
-                menuVoList.add(ztreeMenuVo);
+                //如果该资源不是要过滤的资源，就添加到集合中
+                if(!filterResourceUrls.contains(resource.getUrl())){
+                    ZtreeMenuVo ztreeMenuVo = new ZtreeMenuVo();
+                    ztreeMenuVo.setId(resource.getId());
+                    ztreeMenuVo.setpId(resource.getParentId());
+                    ztreeMenuVo.setName(resource.getName());
+                    ztreeMenuVo.setMenuLevel(resource.getLevel());
+                    menuVoList.add(ztreeMenuVo);
+                }
             }
         }
         return menuVoList;
     }
 
     @Override
-    public List<ZtreeMenuVo> getCheckTreeList(Long roleId) {
-        List<ZtreeMenuVo> menuVoList = getZtreeMenu(null);
+    public List<ZtreeMenuVo> getCheckTreeList(Long roleId,String filterResourceUrls) {
+        List<ZtreeMenuVo> menuVoList = getZtreeMenu(null,filterResourceUrls);
         //获取该角色拥有的资源
         SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
         roleResourceExample.createCriteria().andRoleIdEqualTo(roleId);

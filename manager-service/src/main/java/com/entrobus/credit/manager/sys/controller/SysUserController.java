@@ -45,8 +45,7 @@ public class SysUserController extends ManagerBaseController {
         sysUser.setCreateUser(getLoginUserId());//创建人的用户ID
         sysUser.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
         sysUser.setPlatform(commonParameter.getPlatform());
-        sysUserService.save(sysUser);
-        return WebResult.ok("创建成功！");
+        return sysUserService.save(sysUser);
     }
 
     /**
@@ -151,8 +150,7 @@ public class SysUserController extends ManagerBaseController {
         }
         sysUser.setPlatform(platform);
         sysUser.setUpdateUser(getLoginUserId());
-        sysUserService.update(sysUser);
-        return WebResult.ok("修改成功");
+        return sysUserService.update(sysUser);
     }
 
     /**
