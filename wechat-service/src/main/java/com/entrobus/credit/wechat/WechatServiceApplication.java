@@ -27,7 +27,7 @@ public class WechatServiceApplication {
      * 使用@Bean注入fastJsonHttpMessageConvert
      * @return
      */
-    @Bean
+   /* @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters(){
         //1.需要定义一个Convert转换消息的对象
         FastJsonHttpMessageConverter fastConverter=new FastJsonHttpMessageConverter();
@@ -44,7 +44,7 @@ public class WechatServiceApplication {
         fastConverter.setFastJsonConfig(fastJsonConfig);
         HttpMessageConverter<?> converter=fastConverter;
         return new HttpMessageConverters(converter);
-    }
+    }*/
 
 
     public static void main(String[] args) {

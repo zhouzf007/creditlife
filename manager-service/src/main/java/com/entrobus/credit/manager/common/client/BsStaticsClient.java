@@ -1,5 +1,6 @@
-package com.entrobus.credit.user.client;
+package com.entrobus.credit.manager.common.client;
 
+import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.vo.base.BsStaticVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 参数的注解在FeignClient中使必须的
+ */
 @FeignClient(name = "base-service", fallback = BsStaticsClient.BsStaticsClientFallback.class)
 @RequestMapping("/statics")
 public interface BsStaticsClient {
@@ -44,7 +48,7 @@ public interface BsStaticsClient {
      * @return
      */
     @GetMapping("/unique")
-    BsStaticVo getByTypeAndValue(@RequestParam("codeType") String codeType,@RequestParam("codeValue") String codeValue);
+    BsStaticVo getByTypeAndValue(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
     /**
      * 跟据codeType和codeValue查询CodeName
      *
@@ -52,8 +56,50 @@ public interface BsStaticsClient {
      * @return
      */
     @GetMapping("/name")
-    String getCodeName(@RequestParam("codeType") String codeType,@RequestParam("codeValue") String codeValue);
+    String getCodeName(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
 
+
+
+
+
+
+    /**
+     * 列表
+     *
+     * @param
+     * @return
+     */
+    @GetMapping("")
+    WebResult list(@RequestParam(value = "codeType") String codeType, @RequestParam(value = "status")String status,
+                   @RequestParam(value = "pageNum") Integer pageNum, @RequestParam(value = "pageSize") Integer pageSize);
+    /**
+     * 修改，并缓存
+     * 暂时这样
+     *
+     * @param vo
+     * @return
+     */
+    @PutMapping("/{id}")
+    WebResult update(@PathVariable("id") Long id, @RequestBody  BsStaticVo vo);
+
+    /**
+     * 删除，并删除缓存
+     * 暂时这样
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    WebResult del(@PathVariable("id") Long id);
+
+    /**
+     * 刷新缓存，
+     *
+     * @param codeType 如果非空，只刷新codeType对应数据的缓存，否则刷新全部
+     * @return
+     */
+    @PostMapping("/cache")
+    WebResult cacheOrRefreshAll(@RequestParam(value = "codeType",required = false) String codeType);
     class BsStaticsClientFallback implements   BsStaticsClient{
         private static final Logger LOGGER = LoggerFactory.getLogger(BsStaticsClient.BsStaticsClientFallback.class);
 
@@ -117,6 +163,60 @@ public interface BsStaticsClient {
         public String getCodeName(String codeType, String codeValue) {
             LOGGER.info("getCodeName异常发生，进入fallback方法");
             return "";
+        }
+
+        /**
+         * 列表
+         *
+         * @param codeType
+         * @param status
+         * @param pageNum
+         * @param pageSize @return
+         */
+        @Override
+        public WebResult list(String codeType, String status, Integer pageNum, Integer pageSize) {
+            LOGGER.info("list异常发生，进入fallback方法");
+            return null;
+        }
+
+
+        /**
+         * 修改，并缓存
+         * 暂时这样
+         *
+         * @param id
+         * @param vo
+         * @return
+         */
+        @Override
+        public WebResult update(Long id, BsStaticVo vo) {
+            LOGGER.info("update异常发生，进入fallback方法");
+            return WebResult.error("服务异常");
+        }
+
+        /**
+         * 删除，并删除缓存
+         * 暂时这样
+         *
+         * @param id
+         * @return
+         */
+        @Override
+        public WebResult del(Long id) {
+            LOGGER.info("del异常发生，进入fallback方法");
+            return WebResult.error("服务异常");
+        }
+
+        /**
+         * 刷新缓存，
+         *
+         * @param codeType 如果非空，只刷新codeType对应数据的缓存，否则刷新全部
+         * @return
+         */
+        @Override
+        public WebResult cacheOrRefreshAll(String codeType) {
+            LOGGER.info("cacheOrRefreshAll异常发生，进入fallback方法");
+            return WebResult.error("服务异常");
         }
     }
 }

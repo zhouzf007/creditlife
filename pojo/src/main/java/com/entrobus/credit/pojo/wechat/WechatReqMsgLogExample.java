@@ -730,6 +730,76 @@ public class WechatReqMsgLogExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andReqXmlIsNull() {
+            addCriterion("req_xml is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlIsNotNull() {
+            addCriterion("req_xml is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlEqualTo(String value) {
+            addCriterion("req_xml =", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlNotEqualTo(String value) {
+            addCriterion("req_xml <>", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlGreaterThan(String value) {
+            addCriterion("req_xml >", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlGreaterThanOrEqualTo(String value) {
+            addCriterion("req_xml >=", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlLessThan(String value) {
+            addCriterion("req_xml <", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlLessThanOrEqualTo(String value) {
+            addCriterion("req_xml <=", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlLike(String value) {
+            addCriterion("req_xml like", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlNotLike(String value) {
+            addCriterion("req_xml not like", value, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlIn(List<String> values) {
+            addCriterion("req_xml in", values, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlNotIn(List<String> values) {
+            addCriterion("req_xml not in", values, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlBetween(String value1, String value2) {
+            addCriterion("req_xml between", value1, value2, "reqXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andReqXmlNotBetween(String value1, String value2) {
+            addCriterion("req_xml not between", value1, value2, "reqXml");
+            return (Criteria) this;
+        }
+
         public Criteria andRespTimeIsNull() {
             addCriterion("resp_time is null");
             return (Criteria) this;
@@ -787,6 +857,76 @@ public class WechatReqMsgLogExample implements Serializable {
 
         public Criteria andRespTimeNotBetween(Date value1, Date value2) {
             addCriterion("resp_time not between", value1, value2, "respTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlIsNull() {
+            addCriterion("resp_xml is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlIsNotNull() {
+            addCriterion("resp_xml is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlEqualTo(String value) {
+            addCriterion("resp_xml =", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlNotEqualTo(String value) {
+            addCriterion("resp_xml <>", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlGreaterThan(String value) {
+            addCriterion("resp_xml >", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlGreaterThanOrEqualTo(String value) {
+            addCriterion("resp_xml >=", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlLessThan(String value) {
+            addCriterion("resp_xml <", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlLessThanOrEqualTo(String value) {
+            addCriterion("resp_xml <=", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlLike(String value) {
+            addCriterion("resp_xml like", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlNotLike(String value) {
+            addCriterion("resp_xml not like", value, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlIn(List<String> values) {
+            addCriterion("resp_xml in", values, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlNotIn(List<String> values) {
+            addCriterion("resp_xml not in", values, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlBetween(String value1, String value2) {
+            addCriterion("resp_xml between", value1, value2, "respXml");
+            return (Criteria) this;
+        }
+
+        public Criteria andRespXmlNotBetween(String value1, String value2) {
+            addCriterion("resp_xml not between", value1, value2, "respXml");
             return (Criteria) this;
         }
 

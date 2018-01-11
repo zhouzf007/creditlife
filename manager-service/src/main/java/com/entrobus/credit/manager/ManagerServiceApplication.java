@@ -3,7 +3,7 @@ package com.entrobus.credit.manager;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.entrobus.credit.manager.channel.LogPublishChannel;
+import com.entrobus.credit.manager.common.channel.LogPublishChannel;
 import com.entrobus.credit.manager.common.filter.ChangeParameterFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

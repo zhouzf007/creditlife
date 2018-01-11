@@ -2,6 +2,7 @@ package com.entrobus.credit.wechat.service;
 
 import com.entrobus.credit.pojo.wechat.WechatMenu;
 import com.entrobus.credit.pojo.wechat.WechatMenuExample;
+
 import java.util.List;
 
 public interface WechatMenuService {

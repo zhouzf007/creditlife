@@ -1,6 +1,7 @@
 package com.entrobus.credit.base.service;
 
 import com.entrobus.credit.vo.base.BsStaticVo;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public interface BsStaticsCacheService {
     BsStaticVo getByTypeAndValue(String codeType,String codeValue);
 
     BsStaticVo getOrCache(String codeType, String codeValue);
+
+    String getOrCacheName(@RequestParam String codeType, @RequestParam String codeValue);
 
     /**
      *   根据id查找

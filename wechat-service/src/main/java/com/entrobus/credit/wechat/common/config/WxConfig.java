@@ -1,10 +1,14 @@
 package com.entrobus.credit.wechat.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * 微信公众号基本配置信息
  */
+@ConfigurationProperties
 public class WxConfig {
 
     @Value("${wechat.appId}")

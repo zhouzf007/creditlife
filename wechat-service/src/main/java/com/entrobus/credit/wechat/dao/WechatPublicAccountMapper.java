@@ -2,8 +2,9 @@ package com.entrobus.credit.wechat.dao;
 
 import com.entrobus.credit.pojo.wechat.WechatPublicAccount;
 import com.entrobus.credit.pojo.wechat.WechatPublicAccountExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface WechatPublicAccountMapper {
     /**
