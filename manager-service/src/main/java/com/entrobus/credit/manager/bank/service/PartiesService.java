@@ -33,6 +33,8 @@ public interface PartiesService {
 
     WebResult edit(PartiesExt partiesExt);
 
+    WebResult delete(String id);
+
     /**
      * 资金方是否已经存在 是=true
      * @param name

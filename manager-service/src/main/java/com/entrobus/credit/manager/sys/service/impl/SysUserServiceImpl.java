@@ -147,6 +147,8 @@ public class SysUserServiceImpl implements SysUserService {
             sysUser.setSalt(salt);
             //保存系统用户，保存成功后会返回主键的值
             insertSelective(sysUser);
+            //赋值ID给传入参数，方便外层调用方法
+            sysUserExt.setId(sysUser.getId());
             if(ConversionUtil.isNotEmptyParameter(sysUserExt.getRoleIdList())){
                 //保存用户与角色关系
                 sysUserRoleService.save(sysUser.getId(),sysUserExt.getRoleIdList());

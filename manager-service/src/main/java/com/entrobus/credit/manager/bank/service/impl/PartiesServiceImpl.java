@@ -7,6 +7,7 @@ import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.bank.service.PartiesService;
 import com.entrobus.credit.manager.common.bean.PartiesExt;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
+import com.entrobus.credit.manager.common.bean.SysRoleExt;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.dao.PartiesMapper;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -126,7 +128,7 @@ public class PartiesServiceImpl implements PartiesService {
             //过滤数据中心+资源管理
             List<Long> resourceIds = new ArrayList<>();
             for (SysResource sysResource : resources){
-                if("data_center.html".equals(sysResource.getUrl()) || "sys_resource_info.html".equals(sysResource.getUrl())) continue;
+                if("sys_resource_info.html".equals(sysResource.getUrl())) continue;
                 resourceIds.add(sysResource.getId());
             }
             //赋予角色资源
@@ -167,9 +169,10 @@ public class PartiesServiceImpl implements PartiesService {
         partiesExt.setUpdateTime(new Date());
         partiesExt.setUpdateOperator(userInfo.getId()+"");
         this.updateByPrimaryKeySelective(partiesExt);
+        Parties parties = this.selectByPrimaryKey(partiesExt.getId());
         //修改对应账号
         SysUser sysUser = new SysUser();
-        sysUser.setId(partiesExt.getSysUserId());
+        sysUser.setId(parties.getSysUserId());
         sysUser.setUsername(partiesExt.getContractMobile());
         String salt = RandomStringUtils.randomAlphanumeric(20);
         //将密码使用sha256加密
@@ -202,6 +205,35 @@ public class PartiesServiceImpl implements PartiesService {
             }
         }
         return WebResult.ok("编辑成功");
+    }
+
+    @Transactional
+    @Override
+    public WebResult delete(String id) {
+        //删除资金方
+        this.deleteByPrimaryKey(id);
+        //删除下属账号
+        SysUserExample example = new SysUserExample();
+        example.createCriteria().andOrgIdEqualTo(id);
+        sysUserService.deleteByExample(example);
+        //删除下属角色
+        SysRoleExample roleExample = new SysRoleExample();
+        roleExample.createCriteria().andOrgIdEqualTo(id);
+        List<SysRole> roleList = sysRoleService.selectByExample(roleExample);
+        List<Long> roleIdList = new ArrayList<>();
+        for (SysRole role : roleList){
+            roleIdList.add(role.getId());
+        }
+        if(ConversionUtil.isNotEmptyParameter(roleIdList)){
+            SysUserRoleExample userRoleExample = new SysUserRoleExample();
+            userRoleExample.createCriteria().andRoleIdIn(roleIdList);
+            sysUserRoleService.deleteByExample(userRoleExample);
+            SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
+            roleResourceExample.createCriteria().andRoleIdIn(roleIdList);
+            sysRoleResourceService.deleteByExample(roleResourceExample);
+            sysRoleService.deleteByExample(roleExample);
+        }
+        return WebResult.ok();
     }
 
     @Override

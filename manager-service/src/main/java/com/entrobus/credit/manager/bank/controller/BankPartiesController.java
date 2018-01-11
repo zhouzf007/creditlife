@@ -27,20 +27,47 @@ public class BankPartiesController extends ManagerBaseController{
     @Autowired
     private PartiesService partiesService;
 
+    /**
+     * 新增资金方
+     * @param parties
+     * @return
+     */
     @PostMapping("")
     public WebResult add(PartiesExt parties){
         return partiesService.add(parties);
     }
 
+    /**
+     * 编辑资金方
+     * @param parties
+     * @return
+     */
     @PutMapping("/{id}")
     public WebResult edit(PartiesExt parties){
         return partiesService.edit(parties);
     }
 
+    /**
+     * 内部开发使用
+     * 物理删除资金方及下属账号
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    public WebResult delete(@PathVariable String id){
+        return partiesService.delete(id);
+    }
+
+    /**
+     * 查询资金方列表
+     * @param offset
+     * @param limit
+     * @return
+     */
     @GetMapping("")
-    public WebResult list(Integer offset, Integer limit,CommonParameter commonParameter) {
+    public WebResult list(Integer offset, Integer limit) {
         PartiesExample example = new PartiesExample();
-        example.createCriteria().andStateEqualTo(0).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
         example.setOrderByClause(" create_time desc ");
         PageHelper.startPage(offset,limit);
         List<Parties> partiesList = partiesService.selectByExample(example);
