@@ -6,6 +6,8 @@ import com.entrobus.credit.vo.base.BsStaticVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/bs/statics")
 public class BsStaticsController {
@@ -22,6 +24,26 @@ public class BsStaticsController {
         return bsStaticsClient.list(codeType,status,pageNum,pageSize);
     }
     /**
+     * 添加，并缓存
+     *
+     * @param vo
+     * @return
+     */
+    @PostMapping("")
+    public WebResult add( BsStaticVo vo){
+        return bsStaticsClient.add(vo);
+    }
+    /**
+     * 获取同类型的
+     *
+     * @param codeType
+     * @return
+     */
+    @GetMapping("/similar")
+    public List<BsStaticVo> getByType(@RequestParam String codeType) {
+        return bsStaticsClient.getByType(codeType);
+    }
+    /**
      * 修改，并缓存
      * 暂时这样
      *
@@ -29,7 +51,7 @@ public class BsStaticsController {
      * @return
      */
     @PutMapping("/{id}")
-    public WebResult update(@PathVariable Long id, @RequestBody  BsStaticVo vo){
+    public WebResult update(@PathVariable Long id,   BsStaticVo vo){
         return bsStaticsClient.update(id,vo);
     }
 
@@ -43,6 +65,17 @@ public class BsStaticsController {
     @DeleteMapping("/{id}")
     public WebResult del(@PathVariable Long id){
         return bsStaticsClient.del(id);
+    }
+    /**
+     * 删除，并删除缓存
+     * 暂时这样
+     *
+     * @param ids
+     * @return
+     */
+    @PostMapping("/trashCan")
+    public WebResult batchDel(@RequestParam("ids") List<Long> ids) {
+        return bsStaticsClient.batchDel(ids);
     }
 
     /**

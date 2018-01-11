@@ -35,11 +35,15 @@ public interface BsStaticsClient {
     /**
      * 根据条件搜索
      *
-     * @param vo
      * @return
      */
     @GetMapping("/search")
-    List<BsStaticVo> search(@RequestBody BsStaticVo vo);
+    List<BsStaticVo> search(@RequestParam(value = "codeType") String codeType,
+                            @RequestParam(value = "codeValue") String codeValue,
+                            @RequestParam(value = "codeName") String codeName,
+                            @RequestParam(value = "ext") String ext,
+                            @RequestParam(value = "param") String param
+                            );
 
     /**
      * 跟据codeType和codeValue查询
@@ -79,7 +83,7 @@ public interface BsStaticsClient {
      * @param vo
      * @return
      */
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}",consumes = "application/json")
     WebResult update(@PathVariable("id") Long id, @RequestBody  BsStaticVo vo);
 
     /**
@@ -100,6 +104,25 @@ public interface BsStaticsClient {
      */
     @PostMapping("/cache")
     WebResult cacheOrRefreshAll(@RequestParam(value = "codeType",required = false) String codeType);
+    /**
+     * 添加，并缓存
+     *
+     * @param vo
+     * @return
+     */
+    @PostMapping(value = "",consumes = "application/json")
+    WebResult add(@RequestBody  BsStaticVo vo);
+
+    /**
+     * 批量删除，并删除缓存
+     * 暂时这样
+     *
+     * @param id
+     * @return
+     */
+    @PostMapping("/trashCan")
+    public WebResult batchDel(@RequestParam("ids") List<Long> ids) ;
+
     class BsStaticsClientFallback implements   BsStaticsClient{
         private static final Logger LOGGER = LoggerFactory.getLogger(BsStaticsClient.BsStaticsClientFallback.class);
 
@@ -130,14 +153,20 @@ public interface BsStaticsClient {
         /**
          * 根据条件搜索
          *
-         * @param vo
+         * @param codeType
+         * @param codeValue
+         * @param codeName
+         * @param ext
+         * @param param
          * @return
          */
         @Override
-        public List<BsStaticVo> search(BsStaticVo vo) {
+        public List<BsStaticVo> search(String codeType, String codeValue, String codeName, String ext, String param) {
             LOGGER.info("search异常发生，进入fallback方法");
             return null;
         }
+
+
 
         /**
          * 获取同类型的
@@ -216,6 +245,31 @@ public interface BsStaticsClient {
         @Override
         public WebResult cacheOrRefreshAll(String codeType) {
             LOGGER.info("cacheOrRefreshAll异常发生，进入fallback方法");
+            return WebResult.error("服务异常");
+        }
+
+        /**
+         * 添加，并缓存
+         *
+         * @param vo
+         * @return
+         */
+        @Override
+        public WebResult add(BsStaticVo vo) {
+            LOGGER.info("add异常发生，进入fallback方法");
+            return WebResult.error("服务异常");
+        }
+
+        /**
+         * 批量删除，并删除缓存
+         * 暂时这样
+         *
+         * @param id
+         * @return
+         */
+        @Override
+        public WebResult batchDel(List<Long> id) {
+            LOGGER.info("batchDel异常发生，进入fallback方法");
             return WebResult.error("服务异常");
         }
     }

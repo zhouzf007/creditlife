@@ -42,7 +42,7 @@ public class BsStaticsController {
         }else {
             bsStaticsCacheService.cacheOrRefreshAll();
         }
-        return WebResult.ok();
+        return WebResult.ok("操作成功");
     }
 
     /**
@@ -104,7 +104,6 @@ public class BsStaticsController {
         } else {
             extList = list.stream().map(this::toBsStaticsExt).collect(Collectors.toList());
         }
-
         PageInfo<BsStatics> pageInfo = new PageInfo<>(list);
         return WebResult.ok("操作成功").put("total",pageInfo.getTotal()).put("rows",extList);
     }
@@ -147,7 +146,7 @@ public class BsStaticsController {
      * @return
      */
     @GetMapping("/search")
-    public List<BsStaticVo> search(@RequestBody BsStaticVo vo) {
+    public List<BsStaticVo> search( BsStaticVo vo) {
         List<BsStaticVo> list = null;
         list = bsStaticsService.getBsStaticVo(vo);
         return list;
@@ -210,6 +209,19 @@ public class BsStaticsController {
 
         int i = bsStaticsService.logicDel(id);
         if (i > 0) bsStaticsCacheService.cacheOrRefresh(id);
+        return WebResult.ok("操作成功");
+    }
+    /**
+     * 批量删除，并删除缓存
+     * 暂时这样
+     *
+     * @param ids
+     * @return
+     */
+    @PostMapping("/trashCan")
+    public WebResult trashCan(@RequestParam List<Long> ids) {
+        int i = bsStaticsService.batchLogicDel(ids);
+        if (i > 0) bsStaticsCacheService.cacheOrRefreshAll();
         return WebResult.ok("操作成功");
     }
 
