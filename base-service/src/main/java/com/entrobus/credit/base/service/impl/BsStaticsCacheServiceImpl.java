@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,6 +158,11 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
             staticVo = cacheOrRefresh(statics);
         }
         return staticVo;
+    }
+    @Override
+    public String getOrCacheName(@RequestParam String codeType, @RequestParam String codeValue) {
+        BsStaticVo bsStaticVo= getOrCache(codeType,codeValue);
+        return bsStaticVo == null ? "" : bsStaticVo.getCodeName();
     }
     /**
      *   根据id查找

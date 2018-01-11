@@ -34,6 +34,14 @@ public interface Constants {
         int ERROR = 2;//异常
     }
 
+    /**
+     * 静态数据常量类型
+     */
+    interface CodeType{
+        String CODE_TYPE = "CODE_TYPE";
+        String STATUS = "STATUS";
+    }
+
     interface JobDataKey{
         String CUSTOM = "customParam";
     }
