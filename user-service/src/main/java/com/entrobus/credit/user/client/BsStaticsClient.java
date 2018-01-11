@@ -31,11 +31,15 @@ public interface BsStaticsClient {
     /**
      * 根据条件搜索
      *
-     * @param vo
      * @return
      */
     @GetMapping("/search")
-    List<BsStaticVo> search(@RequestBody BsStaticVo vo);
+    List<BsStaticVo> search(@RequestParam(value = "codeType") String codeType,
+                            @RequestParam(value = "codeValue") String codeValue,
+                            @RequestParam(value = "codeName") String codeName,
+                            @RequestParam(value = "ext") String ext,
+                            @RequestParam(value = "param") String param
+    );
 
     /**
      * 跟据codeType和codeValue查询
@@ -44,7 +48,7 @@ public interface BsStaticsClient {
      * @return
      */
     @GetMapping("/unique")
-    BsStaticVo getByTypeAndValue(@RequestParam("codeType") String codeType,@RequestParam("codeValue") String codeValue);
+    BsStaticVo getByTypeAndValue(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
     /**
      * 跟据codeType和codeValue查询CodeName
      *
@@ -52,7 +56,10 @@ public interface BsStaticsClient {
      * @return
      */
     @GetMapping("/name")
-    String getCodeName(@RequestParam("codeType") String codeType,@RequestParam("codeValue") String codeValue);
+    String getCodeName(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
+
+
+
 
     class BsStaticsClientFallback implements   BsStaticsClient{
         private static final Logger LOGGER = LoggerFactory.getLogger(BsStaticsClient.BsStaticsClientFallback.class);
@@ -84,14 +91,20 @@ public interface BsStaticsClient {
         /**
          * 根据条件搜索
          *
-         * @param vo
+         * @param codeType
+         * @param codeValue
+         * @param codeName
+         * @param ext
+         * @param param
          * @return
          */
         @Override
-        public List<BsStaticVo> search(BsStaticVo vo) {
+        public List<BsStaticVo> search(String codeType, String codeValue, String codeName, String ext, String param) {
             LOGGER.info("search异常发生，进入fallback方法");
             return null;
         }
+
+
 
         /**
          * 获取同类型的

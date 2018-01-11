@@ -136,6 +136,9 @@ public class BsStaticsServiceImpl implements BsStaticsService {
         if (StringUtils.isNotBlank(vo.getCodeValue())){
             criteria.andCodeValueEqualTo(vo.getCodeValue());
         }
+        if (vo.getStatus() != null){
+            criteria.andStatusEqualTo(vo.getStatus());
+        }
         if (StringUtils.isNotBlank(vo.getCodeName())){
             criteria.andCodeNameEqualTo(vo.getCodeName());
         }

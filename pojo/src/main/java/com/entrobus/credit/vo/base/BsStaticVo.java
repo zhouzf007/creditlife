@@ -2,6 +2,9 @@ package com.entrobus.credit.vo.base;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 public class BsStaticVo implements Serializable {
@@ -17,6 +20,17 @@ public class BsStaticVo implements Serializable {
     private Integer sortId;
     private String ext;
     private String param;
+    @NotNull(message = "status 必填")
+    @Digits(integer = 10,fraction = 0,message = "status格式错误")
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Long getId() {
         return id;
