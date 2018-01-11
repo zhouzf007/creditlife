@@ -2,6 +2,8 @@ package com.entrobus.credit.user.services;
 
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
+import com.entrobus.credit.user.bean.LoginUserInfo;
+
 import java.util.List;
 
 public interface UserInfoService {
@@ -26,4 +28,8 @@ public interface UserInfoService {
     int insert(UserInfo record);
 
     int insertSelective(UserInfo record);
+
+    LoginUserInfo getLoginUserInfo(UserInfo record, String token);
+
+    int addUserInfo(String cellphone, String pwd);
 }
