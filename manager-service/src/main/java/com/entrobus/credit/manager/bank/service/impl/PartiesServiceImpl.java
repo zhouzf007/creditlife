@@ -175,20 +175,32 @@ public class PartiesServiceImpl implements PartiesService {
         //将密码使用sha256加密
         sysUser.setPassword(ShiroUtils.sha256(partiesExt.getPassword(),salt));
         sysUser.setSalt(salt);
+        sysUser.setStatus(partiesExt.getState());
         sysUser.setUpdateTime(new Date());
         sysUser.setUpdateUser(userInfo.getId());
         sysUserService.updateByPrimaryKeySelective(sysUser);
-        //冻结资金方下面所有账号并踢下线
+        //冻结资金方下面所有账号
         if(partiesExt.getState()==Constants.PARTIES_STATE.FROZEN){
             SysUserExample sysUserExample = new SysUserExample();
             sysUserExample.createCriteria().andOrgIdEqualTo(partiesExt.getId())
                     .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
             List<SysUser> sysUsers = sysUserService.selectByExample(sysUserExample);
             if(ConversionUtil.isNotEmptyParameter(sysUsers)){
-
+                List<Long> sysUserIdList = new ArrayList<>();
+                for (SysUser user : sysUsers){
+                    sysUserIdList.add(user.getId());
+                }
+                SysUserExample updateUserExample = new SysUserExample();
+                updateUserExample.createCriteria().andIdIn(sysUserIdList);
+                SysUser record = new SysUser();
+                record.setStatus(1);
+                record.setUpdateUser(userInfo.getId());
+                record.setUpdateTime(new Date());
+                sysUserService.updateByExampleSelective(record,updateUserExample);
+                //注销登录
+                managerCacheService.batchLogout(sysUserIdList);
             }
         }
-        //解冻资金方对应系统管理员
         return WebResult.ok("编辑成功");
     }
 

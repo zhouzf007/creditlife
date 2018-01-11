@@ -37,11 +37,6 @@ public class BankPartiesController extends ManagerBaseController{
         return partiesService.edit(parties);
     }
 
-    @DeleteMapping("/{id}")
-    public WebResult delete(@PathVariable String id){
-        return WebResult.ok("删除成功");
-    }
-
     @GetMapping("")
     public WebResult list(Integer offset, Integer limit,CommonParameter commonParameter) {
         PartiesExample example = new PartiesExample();
