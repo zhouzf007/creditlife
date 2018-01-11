@@ -110,56 +110,35 @@
          <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />//无论字段是什么类型，生成的类属性都是varchar。  -->
          <!--用的通配符匹配全部的表 -->
         <!--<table tableName="%"-->
-        <table tableName="sys_user" domainObjectName="SysUser"
+        <table tableName="repayment_plan" domainObjectName="RepaymentPlan"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
-
             <!--  配置自动返回主键 -->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>
-        <table tableName="sys_resource" domainObjectName="SysResource"
+        <table tableName="orders" domainObjectName="Orders"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
-
             <!--  配置自动返回主键 -->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>
-        <table tableName="sys_role" domainObjectName="SysRole"
+
+        <table tableName="repayment" domainObjectName="Repayment"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
-
             <!--  配置自动返回主键 -->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>
-        <table tableName="sys_role_resource" domainObjectName="SysRoleResource"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true">
 
-            <!--  配置自动返回主键 -->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="sys_user_role" domainObjectName="SysUserRole"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true">
-
-            <!--  配置自动返回主键 -->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
     </context>
 
 </generatorConfiguration>

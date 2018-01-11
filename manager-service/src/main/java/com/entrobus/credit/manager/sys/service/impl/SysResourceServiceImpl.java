@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.sys.service.impl;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysMenu;
 import com.entrobus.credit.manager.common.bean.SysResourceVo;
@@ -166,7 +167,7 @@ public class SysResourceServiceImpl implements SysResourceService {
     }
 
     @Override
-    public List<ZtreeMenuVo> getZtreeMenu(Integer menuType) {
+    public List<ZtreeMenuVo> getZtreeMenu(Integer menuType,Integer platform,String filterResourceUrls) {
         List<ZtreeMenuVo> menuVoList = new ArrayList<>();
         //1.查询未删除的菜单
         SysResourceExample resourceExample = new SysResourceExample();
@@ -175,26 +176,34 @@ public class SysResourceServiceImpl implements SysResourceService {
         if(menuType != null){
             criteria.andTypeEqualTo(menuType);
         }
+        if(ConversionUtil.isNotEmptyParameter(platform)){
+            criteria.andPlatformEqualTo(platform);
+        }
         List<SysResource> sysResourceList = selectByExample(resourceExample);
         if(CollectionUtils.isNotEmpty(sysResourceList)){
             for(SysResource resource : sysResourceList){
+                //如果该资源不是要过滤的资源，就添加到集合中
+                if(ConversionUtil.isNotEmptyParameter(filterResourceUrls,resource.getUrl())
+                        && filterResourceUrls.contains(resource.getUrl())) continue;
                 ZtreeMenuVo ztreeMenuVo = new ZtreeMenuVo();
                 ztreeMenuVo.setId(resource.getId());
                 ztreeMenuVo.setpId(resource.getParentId());
                 ztreeMenuVo.setName(resource.getName());
                 ztreeMenuVo.setMenuLevel(resource.getLevel());
                 menuVoList.add(ztreeMenuVo);
+
             }
         }
         return menuVoList;
     }
 
     @Override
-    public List<ZtreeMenuVo> getCheckTreeList(Long roleId) {
-        List<ZtreeMenuVo> menuVoList = getZtreeMenu(null);
+    public List<ZtreeMenuVo> getCheckTreeList(Long roleId,Integer platform,String filterResourceUrls) {
+        List<ZtreeMenuVo> menuVoList = getZtreeMenu(null,platform,filterResourceUrls);
         //获取该角色拥有的资源
         SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
-        roleResourceExample.createCriteria().andRoleIdEqualTo(roleId);
+        SysRoleResourceExample.Criteria criteria = roleResourceExample.createCriteria();
+        criteria.andRoleIdEqualTo(roleId);
         List<SysRoleResource> roleResourceList = sysRoleResourceService.selectByExample(roleResourceExample);
         if(CollectionUtils.isNotEmpty(roleResourceList)){
             for(ZtreeMenuVo ztreeMenuVo:menuVoList){
@@ -280,6 +289,14 @@ public class SysResourceServiceImpl implements SysResourceService {
             }
         }
         return permsSet;
+    }
+
+    @Override
+    public List<SysResource> getSysResourceByPlatform(Integer platform) {
+        SysResourceExample example = new SysResourceExample();
+        example.createCriteria().andPlatformEqualTo(platform)
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        return this.selectByExample(example);
     }
 
     /**

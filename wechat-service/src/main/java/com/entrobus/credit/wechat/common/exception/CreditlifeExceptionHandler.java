@@ -33,9 +33,14 @@ public class CreditlifeExceptionHandler {
 		return WebResult.error("数据库中已存在该记录");
 	}
 
+	/**
+	 * 处理系统异常
+	 * @param e
+	 * @return
+	 */
 	@ExceptionHandler(Exception.class)
 	public WebResult handleException(Exception e){
 		logger.error(e.getMessage(), e);
-		return WebResult.error(e.getMessage());
+		return WebResult.error("系统出错，请联系管理员");
 	}
 }

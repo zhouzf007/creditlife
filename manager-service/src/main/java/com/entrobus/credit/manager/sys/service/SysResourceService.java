@@ -50,15 +50,17 @@ public interface SysResourceService {
     /**
      * 获取针对Ztree控件使用的树形结构菜单
      * @param menuType 菜单类型（1：菜单   2：按钮）
+     * @param filterResourceUrls 需要过滤掉的资源URL
      * @return
      */
-    List<ZtreeMenuVo> getZtreeMenu(Integer menuType);
+    List<ZtreeMenuVo> getZtreeMenu(Integer menuType,Integer platform,String filterResourceUrls);
 
     /**
      * 根据角色ID获取菜单树形列表
+     * @param filterResourceUrls 需要过滤掉的资源URL
      * @return
      */
-    List<ZtreeMenuVo> getCheckTreeList(Long roleId);
+    List<ZtreeMenuVo> getCheckTreeList(Long roleId,Integer platform,String filterResourceUrls);
 
     /**
      * 通过用户ID查找用户能够使用的资源
@@ -82,4 +84,11 @@ public interface SysResourceService {
      * @return
      */
     Set<String> getUserPerms(Long userId,Integer platform);
+
+    /**
+     * 获取平台类型的资源
+     * @param platform
+     * @return
+     */
+    List<SysResource> getSysResourceByPlatform(Integer platform);
 }

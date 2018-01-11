@@ -2,6 +2,7 @@ package com.entrobus.credit.common.bean;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 给客户端的返回数据
@@ -17,7 +18,10 @@ public class WebResult extends HashMap<String, Object> {
 	public WebResult() {
 		put(CODE, 0);
 	}
-	
+	public boolean isOk(){
+		Object code = get(CODE);
+		return  Objects.equals(code ,0);
+	}
 	public static WebResult error() {
 		return error(500, "未知异常，请联系管理员");
 	}

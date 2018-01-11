@@ -37,7 +37,7 @@ spring:
           slow-sql-millis: 1000
           log-slow-sql: true
           merge-sql: true
-        slf4j:
+        log4j:
           statement-executable-sql-log-enable: true
           enabled: true
         wall:
@@ -70,6 +70,13 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
+  cloud:
+    stream:
+      bindings:
+        order_operation_log_publish:
+          destination: order-operation-log-stream
+          content-type: application/json
+
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:

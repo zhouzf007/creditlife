@@ -6,16 +6,19 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.common.SysConstants;
+import com.entrobus.credit.manager.common.bean.LoginVo;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.dao.SysUserMapper;
 import com.entrobus.credit.manager.sys.security.shiro.ShiroUtils;
+import com.entrobus.credit.manager.sys.service.LogService;
 import com.entrobus.credit.manager.sys.service.SysResourceService;
 import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.manager.sys.service.SysUserService;
 import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.pojo.manager.SysUserExample;
 import com.entrobus.credit.pojo.manager.SysUserRoleExample;
+import com.entrobus.credit.vo.log.SysLoginMsg;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -29,7 +32,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -47,6 +49,8 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysResourceService sysResourceService;
+    @Autowired
+    private LogService logService;
 
     private static final Logger logger = LoggerFactory.getLogger(SysUserServiceImpl.class);
 
@@ -121,7 +125,12 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Transactional //开启事务（涉及到多表操作）
     @Override
-    public void save(SysUserExt sysUserExt) {
+    public WebResult save(SysUserExt sysUserExt) {
+        //判断要新增的用户的用户名是否已经存在
+        SysUser existUser = getUserByUserName(sysUserExt.getUsername());
+        if(existUser != null){
+            return WebResult.error("该用户已经存在，请不要重复创建！");
+        }
         SysUser sysUser = new SysUser();
         try {
             BeanUtils.copyProperties(sysUser,sysUserExt);
@@ -136,24 +145,27 @@ public class SysUserServiceImpl implements SysUserService {
             //保存系统用户，保存成功后会返回主键的值
             insertSelective(sysUser);
             if(ConversionUtil.isNotEmptyParameter(sysUserExt.getRoleIdList())){
-                /*List<Long> roleIdList = new ArrayList<>();
-                String[] idArr = sysUserExt.getRoleIds().split(",");
-                for(String id : idArr){
-                    roleIdList.add(Long.parseLong(id));
-                }
-                sysUserExt.setRoleIdList(roleIdList);*/
                 //保存用户与角色关系
                 sysUserRoleService.save(sysUser.getId(),sysUserExt.getRoleIdList());
             }
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         }
+        return WebResult.ok("创建成功");
     }
 
     @Override
-    public void update(SysUserExt sysUserExt) {
+    public WebResult update(SysUserExt sysUserExt) {
+        //判断要新增的用户的用户名是否已经存在
+        SysUser existUser = getUserByUserName(sysUserExt.getUsername());
+        //修改的不是同一个用户
+        if(existUser != null && existUser.getId() != sysUserExt.getId()){
+            return WebResult.error("该用户已经存在！");
+        }
         SysUser sysUser = new SysUser();
         try {
             if(StringUtils.isBlank(sysUserExt.getPassword())){
@@ -177,9 +189,12 @@ public class SysUserServiceImpl implements SysUserService {
             }
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e);
         }
+        return WebResult.ok("修改成功");
     }
 
     @Transactional //开启事务（涉及到多表操作）
@@ -200,19 +215,19 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public WebResult login(String username, String password,Integer platform) {
+    public WebResult login(LoginVo vo) {
         //根据用户名查找用户
         SysUserExample userExample = new SysUserExample();
         userExample.createCriteria()
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
-                .andUsernameEqualTo(username)
-                .andPlatformEqualTo(platform);
+                .andUsernameEqualTo(vo.getUsername())
+                .andPlatformEqualTo(vo.getPlatform());
         List<SysUser> sysUserList = selectByExample(userExample);
         if(CollectionUtils.isEmpty(sysUserList)){
             return WebResult.error("用户名或者密码不正确");
         }
         SysUser sysUser = sysUserList.get(0);
-        password = ShiroUtils.sha256(password,sysUser.getSalt());
+        String password = ShiroUtils.sha256(vo.getPassword(),sysUser.getSalt());
         //密码错误
         if(!password.equals(sysUser.getPassword())) {
             return WebResult.error("用户名或者密码不正确");
@@ -234,13 +249,51 @@ public class SysUserServiceImpl implements SysUserService {
         //生成32位token
         String token = GUIDUtil.genRandomGUID();
         //获取用户权限
-        Set<String> permsSet = sysResourceService.getUserPerms(sysUser.getId(),platform);
+        Set<String> permsSet = sysResourceService.getUserPerms(sysUser.getId(),vo.getPlatform());
         sysLoginUserInfo.setPerms(permsSet);
         //获取用户角色集合
         List<Long> roleList = sysUserRoleService.getRoleIdList(sysUser.getId());
         sysLoginUserInfo.setRoleIds(roleList);
         //将登录信息缓存到redis
         CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
+
+        //登录日志,使用stream
+        SysLoginMsg msg = new SysLoginMsg();
+        msg.setOperationSystem(vo.getOperationSystem());
+        msg.setBrowser(vo.getBrowser());
+        msg.setAddress(vo.getAddress());
+        msg.setPlatform(vo.getPlatform());
+        msg.setSysUserId(String.valueOf(sysUser.getId()));
+        msg.setLoginTime(new Date());
+        logService.login(msg);
+
         return WebResult.ok().put("token",token).put("perms",permsSet);
+    }
+
+    @Override
+    public SysUser getUserByUserName(String username) {
+        //根据用户名查找用户
+        SysUserExample userExample = new SysUserExample();
+        userExample.createCriteria()
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
+                .andUsernameEqualTo(username);
+        List<SysUser> sysUserList = selectByExample(userExample);
+        if(CollectionUtils.isNotEmpty(sysUserList)){
+            return sysUserList.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean checkUserName(String userName,Integer platform) {
+        SysUserExample example = new SysUserExample();
+        example.createCriteria().andUsernameEqualTo(userName)
+//                .andPlatformEqualTo(platform)
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        List<SysUser> sysUsers = this.selectByExample(example);
+        if(ConversionUtil.isNotEmptyParameter(sysUsers)){
+            return true;
+        }
+        return false;
     }
 }

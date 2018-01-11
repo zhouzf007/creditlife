@@ -37,7 +37,7 @@ spring:
           slow-sql-millis: 1000
           log-slow-sql: true
           merge-sql: true
-        slf4j:
+        log4j:
           statement-executable-sql-log-enable: true
           enabled: true
         wall:
@@ -74,5 +74,18 @@ spring:
 #  配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
-#  jpa:
-#    show-sql: true
+
+#配置微信公众号
+wechat:
+    #公众号 APP_ID
+    appId: wxac428c50aaccf942
+    #公众号 APP_SECRET
+    appSecret: 34f7cb149373924005ec00abaceeeb1d
+    #公众号 TOKEN
+    token: creditlife
+    #公众号 AES_KEY
+    aesKey:
+    #微信支付商户号
+    partenerId: 1461196702
+    #微信支付平台商户API密钥
+    partenerKey: C644ED21DEB14FF6E909FCDA6B1B7BA8

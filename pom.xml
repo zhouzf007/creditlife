@@ -39,6 +39,7 @@
         <module>manager-service</module>
         <module>schedule</module>
         <module>wechat-service</module>
+        <module>log-service</module>
 
     </modules>
 

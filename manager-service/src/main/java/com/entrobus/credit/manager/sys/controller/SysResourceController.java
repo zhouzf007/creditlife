@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
+import com.entrobus.credit.manager.common.bean.CommonParameter;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysMenu;
 import com.entrobus.credit.manager.common.bean.ZtreeMenuVo;
@@ -32,11 +33,12 @@ public class SysResourceController extends ManagerBaseController {
     private SysResourceService sysResourceService;
 
     @RequestMapping("/add")
-    public WebResult add(SysResource sysResource){
+    public WebResult add(SysResource sysResource,CommonParameter commonParameter){
         sysResource.setCreateUser(getLoginUserId());
         sysResource.setUpdateUser(getLoginUserId());
         sysResource.setCreateTime(new Date());
         sysResource.setDeleteFlag(Constants.DeleteFlag.NO);
+        sysResource.setPlatform(commonParameter.getPlatform());
         if(ConversionUtil.isEmptyParameter(sysResource.getLevel())){
             sysResource.setLevel(1);
         }
@@ -45,9 +47,10 @@ public class SysResourceController extends ManagerBaseController {
     }
 
     @RequestMapping("/update")
-    public WebResult update(SysResource sysResource){
+    public WebResult update(SysResource sysResource,CommonParameter commonParameter){
         sysResource.setUpdateUser(getLoginUserId());
         sysResource.setUpdateTime(new Date());
+        sysResource.setPlatform(commonParameter.getPlatform());
         if(ConversionUtil.isEmptyParameter(sysResource.getLevel())){
             sysResource.setLevel(1);
         }
@@ -88,7 +91,7 @@ public class SysResourceController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/list")
-    public WebResult list(Integer offset, Integer limit,String name,Long id){
+    public WebResult list(Integer offset, Integer limit,String name,Long id,CommonParameter commonParameter){
         if (offset != null && limit != null) {
             //分页查询
             PageHelper.offsetPage(offset, limit);
@@ -96,6 +99,7 @@ public class SysResourceController extends ManagerBaseController {
         SysResourceExample resourceExample = new SysResourceExample();
         SysResourceExample.Criteria criteria = resourceExample.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        criteria.andPlatformEqualTo(commonParameter.getPlatform());
         if(StringUtils.isNotEmpty(name)){
             criteria.andNameLike("%"+name+"%");
             //把该name下的子资源一起查询出来
@@ -106,6 +110,7 @@ public class SysResourceController extends ManagerBaseController {
             //把该Id下的子资源一起查询出来
             resourceExample.or().andParentIdsLike("%"+id+"%");
         }
+
         List<SysResource> sysResourceList = sysResourceService.selectByExample(resourceExample);
         //分页信息
         PageInfo<SysResource> pageInfo = new PageInfo(sysResourceList);
@@ -151,8 +156,8 @@ public class SysResourceController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/treeList")
-    public WebResult treeList(Integer menuType) {
-        List<ZtreeMenuVo> menuVoList = sysResourceService.getZtreeMenu(menuType);
+    public WebResult treeList(Integer menuType, CommonParameter commonParameter,String filterResourceUrls) {
+        List<ZtreeMenuVo> menuVoList = sysResourceService.getZtreeMenu(menuType,commonParameter.getPlatform(),filterResourceUrls);
         return WebResult.ok(menuVoList);
     }
 
@@ -161,8 +166,8 @@ public class SysResourceController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/checkTreeList")
-    public WebResult checkTreeList(Long roleId) {
-        List<ZtreeMenuVo> menuVoList = sysResourceService.getCheckTreeList(roleId);
+    public WebResult checkTreeList(Long roleId,CommonParameter commonParameter,String filterResourceUrls) {
+        List<ZtreeMenuVo> menuVoList = sysResourceService.getCheckTreeList(roleId,commonParameter.getPlatform(),filterResourceUrls);
         return WebResult.ok(menuVoList);
     }
 }
