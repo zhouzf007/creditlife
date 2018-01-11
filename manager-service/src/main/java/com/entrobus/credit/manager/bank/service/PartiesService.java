@@ -31,6 +31,8 @@ public interface PartiesService {
 
     WebResult add(PartiesExt partiesExt);
 
+    WebResult edit(PartiesExt partiesExt);
+
     /**
      * 资金方是否已经存在 是=true
      * @param name

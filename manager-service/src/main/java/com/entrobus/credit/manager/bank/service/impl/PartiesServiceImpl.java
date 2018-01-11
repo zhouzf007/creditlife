@@ -10,8 +10,10 @@ import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.dao.PartiesMapper;
+import com.entrobus.credit.manager.sys.security.shiro.ShiroUtils;
 import com.entrobus.credit.manager.sys.service.*;
 import com.entrobus.credit.pojo.manager.*;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +101,7 @@ public class PartiesServiceImpl implements PartiesService {
             return WebResult.error("手机号码已被绑定其他资金方");
         }
         //查询手机号是否已注册社区贷资金平台
-        if(sysUserService.checkUserName(partiesExt.getContractMobile(),Constants.PLATFORM.bank)){
+        if(sysUserService.checkUserName(partiesExt.getContractMobile(),Constants.PLATFORM.BANK)){
             return WebResult.error("手机号码已注册社区贷资金平台，请更换手机重试");
         }
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
@@ -114,13 +116,13 @@ public class PartiesServiceImpl implements PartiesService {
             sysRole.setOrgId(partiesExt.getId());
             sysRole.setRoleName("系统管理员");
             sysRole.setRemark("系统生成资金方时生成的默认角色");
-            sysRole.setPlatform(Constants.PLATFORM.bank);
+            sysRole.setPlatform(Constants.PLATFORM.BANK);
             sysRole.setCreateTime(new Date());
             sysRole.setCreateUser(userInfo.getId());
             sysRole.setDeleteFlag(Constants.DeleteFlag.NO);
             sysRoleService.insertSelective(sysRole);
             //查询平台所有资源
-            List<SysResource> resources = sysResourceService.getSysResourceByPlatform(Constants.PLATFORM.bank);
+            List<SysResource> resources = sysResourceService.getSysResourceByPlatform(Constants.PLATFORM.BANK);
             //过滤数据中心+资源管理
             List<Long> resourceIds = new ArrayList<>();
             for (SysResource sysResource : resources){
@@ -144,13 +146,50 @@ public class PartiesServiceImpl implements PartiesService {
             sysUserExt.setCreateUser(userInfo.getId());
             sysUserExt.setUpdateUser(userInfo.getId());
             sysUserExt.setRemark("系统生成资金方时生成的默认账号");
-            sysUserExt.setPlatform(Constants.PLATFORM.bank);
+            sysUserExt.setPlatform(Constants.PLATFORM.BANK);
             sysUserExt.setRoleIdList(roleIds);
             sysUserService.save(sysUserExt);
+            Parties parties = new Parties();
+            parties.setId(partiesExt.getId());
+            parties.setSysUserId(sysUserExt.getId());
+            this.updateByPrimaryKeySelective(parties);
             return WebResult.ok("添加成功");
         }else{
             return WebResult.error("添加失败");
         }
+    }
+
+    @Transactional
+    @Override
+    public WebResult edit(PartiesExt partiesExt) {
+        SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
+        //修改资金方
+        partiesExt.setUpdateTime(new Date());
+        partiesExt.setUpdateOperator(userInfo.getId()+"");
+        this.updateByPrimaryKeySelective(partiesExt);
+        //修改对应账号
+        SysUser sysUser = new SysUser();
+        sysUser.setId(partiesExt.getSysUserId());
+        sysUser.setUsername(partiesExt.getContractMobile());
+        String salt = RandomStringUtils.randomAlphanumeric(20);
+        //将密码使用sha256加密
+        sysUser.setPassword(ShiroUtils.sha256(partiesExt.getPassword(),salt));
+        sysUser.setSalt(salt);
+        sysUser.setUpdateTime(new Date());
+        sysUser.setUpdateUser(userInfo.getId());
+        sysUserService.updateByPrimaryKeySelective(sysUser);
+        //冻结资金方下面所有账号并踢下线
+        if(partiesExt.getState()==Constants.PARTIES_STATE.FROZEN){
+            SysUserExample sysUserExample = new SysUserExample();
+            sysUserExample.createCriteria().andOrgIdEqualTo(partiesExt.getId())
+                    .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+            List<SysUser> sysUsers = sysUserService.selectByExample(sysUserExample);
+            if(ConversionUtil.isNotEmptyParameter(sysUsers)){
+
+            }
+        }
+        //解冻资金方对应系统管理员
+        return WebResult.ok("编辑成功");
     }
 
     @Override
