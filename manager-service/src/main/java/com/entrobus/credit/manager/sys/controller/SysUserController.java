@@ -51,6 +51,20 @@ public class SysUserController extends ManagerBaseController {
         return sysUserService.save(sysUser);
     }
 
+    @RequestMapping("/bank/add")
+    public WebResult addBankUser(SysUserExt sysUser, CommonParameter commonParameter) {
+        SysLoginUserInfo userInfo = getCurrLoginUser();
+        sysUser.setOrgId(userInfo.getOrgId());
+        sysUser.setUsername(sysUser.getCellphone());
+        sysUser.setSex(0);
+        sysUser.setAge(0);
+        sysUser.setRemark(userInfo.getRealName()+"创建的用户");
+        sysUser.setCreateUser(userInfo.getId());//创建人的用户ID
+        sysUser.setUpdateUser(userInfo.getId());//最近一次修改的用户ID
+        sysUser.setPlatform(commonParameter.getPlatform());
+        return sysUserService.save(sysUser);
+    }
+
     /**
      * 获取系统用户列表
      * @return
@@ -156,6 +170,23 @@ public class SysUserController extends ManagerBaseController {
         if(StringUtils.isBlank(sysUser.getUsername())){
             return WebResult.error("用户名不能为空");
         }
+        sysUser.setPlatform(commonParameter.getPlatform());
+        sysUser.setUpdateUser(getLoginUserId());
+        return sysUserService.update(sysUser);
+    }
+
+    /**
+     * 更新银行系统用户
+     * @param sysUser
+     * @param commonParameter
+     * @return
+     */
+    @PostMapping("/bank/update")
+    public WebResult updateBankUser(SysUserExt sysUser,CommonParameter commonParameter){
+        if(StringUtils.isBlank(sysUser.getCellphone())){
+            return WebResult.error("手机号码不能为空");
+        }
+        sysUser.setUsername(sysUser.getCellphone());
         sysUser.setPlatform(commonParameter.getPlatform());
         sysUser.setUpdateUser(getLoginUserId());
         return sysUserService.update(sysUser);

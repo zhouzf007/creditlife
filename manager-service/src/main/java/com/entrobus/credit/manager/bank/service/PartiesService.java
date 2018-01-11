@@ -42,10 +42,14 @@ public interface PartiesService {
      */
     boolean checkName(String name);
 
+    boolean checkName(String name,String id);
+
     /**
      * 手机号是否已经被绑定 是=true
      * @param mobile
      * @return
      */
     boolean checkContractMobile(String mobile);
+
+    boolean checkContractMobile(String mobile,String id);
 }
