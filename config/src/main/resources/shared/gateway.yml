@@ -54,3 +54,6 @@ zuul:
     log-service:
       path: /log/**
       sensitiveHeaders:
+    manager-service:
+      path: /manager/**
+      sensitiveHeaders:

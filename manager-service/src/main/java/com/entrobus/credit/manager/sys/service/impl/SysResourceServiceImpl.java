@@ -183,14 +183,15 @@ public class SysResourceServiceImpl implements SysResourceService {
         if(CollectionUtils.isNotEmpty(sysResourceList)){
             for(SysResource resource : sysResourceList){
                 //如果该资源不是要过滤的资源，就添加到集合中
-                if(!filterResourceUrls.contains(resource.getUrl())){
-                    ZtreeMenuVo ztreeMenuVo = new ZtreeMenuVo();
-                    ztreeMenuVo.setId(resource.getId());
-                    ztreeMenuVo.setpId(resource.getParentId());
-                    ztreeMenuVo.setName(resource.getName());
-                    ztreeMenuVo.setMenuLevel(resource.getLevel());
-                    menuVoList.add(ztreeMenuVo);
-                }
+                if(ConversionUtil.isNotEmptyParameter(filterResourceUrls,resource.getUrl())
+                        && filterResourceUrls.contains(resource.getUrl())) continue;
+                ZtreeMenuVo ztreeMenuVo = new ZtreeMenuVo();
+                ztreeMenuVo.setId(resource.getId());
+                ztreeMenuVo.setpId(resource.getParentId());
+                ztreeMenuVo.setName(resource.getName());
+                ztreeMenuVo.setMenuLevel(resource.getLevel());
+                menuVoList.add(ztreeMenuVo);
+
             }
         }
         return menuVoList;

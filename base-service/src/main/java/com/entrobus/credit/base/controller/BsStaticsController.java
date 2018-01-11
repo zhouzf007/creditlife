@@ -1,10 +1,14 @@
 package com.entrobus.credit.base.controller;
 
+import com.entrobus.credit.base.bean.BsStaticsExt;
 import com.entrobus.credit.base.service.BsStaticsCacheService;
 import com.entrobus.credit.base.service.BsStaticsService;
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.base.BsStatics;
 import com.entrobus.credit.vo.base.BsStaticVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +17,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/statics")
@@ -81,15 +87,36 @@ public class BsStaticsController {
         return WebResult.ok("操作成功");
     }
     /**
-     * 添加，并缓存
+     * 列表
      *
      * @param
      * @return
      */
     @GetMapping("")
-    public WebResult list(BsStaticVo vo) {
-        //todo
-        return WebResult.ok("操作成功");
+    public WebResult list( BsStaticVo vo, Integer pageNum,  Integer pageSize) {
+        if (pageNum != null && pageSize != null)
+            PageHelper.startPage(pageNum,pageSize);
+        List<BsStatics> list = bsStaticsService.getByVo(vo);
+
+        List<BsStaticsExt> extList = null;
+        if (list.isEmpty()){
+            extList = new ArrayList<>();
+        } else {
+            extList = list.stream().map(this::toBsStaticsExt).collect(Collectors.toList());
+        }
+
+        PageInfo<BsStatics> pageInfo = new PageInfo<>(list);
+        return WebResult.ok("操作成功").put("total",pageInfo.getTotal()).put("rows",extList);
+    }
+
+    private BsStaticsExt toBsStaticsExt(BsStatics statics) {
+        BsStaticsExt ext = new BsStaticsExt();
+        BeanUtils.copyProperties(statics,ext);
+        String typeName = bsStaticsCacheService.getOrCacheName(Constants.CodeType.CODE_TYPE, ext.getCodeType());
+        ext.setTypeName(typeName);
+        String statusName = bsStaticsCacheService.getOrCacheName(Constants.CodeType.STATUS, ext.getStatus()+"");
+        ext.setStatusName(statusName);
+        return ext;
     }
 
     private String getValidationMsg(BindingResult result) {
@@ -108,11 +135,47 @@ public class BsStaticsController {
      * @return
      */
     @GetMapping("/similar")
-    public List<BsStaticVo> similar(@RequestParam String codeType) {
+    public List<BsStaticVo> getByType(@RequestParam String codeType) {
         List<BsStaticVo> list = null;
         list = bsStaticsCacheService.getOrCacheByType(codeType);
         return list;
     }
+    /**
+     * 根据条件搜索
+     *
+     * @param vo
+     * @return
+     */
+    @GetMapping("/search")
+    public List<BsStaticVo> search(@RequestBody BsStaticVo vo) {
+        List<BsStaticVo> list = null;
+        list = bsStaticsService.getBsStaticVo(vo);
+        return list;
+    }
+    /**
+     * 获取同类型的
+     *
+     * @param codeType
+     * @return
+     */
+    @GetMapping("/unique")
+    public BsStaticVo getByTypeAndValue(@RequestParam String codeType,@RequestParam String codeValue) {
+        BsStaticVo  bsStaticVo= bsStaticsCacheService.getOrCache(codeType,codeValue);
+        return bsStaticVo;
+    }
+    /**
+     * 获取同类型的
+     *
+     * @param codeType
+     * @return
+     */
+    @GetMapping("/name")
+    public String getCodeName(@RequestParam String codeType,@RequestParam String codeValue) {
+        String name = bsStaticsCacheService.getOrCacheName(codeType, codeValue);
+        return name;
+    }
+
+
 
     /**
      * 修改，并缓存
