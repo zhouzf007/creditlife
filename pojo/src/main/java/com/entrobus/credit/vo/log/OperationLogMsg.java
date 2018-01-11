@@ -225,7 +225,7 @@ public class OperationLogMsg implements Serializable {
          */
         private String name;
         /**
-         * 就值
+         * 旧值
          *
          */
         private String oldValue;
