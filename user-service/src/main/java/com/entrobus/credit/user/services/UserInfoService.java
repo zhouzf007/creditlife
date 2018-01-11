@@ -31,5 +31,5 @@ public interface UserInfoService {
 
     LoginUserInfo getLoginUserInfo(UserInfo record, String token);
 
-    int addUserInfo(String cellphone, String pwd);
+    int addUserInfo(UserInfo record);
 }

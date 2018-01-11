@@ -63,7 +63,7 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("/register")
-    public WebResult register(String cellphone, String pwd, String code){
+    public WebResult register(String cellphone, String pwd, String code, String unionId){
         if(ConversionUtil.isContainEmptyParam(cellphone, pwd)){
             return WebResult.error("请输入账号密码");
         }
@@ -80,7 +80,11 @@ public class UserController extends BaseController {
         if(!verifyCode.equals(code)){
             return WebResult.error("短信验证码不正确");
         }
-        userInfoService.addUserInfo(cellphone, pwd);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setCellphone(cellphone);
+        userInfo.setPwd(pwd);
+        userInfo.setUnionId(unionId);
+        userInfoService.addUserInfo(userInfo);
         return WebResult.ok();
     }
 
