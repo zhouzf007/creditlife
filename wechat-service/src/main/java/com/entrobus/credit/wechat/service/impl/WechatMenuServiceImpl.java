@@ -4,11 +4,12 @@ import com.entrobus.credit.pojo.wechat.WechatMenu;
 import com.entrobus.credit.pojo.wechat.WechatMenuExample;
 import com.entrobus.credit.wechat.dao.WechatMenuMapper;
 import com.entrobus.credit.wechat.service.WechatMenuService;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WechatMenuServiceImpl implements WechatMenuService {

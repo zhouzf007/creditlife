@@ -1,4 +1,4 @@
-package com.entrobus.credit.manager.channel;
+package com.entrobus.credit.manager.common.channel;
 
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;

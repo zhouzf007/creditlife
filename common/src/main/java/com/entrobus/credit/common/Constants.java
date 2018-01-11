@@ -34,6 +34,14 @@ public interface Constants {
         int ERROR = 2;//异常
     }
 
+    /**
+     * 静态数据常量类型
+     */
+    interface CodeType{
+        String CODE_TYPE = "CODE_TYPE";
+        String STATUS = "STATUS";
+    }
+
     interface JobDataKey{
         String CUSTOM = "customParam";
     }
@@ -47,8 +55,13 @@ public interface Constants {
      * 管理系统所属平台类型
      */
     interface PLATFORM{
-        int creditlife = 0;//熵商后台
-        int bank = 1;//银行后台
+        int CREDITLIFE = 0;//熵商后台
+        int BANK = 1;//银行后台
+    }
+
+    interface PARTIES_STATE{
+        int NORMAL = 0;
+        int FROZEN = 1;
     }
 
     interface ORDER_STATE{

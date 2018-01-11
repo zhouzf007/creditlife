@@ -4,11 +4,12 @@ import com.entrobus.credit.pojo.wechat.WechatReqMsgLog;
 import com.entrobus.credit.pojo.wechat.WechatReqMsgLogExample;
 import com.entrobus.credit.wechat.dao.WechatReqMsgLogMapper;
 import com.entrobus.credit.wechat.service.WechatReqMsgLogService;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WechatReqMsgLogServiceImpl implements WechatReqMsgLogService {
@@ -28,7 +29,7 @@ public class WechatReqMsgLogServiceImpl implements WechatReqMsgLogService {
     }
 
     public List<WechatReqMsgLog> selectByExample(WechatReqMsgLogExample example) {
-        return this.wechatReqMsgLogMapper.selectByExampleWithoutBLOBs(example);
+        return this.wechatReqMsgLogMapper.selectByExample(example);
     }
 
     public int deleteByPrimaryKey(String id) {
@@ -40,7 +41,7 @@ public class WechatReqMsgLogServiceImpl implements WechatReqMsgLogService {
     }
 
     public int updateByPrimaryKey(WechatReqMsgLog record) {
-        return this.wechatReqMsgLogMapper.updateByPrimaryKeyWithoutBLOBs(record);
+        return this.wechatReqMsgLogMapper.updateByPrimaryKey(record);
     }
 
     public int deleteByExample(WechatReqMsgLogExample example) {
@@ -52,7 +53,7 @@ public class WechatReqMsgLogServiceImpl implements WechatReqMsgLogService {
     }
 
     public int updateByExample(WechatReqMsgLog record, WechatReqMsgLogExample example) {
-        return this.wechatReqMsgLogMapper.updateByExampleWithoutBLOBs(record, example);
+        return this.wechatReqMsgLogMapper.updateByExample(record, example);
     }
 
     public int insert(WechatReqMsgLog record) {

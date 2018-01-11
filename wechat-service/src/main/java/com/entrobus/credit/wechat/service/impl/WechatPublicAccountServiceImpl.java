@@ -4,11 +4,12 @@ import com.entrobus.credit.pojo.wechat.WechatPublicAccount;
 import com.entrobus.credit.pojo.wechat.WechatPublicAccountExample;
 import com.entrobus.credit.wechat.dao.WechatPublicAccountMapper;
 import com.entrobus.credit.wechat.service.WechatPublicAccountService;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WechatPublicAccountServiceImpl implements WechatPublicAccountService {

@@ -118,7 +118,7 @@ public class SysRoleController extends ManagerBaseController {
         SysRoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andPlatformEqualTo(commonParameter.getPlatform());
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除(待优化，后期改成使用mybatis拦截器统一处理带delete_flag过滤条件的查询)
-        if(commonParameter.getPlatform()==Constants.PLATFORM.bank){
+        if(commonParameter.getPlatform()==Constants.PLATFORM.BANK){
             criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }
         //只有超级管理员，才能查看所有管理员列表
@@ -142,7 +142,7 @@ public class SysRoleController extends ManagerBaseController {
         SysRoleExample example = new SysRoleExample();
         SysRoleExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除
-        if(commonParameter.getPlatform()==Constants.PLATFORM.bank){
+        if(commonParameter.getPlatform()==Constants.PLATFORM.BANK){
             criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }
         if(StringUtils.isNotEmpty(roleName)){

@@ -2,6 +2,8 @@ package com.entrobus.credit.base.service;
 
 import com.entrobus.credit.pojo.base.BsStatics;
 import com.entrobus.credit.pojo.base.BsStaticsExample;
+import com.entrobus.credit.vo.base.BsStaticVo;
+
 import java.util.List;
 
 public interface BsStaticsService {
@@ -32,6 +34,10 @@ public interface BsStaticsService {
     BsStatics getByTypeAndValue(String codeType, String codeValue);
 
     List<BsStatics> getByAll();
+
+    List<BsStaticVo> getBsStaticVo(BsStaticVo vo);
+
+    List<BsStatics> getByVo(BsStaticVo vo);
 
     int add(BsStatics statics);
 

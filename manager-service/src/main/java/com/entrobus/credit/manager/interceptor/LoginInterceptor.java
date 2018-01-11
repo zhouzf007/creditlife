@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
+import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -27,20 +28,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private ManagerCacheService managerCacheService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         logger.debug(">>>LoginInterceptor>>>>>>>登录拦截器");
-        //从请求头中获取登录token
-        String token = request.getHeader("token");
-        if(StringUtils.isEmpty(token)){
-            token = request.getParameter("token");
-        }
-
         //从缓存中获取当前登录的系统用户
-        SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
+        SysLoginUserInfo loginUser = managerCacheService.getCurrLoginUser();
         if(loginUser == null){//用户未登录
             //1.判断是否为ajax请求
             String ajaxRequest = request.getHeader("ajaxRequest");//自定义AJAX请求头，用于标识是否为ajax请求

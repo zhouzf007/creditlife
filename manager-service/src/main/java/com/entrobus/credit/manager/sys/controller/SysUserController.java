@@ -10,6 +10,7 @@ import com.entrobus.credit.manager.common.bean.LoginVo;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
+import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.manager.sys.service.SysUserService;
 import com.entrobus.credit.manager.util.ServletUtil;
@@ -39,7 +40,8 @@ public class SysUserController extends ManagerBaseController {
     private SysUserService sysUserService;
     @Autowired
     private SysUserRoleService sysUserRoleService;
-
+    @Autowired
+    private ManagerCacheService managerCacheService;
 
     @RequestMapping("/add")
     public WebResult add(SysUserExt sysUser, CommonParameter commonParameter) {
@@ -62,7 +64,7 @@ public class SysUserController extends ManagerBaseController {
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(com.entrobus.credit.common.Constants.DeleteFlag.NO);
-        if(commonParameter.getPlatform()== Constants.PLATFORM.bank){
+        if(commonParameter.getPlatform()== Constants.PLATFORM.BANK){
             criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }
         if(StringUtils.isNotEmpty(username)){
@@ -140,7 +142,7 @@ public class SysUserController extends ManagerBaseController {
     @RequestMapping(value = "/logout")
     public WebResult logout(String token) {
         //删除缓存中的用户信息
-        CacheService.delete(redisTemplate,token);
+        managerCacheService.logout(token);
         return WebResult.ok();
     }
 

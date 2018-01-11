@@ -1,21 +1,26 @@
 package com.entrobus.credit.wechat.handler;
 
-//import com.github.binarywang.demo.wechat.builder.TextBuilder;
+import com.entrobus.credit.wechat.builder.TextBuilder;
+import com.entrobus.credit.wechat.service.WechatUserService;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 /**
- * @author Binary Wang(https://github.com/binarywang)
+ * 用户关注公众号时的处理handler
  */
 @Component
 public class SubscribeHandler extends AbstractHandler {
+
+  @Autowired
+  private WechatUserService wechatUserService;
 
   @Override
   public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
@@ -29,7 +34,8 @@ public class SubscribeHandler extends AbstractHandler {
         .userInfo(wxMessage.getFromUser(), null);
 
     if (userWxInfo != null) {
-      // TODO 可以添加关注用户到本地
+      //保存微信用户信息
+      wechatUserService.saveWechatUser(userWxInfo);
     }
 
     WxMpXmlOutMessage responseResult = null;
@@ -43,11 +49,11 @@ public class SubscribeHandler extends AbstractHandler {
       return responseResult;
     }
 
-   /* try {
+   try {
       return new TextBuilder().build("感谢关注", wxMessage, weixinService);
     } catch (Exception e) {
       this.logger.error(e.getMessage(), e);
-    }*/
+    }
 
     return null;
   }

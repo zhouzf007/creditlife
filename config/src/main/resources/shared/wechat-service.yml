@@ -60,7 +60,8 @@ spring:
 #      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-
+  resources: # 指定静态资源的路径
+        static-locations: classpath:/templates/,classpath:/views/
   redis:
     cluster:
       nodes:

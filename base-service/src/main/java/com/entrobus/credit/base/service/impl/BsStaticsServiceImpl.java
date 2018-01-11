@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import com.entrobus.credit.vo.base.BsStaticVo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,6 +119,44 @@ public class BsStaticsServiceImpl implements BsStaticsService {
         example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
         return selectByExample(example);
     }
+    @Override
+    public List<BsStaticVo> getBsStaticVo(BsStaticVo vo){
+        List<BsStatics> list = getByVo(vo);
+        List<BsStaticVo>  voList = list.stream().map(this::toBsStaticVo).collect(Collectors.toList());
+        return voList;
+    }
+    @Override
+    public List<BsStatics> getByVo(BsStaticVo vo) {
+        BsStaticsExample example = new BsStaticsExample();
+        BsStaticsExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        if (StringUtils.isNotBlank(vo.getCodeType())){
+            criteria.andCodeTypeEqualTo(vo.getCodeType());
+        }
+        if (StringUtils.isNotBlank(vo.getCodeValue())){
+            criteria.andCodeValueEqualTo(vo.getCodeValue());
+        }
+        if (vo.getStatus() != null){
+            criteria.andStatusEqualTo(vo.getStatus());
+        }
+        if (StringUtils.isNotBlank(vo.getCodeName())){
+            criteria.andCodeNameEqualTo(vo.getCodeName());
+        }
+        if (StringUtils.isNotBlank(vo.getExt())){
+            criteria.andExtEqualTo(vo.getExt());
+        }
+        if (StringUtils.isNotBlank(vo.getParam())){
+            criteria.andParamEqualTo(vo.getParam());
+        }
+        return selectByExample(example);
+    }
+
+    private BsStaticVo toBsStaticVo(BsStatics statics) {
+        BsStaticVo newVO = new BsStaticVo();
+        BeanUtils.copyProperties(statics,newVO);
+        return newVO;
+    }
+
     @Override
     public int add(BsStatics statics){
         BsStatics oldStatics = getByTypeAndValue(statics.getCodeType(),statics.getCodeValue());
