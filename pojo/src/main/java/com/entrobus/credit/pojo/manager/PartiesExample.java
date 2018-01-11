@@ -600,6 +600,66 @@ public class PartiesExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andSysUserIdIsNull() {
+            addCriterion("sys_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdIsNotNull() {
+            addCriterion("sys_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdEqualTo(Long value) {
+            addCriterion("sys_user_id =", value, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdNotEqualTo(Long value) {
+            addCriterion("sys_user_id <>", value, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdGreaterThan(Long value) {
+            addCriterion("sys_user_id >", value, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("sys_user_id >=", value, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdLessThan(Long value) {
+            addCriterion("sys_user_id <", value, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdLessThanOrEqualTo(Long value) {
+            addCriterion("sys_user_id <=", value, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdIn(List<Long> values) {
+            addCriterion("sys_user_id in", values, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdNotIn(List<Long> values) {
+            addCriterion("sys_user_id not in", values, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdBetween(Long value1, Long value2) {
+            addCriterion("sys_user_id between", value1, value2, "sysUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysUserIdNotBetween(Long value1, Long value2) {
+            addCriterion("sys_user_id not between", value1, value2, "sysUserId");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

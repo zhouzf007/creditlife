@@ -57,7 +57,6 @@ public class OperationLogTableColumnServiceImpl implements OperationLogTableColu
 	 */
     @Override
     public int updateByPrimaryKeySelective(OperationLogTableColumn record) {
-        this.updateValue(record);
 		return this.operationLogTableColumnMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -68,7 +67,6 @@ public class OperationLogTableColumnServiceImpl implements OperationLogTableColu
 	 */
     @Override
     public int updateByPrimaryKey(OperationLogTableColumn record) {
-        this.updateValue(record);
 		return this.operationLogTableColumnMapper.updateByPrimaryKey(record);
     }
 
@@ -87,7 +85,6 @@ public class OperationLogTableColumnServiceImpl implements OperationLogTableColu
 	 */
     @Override
     public int updateByExampleSelective(OperationLogTableColumn record, OperationLogTableColumnExample example) {
-        this.updateValue(record);
 		return this.operationLogTableColumnMapper.updateByExampleSelective(record, example);
     }
 
@@ -97,7 +94,6 @@ public class OperationLogTableColumnServiceImpl implements OperationLogTableColu
 	 */
     @Override
     public int updateByExample(OperationLogTableColumn record, OperationLogTableColumnExample example) {
-        this.updateValue(record);
 		return this.operationLogTableColumnMapper.updateByExample(record, example);
     }
 

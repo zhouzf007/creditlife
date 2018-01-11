@@ -64,7 +64,7 @@ public class SysUserController extends ManagerBaseController {
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(com.entrobus.credit.common.Constants.DeleteFlag.NO);
-        if(commonParameter.getPlatform()== Constants.PLATFORM.bank){
+        if(commonParameter.getPlatform()== Constants.PLATFORM.BANK){
             criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }
         if(StringUtils.isNotEmpty(username)){

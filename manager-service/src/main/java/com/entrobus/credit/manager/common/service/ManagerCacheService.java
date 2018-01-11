@@ -31,7 +31,7 @@ public class ManagerCacheService  {
     }
 
     public void saveLoginUserInfo(String token,SysLoginUserInfo sysLoginUserInfo){
-        CacheService.setCacheObj(redisTemplate,token,SysLoginUserInfo.class);
+        CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
         CacheService.setString(redisTemplate,sysLoginUserInfo.getId()+"",token);
     }
 
