@@ -137,6 +137,9 @@
                enableSelectByExample="true"
                selectByExampleQueryId="true">
 
+            <!--无论字段是什么类型，生成的类属性都是varchar。-->
+            <columnOverride column="req_xml" jdbcType="VARCHAR" />
+            <columnOverride column="resp_xml" jdbcType="VARCHAR" />
             <!--  配置自动返回主键 -->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>

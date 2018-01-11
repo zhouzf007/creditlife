@@ -2,6 +2,7 @@ package com.entrobus.credit.wechat.service;
 
 import com.entrobus.credit.pojo.wechat.WechatReqMsgLog;
 import com.entrobus.credit.pojo.wechat.WechatReqMsgLogExample;
+
 import java.util.List;
 
 public interface WechatReqMsgLogService {

@@ -9,6 +9,7 @@ import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.LoginVo;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
+import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.dao.SysUserMapper;
 import com.entrobus.credit.manager.sys.security.shiro.ShiroUtils;
 import com.entrobus.credit.manager.sys.service.LogService;
@@ -51,6 +52,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysResourceService sysResourceService;
     @Autowired
     private LogService logService;
+    @Autowired
+    private ManagerCacheService managerCacheService;
 
     private static final Logger logger = LoggerFactory.getLogger(SysUserServiceImpl.class);
 
@@ -254,9 +257,10 @@ public class SysUserServiceImpl implements SysUserService {
         //获取用户角色集合
         List<Long> roleList = sysUserRoleService.getRoleIdList(sysUser.getId());
         sysLoginUserInfo.setRoleIds(roleList);
-        //将登录信息缓存到redis
-        CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
 
+        //将登录信息缓存到redis
+       // CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
+        managerCacheService.saveLoginUserInfo(token,sysLoginUserInfo);
         //登录日志,使用stream
         SysLoginMsg msg = new SysLoginMsg();
         msg.setOperationSystem(vo.getOperationSystem());
