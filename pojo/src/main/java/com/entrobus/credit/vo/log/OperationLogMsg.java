@@ -47,11 +47,11 @@ public class OperationLogMsg implements Serializable {
     /**
      * 请求参数
      */
-    private String operationData;
+    private Object operationData;
     /**
      * 扩展字段
      */
-    private String extData;
+    private Object extData;
     /**
      * 记录被操作表信息
      */
@@ -149,19 +149,19 @@ public class OperationLogMsg implements Serializable {
         this.operatorType = operatorType;
     }
 
-    public String getOperationData() {
+    public Object getOperationData() {
         return operationData;
     }
 
-    public void setOperationData(String operationData) {
+    public void setOperationData(Object operationData) {
         this.operationData = operationData;
     }
 
-    public String getExtData() {
+    public Object getExtData() {
         return extData;
     }
 
-    public void setExtData(String extData) {
+    public void setExtData(Object extData) {
         this.extData = extData;
     }
 
