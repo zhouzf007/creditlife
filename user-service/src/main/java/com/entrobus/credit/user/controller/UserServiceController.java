@@ -85,4 +85,10 @@ public class UserServiceController {
         msgChannel.sendMsg().send(msgs);
     }
 
+
+//    @RequestMapping(method = RequestMethod.POST, path = "/applyLoan")
+//    public void apply(@RequestBody Map<String, Object> msg) {
+//        Message<Map<String, Object>> msgs = MessageBuilder.withPayload(msg).build();
+//        msgChannel.sendMsg().send(msgs);
+//    }
 }

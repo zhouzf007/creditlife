@@ -3,6 +3,7 @@ package com.entrobus.credit.wechat.common.exception;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.exception.CreditlifeException;
+import me.chanjar.weixin.common.exception.WxErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -31,6 +32,17 @@ public class CreditlifeExceptionHandler {
 	public WebResult handleDuplicateKeyException(DuplicateKeyException e){
 		logger.error(e.getMessage(), e);
 		return WebResult.error("数据库中已存在该记录");
+	}
+
+	/**
+	 * 处理微信异常
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(WxErrorException.class)
+	public WebResult handleWxErrorException(WxErrorException e){
+		logger.error(e.getError().getErrorMsg(), e);
+		return WebResult.error("微信请求出错，请联系管理员");
 	}
 
 	/**
