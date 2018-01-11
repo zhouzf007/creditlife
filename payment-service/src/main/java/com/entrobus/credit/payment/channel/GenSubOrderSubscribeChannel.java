@@ -1,4 +1,4 @@
-package com.entrobus.credit.msg.channel;
+package com.entrobus.credit.payment.channel;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
@@ -8,11 +8,11 @@ import org.springframework.messaging.SubscribableChannel;
  * @CreateTime: 2017/6/9 10:29
  * @Description:
  */
-public interface MsgSubscribeChannel {
+public interface GenSubOrderSubscribeChannel {
 
-    String SMS_SUBSCRIBE = "sms_subscribe";
+    String GENERATE_SUB_ORDER_SUBSCRIBE = "generate_sub_order_subscribe";
 
-    @Input(SMS_SUBSCRIBE)
-    SubscribableChannel sendMsg();
+    @Input(GENERATE_SUB_ORDER_SUBSCRIBE)
+    SubscribableChannel generateSubOrder();
 
 }

@@ -1109,6 +1109,126 @@ public class RepaymentPlanExample implements Serializable {
             addCriterion("update_operator not between", value1, value2, "updateOperator");
             return (Criteria) this;
         }
+
+        public Criteria andDeleteFlagIsNull() {
+            addCriterion("delete_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagIsNotNull() {
+            addCriterion("delete_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagEqualTo(Integer value) {
+            addCriterion("delete_flag =", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagNotEqualTo(Integer value) {
+            addCriterion("delete_flag <>", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagGreaterThan(Integer value) {
+            addCriterion("delete_flag >", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagGreaterThanOrEqualTo(Integer value) {
+            addCriterion("delete_flag >=", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagLessThan(Integer value) {
+            addCriterion("delete_flag <", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagLessThanOrEqualTo(Integer value) {
+            addCriterion("delete_flag <=", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagIn(List<Integer> values) {
+            addCriterion("delete_flag in", values, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagNotIn(List<Integer> values) {
+            addCriterion("delete_flag not in", values, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagBetween(Integer value1, Integer value2) {
+            addCriterion("delete_flag between", value1, value2, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagNotBetween(Integer value1, Integer value2) {
+            addCriterion("delete_flag not between", value1, value2, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdIsNull() {
+            addCriterion("sort_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdIsNotNull() {
+            addCriterion("sort_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdEqualTo(Integer value) {
+            addCriterion("sort_id =", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdNotEqualTo(Integer value) {
+            addCriterion("sort_id <>", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdGreaterThan(Integer value) {
+            addCriterion("sort_id >", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sort_id >=", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdLessThan(Integer value) {
+            addCriterion("sort_id <", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdLessThanOrEqualTo(Integer value) {
+            addCriterion("sort_id <=", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdIn(List<Integer> values) {
+            addCriterion("sort_id in", values, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdNotIn(List<Integer> values) {
+            addCriterion("sort_id not in", values, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdBetween(Integer value1, Integer value2) {
+            addCriterion("sort_id between", value1, value2, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("sort_id not between", value1, value2, "sortId");
+            return (Criteria) this;
+        }
     }
 
     /**

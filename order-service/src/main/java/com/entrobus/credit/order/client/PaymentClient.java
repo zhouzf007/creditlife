@@ -1,42 +1,43 @@
-package com.entrobus.credit.user.client;
+package com.entrobus.credit.order.client;
 
+import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * Created by zhouzf on 2017/12/28.
  */
-@FeignClient(name = "msg-service", fallback = MsgClient.MsgClientFallback.class)
-public interface MsgClient {
+@FeignClient(name = "payment-service", fallback = PaymentClient.PaymentClientFallback.class)
+public interface PaymentClient {
 
-    @RequestMapping(value = "/verificationCode/{mobile}", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    String sendVerificationCode(@PathVariable("mobile") String mobile,@RequestParam("content") String content);
+    @GetMapping(value = "/orderRepaymentState/{orderId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    int getOrderRepaymentState(@PathVariable("orderId") String orderId);
 
-    @RequestMapping(value = "/message/{mobile}", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    String sendMessage(@PathVariable("mobile") String mobile,@RequestParam("content") String content);
+    @GetMapping(value = "/orderRepaymentPlan/{orderId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    List<RepaymentPlan> getOrderRepaymentPlan(@PathVariable("orderId") String orderId);
 
     @Component
-    class MsgClientFallback implements MsgClient {
+    class PaymentClientFallback implements PaymentClient {
 
         @Override
-        public String sendVerificationCode(String mobile, String content) {
+        public int getOrderRepaymentState(String orderId) {
             LOGGER.info("异常发生，进入fallback方法");
-            return "SEND VERIFICATIONCODE FAILED! - FALLING BACK";
+            return -1;
         }
 
         @Override
-        public String sendMessage(String mobile, String content) {
+        public List<RepaymentPlan> getOrderRepaymentPlan(String orderId) {
             LOGGER.info("异常发生，进入fallback方法");
-            return "SEND MESSAGE FAILED! - FALLING BACK";
+            return null;
         }
 
-        private static final Logger LOGGER = LoggerFactory.getLogger(MsgClientFallback.class);
+        private static final Logger LOGGER = LoggerFactory.getLogger(PaymentClientFallback.class);
     }
 }

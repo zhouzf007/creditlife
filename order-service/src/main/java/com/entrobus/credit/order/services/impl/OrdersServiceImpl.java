@@ -1,5 +1,6 @@
 package com.entrobus.credit.order.services.impl;
 
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.order.dao.OrdersMapper;
 import com.entrobus.credit.order.services.OrdersService;
 import com.entrobus.credit.pojo.order.Orders;
@@ -62,5 +63,13 @@ public class OrdersServiceImpl implements OrdersService {
 
     public int insertSelective(Orders record) {
         return this.ordersMapper.insertSelective(record);
+    }
+
+    @Override
+    public List<Orders> getUserOrders(String userId) {
+        OrdersExample example = new OrdersExample();
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).
+                andUserIdEqualTo(userId);
+        return this.ordersMapper.selectByExample(example);
     }
 }
