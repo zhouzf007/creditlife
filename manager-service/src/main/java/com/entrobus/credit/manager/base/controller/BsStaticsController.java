@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.base.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.common.client.BsStaticsClient;
+import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.base.BsStaticVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bs/statics")
-public class BsStaticsController {
+public class BsStaticsController extends ManagerBaseController{
     @Autowired
     private BsStaticsClient bsStaticsClient;
     /**
