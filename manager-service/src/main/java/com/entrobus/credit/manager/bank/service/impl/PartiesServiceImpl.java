@@ -103,7 +103,7 @@ public class PartiesServiceImpl implements PartiesService {
             return WebResult.error("手机号码已被绑定其他资金方");
         }
         //查询手机号是否已注册社区贷资金平台
-        if(sysUserService.checkUserName(partiesExt.getContractMobile(),Constants.PLATFORM.BANK)){
+        if(sysUserService.checkUserName(partiesExt.getContractMobile())){
             return WebResult.error("手机号码已注册社区贷资金平台，请更换手机重试");
         }
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
@@ -165,11 +165,23 @@ public class PartiesServiceImpl implements PartiesService {
     @Override
     public WebResult edit(PartiesExt partiesExt) {
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
+        Parties parties = this.selectByPrimaryKey(partiesExt.getId());
+        //查询是否已经存在该资金方
+        if(checkName(partiesExt.getName(),partiesExt.getId())){
+            return WebResult.error("已经存在该资金方");
+        }
+        //查询手机号是否已经被注册
+        if(checkContractMobile(partiesExt.getContractMobile(),partiesExt.getId())){
+            return WebResult.error("手机号码已被绑定其他资金方");
+        }
+        //查询手机号是否已注册社区贷资金平台
+        if(sysUserService.checkUserName(partiesExt.getContractMobile(),parties.getSysUserId())){
+            return WebResult.error("手机号码已注册社区贷资金平台，请更换手机重试");
+        }
         //修改资金方
         partiesExt.setUpdateTime(new Date());
         partiesExt.setUpdateOperator(userInfo.getId()+"");
         this.updateByPrimaryKeySelective(partiesExt);
-        Parties parties = this.selectByPrimaryKey(partiesExt.getId());
         //修改对应账号
         SysUser sysUser = new SysUser();
         sysUser.setId(parties.getSysUserId());
@@ -240,6 +252,33 @@ public class PartiesServiceImpl implements PartiesService {
     public boolean checkName(String name) {
         PartiesExample partiesExample = new PartiesExample();
         partiesExample.createCriteria().andNameEqualTo(name)
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        List<Parties> partiesList = this.selectByExample(partiesExample);
+        if(ConversionUtil.isNotEmptyParameter(partiesList)){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkName(String name, String id) {
+        PartiesExample partiesExample = new PartiesExample();
+        partiesExample.createCriteria().andNameEqualTo(name)
+                .andIdNotEqualTo(id)
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        List<Parties> partiesList = this.selectByExample(partiesExample);
+        if(ConversionUtil.isNotEmptyParameter(partiesList)){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkContractMobile(String mobile, String id) {
+        //查询手机号是否已经被注册
+        PartiesExample partiesExample = new PartiesExample();
+        partiesExample.createCriteria().andContractMobileEqualTo(mobile)
+                .andIdNotEqualTo(id)
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
         List<Parties> partiesList = this.selectByExample(partiesExample);
         if(ConversionUtil.isNotEmptyParameter(partiesList)){

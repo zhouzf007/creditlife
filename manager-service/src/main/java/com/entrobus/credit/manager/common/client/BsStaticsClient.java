@@ -117,7 +117,7 @@ public interface BsStaticsClient {
      * 批量删除，并删除缓存
      * 暂时这样
      *
-     * @param id
+     * @param ids
      * @return
      */
     @PostMapping("/trashCan")

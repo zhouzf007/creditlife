@@ -163,6 +163,7 @@ public class SysUserServiceImpl implements SysUserService {
         return WebResult.ok("创建成功");
     }
 
+    @Transactional
     @Override
     public WebResult update(SysUserExt sysUserExt) {
         //判断要新增的用户的用户名是否已经存在
@@ -291,10 +292,22 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public boolean checkUserName(String userName,Integer platform) {
+    public boolean checkUserName(String userName) {
         SysUserExample example = new SysUserExample();
         example.createCriteria().andUsernameEqualTo(userName)
-//                .andPlatformEqualTo(platform)
+                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        List<SysUser> sysUsers = this.selectByExample(example);
+        if(ConversionUtil.isNotEmptyParameter(sysUsers)){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkUserName(String userName, Long id) {
+        SysUserExample example = new SysUserExample();
+        example.createCriteria().andUsernameEqualTo(userName)
+                .andIdNotEqualTo(id)
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
         List<SysUser> sysUsers = this.selectByExample(example);
         if(ConversionUtil.isNotEmptyParameter(sysUsers)){

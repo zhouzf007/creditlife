@@ -70,10 +70,11 @@ public interface SysUserService {
     /**
      * 检查对应平台账号是否重复 重复=true
      * @param userName
-     * @param platform
      * @return
      */
-    boolean checkUserName(String userName,Integer platform);
+    boolean checkUserName(String userName);
+
+    boolean checkUserName(String userName,Long id);
 
     /**
      * 通过username获取用户
