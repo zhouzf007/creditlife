@@ -90,8 +90,4 @@ public interface Constants {
         int YES = 1;
     }
 
-    interface USER_LOGIN_REDIS{
-        String TOKEN = "user-service:login:";
-        String VERIFYCODE = "user-service:verifyCode:";
-    }
 }

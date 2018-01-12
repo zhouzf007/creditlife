@@ -27,8 +27,6 @@ public class UserServiceController {
 
     @Autowired
     RedisTemplate redisTemplate;
-    @Autowired
-    private UserCacheService userCacheService;
 
     @Autowired
     MsgClient msgClient;
@@ -85,10 +83,7 @@ public class UserServiceController {
         msgChannel.sendMsg().send(msgs);
     }
 
+    @Autowired
+    private UserCacheService userCacheService;
 
-//    @RequestMapping(method = RequestMethod.POST, path = "/applyLoan")
-//    public void apply(@RequestBody Map<String, Object> msg) {
-//        Message<Map<String, Object>> msgs = MessageBuilder.withPayload(msg).build();
-//        msgChannel.sendMsg().send(msgs);
-//    }
 }

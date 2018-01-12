@@ -1,7 +1,8 @@
 package com.entrobus.credit.user.common.controller;
 
 import com.entrobus.credit.cache.CacheService;
-import com.entrobus.credit.user.bean.LoginUserInfo;
+import com.entrobus.credit.cache.Cachekey;
+import com.entrobus.credit.user.bean.CacheUserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,16 +45,19 @@ public class BaseController {
 
     /**
      * 获取当前登录的系统用户
+     *
      * @return
      */
-    protected LoginUserInfo getCurrLoginUser() {
+    protected CacheUserInfo getCurrLoginUser() {
         String token = getRequest().getParameter("token");
-        LoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate, Constants.USER_LOGIN_REDIS.TOKEN+token,LoginUserInfo.class);
+        String userId = CacheService.getString(redisTemplate, token);
+        CacheUserInfo loginUser = CacheService.getCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + userId, CacheUserInfo.class);
         return loginUser;
     }
 
     /**
      * 登录用户的ID
+     *
      * @return
      */
     protected String getLoginUserId() {
