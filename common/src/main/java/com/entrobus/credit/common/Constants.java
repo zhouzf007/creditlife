@@ -59,7 +59,7 @@ public interface Constants {
         int BANK = 1;//银行后台
     }
 
-    interface PARTIES_STATE{
+    interface ORGANIZATION_STATE{
         int NORMAL = 0;
         int FROZEN = 1;
     }

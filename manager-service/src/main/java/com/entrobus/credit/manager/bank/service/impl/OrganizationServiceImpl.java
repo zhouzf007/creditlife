@@ -4,13 +4,12 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
-import com.entrobus.credit.manager.bank.service.PartiesService;
-import com.entrobus.credit.manager.common.bean.PartiesExt;
+import com.entrobus.credit.manager.bank.service.OrganizationService;
+import com.entrobus.credit.manager.common.bean.OrganizationExt;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
-import com.entrobus.credit.manager.common.bean.SysRoleExt;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
 import com.entrobus.credit.manager.common.service.ManagerCacheService;
-import com.entrobus.credit.manager.dao.PartiesMapper;
+import com.entrobus.credit.manager.dao.OrganizationMapper;
 import com.entrobus.credit.manager.sys.security.shiro.ShiroUtils;
 import com.entrobus.credit.manager.sys.service.*;
 import com.entrobus.credit.pojo.manager.*;
@@ -21,15 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class PartiesServiceImpl implements PartiesService {
+public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
-    private PartiesMapper partiesMapper;
+    private OrganizationMapper organizationMapper;
     @Autowired
     private ManagerCacheService managerCacheService;
     @Autowired
@@ -43,79 +41,79 @@ public class PartiesServiceImpl implements PartiesService {
     @Autowired
     private SysRoleResourceService sysRoleResourceService;
 
-    private static final Logger logger = LoggerFactory.getLogger(PartiesServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrganizationServiceImpl.class);
 
-    public int countByExample(PartiesExample example) {
-        int count = this.partiesMapper.countByExample(example);
+    public int countByExample(OrganizationExample example) {
+        int count = this.organizationMapper.countByExample(example);
         logger.debug("count: {}", count);
         return count;
     }
 
-    public Parties selectByPrimaryKey(String id) {
-        return this.partiesMapper.selectByPrimaryKey(id);
+    public Organization selectByPrimaryKey(String id) {
+        return this.organizationMapper.selectByPrimaryKey(id);
     }
 
-    public List<Parties> selectByExample(PartiesExample example) {
-        return this.partiesMapper.selectByExample(example);
+    public List<Organization> selectByExample(OrganizationExample example) {
+        return this.organizationMapper.selectByExample(example);
     }
 
     public int deleteByPrimaryKey(String id) {
-        return this.partiesMapper.deleteByPrimaryKey(id);
+        return this.organizationMapper.deleteByPrimaryKey(id);
     }
 
-    public int updateByPrimaryKeySelective(Parties record) {
-        return this.partiesMapper.updateByPrimaryKeySelective(record);
+    public int updateByPrimaryKeySelective(Organization record) {
+        return this.organizationMapper.updateByPrimaryKeySelective(record);
     }
 
-    public int updateByPrimaryKey(Parties record) {
-        return this.partiesMapper.updateByPrimaryKey(record);
+    public int updateByPrimaryKey(Organization record) {
+        return this.organizationMapper.updateByPrimaryKey(record);
     }
 
-    public int deleteByExample(PartiesExample example) {
-        return this.partiesMapper.deleteByExample(example);
+    public int deleteByExample(OrganizationExample example) {
+        return this.organizationMapper.deleteByExample(example);
     }
 
-    public int updateByExampleSelective(Parties record, PartiesExample example) {
-        return this.partiesMapper.updateByExampleSelective(record, example);
+    public int updateByExampleSelective(Organization record, OrganizationExample example) {
+        return this.organizationMapper.updateByExampleSelective(record, example);
     }
 
-    public int updateByExample(Parties record, PartiesExample example) {
-        return this.partiesMapper.updateByExample(record, example);
+    public int updateByExample(Organization record, OrganizationExample example) {
+        return this.organizationMapper.updateByExample(record, example);
     }
 
-    public int insert(Parties record) {
-        return this.partiesMapper.insert(record);
+    public int insert(Organization record) {
+        return this.organizationMapper.insert(record);
     }
 
-    public int insertSelective(Parties record) {
-        return this.partiesMapper.insertSelective(record);
+    public int insertSelective(Organization record) {
+        return this.organizationMapper.insertSelective(record);
     }
 
     @Transactional
     @Override
-    public WebResult add(PartiesExt partiesExt) {
+    public WebResult add(OrganizationExt organizationExt) {
         //查询是否已经存在该资金方
-        if(checkName(partiesExt.getName())){
+        if(checkName(organizationExt.getName())){
             return WebResult.error("已经存在该资金方");
         }
         //查询手机号是否已经被注册
-        if(checkContractMobile(partiesExt.getContractMobile())){
+        if(checkContractMobile(organizationExt.getContractMobile())){
             return WebResult.error("手机号码已被绑定其他资金方");
         }
         //查询手机号是否已注册社区贷资金平台
-        if(sysUserService.checkUserName(partiesExt.getContractMobile())){
+        if(sysUserService.checkUserName(organizationExt.getContractMobile())){
             return WebResult.error("手机号码已注册社区贷资金平台，请更换手机重试");
         }
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
-        partiesExt.setCreateTime(new Date());
-        partiesExt.setCreateOperator(userInfo.getId()+"");
-        partiesExt.setDeleteFlag(Constants.DeleteFlag.NO);
-        partiesExt.setId(GUIDUtil.genRandomGUID());
-        Integer result = this.insertSelective(partiesExt);
+        organizationExt.setCreateTime(new Date());
+        organizationExt.setCreateOperator(userInfo.getId()+"");
+        organizationExt.setDeleteFlag(Constants.DeleteFlag.NO);
+        organizationExt.setId(GUIDUtil.genRandomGUID());
+        Integer result = this.insertSelective(organizationExt);
         if(result>0){
             //add资金方sysRole
             SysRole sysRole = new SysRole();
-            sysRole.setOrgId(partiesExt.getId());
+            sysRole.setOrgId(organizationExt.getId());
             sysRole.setRoleName("系统管理员");
             sysRole.setRemark("系统生成资金方时生成的默认角色");
             sysRole.setPlatform(Constants.PLATFORM.BANK);
@@ -137,11 +135,11 @@ public class PartiesServiceImpl implements PartiesService {
             List<Long> roleIds = new ArrayList<>();
             roleIds.add(sysRole.getId());
             SysUserExt sysUserExt = new SysUserExt();
-            sysUserExt.setOrgId(partiesExt.getId());
-            sysUserExt.setUsername(partiesExt.getContractMobile());
-            sysUserExt.setPassword(partiesExt.getPassword());
-            sysUserExt.setCellphone(partiesExt.getContractMobile());
-            sysUserExt.setRealName(partiesExt.getContractName());
+            sysUserExt.setOrgId(organizationExt.getId());
+            sysUserExt.setUsername(organizationExt.getContractMobile());
+            sysUserExt.setPassword(organizationExt.getPassword());
+            sysUserExt.setCellphone(organizationExt.getContractMobile());
+            sysUserExt.setRealName(organizationExt.getContractName());
             sysUserExt.setSex(0);
             sysUserExt.setAge(0);
             sysUserExt.setStatus(0);
@@ -151,10 +149,10 @@ public class PartiesServiceImpl implements PartiesService {
             sysUserExt.setPlatform(Constants.PLATFORM.BANK);
             sysUserExt.setRoleIdList(roleIds);
             sysUserService.save(sysUserExt);
-            Parties parties = new Parties();
-            parties.setId(partiesExt.getId());
-            parties.setSysUserId(sysUserExt.getId());
-            this.updateByPrimaryKeySelective(parties);
+            Organization organization = new Organization();
+            organization.setId(organizationExt.getId());
+            organization.setSysUserId(sysUserExt.getId());
+            this.updateByPrimaryKeySelective(organization);
             return WebResult.ok("添加成功");
         }else{
             return WebResult.error("添加失败");
@@ -163,41 +161,41 @@ public class PartiesServiceImpl implements PartiesService {
 
     @Transactional
     @Override
-    public WebResult edit(PartiesExt partiesExt) {
+    public WebResult edit(OrganizationExt organizationExt) {
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
-        Parties parties = this.selectByPrimaryKey(partiesExt.getId());
+        Organization organization = this.selectByPrimaryKey(organizationExt.getId());
         //查询是否已经存在该资金方
-        if(checkName(partiesExt.getName(),partiesExt.getId())){
+        if(checkName(organizationExt.getName(), organizationExt.getId())){
             return WebResult.error("已经存在该资金方");
         }
         //查询手机号是否已经被注册
-        if(checkContractMobile(partiesExt.getContractMobile(),partiesExt.getId())){
+        if(checkContractMobile(organizationExt.getContractMobile(), organizationExt.getId())){
             return WebResult.error("手机号码已被绑定其他资金方");
         }
         //查询手机号是否已注册社区贷资金平台
-        if(sysUserService.checkUserName(partiesExt.getContractMobile(),parties.getSysUserId())){
+        if(sysUserService.checkUserName(organizationExt.getContractMobile(),organization.getSysUserId())){
             return WebResult.error("手机号码已注册社区贷资金平台，请更换手机重试");
         }
         //修改资金方
-        partiesExt.setUpdateTime(new Date());
-        partiesExt.setUpdateOperator(userInfo.getId()+"");
-        this.updateByPrimaryKeySelective(partiesExt);
+        organizationExt.setUpdateTime(new Date());
+        organizationExt.setUpdateOperator(userInfo.getId()+"");
+        this.updateByPrimaryKeySelective(organizationExt);
         //修改对应账号
         SysUser sysUser = new SysUser();
-        sysUser.setId(parties.getSysUserId());
-        sysUser.setUsername(partiesExt.getContractMobile());
+        sysUser.setId(organization.getSysUserId());
+        sysUser.setUsername(organizationExt.getContractMobile());
         String salt = RandomStringUtils.randomAlphanumeric(20);
         //将密码使用sha256加密
-        sysUser.setPassword(ShiroUtils.sha256(partiesExt.getPassword(),salt));
+        sysUser.setPassword(ShiroUtils.sha256(organizationExt.getPassword(),salt));
         sysUser.setSalt(salt);
-        sysUser.setStatus(partiesExt.getState());
+        sysUser.setStatus(organizationExt.getState());
         sysUser.setUpdateTime(new Date());
         sysUser.setUpdateUser(userInfo.getId());
         sysUserService.updateByPrimaryKeySelective(sysUser);
         //冻结资金方下面所有账号
-        if(partiesExt.getState()==Constants.PARTIES_STATE.FROZEN){
+        if(organizationExt.getState()==Constants.ORGANIZATION_STATE.FROZEN){
             SysUserExample sysUserExample = new SysUserExample();
-            sysUserExample.createCriteria().andOrgIdEqualTo(partiesExt.getId())
+            sysUserExample.createCriteria().andOrgIdEqualTo(organizationExt.getId())
                     .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
             List<SysUser> sysUsers = sysUserService.selectByExample(sysUserExample);
             if(ConversionUtil.isNotEmptyParameter(sysUsers)){
@@ -250,11 +248,11 @@ public class PartiesServiceImpl implements PartiesService {
 
     @Override
     public boolean checkName(String name) {
-        PartiesExample partiesExample = new PartiesExample();
-        partiesExample.createCriteria().andNameEqualTo(name)
+        OrganizationExample organizationExample = new OrganizationExample();
+        organizationExample.createCriteria().andNameEqualTo(name)
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
-        List<Parties> partiesList = this.selectByExample(partiesExample);
-        if(ConversionUtil.isNotEmptyParameter(partiesList)){
+        List<Organization> organizationList = this.selectByExample(organizationExample);
+        if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
         }
         return false;
@@ -262,12 +260,12 @@ public class PartiesServiceImpl implements PartiesService {
 
     @Override
     public boolean checkName(String name, String id) {
-        PartiesExample partiesExample = new PartiesExample();
-        partiesExample.createCriteria().andNameEqualTo(name)
+        OrganizationExample organizationExample = new OrganizationExample();
+        organizationExample.createCriteria().andNameEqualTo(name)
                 .andIdNotEqualTo(id)
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
-        List<Parties> partiesList = this.selectByExample(partiesExample);
-        if(ConversionUtil.isNotEmptyParameter(partiesList)){
+        List<Organization> organizationList = this.selectByExample(organizationExample);
+        if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
         }
         return false;
@@ -276,12 +274,12 @@ public class PartiesServiceImpl implements PartiesService {
     @Override
     public boolean checkContractMobile(String mobile, String id) {
         //查询手机号是否已经被注册
-        PartiesExample partiesExample = new PartiesExample();
-        partiesExample.createCriteria().andContractMobileEqualTo(mobile)
+        OrganizationExample organizationExample = new OrganizationExample();
+        organizationExample.createCriteria().andContractMobileEqualTo(mobile)
                 .andIdNotEqualTo(id)
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
-        List<Parties> partiesList = this.selectByExample(partiesExample);
-        if(ConversionUtil.isNotEmptyParameter(partiesList)){
+        List<Organization> organizationList = this.selectByExample(organizationExample);
+        if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
         }
         return false;
@@ -290,11 +288,11 @@ public class PartiesServiceImpl implements PartiesService {
     @Override
     public boolean checkContractMobile(String mobile) {
         //查询手机号是否已经被注册
-        PartiesExample partiesExample = new PartiesExample();
-        partiesExample.createCriteria().andContractMobileEqualTo(mobile)
+        OrganizationExample organizationExample = new OrganizationExample();
+        organizationExample.createCriteria().andContractMobileEqualTo(mobile)
                 .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
-        List<Parties> partiesList = this.selectByExample(partiesExample);
-        if(ConversionUtil.isNotEmptyParameter(partiesList)){
+        List<Organization> organizationList = this.selectByExample(organizationExample);
+        if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
         }
         return false;
