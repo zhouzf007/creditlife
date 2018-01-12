@@ -59,8 +59,23 @@ public interface Constants {
         int BANK = 1;//银行后台
     }
 
-    interface PARTIES_STATE{
+    interface ORGANIZATION_STATE{
         int NORMAL = 0;
         int FROZEN = 1;
+    }
+
+    interface ORDER_STATE{
+        int AUIDT_PENGDING = 0;//待审核
+        int LOAN_PENGDING = 1;//待放款
+        int REJECTION = 2;//已驳回
+        int PASS = 3;//使用中
+        int OVERDUE = 4;//已逾期
+        int FINISHED = 5;//已完成
+    }
+
+    interface REPAYMENT_ORDER_STATE{
+        int PASS = 3;//使用中
+        int OVERDUE = 4;//已逾期
+        int FINISHED = 5;//已结清
     }
 }

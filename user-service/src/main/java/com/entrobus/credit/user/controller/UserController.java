@@ -1,19 +1,23 @@
 package com.entrobus.credit.user.controller;
 
 import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
-import com.entrobus.credit.user.bean.LoginUserInfo;
+import com.entrobus.credit.user.bean.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
 import com.entrobus.credit.user.services.UserInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.misc.Cache;
 import utils.Constants;
 import utils.ShiroUtils;
 
@@ -58,7 +62,7 @@ public class UserController extends BaseController {
         //登录成功，生成登录token
         String token = GUIDUtil.genRandomGUID();
         //userInfo
-        LoginUserInfo loginUserInfo = userInfoService.getLoginUserInfo(userInfo, token);
+        CacheUserInfo loginUserInfo = userInfoService.getLoginUserInfo(userInfo, token);
         return WebResult.ok().put("token",token).put("data", loginUserInfo);
     }
 
@@ -76,7 +80,7 @@ public class UserController extends BaseController {
         if(userInfos != null && userInfos.size() > 0){
             return WebResult.error("该手机号码已注册");
         }
-        String verifyCode = CacheService.getCacheObj(redisTemplate, Constants.USER_LOGIN_REDIS.VERIFYCODE + cellphone, String.class);
+        String verifyCode = CacheService.getCacheObj(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone, String.class);
         if(!verifyCode.equals(code)){
             return WebResult.error("短信验证码不正确");
         }
@@ -102,7 +106,7 @@ public class UserController extends BaseController {
         if(userInfos == null && userInfos.size() <= 0){
             return WebResult.error("该手机号码尚未注册");
         }
-        String verifyCode = CacheService.getCacheObj(redisTemplate, Constants.USER_LOGIN_REDIS.VERIFYCODE + cellphone, String.class);
+        String verifyCode = CacheService.getCacheObj(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone, String.class);
         if(!verifyCode.equals(code)){
             return WebResult.error("短信验证码不正确");
         }
@@ -132,7 +136,7 @@ public class UserController extends BaseController {
         //判断是否为业主
         //发送验证码
         String verifyCode = msgClient.sendVerificationCode(cellphone, "");
-        CacheService.setCacheObjExpir(redisTemplate, Constants.USER_LOGIN_REDIS.VERIFYCODE+cellphone, verifyCode, 1000*60*30);
+        CacheService.setCacheObjExpir(redisTemplate, Cachekey.Sms.VERIFICATION_CODE+cellphone, verifyCode, 1000*60*30);
         return WebResult.ok();
     }
 
@@ -144,13 +148,25 @@ public class UserController extends BaseController {
         if(ConversionUtil.isContainEmptyParam(token)){
             return WebResult.error("传入参数有错误");
         }
-        LoginUserInfo loginUser = getCurrLoginUser();
+        CacheUserInfo loginUser = getCurrLoginUser();
         if(ConversionUtil.isContainEmptyParam(loginUser)){
             return WebResult.error("token不合法或已过期");
         }
         UserInfo userInfo = userInfoService.selectByPrimaryKey(loginUser.getId());
         loginUser = userInfoService.getLoginUserInfo(userInfo, token);
         return WebResult.ok().put("data", loginUser);
+    }
+
+    /*
+   * 判断用户的贷款状态
+   * */
+    @RequestMapping("/userLoanState/{id}")
+    public WebResult getUserLoanState(@PathVariable("id") String id){
+        if(StringUtils.isEmpty(id)){
+            return WebResult.error("传入参数有错误");
+        }
+
+        return WebResult.ok().put("data", "");
     }
 
 }

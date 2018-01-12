@@ -27,4 +27,6 @@ public interface OrdersService {
     int insert(Orders record);
 
     int insertSelective(Orders record);
+
+    List<Orders> getUserOrders(String userId);
 }

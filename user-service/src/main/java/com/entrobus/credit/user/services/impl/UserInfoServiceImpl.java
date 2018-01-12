@@ -1,12 +1,13 @@
 package com.entrobus.credit.user.services.impl;
 
 import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
-import com.entrobus.credit.user.bean.LoginUserInfo;
+import com.entrobus.credit.user.bean.CacheUserInfo;
 import com.entrobus.credit.user.bean.UserAccountInfo;
 import com.entrobus.credit.user.dao.UserInfoMapper;
 import com.entrobus.credit.user.services.UserAccountService;
@@ -87,8 +88,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public LoginUserInfo getLoginUserInfo(UserInfo record, String token) {
-        LoginUserInfo loginUserInfo = new LoginUserInfo();
+    public CacheUserInfo getLoginUserInfo(UserInfo record, String token) {
+        CacheUserInfo loginUserInfo = new CacheUserInfo();
         try {
             BeanUtils.copyProperties(loginUserInfo, record);
         } catch (Exception e) {
@@ -108,7 +109,8 @@ public class UserInfoServiceImpl implements UserInfoService {
             userAccountInfos.add(userAccountInfo);
         }
         loginUserInfo.setUserAccountInfos(userAccountInfos);
-        CacheService.setCacheObj(redisTemplate, Constants.USER_LOGIN_REDIS.TOKEN + token, loginUserInfo);
+        CacheService.setCacheObj(redisTemplate, Cachekey.User.SID_PREFIX+ token, loginUserInfo.getId());
+        CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX+ loginUserInfo.getId(), loginUserInfo);
         return loginUserInfo;
     }
 

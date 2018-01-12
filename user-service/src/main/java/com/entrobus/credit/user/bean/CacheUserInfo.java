@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by mozl on 2018/1/11.
  */
-public class LoginUserInfo {
+public class CacheUserInfo {
 
     private String id;
     private String name;//昵称

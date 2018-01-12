@@ -9,6 +9,16 @@ eureka:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
 
+spring:
+#配置generate-sub-order topic 订阅者
+  cloud:
+    stream:
+      bindings:
+        generate_sub_order_subscribe:
+          destination: generate-sub-order
+          consumer:
+            durableSubscription: true
+
 security:
   user:
     name: user

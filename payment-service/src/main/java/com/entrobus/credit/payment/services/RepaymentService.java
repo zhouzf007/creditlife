@@ -26,4 +26,7 @@ public interface RepaymentService {
     int insert(Repayment record);
 
     int insertSelective(Repayment record);
+
+    Repayment getRepaymentByOrderId(String orderId);
+
 }

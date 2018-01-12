@@ -27,8 +27,6 @@ public class UserServiceController {
 
     @Autowired
     RedisTemplate redisTemplate;
-    @Autowired
-    private UserCacheService userCacheService;
 
     @Autowired
     MsgClient msgClient;
@@ -84,5 +82,8 @@ public class UserServiceController {
         Message<Map<String, Object>> msgs = MessageBuilder.withPayload(msg).build();
         msgChannel.sendMsg().send(msgs);
     }
+
+    @Autowired
+    private UserCacheService userCacheService;
 
 }

@@ -1,10 +1,18 @@
 package com.entrobus.credit.payment.services.impl;
 
+import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.payment.dao.RepaymentPlanMapper;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
+import com.entrobus.credit.pojo.payment.Repayment;
+import com.entrobus.credit.pojo.payment.RepaymentExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.pojo.payment.RepaymentPlanExample;
+
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +44,12 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     }
 
     public int updateByPrimaryKeySelective(RepaymentPlan record) {
+        record.setUpdateTime(new Date());
         return this.repaymentPlanMapper.updateByPrimaryKeySelective(record);
     }
 
     public int updateByPrimaryKey(RepaymentPlan record) {
+        record.setUpdateTime(new Date());
         return this.repaymentPlanMapper.updateByPrimaryKey(record);
     }
 
@@ -48,18 +58,38 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     }
 
     public int updateByExampleSelective(RepaymentPlan record, RepaymentPlanExample example) {
+        record.setUpdateTime(new Date());
         return this.repaymentPlanMapper.updateByExampleSelective(record, example);
     }
 
     public int updateByExample(RepaymentPlan record, RepaymentPlanExample example) {
+        record.setUpdateTime(new Date());
         return this.repaymentPlanMapper.updateByExample(record, example);
     }
 
     public int insert(RepaymentPlan record) {
+        defaultValue(record);
         return this.repaymentPlanMapper.insert(record);
     }
 
     public int insertSelective(RepaymentPlan record) {
+        defaultValue(record);
         return this.repaymentPlanMapper.insertSelective(record);
+    }
+
+    @Override
+    public List<RepaymentPlan> getRepaymentPlanByOrderId(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        return this.selectByExample(example);
+    }
+
+    protected void defaultValue(RepaymentPlan record) {
+        if (StringUtils.isEmpty(record.getId())) {
+            record.setId(GUIDUtil.genRandomGUID());
+        }
+        record.setCreateTime(new Date());
+        record.setDeleteFlag(Constants.DeleteFlag.NO);
+        record.setUpdateTime(new Date());
     }
 }

@@ -670,6 +670,76 @@ public class OrdersExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andProdIdIsNull() {
+            addCriterion("prod_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdIsNotNull() {
+            addCriterion("prod_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdEqualTo(String value) {
+            addCriterion("prod_id =", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotEqualTo(String value) {
+            addCriterion("prod_id <>", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdGreaterThan(String value) {
+            addCriterion("prod_id >", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdGreaterThanOrEqualTo(String value) {
+            addCriterion("prod_id >=", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdLessThan(String value) {
+            addCriterion("prod_id <", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdLessThanOrEqualTo(String value) {
+            addCriterion("prod_id <=", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdLike(String value) {
+            addCriterion("prod_id like", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotLike(String value) {
+            addCriterion("prod_id not like", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdIn(List<String> values) {
+            addCriterion("prod_id in", values, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotIn(List<String> values) {
+            addCriterion("prod_id not in", values, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdBetween(String value1, String value2) {
+            addCriterion("prod_id between", value1, value2, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotBetween(String value1, String value2) {
+            addCriterion("prod_id not between", value1, value2, "prodId");
+            return (Criteria) this;
+        }
+
         public Criteria andCreditScoreIsNull() {
             addCriterion("credit_score is null");
             return (Criteria) this;
@@ -1097,6 +1167,66 @@ public class OrdersExample implements Serializable {
 
         public Criteria andInterestRateNotBetween(Integer value1, Integer value2) {
             addCriterion("interest_rate not between", value1, value2, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateIsNull() {
+            addCriterion("system_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateIsNotNull() {
+            addCriterion("system_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateEqualTo(Integer value) {
+            addCriterion("system_state =", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateNotEqualTo(Integer value) {
+            addCriterion("system_state <>", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateGreaterThan(Integer value) {
+            addCriterion("system_state >", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("system_state >=", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateLessThan(Integer value) {
+            addCriterion("system_state <", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateLessThanOrEqualTo(Integer value) {
+            addCriterion("system_state <=", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateIn(List<Integer> values) {
+            addCriterion("system_state in", values, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateNotIn(List<Integer> values) {
+            addCriterion("system_state not in", values, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateBetween(Integer value1, Integer value2) {
+            addCriterion("system_state between", value1, value2, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("system_state not between", value1, value2, "systemState");
             return (Criteria) this;
         }
 
@@ -1877,6 +2007,66 @@ public class OrdersExample implements Serializable {
 
         public Criteria andDeleteOperatorNotBetween(String value1, String value2) {
             addCriterion("delete_operator not between", value1, value2, "deleteOperator");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
     }

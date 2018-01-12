@@ -1,10 +1,17 @@
 package com.entrobus.credit.payment.services.impl;
 
+import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.payment.dao.RepaymentInstanceMapper;
 import com.entrobus.credit.payment.services.RepaymentInstanceService;
+import com.entrobus.credit.pojo.payment.Repayment;
 import com.entrobus.credit.pojo.payment.RepaymentInstance;
 import com.entrobus.credit.pojo.payment.RepaymentInstanceExample;
+
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,10 +63,19 @@ public class RepaymentInstanceServiceImpl implements RepaymentInstanceService {
     }
 
     public int insert(RepaymentInstance record) {
+        defaultValue(record);
         return this.repaymentInstanceMapper.insert(record);
     }
 
     public int insertSelective(RepaymentInstance record) {
+        defaultValue(record);
         return this.repaymentInstanceMapper.insertSelective(record);
+    }
+
+    protected void defaultValue(RepaymentInstance record) {
+        if (StringUtils.isEmpty(record.getId())) {
+            record.setId(GUIDUtil.genRandomGUID());
+        }
+        record.setCreateTime(new Date());
     }
 }
