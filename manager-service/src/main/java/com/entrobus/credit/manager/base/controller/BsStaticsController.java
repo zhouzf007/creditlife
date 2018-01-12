@@ -20,8 +20,8 @@ public class BsStaticsController {
      * @return
      */
     @GetMapping("")
-    public WebResult list( String codeType, String status, Integer pageNum, Integer pageSize){
-        return bsStaticsClient.list(codeType,status,pageNum,pageSize);
+    public WebResult list( String codeType, String status, Integer offset, Integer limit){
+        return bsStaticsClient.list(codeType,status,offset,limit);
     }
     /**
      * 添加，并缓存
