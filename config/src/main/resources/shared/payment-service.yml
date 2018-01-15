@@ -72,6 +72,15 @@ spring:
         - 10.1.1.241:7004
         - 10.1.1.241:7005
 
+#配置generate-sub-order topic 订阅者
+  cloud:
+    stream:
+      bindings:
+        generate_sub_order_subscribe:
+          destination: generate-sub-order
+          consumer:
+            durableSubscription: true
+
 #  配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml

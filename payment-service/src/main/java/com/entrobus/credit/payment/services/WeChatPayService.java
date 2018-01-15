@@ -1,6 +1,7 @@
 package com.entrobus.credit.payment.services;
 
 import com.github.binarywang.wxpay.bean.result.WxEntPayResult;
+import com.github.binarywang.wxpay.bean.result.WxPaySendRedpackResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 
 /**
@@ -16,4 +17,13 @@ public interface WeChatPayService {
      * @throws WxPayException
      */
     WxEntPayResult entPay(String openId,Integer money) throws WxPayException;
+
+    /**
+     * 发送普通微信红包给指定用户
+     * @param openId 微信用户OpenId
+     * @param money 红包金额
+     * @return WxPaySendRedpackResult
+     * @throws WxPayException
+     */
+    WxPaySendRedpackResult sendRedpack(String openId,Integer money) throws WxPayException;
 }
