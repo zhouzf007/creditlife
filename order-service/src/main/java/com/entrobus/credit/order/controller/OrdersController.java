@@ -13,6 +13,8 @@ import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.order.OrdersExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
+import com.entrobus.credit.pojo.user.UserInfo;
+import com.entrobus.credit.vo.log.OrderOperationMsg;
 import com.entrobus.credit.vo.order.*;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,13 +82,13 @@ public class OrdersController {
         msg.setRemark("dsds");//备注（1024）：自定义，如：超时、定时操作等
         msg.setTime(new Date());//操作时间
         msg.setOperationState(Constants.OPERATION_STATE.SUCCESS);//操作状态：0-成功，1-失败，2-异常
-        logService.orderLog(msg);
+//        logService.orderLog(msg);
         return "成功";
     }
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/loanOrder")
-    public void apply(@RequestBody ApplyVo vo) {
+    public WebResult apply(@RequestBody ApplyVo vo) {
         Orders order = new Orders();
         order.setId(GUIDUtil.genRandomGUID());
         order.setUserId(vo.getUserId());
@@ -222,7 +224,7 @@ public class OrdersController {
     public WebResult getOrderList(@RequestBody OrderQueryVo vo) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
-        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         if (vo.getState() != null) {
             criteria.andStateEqualTo(vo.getState());
         }
@@ -256,7 +258,7 @@ public class OrdersController {
     public WebResult getUserOrderList(@RequestBody OrderQueryVo vo) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
-        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         if (vo.getState() != null) {
             criteria.andStateEqualTo(vo.getState());
         }
