@@ -32,7 +32,7 @@ public class JobClassManagerImpl implements JobClassManager,InitializingBean{
                 Class<?> aClass = Class.forName(className);
                 JobBean jobBean = aClass.getAnnotation(JobBean.class);
                 if (jobBean != null && Job.class.isAssignableFrom(aClass)){
-                    String jobName = jobBean.jobName();
+                    String jobName = jobBean.value();
                     Class <? extends Job> jobClass = (Class <? extends Job>) aClass;
                     if (StringUtils.isBlank(jobName)) {
                         String simpleName = jobClass.getSimpleName();

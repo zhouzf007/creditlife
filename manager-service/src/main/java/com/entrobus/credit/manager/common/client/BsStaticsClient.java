@@ -205,7 +205,7 @@ public interface BsStaticsClient {
         @Override
         public WebResult list(String codeType, String status, Integer pageNum, Integer pageSize) {
             LOGGER.info("list异常发生，进入fallback方法");
-            return null;
+            return WebResult.error("服务异常");
         }
 
 

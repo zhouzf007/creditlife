@@ -16,9 +16,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Order(1)
 public @interface JobBean {
-//    String value() default "";
+    String value() default "";//任务名称
     //任务名称
-    String jobName() default "";
+//    String jobName() default "";
     //分组名称
 //    String groupName() default Constants.JobGroupName.DEFAULT;
     //cron 时间
