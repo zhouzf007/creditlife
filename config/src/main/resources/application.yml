@@ -41,8 +41,12 @@ spring:
 #          search-paths: config-repo
 #          username: root
 #          password: KcjJb17151
+# 内网rabbitmq服务器地址
   rabbitmq:
-    host: localhost
+    host: 10.1.1.241
+    port: 5672
+    username: admin
+    password: admin
 
 security:
   user:
