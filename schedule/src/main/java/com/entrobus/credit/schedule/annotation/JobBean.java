@@ -1,6 +1,5 @@
 package com.entrobus.credit.schedule.annotation;
 
-import com.entrobus.credit.common.Constants;
 import org.springframework.core.annotation.Order;
 
 import java.lang.annotation.ElementType;

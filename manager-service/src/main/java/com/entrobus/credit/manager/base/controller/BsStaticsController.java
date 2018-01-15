@@ -1,8 +1,10 @@
 package com.entrobus.credit.manager.base.controller;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.annotation.OperationLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.client.BsStaticsClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.LogService;
@@ -38,8 +40,30 @@ public class BsStaticsController extends ManagerBaseController{
      */
     @PostMapping("")
     public WebResult add( BsStaticVo vo){
-        return bsStaticsClient.add(vo);
+        WebResult result = bsStaticsClient.add(vo);
+        SysLoginUserInfo loginUser = getCurrLoginUser();
+        //操作日志
+        OperationLogMsg msg = new OperationLogMsg();
+        msg.setDesc("新增静态数据");// 操作说明：自定义,如 提交申请（创建订单）、审核 等
+        msg.setOperationData(vo);//请求参数，Object
+//        msg.setOperationData(str);//请求参数，Object
+        msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
+//        msg.setRelId(GUIDUtil.genRandomGUID());//关联id,如orderId
+        //这里跟platform对应
+        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+//        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
+        //操作状态：0-成功，1-失败，2-异常
+        msg.setOperationState(getOperationState(result));
+//        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
+        logService.operation(msg);
+
+        return result;
     }
+
+    private int getOperationState(WebResult result) {
+        return result.isOk() ? Constants.OPERATION_STATE.SUCCESS : Constants.OPERATION_STATE.FAIL;
+    }
+
     /**
      * 获取同类型的
      *
@@ -59,7 +83,23 @@ public class BsStaticsController extends ManagerBaseController{
      */
     @PutMapping("/{id}")
     public WebResult update(@PathVariable Long id,   BsStaticVo vo){
-        return bsStaticsClient.update(id,vo);
+        WebResult result = bsStaticsClient.update(id, vo);
+        SysLoginUserInfo loginUser = getCurrLoginUser();
+        //操作日志
+        OperationLogMsg msg = new OperationLogMsg();
+        msg.setDesc("编辑静态数据");// 操作说明：自定义,如 提交申请（创建订单）、审核 等
+        msg.setOperationData(vo);//请求参数，Object
+//        msg.setOperationData(str);//请求参数，Object
+        msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
+        msg.setRelId(String.valueOf(id));//关联id,如orderId
+        //这里跟platform对应
+        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+//        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
+        //操作状态：0-成功，1-失败，2-异常
+        msg.setOperationState(getOperationState(result));
+//        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
+        logService.operation(msg);
+        return result;
     }
 
     /**
@@ -71,7 +111,25 @@ public class BsStaticsController extends ManagerBaseController{
      */
     @DeleteMapping("/{id}")
     public WebResult del(@PathVariable Long id){
-        return bsStaticsClient.del(id);
+        WebResult result = bsStaticsClient.del(id);
+        SysLoginUserInfo loginUser = getCurrLoginUser();
+        //操作日志
+        OperationLogMsg msg = new OperationLogMsg();
+        msg.setDesc("删除静态数据");// 操作说明：自定义,如 提交申请（创建订单）、审核 等
+        Map<String,Long> map = new HashMap<>();
+        map.put("id",id);
+        msg.setOperationData(map);//请求参数，Object
+//        msg.setOperationData(str);//请求参数，Object
+        msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
+        msg.setRelId(String.valueOf(id));//关联id,如orderId
+        //这里跟platform对应
+        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+//        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
+        //操作状态：0-成功，1-失败，2-异常
+        msg.setOperationState(getOperationState(result));
+//        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
+        logService.operation(msg);
+        return result;
     }
     /**
      * 删除，并删除缓存
@@ -82,7 +140,25 @@ public class BsStaticsController extends ManagerBaseController{
      */
     @PostMapping("/trashCan")
     public WebResult batchDel(@RequestParam("ids") List<Long> ids) {
-        return bsStaticsClient.batchDel(ids);
+        WebResult result = bsStaticsClient.batchDel(ids);
+        SysLoginUserInfo loginUser = getCurrLoginUser();
+        //操作日志
+        OperationLogMsg msg = new OperationLogMsg();
+        msg.setDesc("删除静态数据");// 操作说明：自定义,如 提交申请（创建订单）、审核 等
+        Map<String,List<Long>> map = new HashMap<>();
+        map.put("ids",ids);
+        msg.setOperationData(map);//请求参数，Object
+//        msg.setOperationData(str);//请求参数，Object
+        msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
+//        msg.setRelId(String.valueOf(id));//关联id,如orderId
+        //这里跟platform对应
+        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+//        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
+        //操作状态：0-成功，1-失败，2-异常
+        msg.setOperationState(getOperationState(result));
+//        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
+        logService.operation(msg);
+        return result;
     }
 
     /**
@@ -95,6 +171,23 @@ public class BsStaticsController extends ManagerBaseController{
     public WebResult cacheOrRefreshAll( String codeType){
         return bsStaticsClient.cacheOrRefreshAll(codeType);
     }
+
+    /**
+     * 操作日志demo
+     * 使用注解
+     * @param str
+     * @return
+     */
+    @PostMapping("/testLog2")
+    @OperationLog
+    public WebResult testLog2(String str){
+        return WebResult.ok();
+    }
+    /**
+     * 操作日志demo
+     * @param str
+     * @return
+     */
     @PostMapping("/testLog")
     public WebResult testLog(String str){
         OperationLogMsg msg = new OperationLogMsg();
