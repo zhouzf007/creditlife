@@ -15,6 +15,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public void login(SysLoginMsg msg) {
+
         Message<SysLoginMsg> message = buildMessage(msg);
         logPublishChannel.sysLoginLog().send(message);
     }
