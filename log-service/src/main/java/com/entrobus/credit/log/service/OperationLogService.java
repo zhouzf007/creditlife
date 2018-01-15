@@ -2,6 +2,7 @@ package com.entrobus.credit.log.service;
 
 import com.entrobus.credit.pojo.log.OperationLog;
 import com.entrobus.credit.pojo.log.OperationLogExample;
+import com.entrobus.credit.vo.log.OperationLogMsg;
 
 import java.util.List;
 
@@ -84,4 +85,6 @@ public interface OperationLogService {
 	 * @mbggenerated 
 	 */
     int insertSelective(OperationLog record);
+
+    int logMsg(OperationLogMsg msg);
 }

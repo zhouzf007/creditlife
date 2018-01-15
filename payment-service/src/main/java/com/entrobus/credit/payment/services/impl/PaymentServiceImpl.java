@@ -10,7 +10,6 @@ import com.entrobus.credit.pojo.payment.PaymentExample;
 import java.util.Date;
 import java.util.List;
 
-import com.entrobus.credit.pojo.payment.Repayment;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,7 +79,7 @@ public class PaymentServiceImpl implements PaymentService {
         if (StringUtils.isEmpty(record.getId())) {
             record.setId(GUIDUtil.genRandomGUID());
         }
-        record.setDeleteFlag(Constants.DeleteFlag.NO);
+        record.setDeleteFlag(Constants.DELETE_FLAG.NO);
         record.setUpdateTime(new Date());
     }
 }

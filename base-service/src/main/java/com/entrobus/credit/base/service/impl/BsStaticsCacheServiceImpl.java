@@ -306,8 +306,8 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
      * @return
      */
     protected boolean isNormal(BsStatics statics) {
-        return statics != null && Objects.equals(statics.getDeleteFlag(), Constants.DeleteFlag.NO)
-                && Objects.equals(statics.getStatus(),Constants.Status.NORMAL);
+        return statics != null && Objects.equals(statics.getDeleteFlag(), Constants.DELETE_FLAG.NO)
+                && Objects.equals(statics.getStatus(), Constants.STATUS.NORMAL);
     }
 
     /**

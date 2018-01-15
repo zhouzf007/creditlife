@@ -1,5 +1,6 @@
 package com.entrobus.credit.log.service.impl;
 
+import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.log.dao.OperationLogTableColumnMapper;
 import com.entrobus.credit.log.service.OperationLogTableColumnService;
 import com.entrobus.credit.pojo.log.OperationLogTableColumn;
@@ -123,6 +124,7 @@ public class OperationLogTableColumnServiceImpl implements OperationLogTableColu
 	 */
     protected boolean defaultValue(OperationLogTableColumn record) {
         // 填充字段默认值
+        if (record.getId() == null) record.setId(GUIDUtil.genRandomGUID());
 		return false;
     }
 }

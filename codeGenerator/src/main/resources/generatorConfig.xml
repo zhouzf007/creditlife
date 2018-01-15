@@ -25,6 +25,7 @@
         <plugin type="org.mybatis.generator.plugin.ext.SerializablePlugin"/>
         <!--生成service插件-->
         <plugin type="org.mybatis.generator.plugin.ext.ServicePlugin">
+        <!--分页插件-->
             <property name="targetPackage" value="${service.package}" />
             <property name="implementationPackage" value="${service.impl.package}" />
             <property name="targetProject" value="${target.project}" />
@@ -110,7 +111,7 @@
          <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />//无论字段是什么类型，生成的类属性都是varchar。  -->
          <!--用的通配符匹配全部的表 -->
         <!--<table tableName="%"-->
-        <table tableName="organization" domainObjectName="Organization"
+        <table tableName="operation_log" domainObjectName="OperationLog"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
@@ -120,39 +121,59 @@
             <!--  配置自动返回主键 -->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>
-        <!--<table tableName="wechat_menu" domainObjectName="WechatMenu"
+        <table tableName="operation_log_table" domainObjectName="OperationLogTable"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
 
-            &lt;!&ndash;  配置自动返回主键 &ndash;&gt;
-            &lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;
+            <!--  配置自动返回主键 -->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>
-        <table tableName="wechat_req_msg_log" domainObjectName="WechatReqMsgLog"
+        <table tableName="operation_log_table_column" domainObjectName="OperationLogTableColumn"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
                enableSelectByExample="true"
                selectByExampleQueryId="true">
 
-            &lt;!&ndash;无论字段是什么类型，生成的类属性都是varchar。&ndash;&gt;
+            <!--无论字段是什么类型，生成的类属性都是varchar。-->
             <columnOverride column="req_xml" jdbcType="VARCHAR" />
             <columnOverride column="resp_xml" jdbcType="VARCHAR" />
-            &lt;!&ndash;  配置自动返回主键 &ndash;&gt;
-            &lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;
+            <!--  配置自动返回主键 -->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>
-        <table tableName="wechat_public_account" domainObjectName="WechatPublicAccount"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true">
+        <!--<table tableName="sys_role" domainObjectName="SysRole"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
 
-            &lt;!&ndash;  配置自动返回主键 &ndash;&gt;
-            &lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;
-        </table>-->
+            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="sys_role_resource" domainObjectName="SysRoleResource"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+
+            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="sys_user_role" domainObjectName="SysUserRole"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+
+            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
     </context>
 
 </generatorConfiguration>

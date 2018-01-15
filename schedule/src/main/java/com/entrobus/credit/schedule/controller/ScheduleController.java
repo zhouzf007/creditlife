@@ -48,7 +48,7 @@ public class ScheduleController {
             return WebResult.error(validationMsg);
         }
         if (StringUtils.isBlank(vo.getGroupName())){
-            vo.setGroupName(Constants.JobGroupName.DEFAULT);
+            vo.setGroupName(Constants.JOB_GROUP_NAME.DEFAULT);
         }
         //todo cron校验
         return scheduleService.addJob(vo);
@@ -71,7 +71,7 @@ public class ScheduleController {
         }
         //todo cron校验
         if (StringUtils.isBlank(vo.getGroupName())){
-            vo.setGroupName(Constants.JobGroupName.DEFAULT);
+            vo.setGroupName(Constants.JOB_GROUP_NAME.DEFAULT);
         }
         return scheduleService.modifyJobTime(jobName,vo.getGroupName(),vo.getCron());
     }
