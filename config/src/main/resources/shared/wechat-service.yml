@@ -94,3 +94,8 @@ wechat:
     server: http://entrobus.tunnel.qydev.com
     #微信前端UI服务器地址
     frontServer: http://creditlife.entrobus.com
+
+##开启熔断器
+feign:
+  hystrix:
+    enabled: true

@@ -1,13 +1,17 @@
 package com.entrobus.credit.wechat.service.impl;
 
+import com.entrobus.credit.common.ThreadManager;
+import com.entrobus.credit.common.bean.FileUploadResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.wechat.WechatUser;
 import com.entrobus.credit.pojo.wechat.WechatUserExample;
 import com.entrobus.credit.wechat.WechatConst;
+import com.entrobus.credit.wechat.client.FileServiceClient;
 import com.entrobus.credit.wechat.dao.WechatUserMapper;
 import com.entrobus.credit.wechat.service.WechatUserService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,9 @@ import java.util.List;
 public class WechatUserServiceImpl implements WechatUserService {
     @Autowired
     private WechatUserMapper wechatUserMapper;
+
+    @Autowired
+    private FileServiceClient fileServiceClient;
 
     private static final Logger logger = LoggerFactory.getLogger(WechatUserServiceImpl.class);
 
@@ -96,6 +103,10 @@ public class WechatUserServiceImpl implements WechatUserService {
             wechatUserInfo.setUpdateTime(new Date());
             //更新
             int result = updateByExampleSelective(wechatUserInfo,example);
+            if(result > 0){
+                //更新微信用户的头像
+                updateUserHeadImg(wechatUserInfo);
+            }
             return result;
         }else {
             //不存在，新增
@@ -103,8 +114,33 @@ public class WechatUserServiceImpl implements WechatUserService {
             wechatUserInfo.setId(GUIDUtil.genRandomGUID());
             wechatUserInfo.setCreateTime(new Date());
             int result = insertSelective(wechatUserInfo);
+            if(result > 0){
+                //更新微信用户的头像
+                updateUserHeadImg(wechatUserInfo);
+            }
             return result;
         }
+    }
+
+    private void updateUserHeadImg(WechatUser wechatUserInfo) {
+        final WechatUser finalWechatUserInfo = wechatUserInfo;
+        ThreadManager.getInstance().createLongPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                if(StringUtils.isNotEmpty(finalWechatUserInfo.getHeadimgurl())){
+                    //调用文件服务下载微信头像并上传到文件服务器
+                    FileUploadResult uploadFile = fileServiceClient.uploadNetworkFile2(finalWechatUserInfo.getHeadimgurl(),"png");
+                    if(uploadFile != null && uploadFile.isUploadSuccess()){
+                        WechatUserExample example = new WechatUserExample();
+                        example.createCriteria().andOpenIdEqualTo(finalWechatUserInfo.getOpenId());
+                        finalWechatUserInfo.setUpdateTime(new Date());
+                        finalWechatUserInfo.setHeadimgurl(uploadFile.getFileUrl());
+                        //更新用户头像链接
+                        updateByExampleSelective(finalWechatUserInfo, example);
+                    }
+                }
+            }
+        });
     }
 
     @Override
