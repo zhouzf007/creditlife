@@ -112,7 +112,8 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setOperationState(Constants.OPERATION_STATE.SUCCESS);//操作状态：0-成功，1-失败，2-异常
         msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
         msg.setTime(new Date());//操作时间
-        //可选扩展内容，记录相关数据操作前后的值
+        //
+        //*****************可选扩展内容，记录相关数据操作前后的值 start
         msg.newTables("table1")//操作相关数据表1
                 .putColume("abb","ddd","old")//表中字段名、新值、旧值
                 .putColume("abb4","ddd1","old")
@@ -123,6 +124,9 @@ public class BsStaticsController extends ManagerBaseController{
                 .putColume("abb4","ddd1","old")
                 .putColume("abb5","ddd2","old")
                 .putColume("abb2","ddd24","old2");
+
+        //*****************可选扩展内容，记录相关数据操作前后的值 end
+
         //操作日志
         logService.operation(msg);
 
