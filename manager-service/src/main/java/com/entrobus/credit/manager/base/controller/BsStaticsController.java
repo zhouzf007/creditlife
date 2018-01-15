@@ -11,9 +11,7 @@ import com.entrobus.credit.vo.log.OperationLogMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/bs/statics")
@@ -101,10 +99,12 @@ public class BsStaticsController extends ManagerBaseController{
     public WebResult testLog(String str){
         OperationLogMsg msg = new OperationLogMsg();
         msg.setDesc("testLog");// 操作说明：自定义,如 提交申请（创建订单）、审核 等
-//        msg.setOperationData(new HashMap<>());
-        msg.setOperationData("testLog");//请求参数
+        Map<Object, Object> map = new HashMap<>();
+        map.put("str",str);
+        msg.setOperationData(map);//请求参数，Object
+//        msg.setOperationData(str);//请求参数，Object
 //        msg.setExtData(new HashMap<>());
-        msg.setExtData("testLog");//扩展字段
+        msg.setExtData("testLog");//扩展数据字段,Object
         msg.setOperatorId(GUIDUtil.genRandomGUID());//操作人id,与operatorType对应管理员或用户id
         msg.setRelId(GUIDUtil.genRandomGUID());//关联id,如orderId
         msg.setOperatorType(Constants.OPERATOR_TYPE.MANAGER);//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户
@@ -112,6 +112,7 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setOperationState(Constants.OPERATION_STATE.SUCCESS);//操作状态：0-成功，1-失败，2-异常
         msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
         msg.setTime(new Date());//操作时间
+        //可选扩展内容，记录相关数据操作前后的值
         msg.newTables("table1")//操作相关数据表1
                 .putColume("abb","ddd","old")//表中字段名、新值、旧值
                 .putColume("abb4","ddd1","old")
@@ -122,7 +123,7 @@ public class BsStaticsController extends ManagerBaseController{
                 .putColume("abb4","ddd1","old")
                 .putColume("abb5","ddd2","old")
                 .putColume("abb2","ddd24","old2");
-
+        //操作日志
         logService.operation(msg);
 
         if (Objects.equals("0",str)) return WebResult.ok("操作成功");

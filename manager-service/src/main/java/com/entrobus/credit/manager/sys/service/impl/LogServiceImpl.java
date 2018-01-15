@@ -13,6 +13,8 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class LogServiceImpl implements LogService {
     @Value("${spring.application.name}")
@@ -21,28 +23,42 @@ public class LogServiceImpl implements LogService {
     private LogPublishChannel logPublishChannel;
     private static final Logger logger = LoggerFactory.getLogger(LogServiceImpl.class);
 
+    /**
+     * 登录日志
+     * @param msg
+     */
     @Override
     public void login(SysLoginMsg msg) {
-
         try {
+            if (msg.getLoginTime() == null) msg.setLoginTime(new Date());
             Message<SysLoginMsg> message = buildMessage(msg);
             logPublishChannel.sysLoginLog().send(message);
         } catch (Exception e) {
-            logger.error(String.format("登陆日志发布失败,消息内容：%s", JSON.toJSONString(msg)),e);
+            logger.error(String.format("登陆日志发布失败,消息内容：%s", JSON.toJSONString(msg)), e);
         }
     }
+    /**
+     * 记录操作日志
+     */
     @Override
     public void operation(OperationLogMsg msg) {
-
         try {
+            if (msg.getTime() == null) msg.setTime(new Date());
             msg.setApplicationName(applicationName);
             Message<OperationLogMsg> message = buildMessage(msg);
             logPublishChannel.operationLog().send(message);
         } catch (Exception e) {
-            logger.error(String.format("操作日志发布失败,消息内容：%s", JSON.toJSONString(msg)),e);
+            logger.error(String.format("操作日志发布失败,消息内容：%s", JSON.toJSONString(msg)), e);
         }
     }
-    protected  <T> Message<T> buildMessage(T msg) {
+
+    /**
+     * 构建消息
+     * @param msg
+     * @param <T>
+     * @return
+     */
+    protected <T> Message<T> buildMessage(T msg) {
         return MessageBuilder.withPayload(msg).build();
     }
 }
