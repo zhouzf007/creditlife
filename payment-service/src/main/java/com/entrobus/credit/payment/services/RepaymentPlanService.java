@@ -29,4 +29,9 @@ public interface RepaymentPlanService {
 
     List<RepaymentPlan> getRepaymentPlanByOrderId(String orderId);
 
+    RepaymentPlan getLastRepaymentPlanByOrderId(String orderId);
+
+    List<RepaymentPlan> getOverDueRepaymentPlans(String orderId);
+
+    List<RepaymentPlan> getFinishedRepaymentPlans(String orderId);
 }

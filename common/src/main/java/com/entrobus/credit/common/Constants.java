@@ -65,6 +65,7 @@ public interface Constants {
     }
 
     interface ORDER_STATE{
+        int NOT_LOAN = -1;//未借款
         int AUIDT_PENGDING = 0;//待审核
         int LOAN_PENGDING = 1;//待放款
         int REJECTION = 2;//已驳回

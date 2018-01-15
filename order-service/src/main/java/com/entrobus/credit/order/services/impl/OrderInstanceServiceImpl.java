@@ -1,9 +1,11 @@
 package com.entrobus.credit.order.services.impl;
 
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.order.dao.OrderInstanceMapper;
+import com.entrobus.credit.order.services.ContractService;
+import com.entrobus.credit.order.services.CreditReportService;
 import com.entrobus.credit.order.services.OrderInstanceService;
-import com.entrobus.credit.pojo.order.OrderInstance;
-import com.entrobus.credit.pojo.order.OrderInstanceExample;
+import com.entrobus.credit.pojo.order.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,12 @@ import java.util.List;
 public class OrderInstanceServiceImpl implements OrderInstanceService {
     @Autowired
     private OrderInstanceMapper orderInstanceMapper;
+
+    @Autowired
+    private ContractService contractService;
+
+    @Autowired
+    private CreditReportService creditReportService;
 
     private static final Logger logger = LoggerFactory.getLogger(OrderInstanceServiceImpl.class);
 
@@ -62,5 +70,43 @@ public class OrderInstanceServiceImpl implements OrderInstanceService {
 
     public int insertSelective(OrderInstance record) {
         return this.orderInstanceMapper.insertSelective(record);
+    }
+
+    @Override
+    public int saveOrderInstance(Orders order) {
+        OrderInstance instance=new  OrderInstance();
+        instance.setOrderId(order.getId());
+        //申请信息
+        instance.setActualMoney(order.getActualMoney());
+        instance.setApplyMoney(order.getApplyMoney());
+        instance.setApplyTime(order.getApplyTime());
+        instance.setLoanUsage(order.getLoanUsage());
+        //审核信息
+        instance.setAuditTime(order.getAuditTime());
+        instance.setAuditor(order.getAuditor());
+        instance.setLoanOperator(order.getLoanOperator());
+        instance.setReason(order.getReason());
+        //合同信息
+        instance.setContractId(order.getContractId());
+        Contract contract=contractService.selectByPrimaryKey(order.getContractId());
+        if (contract!=null){
+//          instance.setContractContent(contract.get);
+            instance.setContractUrl(contract.getContractUrl());
+        }
+
+        //信用报告
+        CreditReport report =creditReportService.selectByPrimaryKey(order.getCreditReportId());
+        if (report!=null){
+//          instance.setCreditContent();
+            instance.setCreditUrl(report.getReportUrl());
+            instance.setCreditScore(order.getCreditScore());
+        }
+        //产品信息
+        instance.setProdId(order.getProdId());
+        instance.setInterestRate(order.getInterestRate());
+        instance.setRepaymentTerm(order.getRepaymentTerm());
+        instance.setRepaymentType(order.getRepaymentType());
+        instance.setState(Constants.ORDER_STATE.FINISHED);
+        return this.insertSelective(instance);
     }
 }

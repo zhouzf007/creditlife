@@ -2,7 +2,7 @@ package com.entrobus.credit.user.services;
 
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
-import com.entrobus.credit.user.bean.CacheUserInfo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 
 import java.util.List;
 

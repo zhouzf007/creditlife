@@ -7,7 +7,7 @@ import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
-import com.entrobus.credit.user.bean.CacheUserInfo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
 import com.entrobus.credit.user.services.UserInfoService;
@@ -17,7 +17,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.misc.Cache;
 import utils.Constants;
 import utils.ShiroUtils;
 

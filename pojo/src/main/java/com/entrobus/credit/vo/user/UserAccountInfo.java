@@ -1,4 +1,4 @@
-package com.entrobus.credit.user.bean;
+package com.entrobus.credit.vo.user;
 
 /**
  * Created by mozl on 2018/1/11.

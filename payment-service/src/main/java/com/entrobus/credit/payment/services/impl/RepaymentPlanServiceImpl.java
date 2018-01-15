@@ -83,6 +83,32 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
         example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
         return this.selectByExample(example);
     }
+    @Override
+    public RepaymentPlan getLastRepaymentPlanByOrderId(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andPlanTimeLessThan(new Date());
+        example.setOrderByClause(" plan_time desc ");
+       List<RepaymentPlan> list=this.selectByExample(example);
+       if (!list.isEmpty()){
+           return list.get(0);
+       }
+        return null;
+    }
+
+    @Override
+    public List<RepaymentPlan> getOverDueRepaymentPlans(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
+        example.setOrderByClause(" plan_time desc ");
+        return this.selectByExample(example);
+    }
+
+    @Override
+    public List<RepaymentPlan> getFinishedRepaymentPlans(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
+        return this.selectByExample(example);
+    }
 
     protected void defaultValue(RepaymentPlan record) {
         if (StringUtils.isEmpty(record.getId())) {

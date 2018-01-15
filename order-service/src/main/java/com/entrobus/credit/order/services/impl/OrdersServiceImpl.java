@@ -72,4 +72,17 @@ public class OrdersServiceImpl implements OrdersService {
                 andUserIdEqualTo(userId);
         return this.ordersMapper.selectByExample(example);
     }
+
+    @Override
+    public Orders getUserLastOrder(String userId) {
+        OrdersExample example = new OrdersExample();
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).
+                andUserIdEqualTo(userId);
+        example.setOrderByClause(" create_time desc ");
+        List<Orders> list=this.ordersMapper.selectByExample(example);
+        if (!list.isEmpty()){
+            return  list.get(0);
+        }
+        return null;
+    }
 }
