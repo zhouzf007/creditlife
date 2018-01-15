@@ -1,10 +1,8 @@
 package com.entrobus.credit.payment.controller;
 
-import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
 import com.entrobus.credit.payment.services.RepaymentService;
 import com.entrobus.credit.pojo.payment.Repayment;
-import com.entrobus.credit.pojo.payment.RepaymentExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -16,7 +14,7 @@ import java.util.List;
 
 @RefreshScope
 @RestController
-public class RepaymentController {
+public class RepaymentController extends PaymentBaseController{
 
     @Autowired
     private RepaymentService repaymentService;
