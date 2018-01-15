@@ -1,6 +1,5 @@
 package com.entrobus.credit.manager.sys.service.impl;
 
-import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
@@ -139,7 +138,7 @@ public class SysUserServiceImpl implements SysUserService {
             BeanUtils.copyProperties(sysUser,sysUserExt);
             sysUser.setCreateTime(new Date());
             sysUser.setUpdateTime(new Date());
-            sysUser.setDeleteFlag(Constants.DeleteFlag.NO);
+            sysUser.setDeleteFlag(Constants.DELETE_FLAG.NO);
             //生成20位长度的随机数，用作密码加密的盐
             String salt = RandomStringUtils.randomAlphanumeric(20);
             //将密码使用sha256加密
@@ -209,7 +208,7 @@ public class SysUserServiceImpl implements SysUserService {
         SysUserExample userExample = new SysUserExample();
         userExample.createCriteria().andIdIn(idList);
         SysUser sysUser = new SysUser();
-        sysUser.setDeleteFlag(Constants.DeleteFlag.YES);
+        sysUser.setDeleteFlag(Constants.DELETE_FLAG.YES);
         sysUser.setDeleteUser(deleteUserId);
         sysUser.setDeleteTime(new Date());
         updateByExampleSelective(sysUser,userExample);//逻辑删除
@@ -225,7 +224,7 @@ public class SysUserServiceImpl implements SysUserService {
         //根据用户名查找用户
         SysUserExample userExample = new SysUserExample();
         userExample.createCriteria()
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO)
                 .andUsernameEqualTo(vo.getUsername())
                 .andPlatformEqualTo(vo.getPlatform());
         List<SysUser> sysUserList = selectByExample(userExample);
@@ -282,7 +281,7 @@ public class SysUserServiceImpl implements SysUserService {
         //根据用户名查找用户
         SysUserExample userExample = new SysUserExample();
         userExample.createCriteria()
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO)
                 .andUsernameEqualTo(username);
         List<SysUser> sysUserList = selectByExample(userExample);
         if(CollectionUtils.isNotEmpty(sysUserList)){
@@ -295,7 +294,7 @@ public class SysUserServiceImpl implements SysUserService {
     public boolean checkUserName(String userName) {
         SysUserExample example = new SysUserExample();
         example.createCriteria().andUsernameEqualTo(userName)
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<SysUser> sysUsers = this.selectByExample(example);
         if(ConversionUtil.isNotEmptyParameter(sysUsers)){
             return true;
@@ -308,7 +307,7 @@ public class SysUserServiceImpl implements SysUserService {
         SysUserExample example = new SysUserExample();
         example.createCriteria().andUsernameEqualTo(userName)
                 .andIdNotEqualTo(id)
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<SysUser> sysUsers = this.selectByExample(example);
         if(ConversionUtil.isNotEmptyParameter(sysUsers)){
             return true;

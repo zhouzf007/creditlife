@@ -5,6 +5,7 @@ import com.entrobus.credit.vo.schedule.QuartzJobVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -76,8 +77,9 @@ public interface ScheduleClient {
      */
     @PostMapping("/triggerJob")
     WebResult triggerJob( @RequestParam("jobName") String jobName, @RequestParam("groupName") String groupName);
+    @Component
     class ScheduleClientFallback implements ScheduleClient{
-        private static final Logger LOGGER = LoggerFactory.getLogger(BsStaticsClient.BsStaticsClientFallback.class);
+        private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleClient.ScheduleClientFallback.class);
 
         /**
          * 添加任务

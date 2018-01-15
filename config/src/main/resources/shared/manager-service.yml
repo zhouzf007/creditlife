@@ -76,6 +76,9 @@ spring:
         sys_lonin_log_publish:
           destination: sys-lonin-log-stream
           content-type: application/json
+        creditlife_operation_log_publish:
+          destination: creditlife-operation-log-stream
+          content-type: application/json
 #  配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml

@@ -65,7 +65,7 @@ public class OrganizationController extends ManagerBaseController{
     @GetMapping("")
     public WebResult list(Integer offset, Integer limit) {
         OrganizationExample example = new OrganizationExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         example.setOrderByClause(" create_time desc ");
         PageHelper.startPage(offset,limit);
         List<Organization> organizationList = organizationService.selectByExample(example);

@@ -37,7 +37,7 @@ public class SysResourceController extends ManagerBaseController {
         sysResource.setCreateUser(getLoginUserId());
         sysResource.setUpdateUser(getLoginUserId());
         sysResource.setCreateTime(new Date());
-        sysResource.setDeleteFlag(Constants.DeleteFlag.NO);
+        sysResource.setDeleteFlag(Constants.DELETE_FLAG.NO);
         sysResource.setPlatform(commonParameter.getPlatform());
         if(ConversionUtil.isEmptyParameter(sysResource.getLevel())){
             sysResource.setLevel(1);
@@ -98,7 +98,7 @@ public class SysResourceController extends ManagerBaseController {
         }
         SysResourceExample resourceExample = new SysResourceExample();
         SysResourceExample.Criteria criteria = resourceExample.createCriteria();
-        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         criteria.andPlatformEqualTo(commonParameter.getPlatform());
         if(StringUtils.isNotEmpty(name)){
             criteria.andNameLike("%"+name+"%");
