@@ -10,13 +10,11 @@ import com.entrobus.credit.pojo.payment.RepaymentExample;
 import java.util.Date;
 import java.util.List;
 
-import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.text.resources.no.CollationData_no;
 
 @Service
 public class RepaymentServiceImpl implements RepaymentService {
@@ -80,7 +78,7 @@ public class RepaymentServiceImpl implements RepaymentService {
     @Override
     public Repayment getRepaymentByOrderId(String orderId) {
         RepaymentExample example = new RepaymentExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<Repayment> list = this.selectByExample(example);
         return list.isEmpty() ? null : list.get(0);
     }
@@ -91,7 +89,7 @@ public class RepaymentServiceImpl implements RepaymentService {
             record.setId(GUIDUtil.genRandomGUID());
         }
         record.setCreateTime(new Date());
-        record.setDeleteFlag(Constants.DeleteFlag.NO);
+        record.setDeleteFlag(Constants.DELETE_FLAG.NO);
         record.setUpdateTime(new Date());
     }
 }

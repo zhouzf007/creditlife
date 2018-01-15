@@ -111,9 +111,9 @@ public class BsStaticsController {
     private BsStaticsExt toBsStaticsExt(BsStatics statics) {
         BsStaticsExt ext = new BsStaticsExt();
         BeanUtils.copyProperties(statics,ext);
-        String typeName = bsStaticsCacheService.getOrCacheName(Constants.CodeType.CODE_TYPE, ext.getCodeType());
+        String typeName = bsStaticsCacheService.getOrCacheName(Constants.CODE_TYPE.CODE_TYPE, ext.getCodeType());
         ext.setTypeName(typeName);
-        String statusName = bsStaticsCacheService.getOrCacheName(Constants.CodeType.STATUS, ext.getStatus()+"");
+        String statusName = bsStaticsCacheService.getOrCacheName(Constants.CODE_TYPE.STATUS, ext.getStatus()+"");
         ext.setStatusName(statusName);
         return ext;
     }

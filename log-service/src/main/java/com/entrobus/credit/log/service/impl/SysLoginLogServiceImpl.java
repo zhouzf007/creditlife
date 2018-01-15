@@ -75,7 +75,7 @@ public class SysLoginLogServiceImpl implements SysLoginLogService {
     }
 
     @Override
-    public int log(SysLoginMsg msg){
+    public int logMsg(SysLoginMsg msg){
         SysLoginLog sysLoginLog = new SysLoginLog();
         BeanUtils.copyProperties(msg, sysLoginLog);
         return insertSelective(sysLoginLog);

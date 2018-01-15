@@ -88,6 +88,12 @@ spring:
           group: ${spring.application.name}
           consumer:
             durableSubscription: true
+        creditlife_operation_log_subscribe:
+          destination: creditlife-operation-log-stream
+          content-type: application/json
+          group: ${spring.application.name}
+          consumer:
+            durableSubscription: true
 #    配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml

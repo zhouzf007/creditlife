@@ -107,7 +107,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
         organizationExt.setCreateTime(new Date());
         organizationExt.setCreateOperator(userInfo.getId()+"");
-        organizationExt.setDeleteFlag(Constants.DeleteFlag.NO);
+        organizationExt.setDeleteFlag(Constants.DELETE_FLAG.NO);
         organizationExt.setId(GUIDUtil.genRandomGUID());
         Integer result = this.insertSelective(organizationExt);
         if(result>0){
@@ -119,7 +119,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             sysRole.setPlatform(Constants.PLATFORM.BANK);
             sysRole.setCreateTime(new Date());
             sysRole.setCreateUser(userInfo.getId());
-            sysRole.setDeleteFlag(Constants.DeleteFlag.NO);
+            sysRole.setDeleteFlag(Constants.DELETE_FLAG.NO);
             sysRoleService.insertSelective(sysRole);
             //查询平台所有资源
             List<SysResource> resources = sysResourceService.getSysResourceByPlatform(Constants.PLATFORM.BANK);
@@ -196,7 +196,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         if(organizationExt.getState()==Constants.ORGANIZATION_STATE.FROZEN){
             SysUserExample sysUserExample = new SysUserExample();
             sysUserExample.createCriteria().andOrgIdEqualTo(organizationExt.getId())
-                    .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                    .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
             List<SysUser> sysUsers = sysUserService.selectByExample(sysUserExample);
             if(ConversionUtil.isNotEmptyParameter(sysUsers)){
                 List<Long> sysUserIdList = new ArrayList<>();
@@ -250,7 +250,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public boolean checkName(String name) {
         OrganizationExample organizationExample = new OrganizationExample();
         organizationExample.createCriteria().andNameEqualTo(name)
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<Organization> organizationList = this.selectByExample(organizationExample);
         if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
@@ -263,7 +263,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         OrganizationExample organizationExample = new OrganizationExample();
         organizationExample.createCriteria().andNameEqualTo(name)
                 .andIdNotEqualTo(id)
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<Organization> organizationList = this.selectByExample(organizationExample);
         if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
@@ -277,7 +277,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         OrganizationExample organizationExample = new OrganizationExample();
         organizationExample.createCriteria().andContractMobileEqualTo(mobile)
                 .andIdNotEqualTo(id)
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<Organization> organizationList = this.selectByExample(organizationExample);
         if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
@@ -290,7 +290,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         //查询手机号是否已经被注册
         OrganizationExample organizationExample = new OrganizationExample();
         organizationExample.createCriteria().andContractMobileEqualTo(mobile)
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<Organization> organizationList = this.selectByExample(organizationExample);
         if(ConversionUtil.isNotEmptyParameter(organizationList)){
             return true;
