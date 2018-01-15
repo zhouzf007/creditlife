@@ -10,7 +10,7 @@ public interface ScheduleService {
 
     List<String > groupNames() throws SchedulerException;
 
-    List<QuartzJobVo> jobList();
+    List<QuartzJobVo> jobList(QuartzJobVo vo);
 
     WebResult removeJob(String jobName) throws SchedulerException;
 
@@ -22,9 +22,15 @@ public interface ScheduleService {
 
     WebResult pauseJob(String jobName, String jobGroupName) throws SchedulerException;
 
+    WebResult pauseJob(String jobName) throws SchedulerException;
+
     WebResult resumeJob(String jobName, String jobGroupName) throws SchedulerException;
+
+    WebResult resumeJob(String jobName) throws SchedulerException;
 
     WebResult modifyJobTime(String jobName, String groupName, String cron);
 
     void clear();
+
+    WebResult triggerJob(String jobName) throws SchedulerException;
 }

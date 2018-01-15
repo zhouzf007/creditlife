@@ -1,9 +1,9 @@
 package com.entrobus.credit.manager.common.bean;
 
 
-import com.entrobus.credit.pojo.manager.Parties;
+import com.entrobus.credit.pojo.manager.Organization;
 
-public class PartiesExt extends Parties {
+public class OrganizationExt extends Organization {
 
     private String password;
 

@@ -55,13 +55,38 @@ public class OrdersController {
     @Value("${msg:unknown}")
     private String msg;
 
-    /**
-     * 申请贷款
-     *
-     * @param vo
-     */
-    @PostMapping(path = "/loanOrder")
-    public WebResult apply(@RequestBody ApplyVo vo) {
+
+    @GetMapping(value = "/test")
+    public String test() {
+        return "测试";
+    }
+
+    @PostMapping("/log")
+    public String log() {
+        //订单操作 日志
+        OrderOperationMsg msg = new OrderOperationMsg();
+        msg.setDesc("测试");//操作说明：自定义,如 提交申请（创建订单）、审核 等
+
+        UserInfo userInfo = new UserInfo();//测试用
+        userInfo.setId(GUIDUtil.genRandomGUID());
+        userInfo.setIdCard(GUIDUtil.genRandomGUID());
+        msg.setOperationData("");//操作参数
+
+        msg.setOperatorId("111");// 操作人id
+        msg.setOrderId("1111");//订单id
+        msg.setOrderState(1);//操作完成后的订单状态
+//        msg.setRemark("dsds");//备注（1024）：自定义，如：超时、定时操作等
+
+        msg.setRemark("dsds");//备注（1024）：自定义，如：超时、定时操作等
+        msg.setTime(new Date());//操作时间
+        msg.setOperationState(Constants.OPERATION_STATE.SUCCESS);//操作状态：0-成功，1-失败，2-异常
+        logService.orderLog(msg);
+        return "成功";
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, path = "/loanOrder")
+    public void apply(@RequestBody ApplyVo vo) {
         Orders order = new Orders();
         order.setId(GUIDUtil.genRandomGUID());
         order.setUserId(vo.getUserId());

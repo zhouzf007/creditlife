@@ -29,5 +29,5 @@ public interface SysLoginLogService {
 
     int insertSelective(SysLoginLog record);
 
-    int log(SysLoginMsg msg);
+    int logMsg(SysLoginMsg msg);
 }

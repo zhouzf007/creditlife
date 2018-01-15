@@ -49,7 +49,7 @@ public class BaseController {
      */
     protected CacheUserInfo getCurrLoginUser() {
         String token = getRequest().getParameter("token");
-        String userId = CacheService.getString(redisTemplate, token);
+        String userId = CacheService.getString(redisTemplate, Cachekey.User.SID_PREFIX+ token);
         CacheUserInfo loginUser = CacheService.getCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + userId, CacheUserInfo.class);
         return loginUser;
     }

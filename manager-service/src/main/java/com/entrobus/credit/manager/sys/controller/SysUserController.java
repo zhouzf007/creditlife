@@ -1,7 +1,6 @@
 package com.entrobus.credit.manager.sys.controller;
 
 import com.alibaba.fastjson.JSONArray;
-import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
@@ -13,7 +12,7 @@ import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.manager.sys.service.SysUserService;
-import com.entrobus.credit.manager.util.ServletUtil;
+import com.entrobus.credit.manager.common.util.ServletUtil;
 import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.pojo.manager.SysUserExample;
 import com.entrobus.credit.pojo.manager.SysUserRole;
@@ -77,7 +76,7 @@ public class SysUserController extends ManagerBaseController {
         }
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria();
-        criteria.andDeleteFlagEqualTo(com.entrobus.credit.common.Constants.DeleteFlag.NO);
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         if(commonParameter.getPlatform()== Constants.PLATFORM.BANK){
             criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }

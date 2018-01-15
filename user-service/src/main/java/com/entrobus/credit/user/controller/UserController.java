@@ -5,11 +5,13 @@ import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
+import com.entrobus.credit.user.services.UserAccountService;
 import com.entrobus.credit.user.services.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private UserAccountService userAccountService;
 
     @Autowired
     MsgClient msgClient;
@@ -62,7 +67,7 @@ public class UserController extends BaseController {
         String token = GUIDUtil.genRandomGUID();
         //userInfo
         CacheUserInfo loginUserInfo = userInfoService.getLoginUserInfo(userInfo, token);
-        return WebResult.ok().put("token",token).put("data", loginUserInfo);
+        return WebResult.ok().put("token",token).put(WebResult.DATA, loginUserInfo);
     }
 
     @RequestMapping("/register")
@@ -80,7 +85,7 @@ public class UserController extends BaseController {
             return WebResult.error("该手机号码已注册");
         }
         String verifyCode = CacheService.getCacheObj(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone, String.class);
-        if(!verifyCode.equals(code)){
+        if(StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)){
             return WebResult.error("短信验证码不正确");
         }
         UserInfo userInfo = new UserInfo();
@@ -106,7 +111,7 @@ public class UserController extends BaseController {
             return WebResult.error("该手机号码尚未注册");
         }
         String verifyCode = CacheService.getCacheObj(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone, String.class);
-        if(!verifyCode.equals(code)){
+        if(StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)){
             return WebResult.error("短信验证码不正确");
         }
         UserInfo userInfo = userInfos.get(0);
@@ -118,7 +123,7 @@ public class UserController extends BaseController {
 
     @RequestMapping("/sendCode")
     public WebResult sendCode(String cellphone, Integer type){
-        if(type != null){
+        if(type != null || type == 3){
             UserInfoExample example = new UserInfoExample();
             example.createCriteria().andCellphoneEqualTo(cellphone);
             List<UserInfo> userInfos = userInfoService.selectByExample(example);
@@ -126,7 +131,7 @@ public class UserController extends BaseController {
                 if(userInfos != null && userInfos.size() > 0){
                     return WebResult.error("该手机号码已注册");
                 }
-            }else{
+            }else if(type == 2){
                 if(userInfos == null || userInfos.size() <= 0){
                     return WebResult.error("该手机号码尚未注册");
                 }
@@ -153,7 +158,7 @@ public class UserController extends BaseController {
         }
         UserInfo userInfo = userInfoService.selectByPrimaryKey(loginUser.getId());
         loginUser = userInfoService.getLoginUserInfo(userInfo, token);
-        return WebResult.ok().put("data", loginUser);
+        return WebResult.ok().put(WebResult.DATA, loginUser);
     }
 
     /*
@@ -165,7 +170,51 @@ public class UserController extends BaseController {
             return WebResult.error("传入参数有错误");
         }
 
-        return WebResult.ok().put("data", "");
+        return WebResult.ok().put(WebResult.DATA, "");
+    }
+
+    /*
+    * 添加银行卡
+    * */
+    @RequestMapping("/addAccount")
+    public WebResult addAccount(UserAccount userAccount){
+        CacheUserInfo loginUser = getCurrLoginUser();
+        if(ConversionUtil.isContainEmptyParam(loginUser)){
+            return WebResult.error("token不合法或已过期");
+        }
+        //请使用您本人的银行卡
+
+        //保存
+        userAccount.setId(GUIDUtil.genRandomGUID());
+        userAccount.setCreateTime(new Date());
+        userAccount.setUserId(loginUser.getId());
+        userAccount.setState(Constants.ACCOUNT_STATUS.WAIT);
+        userAccount.setDeleteFlag(Constants.DELETEFLAG.NORMAL);
+        userAccount.setCreateOperator(loginUser.getId());
+        userAccountService.insertSelective(userAccount);
+        return WebResult.ok().put(WebResult.DATA, userAccount.getId());
+    }
+
+    /*
+    * 添加银行卡验证手机号
+    * */
+    @RequestMapping("/accountVerifyCode")
+    public WebResult accountVerifyCode(String code, String cellphone, String id){
+        CacheUserInfo loginUser = getCurrLoginUser();
+        if(ConversionUtil.isContainEmptyParam(loginUser)){
+            return WebResult.error("token不合法或已过期");
+        }
+        String verifyCode = CacheService.getCacheObj(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone, String.class);
+        if(StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)){
+            return WebResult.error("验证码错误");
+        }
+        UserAccount userAccount = new UserAccount();
+        userAccount.setId(id);
+        userAccount.setState(Constants.ACCOUNT_STATUS.NORMAL);
+        userAccount.setUpdateTime(new Date());
+        userAccount.setUpdateOperator(loginUser.getId());
+        userAccountService.updateByPrimaryKeySelective(userAccount);
+        return WebResult.ok();
     }
 
 }

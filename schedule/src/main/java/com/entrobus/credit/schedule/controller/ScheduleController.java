@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ScheduleController {
@@ -39,7 +40,7 @@ public class ScheduleController {
      * @param result
      * @return
      */
-    @PostMapping("/")
+    @PostMapping("/job")
     public WebResult addJob(@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
         //参数校验
         if (result.hasErrors()) {
@@ -47,7 +48,7 @@ public class ScheduleController {
             return WebResult.error(validationMsg);
         }
         if (StringUtils.isBlank(vo.getGroupName())){
-            vo.setGroupName(Constants.JobGroupName.DEFAULT);
+            vo.setGroupName(Constants.JOB_GROUP_NAME.DEFAULT);
         }
         //todo cron校验
         return scheduleService.addJob(vo);
@@ -60,8 +61,9 @@ public class ScheduleController {
      * @param result
      * @return
      */
-    @PutMapping("/")
-    public WebResult editJob(@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
+    @PutMapping("/job/{jobName}")
+//    public WebResult editJob(@PathVariable String jobName,@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
+    public WebResult editJob(@PathVariable String jobName,@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
         //参数校验
         if (result.hasErrors()) {
             String validationMsg = getValidationMsg(result);
@@ -69,22 +71,28 @@ public class ScheduleController {
         }
         //todo cron校验
         if (StringUtils.isBlank(vo.getGroupName())){
-            vo.setGroupName(Constants.JobGroupName.DEFAULT);
+            vo.setGroupName(Constants.JOB_GROUP_NAME.DEFAULT);
         }
-        return scheduleService.modifyJobTime(vo.getJobName(),vo.getGroupName(),vo.getCron());
+        return scheduleService.modifyJobTime(jobName,vo.getGroupName(),vo.getCron());
     }
 
     /**
      * 任务列表
      * @return
      */
-    @GetMapping("/")
-    public WebResult get(){
-        List<QuartzJobVo> voList = scheduleService.jobList();
-        return WebResult.ok("成功").put("list",voList);
+    @GetMapping("/job")
+    public WebResult jobList(QuartzJobVo vo, Integer pageNum, Integer pageSize){
+        List<QuartzJobVo> voList = scheduleService.jobList(vo);
+        int total = voList.size();
+        //模拟分页
+        if (pageNum != null && pageSize != null) {
+            int skip = (pageNum - 1) * pageSize;
+            voList = voList.stream().skip(skip).limit(pageSize).collect(Collectors.toList());
+        }
+        return WebResult.ok("成功").put("rows",voList).put("total",total);
     }
     /**
-     * 任务列表
+     * 任务组名称
      * @return
      */
     @GetMapping("/groupName")
@@ -95,13 +103,12 @@ public class ScheduleController {
     /**
      * 删除任务
      * @param jobName
-     * @param groupName
      * @return
      * @throws SchedulerException
      */
-    @DeleteMapping("/")
-    public WebResult removeJob(@RequestParam String jobName,@RequestParam String groupName) throws SchedulerException {
-        return scheduleService.removeJob(jobName,groupName);
+    @DeleteMapping("/job/{jobName}")
+    public WebResult removeJob(@PathVariable String jobName) throws SchedulerException {
+        return scheduleService.removeJob(jobName);
     }
 
     /**
@@ -112,8 +119,11 @@ public class ScheduleController {
      * @throws SchedulerException
      */
     @PostMapping("/pauseJob")
-    public WebResult pauseJob(@RequestParam String jobName,@RequestParam String groupName) throws SchedulerException {
-        return scheduleService.pauseJob(jobName,groupName);
+    public WebResult pauseJob(@RequestParam String jobName,@RequestParam(required = false) String groupName) throws SchedulerException {
+        if (StringUtils.isNotBlank(groupName)) {
+            return scheduleService.pauseJob(jobName, groupName);
+        }
+        return scheduleService.pauseJob(jobName);
     }
 
     /**
@@ -124,10 +134,22 @@ public class ScheduleController {
      * @throws SchedulerException
      */
     @PostMapping("/resumeJob")
-    public WebResult resumeJob(@RequestParam String jobName,@RequestParam String groupName) throws SchedulerException {
-        return scheduleService.resumeJob(jobName,groupName);
+    public WebResult resumeJob(@RequestParam String jobName,@RequestParam(required = false) String groupName) throws SchedulerException {
+        if (StringUtils.isNotBlank(groupName)) {
+            return scheduleService.resumeJob(jobName, groupName);
+        }
+        return scheduleService.resumeJob(jobName);
     }
-
+    /**
+     * 恢复任务
+     * @param jobName
+     * @return
+     * @throws SchedulerException
+     */
+    @PostMapping("/triggerJob")
+    public WebResult triggerJob( String jobName, String groupName) throws SchedulerException{
+        return scheduleService.triggerJob(jobName);
+    }
 
 
 }

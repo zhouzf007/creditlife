@@ -7,7 +7,6 @@ import com.entrobus.credit.payment.services.RepaymentPlanService;
 import com.entrobus.credit.payment.services.RepaymentService;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.payment.Repayment;
-import com.entrobus.credit.pojo.payment.RepaymentExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.sun.corba.se.spi.ior.IdentifiableFactory;
 import org.apache.tomcat.util.bcel.Const;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @RefreshScope
 @RestController
-public class RepaymentController {
+public class RepaymentController extends PaymentBaseController{
 
     @Autowired
     private RepaymentService repaymentService;

@@ -50,6 +50,8 @@ http://weixinhost.com/
 https://pay.weixin.qq.com/wiki/doc/api/index.html
 
 ## maven 单独构建多模块项目中的单个模块
-### 单独构建模块 manager-service，同时会构建 manager-service 模块依赖的其他模块
+### 单独构建模块 wechat-service，同时会构建 wechat-service 模块依赖的其他模块
 mvn install -pl wechat-service -am
 
+##公众号入口URL
+ http://entrobus.tunnel.qydev.com/view/index

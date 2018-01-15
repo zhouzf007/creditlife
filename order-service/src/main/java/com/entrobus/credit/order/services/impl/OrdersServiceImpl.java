@@ -68,7 +68,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> getUserOrders(String userId) {
         OrdersExample example = new OrdersExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
                 andUserIdEqualTo(userId);
         return this.ordersMapper.selectByExample(example);
     }

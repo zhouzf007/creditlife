@@ -2,49 +2,47 @@ package com.entrobus.credit.manager.bank.controller;
 
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.manager.bank.service.PartiesService;
-import com.entrobus.credit.manager.common.bean.CommonParameter;
-import com.entrobus.credit.manager.common.bean.PartiesExt;
+import com.entrobus.credit.manager.bank.service.OrganizationService;
+import com.entrobus.credit.manager.common.bean.OrganizationExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
-import com.entrobus.credit.pojo.manager.Parties;
-import com.entrobus.credit.pojo.manager.PartiesExample;
+import com.entrobus.credit.pojo.manager.Organization;
+import com.entrobus.credit.pojo.manager.OrganizationExample;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RefreshScope
 @RestController
-@RequestMapping("/bank/parties")
-public class BankPartiesController extends ManagerBaseController{
+@RequestMapping("/organization")
+public class OrganizationController extends ManagerBaseController{
 
     @Autowired
-    private PartiesService partiesService;
+    private OrganizationService organizationService;
 
     /**
      * 新增资金方
-     * @param parties
+     * @param organizationExt
      * @return
      */
     @PostMapping("")
-    public WebResult add(PartiesExt parties){
-        return partiesService.add(parties);
+    public WebResult add(OrganizationExt organizationExt){
+        return organizationService.add(organizationExt);
     }
 
     /**
      * 编辑资金方
-     * @param parties
+     * @param organizationExt
      * @return
      */
     @PutMapping("/{id}")
-    public WebResult edit(PartiesExt parties){
-        return partiesService.edit(parties);
+    public WebResult edit(OrganizationExt organizationExt){
+        return organizationService.edit(organizationExt);
     }
 
     /**
@@ -55,7 +53,7 @@ public class BankPartiesController extends ManagerBaseController{
      */
     @DeleteMapping("/{id}")
     public WebResult delete(@PathVariable String id){
-        return partiesService.delete(id);
+        return organizationService.delete(id);
     }
 
     /**
@@ -66,15 +64,15 @@ public class BankPartiesController extends ManagerBaseController{
      */
     @GetMapping("")
     public WebResult list(Integer offset, Integer limit) {
-        PartiesExample example = new PartiesExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        OrganizationExample example = new OrganizationExample();
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         example.setOrderByClause(" create_time desc ");
         PageHelper.startPage(offset,limit);
-        List<Parties> partiesList = partiesService.selectByExample(example);
-        PageInfo pageInfo = new PageInfo<>(partiesList);
+        List<Organization> organizationList = organizationService.selectByExample(example);
+        PageInfo pageInfo = new PageInfo<>(organizationList);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("total",pageInfo.getTotal());
-        dataMap.put("rows", partiesList);
+        dataMap.put("rows", organizationList);
         return WebResult.ok(dataMap);
     }
 

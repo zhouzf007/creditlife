@@ -94,20 +94,20 @@ public class BsStaticsServiceImpl implements BsStaticsService {
         Date now = new Date();
         if (record.getCreateTime() == null) record.setCreateTime(now);
         if (record.getUpdateTime() == null) record.setUpdateTime(now);
-        if (record.getDeleteFlag() == null) record.setDeleteFlag(Constants.DeleteFlag.NO);
+        if (record.getDeleteFlag() == null) record.setDeleteFlag(Constants.DELETE_FLAG.NO);
         if (record.getSortId() == null) record.setSortId(100);
     }
     @Override
     public List<BsStatics> getByCodeType(String codeType){
         if (StringUtils.isBlank(codeType)) return new ArrayList<>();
         BsStaticsExample example = new BsStaticsExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andCodeTypeEqualTo(codeType);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andCodeTypeEqualTo(codeType);
         return selectByExample(example);
     }
     @Override
     public BsStatics getByTypeAndValue(String codeType, String codeValue){
         BsStaticsExample example = new BsStaticsExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO)
                 .andCodeTypeEqualTo(codeType).andCodeValueEqualTo(codeValue);
         List<BsStatics> list = selectByExample(example);
         return list.isEmpty() ? null : list.get(0);
@@ -116,7 +116,7 @@ public class BsStaticsServiceImpl implements BsStaticsService {
     @Override
     public List<BsStatics> getByAll(){
         BsStaticsExample example = new BsStaticsExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         return selectByExample(example);
     }
     @Override
@@ -129,7 +129,7 @@ public class BsStaticsServiceImpl implements BsStaticsService {
     public List<BsStatics> getByVo(BsStaticVo vo) {
         BsStaticsExample example = new BsStaticsExample();
         BsStaticsExample.Criteria criteria = example.createCriteria();
-        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         if (StringUtils.isNotBlank(vo.getCodeType())){
             criteria.andCodeTypeEqualTo(vo.getCodeType());
         }
@@ -173,11 +173,11 @@ public class BsStaticsServiceImpl implements BsStaticsService {
     public int logicDel(Long id){
 
         BsStatics bsStatics = new BsStatics();
-        bsStatics.setDeleteFlag(Constants.DeleteFlag.YES);
+        bsStatics.setDeleteFlag(Constants.DELETE_FLAG.YES);
         bsStatics.setDeleteTime(new Date());
 
         BsStaticsExample example = new BsStaticsExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andIdEqualTo(id);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andIdEqualTo(id);
 
         int n =  this.updateByExampleSelective(bsStatics, example);
         return n;
@@ -188,10 +188,10 @@ public class BsStaticsServiceImpl implements BsStaticsService {
             return 0;
         }
         BsStatics bsStatics = new BsStatics();
-        bsStatics.setDeleteFlag(Constants.DeleteFlag.YES);
+        bsStatics.setDeleteFlag(Constants.DELETE_FLAG.YES);
         bsStatics.setDeleteTime(new Date());
         BsStaticsExample example = new BsStaticsExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andIdIn(idList);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andIdIn(idList);
 
         int n =  this.updateByExampleSelective(bsStatics, example);
         return n;

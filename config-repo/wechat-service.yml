@@ -89,3 +89,7 @@ wechat:
     partenerId: 1461196702
     #微信支付平台商户API密钥
     partenerKey: C644ED21DEB14FF6E909FCDA6B1B7BA8
+    #微信服务器地址
+    server: http://entrobus.tunnel.qydev.com
+    #微信前端UI服务器地址
+    frontServer: http://creditlife.entrobus.com

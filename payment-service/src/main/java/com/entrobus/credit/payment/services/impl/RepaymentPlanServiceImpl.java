@@ -4,8 +4,6 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.payment.dao.RepaymentPlanMapper;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
-import com.entrobus.credit.pojo.payment.Repayment;
-import com.entrobus.credit.pojo.payment.RepaymentExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.pojo.payment.RepaymentPlanExample;
 
@@ -80,7 +78,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public List<RepaymentPlan> getRepaymentPlanByOrderId(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         return this.selectByExample(example);
     }
     @Override
@@ -115,7 +113,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
             record.setId(GUIDUtil.genRandomGUID());
         }
         record.setCreateTime(new Date());
-        record.setDeleteFlag(Constants.DeleteFlag.NO);
+        record.setDeleteFlag(Constants.DELETE_FLAG.NO);
         record.setUpdateTime(new Date());
     }
 }

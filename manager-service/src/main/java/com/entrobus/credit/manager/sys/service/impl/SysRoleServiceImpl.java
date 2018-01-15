@@ -91,7 +91,7 @@ public class SysRoleServiceImpl implements SysRoleService {
             BeanUtils.copyProperties(sysRole,role);
             sysRole.setCreateTime(new Date());
             sysRole.setUpdateTime(new Date());
-            sysRole.setDeleteFlag(Constants.DeleteFlag.NO);
+            sysRole.setDeleteFlag(Constants.DELETE_FLAG.NO);
             //保存系统角色，保存成功后会返回主键的值
             insertSelective(sysRole);
             if(ConversionUtil.isNotEmptyParameter(role.getResourceIdList())){
@@ -137,7 +137,7 @@ public class SysRoleServiceImpl implements SysRoleService {
         SysRoleExample roleExample = new SysRoleExample();
         roleExample.createCriteria().andIdIn(idList);
         SysRole sysRole = new SysRole();
-        sysRole.setDeleteFlag(Constants.DeleteFlag.YES);
+        sysRole.setDeleteFlag(Constants.DELETE_FLAG.YES);
         sysRole.setDeleteUser(deleteUserId);
         sysRole.setDeleteTime(new Date());
         //1.删除角色（逻辑删除）

@@ -2,8 +2,6 @@ package com.entrobus.credit.wechat.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 /**
  * 微信公众号基本配置信息
@@ -29,6 +27,17 @@ public class WxConfig {
     @Value("${wechat.partenerKey}")
     private String partenerKey;
 
+    /**
+     * 微信服务器
+     */
+    @Value("${wechat.server}")
+    private String server;
+
+    /**
+     * 微信前端UI服务器地址
+     */
+    @Value("${wechat.frontServer}")
+    private String frontServer;
 
     public String getAppId() {
         return appId;
@@ -76,5 +85,21 @@ public class WxConfig {
 
     public void setPartenerKey(String partenerKey) {
         this.partenerKey = partenerKey;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public String getFrontServer() {
+        return frontServer;
+    }
+
+    public void setFrontServer(String frontServer) {
+        this.frontServer = frontServer;
     }
 }

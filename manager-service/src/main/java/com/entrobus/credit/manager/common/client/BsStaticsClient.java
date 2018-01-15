@@ -5,6 +5,7 @@ import com.entrobus.credit.vo.base.BsStaticVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,14 +14,14 @@ import java.util.List;
  * 参数的注解在FeignClient中使必须的
  */
 @FeignClient(name = "base-service", fallback = BsStaticsClient.BsStaticsClientFallback.class)
-@RequestMapping("/statics")
+//@RequestMapping("/statics")
 public interface BsStaticsClient {
     /**
      * 从缓存获取，如果缓存中没有，则刷新缓存
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping("/statics/{id}")
     BsStaticVo getBsStatic(@PathVariable("id") Long id);
 
     /**
@@ -29,7 +30,7 @@ public interface BsStaticsClient {
      * @param codeType
      * @return
      */
-    @GetMapping("/similar")
+    @GetMapping("/statics/similar")
     List<BsStaticVo> getByType(@RequestParam("codeType") String codeType);
 
     /**
@@ -37,7 +38,7 @@ public interface BsStaticsClient {
      *
      * @return
      */
-    @GetMapping("/search")
+    @GetMapping("/statics/search")
     List<BsStaticVo> search(@RequestParam(value = "codeType") String codeType,
                             @RequestParam(value = "codeValue") String codeValue,
                             @RequestParam(value = "codeName") String codeName,
@@ -51,7 +52,7 @@ public interface BsStaticsClient {
      * @param codeType
      * @return
      */
-    @GetMapping("/unique")
+    @GetMapping("/statics/unique")
     BsStaticVo getByTypeAndValue(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
     /**
      * 跟据codeType和codeValue查询CodeName
@@ -59,7 +60,7 @@ public interface BsStaticsClient {
      * @param codeType
      * @return
      */
-    @GetMapping("/name")
+    @GetMapping("/statics/name")
     String getCodeName(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
 
 
@@ -73,7 +74,7 @@ public interface BsStaticsClient {
      * @param
      * @return
      */
-    @GetMapping("")
+    @GetMapping("/statics")
     WebResult list(@RequestParam(value = "codeType") String codeType, @RequestParam(value = "status")String status,
                    @RequestParam(value = "pageNum") Integer pageNum, @RequestParam(value = "pageSize") Integer pageSize);
     /**
@@ -83,7 +84,7 @@ public interface BsStaticsClient {
      * @param vo
      * @return
      */
-    @PutMapping(value = "/{id}",consumes = "application/json")
+    @PutMapping(value = "/statics/{id}",consumes = "application/json")
     WebResult update(@PathVariable("id") Long id, @RequestBody  BsStaticVo vo);
 
     /**
@@ -93,7 +94,7 @@ public interface BsStaticsClient {
      * @param id
      * @return
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/statics/{id}")
     WebResult del(@PathVariable("id") Long id);
 
     /**
@@ -102,7 +103,7 @@ public interface BsStaticsClient {
      * @param codeType 如果非空，只刷新codeType对应数据的缓存，否则刷新全部
      * @return
      */
-    @PostMapping("/cache")
+    @PostMapping("/statics/cache")
     WebResult cacheOrRefreshAll(@RequestParam(value = "codeType",required = false) String codeType);
     /**
      * 添加，并缓存
@@ -110,7 +111,7 @@ public interface BsStaticsClient {
      * @param vo
      * @return
      */
-    @PostMapping(value = "",consumes = "application/json")
+    @PostMapping(value = "/statics",consumes = "application/json")
     WebResult add(@RequestBody  BsStaticVo vo);
 
     /**
@@ -120,9 +121,9 @@ public interface BsStaticsClient {
      * @param ids
      * @return
      */
-    @PostMapping("/trashCan")
-    public WebResult batchDel(@RequestParam("ids") List<Long> ids) ;
-
+    @PostMapping("/statics/trashCan")
+    WebResult batchDel(@RequestParam("ids") List<Long> ids) ;
+    @Component
     class BsStaticsClientFallback implements   BsStaticsClient{
         private static final Logger LOGGER = LoggerFactory.getLogger(BsStaticsClient.BsStaticsClientFallback.class);
 
@@ -205,7 +206,7 @@ public interface BsStaticsClient {
         @Override
         public WebResult list(String codeType, String status, Integer pageNum, Integer pageSize) {
             LOGGER.info("list异常发生，进入fallback方法");
-            return null;
+            return WebResult.error("服务异常");
         }
 
 

@@ -1,6 +1,5 @@
 package com.entrobus.credit.schedule.annotation;
 
-import com.entrobus.credit.common.Constants;
 import org.springframework.core.annotation.Order;
 
 import java.lang.annotation.ElementType;
@@ -16,11 +15,11 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Order(1)
 public @interface JobBean {
-//    String value() default "";
+    String value() default "";//任务名称
     //任务名称
-    String jobName() default "";
+//    String jobName() default "";
     //分组名称
-//    String groupName() default Constants.JobGroupName.DEFAULT;
+//    String groupName() default Constants.JOB_GROUP_NAME.DEFAULT;
     //cron 时间
 //    String cron() default "" ;
 }
