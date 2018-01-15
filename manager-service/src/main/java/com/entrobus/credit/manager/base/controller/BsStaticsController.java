@@ -110,7 +110,7 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setOperatorType(Constants.OPERATOR_TYPE.MANAGER);//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户
         msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
         msg.setOperationState(Constants.OPERATION_STATE.SUCCESS);//操作状态：0-成功，1-失败，2-异常
-        msg.setRequestId(GUIDUtil.genRandomGUID());
+        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
         msg.setTime(new Date());//操作时间
         msg.newTables("table1")//操作相关数据表1
                 .putColume("abb","ddd","old")//表中字段名、新值、旧值
