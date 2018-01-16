@@ -221,7 +221,7 @@ public class OrdersController {
      * @return
      */
     @GetMapping(path = "/orderList")
-    public WebResult getOrderList(@RequestBody OrderQueryVo vo) throws Exception {
+    public List<OrderListVo> getOrderList(@RequestBody OrderQueryVo vo) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -229,6 +229,10 @@ public class OrdersController {
             criteria.andStateEqualTo(vo.getState());
         }
         example.setOrderByClause(" create_time desc ");
+        if (vo.getLimit() != null && vo.getOffset() != null) {
+            example.setLimitStart(vo.getOffset());
+            example.setLimitEnd(vo.getLimit());
+        }
         List<Orders> list = ordersService.selectByExample(example);
         List<OrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -243,9 +247,7 @@ public class OrdersController {
             orderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(orderVo);
         }
-        Map rsMap = new HashMap<>();
-        rsMap.put("list", rsList);
-        return WebResult.ok(rsMap);
+        return rsList;
     }
 
     /**
@@ -255,7 +257,7 @@ public class OrdersController {
      * @return
      */
     @GetMapping(path = "/userOrderList")
-    public WebResult getUserOrderList(@RequestBody OrderQueryVo vo) throws Exception {
+    public List<OrderListVo> getUserOrderList(@RequestBody OrderQueryVo vo) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -263,6 +265,10 @@ public class OrdersController {
             criteria.andStateEqualTo(vo.getState());
         }
         example.setOrderByClause(" create_time desc ");
+        if (vo.getLimit() != null && vo.getOffset() != null) {
+            example.setLimitStart(vo.getOffset());
+            example.setLimitEnd(vo.getLimit());
+        }
         List<Orders> list = ordersService.selectByExample(example);
         List<OrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -276,9 +282,7 @@ public class OrdersController {
             rsorderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(rsorderVo);
         }
-        Map rsMap = new HashMap<>();
-        rsMap.put("list", rsList);
-        return WebResult.ok(rsMap);
+        return rsList;
     }
 
     /**
