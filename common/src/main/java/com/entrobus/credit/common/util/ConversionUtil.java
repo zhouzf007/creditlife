@@ -8,6 +8,7 @@ import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -564,6 +565,14 @@ public class ConversionUtil {
             System.out.println("判断day2 - day1 : " + (day2-day1));
             return day2-day1;
         }
+    }
+
+    public static Long rateToLong(String rate){
+        return new BigDecimal(rate).multiply(new BigDecimal(10000)).setScale(0, BigDecimal.ROUND_HALF_UP).longValue();
+    }
+
+    public static String rateToString(Long rate){
+        return new BigDecimal(rate).divide(new BigDecimal(10000), 4, BigDecimal.ROUND_HALF_UP).toString();
     }
 
     public static void main(String[] str ){

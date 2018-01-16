@@ -63,4 +63,9 @@ public class LoanInterestRateServiceImpl implements LoanInterestRateService {
     public int insertSelective(LoanInterestRate record) {
         return this.loanInterestRateMapper.insertSelective(record);
     }
+
+    @Override
+    public int insertBatchSelective(List<LoanInterestRate> records) {
+        return this.loanInterestRateMapper.insertBatchSelective(records);
+    }
 }

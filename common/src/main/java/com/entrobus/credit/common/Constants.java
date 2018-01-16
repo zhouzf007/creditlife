@@ -103,6 +103,14 @@ public interface Constants {
     }
 
     /**
+     * 还款方式类型
+     */
+    interface REPAYMENT_TYPE{
+        int INTEREST_CAPITAL = 0;//先息后本
+        int MONTH_EQUAL = 1;//每月等额
+    }
+
+    /**
      * 用户状态
      * 0：正常   1：禁用
      */

@@ -1,7 +1,9 @@
 package com.entrobus.credit.manager.bank.service;
 
+import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.manager.LoanProduct;
 import com.entrobus.credit.pojo.manager.LoanProductExample;
+import com.entrobus.credit.vo.loan.LoanConfigureVo;
 
 import java.util.List;
 
@@ -27,4 +29,8 @@ public interface LoanProductService {
     int insert(LoanProduct record);
 
     int insertSelective(LoanProduct record);
+
+    WebResult save(LoanConfigureVo loanConfigureVo);
+
+    WebResult detail();
 }
