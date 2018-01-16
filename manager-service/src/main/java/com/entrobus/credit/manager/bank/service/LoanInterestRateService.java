@@ -27,4 +27,7 @@ public interface LoanInterestRateService {
     int insert(LoanInterestRate record);
 
     int insertSelective(LoanInterestRate record);
+
+    int insertBatchSelective(List<LoanInterestRate> records);
+
 }
