@@ -1,7 +1,7 @@
 package com.entrobus.credit.manager.base.controller;
 
 import com.entrobus.credit.common.Constants;
-import com.entrobus.credit.common.annotation.OperationLog;
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
@@ -179,7 +179,7 @@ public class BsStaticsController extends ManagerBaseController{
      * @return
      */
     @PostMapping("/testLog2")
-    @OperationLog
+    @RecordLog
     public WebResult testLog2(String str){
         return WebResult.ok();
     }

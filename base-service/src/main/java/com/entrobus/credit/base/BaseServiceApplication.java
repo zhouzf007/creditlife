@@ -31,7 +31,7 @@ public class BaseServiceApplication {
     RedisTemplate redisTemplate;
 
     @Bean
-    protected void redisInit() {
+    protected Integer redisInit() {
         CacheService.setString(redisTemplate, Cachekey.Translation.ORDER_STATE + Constants.ORDER_STATE.NOT_LOAN, "未申请");
         CacheService.setString(redisTemplate, Cachekey.Translation.ORDER_STATE + Constants.ORDER_STATE.AUIDT_PENGDING, "待审核");
         CacheService.setString(redisTemplate, Cachekey.Translation.ORDER_STATE + Constants.ORDER_STATE.LOAN_PENGDING, "待放款");
@@ -42,5 +42,6 @@ public class BaseServiceApplication {
         CacheService.setString(redisTemplate, Cachekey.Translation.REPAYMENT_STATE + Constants.REPAYMENT_ORDER_STATE.PASS, "使用中");
         CacheService.setString(redisTemplate, Cachekey.Translation.REPAYMENT_STATE + Constants.REPAYMENT_ORDER_STATE.OVERDUE, "已逾期");
         CacheService.setString(redisTemplate, Cachekey.Translation.REPAYMENT_STATE + Constants.REPAYMENT_ORDER_STATE.FINISHED, "已结清");
+        return 1;
     }
 }
