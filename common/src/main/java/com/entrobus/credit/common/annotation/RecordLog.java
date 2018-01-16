@@ -30,7 +30,11 @@ public @interface RecordLog {
     String remark() default "";
 
     /**
-     * 请求参数中主键的参数名
+     * 被操作数据的主键名称，
+     * 即请求参数中主键的参数名
+     * 通过aop根据relId取得实际的主键值
+     *
+     * 暂时只能拿到@PathVariable和@RequestParam注解设置的参数名
      * @return
      */
     String relId() default "id";
