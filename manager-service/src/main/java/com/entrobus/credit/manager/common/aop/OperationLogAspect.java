@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.common.aop;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
@@ -8,6 +9,7 @@ import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.sys.service.LogService;
 import com.entrobus.credit.vo.log.OperationLogMsg;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -75,7 +79,7 @@ public class OperationLogAspect {
     private OperationLogMsg getOperationLogMsg(ProceedingJoinPoint pjp) {
         OperationLogMsg msg = null;
         try {
-            Object[] args = pjp.getArgs();
+
             Signature sig = pjp.getSignature();
             MethodSignature msig = null;
             if (!(sig instanceof MethodSignature)) {
@@ -90,25 +94,31 @@ public class OperationLogAspect {
             //操作日志
             msg = new OperationLogMsg();
             msg.setDesc(logAnnotation.desc());// 操作说明：自定义,如 提交申请（创建订单）、审核 等
-            msg.setOperationData(args);//请求参数，Object
-            SysLoginUserInfo loginUser = cacheService.getCurrLoginUser();
-//        msg.setOperationData(str);//请求参数，Object
-            msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
 
+            SysLoginUserInfo loginUser = cacheService.getCurrLoginUser();
+            if (loginUser != null) {
+                msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
+                msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+            }
             //获取相关主键
             String relId = null;
-            int index = getKeyParamIndex(logAnnotation.relId(), currentMethod);
-            Object[] pjpArgs = pjp.getArgs();
-            if (pjpArgs != null && index >-1  ){
-                if (pjpArgs.length > index){
-                    relId = String.valueOf(pjpArgs[index]);
+            Object[] args = pjp.getArgs();
+//            int index = getKeyParamIndex(logAnnotation.relId(), currentMethod);
+            String[] argNames = getArgNames(currentMethod);
+//            int index = (int) argNames;
+
+            if (args != null && argNames != null && args.length>0){
+                Map<String,Object> argMap = new HashMap<>(args.length);
+                for (int i = 0; i < args.length; i++) {
+                    String name = argNames[i];
+                    argMap.put(name,args[i]);
+                    if (Objects.equals(logAnnotation.relId(), name))
+                        msg.setRelId(name);//关联id,如orderId
                 }
+                msg.setOperationData(argMap);//请求参数，Object
             }
 
-
-            msg.setRelId(relId);//关联id,如orderId
             //这里跟platform对应
-        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
             msg.setRemark(logAnnotation.remark());//备注（1024）：自定义，如：超时、定时操作等
             //操作状态：0-成功，1-失败，2-异常
             pjp.getArgs();
@@ -119,31 +129,37 @@ public class OperationLogAspect {
         return msg;
     }
 
-
-
-    private int  getKeyParamIndex(String relKey,Method currentMethod ) {
+    /**
+     * 获取参数名
+     * 为了避免拿不到实际参数名的情况（JDK版本小于1.8）
+     * 优先使用@PathVariable和@RequestParam绑定值，如果没有，则使用Parameter.getName()
+     *
+     * @param currentMethod
+     * @return
+     */
+    private String[]  getArgNames(Method currentMethod ) {
         Parameter[] parameters = currentMethod.getParameters();
-        int nameIndex = -1;
         if (parameters != null && parameters.length > 0){
+            String[]  argNames = new String[parameters.length];
             for (int i = 0; i < parameters.length; i++) {
                 Parameter param = parameters[i];
                 if (param.isAnnotationPresent(PathVariable.class)){
                     PathVariable pv = param.getAnnotation(PathVariable.class);
-                    if (Objects.equals(pv.value(),relKey) || Objects.equals(pv.name(),relKey)) {
-                        return i;
-                    }
+                    String name = pv.value();
+                    name = StringUtils.isBlank(name) ? name : pv.name();
+                    argNames[i] = name;
                 }else if (param.isAnnotationPresent(RequestParam.class)){
                     RequestParam pv = param.getAnnotation(RequestParam.class);
-                    if (Objects.equals(pv.value(),relKey) || Objects.equals(pv.name(),relKey)) {
-                        return i;
-                    }
-                }
-                if (param.isNamePresent() && Objects.equals(param.getName(),relKey)){
-                    nameIndex = i;
+                    String name = pv.value();
+                    name = StringUtils.isBlank(name) ? name : pv.name();
+                        argNames[i] = name;
+                }else {
+                    argNames[i] = param.getName();
                 }
             }
+            return argNames;
         }
-        return nameIndex;
+        return null;
     }
 
 
