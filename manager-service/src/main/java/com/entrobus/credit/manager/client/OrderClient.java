@@ -19,7 +19,7 @@ public interface OrderClient {
 
 
     @PutMapping(value = "/order/{id}")
-    void updateOrder(@PathVariable("id")String id,@RequestBody Orders order);
+    void updateOrder(@PathVariable("id") String id, @RequestBody Orders order);
 
     @GetMapping(path = "/order/{id}")
     Orders getOrder(@PathVariable("id") String id);

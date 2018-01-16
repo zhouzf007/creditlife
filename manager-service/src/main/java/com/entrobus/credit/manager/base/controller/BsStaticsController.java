@@ -39,6 +39,7 @@ public class BsStaticsController extends ManagerBaseController{
      * @return
      */
     @PostMapping("")
+    @RecordLog(desc = "新增静态数据")
     public WebResult add( BsStaticVo vo){
         WebResult result = bsStaticsClient.add(vo);
         SysLoginUserInfo loginUser = getCurrLoginUser();
@@ -82,6 +83,7 @@ public class BsStaticsController extends ManagerBaseController{
      * @return
      */
     @PutMapping("/{id}")
+    @RecordLog(desc = "编辑静态数据",remark = "单个删除")
     public WebResult update(@PathVariable Long id,   BsStaticVo vo){
         WebResult result = bsStaticsClient.update(id, vo);
         SysLoginUserInfo loginUser = getCurrLoginUser();
@@ -110,6 +112,7 @@ public class BsStaticsController extends ManagerBaseController{
      * @return
      */
     @DeleteMapping("/{id}")
+    @RecordLog(desc = "删除静态数据",remark = "单个删除",relId = "id")
     public WebResult del(@PathVariable Long id){
         WebResult result = bsStaticsClient.del(id);
         SysLoginUserInfo loginUser = getCurrLoginUser();
@@ -139,6 +142,7 @@ public class BsStaticsController extends ManagerBaseController{
      * @return
      */
     @PostMapping("/trashCan")
+    @RecordLog(desc = "删除静态数据",remark = "批量删除")
     public WebResult batchDel(@RequestParam("ids") List<Long> ids) {
         WebResult result = bsStaticsClient.batchDel(ids);
         SysLoginUserInfo loginUser = getCurrLoginUser();
@@ -173,14 +177,17 @@ public class BsStaticsController extends ManagerBaseController{
     }
 
     /**
-     * 操作日志demo
+     * 操作日志demo2
      * 使用注解
+     * 程序自动获取请求参数、返回结果、应用名称等
+     * 部分参数需要根据业务自定义
+     * relId默认值是"id"
      * @param str
      * @return
      */
-    @PostMapping("/testLog2")
-    @RecordLog
-    public WebResult testLog2(String str){
+//    @PostMapping("/testLog2")
+    @RecordLog(desc = "testLog2",remark = "ass", relId = "str")//操作名称、描述，备注，关联主键
+    public WebResult testLog2(@RequestParam("str") String str){
         return WebResult.ok();
     }
     /**
@@ -188,7 +195,7 @@ public class BsStaticsController extends ManagerBaseController{
      * @param str
      * @return
      */
-    @PostMapping("/testLog")
+//    @PostMapping("/testLog")
     public WebResult testLog(String str){
         OperationLogMsg msg = new OperationLogMsg();
         msg.setDesc("testLog");// 操作说明：自定义,如 提交申请（创建订单）、审核 等

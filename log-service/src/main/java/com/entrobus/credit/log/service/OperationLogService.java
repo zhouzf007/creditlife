@@ -87,4 +87,6 @@ public interface OperationLogService {
     int insertSelective(OperationLog record);
 
     int logMsg(OperationLogMsg msg);
+
+    int clear();
 }
