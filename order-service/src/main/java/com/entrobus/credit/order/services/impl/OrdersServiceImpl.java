@@ -76,7 +76,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public Orders getUserLastOrder(String userId) {
         OrdersExample example = new OrdersExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
                 andUserIdEqualTo(userId);
         example.setOrderByClause(" create_time desc ");
         List<Orders> list=this.ordersMapper.selectByExample(example);

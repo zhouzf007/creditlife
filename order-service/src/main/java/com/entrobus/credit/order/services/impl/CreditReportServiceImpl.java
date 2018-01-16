@@ -68,7 +68,7 @@ public class CreditReportServiceImpl implements CreditReportService {
     @Override
     public CreditReport getCreditReportByUid(String userId) {
         CreditReportExample example = new CreditReportExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andUserIdEqualTo(userId);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andUserIdEqualTo(userId);
         example.setOrderByClause(" create_time desc ");
         List<CreditReport> list = selectByExample(example);
         if (!list.isEmpty()) {

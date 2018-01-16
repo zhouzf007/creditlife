@@ -84,7 +84,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public RepaymentPlan getLastRepaymentPlanByOrderId(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andPlanTimeLessThan(new Date());
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date());
         example.setOrderByClause(" plan_time desc ");
        List<RepaymentPlan> list=this.selectByExample(example);
        if (!list.isEmpty()){
@@ -96,7 +96,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public List<RepaymentPlan> getOverDueRepaymentPlans(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
         example.setOrderByClause(" plan_time desc ");
         return this.selectByExample(example);
     }
@@ -104,7 +104,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public List<RepaymentPlan> getFinishedRepaymentPlans(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
         return this.selectByExample(example);
     }
 

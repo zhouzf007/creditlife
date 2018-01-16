@@ -1,6 +1,5 @@
 package com.entrobus.credit.manager.client;
 
-import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.vo.order.OrderListVo;
 import com.entrobus.credit.vo.order.OrderQueryVo;
@@ -20,7 +19,7 @@ public interface OrderClient {
 
 
     @PutMapping(value = "/order/{id}")
-    void updateOrder(String id, Orders order);
+    void updateOrder(@PathVariable("id")String id,@RequestBody Orders order);
 
     @GetMapping(path = "/order/{id}")
     Orders getOrder(@PathVariable("id") String id);
