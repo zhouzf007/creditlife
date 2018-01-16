@@ -4,6 +4,7 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.manager.LoanProduct;
 import com.entrobus.credit.pojo.manager.LoanProductExample;
 import com.entrobus.credit.vo.loan.LoanConfigureVo;
+import com.entrobus.credit.vo.loan.LoanProductVo;
 
 import java.util.List;
 
@@ -33,4 +34,8 @@ public interface LoanProductService {
     WebResult save(LoanConfigureVo loanConfigureVo);
 
     WebResult detail();
+
+    LoanProductVo getInfoById(String id);
+
+    LoanProductVo getInfoByOrgId(String orgId);
 }
