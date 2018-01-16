@@ -1,6 +1,8 @@
 package com.entrobus.credit.msg.services.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.FreemarkerUtil;
 import com.entrobus.credit.msg.Util.SMSUtil;
@@ -12,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -29,6 +32,8 @@ public class MsgServiceImpl implements MsgService {
     @Autowired
     private SmsLogService smsLogService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Override
     public String sendVerificationCode(MsgVo msg) throws Exception {
         String mobile = msg.getMobile();
@@ -47,6 +52,7 @@ public class MsgServiceImpl implements MsgService {
         log.setPushType(Constants.SMS_TYPE.VERIFICATION);
         log.setResult(result);
         smsLogService.insertSelective(log);
+        CacheService.setStringExpir(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + mobile, String.valueOf(verifyCode), 1000 * 60 * 30);
         return String.valueOf(verifyCode);
     }
 
