@@ -125,7 +125,7 @@ public class LoanProductServiceImpl implements LoanProductService {
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
         LoanProductExample example = new LoanProductExample();
         example.createCriteria().andOrgIdEqualTo(userInfo.getOrgId())
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         example.setOrderByClause(" create_time desc ");
         List<LoanProduct> productList = this.selectByExample(example);
         Map<String, Object> dataMap = new HashMap<>();
@@ -142,7 +142,7 @@ public class LoanProductServiceImpl implements LoanProductService {
         //期数利率
         LoanInterestRateExample rateExample = new LoanInterestRateExample();
         rateExample.createCriteria().andLoanProductIdEqualTo(product.getId())
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         rateExample.setOrderByClause(" create_time asc");
         List<LoanInterestRate> interestRateList = loanInterestRateService.selectByExample(rateExample);
         TreeSet<Integer> set = new TreeSet<>();
@@ -182,7 +182,7 @@ public class LoanProductServiceImpl implements LoanProductService {
         rate.setInterestRate(ConversionUtil.rateToLong(interestRate));
         rate.setCreateTime(new Date());
         rate.setUpdateTime(new Date());
-        rate.setDeleteFlag(Constants.DeleteFlag.NO);
+        rate.setDeleteFlag(Constants.DELETE_FLAG.NO);
         return rate;
     }
 
@@ -196,7 +196,7 @@ public class LoanProductServiceImpl implements LoanProductService {
         loanProduct.setUpdateTime(new Date());
         loanProduct.setCreateUser(sysUserId);
         loanProduct.setUpdateUser(sysUserId);
-        loanProduct.setDeleteFlag(Constants.DeleteFlag.NO);
+        loanProduct.setDeleteFlag(Constants.DELETE_FLAG.NO);
         return loanProduct;
     }
 
