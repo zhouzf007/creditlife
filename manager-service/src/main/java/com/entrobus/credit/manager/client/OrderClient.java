@@ -1,6 +1,5 @@
 package com.entrobus.credit.manager.client;
 
-import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.vo.order.OrderListVo;
 import com.entrobus.credit.vo.order.OrderQueryVo;

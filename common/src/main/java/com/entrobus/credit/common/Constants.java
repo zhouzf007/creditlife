@@ -87,4 +87,12 @@ public interface Constants {
         int OVERDUE = 4;//已逾期
         int FINISHED = 5;//已结清
     }
+
+    /**
+     * 还款方式类型
+     */
+    interface REPAYMENT_TYPE{
+        int INTEREST_CAPITAL = 0;//先息后本
+        int MONTH_EQUAL = 1;//每月等额
+    }
 }
