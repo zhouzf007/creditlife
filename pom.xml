@@ -213,9 +213,14 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <!-- 显示编译告警信息-->
-                    <compilerArgument>
-                        -Xlint:unchecked
-                    </compilerArgument>
+                    <!--<compilerArgument>-->
+                         <!-- -Xlint:unchecked-->
+                    <!--</compilerArgument>-->
+                    <compilerArgs>
+                        <!--<arg></arg>-->
+                        <arg>-Xlint:unchecked</arg>
+                        <compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>

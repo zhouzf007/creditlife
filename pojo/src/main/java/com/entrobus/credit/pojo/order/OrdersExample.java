@@ -330,6 +330,76 @@ public class OrdersExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andOrgIdIsNull() {
+            addCriterion("org_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdIsNotNull() {
+            addCriterion("org_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdEqualTo(String value) {
+            addCriterion("org_id =", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdNotEqualTo(String value) {
+            addCriterion("org_id <>", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdGreaterThan(String value) {
+            addCriterion("org_id >", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdGreaterThanOrEqualTo(String value) {
+            addCriterion("org_id >=", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdLessThan(String value) {
+            addCriterion("org_id <", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdLessThanOrEqualTo(String value) {
+            addCriterion("org_id <=", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdLike(String value) {
+            addCriterion("org_id like", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdNotLike(String value) {
+            addCriterion("org_id not like", value, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdIn(List<String> values) {
+            addCriterion("org_id in", values, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdNotIn(List<String> values) {
+            addCriterion("org_id not in", values, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdBetween(String value1, String value2) {
+            addCriterion("org_id between", value1, value2, "orgId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrgIdNotBetween(String value1, String value2) {
+            addCriterion("org_id not between", value1, value2, "orgId");
+            return (Criteria) this;
+        }
+
         public Criteria andApplyNoIsNull() {
             addCriterion("apply_no is null");
             return (Criteria) this;
@@ -397,6 +467,146 @@ public class OrdersExample implements Serializable {
 
         public Criteria andApplyNoNotBetween(String value1, String value2) {
             addCriterion("apply_no not between", value1, value2, "applyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIsNull() {
+            addCriterion("`role` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIsNotNull() {
+            addCriterion("`role` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEqualTo(String value) {
+            addCriterion("`role` =", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotEqualTo(String value) {
+            addCriterion("`role` <>", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleGreaterThan(String value) {
+            addCriterion("`role` >", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleGreaterThanOrEqualTo(String value) {
+            addCriterion("`role` >=", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLessThan(String value) {
+            addCriterion("`role` <", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLessThanOrEqualTo(String value) {
+            addCriterion("`role` <=", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLike(String value) {
+            addCriterion("`role` like", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotLike(String value) {
+            addCriterion("`role` not like", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIn(List<String> values) {
+            addCriterion("`role` in", values, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotIn(List<String> values) {
+            addCriterion("`role` not in", values, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleBetween(String value1, String value2) {
+            addCriterion("`role` between", value1, value2, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotBetween(String value1, String value2) {
+            addCriterion("`role` not between", value1, value2, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountIsNull() {
+            addCriterion("account is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountIsNotNull() {
+            addCriterion("account is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountEqualTo(String value) {
+            addCriterion("account =", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountNotEqualTo(String value) {
+            addCriterion("account <>", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountGreaterThan(String value) {
+            addCriterion("account >", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountGreaterThanOrEqualTo(String value) {
+            addCriterion("account >=", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountLessThan(String value) {
+            addCriterion("account <", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountLessThanOrEqualTo(String value) {
+            addCriterion("account <=", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountLike(String value) {
+            addCriterion("account like", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountNotLike(String value) {
+            addCriterion("account not like", value, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountIn(List<String> values) {
+            addCriterion("account in", values, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountNotIn(List<String> values) {
+            addCriterion("account not in", values, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountBetween(String value1, String value2) {
+            addCriterion("account between", value1, value2, "account");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountNotBetween(String value1, String value2) {
+            addCriterion("account not between", value1, value2, "account");
             return (Criteria) this;
         }
 

@@ -68,7 +68,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 }
                 JobDetail jobDetail = scheduler.getJobDetail(jobKey);
                 jobVo.setDescription(jobDetail.getDescription());
-                jobVo.setParam((String) jobDetail.getJobDataMap().get(Constants.JobDataKey.CUSTOM));
+                jobVo.setParam((String) jobDetail.getJobDataMap().get(Constants.JOB_DATA_KEY.CUSTOM));
 
             }
         } catch (SchedulerException e) {
@@ -132,7 +132,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public WebResult removeJob(String jobName, String groupName) throws SchedulerException {
-        if(groupName == null) groupName = Constants.JobGroupName.DEFAULT;
+        if(groupName == null) groupName = Constants.JOB_GROUP_NAME.DEFAULT;
         JobKey jobKey = JobKey.jobKey(jobName,groupName);
         if (remove(jobKey)){
             return WebResult.error("任务不存在");
@@ -177,7 +177,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             jobBuilder.storeDurably(true);//持久化
             jobBuilder.requestRecovery(true);//重写执行失败的任务,default=false
             if (StringUtils.isNotBlank(vo.getParam())){
-                jobBuilder.usingJobData(Constants.JobDataKey.CUSTOM,vo.getParam());
+                jobBuilder.usingJobData(Constants.JOB_DATA_KEY.CUSTOM,vo.getParam());
             }
 
             JobDetail jobDetail= jobBuilder.build();

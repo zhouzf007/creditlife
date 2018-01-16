@@ -20,6 +20,12 @@ public interface Constants {
         int FROZEN = 1;//禁用
     }
 
+    interface ACCOUNT_STATUS {
+        int NORMAL = 0;//正常
+        int FROZEN = 1;//冻结
+        int WAIT = 1;//待验证
+    }
+
 
     /**
      * 数据库性别字段

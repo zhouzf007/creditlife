@@ -2,6 +2,7 @@ package com.entrobus.credit.order.services;
 
 import com.entrobus.credit.pojo.order.OrderInstance;
 import com.entrobus.credit.pojo.order.OrderInstanceExample;
+import com.entrobus.credit.pojo.order.Orders;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface OrderInstanceService {
     int insert(OrderInstance record);
 
     int insertSelective(OrderInstance record);
+
+    int saveOrderInstance(Orders record);
 }

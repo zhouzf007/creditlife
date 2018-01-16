@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
-import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.CommonParameter;
 import com.entrobus.credit.manager.common.bean.SysRoleExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
@@ -117,7 +116,7 @@ public class SysRoleController extends ManagerBaseController {
         SysRoleExample roleExample = new SysRoleExample();
         SysRoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andPlatformEqualTo(commonParameter.getPlatform());
-        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除(待优化，后期改成使用mybatis拦截器统一处理带delete_flag过滤条件的查询)
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);//未删除(待优化，后期改成使用mybatis拦截器统一处理带delete_flag过滤条件的查询)
         if(commonParameter.getPlatform()==Constants.PLATFORM.BANK){
             criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }
@@ -141,7 +140,7 @@ public class SysRoleController extends ManagerBaseController {
         }
         SysRoleExample example = new SysRoleExample();
         SysRoleExample.Criteria criteria = example.createCriteria();
-        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);//未删除
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);//未删除
         if(commonParameter.getPlatform()==Constants.PLATFORM.BANK){
             criteria.andOrgIdEqualTo(getCurrLoginUser().getOrgId());
         }

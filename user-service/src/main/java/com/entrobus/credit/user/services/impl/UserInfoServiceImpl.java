@@ -7,8 +7,8 @@ import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
-import com.entrobus.credit.user.bean.CacheUserInfo;
-import com.entrobus.credit.user.bean.UserAccountInfo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
+import com.entrobus.credit.vo.user.UserAccountInfo;
 import com.entrobus.credit.user.dao.UserInfoMapper;
 import com.entrobus.credit.user.services.UserAccountService;
 import com.entrobus.credit.user.services.UserInfoService;
@@ -109,7 +109,8 @@ public class UserInfoServiceImpl implements UserInfoService {
             userAccountInfos.add(userAccountInfo);
         }
         loginUserInfo.setUserAccountInfos(userAccountInfos);
-        CacheService.setCacheObj(redisTemplate, Cachekey.User.SID_PREFIX+ token, loginUserInfo.getId());
+        CacheService.setString(redisTemplate, Cachekey.User.SID_PREFIX+ token, loginUserInfo.getId());
+        CacheService.setString(redisTemplate, Cachekey.User.UID_SID_PREFIX+ loginUserInfo.getId(), token);
         CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX+ loginUserInfo.getId(), loginUserInfo);
         return loginUserInfo;
     }

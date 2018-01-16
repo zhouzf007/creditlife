@@ -1,5 +1,6 @@
 package com.entrobus.credit.order.services.impl;
 
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.order.dao.CreditReportMapper;
 import com.entrobus.credit.order.services.CreditReportService;
 import com.entrobus.credit.pojo.order.CreditReport;
@@ -62,5 +63,17 @@ public class CreditReportServiceImpl implements CreditReportService {
 
     public int insertSelective(CreditReport record) {
         return this.creditReportMapper.insertSelective(record);
+    }
+
+    @Override
+    public CreditReport getCreditReportByUid(String userId) {
+        CreditReportExample example = new CreditReportExample();
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andUserIdEqualTo(userId);
+        example.setOrderByClause(" create_time desc ");
+        List<CreditReport> list = selectByExample(example);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
     }
 }

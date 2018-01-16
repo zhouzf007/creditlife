@@ -21,7 +21,7 @@ public class DemoJobBean extends QuartzJobBean {
         //获取执行参数，可自定义配置
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
         //后台添加的自定义参数
-        String param = jobDataMap == null ? null : jobDataMap.getString(Constants.JobDataKey.CUSTOM);
+        String param = jobDataMap == null ? null : jobDataMap.getString(Constants.JOB_DATA_KEY.CUSTOM);
 
         System.out.println("执行 DemoJobBean 时间："+ DateUtils.formatDate(new Date()));
     }

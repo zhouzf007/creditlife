@@ -1,20 +1,32 @@
 package com.entrobus.credit.log.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.log.dao.OperationLogMapper;
 import com.entrobus.credit.log.service.OperationLogService;
+import com.entrobus.credit.log.service.OperationLogTableColumnService;
+import com.entrobus.credit.log.service.OperationLogTableService;
 import com.entrobus.credit.pojo.log.OperationLog;
 import com.entrobus.credit.pojo.log.OperationLogExample;
+import com.entrobus.credit.pojo.log.OperationLogTable;
+import com.entrobus.credit.pojo.log.OperationLogTableColumn;
+import com.entrobus.credit.vo.log.OperationLogMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class OperationLogServiceImpl implements OperationLogService {
     @Autowired
     private OperationLogMapper operationLogMapper;
+    @Autowired
+    private OperationLogTableService operationLogTableService;
+    @Autowired
+    private OperationLogTableColumnService operationLogTableColumnService;
 
     /** 
 	 * 根据条件统计总数。
@@ -145,5 +157,67 @@ public class OperationLogServiceImpl implements OperationLogService {
         // 填充字段默认值
         record.setId(GUIDUtil.genRandomGUID());
         record.setCreateTime(new Date());
+    }
+    @Override
+    public int logMsg(OperationLogMsg msg){
+        OperationLog log = new OperationLog();
+        log.setApplicationName(msg.getApplicationName());
+        if (msg.getExtData() != null) {
+            log.setExtData(JSON.toJSONString(msg.getExtData()));
+        }
+        if (msg.getOperationData() != null) {
+            log.setOperationData(JSON.toJSONString(msg.getOperationData()));
+        }
+        log.setOperationDesc(msg.getDesc());
+        log.setOperationState(msg.getOperationState());
+        log.setRelId(msg.getRelId());
+        log.setOperationTime(msg.getTime());
+        log.setRemark(msg.getRemark());
+        log.setOperatorId(msg.getOperatorId());
+        log.setOperatorType(msg.getOperatorType());
+        log.setRequestId(msg.getRequestId());
+        int n = insertSelective(log);
+
+        List<OperationLogMsg.Table> tables = msg.getTables();
+        if (tables != null){
+            saveTables(log, tables);
+        }
+
+
+
+        return n;
+    }
+
+    private void saveTables(OperationLog log, List<OperationLogMsg.Table> tables) {
+        for (OperationLogMsg.Table msgTable : tables) {
+            OperationLogTable tb = new OperationLogTable();
+            tb.setLogId(log.getId());
+            tb.setDatabaseName(msgTable.getDatabase());
+            tb.setTableName(msgTable.getName());
+            operationLogTableService.insertSelective(tb);
+
+            List<OperationLogMsg.Colume> columes = msgTable.getColumes();
+            if (columes != null){
+                saveColumes(tb, columes);
+            }
+
+        }
+    }
+
+    private void saveColumes(OperationLogTable tb, List<OperationLogMsg.Colume> columes) {
+        for (OperationLogMsg.Colume msgColume : columes) {
+            OperationLogTableColumn column = new OperationLogTableColumn();
+            column.setColumnName(msgColume.getName());
+            column.setLogTableId(tb.getId());
+            column.setNewValue(msgColume.getNewValue());
+            column.setOldValue(msgColume.getOldValue());
+            operationLogTableColumnService.insertSelective(column);
+        }
+    }
+    @Override
+    public int clear(){
+        operationLogTableService.deleteByExample(null);
+        operationLogTableColumnService.deleteByExample(null);
+        return deleteByExample(null);
     }
 }

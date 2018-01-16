@@ -1,4 +1,4 @@
-package com.entrobus.credit.user.bean;
+package com.entrobus.credit.vo.user;
 
 /**
  * Created by mozl on 2018/1/11.
@@ -10,7 +10,7 @@ public class UserAccountInfo {
     private String name;
     private Integer type;
     private Integer state;
-    private String balance;
+    private Long balance;
     private String cellphone;
 
     public String getAccount() {
@@ -53,11 +53,11 @@ public class UserAccountInfo {
         this.state = state;
     }
 
-    public String getBalance() {
+    public Long getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(Long balance) {
         this.balance = balance;
     }
 

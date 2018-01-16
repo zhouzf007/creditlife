@@ -1,4 +1,4 @@
-package com.entrobus.credit.manager.util;
+package com.entrobus.credit.manager.common.util;
 
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;

@@ -27,4 +27,6 @@ public interface CreditReportService {
     int insert(CreditReport record);
 
     int insertSelective(CreditReport record);
+
+    CreditReport getCreditReportByUid(String userId);
 }

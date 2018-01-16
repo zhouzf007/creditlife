@@ -90,7 +90,7 @@ public class SysResourceServiceImpl implements SysResourceService {
         for(Long id : idList){
             //查询这个ID下的所有子资源
             example.createCriteria()
-                    .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
+                    .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO)
                     .andParentIdsLike("%" + id + "%");
             //查询子资源
             List<SysResource> sysSubResourceList = selectByExample(example);
@@ -108,7 +108,7 @@ public class SysResourceServiceImpl implements SysResourceService {
         SysResource sysResource = new SysResource();
         sysResource.setDeleteTime(new Date());
         sysResource.setDeleteUser(loginUserId);
-        sysResource.setDeleteFlag(Constants.DeleteFlag.YES);
+        sysResource.setDeleteFlag(Constants.DELETE_FLAG.YES);
         example = new SysResourceExample();
         example.createCriteria().andIdIn(idList);//要删除的资源ID
         updateByExampleSelective(sysResource,example);//逻辑删除
@@ -123,11 +123,11 @@ public class SysResourceServiceImpl implements SysResourceService {
     public SysResourceVo getResourceTreeById(Long id) {
         //1.根据ID获取资源以及这个ID下的所有子资源
         SysResourceExample example = new SysResourceExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO).andIdEqualTo(id);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andIdEqualTo(id);
         //2.构建查询这个ID下的所有子资源的查询条件
         SysResourceExample.Criteria criteria2 = example.createCriteria();
         criteria2
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO)
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO)
                 .andParentIdsLike("%" + id + "%");
         example.or(criteria2);//example多条件拼接查询
         // 原始的数据
@@ -144,7 +144,7 @@ public class SysResourceServiceImpl implements SysResourceService {
         List<SysResourceVo> sysResourceVoList = new ArrayList<>();
         //查询出所有未删除的资源
         SysResourceExample example = new SysResourceExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         // 原始的数据
         List<SysResource> sysResourceList = selectByExample(example);
         if(CollectionUtils.isNotEmpty(sysResourceList)){
@@ -172,7 +172,7 @@ public class SysResourceServiceImpl implements SysResourceService {
         //1.查询未删除的菜单
         SysResourceExample resourceExample = new SysResourceExample();
         SysResourceExample.Criteria criteria = resourceExample.createCriteria();
-        criteria.andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         if(menuType != null){
             criteria.andTypeEqualTo(menuType);
         }
@@ -241,7 +241,7 @@ public class SysResourceServiceImpl implements SysResourceService {
                 //3.根据资源ID查找资源信息
                 SysResourceExample sysResourceExample = new SysResourceExample();
                 SysResourceExample.Criteria criteria = sysResourceExample.createCriteria();
-                criteria.andIdIn(resourceIdList).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                criteria.andIdIn(resourceIdList).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
                 if(platform != null){
                     criteria.andPlatformEqualTo(platform);
                 }
@@ -295,7 +295,7 @@ public class SysResourceServiceImpl implements SysResourceService {
     public List<SysResource> getSysResourceByPlatform(Integer platform) {
         SysResourceExample example = new SysResourceExample();
         example.createCriteria().andPlatformEqualTo(platform)
-                .andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         return this.selectByExample(example);
     }
 

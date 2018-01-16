@@ -2,8 +2,11 @@ package com.entrobus.credit.log.channel.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.log.channel.LogSubscribeChannel;
+import com.entrobus.credit.log.service.OperationLogService;
 import com.entrobus.credit.log.service.OrderOperationLogService;
 import com.entrobus.credit.log.service.SysLoginLogService;
+import com.entrobus.credit.pojo.log.OperationLog;
+import com.entrobus.credit.vo.log.OperationLogMsg;
 import com.entrobus.credit.vo.log.OrderOperationMsg;
 import com.entrobus.credit.vo.log.SysLoginMsg;
 import org.slf4j.Logger;
@@ -19,6 +22,9 @@ public class LogSubscribeHandler {
     private OrderOperationLogService orderOperationLogService;
     @Autowired
     private SysLoginLogService sysLoginLogService;
+    @Autowired
+    private OperationLogService operationLogService;
+
     @StreamListener(LogSubscribeChannel.ORDER_OPERATION_LOG)
     public void orderOperationLog(OrderOperationMsg msg){
 //        orderOperationLogService.
@@ -31,7 +37,12 @@ public class LogSubscribeHandler {
     public void sysLoginLog(SysLoginMsg msg){
 //        orderOperationLogService.
         logger.info(JSON.toJSONString(msg));
-        sysLoginLogService.log(msg);
+        sysLoginLogService.logMsg(msg);
 
+    }
+
+    @StreamListener(LogSubscribeChannel.OPERATION_LOG)
+    public void operationLog(OperationLogMsg msg){
+        operationLogService.logMsg(msg);
     }
 }

@@ -2,11 +2,66 @@ package com.entrobus.credit.vo.order;
 
 public class ApplyVo {
 
-    private int type;
+    private String token;
+    private Integer type;
     private String userId;
     private long money;
+    private String usage;
+    private Integer repaymentTerm;
+    private Integer repaymentType;
+    private Integer rate;
     private String prodId;
     private String partyId;
+    private Integer score;
+    private String signature;
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setUsage(String usage) {
+        this.usage = usage;
+    }
+
+    public Integer getRepaymentTerm() {
+        return repaymentTerm;
+    }
+
+    public void setRepaymentTerm(Integer repaymentTerm) {
+        this.repaymentTerm = repaymentTerm;
+    }
+
+    public Integer getRepaymentType() {
+        return repaymentType;
+    }
+
+    public void setRepaymentType(Integer repaymentType) {
+        this.repaymentType = repaymentType;
+    }
+
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
+    }
 
     public String getProdId() {
         return prodId;
@@ -16,21 +71,19 @@ public class ApplyVo {
         this.prodId = prodId;
     }
 
-    private int score;
-
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

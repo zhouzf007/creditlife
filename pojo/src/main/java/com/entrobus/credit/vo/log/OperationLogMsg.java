@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OperationLogMsg implements Serializable {
     /**
-     * 关联id
+     * 关联id,如orderId
      */
     private String relId;
 
@@ -53,7 +53,7 @@ public class OperationLogMsg implements Serializable {
      */
     private Object extData;
     /**
-     * 记录被操作表信息
+     * 相关被操作表信息
      */
     public List<Table> tables;
 
@@ -68,6 +68,14 @@ public class OperationLogMsg implements Serializable {
         Table table = new Table(name,database);
         tables.add(table);
         return table;
+    }
+
+    /**
+     * 添加新的被操作表
+     * @return
+     */
+    public Table newTables(String name){
+        return newTables(name,null);
     }
     public List<Table> getTables() {
         return tables;
@@ -187,7 +195,14 @@ public class OperationLogMsg implements Serializable {
             this.database = database;
         }
 
-        public Table putColumes(String name, String newValue, String oldValue){
+        /**
+         * 添加相关字段
+         * @param name 字段名
+         * @param newValue 新值
+         * @param oldValue 旧值
+         * @return
+         */
+        public Table putColume(String name, String newValue, String oldValue){
             if (columes == null) {
                 columes = new ArrayList<>();
             }

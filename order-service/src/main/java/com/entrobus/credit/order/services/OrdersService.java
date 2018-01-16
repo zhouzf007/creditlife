@@ -29,4 +29,6 @@ public interface OrdersService {
     int insertSelective(Orders record);
 
     List<Orders> getUserOrders(String userId);
+
+    Orders getUserLastOrder(String userId);
 }

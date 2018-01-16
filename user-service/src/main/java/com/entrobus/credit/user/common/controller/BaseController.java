@@ -2,14 +2,13 @@ package com.entrobus.credit.user.common.controller;
 
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
-import com.entrobus.credit.user.bean.CacheUserInfo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import utils.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

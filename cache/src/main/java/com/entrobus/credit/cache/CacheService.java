@@ -677,4 +677,12 @@ public class CacheService {
         }
     }
 
+    public static Object getUserCacheByUid(RedisTemplate redisTemplate, String userId) {
+        return getObject(redisTemplate, Cachekey.User.UID_PREFIX + userId);
+    }
+
+    public static Object getUserCacheBySid(RedisTemplate redisTemplate, String sid) {
+        String uid = getString(redisTemplate, Cachekey.User.SID_PREFIX + sid);
+        return getObject(redisTemplate, Cachekey.User.UID_PREFIX + uid);
+    }
 }

@@ -470,6 +470,76 @@ public class OrderInstanceExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andProdIdIsNull() {
+            addCriterion("prod_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdIsNotNull() {
+            addCriterion("prod_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdEqualTo(String value) {
+            addCriterion("prod_id =", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotEqualTo(String value) {
+            addCriterion("prod_id <>", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdGreaterThan(String value) {
+            addCriterion("prod_id >", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdGreaterThanOrEqualTo(String value) {
+            addCriterion("prod_id >=", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdLessThan(String value) {
+            addCriterion("prod_id <", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdLessThanOrEqualTo(String value) {
+            addCriterion("prod_id <=", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdLike(String value) {
+            addCriterion("prod_id like", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotLike(String value) {
+            addCriterion("prod_id not like", value, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdIn(List<String> values) {
+            addCriterion("prod_id in", values, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotIn(List<String> values) {
+            addCriterion("prod_id not in", values, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdBetween(String value1, String value2) {
+            addCriterion("prod_id between", value1, value2, "prodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdIdNotBetween(String value1, String value2) {
+            addCriterion("prod_id not between", value1, value2, "prodId");
+            return (Criteria) this;
+        }
+
         public Criteria andApplyTimeIsNull() {
             addCriterion("apply_time is null");
             return (Criteria) this;
@@ -1260,133 +1330,133 @@ public class OrderInstanceExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodIsNull() {
-            addCriterion("repayment_method is null");
+        public Criteria andRepaymentTypeIsNull() {
+            addCriterion("repayment_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodIsNotNull() {
-            addCriterion("repayment_method is not null");
+        public Criteria andRepaymentTypeIsNotNull() {
+            addCriterion("repayment_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodEqualTo(Integer value) {
-            addCriterion("repayment_method =", value, "repaymentMethod");
+        public Criteria andRepaymentTypeEqualTo(Integer value) {
+            addCriterion("repayment_type =", value, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodNotEqualTo(Integer value) {
-            addCriterion("repayment_method <>", value, "repaymentMethod");
+        public Criteria andRepaymentTypeNotEqualTo(Integer value) {
+            addCriterion("repayment_type <>", value, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodGreaterThan(Integer value) {
-            addCriterion("repayment_method >", value, "repaymentMethod");
+        public Criteria andRepaymentTypeGreaterThan(Integer value) {
+            addCriterion("repayment_type >", value, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodGreaterThanOrEqualTo(Integer value) {
-            addCriterion("repayment_method >=", value, "repaymentMethod");
+        public Criteria andRepaymentTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("repayment_type >=", value, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodLessThan(Integer value) {
-            addCriterion("repayment_method <", value, "repaymentMethod");
+        public Criteria andRepaymentTypeLessThan(Integer value) {
+            addCriterion("repayment_type <", value, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodLessThanOrEqualTo(Integer value) {
-            addCriterion("repayment_method <=", value, "repaymentMethod");
+        public Criteria andRepaymentTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("repayment_type <=", value, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodIn(List<Integer> values) {
-            addCriterion("repayment_method in", values, "repaymentMethod");
+        public Criteria andRepaymentTypeIn(List<Integer> values) {
+            addCriterion("repayment_type in", values, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodNotIn(List<Integer> values) {
-            addCriterion("repayment_method not in", values, "repaymentMethod");
+        public Criteria andRepaymentTypeNotIn(List<Integer> values) {
+            addCriterion("repayment_type not in", values, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodBetween(Integer value1, Integer value2) {
-            addCriterion("repayment_method between", value1, value2, "repaymentMethod");
+        public Criteria andRepaymentTypeBetween(Integer value1, Integer value2) {
+            addCriterion("repayment_type between", value1, value2, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andRepaymentMethodNotBetween(Integer value1, Integer value2) {
-            addCriterion("repayment_method not between", value1, value2, "repaymentMethod");
+        public Criteria andRepaymentTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("repayment_type not between", value1, value2, "repaymentType");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseIsNull() {
-            addCriterion("loan_use is null");
+        public Criteria andLoanUsageIsNull() {
+            addCriterion("loan_usage is null");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseIsNotNull() {
-            addCriterion("loan_use is not null");
+        public Criteria andLoanUsageIsNotNull() {
+            addCriterion("loan_usage is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseEqualTo(String value) {
-            addCriterion("loan_use =", value, "loanUse");
+        public Criteria andLoanUsageEqualTo(String value) {
+            addCriterion("loan_usage =", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseNotEqualTo(String value) {
-            addCriterion("loan_use <>", value, "loanUse");
+        public Criteria andLoanUsageNotEqualTo(String value) {
+            addCriterion("loan_usage <>", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseGreaterThan(String value) {
-            addCriterion("loan_use >", value, "loanUse");
+        public Criteria andLoanUsageGreaterThan(String value) {
+            addCriterion("loan_usage >", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseGreaterThanOrEqualTo(String value) {
-            addCriterion("loan_use >=", value, "loanUse");
+        public Criteria andLoanUsageGreaterThanOrEqualTo(String value) {
+            addCriterion("loan_usage >=", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseLessThan(String value) {
-            addCriterion("loan_use <", value, "loanUse");
+        public Criteria andLoanUsageLessThan(String value) {
+            addCriterion("loan_usage <", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseLessThanOrEqualTo(String value) {
-            addCriterion("loan_use <=", value, "loanUse");
+        public Criteria andLoanUsageLessThanOrEqualTo(String value) {
+            addCriterion("loan_usage <=", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseLike(String value) {
-            addCriterion("loan_use like", value, "loanUse");
+        public Criteria andLoanUsageLike(String value) {
+            addCriterion("loan_usage like", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseNotLike(String value) {
-            addCriterion("loan_use not like", value, "loanUse");
+        public Criteria andLoanUsageNotLike(String value) {
+            addCriterion("loan_usage not like", value, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseIn(List<String> values) {
-            addCriterion("loan_use in", values, "loanUse");
+        public Criteria andLoanUsageIn(List<String> values) {
+            addCriterion("loan_usage in", values, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseNotIn(List<String> values) {
-            addCriterion("loan_use not in", values, "loanUse");
+        public Criteria andLoanUsageNotIn(List<String> values) {
+            addCriterion("loan_usage not in", values, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseBetween(String value1, String value2) {
-            addCriterion("loan_use between", value1, value2, "loanUse");
+        public Criteria andLoanUsageBetween(String value1, String value2) {
+            addCriterion("loan_usage between", value1, value2, "loanUsage");
             return (Criteria) this;
         }
 
-        public Criteria andLoanUseNotBetween(String value1, String value2) {
-            addCriterion("loan_use not between", value1, value2, "loanUse");
+        public Criteria andLoanUsageNotBetween(String value1, String value2) {
+            addCriterion("loan_usage not between", value1, value2, "loanUsage");
             return (Criteria) this;
         }
 

@@ -1,4 +1,4 @@
-package com.entrobus.credit.user.bean;
+package com.entrobus.credit.vo.user;
 
 import java.util.List;
 

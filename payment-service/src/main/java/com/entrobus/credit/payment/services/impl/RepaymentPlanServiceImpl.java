@@ -4,8 +4,6 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.payment.dao.RepaymentPlanMapper;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
-import com.entrobus.credit.pojo.payment.Repayment;
-import com.entrobus.credit.pojo.payment.RepaymentExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.pojo.payment.RepaymentPlanExample;
 
@@ -80,7 +78,33 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public List<RepaymentPlan> getRepaymentPlanByOrderId(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DeleteFlag.NO);
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        return this.selectByExample(example);
+    }
+    @Override
+    public RepaymentPlan getLastRepaymentPlanByOrderId(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date());
+        example.setOrderByClause(" plan_time desc ");
+       List<RepaymentPlan> list=this.selectByExample(example);
+       if (!list.isEmpty()){
+           return list.get(0);
+       }
+        return null;
+    }
+
+    @Override
+    public List<RepaymentPlan> getOverDueRepaymentPlans(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
+        example.setOrderByClause(" plan_time desc ");
+        return this.selectByExample(example);
+    }
+
+    @Override
+    public List<RepaymentPlan> getFinishedRepaymentPlans(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
         return this.selectByExample(example);
     }
 
@@ -89,7 +113,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
             record.setId(GUIDUtil.genRandomGUID());
         }
         record.setCreateTime(new Date());
-        record.setDeleteFlag(Constants.DeleteFlag.NO);
+        record.setDeleteFlag(Constants.DELETE_FLAG.NO);
         record.setUpdateTime(new Date());
     }
 }

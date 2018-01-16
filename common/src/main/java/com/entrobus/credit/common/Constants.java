@@ -4,7 +4,7 @@ public interface Constants {
     /**
      * 数据库删除标记 0-未删除，1-已删除
      */
-    interface DeleteFlag {
+    interface DELETE_FLAG {
         int YES = 1;
         int NO = 0;
     }
@@ -13,7 +13,7 @@ public interface Constants {
      * 各种通用的状态
      * 0-正常（生效，可用），1-停用
      */
-    interface Status{
+    interface STATUS {
         int NORMAL = 0;
         int DISABLE = 1;
     }
@@ -21,28 +21,36 @@ public interface Constants {
     /**
      * 调度任务分组
      */
-    interface JobGroupName{
+    interface JOB_GROUP_NAME {
         String DEFAULT = "creditlife_default";//默认分组
     }
 
     /**
      * 操作状态
      */
-    interface  OperationState{
+    interface OPERATION_STATE {
         int SUCCESS = 0;//成功
         int FAIL = 1;//失败
         int ERROR = 2;//异常
+    }
+    /**
+     * 操作人类型
+     */
+    interface OPERATOR_TYPE {
+        int MANAGER = 0;//信用贷后台管理员
+        int CAPITAL = 1;//资金方后台管理员
+        int USER = 2;//用户
     }
 
     /**
      * 静态数据常量类型
      */
-    interface CodeType{
+    interface CODE_TYPE {
         String CODE_TYPE = "CODE_TYPE";
         String STATUS = "STATUS";
     }
 
-    interface JobDataKey{
+    interface JOB_DATA_KEY {
         String CUSTOM = "customParam";
     }
 
@@ -65,6 +73,7 @@ public interface Constants {
     }
 
     interface ORDER_STATE{
+        int NOT_LOAN = -1;//未借款
         int AUIDT_PENGDING = 0;//待审核
         int LOAN_PENGDING = 1;//待放款
         int REJECTION = 2;//已驳回
