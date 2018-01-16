@@ -2,6 +2,7 @@ package com.entrobus.credit.user.services.impl;
 
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
@@ -24,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import utils.Constants;
 import utils.ShiroUtils;
 
 @Service
@@ -127,7 +127,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfo.setSalt(salt);
         userInfo.setRole(1);
         userInfo.setState(Constants.USER_STATUS.NORMAL);
-        userInfo.setDeleteFlag(Constants.DELETEFLAG.NORMAL);
+        userInfo.setDeleteFlag(Constants.DELETE_FLAG.NO);
         return userInfoMapper.insertSelective(userInfo);
     }
 }

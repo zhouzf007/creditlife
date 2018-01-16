@@ -9,6 +9,13 @@ public interface Constants {
         int NO = 0;
     }
 
+
+    interface ACCOUNT_STATUS {
+        int NORMAL = 0;//正常
+        int FROZEN = 1;//冻结
+        int WAIT = 1;//待验证
+    }
+
     /**
      * 各种通用的状态
      * 0-正常（生效，可用），1-停用
@@ -33,6 +40,7 @@ public interface Constants {
         int FAIL = 1;//失败
         int ERROR = 2;//异常
     }
+
     /**
      * 操作人类型
      */
@@ -54,25 +62,31 @@ public interface Constants {
         String CUSTOM = "customParam";
     }
 
-    interface SMS_TYPE{
+    interface SMS_TYPE {
         int VERIFICATION = 0;
         int INFORMATION = 1;
+    }
+
+    interface VERIFICATION_TYPE {
+        int REGISTER = 1;//用户注册
+        int RESET_PASSWORD = 2;//忘记密码
+        int BINDING_CARD = 3;//绑定银行卡
     }
 
     /**
      * 管理系统所属平台类型
      */
-    interface PLATFORM{
+    interface PLATFORM {
         int CREDITLIFE = 0;//熵商后台
         int BANK = 1;//银行后台
     }
 
-    interface ORGANIZATION_STATE{
+    interface ORGANIZATION_STATE {
         int NORMAL = 0;
         int FROZEN = 1;
     }
 
-    interface ORDER_STATE{
+    interface ORDER_STATE {
         int NOT_LOAN = -1;//未借款
         int AUIDT_PENGDING = 0;//待审核
         int LOAN_PENGDING = 1;//待放款
@@ -82,9 +96,44 @@ public interface Constants {
         int FINISHED = 5;//已完成
     }
 
-    interface REPAYMENT_ORDER_STATE{
+    interface REPAYMENT_ORDER_STATE {
         int PASS = 3;//使用中
         int OVERDUE = 4;//已逾期
         int FINISHED = 5;//已结清
     }
+
+    /**
+     * 用户状态
+     * 0：正常   1：禁用
+     */
+    interface USER_STATUS {
+        int NORMAL = 0;//正常
+        int FROZEN = 1;//冻结
+    }
+    /**
+     * 数据库性别字段
+     */
+    interface GENDER {
+        /**
+         * 男
+         */
+        int MALE = 1;
+        /**
+         * 女
+         */
+        int FEMALE = 2;
+
+        /**
+         * 保密
+         */
+        int SECRECY = 0;
+    }
+    /**
+     * 登录状态
+     */
+    interface lOGIN_STATE {
+        String LOGIN = "0";//登录
+        String LOGOUT = "1";//已退出登录
+    }
+
 }
