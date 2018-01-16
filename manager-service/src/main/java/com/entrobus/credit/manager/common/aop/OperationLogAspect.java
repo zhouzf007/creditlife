@@ -5,10 +5,9 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.sys.service.LogService;
 import com.entrobus.credit.vo.log.OperationLogMsg;
-import com.entrobus.credit.common.annotation.OperationLog ;
+import com.entrobus.credit.common.annotation.RecordLog;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -20,9 +19,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 实现AOP的切面主要有以下几个要素：
@@ -46,10 +42,10 @@ public class OperationLogAspect {
     private LogService logService;
 
 //    @Pointcut("execution(public * com.entrobus.credit.manager.*.controller..*.*(..))")
-    @Pointcut( "@annotation(com.entrobus.credit.common.annotation.OperationLog)")
-    public void operationLog(){}
+    @Pointcut( "@annotation(com.entrobus.credit.common.annotation.RecordLog)")
+    public void recordLog(){}
 
-    @Around(value = "operationLog()")
+    @Around(value = "recordLog()")
     public void doAround(ProceedingJoinPoint pjp) throws Throwable {
 
         OperationLogMsg msg = getOperationLogMsg(pjp);
@@ -79,7 +75,7 @@ public class OperationLogAspect {
             msig = (MethodSignature) sig;
             Object target = pjp.getTarget();
             Method currentMethod = target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
-            OperationLog logAnnotation = currentMethod.getAnnotation(OperationLog.class);
+            RecordLog logAnnotation = currentMethod.getAnnotation(RecordLog.class);
             //todo 登录用户信息
             //操作日志
             msg = new OperationLogMsg();
@@ -100,7 +96,7 @@ public class OperationLogAspect {
         return msg;
     }
 
-    //    @AfterReturning(returning = "ret", pointcut = "operationLog()")
+    //    @AfterReturning(returning = "ret", pointcut = "recordLog()")
 //    public void doAfterReturning(Object ret) throws Throwable {
 //        // 处理完请求，返回内容
 //        logger.info("处理完请求，返回内容 : " + ret);

@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Order(1)
-public @interface OperationLog {
+public @interface RecordLog {
 //    String value() default "";
     String desc() default "";
     String remark() default "";
