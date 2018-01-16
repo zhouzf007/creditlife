@@ -179,8 +179,8 @@ public class BsStaticsController extends ManagerBaseController{
      * @return
      */
     @PostMapping("/testLog2")
-    @RecordLog
-    public WebResult testLog2(String str){
+    @RecordLog(desc = "testLog2",remark = "ass", relId = "str")//操作名称、描述，备注，关联主键
+    public WebResult testLog2(@RequestParam("str") String str){
         return WebResult.ok();
     }
     /**

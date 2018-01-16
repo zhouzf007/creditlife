@@ -166,7 +166,7 @@ public class OperationLogServiceImpl implements OperationLogService {
             log.setExtData(JSON.toJSONString(msg.getExtData()));
         }
         if (msg.getOperationData() != null) {
-            log.setOperationData(JSON.toJSONString(msg));
+            log.setOperationData(JSON.toJSONString(msg.getOperationData()));
         }
         log.setOperationDesc(msg.getDesc());
         log.setOperationState(msg.getOperationState());
@@ -213,5 +213,11 @@ public class OperationLogServiceImpl implements OperationLogService {
             column.setOldValue(msgColume.getOldValue());
             operationLogTableColumnService.insertSelective(column);
         }
+    }
+    @Override
+    public int clear(){
+        operationLogTableService.deleteByExample(null);
+        operationLogTableColumnService.deleteByExample(null);
+        return deleteByExample(null);
     }
 }

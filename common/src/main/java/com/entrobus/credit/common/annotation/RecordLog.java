@@ -16,6 +16,22 @@ import java.lang.annotation.Target;
 @Order(1)
 public @interface RecordLog {
 //    String value() default "";
+
+    /**
+     * 操作名称、描述
+     * @return
+     */
     String desc() default "";
+
+    /**
+     * 备注
+     * @return
+     */
     String remark() default "";
+
+    /**
+     * 请求参数中主键的参数名
+     * @return
+     */
+    String relId() default "id";
 }
