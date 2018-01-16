@@ -1,7 +1,6 @@
 package com.entrobus.credit.manager.common.aop;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
@@ -80,14 +79,7 @@ public class OperationLogAspect {
         OperationLogMsg msg = null;
         try {
 
-            Signature sig = pjp.getSignature();
-            MethodSignature msig = null;
-            if (!(sig instanceof MethodSignature)) {
-                throw new IllegalArgumentException("该注解只能用于方法");
-            }
-            msig = (MethodSignature) sig;
-            Object target = pjp.getTarget();
-            Method currentMethod = target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
+            Method currentMethod = getCurrentMethod(pjp);
             RecordLog logAnnotation = currentMethod.getAnnotation(RecordLog.class);
 
             // 登录用户信息
@@ -127,6 +119,23 @@ public class OperationLogAspect {
             logger.error("执行操作前获取操作信息失败",e);
         }
         return msg;
+    }
+
+    /**
+     * 获取当前方法
+     * @param pjp
+     * @return
+     * @throws NoSuchMethodException
+     */
+    private Method getCurrentMethod(ProceedingJoinPoint pjp) throws NoSuchMethodException {
+        Signature sig = pjp.getSignature();
+        MethodSignature msig = null;
+        if (!(sig instanceof MethodSignature)) {
+            throw new IllegalArgumentException("该注解只能用于方法");
+        }
+        msig = (MethodSignature) sig;
+        Object target = pjp.getTarget();
+        return target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
     }
 
     /**
