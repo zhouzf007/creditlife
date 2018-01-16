@@ -213,14 +213,12 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <!-- 显示编译告警信息-->
-                    <!--<compilerArgument>-->
-                         <!-- -Xlint:unchecked-->
-                    <!--</compilerArgument>-->
+                    <!--编译时参数-->
                     <compilerArgs>
-                        <!--<arg></arg>-->
-                        <arg>-Xlint:unchecked</arg>
+                        <!-- 编译后保留参数名(jdk8)-->
                         <arg>-parameters</arg>
+                        <!-- 显示编译告警信息-->
+                        <arg>-Xlint:unchecked</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
