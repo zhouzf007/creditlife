@@ -219,7 +219,7 @@
                     <compilerArgs>
                         <!--<arg></arg>-->
                         <arg>-Xlint:unchecked</arg>
-                        <compilerArg>-parameters</compilerArg>
+                        <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
