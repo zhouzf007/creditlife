@@ -97,7 +97,9 @@ public class UserController extends BaseController {
         userInfo.setPwd(pwd);
         userInfo.setUnionId(unionId);
         userInfoService.addUserInfo(userInfo);
-        return WebResult.ok();
+        String token = GUIDUtil.genRandomGUID();
+        CacheUserInfo loginUserInfo = userInfoService.getLoginUserInfo(userInfo, token);
+        return WebResult.ok().put("token", token).put(WebResult.DATA, loginUserInfo);
     }
 
     @RequestMapping("/reset")
@@ -109,7 +111,7 @@ public class UserController extends BaseController {
             return WebResult.error("请输入验证码");
         }
         UserInfoExample example = new UserInfoExample();
-        example.createCriteria().andCellphoneEqualTo(cellphone);
+        example.createCriteria().andCellphoneEqualTo(cellphone).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<UserInfo> userInfos = userInfoService.selectByExample(example);
         if (userInfos == null && userInfos.size() <= 0) {
             return WebResult.error("该手机号码尚未注册");

@@ -7,6 +7,7 @@ import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.order.channel.GenSubOrderPublishChannel;
 import com.entrobus.credit.order.client.PaymentClient;
+import com.entrobus.credit.order.client.ProductionClient;
 import com.entrobus.credit.order.services.*;
 import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.pojo.order.CreditReport;
@@ -14,6 +15,7 @@ import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.order.OrdersExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.pojo.user.UserInfo;
+import com.entrobus.credit.vo.loan.LoanProductVo;
 import com.entrobus.credit.vo.log.OrderOperationMsg;
 import com.entrobus.credit.vo.order.*;
 import com.entrobus.credit.vo.user.CacheUserInfo;
@@ -47,6 +49,10 @@ public class OrdersController {
 
     @Autowired
     PaymentClient paymentClient;
+
+
+    @Autowired
+    ProductionClient productionClient;
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -88,23 +94,29 @@ public class OrdersController {
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/loanOrder")
-    public WebResult apply(@RequestBody ApplyVo vo) {
+    public WebResult apply(@RequestBody ApplyVo vo,@RequestParam("token") String token) {
+        CacheUserInfo userInfo=cacheService.getUserCacheByUid(token);
+        if (userInfo==null){
+            return WebResult.error("用户未登录");
+        }
+        //@TODO 检验是否可以贷款
         Orders order = new Orders();
         order.setId(GUIDUtil.genRandomGUID());
-        order.setUserId(vo.getUserId());
+        order.setUserId(userInfo.getId());
         order.setProdId(vo.getProdId());
         //@TODO 产品合法性检验
+        LoanProductVo prod =productionClient.getInfoById(vo.getProdId());
         //加入产品信息
-        order.setRepaymentTerm(vo.getRepaymentTerm());
-        order.setRepaymentType(vo.getRepaymentType());
-        order.setInterestRate(vo.getRate());
-
+        if (prod!=null){
+            order.setRepaymentTerm(vo.getRepaymentTerm());
+            order.setRepaymentType(vo.getRepaymentType());
+            order.setInterestRate(vo.getRate());
+        }
         order.setLoanUsage(vo.getUsage());
         order.setApplyMoney(vo.getMoney());
         order.setApplyTime(new Date());
 
         //加入用户信息
-        CacheUserInfo userInfo = cacheService.getUserCacheByUid(vo.getUserId());
         order.setRole(userInfo.getRole() + "");
 
         //信用报告信息
@@ -112,7 +124,6 @@ public class OrdersController {
         CreditReport creditReport = creditReportService.getCreditReportByUid(vo.getUserId());
         if (creditReport != null) {
             order.setCreditReportId(creditReport.getId());
-            order.setCreditScore(creditReport.getCreditScore());
             contract.setCreditReportId(creditReport.getId());
             contract.setCreditScore(creditReport.getCreditScore());
         }
@@ -129,7 +140,7 @@ public class OrdersController {
     }
 
     /**
-     * 贷款订单详情
+     * 贷款订单详情(包含还款计划的)
      *
      * @param id
      */

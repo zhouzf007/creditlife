@@ -10,6 +10,10 @@ public class OrderListVo {
     private String money;
     private Integer score;
     private String userName;
+    private String mobile;
+    private String userId;
+    private Date updateTime;
+    private String stateName;
 
     public Date getUpdateTime() {
         return updateTime;
@@ -19,7 +23,6 @@ public class OrderListVo {
         this.updateTime = updateTime;
     }
 
-    private Date updateTime;
 
     public String getUserId() {
         return userId;
@@ -29,8 +32,6 @@ public class OrderListVo {
         this.userId = userId;
     }
 
-    private String mobile;
-    private String userId;
 
     public Integer getScore() {
         return score;
@@ -48,7 +49,6 @@ public class OrderListVo {
         this.mobile = mobile;
     }
 
-    private String stateName;
 
     public String getId() {
         return id;
