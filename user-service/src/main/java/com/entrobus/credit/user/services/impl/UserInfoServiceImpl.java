@@ -117,17 +117,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public int addUserInfo(UserInfo record) {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setId(GUIDUtil.genRandomGUID());
-        userInfo.setCreateTime(new Date());
+        record.setId(GUIDUtil.genRandomGUID());
+        record.setCreateTime(new Date());
         //生成20位长度的随机数，用作密码加密的盐
         String salt = RandomStringUtils.randomAlphanumeric(20);
         //将密码使用sha256加密
-        userInfo.setPwd(ShiroUtils.sha256(userInfo.getPwd(), salt));
-        userInfo.setSalt(salt);
-        userInfo.setRole(1);
-        userInfo.setState(Constants.USER_STATUS.NORMAL);
-        userInfo.setDeleteFlag(Constants.DELETE_FLAG.NO);
-        return userInfoMapper.insertSelective(userInfo);
+        record.setPwd(ShiroUtils.sha256(record.getPwd(), salt));
+        record.setSalt(salt);
+        record.setState(Constants.USER_STATUS.NORMAL);
+        record.setDeleteFlag(Constants.DELETE_FLAG.NO);
+        return userInfoMapper.insertSelective(record);
     }
 }

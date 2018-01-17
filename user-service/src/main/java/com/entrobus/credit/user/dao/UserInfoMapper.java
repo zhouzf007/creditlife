@@ -2,8 +2,9 @@ package com.entrobus.credit.user.dao;
 
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserInfoMapper {
     /**
