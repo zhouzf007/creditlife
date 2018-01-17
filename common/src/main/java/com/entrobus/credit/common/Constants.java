@@ -41,14 +41,6 @@ public interface Constants {
         int ERROR = 2;//异常
     }
 
-    /**
-     * 操作人类型
-     */
-    interface OPERATOR_TYPE {
-        int MANAGER = 0;//信用贷后台管理员
-        int CAPITAL = 1;//资金方后台管理员
-        int USER = 2;//用户
-    }
 
     /**
      * 静态数据常量类型
@@ -74,11 +66,22 @@ public interface Constants {
     }
 
     /**
-     * 管理系统所属平台类型
+     * 平台类型
      */
     interface PLATFORM {
         int CREDITLIFE = 0;//熵商后台
-        int BANK = 1;//银行后台
+        int BANK = 1;//资金方后台
+        int USER = 2;//用户（贷款方）
+    }
+    /**
+     * 客户端类型
+     */
+    interface CLIENT {
+        int IOS = 1;// 苹果
+        int ANDROID = 0;// 安卓
+        int WECHAT = 2;// 微信公众号
+        int MINA = 3;// 微信小程序
+        int H5 = 4;//h5
     }
 
     interface ORGANIZATION_STATE {

@@ -174,7 +174,7 @@ public class OperationLogServiceImpl implements OperationLogService {
         log.setOperationTime(msg.getTime());
         log.setRemark(msg.getRemark());
         log.setOperatorId(msg.getOperatorId());
-        log.setOperatorType(msg.getOperatorType());
+        log.setOperatorType(msg.getPlatform());
         log.setRequestId(msg.getRequestId());
         int n = insertSelective(log);
 
