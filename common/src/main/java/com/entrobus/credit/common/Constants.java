@@ -13,7 +13,7 @@ public interface Constants {
     interface ACCOUNT_STATUS {
         int NORMAL = 0;//正常
         int FROZEN = 1;//冻结
-        int WAIT = 1;//待验证
+        int WAIT = 2;//待验证
     }
 
     /**

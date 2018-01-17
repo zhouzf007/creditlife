@@ -96,7 +96,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             logger.error(e.getMessage(), e);
         }
         UserAccountExample userAccountExample = new UserAccountExample();
-        userAccountExample.createCriteria().andIdEqualTo(record.getAccountId());
+        userAccountExample.createCriteria().andUserIdEqualTo(record.getId());
         List<UserAccount> userAccounts = userAccountService.selectByExample(userAccountExample);
         List<UserAccountInfo> userAccountInfos = new ArrayList<>();
         for (UserAccount userAccount : userAccounts) {

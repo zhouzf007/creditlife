@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableResourceServer
 //@EnableOAuth2Client
 @EnableBinding(MsgPublishChannel.class)
-@MapperScan(basePackages="com.entrobus.credit.user.dao",sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages="com.entrobus.credit.user.dao")
 public class UserServiceApplication {
 
     public static void main(String[] args) {
