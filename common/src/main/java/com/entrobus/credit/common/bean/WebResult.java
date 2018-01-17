@@ -101,12 +101,10 @@ public class WebResult extends HashMap<String, Object> {
 
 	public WebResult() {
 		put(CODE, CODE_OK);
+		put(MSG, CODE_MSG.get(CODE_OK));
 		put(TIME,System.currentTimeMillis());
 	}
-	public boolean isOk(){
-		Object code = get(CODE);
-		return  Objects.equals(code ,CODE_OK);
-	}
+
 	public static WebResult error() {
 		return error(CODE_ERROR, CODE_MSG.get(CODE_ERROR));
 	}
@@ -159,9 +157,17 @@ public class WebResult extends HashMap<String, Object> {
 	public static  WebResult ok() {
 		return new WebResult();
 	}
+	public boolean isOk(){
+		Object code = get(CODE);
+		return  Objects.equals(code ,CODE_OK);
+	}
 
 	public WebResult put(String key, Object value) {
 		super.put(key, value);
 		return this;
+	}
+
+	public WebResult data(Object data) {
+		return put(DATA,data);
 	}
 }
