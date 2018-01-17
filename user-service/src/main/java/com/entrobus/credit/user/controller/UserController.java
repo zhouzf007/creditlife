@@ -51,21 +51,21 @@ public class UserController extends BaseController {
     @RequestMapping("/login")
     public WebResult login(String cellphone, String pwd) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
-            return WebResult.error("请输入账号密码");
+            return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
         UserInfoExample example = new UserInfoExample();
         example.createCriteria().andCellphoneEqualTo(cellphone);
         List<UserInfo> userInfos = userInfoService.selectByExample(example);
         if (userInfos == null || userInfos.size() <= 0) {
-            return WebResult.error("该手机号码尚未注册");
+            return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
         }
         UserInfo userInfo = userInfos.get(0);
         String password = ShiroUtils.sha256(pwd, userInfo.getSalt());
         if (!password.equals(userInfo.getPwd())) {
-            return WebResult.error("账号或密码错误");
+            return WebResult.fail(WebResult.CODE_OPERATION, "账号或密码错误");
         }
         if (userInfo.getState() == Constants.USER_STATUS.FROZEN) {
-            return WebResult.error("该账号已冻结，无法登录");
+            return WebResult.fail(WebResult.CODE_FROZEN, "该账号已冻结，无法登录");
         }
         //登录成功，生成登录token
         String token = GUIDUtil.genRandomGUID();
@@ -77,20 +77,20 @@ public class UserController extends BaseController {
     @RequestMapping("/register")
     public WebResult register(String cellphone, String pwd, String code, String unionId) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
-            return WebResult.error("请输入账号密码");
+            return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
         if (ConversionUtil.isContainEmptyParam(code)) {
-            return WebResult.error("请输入验证码");
+            return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入验证码");
         }
         UserInfoExample example = new UserInfoExample();
         example.createCriteria().andCellphoneEqualTo(cellphone);
         List<UserInfo> userInfos = userInfoService.selectByExample(example);
         if (userInfos != null && userInfos.size() > 0) {
-            return WebResult.error("该手机号码已注册");
+            return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码已注册");
         }
         String verifyCode = CacheService.getString(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
         if (StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)) {
-            return WebResult.error("短信验证码不正确");
+            return WebResult.fail(WebResult.CODE_VERIFYCODE, "短信验证码不正确");
         }
         UserInfo userInfo = new UserInfo();
         userInfo.setCellphone(cellphone);
@@ -105,20 +105,20 @@ public class UserController extends BaseController {
     @RequestMapping("/reset")
     public WebResult reset(String cellphone, String pwd, String code) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
-            return WebResult.error("请输入账号密码");
+            return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
         if (ConversionUtil.isContainEmptyParam(code)) {
-            return WebResult.error("请输入验证码");
+            return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入验证码");
         }
         UserInfoExample example = new UserInfoExample();
         example.createCriteria().andCellphoneEqualTo(cellphone).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<UserInfo> userInfos = userInfoService.selectByExample(example);
         if (userInfos == null && userInfos.size() <= 0) {
-            return WebResult.error("该手机号码尚未注册");
+            return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
         }
         String verifyCode = CacheService.getString(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
         if (StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)) {
-            return WebResult.error("短信验证码不正确");
+            return WebResult.fail(WebResult.CODE_VERIFYCODE, "短信验证码不正确");
         }
         UserInfo userInfo = userInfos.get(0);
         userInfo.setPwd(ShiroUtils.sha256(pwd, userInfo.getSalt()));
@@ -142,16 +142,16 @@ public class UserController extends BaseController {
                 userInfoService.updateByPrimaryKeySelective(info);
                 return WebResult.ok();
             } else {
-                return WebResult.error("身份认证失败");
+                return WebResult.fail(WebResult.CODE_OPERATION, "身份认证失败");
             }
-        } else return WebResult.error("用户未登陆");
-
+        }
+        return WebResult.fail(WebResult.CODE_NOT_LOGIN);
     }
 
     @RequestMapping("/sendCode")
     public WebResult sendCode(String cellphone, Integer type) {
         if (StringUtils.isEmpty(cellphone) || type == null) {
-            return WebResult.error("参数不正确");
+            return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
         if (Constants.VERIFICATION_TYPE.REGISTER == type || Constants.VERIFICATION_TYPE.RESET_PASSWORD == type) {
             UserInfoExample example = new UserInfoExample();
@@ -159,11 +159,11 @@ public class UserController extends BaseController {
             List<UserInfo> userInfos = userInfoService.selectByExample(example);
             if (Constants.VERIFICATION_TYPE.REGISTER == type) {
                 if (userInfos != null && userInfos.size() > 0) {
-                    return WebResult.error("该手机号码已注册");
+                    return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码已注册");
                 }
             } else if (Constants.VERIFICATION_TYPE.RESET_PASSWORD == type) {
                 if (userInfos == null || userInfos.size() <= 0) {
-                    return WebResult.error("该手机号码尚未注册");
+                    return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
                 }
             }
         }
@@ -177,11 +177,11 @@ public class UserController extends BaseController {
     @RequestMapping("/info")
     public WebResult info(String token) {
         if (ConversionUtil.isContainEmptyParam(token)) {
-            return WebResult.error("传入参数有错误");
+            return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
         CacheUserInfo loginUser = getCurrLoginUser();
         if (ConversionUtil.isContainEmptyParam(loginUser)) {
-            return WebResult.error("token不合法或已过期");
+            return WebResult.fail(WebResult.CODE_TOKEN);
         }
         UserInfo userInfo = userInfoService.selectByPrimaryKey(loginUser.getId());
         loginUser = userInfoService.getLoginUserInfo(userInfo, token);
@@ -194,7 +194,7 @@ public class UserController extends BaseController {
     @RequestMapping("/userLoanState/{id}")
     public WebResult getUserLoanState(@PathVariable("id") String id) {
         if (StringUtils.isEmpty(id)) {
-            return WebResult.error("传入参数有错误");
+            return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
 
         return WebResult.ok().put(WebResult.DATA, "");
@@ -207,7 +207,7 @@ public class UserController extends BaseController {
     public WebResult addAccount(UserAccount userAccount) {
         CacheUserInfo loginUser = getCurrLoginUser();
         if (ConversionUtil.isContainEmptyParam(loginUser)) {
-            return WebResult.error("token不合法或已过期");
+            return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
 
@@ -229,11 +229,11 @@ public class UserController extends BaseController {
     public WebResult accountVerifyCode(String code, String cellphone, String id) {
         CacheUserInfo loginUser = getCurrLoginUser();
         if (ConversionUtil.isContainEmptyParam(loginUser)) {
-            return WebResult.error("token不合法或已过期");
+            return WebResult.fail(WebResult.CODE_TOKEN);
         }
         String verifyCode = CacheService.getString(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
         if (StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)) {
-            return WebResult.error("验证码错误");
+            return WebResult.fail(WebResult.CODE_VERIFYCODE);
         }
         UserAccount userAccount = new UserAccount();
         userAccount.setId(id);
