@@ -3,6 +3,7 @@ package com.entrobus.credit.user.services.impl;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.user.services.UserCacheService;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserInfoCache;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -22,6 +23,23 @@ public class UserCacheServiceImpl implements UserCacheService {
     @Autowired
     RedisTemplate redisTemplate;
 
+    @Override
+    public CacheUserInfo getUserCacheByUid(String userId) {
+        Object o = CacheService.getObject(redisTemplate, Cachekey.User.UID_PREFIX + userId);
+        return o instanceof CacheUserInfo ? (CacheUserInfo) o : null;
+    }
+
+    @Override
+    public CacheUserInfo getUserCacheBySid(String sid) {
+        String uid = CacheService.getString(redisTemplate, Cachekey.User.SID_PREFIX + sid);
+        Object o = CacheService.getObject(redisTemplate, Cachekey.User.UID_PREFIX + uid);
+        return o instanceof CacheUserInfo ? (CacheUserInfo) o : null;
+    }
+
+    @Override
+    public String translate(String key) {
+        return CacheService.getString(redisTemplate, key);
+    }
 
     @Override
     public UserInfoCache getUserCache(String userId) {

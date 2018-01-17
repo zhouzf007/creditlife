@@ -9,6 +9,7 @@ import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
+import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
@@ -34,6 +35,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private UserCacheService userCacheService;
 
     @Autowired
     private UserAccountService userAccountService;
@@ -121,6 +125,27 @@ public class UserController extends BaseController {
         return WebResult.ok();
     }
 
+    @RequestMapping("/identification")
+    public WebResult identification(String token, String name, String idCard) {
+        CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
+        if (userInfo != null) {
+            boolean flag = false;
+            //@TODO  调用第三方校验身份
+            if (flag) {
+                String realName = "";
+                String idCardNo = "";
+                UserInfo info = userInfoService.selectByPrimaryKey(userInfo.getId());
+                info.setRealName(realName);
+                info.setIdCard(idCardNo);
+                userInfoService.updateByPrimaryKeySelective(info);
+                return WebResult.ok();
+            } else {
+                return WebResult.error("身份认证失败");
+            }
+        } else return WebResult.error("用户未登陆");
+
+    }
+
     @RequestMapping("/sendCode")
     public WebResult sendCode(String cellphone, Integer type) {
         if (StringUtils.isEmpty(cellphone) || type == null) {
@@ -140,8 +165,6 @@ public class UserController extends BaseController {
                 }
             }
         }
-        //判断是否为业主
-        //发送验证码
         msgClient.sendVerificationCode(cellphone, "");
         return WebResult.ok();
     }

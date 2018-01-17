@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CacheServiceImpl implements OrderCacheService {
+public class OrderCacheServiceImpl implements OrderCacheService {
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -29,7 +29,7 @@ public class CacheServiceImpl implements OrderCacheService {
 
     @Override
     public String translate(String key) {
-      return CacheService.getString(redisTemplate, key);
+        return CacheService.getString(redisTemplate, key);
     }
 
 }
