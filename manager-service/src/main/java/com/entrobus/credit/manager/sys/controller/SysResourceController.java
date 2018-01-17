@@ -43,6 +43,7 @@ public class SysResourceController extends ManagerBaseController {
             sysResource.setLevel(1);
         }
         sysResourceService.insertSelective(sysResource);
+
         return WebResult.ok("创建成功！");
     }
 
