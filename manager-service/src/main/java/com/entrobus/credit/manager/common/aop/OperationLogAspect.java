@@ -20,9 +20,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
@@ -93,19 +96,23 @@ public class OperationLogAspect {
                 msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
             }
             //获取相关主键
-            String relId = null;
             Object[] args = pjp.getArgs();
-//            int index = getKeyParamIndex(logAnnotation.relId(), currentMethod);
             String[] argNames = getArgNames(currentMethod);
-//            int index = (int) argNames;
 
             if (args != null && argNames != null && args.length>0){
                 Map<String,Object> argMap = new HashMap<>(args.length);
                 for (int i = 0; i < args.length; i++) {
+                    Object arg = args[i];
+                    if (arg instanceof BindingResult){
+                        //这是用于参数校验结果的，@Validated 或 @Valid
+                        msg.setExtData(arg);//扩展字段
+                        continue;
+                    }
                     String name = argNames[i];
-                    argMap.put(name,args[i]);
-                    if (Objects.equals(logAnnotation.relId(), name))
+                    argMap.put(name, arg);
+                    if (Objects.equals(logAnnotation.relId(), name)) {
                         msg.setRelId(name);//关联id,如orderId
+                    }
                 }
                 msg.setOperationData(argMap);//请求参数，Object
             }
@@ -113,7 +120,6 @@ public class OperationLogAspect {
             //这里跟platform对应
             msg.setRemark(logAnnotation.remark());//备注（1024）：自定义，如：超时、定时操作等
             //操作状态：0-成功，1-失败，2-异常
-            pjp.getArgs();
 //        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
         } catch (Exception e) {
             logger.error("执行操作前获取操作信息失败",e);
