@@ -1,7 +1,7 @@
 package com.entrobus.credit.manager.schedule.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.manager.common.client.ScheduleClient;
+import com.entrobus.credit.manager.client.ScheduleClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.schedule.QuartzJobVo;
 import org.springframework.beans.factory.annotation.Autowired;

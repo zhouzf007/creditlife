@@ -1,4 +1,4 @@
-package com.entrobus.credit.manager.common.client;
+package com.entrobus.credit.manager.client;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.vo.schedule.QuartzJobVo;

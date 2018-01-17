@@ -5,7 +5,7 @@ import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
-import com.entrobus.credit.manager.common.client.BsStaticsClient;
+import com.entrobus.credit.manager.client.BsStaticsClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.LogService;
 import com.entrobus.credit.vo.base.BsStaticVo;
@@ -187,7 +187,7 @@ public class BsStaticsController extends ManagerBaseController{
      */
     @PostMapping("/testLog2")
     @RecordLog(desc = "testLog2",remark = "ass", relId = "str")//操作名称、描述，备注，关联主键
-    public WebResult testLog2( String str){
+    public WebResult testLog2( String str,String nnn){
         return WebResult.ok();
     }
     /**

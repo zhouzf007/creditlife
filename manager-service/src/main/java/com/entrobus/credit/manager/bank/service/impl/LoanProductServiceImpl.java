@@ -14,6 +14,7 @@ import com.entrobus.credit.manager.dao.LoanProductMapper;
 import com.entrobus.credit.pojo.manager.*;
 import com.entrobus.credit.vo.loan.LoanConfigureVo;
 import com.entrobus.credit.vo.loan.LoanPeriodsRateVo;
+import com.entrobus.credit.vo.loan.LoanProductVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,6 +165,66 @@ public class LoanProductServiceImpl implements LoanProductService {
         dataMap.put("rateList",rateList);
         dataMap.put("repaymentTypes",repaymentTypes);
         return WebResult.ok(dataMap);
+    }
+
+    @Override
+    public LoanProductVo getInfoById(String id) {
+        LoanProduct product = this.selectByPrimaryKey(id);
+        return getLoanProductInfo(product);
+    }
+
+    @Override
+    public LoanProductVo getInfoByOrgId(String orgId) {
+        LoanProductExample example = new LoanProductExample();
+        example.createCriteria().andOrgIdEqualTo(orgId)
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        example.setOrderByClause(" create_time desc ");
+        List<LoanProduct> productList = this.selectByExample(example);
+        if(ConversionUtil.isEmptyParameter(productList)){
+            return null;
+        }
+        LoanProduct product = productList.get(0);
+        return getLoanProductInfo(product);
+    }
+
+    private LoanProductVo getLoanProductInfo(LoanProduct product){
+        LoanProductVo loanProductVo = new LoanProductVo();
+        loanProductVo.setId(product.getId());
+        loanProductVo.setOrgId(product.getOrgId());
+        loanProductVo.setLoanDateType(product.getLoanDateType());
+        loanProductVo.setRemark(product.getRemark());
+        //期数利率
+        LoanInterestRateExample rateExample = new LoanInterestRateExample();
+        rateExample.createCriteria().andLoanProductIdEqualTo(product.getId())
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        rateExample.setOrderByClause(" create_time asc");
+        List<LoanInterestRate> interestRateList = loanInterestRateService.selectByExample(rateExample);
+        TreeSet<Integer> set = new TreeSet<>();
+        Map<String,String> rateMap = new HashMap<>();
+        List<LoanPeriodsRateVo> rateList = new ArrayList<>();
+        for (LoanInterestRate rate : interestRateList){
+            set.add(rate.getPeriods());
+            rateMap.put(rate.getPeriods()+"type"+rate.getRepaymentType(),ConversionUtil.rateToString(rate.getInterestRate()));
+        }
+        for (Integer periods : set){
+            String interestCapitalRate = rateMap.get(periods+"type"+Constants.REPAYMENT_TYPE.INTEREST_CAPITAL);
+            String monthEqualRate = rateMap.get(periods+"type"+Constants.REPAYMENT_TYPE.MONTH_EQUAL);
+            List<Integer> repaymentTypeList = new ArrayList<>();
+            LoanPeriodsRateVo vo = new LoanPeriodsRateVo();
+            vo.setPeriods(periods);
+            if(ConversionUtil.isNotEmptyParameter(interestCapitalRate)){
+                vo.setInterestCapitalRate(interestCapitalRate);
+                repaymentTypeList.add(Constants.REPAYMENT_TYPE.INTEREST_CAPITAL);
+            }
+            if(ConversionUtil.isNotEmptyParameter(monthEqualRate)){
+                vo.setMonthEqualRate(monthEqualRate);
+                repaymentTypeList.add(Constants.REPAYMENT_TYPE.MONTH_EQUAL);
+            }
+            vo.setRepaymentTypeList(repaymentTypeList);
+            rateList.add(vo);
+        }
+        loanProductVo.setLoanPeriodsRateVoList(rateList);
+        return loanProductVo;
     }
 
     /**
