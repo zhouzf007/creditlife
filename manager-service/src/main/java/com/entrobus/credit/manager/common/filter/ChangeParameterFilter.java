@@ -4,6 +4,7 @@ import com.entrobus.credit.manager.common.bean.CommonParameter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.web.firewall.FirewalledRequest;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -27,18 +28,23 @@ public class ChangeParameterFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         logger.debug("修改request请求参数过滤器");
-        HttpServletRequest request = (HttpServletRequest)servletRequest;
-        ParameterRequestWrapper requestWrapper = new ParameterRequestWrapper(request);
-        //从请求头中获取登录token
-        String token = request.getHeader("token");
-        //将token作为请求参数放入到HttpServletRequest对象中，方便其他地方通过request.getParameter("token")去获取
-        requestWrapper.addParameter("token",token);
-        String platform = request.getParameter("platform");
-        if(StringUtils.isEmpty(platform)){
-            platform = request.getHeader("platform");
-            requestWrapper.addParameter("platform",platform);
+        boolean  flag=servletRequest instanceof FirewalledRequest;
+        if (flag){
+            filterChain.doFilter(servletRequest, servletResponse);
+        }else {
+            HttpServletRequest request = (HttpServletRequest)servletRequest;
+            ParameterRequestWrapper requestWrapper = new ParameterRequestWrapper(request);
+            //从请求头中获取登录token
+            String token = request.getHeader("token");
+            //将token作为请求参数放入到HttpServletRequest对象中，方便其他地方通过request.getParameter("token")去获取
+            requestWrapper.addParameter("token",token);
+            String platform = request.getParameter("platform");
+            if(StringUtils.isEmpty(platform)){
+                platform = request.getHeader("platform");
+                requestWrapper.addParameter("platform",platform);
+            }
+            filterChain.doFilter(requestWrapper, servletResponse);
         }
-        filterChain.doFilter(requestWrapper, servletResponse);
     }
 
     @Override

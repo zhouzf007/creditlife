@@ -35,7 +35,8 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
                 .excludePathPatterns(
                         "/sys/user/login",
                         "/sys/user/logout",
-                        "/sys/tool/createSuperAdmin"
+                        "/sys/tool/createSuperAdmin",
+                        "/loan/rate/**"
                 )
                 .addPathPatterns("/**");
         super.addInterceptors(registry);
