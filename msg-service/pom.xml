@@ -149,6 +149,7 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                     <include>**/*.yml</include>
+                    <include>**/template/*.ftl</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>

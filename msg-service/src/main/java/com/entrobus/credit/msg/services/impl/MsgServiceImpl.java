@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
-import com.entrobus.credit.common.util.FreemarkerUtil;
+import com.entrobus.credit.msg.Util.FreemarkUtil;
 import com.entrobus.credit.msg.Util.SMSUtil;
 import com.entrobus.credit.msg.services.MsgService;
 import com.entrobus.credit.msg.services.SmsLogService;
@@ -43,7 +43,7 @@ public class MsgServiceImpl implements MsgService {
         Integer verifyCode = rnd.nextInt(8999) + 1000;
         Map<String, String> map = new HashMap<>();
         map.put("verifyCode", String.valueOf(verifyCode));
-        String content = FreemarkerUtil.getTemplateContent("validateCode.ftl", map);
+        String content = FreemarkUtil.getTemplate("validateCode.ftl", map);
         String result = SMSUtil.smsSend(areaCode, mobile, content);
         SmsLog log = new SmsLog();
         log.setTargets(mobile);

@@ -57,9 +57,9 @@
             <version>${httpclient.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>${freemarker.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <version>1.4.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

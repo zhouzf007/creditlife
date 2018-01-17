@@ -1,7 +1,9 @@
 server:
   port: 8083
   
-msg: Hello
+sms:
+  apikey: a56575f23e62f90992d9c22ebb17efa9
+  postUrl: http://sms.yunpian.com/v2/sms/single_send.json
 
 eureka:
   instance:

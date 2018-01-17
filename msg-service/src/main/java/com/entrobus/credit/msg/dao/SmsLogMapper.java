@@ -2,8 +2,9 @@ package com.entrobus.credit.msg.dao;
 
 import com.entrobus.credit.pojo.msg.SmsLog;
 import com.entrobus.credit.pojo.msg.SmsLogExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SmsLogMapper {
     /**

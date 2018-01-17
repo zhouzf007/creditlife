@@ -1,6 +1,5 @@
 package com.entrobus.credit.msg.Util;
 
-import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.util.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -12,10 +11,10 @@ import java.util.Map;
 @RefreshScope
 public class SMSUtil {
 
-    @Value("${sms:apikey}")
+    @Value("${sms.apikey}")
     private static String apikey;
 
-    @Value("${sms:postUrl}")
+    @Value("${sms.postUrl}")
     private static String postUrl;
     //http://sms.yunpian.com/v2/sms/single_send.json
     /*{
@@ -30,10 +29,10 @@ public class SMSUtil {
     */
     public static String smsSend(String areaCode, String mobile, String text) throws UnsupportedEncodingException {
         Map<String, String> params = new HashMap<>();//请求参数集合
-        params.put("apikey", apikey);
+        params.put("apikey", "a56575f23e62f90992d9c22ebb17efa9");
         params.put("text", text);
         params.put("mobile", "+" + areaCode + mobile);
-        String result = HttpClientUtil.doPost(postUrl, params);
+        String result = HttpClientUtil.doPost("http://sms.yunpian.com/v2/sms/single_send.json", params);
 //        Map smMap = JSON.parseObject(result);
         return result;
     }
