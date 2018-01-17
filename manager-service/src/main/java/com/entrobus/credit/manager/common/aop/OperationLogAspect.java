@@ -24,6 +24,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
@@ -106,6 +108,8 @@ public class OperationLogAspect {
                         msg.setExtData(arg);//扩展字段
                         continue;
                     }
+                    if (arg instanceof ServletRequest) continue;
+                    if (arg instanceof ServletResponse) continue;
                     String name = argNames[i];
                     argMap.put(name, arg);
                     if (Objects.equals(logAnnotation.relId(), name)) {
