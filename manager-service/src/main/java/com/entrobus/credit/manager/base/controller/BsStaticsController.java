@@ -51,7 +51,7 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
 //        msg.setRelId(GUIDUtil.genRandomGUID());//关联id,如orderId
         //这里跟platform对应
-        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+        msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
 //        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
         //操作状态：0-成功，1-失败，2-异常
         msg.setOperationState(getOperationState(result));
@@ -95,7 +95,7 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
         msg.setRelId(String.valueOf(id));//关联id,如orderId
         //这里跟platform对应
-        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+        msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
 //        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
         //操作状态：0-成功，1-失败，2-异常
         msg.setOperationState(getOperationState(result));
@@ -126,7 +126,7 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
         msg.setRelId(String.valueOf(id));//关联id,如orderId
         //这里跟platform对应
-        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+        msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
 //        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
         //操作状态：0-成功，1-失败，2-异常
         msg.setOperationState(getOperationState(result));
@@ -156,7 +156,7 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
 //        msg.setRelId(String.valueOf(id));//关联id,如orderId
         //这里跟platform对应
-        msg.setOperatorType(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+        msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
 //        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
         //操作状态：0-成功，1-失败，2-异常
         msg.setOperationState(getOperationState(result));
@@ -207,7 +207,7 @@ public class BsStaticsController extends ManagerBaseController{
         msg.setExtData("testLog");//扩展数据字段,Object
         msg.setOperatorId(GUIDUtil.genRandomGUID());//操作人id,与operatorType对应管理员或用户id
         msg.setRelId(GUIDUtil.genRandomGUID());//关联id,如orderId
-        msg.setOperatorType(Constants.OPERATOR_TYPE.MANAGER);//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户
+        msg.setPlatform(Constants.PLATFORM.CREDITLIFE);//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户
         msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
         msg.setOperationState(Constants.OPERATION_STATE.SUCCESS);//操作状态：0-成功，1-失败，2-异常
         msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段

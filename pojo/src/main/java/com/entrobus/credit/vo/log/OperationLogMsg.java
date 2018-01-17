@@ -41,9 +41,9 @@ public class OperationLogMsg implements Serializable {
      */
     private String applicationName;
     /**
-     * 操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户
+     * 平台类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户
      */
-    private Integer operatorType;
+    private Integer platform;
     /**
      * 请求参数
      */
@@ -149,12 +149,12 @@ public class OperationLogMsg implements Serializable {
         this.applicationName = applicationName;
     }
 
-    public Integer getOperatorType() {
-        return operatorType;
+    public Integer getPlatform() {
+        return platform;
     }
 
-    public void setOperatorType(Integer operatorType) {
-        this.operatorType = operatorType;
+    public void setPlatform(Integer platform) {
+        this.platform = platform;
     }
 
     public Object getOperationData() {
