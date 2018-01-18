@@ -57,3 +57,6 @@ zuul:
     manager-service:
       path: /manager/**
       sensitiveHeaders:
+    payment-service:
+      path: /payment/**
+      sensitiveHeaders:
