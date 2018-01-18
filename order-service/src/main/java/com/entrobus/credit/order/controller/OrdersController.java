@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
@@ -93,9 +94,9 @@ public class OrdersController {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, path = "/loanOrder")
+    @PostMapping(value = "/loanOrder",produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResult apply(@RequestBody ApplyVo vo,@RequestParam("token") String token) {
-        CacheUserInfo userInfo=cacheService.getUserCacheByUid(token);
+        CacheUserInfo userInfo=cacheService.getUserCacheBySid(token);
         if (userInfo==null){
             return WebResult.error("用户未登录");
         }

@@ -1,5 +1,6 @@
 package com.entrobus.credit.log.service.impl;
 
+import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.log.dao.ClientLogMapper;
 import com.entrobus.credit.log.service.ClientLogService;
 import com.entrobus.credit.pojo.log.ClientLog;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -61,6 +63,8 @@ public class ClientLogServiceImpl implements ClientLogService {
     }
 
     public int insertSelective(ClientLog record) {
+        if (record.getId() == null) record.setId(GUIDUtil.genRandomGUID());
+        if (record.getCreateTime() == null) record.setCreateTime(new Date());
         return this.clientLogMapper.insertSelective(record);
     }
 }
