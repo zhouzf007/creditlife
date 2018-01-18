@@ -19,6 +19,7 @@ ribbon:
 
 zuul:
   ignoredServices: '*'
+  addHostHeader: true
   routes:
     auth-service:
       path: /uaa/**
