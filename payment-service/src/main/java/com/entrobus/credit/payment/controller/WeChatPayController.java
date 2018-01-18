@@ -1,11 +1,14 @@
 package com.entrobus.credit.payment.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.payment.client.ManagerClient;
 import com.entrobus.credit.payment.services.WeChatPayService;
+import com.entrobus.credit.vo.loan.LoanProductVo;
 import com.github.binarywang.wxpay.bean.result.WxEntPayResult;
 import com.github.binarywang.wxpay.bean.result.WxPaySendRedpackResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +21,9 @@ public class WeChatPayController extends PaymentBaseController{
 
     @Autowired
     private WeChatPayService weChatPayService;
+
+    @Autowired
+    private ManagerClient managerClient;
 
     /**
      * 给指定的用户转账（测试通过）
@@ -43,5 +49,11 @@ public class WeChatPayController extends PaymentBaseController{
     public WebResult sendRedpack(String openId,Integer money) throws WxPayException{
         WxPaySendRedpackResult sendRedpackResult = weChatPayService.sendRedpack(openId,money);
         return WebResult.ok(sendRedpackResult);
+    }
+
+    @RequestMapping("/getInfoByOrgId/{orgId}")
+    public WebResult getInfoByOrgId(@PathVariable("orgId") String orgId) {
+        LoanProductVo loanProductVo = managerClient.getInfoByOrgId(orgId);
+        return WebResult.ok(loanProductVo);
     }
 }

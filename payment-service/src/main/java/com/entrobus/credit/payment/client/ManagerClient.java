@@ -1,4 +1,4 @@
-package com.entrobus.credit.order.client;
+package com.entrobus.credit.payment.client;
 
 import com.entrobus.credit.vo.loan.LoanProductVo;
 import org.slf4j.Logger;
@@ -6,13 +6,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by zhouzf on 2017/12/28.
+ *
  */
-@FeignClient(name = "manager-service", fallback = ProductionClient.PaymentClientFallback.class)
-public interface ProductionClient {
+@FeignClient(name = "manager-service", fallback = ManagerClient.ManagerClientFallback.class)
+public interface ManagerClient {
 
     /**
      * 根据配置ID查询资金方贷款配置信息
@@ -33,9 +32,9 @@ public interface ProductionClient {
     LoanProductVo getInfoByOrgId(@PathVariable("orgId") String orgId);
 
 
-    class PaymentClientFallback implements ProductionClient {
+    class ManagerClientFallback implements ManagerClient {
 
-        private static final Logger LOGGER = LoggerFactory.getLogger(PaymentClientFallback.class);
+        private static final Logger LOGGER = LoggerFactory.getLogger(ManagerClientFallback.class);
 
         @Override
         public LoanProductVo getInfoById(String id) {
