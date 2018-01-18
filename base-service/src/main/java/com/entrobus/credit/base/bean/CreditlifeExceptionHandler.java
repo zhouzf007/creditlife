@@ -1,9 +1,8 @@
-package com.entrobus.credit.manager.common.exception;
+package com.entrobus.credit.base.bean;
 
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.exception.CreditlifeException;
-import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -38,11 +37,6 @@ public class CreditlifeExceptionHandler {
 		return WebResult.error("数据库中已存在该记录");
 	}
 
-	@ExceptionHandler(AuthorizationException.class)
-	public WebResult handleAuthorizationException(AuthorizationException e){
-		logger.error(e.getMessage(), e);
-		return WebResult.error("没有权限，请联系管理员授权");
-	}
 	/**
 	 * 参数校验失败
 	 * @param e
@@ -81,9 +75,11 @@ public class CreditlifeExceptionHandler {
 		}
 		return sb.toString();
 	}
+
 	@ExceptionHandler(Exception.class)
 	public WebResult handleException(Exception e){
 		logger.error(e.getMessage(), e);
 		return WebResult.error("系统异常，请联系管理员");
 	}
+
 }

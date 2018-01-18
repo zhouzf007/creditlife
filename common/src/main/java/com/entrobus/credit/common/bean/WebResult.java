@@ -17,7 +17,7 @@ public class WebResult extends HashMap<String, Object> {
 	public static final String TIME = "time";
 
 
-	/******************** 0-399  业务逻辑相关 *********************/
+	/******************** 0-399  业务逻辑相关 start *********************/
 	/** 操作成功 */
 	public static final int  CODE_OK = 0;//0成功
 	/** 操作失败 */
@@ -33,9 +33,11 @@ public class WebResult extends HashMap<String, Object> {
 	/** 业务不允许 */
 	public static final int  CODE_BUSI_DISPERMIT = 15;
 
+	/******************** 0-399  业务逻辑相关 end *********************/
 
 
-	/******************** 400-499  各种拦截验证不通过，无法进入业务逻辑 *********************/
+
+	/******************** 400-499  各种拦截验证不通过，无法进入业务逻辑 start *********************/
 	/** 传入参数有错误 */
 	public static final int  CODE_PARAMETERS = 400;//传入参数有错误
 	/** 通信签名验证不通过 */
@@ -57,17 +59,21 @@ public class WebResult extends HashMap<String, Object> {
 	/** 接口已关闭，请联系开发人员 */
 	public static final int  CODE_INTERFACE_CLOSE = 415;
 
-	/******************** 500-599  服务器各种异常 *********************/
+	/******************** 400-499  各种拦截验证不通过，无法进入业务逻辑 end *********************/
+
+	/******************** 500-599  服务器各种异常 start *********************/
 	/** 服务异常  */
 	public static final int  CODE_ERROR = 500;//异常
 	/** 未知错误  */
 	public static final int  CODE_ERROR_UNKNOWN = 506;//异常
+	/******************** 500-599  服务器各种异常  end *********************/
 
-	/******************** 700-799  网关拦截相关 *********************/
+	/******************** 700-799  网关拦截相关 start *********************/
 	/** 您的操作过于频繁，请稍后再试 */
 	public static final int  CODE_TOO_OFTENL = 700;
 	/** 请勿重复操作 */
 	public static final int  CODE_REPEAT_OPERATION = 701;
+	/******************** 700-799  网关拦截相关 end *********************/
 
 
 

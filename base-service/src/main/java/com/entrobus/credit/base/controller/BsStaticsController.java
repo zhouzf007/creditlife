@@ -75,11 +75,7 @@ public class BsStaticsController {
      * @return
      */
     @PostMapping("")
-    public WebResult add(@RequestBody @Validated BsStaticVo vo, BindingResult result) {
-        if (result.hasErrors()) {
-            String validationMsg = getValidationMsg(result);
-            return WebResult.error(validationMsg);
-        }
+    public WebResult add(@RequestBody @Validated BsStaticVo vo) {
         BsStatics statics = new BsStatics();
         BeanUtils.copyProperties(vo, statics);
         int i = bsStaticsService.add(statics);
@@ -118,14 +114,6 @@ public class BsStaticsController {
         return ext;
     }
 
-    private String getValidationMsg(BindingResult result) {
-        StringBuilder sb = new StringBuilder();
-        for (ObjectError error : result.getAllErrors()) {
-            if (sb.length() > 0 ) sb.append(",");
-            sb.append(error.getDefaultMessage());
-        }
-        return sb.toString();
-    }
 
     /**
      * 获取同类型的
@@ -184,11 +172,7 @@ public class BsStaticsController {
      * @return
      */
     @PutMapping("/{id}")
-    public WebResult update(@PathVariable Long id, @RequestBody @Validated BsStaticVo vo, BindingResult result) {
-        if (result.hasErrors()) {
-            String validationMsg = getValidationMsg(result);
-            return WebResult.error(validationMsg);
-        }
+    public WebResult update(@PathVariable Long id, @RequestBody @Validated BsStaticVo vo) {
         BsStatics statics = new BsStatics();
         BeanUtils.copyProperties(vo, statics);
         statics.setId(id);
