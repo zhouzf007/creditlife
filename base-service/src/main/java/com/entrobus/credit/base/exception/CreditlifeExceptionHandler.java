@@ -1,4 +1,4 @@
-package com.entrobus.credit.base.bean;
+package com.entrobus.credit.base.exception;
 
 
 import com.entrobus.credit.common.bean.WebResult;

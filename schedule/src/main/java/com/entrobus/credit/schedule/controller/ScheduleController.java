@@ -20,33 +20,16 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
-    /**
-     * 拼接参数校验错误信息
-     * @param result
-     * @return
-     */
-    private String getValidationMsg(BindingResult result) {
-        StringBuilder sb = new StringBuilder();
-        for (ObjectError error : result.getAllErrors()) {
-            if (sb.length() > 0 ) sb.append(",");
-            sb.append(error.getDefaultMessage());
-        }
-        return sb.toString();
-    }
+
 
     /**
      * 添加任务
      * @param vo
-     * @param result
      * @return
      */
     @PostMapping("/job")
-    public WebResult addJob(@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
-        //参数校验
-        if (result.hasErrors()) {
-            String validationMsg = getValidationMsg(result);
-            return WebResult.error(validationMsg);
-        }
+    public WebResult addJob(@RequestBody @Validated QuartzJobVo vo) {
+        //
         if (StringUtils.isBlank(vo.getGroupName())){
             vo.setGroupName(Constants.JOB_GROUP_NAME.DEFAULT);
         }
@@ -63,12 +46,7 @@ public class ScheduleController {
      */
     @PutMapping("/job/{jobName}")
 //    public WebResult editJob(@PathVariable String jobName,@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
-    public WebResult editJob(@PathVariable String jobName,@RequestBody @Validated QuartzJobVo vo, BindingResult result) {
-        //参数校验
-        if (result.hasErrors()) {
-            String validationMsg = getValidationMsg(result);
-            return WebResult.error(validationMsg);
-        }
+    public WebResult editJob(@PathVariable String jobName,@RequestBody @Validated QuartzJobVo vo) {
         //todo cron校验
         if (StringUtils.isBlank(vo.getGroupName())){
             vo.setGroupName(Constants.JOB_GROUP_NAME.DEFAULT);
