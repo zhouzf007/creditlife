@@ -1,6 +1,5 @@
 package com.entrobus.credit.manager.common.filter;
 
-import com.entrobus.credit.manager.common.bean.CommonParameter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,20 +27,19 @@ public class ChangeParameterFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         logger.debug("修改request请求参数过滤器");
-        boolean  flag=servletRequest instanceof FirewalledRequest;
-        if (flag){
-            filterChain.doFilter(servletRequest, servletResponse);
-        }else {
-            HttpServletRequest request = (HttpServletRequest)servletRequest;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        //从请求头中获取登录token
+        String token = request.getHeader("token");
+        if(StringUtils.isEmpty(token)){
+            filterChain.doFilter(request, servletResponse);
+        }else{
             ParameterRequestWrapper requestWrapper = new ParameterRequestWrapper(request);
-            //从请求头中获取登录token
-            String token = request.getHeader("token");
             //将token作为请求参数放入到HttpServletRequest对象中，方便其他地方通过request.getParameter("token")去获取
-            requestWrapper.addParameter("token",token);
+            requestWrapper.addParameter("token", token);
             String platform = request.getParameter("platform");
-            if(StringUtils.isEmpty(platform)){
+            if (StringUtils.isEmpty(platform)) {
                 platform = request.getHeader("platform");
-                requestWrapper.addParameter("platform",platform);
+                requestWrapper.addParameter("platform", platform);
             }
             filterChain.doFilter(requestWrapper, servletResponse);
         }

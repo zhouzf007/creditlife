@@ -30,12 +30,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private ManagerCacheService managerCacheService;
 
+   /* @Autowired
+    RedisTemplate redisTemplate;*/
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         logger.debug(">>>LoginInterceptor>>>>>>>登录拦截器");
+        String token = request.getParameter("token");
         //从缓存中获取当前登录的系统用户
         SysLoginUserInfo loginUser = managerCacheService.getCurrLoginUser();
+        //SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
         if(loginUser == null){//用户未登录
             //1.判断是否为ajax请求
             String ajaxRequest = request.getHeader("ajaxRequest");//自定义AJAX请求头，用于标识是否为ajax请求
