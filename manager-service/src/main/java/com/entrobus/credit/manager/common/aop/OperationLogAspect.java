@@ -96,7 +96,7 @@ public class OperationLogAspect {
                 msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
                 msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
             }
-            //获取相关主键
+            //获取相关方法参数
             Object[] args = pjp.getArgs();
             String[] argNames = getArgNames(currentMethod);
 
@@ -164,14 +164,13 @@ public class OperationLogAspect {
                 if (param.isAnnotationPresent(PathVariable.class)){
                     PathVariable pv = param.getAnnotation(PathVariable.class);
                     String name = pv.value();
-                    name = StringUtils.isBlank(name) ? name : pv.name();
-                    argNames[i] = name;
+                    argNames[i]  = StringUtils.isBlank(name) ? pv.name() : name;
                 }else if (param.isAnnotationPresent(RequestParam.class)){
                     RequestParam pv = param.getAnnotation(RequestParam.class);
                     String name = pv.value();
-                    name = StringUtils.isBlank(name) ? name : pv.name();
-                        argNames[i] = name;
-                }else {
+                    argNames[i] = StringUtils.isBlank(name) ? pv.name() : name;
+                }
+                if (StringUtils.isBlank(argNames[i])) {
                     argNames[i] = param.getName();
                 }
             }
@@ -180,11 +179,16 @@ public class OperationLogAspect {
         return null;
     }
 
-
+    /**
+     * 判断操作状态
+     * @param object
+     * @return 0-成功，1-失败，2异常
+     */
     protected int getOperationState(Object object) {
-        if (object instanceof  WebResult) {
+        if (object != null && object instanceof  WebResult) {
             WebResult result = (WebResult)object;
-            return result.isOk() ? Constants.OPERATION_STATE.SUCCESS : Constants.OPERATION_STATE.FAIL;
+            if (result.isOk()) return Constants.OPERATION_STATE.SUCCESS;
+            return result.isError() ? Constants.OPERATION_STATE.ERROR : Constants.OPERATION_STATE.FAIL;
         }
         return Constants.OPERATION_STATE.SUCCESS;
     }

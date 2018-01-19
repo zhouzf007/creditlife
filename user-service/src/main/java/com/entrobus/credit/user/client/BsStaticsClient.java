@@ -4,19 +4,21 @@ import com.entrobus.credit.vo.base.BsStaticVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @FeignClient(name = "base-service", fallback = BsStaticsClient.BsStaticsClientFallback.class)
-@RequestMapping("/statics")
+//@RequestMapping("/statics")
 public interface BsStaticsClient {
     /**
      * 从缓存获取，如果缓存中没有，则刷新缓存
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping("/statics/{id}")
     BsStaticVo getBsStatic(@PathVariable("id") Long id);
 
     /**
@@ -25,7 +27,7 @@ public interface BsStaticsClient {
      * @param codeType
      * @return
      */
-    @GetMapping("/similar")
+    @GetMapping("/statics/similar")
     List<BsStaticVo> getByType(@RequestParam("codeType") String codeType);
 
     /**
@@ -33,7 +35,7 @@ public interface BsStaticsClient {
      *
      * @return
      */
-    @GetMapping("/search")
+    @GetMapping("/statics/search")
     List<BsStaticVo> search(@RequestParam(value = "codeType") String codeType,
                             @RequestParam(value = "codeValue") String codeValue,
                             @RequestParam(value = "codeName") String codeName,
@@ -47,7 +49,7 @@ public interface BsStaticsClient {
      * @param codeType
      * @return
      */
-    @GetMapping("/unique")
+    @GetMapping("/statics/unique")
     BsStaticVo getByTypeAndValue(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
     /**
      * 跟据codeType和codeValue查询CodeName
@@ -55,7 +57,7 @@ public interface BsStaticsClient {
      * @param codeType
      * @return
      */
-    @GetMapping("/name")
+    @GetMapping("/statics/name")
     String getCodeName(@RequestParam("codeType") String codeType, @RequestParam("codeValue") String codeValue);
 
 

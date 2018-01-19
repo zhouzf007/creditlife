@@ -1,6 +1,6 @@
 package com.entrobus.credit.log.controller;
 
-import com.entrobus.credit.common.util.RequestUtil;
+import com.entrobus.credit.common.util.ServletUtil;
 import com.entrobus.credit.log.service.ClientLogService;
 import com.entrobus.credit.log.service.OperationLogService;
 import com.entrobus.credit.pojo.log.ClientLog;
@@ -29,7 +29,7 @@ public class LogController {
     public void clientLog(@RequestParam String form, CommonParameter parameter, HttpServletRequest request){
         if (StringUtils.isBlank(form)) return;
         ClientLog log = new ClientLog();
-        log.setAddress(RequestUtil.getIpAddr(request));
+        log.setAddress(ServletUtil.getIpAddr(request));
         log.setContent(form);
         if (StringUtils.isNotBlank(parameter.getClient()))
             log.setClient(Integer.valueOf(parameter.getClient()));
