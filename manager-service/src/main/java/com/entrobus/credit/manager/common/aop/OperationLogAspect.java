@@ -187,8 +187,8 @@ public class OperationLogAspect {
     protected int getOperationState(Object object) {
         if (object != null && object instanceof  WebResult) {
             WebResult result = (WebResult)object;
-            if (result.isError()) return Constants.OPERATION_STATE.ERROR;
-            return result.isOk() ? Constants.OPERATION_STATE.SUCCESS : Constants.OPERATION_STATE.FAIL;
+            if (result.isOk()) return Constants.OPERATION_STATE.SUCCESS;
+            return result.isError() ? Constants.OPERATION_STATE.ERROR : Constants.OPERATION_STATE.FAIL;
         }
         return Constants.OPERATION_STATE.SUCCESS;
     }
