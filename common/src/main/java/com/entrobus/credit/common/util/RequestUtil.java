@@ -49,4 +49,8 @@ public class RequestUtil {
         }
         return ipAddress;
     }
+
+    public static String getToken(HttpServletRequest request){
+        return request.getHeader("token");
+    }
 }

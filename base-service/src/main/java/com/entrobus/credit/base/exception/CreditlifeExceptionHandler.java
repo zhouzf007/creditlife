@@ -1,4 +1,4 @@
-package com.entrobus.credit.schedule.exception;
+package com.entrobus.credit.base.exception;
 
 
 import com.entrobus.credit.common.bean.WebResult;
@@ -37,7 +37,7 @@ public class CreditlifeExceptionHandler {
 		return WebResult.error("数据库中已存在该记录");
 	}
 
-    /**
+	/**
 	 * 参数校验失败
 	 * @param e
 	 * @return
@@ -53,10 +53,10 @@ public class CreditlifeExceptionHandler {
 		return WebResult.fail(WebResult.CODE_PARAMETERS);
 	}
 	/**
-     * 参数校验失败
+	 * 参数校验失败
 	 * @param e
-     * @return
-     */
+	 * @return
+	 */
 	@ExceptionHandler(BindException.class)
 	public WebResult bindException(BindException e){
 		logger.error(e.getMessage(), e);
