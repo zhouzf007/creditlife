@@ -85,23 +85,6 @@ public class BsStaticsController extends ManagerBaseController{
     @RecordLog(desc = "删除静态数据",remark = "单个删除",relId = "id")
     public WebResult del(@PathVariable Long id){
         WebResult result = bsStaticsClient.del(id);
-        SysLoginUserInfo loginUser = getCurrLoginUser();
-        //操作日志
-        OperationLogMsg msg = new OperationLogMsg();
-        msg.setDesc("删除静态数据");// 操作说明：自定义,如 提交申请（创建订单）、审核 等
-        Map<String,Long> map = new HashMap<>();
-        map.put("id",id);
-        msg.setOperationData(map);//请求参数，Object
-//        msg.setOperationData(str);//请求参数，Object
-        msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
-        msg.setRelId(String.valueOf(id));//关联id,如orderId
-        //这里跟platform对应
-        msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
-//        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
-        //操作状态：0-成功，1-失败，2-异常
-        msg.setOperationState(getOperationState(result));
-//        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
-        logService.operation(msg);
         return result;
     }
     /**
@@ -115,23 +98,6 @@ public class BsStaticsController extends ManagerBaseController{
     @RecordLog(desc = "删除静态数据",remark = "批量删除")
     public WebResult batchDel(@RequestParam("ids") List<Long> ids) {
         WebResult result = bsStaticsClient.batchDel(ids);
-        SysLoginUserInfo loginUser = getCurrLoginUser();
-        //操作日志
-        OperationLogMsg msg = new OperationLogMsg();
-        msg.setDesc("删除静态数据");// 操作说明：自定义,如 提交申请（创建订单）、审核 等
-        Map<String,List<Long>> map = new HashMap<>();
-        map.put("ids",ids);
-        msg.setOperationData(map);//请求参数，Object
-//        msg.setOperationData(str);//请求参数，Object
-        msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
-//        msg.setRelId(String.valueOf(id));//关联id,如orderId
-        //这里跟platform对应
-        msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
-//        msg.setRemark("testLog");//备注（1024）：自定义，如：超时、定时操作等
-        //操作状态：0-成功，1-失败，2-异常
-        msg.setOperationState(getOperationState(result));
-//        msg.setRequestId(GUIDUtil.genRandomGUID());//请求id,保留字段
-        logService.operation(msg);
         return result;
     }
 
@@ -196,7 +162,6 @@ public class BsStaticsController extends ManagerBaseController{
                 .putColume("abb2","ddd24","old2");
 
         //*****************可选扩展内容，记录相关数据操作前后的值 end
-
         //操作日志
         logService.operation(msg);
 

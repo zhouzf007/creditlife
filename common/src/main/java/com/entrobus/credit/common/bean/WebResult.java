@@ -167,6 +167,12 @@ public class WebResult extends HashMap<String, Object> {
 		Object code = get(CODE);
 		return  Objects.equals(code ,CODE_OK);
 	}
+	public boolean isError(){
+		Object code = get(CODE);
+		if(code == null) return false;
+		int c = (int) code;
+		return  c >=500 && c <600;
+	}
 
 	public WebResult put(String key, Object value) {
 		super.put(key, value);

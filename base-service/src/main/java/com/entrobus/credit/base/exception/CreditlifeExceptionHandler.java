@@ -44,7 +44,7 @@ public class CreditlifeExceptionHandler {
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public WebResult methodArgumentNotValidException(MethodArgumentNotValidException e){
-		logger.error(e.getMessage(), e);
+		logger.info(e.getMessage(), e);
 
 		BindingResult result = e.getBindingResult();
 		if (result.hasErrors()){
@@ -59,7 +59,7 @@ public class CreditlifeExceptionHandler {
 	 */
 	@ExceptionHandler(BindException.class)
 	public WebResult bindException(BindException e){
-		logger.error(e.getMessage(), e);
+		logger.info(e.getMessage(), e);
 
 		BindingResult result = e.getBindingResult();
 		if (result != null && result.hasErrors()){

@@ -1,4 +1,4 @@
-package com.entrobus.credit.schedule.bean;
+package com.entrobus.credit.schedule.service;
 
 import org.quartz.Job;
 
