@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 //@RefreshScope
 @RestController
 @RequestMapping("/test")
@@ -24,7 +22,7 @@ public class TestController {
         return WebResult.ok().put("name",name).put("password",password);
     }
     @PostMapping("/validate")
-    public WebResult validate(@Validated BsStaticVo vo){
+    public WebResult validate(@RequestBody @Validated BsStaticVo vo){
         return WebResult.ok();
     }
 }
