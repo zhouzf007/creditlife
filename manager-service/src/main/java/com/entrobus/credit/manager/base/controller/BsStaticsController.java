@@ -46,9 +46,6 @@ public class BsStaticsController extends ManagerBaseController{
         return result;
     }
 
-    private int getOperationState(WebResult result) {
-        return result.isOk() ? Constants.OPERATION_STATE.SUCCESS : Constants.OPERATION_STATE.FAIL;
-    }
 
     /**
      * 获取同类型的
