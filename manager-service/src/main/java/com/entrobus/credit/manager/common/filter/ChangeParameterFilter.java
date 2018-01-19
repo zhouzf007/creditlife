@@ -28,7 +28,7 @@ public class ChangeParameterFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         logger.debug("修改request请求参数过滤器");
-        boolean  flag=servletRequest instanceof FirewalledRequest;
+        boolean  flag= false;//servletRequest instanceof FirewalledRequest;
         if (flag){
             filterChain.doFilter(servletRequest, servletResponse);
         }else {
