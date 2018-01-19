@@ -19,6 +19,7 @@ ribbon:
 
 zuul:
   ignoredServices: '*'
+  addHostHeader: true
   routes:
     auth-service:
       path: /uaa/**
@@ -56,4 +57,7 @@ zuul:
       sensitiveHeaders:
     manager-service:
       path: /manager/**
+      sensitiveHeaders:
+    payment-service:
+      path: /payment/**
       sensitiveHeaders:

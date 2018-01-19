@@ -13,6 +13,19 @@ import org.springframework.web.filter.CorsFilter;
 @EnableDiscoveryClient
 @EnableZuulProxy
 public class GatewayApplication {
+
+	/*@Bean
+	public CorsFilter corsFilter() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration corsConfiguration = new CorsConfiguration();
+		corsConfiguration.addAllowedOrigin("*");
+		corsConfiguration.addAllowedHeader("*");
+		corsConfiguration.addAllowedMethod("*");
+		corsConfiguration.addExposedHeader("loginStatus");//添加自定义输出请求头
+		source.registerCorsConfiguration("/**", corsConfiguration);
+		return new CorsFilter(source);
+	}*/
+
 	/**
 	 * 全局处理跨域请求
 	 * @return

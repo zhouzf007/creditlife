@@ -25,7 +25,8 @@ public class ManagerCacheService  {
      * @return
      */
     public SysLoginUserInfo getCurrLoginUser() {
-        String token = getRequest().getParameter("token");
+//        String token = getRequest().getParameter("token");
+        String token = getRequest().getHeader("token");
         SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
         return loginUser;
     }

@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.common.controller;
 
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
+import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.common.util.WebUtil;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -29,6 +30,8 @@ public class ManagerBaseController {
 
     @Autowired
     protected RedisTemplate redisTemplate;
+    @Autowired
+    private ManagerCacheService managerCacheService;
 
     /**
      * 获取当前请求对象
@@ -102,8 +105,9 @@ public class ManagerBaseController {
      * @return
      */
     protected SysLoginUserInfo getCurrLoginUser() {
-        String token = getRequest().getParameter("token");
-        SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
+//        String token = getRequest().getParameter("token");
+//        String token = getRequest().getHeader("token");
+        SysLoginUserInfo loginUser = managerCacheService.getCurrLoginUser();
         return loginUser;
     }
 

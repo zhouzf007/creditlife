@@ -11,6 +11,7 @@ import com.entrobus.credit.vo.log.OperationLogMsg;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -61,7 +62,7 @@ public class OperationLogAspect {
     public void recordLog(){}
 
     @Around(value = "recordLog()")
-    public void doAround(ProceedingJoinPoint pjp) throws Throwable {
+    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
 
         OperationLogMsg msg = getOperationLogMsg(pjp);
         //执行业务
@@ -75,7 +76,7 @@ public class OperationLogAspect {
             logger.error(String.format("通过注解记录操作日志发布失败！操作参数：%s", JSON.toJSONString(pjp.getArgs())),e);
         }
 
-
+        return proceed;//返回值
     }
 
     private OperationLogMsg getOperationLogMsg(ProceedingJoinPoint pjp) {
@@ -192,7 +193,7 @@ public class OperationLogAspect {
 //    public void doAfterThrowing(Exception ex){
 //
 //    }
-    //    @AfterReturning(returning = "ret", pointcut = "recordLog()")
+//    @AfterReturning(returning = "ret", pointcut = "recordLog()")
 //    public void doAfterReturning(Object ret) throws Throwable {
 //        // 处理完请求，返回内容
 //        logger.info("处理完请求，返回内容 : " + ret);

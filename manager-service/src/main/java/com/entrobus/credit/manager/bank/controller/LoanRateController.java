@@ -23,7 +23,7 @@ public class LoanRateController extends ManagerBaseController{
      * @param id
      * @return
      */
-    @GetMapping("getInfoById/{id}")
+    @GetMapping("/getInfoById/{id}")
     public LoanProductVo getInfoById(@PathVariable("id") String id) {
         return loanProductService.getInfoById(id);
     }
@@ -33,7 +33,7 @@ public class LoanRateController extends ManagerBaseController{
      * @param orgId
      * @return
      */
-    @GetMapping("getInfoByOrgId/{orgId}")
+    @GetMapping("/getInfoByOrgId/{orgId}")
     public LoanProductVo getInfoByOrgId(@PathVariable("orgId") String orgId) {
         return loanProductService.getInfoByOrgId(orgId);
     }

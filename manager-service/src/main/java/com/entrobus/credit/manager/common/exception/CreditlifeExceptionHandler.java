@@ -7,6 +7,10 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -39,7 +43,44 @@ public class CreditlifeExceptionHandler {
 		logger.error(e.getMessage(), e);
 		return WebResult.error("没有权限，请联系管理员授权");
 	}
+	/**
+	 * 参数校验失败
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public WebResult methodArgumentNotValidException(MethodArgumentNotValidException e){
+		logger.error(e.getMessage(), e);
 
+		BindingResult result = e.getBindingResult();
+		if (result.hasErrors()){
+			return WebResult.fail(WebResult.CODE_PARAMETERS,getValidationMsg(result));
+		}
+		return WebResult.fail(WebResult.CODE_PARAMETERS);
+	}
+	/**
+	 * 参数校验失败
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(BindException.class)
+	public WebResult bindException(BindException e){
+		logger.error(e.getMessage(), e);
+
+		BindingResult result = e.getBindingResult();
+		if (result != null && result.hasErrors()){
+			return WebResult.fail(WebResult.CODE_PARAMETERS,getValidationMsg(result));
+		}
+		return WebResult.fail(WebResult.CODE_PARAMETERS);
+	}
+	private String getValidationMsg(BindingResult result) {
+		StringBuilder sb = new StringBuilder();
+		for (ObjectError error : result.getAllErrors()) {
+			if (sb.length() > 0 ) sb.append(",");
+			sb.append(error.getDefaultMessage());
+		}
+		return sb.toString();
+	}
 	@ExceptionHandler(Exception.class)
 	public WebResult handleException(Exception e){
 		logger.error(e.getMessage(), e);
