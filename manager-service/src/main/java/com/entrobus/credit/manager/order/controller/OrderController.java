@@ -5,7 +5,7 @@ import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.order.*;
-import com.entrobus.credit.vo.order.OrderListVo;
+import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +22,40 @@ import java.util.*;
 public class OrderController extends ManagerBaseController {
 
     @Autowired
-    private OrderClient OrderClient;
+    private OrderClient orderClient;
 
     /**
-     * 查询资金方列表
+     * 订单列表
+     */
+    @GetMapping("/orderList")
+    public WebResult getOrderList(Integer offset, Integer limit, Integer state, String orgId) {
+        PageHelper.startPage(offset, limit);
+        List<OrderListVo> orderList = orderClient.getOrderList(state, orgId, offset, limit);
+        PageInfo pageInfo = new PageInfo<>(orderList);
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("rows", orderList);
+        dataMap.put("total", pageInfo.getTotal());
+        return WebResult.ok(dataMap);
+    }
+
+    /**
+     * 订单详情
+     */
+    @GetMapping("/orderDtl")
+    public WebResult getOrderDtl(String id) {
+        OrderDtlVo vo = orderClient.getOrderDtl(id);
+        return WebResult.ok(vo);
+    }
+
+    /**
+     * 还款列表
      *
-     * @param offset
-     * @param limit
      * @return
      */
-    @GetMapping("")
-    public WebResult list(Integer state, String orgId, Integer offset, Integer limit) {
+    @GetMapping("/repayment/list")
+    public WebResult getRepaymentList(Integer offset, Integer limit, Integer state, String orgId) {
         PageHelper.startPage(offset, limit);
-        List<OrderListVo> list = OrderClient.getOrderList(state, orgId, offset, limit);
+        List<OrderListVo> list = orderClient.getOrderList(state, orgId, offset, limit);
         PageInfo pageInfo = new PageInfo<>(list);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("total", pageInfo.getTotal());
@@ -42,27 +63,39 @@ public class OrderController extends ManagerBaseController {
         return WebResult.ok(dataMap);
     }
 
+    /**
+     * 还款订单详情
+     *
+     * @return
+     */
+    @GetMapping("/repayment/detail")
+    public WebResult getRepaymentDetail(String id) {
+        OrderDtlVo vo = orderClient.getOrderDtl(id);
+        return WebResult.ok(vo);
+    }
+
+
     @GetMapping("/testList")
-    public WebResult testList(Integer offset, Integer limit,Integer state) {
+    public WebResult testList(Integer offset, Integer limit, Integer state) {
         PageHelper.startPage(offset, limit);
-        List<OrderListVo> list = new ArrayList<>();
-        for (int i = (offset-1)*limit+1;i<=limit*offset;i++){
-            OrderListVo vo = new OrderListVo();
+        List<UserOrderListVo> list = new ArrayList<>();
+        for (int i = (offset - 1) * limit + 1; i <= limit * offset; i++) {
+            UserOrderListVo vo = new UserOrderListVo();
             vo.setId(GUIDUtil.genRandomGUID());
-            vo.setApplyTime(new Date());
-            vo.setApplyNo("NO:"+i);
-            vo.setMoney(i*100+"");
+//            vo.setApplyTime(new Date());
+//            vo.setApplyNo("NO:" + i);
+            vo.setMoney(i * 100 + "");
             vo.setScore(i);
-            vo.setUserName("user:"+i);
-            vo.setUpdateTime(new Date());
+            vo.setUserName("user:" + i);
+//            vo.setUpdateTime(new Date());
             vo.setMobile("12345678910");
-            vo.setUserId("id:"+i);
-            vo.setStateName(state==-1?"全部":(state==0?"待审核":(state==1?"待放款":(state==2?"已驳回":"其他"))));
+            vo.setUserId("id:" + i);
+            vo.setStateName(state == -1 ? "全部" : (state == 0 ? "待审核" : (state == 1 ? "待放款" : (state == 2 ? "已驳回" : "其他"))));
             list.add(vo);
         }
         PageInfo pageInfo = new PageInfo<>(list);
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("total", 10*limit);
+        dataMap.put("total", 10 * limit);
         dataMap.put("rows", list);
         return WebResult.ok(dataMap);
     }
@@ -97,26 +130,26 @@ public class OrderController extends ManagerBaseController {
 
 
     @GetMapping("/repayment/testList")
-    public WebResult repaymentList(Integer offset, Integer limit,Integer state) {
+    public WebResult repaymentList(Integer offset, Integer limit, Integer state) {
         PageHelper.startPage(offset, limit);
-        List<OrderListVo> list = new ArrayList<>();
-        for (int i = (offset-1)*limit+1;i<=limit*offset;i++){
-            OrderListVo vo = new OrderListVo();
+        List<UserOrderListVo> list = new ArrayList<>();
+        for (int i = (offset - 1) * limit + 1; i <= limit * offset; i++) {
+            UserOrderListVo vo = new UserOrderListVo();
             vo.setId(GUIDUtil.genRandomGUID());
-            vo.setApplyTime(new Date());
-            vo.setApplyNo("NO:"+i);
-            vo.setMoney(i*100+"");
+//            vo.setApplyTime(new Date());
+//            vo.setApplyNo("NO:" + i);
+            vo.setMoney(i * 100 + "");
             vo.setScore(i);
-            vo.setUserName("user:"+i);
-            vo.setUpdateTime(new Date());
+            vo.setUserName("user:" + i);
+//            vo.setUpdateTime(new Date());
             vo.setMobile("12345678910");
-            vo.setUserId("id:"+i);
-            vo.setStateName(state==-1?"全部":(state==0?"还款中":(state==1?"已完成":"其他")));
+            vo.setUserId("id:" + i);
+            vo.setStateName(state == -1 ? "全部" : (state == 0 ? "还款中" : (state == 1 ? "已完成" : "其他")));
             list.add(vo);
         }
         PageInfo pageInfo = new PageInfo<>(list);
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("total", 10*limit);
+        dataMap.put("total", 10 * limit);
         dataMap.put("rows", list);
         return WebResult.ok(dataMap);
     }
@@ -147,12 +180,12 @@ public class OrderController extends ManagerBaseController {
         vo.setLoanOperator("大红");
         vo.setLoanTime("2018-1-17 15:44");
         List<RepaymentPlanVo> planList = new ArrayList<>();
-        for (int i=0;i<5;i++){
+        for (int i = 0; i < 5; i++) {
             RepaymentPlanVo planVo = new RepaymentPlanVo();
             planVo.setId(GUIDUtil.genRandomGUID());
             planVo.setMoney("123,456,789");
             planVo.setRepayTime(new Date());
-            planVo.setStateName(i<2?"已结清":(i>=2&&i<4?"已逾期":"待还款"));
+            planVo.setStateName(i < 2 ? "已结清" : (i >= 2 && i < 4 ? "已逾期" : "待还款"));
             planVo.setOperator("小红");
             planVo.setUpdateTime(new Date());
             planList.add(planVo);

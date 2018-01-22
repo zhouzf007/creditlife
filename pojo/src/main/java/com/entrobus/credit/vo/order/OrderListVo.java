@@ -8,21 +8,8 @@ public class OrderListVo {
     private Date applyTime;
     private String applyNo;
     private String money;
-    private Integer score;
     private String userName;
-    private String mobile;
-    private String userId;
-    private Date updateTime;
     private Integer state;
-
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
     private String stateName;
 
     public Date getUpdateTime() {
@@ -33,32 +20,7 @@ public class OrderListVo {
         this.updateTime = updateTime;
     }
 
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
+    private Date updateTime;
 
     public String getId() {
         return id;
@@ -98,6 +60,14 @@ public class OrderListVo {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public String getStateName() {

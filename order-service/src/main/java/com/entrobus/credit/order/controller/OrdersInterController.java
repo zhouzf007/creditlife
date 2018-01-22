@@ -19,7 +19,6 @@ import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.MediaType;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +58,7 @@ public class OrdersInterController {
 
 
     /**
-     * 订单列表（银行端）
+     * 订单列表
      *
      * @param
      * @return
@@ -70,62 +69,12 @@ public class OrdersInterController {
     }
 
     /**
-     * 订单列表（熵商管理端）
-     *
-     * @param
-     * @return
-     */
-    @GetMapping(path = "/userOrderList")
-    public List<OrderListVo> getUserOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
-        return ordersService.getUserOrderList(state, orgId, offset, limit);
-    }
-
-    /**
-     * 用户贷款详情
-     *
-     * @param userId
-     */
-    @GetMapping(path = "/userOrderDtl/{userId}")
-    public WebResult getUserOrderDtl(@PathVariable("userId") String userId) throws Exception {
-        CacheUserInfo userInfo = cacheService.getUserCacheByUid(userId);
-        UserOrderDtlVo dtl = new UserOrderDtlVo();
-        dtl.setUserId(userInfo.getId());
-        dtl.setName(userInfo.getRealName());
-        dtl.setIdCard(userInfo.getIdCard());
-        dtl.setQuota(AmountUtil.changeF2Y(userInfo.getQuota()));
-        dtl.setAccount("建设银行");
-        dtl.setMobile(userInfo.getCellphone());
-        dtl.setRole(userInfo.getRole() + "");
-        dtl.setScore(userInfo.getCreditScore());
-        List<OrderListVo> rsOrderList = new ArrayList<>();
-        List<Orders> orderList = ordersService.getUserOrders(userId);
-        for (int i = 0; i < orderList.size(); i++) {
-            Orders order = orderList.get(i);
-            OrderListVo vo = new OrderListVo();
-            vo.setId(order.getId());
-            vo.setUserId(order.getUserId());
-            vo.setState(order.getState());
-            vo.setScore(order.getCreditScore());
-            vo.setApplyNo(order.getApplyNo());
-            vo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
-            vo.setApplyTime(order.getApplyTime());
-            vo.setUpdateTime(order.getUpdateTime());
-            vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
-            rsOrderList.add(vo);
-        }
-        dtl.setOrderList(rsOrderList);
-        Map rsMap = new HashMap<>();
-        rsMap.put("orderDtl", dtl);
-        return WebResult.ok(rsMap);
-    }
-
-    /**
-     * 贷款订单详情(包含还款计划的)
+     * 贷款订单详情
      *
      * @param id
      */
-    @GetMapping(path = "/orderDtl/{id}")
-    public WebResult getOrderDtl(@PathVariable("id") String id) throws Exception {
+    @GetMapping(path = "/orderDtl")
+    public OrderDtlVo getOrderDtl(@RequestParam("id") String id) throws Exception {
         Orders order = ordersService.selectByPrimaryKey(id);
         CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
         OrderDtlVo dtl = new OrderDtlVo();
@@ -167,10 +116,55 @@ public class OrdersInterController {
             }
         }
         dtl.setList(planList);
-        Map rsMap = new HashMap<>();
-        rsMap.put("orderDtl", dtl);
-        return WebResult.ok(rsMap);
+        return dtl;
     }
+
+    /**
+     * 用户订单列表
+     *
+     * @param
+     * @return
+     */
+    @GetMapping(path = "/userOrderList")
+    public List<UserOrderListVo> getUserOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
+        return ordersService.getUserOrderList(state, orgId, offset, limit);
+    }
+
+    /**
+     * 用户贷款详情
+     *
+     * @param userId
+     */
+    @GetMapping(path = "/userOrderDtl")
+    public UserOrderDtlVo getUserOrderDtl(@RequestParam("userId") String userId) throws Exception {
+        CacheUserInfo userInfo = cacheService.getUserCacheByUid(userId);
+        UserOrderDtlVo dtl = new UserOrderDtlVo();
+        dtl.setUserId(userInfo.getId());
+        dtl.setName(userInfo.getRealName());
+        dtl.setIdCard(userInfo.getIdCard());
+        dtl.setQuota(AmountUtil.changeF2Y(userInfo.getQuota()));
+        dtl.setAccount("建设银行");
+        dtl.setMobile(userInfo.getCellphone());
+        dtl.setRole(userInfo.getRole() + "");
+        dtl.setScore(userInfo.getCreditScore());
+        List<OrderListVo> rsOrderList = new ArrayList<>();
+        List<Orders> orderList = ordersService.getUserOrders(userId);
+        for (int i = 0; i < orderList.size(); i++) {
+            Orders order = orderList.get(i);
+            OrderListVo vo = new OrderListVo();
+            vo.setId(order.getId());
+            vo.setState(order.getState());
+            vo.setApplyNo(order.getApplyNo());
+            vo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
+            vo.setApplyTime(order.getApplyTime());
+            vo.setUpdateTime(order.getUpdateTime());
+            vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
+            rsOrderList.add(vo);
+        }
+        dtl.setOrderList(rsOrderList);
+        return dtl;
+    }
+
 
     /**
      * 订单状态更新

@@ -16,6 +16,7 @@ import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.order.OrdersExample;
 import com.entrobus.credit.vo.order.ApplyVo;
+import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.entrobus.credit.vo.order.OrderListVo;
 import com.entrobus.credit.vo.order.UserOrdersVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
@@ -184,7 +185,7 @@ public class OrdersServiceImpl implements OrdersService {
         return WebResult.ok(rsMap);
     }
 
-    public List<OrderListVo> getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
+    public List<UserOrderListVo> getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -200,10 +201,10 @@ public class OrdersServiceImpl implements OrdersService {
             example.setLimitEnd(limit);
         }
         List<Orders> list = this.selectByExample(example);
-        List<OrderListVo> rsList = new ArrayList<>();
+        List<UserOrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             Orders order = list.get(i);
-            OrderListVo rsorderVo = new OrderListVo();
+            UserOrderListVo rsorderVo = new UserOrderListVo();
             rsorderVo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
             CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
             rsorderVo.setId(order.getId());
@@ -246,11 +247,7 @@ public class OrdersServiceImpl implements OrdersService {
             orderVo.setId(order.getId());
             orderVo.setUserName(userInfo.getRealName());
             orderVo.setApplyTime(order.getApplyTime());
-            orderVo.setMobile(userInfo.getCellphone());
-            orderVo.setScore(order.getCreditScore());
-            orderVo.setUserId(order.getUserId());
             orderVo.setApplyNo(order.getApplyNo());
-            orderVo.setUpdateTime(order.getUpdateTime());
             orderVo.setState(order.getState());
             orderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(orderVo);
@@ -273,4 +270,5 @@ public class OrdersServiceImpl implements OrdersService {
         }
         return rsList;
     }
+
 }
