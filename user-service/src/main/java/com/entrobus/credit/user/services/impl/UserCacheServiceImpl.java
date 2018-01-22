@@ -2,6 +2,7 @@ package com.entrobus.credit.user.services.impl;
 
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
+import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.user.services.UserInfoService;
 import com.entrobus.credit.vo.user.CacheUserInfo;
@@ -33,9 +34,11 @@ public class UserCacheServiceImpl implements UserCacheService {
         if (o instanceof CacheUserInfo) {
             return (CacheUserInfo) o;
         } else {
-            userInfoService.selectByPrimaryKey(userId);
+            UserInfo user = userInfoService.selectByPrimaryKey(userId);
+            if (user != null) {
+                return userInfoService.initUserCache(user);
+            } else return null;
         }
-        return o instanceof CacheUserInfo ? (CacheUserInfo) o : null;
     }
 
     @Override

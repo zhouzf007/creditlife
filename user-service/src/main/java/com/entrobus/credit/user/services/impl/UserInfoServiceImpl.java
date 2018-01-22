@@ -95,24 +95,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-        UserAccountExample userAccountExample = new UserAccountExample();
-        userAccountExample.createCriteria().andUserIdEqualTo(record.getId());
-        userAccountExample.setOrderByClause(" update_time asc ");
-        List<UserAccount> userAccounts = userAccountService.selectByExample(userAccountExample);
-        List<UserAccountInfo> userAccountInfos = new ArrayList<>();
-        for (UserAccount userAccount : userAccounts) {
-            UserAccountInfo userAccountInfo = new UserAccountInfo();
-            try {
-                BeanUtils.copyProperties(userAccountInfo, userAccount);
-            } catch (Exception e) {
-                logger.error(e.getMessage(), e);
-            }
-            if (userAccountInfo.getIsDefualt() == Constants.YES_OR_NO.YES) {
-                loginUserInfo.setDefualtAccount(userAccountInfo.getAccount());
-                loginUserInfo.setDefualtAccountId(userAccountInfo.getId());
-            }
-            userAccountInfos.add(userAccountInfo);
-        }
+        List<UserAccountInfo> userAccountInfos = getUserAccountInfos(record, loginUserInfo);
         loginUserInfo.setUserAccountInfos(userAccountInfos);
         CacheService.setString(redisTemplate, Cachekey.User.SID_PREFIX + token, loginUserInfo.getId());
         CacheService.setString(redisTemplate, Cachekey.User.UID_SID_PREFIX + loginUserInfo.getId(), token);
@@ -142,6 +125,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
+        List<UserAccountInfo> userAccountInfos = getUserAccountInfos(record, cacheUserInfo);
+        cacheUserInfo.setUserAccountInfos(userAccountInfos);
+        CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + record.getId(), cacheUserInfo);
+        return cacheUserInfo;
+    }
+
+    private List<UserAccountInfo> getUserAccountInfos(UserInfo record, CacheUserInfo cacheUserInfo) {
         UserAccountExample userAccountExample = new UserAccountExample();
         userAccountExample.createCriteria().andUserIdEqualTo(record.getId());
         userAccountExample.setOrderByClause(" update_time asc ");
@@ -160,8 +150,6 @@ public class UserInfoServiceImpl implements UserInfoService {
             }
             userAccountInfos.add(userAccountInfo);
         }
-        cacheUserInfo.setUserAccountInfos(userAccountInfos);
-        CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + record.getId(), cacheUserInfo);
-        return cacheUserInfo;
+        return userAccountInfos;
     }
 }
