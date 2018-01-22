@@ -1,4 +1,4 @@
-package com.entrobus.credit.order.client;
+package com.entrobus.credit.manager.client;
 
 import com.entrobus.credit.pojo.order.CreditReport;
 import org.slf4j.Logger;
@@ -24,6 +24,9 @@ public interface UserClient {
     CreditReport getCrediReport(@PathVariable("id") String id);
 
 
+    @PutMapping(value = "/userState")
+    void updateUserState(@RequestParam("userId") String userId, @RequestParam("state") Integer state);
+
     @Component
     class UserClientFallback implements UserClient {
 
@@ -39,5 +42,9 @@ public interface UserClient {
             return null;
         }
 
+        @Override
+        public void updateUserState(String userId, Integer state) {
+
+        }
     }
 }

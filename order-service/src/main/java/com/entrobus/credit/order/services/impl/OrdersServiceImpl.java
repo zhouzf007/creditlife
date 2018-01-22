@@ -171,7 +171,7 @@ public class OrdersServiceImpl implements OrdersService {
         order.setApplyTime(new Date());
 
         //加入用户信息
-        order.setRole(userInfo.getRole() + "");
+        order.setRole(userInfo.getRole());
         order.setAccount(userInfo.getDefualtAccount());
 
         //生成合同信息

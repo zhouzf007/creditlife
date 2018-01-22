@@ -87,16 +87,16 @@ public class OrdersInterController {
         dtl.setAccount(order.getAccount());
         dtl.setMobile(userInfo.getCellphone());
         dtl.setRole(order.getRole());
-
+        dtl.setRoleName(cacheService.translate(Cachekey.Translation.ROLE_NAME + order.getRole()));
         dtl.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
         dtl.setRate(AmountUtil.change2Percent(order.getInterestRate()));
         dtl.setRepaymentTerm(order.getRepaymentTerm() + "");
         dtl.setRepaymentType(order.getRepaymentType() + "");
         dtl.setUsage(order.getLoanUsage());
         dtl.setScore(order.getCreditScore());
-
         dtl.setContractId(order.getContractId());
         dtl.setCreditReportId(order.getCreditReportId());
+        dtl.setUserState(userInfo.getState());
         dtl.setState(order.getState());
         dtl.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
         List<RepaymentPlanVo> planList = new ArrayList<>();
@@ -143,7 +143,7 @@ public class OrdersInterController {
         dtl.setName(userInfo.getRealName());
         dtl.setIdCard(userInfo.getIdCard());
         dtl.setQuota(AmountUtil.changeF2Y(userInfo.getQuota()));
-        dtl.setAccount(userInfo.getAccountBank()+"("+userInfo.getDefualtAccount()+")");
+        dtl.setAccount(userInfo.getAccountBank() + "(" + userInfo.getDefualtAccount() + ")");
         dtl.setUserState(userInfo.getState());
         dtl.setMobile(userInfo.getCellphone());
         dtl.setRole(cacheService.translate(Cachekey.Translation.ROLE_NAME + userInfo.getRole()));
