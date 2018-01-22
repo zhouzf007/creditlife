@@ -2,12 +2,14 @@ package com.entrobus.credit.manager.user.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.order.OrderListVo;
 import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.entrobus.credit.vo.order.UserOrderDtlVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
