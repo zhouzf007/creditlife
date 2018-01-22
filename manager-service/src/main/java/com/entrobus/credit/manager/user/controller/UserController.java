@@ -3,6 +3,7 @@ package com.entrobus.credit.manager.user.controller;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
+import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.order.OrderListVo;
 import com.entrobus.credit.vo.order.UserOrderListVo;
@@ -28,8 +29,9 @@ public class UserController extends ManagerBaseController {
 
     @GetMapping("/userOrderList")
     public WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) {
+        SysLoginUserInfo userInfo = getCurrLoginUser();
         PageHelper.startPage(offset, limit);
-        List<UserOrderListVo> rsList = orderClient.getUserOrderList(state, orgId, offset, limit);
+        List<UserOrderListVo> rsList = orderClient.getUserOrderList(state, userInfo.getOrgId(), offset, limit);
         PageInfo pageInfo = new PageInfo<>(rsList);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("total", pageInfo.getTotal());
