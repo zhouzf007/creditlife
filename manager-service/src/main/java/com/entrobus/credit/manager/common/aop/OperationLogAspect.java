@@ -96,6 +96,7 @@ public class OperationLogAspect {
             if (loginUser != null) {
                 msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
                 msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+                msg.setOrgId(loginUser.getOrgId());
             }
             //获取相关方法参数
             Object[] args = pjp.getArgs();

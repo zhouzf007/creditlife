@@ -314,4 +314,13 @@ public class SysUserServiceImpl implements SysUserService {
         }
         return false;
     }
+    @Override
+    public List<SysUser> getByOrgId(String orgId){
+        SysUserExample example = new SysUserExample();
+        example.createCriteria()
+                .andOrgIdEqualTo(orgId)
+                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        List<SysUser> sysUsers = this.selectByExample(example);
+        return sysUsers;
+    }
 }

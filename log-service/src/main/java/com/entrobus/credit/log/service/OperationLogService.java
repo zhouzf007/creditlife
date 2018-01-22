@@ -2,6 +2,7 @@ package com.entrobus.credit.log.service;
 
 import com.entrobus.credit.pojo.log.OperationLog;
 import com.entrobus.credit.pojo.log.OperationLogExample;
+import com.entrobus.credit.vo.log.LogQueryVo;
 import com.entrobus.credit.vo.log.OperationLogMsg;
 
 import java.util.List;
@@ -89,4 +90,6 @@ public interface OperationLogService {
     int logMsg(OperationLogMsg msg);
 
     int clear();
+
+    List<OperationLog> getByQueryVo(LogQueryVo vo);
 }

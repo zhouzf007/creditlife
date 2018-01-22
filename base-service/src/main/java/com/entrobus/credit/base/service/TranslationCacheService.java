@@ -10,4 +10,6 @@ public interface TranslationCacheService {
     void init();
 
     <T> void addTranslation(String prefix, T value, String name);
+
+    <T> String translation(String prefix, T value);
 }
