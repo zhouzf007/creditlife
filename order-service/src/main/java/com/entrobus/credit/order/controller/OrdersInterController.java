@@ -143,9 +143,10 @@ public class OrdersInterController {
         dtl.setName(userInfo.getRealName());
         dtl.setIdCard(userInfo.getIdCard());
         dtl.setQuota(AmountUtil.changeF2Y(userInfo.getQuota()));
-        dtl.setAccount("建设银行");
+        dtl.setAccount(userInfo.getAccountBank()+"("+userInfo.getDefualtAccount()+")");
+        dtl.setUserState(userInfo.getState());
         dtl.setMobile(userInfo.getCellphone());
-        dtl.setRole(userInfo.getRole() + "");
+        dtl.setRole(cacheService.translate(Cachekey.Translation.ROLE_NAME + userInfo.getRole()));
         dtl.setScore(userInfo.getCreditScore());
         List<OrderListVo> rsOrderList = new ArrayList<>();
         List<Orders> orderList = ordersService.getUserOrders(userId);

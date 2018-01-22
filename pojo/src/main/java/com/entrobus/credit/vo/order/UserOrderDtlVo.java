@@ -11,7 +11,7 @@ public class UserOrderDtlVo {
     private String mobile;// 手机号码
     private Integer score;//熵商信用分
     private String account;//银行卡信息
-    private String userState;//用户状态
+    private Integer userState;//用户状态
     private String quota;//额度
     private List<OrderListVo> orderList;
     private Integer state;
@@ -89,11 +89,11 @@ public class UserOrderDtlVo {
         this.account = account;
     }
 
-    public String getUserState() {
+    public Integer getUserState() {
         return userState;
     }
 
-    public void setUserState(String userState) {
+    public void setUserState(Integer userState) {
         this.userState = userState;
     }
 
