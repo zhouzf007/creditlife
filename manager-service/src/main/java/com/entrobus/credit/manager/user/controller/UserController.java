@@ -73,7 +73,7 @@ public class UserController extends ManagerBaseController {
         vo.setMobile("13800138000");
         vo.setScore(99);
         vo.setAccount("建设银行信用卡0001");
-        vo.setUserState("正常");
+        vo.setUserState(1);
         vo.setQuota("7,000,100,200,100");
         List<OrderListVo> orderList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
