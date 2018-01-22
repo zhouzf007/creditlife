@@ -44,7 +44,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 response.setHeader("loginStatus", "timeout");//在响应头设置登录状态
             }else{
                 logger.debug("----本次请求为普通请求-----");
-                write(JSON.toJSONString(WebResult.error("用户未登录")),response);
+                write(JSON.toJSONString(WebResult.fail("用户未登录")),response);
             }
             return false;
         }

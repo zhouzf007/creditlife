@@ -118,7 +118,7 @@ public class LoanProductServiceImpl implements LoanProductService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return WebResult.error("设置失败");
+        return WebResult.fail("设置失败");
     }
 
     @Override

@@ -23,7 +23,7 @@ public class LoanProductController extends ManagerBaseController{
     @PostMapping("")
     public WebResult save(LoanConfigureVo loanConfigureVo){
         if(ConversionUtil.isEmptyParameter(loanConfigureVo.getStrLoanPeriodsRateVoList())){
-            return WebResult.error("至少填一项期数利率");
+            return WebResult.fail("至少填一项期数利率");
         }
         return loanProductService.save(loanConfigureVo);
     }
