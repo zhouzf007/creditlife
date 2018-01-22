@@ -29,13 +29,7 @@ public class OrderController extends ManagerBaseController {
      */
     @GetMapping("/orderList")
     public WebResult getOrderList(Integer offset, Integer limit, Integer state, String orgId) {
-        PageHelper.startPage(offset, limit);
-        List<OrderListVo> orderList = orderClient.getOrderList(state, orgId, offset, limit);
-        PageInfo pageInfo = new PageInfo<>(orderList);
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("rows", orderList);
-        dataMap.put("total", pageInfo.getTotal());
-        return WebResult.ok(dataMap);
+        return orderClient.getOrderList(state, orgId, offset, limit);
     }
 
     /**
@@ -54,13 +48,7 @@ public class OrderController extends ManagerBaseController {
      */
     @GetMapping("/repayment/list")
     public WebResult getRepaymentList(Integer offset, Integer limit, Integer state, String orgId) {
-        PageHelper.startPage(offset, limit);
-        List<OrderListVo> list = orderClient.getOrderList(state, orgId, offset, limit);
-        PageInfo pageInfo = new PageInfo<>(list);
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("total", pageInfo.getTotal());
-        dataMap.put("rows", list);
-        return WebResult.ok(dataMap);
+        return orderClient.getOrderList(state, orgId, offset, limit);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.client;
 
+import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.vo.order.OrderDtlVo;
 import com.entrobus.credit.vo.order.OrderListVo;
@@ -28,7 +29,7 @@ public interface OrderClient {
      * @return
      */
     @GetMapping(path = "/orderList")
-    List<OrderListVo> getOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
+    WebResult getOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
     /**
      * 订单详情
@@ -42,7 +43,7 @@ public interface OrderClient {
      * 用户列表
      */
     @GetMapping(path = "/userOrderList")
-    List<UserOrderListVo> getUserOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
+    WebResult getUserOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
     /**
      * 用户订单详情
@@ -67,7 +68,7 @@ public interface OrderClient {
         }
 
         @Override
-        public List<OrderListVo> getOrderList(Integer state, String orgId, Integer offset, Integer limit) {
+        public WebResult getOrderList(Integer state, String orgId, Integer offset, Integer limit) {
             return null;
         }
 
@@ -77,7 +78,7 @@ public interface OrderClient {
         }
 
         @Override
-        public List<UserOrderListVo> getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) {
+        public WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) {
             LOGGER.info("异常发生，进入fallback方法");
             return null;
         }

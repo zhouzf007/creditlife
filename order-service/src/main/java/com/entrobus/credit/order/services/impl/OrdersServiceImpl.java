@@ -16,10 +16,12 @@ import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.order.OrdersExample;
 import com.entrobus.credit.vo.order.ApplyVo;
-import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.entrobus.credit.vo.order.OrderListVo;
+import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.entrobus.credit.vo.order.UserOrdersVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,7 +187,7 @@ public class OrdersServiceImpl implements OrdersService {
         return WebResult.ok(rsMap);
     }
 
-    public List<UserOrderListVo> getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -200,6 +202,7 @@ public class OrdersServiceImpl implements OrdersService {
             example.setLimitStart(offset);
             example.setLimitEnd(limit);
         }
+        PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<UserOrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -216,11 +219,15 @@ public class OrdersServiceImpl implements OrdersService {
             rsorderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(rsorderVo);
         }
-        return rsList;
+        PageInfo pageInfo = new PageInfo<>(rsList);
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("rows", rsList);
+        dataMap.put("total", pageInfo.getTotal());
+        return WebResult.ok(dataMap);
     }
 
     @Override
-    public List<OrderListVo> getOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -235,6 +242,7 @@ public class OrdersServiceImpl implements OrdersService {
             example.setLimitStart(offset);
             example.setLimitEnd(limit);
         }
+        PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<OrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -249,7 +257,11 @@ public class OrdersServiceImpl implements OrdersService {
             orderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(orderVo);
         }
-        return rsList;
+        PageInfo pageInfo = new PageInfo<>(rsList);
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("rows", rsList);
+        dataMap.put("total", pageInfo.getTotal());
+        return WebResult.ok(dataMap);
     }
 
     @Override

@@ -64,7 +64,7 @@ public class OrdersInterController {
      * @return
      */
     @GetMapping(path = "/orderList")
-    public List<OrderListVo> getOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
         return ordersService.getOrderList(state, orgId, offset, limit);
     }
 
@@ -126,7 +126,7 @@ public class OrdersInterController {
      * @return
      */
     @GetMapping(path = "/userOrderList")
-    public List<UserOrderListVo> getUserOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getUserOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
         return ordersService.getUserOrderList(state, orgId, offset, limit);
     }
 
