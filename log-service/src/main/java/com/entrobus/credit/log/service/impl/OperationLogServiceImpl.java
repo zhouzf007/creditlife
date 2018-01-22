@@ -168,6 +168,9 @@ public class OperationLogServiceImpl implements OperationLogService {
         if (msg.getOperationData() != null) {
             log.setOperationData(JSON.toJSONString(msg.getOperationData()));
         }
+        if (msg.getResult() != null) {
+            log.setResult(JSON.toJSONString(msg.getResult()));
+        }
         log.setOperationDesc(msg.getDesc());
         log.setOperationState(msg.getOperationState());
         log.setRelId(msg.getRelId());

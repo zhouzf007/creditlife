@@ -70,6 +70,7 @@ public class OperationLogAspect {
         try {
             //操作状态
             msg.setOperationState(getOperationState(proceed));
+            msg.setResult(proceed);
             //记录日志
             logService.operation(msg);
         } catch (Exception e) {
