@@ -1,4 +1,4 @@
-package com.entrobus.credit.order.dao;
+package com.entrobus.credit.user.dao;
 
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.CreditReportExample;

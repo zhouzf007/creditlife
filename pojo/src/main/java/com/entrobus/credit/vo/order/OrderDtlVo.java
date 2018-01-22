@@ -27,6 +27,15 @@ public class OrderDtlVo {
     private String auditTime;// 审核日期
     private String loanOperator;//放款人
     private String loanTime;//操作放款日期/实际放款日期
+    private Integer state;
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
     public String getAuditor() {
         return auditor;

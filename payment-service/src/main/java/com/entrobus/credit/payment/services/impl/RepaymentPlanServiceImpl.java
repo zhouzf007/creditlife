@@ -79,17 +79,19 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     public List<RepaymentPlan> getRepaymentPlanByOrderId(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
         example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        example.setOrderByClause(" plan_time asc ");
         return this.selectByExample(example);
     }
+
     @Override
     public RepaymentPlan getLastRepaymentPlanByOrderId(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
         example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date());
         example.setOrderByClause(" plan_time desc ");
-       List<RepaymentPlan> list=this.selectByExample(example);
-       if (!list.isEmpty()){
-           return list.get(0);
-       }
+        List<RepaymentPlan> list = this.selectByExample(example);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
         return null;
     }
 

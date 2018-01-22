@@ -5,13 +5,33 @@ package com.entrobus.credit.vo.user;
  */
 public class UserAccountInfo {
 
+    private String id;
     private String account;
     private String bank;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String name;
     private Integer type;
     private Integer state;
     private Long balance;
     private String cellphone;
+
+    public Integer getIsDefualt() {
+        return isDefualt;
+    }
+
+    public void setIsDefualt(Integer isDefualt) {
+        this.isDefualt = isDefualt;
+    }
+
+    private Integer isDefualt;
 
     public String getAccount() {
         return account;

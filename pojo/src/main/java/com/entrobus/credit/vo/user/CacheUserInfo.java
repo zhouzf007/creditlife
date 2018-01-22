@@ -20,6 +20,25 @@ public class CacheUserInfo {
     private Long quota;//预估额度
     private String unionId;//unionId
     private Integer role;//角色
+    private String defualtAccount;//默认账户
+
+    public String getDefualtAccount() {
+        return defualtAccount;
+    }
+
+    public void setDefualtAccount(String defualtAccount) {
+        this.defualtAccount = defualtAccount;
+    }
+
+    public String getDefualtAccountId() {
+        return defualtAccountId;
+    }
+
+    public void setDefualtAccountId(String defualtAccountId) {
+        this.defualtAccountId = defualtAccountId;
+    }
+
+    private String defualtAccountId;//默认账户
     private List<UserAccountInfo> userAccountInfos;//用户帐号
 
     public String getId() {

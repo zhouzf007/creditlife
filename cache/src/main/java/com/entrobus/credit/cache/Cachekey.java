@@ -26,5 +26,9 @@ public interface Cachekey {
         String REPAYMENT_STATE = "repayment_state:state:";
     }
 
+    interface Order {
+        String apply_no = "order:apply_no:";
+    }
+
 
 }

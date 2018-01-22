@@ -6,9 +6,11 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
+import com.entrobus.credit.user.services.CreditReportService;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
@@ -18,9 +20,8 @@ import com.entrobus.credit.user.services.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import utils.ShiroUtils;
 
 import java.util.Date;
@@ -46,10 +47,13 @@ public class UserController extends BaseController {
     MsgClient msgClient;
 
     @Autowired
+    CreditReportService creditReportService;
+
+    @Autowired
     private RedisTemplate redisTemplate;
 
-    @RequestMapping("/login")
-    public WebResult login(String cellphone, String pwd) {
+    @PostMapping(value = "/login")
+    public WebResult login(@RequestParam String cellphone, @RequestParam("pwd") String pwd) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
@@ -203,21 +207,20 @@ public class UserController extends BaseController {
     /*
     * 添加银行卡
     * */
-    @RequestMapping("/addAccount")
-    public WebResult addAccount(UserAccount userAccount) {
-        CacheUserInfo loginUser = getCurrLoginUser();
-        if (ConversionUtil.isContainEmptyParam(loginUser)) {
+    @PostMapping(value = "/addAccount", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResult addAccount(@RequestBody UserAccount userAccount, @RequestParam("token") String token) {
+        CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
+        if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
-
         //保存
         userAccount.setId(GUIDUtil.genRandomGUID());
         userAccount.setCreateTime(new Date());
-        userAccount.setUserId(loginUser.getId());
+        userAccount.setUserId(userInfo.getId());
         userAccount.setState(Constants.ACCOUNT_STATUS.WAIT);
         userAccount.setDeleteFlag(Constants.DELETE_FLAG.NO);
-        userAccount.setCreateOperator(loginUser.getId());
+        userAccount.setCreateOperator(userInfo.getId());
         userAccountService.insertSelective(userAccount);
         return WebResult.ok().put(WebResult.DATA, userAccount.getId());
     }
@@ -243,5 +246,19 @@ public class UserController extends BaseController {
         userAccountService.updateByPrimaryKeySelective(userAccount);
         return WebResult.ok();
     }
+
+
+    @GetMapping(value = "/userCreditReport")
+    public CreditReport getUserCrediReport(@RequestParam("userId") String userId) {
+        CreditReport creditReport = creditReportService.getCreditReportByUid(userId);
+        return creditReport;
+    }
+
+    @GetMapping(value = "/creditReport/{id}")
+    public CreditReport getCrediReport(@PathVariable("id") String id) {
+        CreditReport creditReport = creditReportService.selectByPrimaryKey(id);
+        return creditReport;
+    }
+
 
 }

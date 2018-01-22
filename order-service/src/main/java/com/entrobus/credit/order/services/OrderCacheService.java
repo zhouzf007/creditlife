@@ -9,4 +9,6 @@ public interface OrderCacheService {
     CacheUserInfo getUserCacheBySid(String sid);
 
     String translate(String key);
+
+    String getOrderApplyNo();
 }

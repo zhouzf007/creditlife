@@ -97,6 +97,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         UserAccountExample userAccountExample = new UserAccountExample();
         userAccountExample.createCriteria().andUserIdEqualTo(record.getId());
+        userAccountExample.setOrderByClause(" update_time asc ");
         List<UserAccount> userAccounts = userAccountService.selectByExample(userAccountExample);
         List<UserAccountInfo> userAccountInfos = new ArrayList<>();
         for (UserAccount userAccount : userAccounts) {
@@ -106,12 +107,16 @@ public class UserInfoServiceImpl implements UserInfoService {
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
             }
+            if (userAccountInfo.getIsDefualt() == Constants.YES_OR_NO.YES) {
+                loginUserInfo.setDefualtAccount(userAccountInfo.getAccount());
+                loginUserInfo.setDefualtAccountId(userAccountInfo.getId());
+            }
             userAccountInfos.add(userAccountInfo);
         }
         loginUserInfo.setUserAccountInfos(userAccountInfos);
-        CacheService.setString(redisTemplate, Cachekey.User.SID_PREFIX+ token, loginUserInfo.getId());
-        CacheService.setString(redisTemplate, Cachekey.User.UID_SID_PREFIX+ loginUserInfo.getId(), token);
-        CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX+ loginUserInfo.getId(), loginUserInfo);
+        CacheService.setString(redisTemplate, Cachekey.User.SID_PREFIX + token, loginUserInfo.getId());
+        CacheService.setString(redisTemplate, Cachekey.User.UID_SID_PREFIX + loginUserInfo.getId(), token);
+        CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + loginUserInfo.getId(), loginUserInfo);
         return loginUserInfo;
     }
 

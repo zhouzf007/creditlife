@@ -13,6 +13,16 @@ public class OrderListVo {
     private String mobile;
     private String userId;
     private Date updateTime;
+    private Integer state;
+
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
     private String stateName;
 
     public Date getUpdateTime() {

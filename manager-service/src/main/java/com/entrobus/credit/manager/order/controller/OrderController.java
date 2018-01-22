@@ -4,7 +4,6 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.order.OrderListVo;
-import com.entrobus.credit.vo.order.OrderQueryVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +32,9 @@ public class OrderController extends ManagerBaseController {
      * @return
      */
     @GetMapping("")
-    public WebResult list(Integer offset, Integer limit,String key) {
+    public WebResult list(Integer state, String orgId, Integer offset, Integer limit) {
         PageHelper.startPage(offset, limit);
-        OrderQueryVo qvo = new OrderQueryVo();
-        qvo.setLimit(limit);
-        qvo.setOffset(offset);
-        qvo.setKey(key);
-        List<OrderListVo> list = OrderClient.getOrderList(qvo);
+        List<OrderListVo> list = OrderClient.getOrderList(state, orgId, offset, limit);
         PageInfo pageInfo = new PageInfo<>(list);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("total", pageInfo.getTotal());

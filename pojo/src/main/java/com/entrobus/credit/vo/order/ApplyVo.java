@@ -3,16 +3,23 @@ package com.entrobus.credit.vo.order;
 public class ApplyVo {
 
     private String token;
-    private Integer type;
     private String userId;
     private long money;
     private String usage;
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
     private Integer repaymentTerm;
     private Integer repaymentType;
     private Integer rate;
     private String prodId;
-    private String partyId;
-    private Integer score;
+    private String orgId;
     private String signature;
 
     public String getSignature() {
@@ -71,21 +78,6 @@ public class ApplyVo {
         this.prodId = prodId;
     }
 
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
 
     public String getUserId() {
         return userId;
@@ -103,11 +95,4 @@ public class ApplyVo {
         this.money = money;
     }
 
-    public String getPartyId() {
-        return partyId;
-    }
-
-    public void setPartyId(String partyId) {
-        this.partyId = partyId;
-    }
 }

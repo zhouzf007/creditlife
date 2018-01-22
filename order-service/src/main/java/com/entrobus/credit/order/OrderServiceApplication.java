@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableOAuth2Client
 @EnableTransactionManagement//开启事务
 @MapperScan(basePackages = "com.entrobus.credit.order.dao")
-@EnableBinding({LogPublishChannel.class,GenSubOrderPublishChannel.class})
+@EnableBinding({GenSubOrderPublishChannel.class,LogPublishChannel.class})
 public class OrderServiceApplication {
 
     public static void main(String[] args) {

@@ -1379,6 +1379,66 @@ public class UserAccountExample implements Serializable {
             addCriterion("delete_operator not between", value1, value2, "deleteOperator");
             return (Criteria) this;
         }
+
+        public Criteria andIsDefualtIsNull() {
+            addCriterion("is_defualt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtIsNotNull() {
+            addCriterion("is_defualt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtEqualTo(Integer value) {
+            addCriterion("is_defualt =", value, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtNotEqualTo(Integer value) {
+            addCriterion("is_defualt <>", value, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtGreaterThan(Integer value) {
+            addCriterion("is_defualt >", value, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_defualt >=", value, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtLessThan(Integer value) {
+            addCriterion("is_defualt <", value, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtLessThanOrEqualTo(Integer value) {
+            addCriterion("is_defualt <=", value, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtIn(List<Integer> values) {
+            addCriterion("is_defualt in", values, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtNotIn(List<Integer> values) {
+            addCriterion("is_defualt not in", values, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtBetween(Integer value1, Integer value2) {
+            addCriterion("is_defualt between", value1, value2, "isDefualt");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDefualtNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_defualt not between", value1, value2, "isDefualt");
+            return (Criteria) this;
+        }
     }
 
     /**

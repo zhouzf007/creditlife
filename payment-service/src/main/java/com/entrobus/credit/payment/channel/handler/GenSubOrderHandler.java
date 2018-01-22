@@ -35,13 +35,17 @@ public class GenSubOrderHandler {
         Repayment repayment = new Repayment();
         int term = order.getRepaymentTerm();
         String orderId = order.getId();
+        String account = order.getAccount();
         String userId = order.getUserId();
         String createOp = order.getCreateOperator();
+        repayment.setApplyNo(order.getApplyNo());
         repayment.setOrderId(orderId);
         repayment.setApplyTime(order.getApplyTime());
+        repayment.setAccount(order.getAccount());
         repayment.setRepaymentTerm(term);
         repayment.setRepaymentType(order.getRepaymentType());
         repayment.setState(Constants.REPAYMENT_ORDER_STATE.PASS);
+        repayment.setSystemState(Constants.REPAYMENT_ORDER_STATE.PASS);
         repayment.setCreateOperator(createOp);
         repayment.setUserId(userId);
         repaymentService.insertSelective(repayment);
@@ -52,10 +56,12 @@ public class GenSubOrderHandler {
         for (int i = 0; i < term; i++) {
             RepaymentPlan plan = new RepaymentPlan();
             plan.setOrderId(orderId);
-            plan.setSortId(i+1);
+            plan.setSortId(i + 1);
             plan.setUserId(userId);
             plan.setState(Constants.REPAYMENT_ORDER_STATE.PASS);
+            plan.setSystemState(Constants.REPAYMENT_ORDER_STATE.PASS);
             plan.setRepaymentId(repaymentId);
+            plan.setAccount(account);
             plan.setMoney(rsMoney);
             plan.setPlanTime(rsDate);
             plan.setCreateOperator(createOp);

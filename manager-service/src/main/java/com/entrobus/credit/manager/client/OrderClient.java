@@ -2,15 +2,11 @@ package com.entrobus.credit.manager.client;
 
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.vo.order.OrderListVo;
-import com.entrobus.credit.vo.order.OrderQueryVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,13 +21,16 @@ public interface OrderClient {
     Orders getOrder(@PathVariable("id") String id);
 
     @GetMapping(path = "/orderList")
-    List<OrderListVo> getOrderList(@RequestBody OrderQueryVo vo);
+    List<OrderListVo> getOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
     @GetMapping(path = "/userOrderList")
-    List<OrderListVo> getUserOrderList(@RequestBody OrderQueryVo vo);
+    List<OrderListVo> getUserOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
     @Component
     class OrderClientFallback implements OrderClient {
+
+
+        private static final Logger LOGGER = LoggerFactory.getLogger(OrderClientFallback.class);
 
         @Override
         public void updateOrder(String id, Orders order) {
@@ -45,18 +44,14 @@ public interface OrderClient {
         }
 
         @Override
-        public List<OrderListVo> getOrderList(OrderQueryVo vo) {
-            LOGGER.info("异常发生，进入fallback方法");
+        public List<OrderListVo> getOrderList(Integer state, String orgId, Integer offset, Integer limit) {
             return null;
         }
 
         @Override
-        public List<OrderListVo> getUserOrderList(OrderQueryVo vo) {
+        public List<OrderListVo> getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) {
             LOGGER.info("异常发生，进入fallback方法");
             return null;
         }
-
-
-        private static final Logger LOGGER = LoggerFactory.getLogger(OrderClientFallback.class);
     }
 }

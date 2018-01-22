@@ -76,7 +76,9 @@ spring:
         order_operation_log_publish:
           destination: order-operation-log-stream
           content-type: application/json
-
+        generate_sub_order_publish:
+          destination: generate-sub-order
+          content-type: application/json
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:

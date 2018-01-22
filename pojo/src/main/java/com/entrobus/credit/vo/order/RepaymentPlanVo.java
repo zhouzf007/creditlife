@@ -10,6 +10,16 @@ public class RepaymentPlanVo {
     private String stateName;
     private Date updateTime;
     private String operator;
+    private Integer state;
+
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
     public String getId() {
         return id;

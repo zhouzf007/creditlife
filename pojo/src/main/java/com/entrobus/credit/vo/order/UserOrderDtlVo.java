@@ -14,6 +14,16 @@ public class UserOrderDtlVo {
     private String userState;//用户状态
     private String quota;//额度
     private List<OrderListVo> orderList;
+    private Integer state;
+
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
     public String getQuota() {
         return quota;

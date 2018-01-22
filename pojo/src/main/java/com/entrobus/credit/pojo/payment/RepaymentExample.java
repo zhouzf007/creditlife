@@ -600,76 +600,6 @@ public class RepaymentExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andAccountIdIsNull() {
-            addCriterion("account_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdIsNotNull() {
-            addCriterion("account_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdEqualTo(String value) {
-            addCriterion("account_id =", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdNotEqualTo(String value) {
-            addCriterion("account_id <>", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdGreaterThan(String value) {
-            addCriterion("account_id >", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdGreaterThanOrEqualTo(String value) {
-            addCriterion("account_id >=", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdLessThan(String value) {
-            addCriterion("account_id <", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdLessThanOrEqualTo(String value) {
-            addCriterion("account_id <=", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdLike(String value) {
-            addCriterion("account_id like", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdNotLike(String value) {
-            addCriterion("account_id not like", value, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdIn(List<String> values) {
-            addCriterion("account_id in", values, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdNotIn(List<String> values) {
-            addCriterion("account_id not in", values, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdBetween(String value1, String value2) {
-            addCriterion("account_id between", value1, value2, "accountId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAccountIdNotBetween(String value1, String value2) {
-            addCriterion("account_id not between", value1, value2, "accountId");
-            return (Criteria) this;
-        }
-
         public Criteria andAccountIsNull() {
             addCriterion("account is null");
             return (Criteria) this;
@@ -987,6 +917,66 @@ public class RepaymentExample implements Serializable {
 
         public Criteria andSourceAccountNotBetween(String value1, String value2) {
             addCriterion("source_account not between", value1, value2, "sourceAccount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateIsNull() {
+            addCriterion("system_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateIsNotNull() {
+            addCriterion("system_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateEqualTo(Integer value) {
+            addCriterion("system_state =", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateNotEqualTo(Integer value) {
+            addCriterion("system_state <>", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateGreaterThan(Integer value) {
+            addCriterion("system_state >", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("system_state >=", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateLessThan(Integer value) {
+            addCriterion("system_state <", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateLessThanOrEqualTo(Integer value) {
+            addCriterion("system_state <=", value, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateIn(List<Integer> values) {
+            addCriterion("system_state in", values, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateNotIn(List<Integer> values) {
+            addCriterion("system_state not in", values, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateBetween(Integer value1, Integer value2) {
+            addCriterion("system_state between", value1, value2, "systemState");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("system_state not between", value1, value2, "systemState");
             return (Criteria) this;
         }
 

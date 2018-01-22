@@ -1,6 +1,12 @@
 package com.entrobus.credit.common;
 
 public interface Constants {
+
+    interface YES_OR_NO {
+        int YES = 0;
+        int NO = 1;
+    }
+
     /**
      * 数据库删除标记 0-未删除，1-已删除
      */
