@@ -248,7 +248,7 @@ public class OperationLogServiceImpl implements OperationLogService {
         if (StringUtils.isNotBlank(vo.getOrgId()))
             criteria.andOrgIdEqualTo(vo.getOrgId());
 
-
+        example.setOrderByClause("operation_time DESC");
         return selectByExample(example);
     }
 }
