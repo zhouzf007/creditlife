@@ -198,10 +198,6 @@ public class OrdersServiceImpl implements OrdersService {
             criteria.andOrgIdEqualTo(orgId);
         }
         example.setOrderByClause(" create_time desc ");
-        if (limit != null && offset != null) {
-            example.setLimitStart(offset);
-            example.setLimitEnd(limit);
-        }
         PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<UserOrderListVo> rsList = new ArrayList<>();
@@ -219,7 +215,7 @@ public class OrdersServiceImpl implements OrdersService {
             rsorderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(rsorderVo);
         }
-        PageInfo pageInfo = new PageInfo<>(rsList);
+        PageInfo pageInfo = new PageInfo<>(list);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("rows", rsList);
         dataMap.put("total", pageInfo.getTotal());
@@ -257,7 +253,7 @@ public class OrdersServiceImpl implements OrdersService {
             orderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(orderVo);
         }
-        PageInfo pageInfo = new PageInfo<>(rsList);
+        PageInfo pageInfo = new PageInfo<>(list);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("rows", rsList);
         dataMap.put("total", pageInfo.getTotal());

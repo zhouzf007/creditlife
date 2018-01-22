@@ -25,8 +25,8 @@ public class ManagerCacheService  {
      * @return
      */
     public SysLoginUserInfo getCurrLoginUser() {
-//        String token = getRequest().getParameter("token");
-        String token = getRequest().getHeader("token");
+        String token = getRequest().getParameter("token");
+//        String token = getRequest().getHeader("token");
         SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
         return loginUser;
     }
@@ -36,7 +36,8 @@ public class ManagerCacheService  {
         CacheService.setString(redisTemplate,sysLoginUserInfo.getId()+"",token);
     }
 
-    public void logout(String token){
+    public void logout(){
+        String token = getRequest().getParameter("token");
         SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
         CacheService.delete(redisTemplate,loginUser.getId()+"");
         CacheService.delete(redisTemplate,token);
