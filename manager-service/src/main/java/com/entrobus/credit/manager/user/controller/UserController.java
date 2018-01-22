@@ -67,13 +67,11 @@ public class UserController extends ManagerBaseController {
     public WebResult testDetail(String id) {
         UserOrderDtlVo vo = new UserOrderDtlVo();
         vo.setUserId(GUIDUtil.genRandomGUID());
-        vo.setRole("业主");
         vo.setIdCard("43132219891228888x");
         vo.setName("小红");
         vo.setMobile("13800138000");
         vo.setScore(99);
         vo.setAccount("建设银行信用卡0001");
-        vo.setUserState("正常");
         vo.setQuota("7,000,100,200,100");
         List<OrderListVo> orderList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
