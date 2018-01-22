@@ -96,7 +96,6 @@ public class OrderController extends ManagerBaseController {
         vo.setMoney("1,000,100,200,100");
         vo.setUsage("个人日常消费");
         vo.setApplyNo(GUIDUtil.genRandomGUID());
-        vo.setRole("业主");
         vo.setIdCard("43132219891228888x");
         vo.setName("张三");
         vo.setApplyTime(new Date());
@@ -150,7 +149,6 @@ public class OrderController extends ManagerBaseController {
         vo.setMoney("1,000,100,200,100");
         vo.setUsage("个人日常消费");
         vo.setApplyNo(GUIDUtil.genRandomGUID());
-        vo.setRole("业主");
         vo.setIdCard("43132219891228888x");
         vo.setName("张三");
         vo.setApplyTime(new Date());

@@ -24,6 +24,7 @@ public interface Cachekey {
     interface Translation {
         String ORDER_STATE = "order_state:state:";
         String REPAYMENT_STATE = "repayment_state:state:";
+        String ROLE_NAME = "role_name:role:";
     }
 
     interface Order {

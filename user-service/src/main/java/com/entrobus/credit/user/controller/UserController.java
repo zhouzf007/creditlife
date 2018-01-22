@@ -283,5 +283,15 @@ public class UserController extends BaseController {
         return creditReport;
     }
 
+    @PutMapping(value = "/userState")
+    public void updateUserState(@RequestParam("userId") String userId, @RequestParam("state") Integer state) {
+        UserInfo userInfo = userInfoService.selectByPrimaryKey(userId);
+        if (userInfo != null) {
+            userInfo.setState(state);
+            userInfoService.updateByPrimaryKey(userInfo);
+            userInfoService.initUserCache(userInfo);
+        }
+    }
+
 
 }

@@ -154,6 +154,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             if (userAccountInfo.getIsDefualt() == Constants.YES_OR_NO.YES) {
                 cacheUserInfo.setDefualtAccount(userAccountInfo.getAccount());
                 cacheUserInfo.setDefualtAccountId(userAccountInfo.getId());
+                cacheUserInfo.setAccountBank(userAccountInfo.getBank());
             }
             userAccountInfos.add(userAccountInfo);
         }

@@ -18,12 +18,31 @@ public class CacheUserInfo {
     private String email;//邮箱
     private Integer age;//年龄
     private Integer gender;//性别
+    private Integer state;//性别
     private Integer creditScore;//熵商信用分
     private Long quota;//预估额度
     private String unionId;//unionId
     private Integer role;//角色
     private String roleName;//角色
     private String defualtAccount;//默认账户
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    private String accountBank;//账户银行
+
+    public String getAccountBank() {
+        return accountBank;
+    }
+
+    public void setAccountBank(String accountBank) {
+        this.accountBank = accountBank;
+    }
 
     public String getDefualtAccount() {
         return defualtAccount;
