@@ -1,5 +1,7 @@
 package com.entrobus.credit.vo.user;
 
+import org.apache.catalina.authenticator.Constants;
+
 import java.util.List;
 
 /**
@@ -20,6 +22,7 @@ public class CacheUserInfo {
     private Long quota;//预估额度
     private String unionId;//unionId
     private Integer role;//角色
+    private String roleName;//角色
     private String defualtAccount;//默认账户
 
     public String getDefualtAccount() {
@@ -151,5 +154,13 @@ public class CacheUserInfo {
 
     public void setUserAccountInfos(List<UserAccountInfo> userAccountInfos) {
         this.userAccountInfos = userAccountInfos;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }
