@@ -45,7 +45,7 @@ public class OrdersController {
     public WebResult getUserLoanState(@RequestParam("token") String token) {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(token);
         if (userInfo == null) {
-            return WebResult.error("用户未登陆");
+            return WebResult.fail(WebResult.CODE_NOT_LOGIN,"用户未登陆");
         }
         Orders lastOrder = ordersService.getUserLastOrder(userInfo.getId());
         Map rsMap = new HashMap<>();
@@ -67,7 +67,7 @@ public class OrdersController {
     public WebResult apply(@RequestBody ApplyVo vo) {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(vo.getToken());
         if (userInfo == null) {
-            return WebResult.error("用户未登录");
+            return WebResult.fail("用户未登录");
         }
         return ordersService.applyOrder(vo, userInfo);
     }
@@ -82,7 +82,7 @@ public class OrdersController {
     public WebResult getUserOrderList(@RequestParam("token") String token, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(token);
         if (userInfo == null) {
-            return WebResult.error("用户未登录");
+            return WebResult.fail(WebResult.CODE_NOT_LOGIN,"用户未登录");
         }
         List<UserOrdersVo> list = ordersService.getUserOrderList(userInfo.getId(), offset, limit);
         Map rsMap = new HashMap<>();

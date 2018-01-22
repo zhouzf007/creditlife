@@ -131,7 +131,7 @@ public class SysUserServiceImpl implements SysUserService {
         //判断要新增的用户的用户名是否已经存在
         SysUser existUser = getUserByUserName(sysUserExt.getUsername());
         if(existUser != null){
-            return WebResult.error("该用户已经存在，请不要重复创建！");
+            return WebResult.fail("该用户已经存在，请不要重复创建！");
         }
         SysUser sysUser = new SysUser();
         try {
@@ -169,7 +169,7 @@ public class SysUserServiceImpl implements SysUserService {
         SysUser existUser = getUserByUserName(sysUserExt.getUsername());
         //修改的不是同一个用户
         if(existUser != null && existUser.getId() != sysUserExt.getId()){
-            return WebResult.error("该用户已经存在！");
+            return WebResult.fail("该用户已经存在！");
         }
         SysUser sysUser = new SysUser();
         try {
@@ -229,17 +229,17 @@ public class SysUserServiceImpl implements SysUserService {
                 .andPlatformEqualTo(vo.getPlatform());
         List<SysUser> sysUserList = selectByExample(userExample);
         if(CollectionUtils.isEmpty(sysUserList)){
-            return WebResult.error("用户名或者密码不正确");
+            return WebResult.fail("用户名或者密码不正确");
         }
         SysUser sysUser = sysUserList.get(0);
         String password = ShiroUtils.sha256(vo.getPassword(),sysUser.getSalt());
         //密码错误
         if(!password.equals(sysUser.getPassword())) {
-            return WebResult.error("用户名或者密码不正确");
+            return WebResult.fail("用户名或者密码不正确");
         }
         //账号已经被禁用
         if(sysUser.getStatus()== SysConstants.USER_STATUS.FROZEN){
-            return WebResult.error("账号已被锁定,请联系管理员");
+            return WebResult.fail("账号已被锁定,请联系管理员");
         }
         //登录成功，生成登录token
         SysLoginUserInfo sysLoginUserInfo = new SysLoginUserInfo();

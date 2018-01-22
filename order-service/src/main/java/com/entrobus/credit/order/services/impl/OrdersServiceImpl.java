@@ -144,7 +144,7 @@ public class OrdersServiceImpl implements OrdersService {
             contract.setCreditReportId(creditReport.getId());
             contract.setCreditScore(creditReport.getCreditScore());
         } else {
-            return WebResult.error("无法获取信用报告，暂时无法申请贷款");
+            return WebResult.fail("无法获取信用报告，暂时无法申请贷款");
         }
         order.setId(GUIDUtil.genRandomGUID());
         order.setState(Constants.ORDER_STATE.AUIDT_PENGDING);
@@ -162,7 +162,7 @@ public class OrdersServiceImpl implements OrdersService {
             order.setInterestRate(vo.getRate());
             order.setOrgId(vo.getOrgId());
         } else {
-            return WebResult.error("贷款产品不合法");
+            return WebResult.fail("贷款产品不合法");
         }
         order.setLoanUsage(vo.getUsage());
         order.setApplyMoney(vo.getMoney());

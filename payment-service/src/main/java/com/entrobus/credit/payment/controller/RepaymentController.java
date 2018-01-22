@@ -89,11 +89,11 @@ public class RepaymentController extends PaymentBaseController{
                     }
                 }
             } else {
-                return WebResult.error("订单状态有误，操作失败");
+                return WebResult.fail("订单状态有误，操作失败");
             }
             return WebResult.ok("");
         } else {
-            return WebResult.error("找不到还款计划单，操作失败");
+            return WebResult.fail("找不到还款计划单，操作失败");
         }
     }
 }

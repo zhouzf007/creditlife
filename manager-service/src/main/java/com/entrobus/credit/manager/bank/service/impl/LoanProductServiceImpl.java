@@ -118,7 +118,7 @@ public class LoanProductServiceImpl implements LoanProductService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return WebResult.error("设置失败");
+        return WebResult.fail("设置失败");
     }
 
     @Override
@@ -131,7 +131,7 @@ public class LoanProductServiceImpl implements LoanProductService {
         List<LoanProduct> productList = this.selectByExample(example);
         Map<String, Object> dataMap = new HashMap<>();
         if (ConversionUtil.isEmptyParameter(productList)) {
-            return WebResult.error(101, "暂未设置贷款信息");
+            return WebResult.fail(101, "暂未设置贷款信息");
         }
         LoanProduct product = productList.get(0);
         dataMap.put("id", product.getId());
