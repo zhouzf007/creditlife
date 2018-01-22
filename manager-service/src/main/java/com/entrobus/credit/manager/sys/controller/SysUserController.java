@@ -153,9 +153,9 @@ public class SysUserController extends ManagerBaseController {
      * 退出
      */
     @RequestMapping(value = "/logout")
-    public WebResult logout(String token) {
+    public WebResult logout() {
         //删除缓存中的用户信息
-        managerCacheService.logout(token);
+        managerCacheService.logout();
         return WebResult.ok();
     }
 

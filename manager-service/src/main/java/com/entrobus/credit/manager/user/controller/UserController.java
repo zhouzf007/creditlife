@@ -5,8 +5,8 @@ import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.order.OrderListVo;
-import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.entrobus.credit.vo.order.UserOrderDtlVo;
+import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +28,7 @@ public class UserController extends ManagerBaseController {
 
     @GetMapping("/userOrderList")
     public WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) {
-        PageHelper.startPage(offset, limit);
-        List<UserOrderListVo> rsList = orderClient.getUserOrderList(state, orgId, offset, limit);
-        PageInfo pageInfo = new PageInfo<>(rsList);
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("total", pageInfo.getTotal());
-        dataMap.put("rows", rsList);
-        return WebResult.ok(dataMap);
+        return orderClient.getUserOrderList(state, getCurrLoginUser().getOrgId(), offset, limit);
     }
 
     @GetMapping("/userOrderDtl")
