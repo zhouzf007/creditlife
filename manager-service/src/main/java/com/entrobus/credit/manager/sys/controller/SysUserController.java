@@ -12,7 +12,7 @@ import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.sys.service.SysUserRoleService;
 import com.entrobus.credit.manager.sys.service.SysUserService;
-import com.entrobus.credit.manager.common.util.ServletUtil;
+import com.entrobus.credit.common.util.ServletUtil;
 import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.pojo.manager.SysUserExample;
 import com.entrobus.credit.pojo.manager.SysUserRole;

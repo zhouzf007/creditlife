@@ -21,7 +21,7 @@ public class BsStaticVo implements Serializable {
     private String ext;
     private String param;
     @NotNull(message = "status 必填")
-    @Digits(integer = 10,fraction = 0,message = "status格式错误")
+    @Digits(integer = 10,fraction = 0,message = "status 格式错误")
     private Integer status;
 
     public Integer getStatus() {

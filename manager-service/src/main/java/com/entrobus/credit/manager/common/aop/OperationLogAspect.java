@@ -11,6 +11,7 @@ import com.entrobus.credit.vo.log.OperationLogMsg;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -61,7 +62,7 @@ public class OperationLogAspect {
     public void recordLog(){}
 
     @Around(value = "recordLog()")
-    public void doAround(ProceedingJoinPoint pjp) throws Throwable {
+    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
 
         OperationLogMsg msg = getOperationLogMsg(pjp);
         //执行业务
@@ -75,7 +76,7 @@ public class OperationLogAspect {
             logger.error(String.format("通过注解记录操作日志发布失败！操作参数：%s", JSON.toJSONString(pjp.getArgs())),e);
         }
 
-
+        return proceed;//返回值
     }
 
     private OperationLogMsg getOperationLogMsg(ProceedingJoinPoint pjp) {
@@ -95,7 +96,7 @@ public class OperationLogAspect {
                 msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
                 msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
             }
-            //获取相关主键
+            //获取相关方法参数
             Object[] args = pjp.getArgs();
             String[] argNames = getArgNames(currentMethod);
 
@@ -163,14 +164,13 @@ public class OperationLogAspect {
                 if (param.isAnnotationPresent(PathVariable.class)){
                     PathVariable pv = param.getAnnotation(PathVariable.class);
                     String name = pv.value();
-                    name = StringUtils.isBlank(name) ? name : pv.name();
-                    argNames[i] = name;
+                    argNames[i]  = StringUtils.isBlank(name) ? pv.name() : name;
                 }else if (param.isAnnotationPresent(RequestParam.class)){
                     RequestParam pv = param.getAnnotation(RequestParam.class);
                     String name = pv.value();
-                    name = StringUtils.isBlank(name) ? name : pv.name();
-                        argNames[i] = name;
-                }else {
+                    argNames[i] = StringUtils.isBlank(name) ? pv.name() : name;
+                }
+                if (StringUtils.isBlank(argNames[i])) {
                     argNames[i] = param.getName();
                 }
             }
@@ -179,11 +179,16 @@ public class OperationLogAspect {
         return null;
     }
 
-
+    /**
+     * 判断操作状态
+     * @param object
+     * @return 0-成功，1-失败，2异常
+     */
     protected int getOperationState(Object object) {
-        if (object instanceof  WebResult) {
+        if (object != null && object instanceof  WebResult) {
             WebResult result = (WebResult)object;
-            return result.isOk() ? Constants.OPERATION_STATE.SUCCESS : Constants.OPERATION_STATE.FAIL;
+            if (result.isOk()) return Constants.OPERATION_STATE.SUCCESS;
+            return result.isError() ? Constants.OPERATION_STATE.ERROR : Constants.OPERATION_STATE.FAIL;
         }
         return Constants.OPERATION_STATE.SUCCESS;
     }
@@ -192,7 +197,7 @@ public class OperationLogAspect {
 //    public void doAfterThrowing(Exception ex){
 //
 //    }
-    //    @AfterReturning(returning = "ret", pointcut = "recordLog()")
+//    @AfterReturning(returning = "ret", pointcut = "recordLog()")
 //    public void doAfterReturning(Object ret) throws Throwable {
 //        // 处理完请求，返回内容
 //        logger.info("处理完请求，返回内容 : " + ret);

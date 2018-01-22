@@ -1,14 +1,16 @@
 package com.entrobus.credit.common.util;
 
-
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class RequestUtil {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(RequestUtil.class);
+public class ServletUtil {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ServletUtil.class);
 
     /**
      * 获取当前网络ip
@@ -49,8 +51,21 @@ public class RequestUtil {
         }
         return ipAddress;
     }
+    /**
+     * 获取当前用户游览器型号
+     */
+    public static String getUserBrowser(HttpServletRequest request) {
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        Browser browser = userAgent.getBrowser();
+        return browser.toString();
+    }
 
-    public static String getToken(HttpServletRequest request){
-        return request.getHeader("token");
+    /**
+     * 获取当前用户系统型号
+     */
+    public static String getUserOperatingSystem(HttpServletRequest request) {
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        OperatingSystem operatingSystem = userAgent.getOperatingSystem();
+        return operatingSystem.toString();
     }
 }

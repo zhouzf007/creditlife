@@ -1,7 +1,8 @@
-package com.entrobus.credit.schedule.bean;
+package com.entrobus.credit.schedule.service.impl;
 
 import com.entrobus.credit.common.util.ClassUtils;
 import com.entrobus.credit.schedule.annotation.JobBean;
+import com.entrobus.credit.schedule.service.JobClassManager;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.Job;
 import org.quartz.SchedulerException;

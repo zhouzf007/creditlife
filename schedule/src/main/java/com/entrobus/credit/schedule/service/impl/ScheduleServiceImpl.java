@@ -2,7 +2,7 @@ package com.entrobus.credit.schedule.service.impl;
 
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.schedule.bean.JobClassManager;
+import com.entrobus.credit.schedule.service.JobClassManager;
 import com.entrobus.credit.schedule.service.ScheduleService;
 import com.entrobus.credit.vo.schedule.QuartzJobVo;
 import org.apache.commons.lang3.StringUtils;

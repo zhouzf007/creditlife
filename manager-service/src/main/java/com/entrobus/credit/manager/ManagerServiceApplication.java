@@ -43,7 +43,7 @@ public class ManagerServiceApplication {
                 SerializerFeature.WriteNullListAsEmpty,//List字段如果为null,输出为[],而非null
                 SerializerFeature.DisableCircularReferenceDetect //避免循环引用
         );
-        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm");
         //3.在convert中添加配置信息
         fastConverter.setFastJsonConfig(fastJsonConfig);
         HttpMessageConverter<?> converter=fastConverter;

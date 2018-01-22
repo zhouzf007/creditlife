@@ -44,7 +44,7 @@ public class CreditlifeExceptionHandler {
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public WebResult methodArgumentNotValidException(MethodArgumentNotValidException e){
-		logger.error(e.getMessage(), e);
+		logger.info(e.getMessage(), e);
 
 		BindingResult result = e.getBindingResult();
 		if (result.hasErrors()){
@@ -59,7 +59,7 @@ public class CreditlifeExceptionHandler {
 	 */
 	@ExceptionHandler(BindException.class)
 	public WebResult bindException(BindException e){
-		logger.error(e.getMessage(), e);
+		logger.info(e.getMessage(), e);
 
 		BindingResult result = e.getBindingResult();
 		if (result != null && result.hasErrors()){
@@ -68,7 +68,7 @@ public class CreditlifeExceptionHandler {
 		return WebResult.fail(WebResult.CODE_PARAMETERS);
 	}
 	private String getValidationMsg(BindingResult result) {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("您提交的请求中包含如下不满足条件的参数：");
 		for (ObjectError error : result.getAllErrors()) {
 			if (sb.length() > 0 ) sb.append(",");
 			sb.append(error.getDefaultMessage());

@@ -126,12 +126,7 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.1.0</version>
         </dependency>
-        <!-- 获取User Agent用户代理:解析客户端操作系统、浏览器等 -->
-        <dependency>
-            <groupId>eu.bitwalker</groupId>
-            <artifactId>UserAgentUtils</artifactId>
-            <version>1.20</version>
-        </dependency>
+
     </dependencies>
 
     <build>
@@ -145,6 +140,25 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
             </plugin>-->
+            <!-- 编译插件 -->
+            <!--由于不能完整install父项目，导致有时候编译参数不生效，所以在这里重复添加-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!--编译时参数-->
+                    <compilerArgs>
+                        <!-- 编译后保留参数名(jdk8)-->
+                        <arg>-parameters</arg>
+                        <!-- 显示编译告警信息-->
+                        <arg>-Xlint:unchecked</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
         </plugins>
         <!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
         <resources>
