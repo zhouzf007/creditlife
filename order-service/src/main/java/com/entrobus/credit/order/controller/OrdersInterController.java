@@ -146,7 +146,8 @@ public class OrdersInterController {
         dtl.setAccount(userInfo.getAccountBank() + "(" + userInfo.getDefualtAccount() + ")");
         dtl.setUserState(userInfo.getState());
         dtl.setMobile(userInfo.getCellphone());
-        dtl.setRole(cacheService.translate(Cachekey.Translation.ROLE_NAME + userInfo.getRole()));
+        dtl.setRole(userInfo.getRole());
+        dtl.setRoleName(cacheService.translate(Cachekey.Translation.ROLE_NAME + userInfo.getRole()));
         dtl.setScore(userInfo.getCreditScore());
         List<OrderListVo> rsOrderList = new ArrayList<>();
         List<Orders> orderList = ordersService.getUserOrders(userId);

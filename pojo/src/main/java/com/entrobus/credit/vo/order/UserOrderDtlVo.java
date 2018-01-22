@@ -5,7 +5,8 @@ import java.util.List;
 public class UserOrderDtlVo {
 
     private String userId;
-    private String role;//角色
+    private Integer role;//角色
+    private String roleName;//角色
     private String idCard;//身份证号
     private String name;//真实姓名
     private String mobile;// 手机号码
@@ -37,17 +38,26 @@ public class UserOrderDtlVo {
         return userId;
     }
 
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getIdCard() {
         return idCard;
