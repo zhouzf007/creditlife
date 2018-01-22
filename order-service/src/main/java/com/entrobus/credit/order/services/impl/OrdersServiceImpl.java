@@ -209,12 +209,9 @@ public class OrdersServiceImpl implements OrdersService {
             CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
             rsorderVo.setId(order.getId());
             rsorderVo.setUserName(userInfo.getRealName());
-            rsorderVo.setApplyTime(order.getApplyTime());
             rsorderVo.setMobile(userInfo.getCellphone());
             rsorderVo.setScore(order.getCreditScore());
             rsorderVo.setUserId(order.getUserId());
-            rsorderVo.setApplyNo(order.getApplyNo());
-            rsorderVo.setUpdateTime(order.getUpdateTime());
             rsorderVo.setState(order.getState());
             rsorderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(rsorderVo);

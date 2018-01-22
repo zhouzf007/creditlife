@@ -133,4 +133,35 @@ public class UserInfoServiceImpl implements UserInfoService {
         record.setDeleteFlag(Constants.DELETE_FLAG.NO);
         return userInfoMapper.insertSelective(record);
     }
+
+    @Override
+    public CacheUserInfo initUserCache(UserInfo record) {
+        CacheUserInfo cacheUserInfo = new CacheUserInfo();
+        try {
+            BeanUtils.copyProperties(cacheUserInfo, record);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        UserAccountExample userAccountExample = new UserAccountExample();
+        userAccountExample.createCriteria().andUserIdEqualTo(record.getId());
+        userAccountExample.setOrderByClause(" update_time asc ");
+        List<UserAccount> userAccounts = userAccountService.selectByExample(userAccountExample);
+        List<UserAccountInfo> userAccountInfos = new ArrayList<>();
+        for (UserAccount userAccount : userAccounts) {
+            UserAccountInfo userAccountInfo = new UserAccountInfo();
+            try {
+                BeanUtils.copyProperties(userAccountInfo, userAccount);
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+            }
+            if (userAccountInfo.getIsDefualt() == Constants.YES_OR_NO.YES) {
+                cacheUserInfo.setDefualtAccount(userAccountInfo.getAccount());
+                cacheUserInfo.setDefualtAccountId(userAccountInfo.getId());
+            }
+            userAccountInfos.add(userAccountInfo);
+        }
+        cacheUserInfo.setUserAccountInfos(userAccountInfos);
+        CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + record.getId(), cacheUserInfo);
+        return cacheUserInfo;
+    }
 }

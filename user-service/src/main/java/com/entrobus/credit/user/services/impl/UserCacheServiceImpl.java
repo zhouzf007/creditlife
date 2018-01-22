@@ -1,8 +1,9 @@
 package com.entrobus.credit.user.services.impl;
 
-import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.user.services.UserCacheService;
+import com.entrobus.credit.user.services.UserInfoService;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserInfoCache;
 import org.apache.commons.lang.StringUtils;
@@ -23,9 +24,17 @@ public class UserCacheServiceImpl implements UserCacheService {
     @Autowired
     RedisTemplate redisTemplate;
 
+    @Autowired
+    private UserInfoService userInfoService;
+
     @Override
     public CacheUserInfo getUserCacheByUid(String userId) {
         Object o = CacheService.getObject(redisTemplate, Cachekey.User.UID_PREFIX + userId);
+        if (o instanceof CacheUserInfo) {
+            return (CacheUserInfo) o;
+        } else {
+            userInfoService.selectByPrimaryKey(userId);
+        }
         return o instanceof CacheUserInfo ? (CacheUserInfo) o : null;
     }
 

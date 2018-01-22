@@ -32,4 +32,6 @@ public interface UserInfoService {
     CacheUserInfo getLoginUserInfo(UserInfo record, String token);
 
     int addUserInfo(UserInfo record);
+
+    CacheUserInfo initUserCache(UserInfo record);
 }
