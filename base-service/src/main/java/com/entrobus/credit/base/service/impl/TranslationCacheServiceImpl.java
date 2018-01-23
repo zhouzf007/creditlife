@@ -40,6 +40,9 @@ public class TranslationCacheServiceImpl implements TranslationCacheService,Comm
         addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.ERROR, "异常");
         addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.ERROR, "操作成功");
 
+        addTranslation(Cachekey.Translation.REPAYMENT_TYPE , Constants.REPAYMENT_TYPE.INTEREST_CAPITAL, "先息后本");
+        addTranslation(Cachekey.Translation.REPAYMENT_TYPE , Constants.REPAYMENT_TYPE.MONTH_EQUAL, "等额本息");
+
     }
 
     public void  cache(String key,String value){

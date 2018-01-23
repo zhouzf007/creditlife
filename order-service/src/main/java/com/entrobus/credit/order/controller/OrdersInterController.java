@@ -97,6 +97,7 @@ public class OrdersInterController {
         dtl.setRate(AmountUtil.change2Percent(order.getInterestRate()));
         dtl.setRepaymentTerm(order.getRepaymentTerm() + "");
         dtl.setRepaymentType(order.getRepaymentType() + "");
+        dtl.setRepaymentTypeName(cacheService.translate(Cachekey.Translation.REPAYMENT_TYPE + order.getRepaymentType()));
         dtl.setUsage(order.getLoanUsage());
         dtl.setScore(order.getCreditScore());
         dtl.setContractId(order.getContractId());

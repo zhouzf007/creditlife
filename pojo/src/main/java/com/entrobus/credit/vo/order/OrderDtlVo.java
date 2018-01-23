@@ -19,6 +19,16 @@ public class OrderDtlVo {
     private String contractId;
     private String repaymentTerm;
     private String repaymentType;
+
+    public String getRepaymentTypeName() {
+        return repaymentTypeName;
+    }
+
+    public void setRepaymentTypeName(String repaymentTypeName) {
+        this.repaymentTypeName = repaymentTypeName;
+    }
+
+    private String repaymentTypeName;
     private String rate;
     private Integer userState;
 
