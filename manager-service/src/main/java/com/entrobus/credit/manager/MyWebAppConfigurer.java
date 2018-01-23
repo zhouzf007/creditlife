@@ -36,7 +36,8 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
                         "/sys/user/login",
                         "/sys/user/logout",
                         "/sys/tool/createSuperAdmin",
-                        "/loan/rate/**"
+                        "/loan/rate/**",
+                        "/api/**"
                 )
                 .addPathPatterns("/**");
         super.addInterceptors(registry);

@@ -4,15 +4,15 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
+import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.vo.order.*;
 import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -40,6 +40,26 @@ public class OrderController extends ManagerBaseController {
         OrderDtlVo vo = orderClient.getOrderDtl(id);
         return WebResult.ok(vo);
     }
+
+    /**
+     * 订单审核
+     * 驳回，通过，放款
+     */
+    @PutMapping("/orderState")
+    public WebResult updateOrderState(String id, Integer state, String reason, Date loanTime, Long money) {
+        if (StringUtils.isEmpty(id) || state == null) {
+            return WebResult.error(WebResult.CODE_PARAMETERS, "参数有误");
+        }
+        Orders order = new Orders();
+        order.setId(id);
+        order.setState(state);
+        order.setReason(reason);
+        order.setLoanTime(loanTime);
+        order.setActualMoney(money);
+        orderClient.updateOrder(order);
+        return WebResult.ok();
+    }
+
 
     /**
      * 还款列表

@@ -1,4 +1,4 @@
-package com.entrobus.credit.manager.bank.controller;
+package com.entrobus.credit.manager.product;
 
 import com.entrobus.credit.manager.bank.service.LoanProductService;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;

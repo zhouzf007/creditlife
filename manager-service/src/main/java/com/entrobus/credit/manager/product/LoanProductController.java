@@ -1,4 +1,4 @@
-package com.entrobus.credit.manager.bank.controller;
+package com.entrobus.credit.manager.product;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;

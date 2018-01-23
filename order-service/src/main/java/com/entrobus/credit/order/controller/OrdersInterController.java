@@ -172,12 +172,11 @@ public class OrdersInterController {
      * 订单状态更新
      * 审核，放款，驳回，逾期，结清
      *
-     * @param id
      * @param order
      */
-    @PutMapping("/order/{id}")
-    public WebResult updateOrder(@PathVariable("id") String id, @RequestBody Orders order) {
-        Orders loanOrder = ordersService.selectByPrimaryKey(id);
+    @PutMapping("/order")
+    public WebResult updateOrder(@RequestBody Orders order) {
+        Orders loanOrder = ordersService.selectByPrimaryKey(order.getId());
         if (loanOrder != null) {
             if (loanOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING && order.getState() == Constants.ORDER_STATE.LOAN_PENGDING) {
                 //审核
@@ -215,6 +214,8 @@ public class OrdersInterController {
                 ordersService.updateByPrimaryKeySelective(loanOrder);
                 //生成订单实例
                 orderInstanceService.saveOrderInstance(loanOrder);
+            }else {
+                return WebResult.error(WebResult.CODE_BUSI_DISPERMIT,"订单状态异常");
             }
         }
         return WebResult.ok();
