@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.product;
 
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.bank.service.LoanProductService;
@@ -21,6 +22,7 @@ public class LoanProductController extends ManagerBaseController{
     private LoanProductService loanProductService;
 
     @PostMapping("")
+    @RecordLog(desc = "添加产品")
     public WebResult save(LoanConfigureVo loanConfigureVo){
         if(ConversionUtil.isEmptyParameter(loanConfigureVo.getStrLoanPeriodsRateVoList())){
             return WebResult.fail("至少填一项期数利率");

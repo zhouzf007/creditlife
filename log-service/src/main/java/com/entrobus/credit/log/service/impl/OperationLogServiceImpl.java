@@ -164,16 +164,13 @@ public class OperationLogServiceImpl implements OperationLogService {
     @Override
     public int logMsg(OperationLogMsg msg){
         OperationLog log = new OperationLog();
+
+        //obj2String
+        log.setExtData(obj2String(msg.getExtData()));
+        log.setOperationData(obj2String(msg.getOperationData()));
+        log.setResult(obj2String(msg.getResult()));
+
         log.setApplicationName(msg.getApplicationName());
-        if (msg.getExtData() != null) {
-            log.setExtData(JSON.toJSONString(msg.getExtData()));
-        }
-        if (msg.getOperationData() != null) {
-            log.setOperationData(JSON.toJSONString(msg.getOperationData()));
-        }
-        if (msg.getResult() != null) {
-            log.setResult(JSON.toJSONString(msg.getResult()));
-        }
         log.setOperationDesc(msg.getDesc());
         log.setOperationState(msg.getOperationState());
         log.setRelId(msg.getRelId());
@@ -195,6 +192,12 @@ public class OperationLogServiceImpl implements OperationLogService {
         return n;
     }
 
+    private String obj2String(Object obj){
+        if(obj instanceof String)
+            return obj.toString();
+        else
+            return JSON.toJSONString(obj);
+    }
     private void saveTables(OperationLog log, List<OperationLogMsg.Table> tables) {
         for (OperationLogMsg.Table msgTable : tables) {
             OperationLogTable tb = new OperationLogTable();
