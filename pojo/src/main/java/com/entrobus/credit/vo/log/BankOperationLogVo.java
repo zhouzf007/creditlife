@@ -12,8 +12,17 @@ public class BankOperationLogVo {
     private String operatorId;
     private String remark;
     private Integer operationState;
-    private Integer operationStateName;
+    private String operationStateName;
     private String resultMsg;
+    private String operatorName;
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
 
     public String getId() {
         return id;
@@ -63,11 +72,11 @@ public class BankOperationLogVo {
         this.operationState = operationState;
     }
 
-    public Integer getOperationStateName() {
+    public String getOperationStateName() {
         return operationStateName;
     }
 
-    public void setOperationStateName(Integer operationStateName) {
+    public void setOperationStateName(String operationStateName) {
         this.operationStateName = operationStateName;
     }
 

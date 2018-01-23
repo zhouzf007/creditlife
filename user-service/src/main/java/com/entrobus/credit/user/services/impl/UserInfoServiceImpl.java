@@ -1,9 +1,11 @@
 package com.entrobus.credit.user.services.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
@@ -14,18 +16,17 @@ import com.entrobus.credit.user.dao.UserInfoMapper;
 import com.entrobus.credit.user.services.UserAccountService;
 import com.entrobus.credit.user.services.UserInfoService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import utils.ShiroUtils;
+import com.entrobus.credit.user.utils.ShiroUtils;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -95,6 +96,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
+        if(loginUserInfo.getRole() == Constants.USER_ROLE.ORDINARY){
+            loginUserInfo.setRoleName("普通用户");
+        }else  if(loginUserInfo.getRole() == Constants.USER_ROLE.OWNER){
+            loginUserInfo.setRoleName("业主");
+        }
         List<UserAccountInfo> userAccountInfos = getUserAccountInfos(record, loginUserInfo);
         loginUserInfo.setUserAccountInfos(userAccountInfos);
         CacheService.setString(redisTemplate, Cachekey.User.SID_PREFIX + token, loginUserInfo.getId());
@@ -113,6 +119,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         record.setPwd(ShiroUtils.sha256(record.getPwd(), salt));
         record.setSalt(salt);
         record.setState(Constants.USER_STATUS.NORMAL);
+        record.setRole(Constants.USER_ROLE.ORDINARY);
         record.setDeleteFlag(Constants.DELETE_FLAG.NO);
         return userInfoMapper.insertSelective(record);
     }
@@ -152,5 +159,17 @@ public class UserInfoServiceImpl implements UserInfoService {
             userAccountInfos.add(userAccountInfo);
         }
         return userAccountInfos;
+    }
+
+    @Override
+    public Map isOwner(String cellphone) {
+        Map<String, String> m = new HashMap<>();
+        m.put("cellphone", cellphone);
+        String json = HttpClientUtil.doPost("http://creditlife.entrobus.com/api/v0.1/owner_query/match_or_not", m);
+        if(StringUtils.isNotBlank(json)){
+            Map map = (Map) JSONArray.parse(json);
+            return (Map) map.get("result");
+        }
+        return null;
     }
 }

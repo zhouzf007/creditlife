@@ -33,7 +33,11 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
         CacheService.setCacheObj(redisTemplate, key,vo);
         return vo;
     }
-
+    public String cacheNameByTypeAndValue(BsStatics statics){
+        String key = getNameKey(statics.getCodeType(), statics.getCodeValue());
+        CacheService.setCacheObj(redisTemplate, key,statics.getCodeName());
+        return statics.getCodeName();
+    }
 //    @Override
     public BsStaticVo cacheObjByTypeAndValue(BsStatics statics) {
         BsStaticVo vo = cacheObj(statics);
@@ -41,11 +45,15 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
             return null;
         }
         String key = getKey(statics.getCodeType(), statics.getCodeValue());
-        CacheService.setCacheObj(redisTemplate, key,getByType(String.valueOf(statics.getId())));
+        CacheService.setCacheObj(redisTemplate, key,String.valueOf(statics.getId()));
+        cacheNameByTypeAndValue(statics);
         return vo;
       
     }
 
+    private String getNameKey(String codeType, String codeValue) {
+        return Cachekey.BsStatics.TYPE_VALUE_NAME + codeType + codeValue;
+    }
     private String getKey(String codeType, String codeValue) {
         return Cachekey.BsStatics.TYPE_VALUE_ID + codeType + codeValue;
     }
@@ -161,8 +169,13 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
     }
     @Override
     public String getOrCacheName(@RequestParam String codeType, @RequestParam String codeValue) {
-        BsStaticVo bsStaticVo= getOrCache(codeType,codeValue);
-        return bsStaticVo == null ? "" : bsStaticVo.getCodeName();
+        String key = getNameKey(codeType,codeValue);
+        String name = CacheService.getString(redisTemplate, key);
+        if (name == null) {
+            BsStaticVo bsStaticVo= getOrCache(codeType,codeValue);
+            return bsStaticVo == null ? null : bsStaticVo.getCodeName();
+        }
+        return name;
     }
     /**
      *   根据id查找
@@ -238,6 +251,7 @@ public class BsStaticsCacheServiceImpl implements BsStaticsCacheService {
         int n = 0;
         n += CacheService.deleteByKeyPrefix(redisTemplate,Cachekey.BsStatics.ID_OBJ);
         n += CacheService.deleteByKeyPrefix(redisTemplate,Cachekey.BsStatics.TYPE_VALUE_ID);
+        n += CacheService.deleteByKeyPrefix(redisTemplate,Cachekey.BsStatics.TYPE_VALUE_NAME);
         n += CacheService.deleteByKeyPrefix(redisTemplate,Cachekey.BsStatics.TYPE_LIST);
         return n;
     }

@@ -13,7 +13,8 @@ public interface Cachekey {
 
     interface BsStatics {
         String ID_OBJ = "bs_statics_id:obj:";//根据id 获取缓存对象
-        String TYPE_VALUE_ID = "bs_statics:type:value:id:";//根据codeType和codeValue 获取缓存id
+        String TYPE_VALUE_ID = "bs_statics:type:value:id:";//根据codeType和codeValue 缓存id
+        String TYPE_VALUE_NAME = "bs_statics:type:value:name:";//根据codeType和codeValue 缓存codeName
         String TYPE_LIST = "bs_statics_type:list:";//根据codeType缓存list
     }
 
@@ -25,6 +26,8 @@ public interface Cachekey {
         String ORDER_STATE = "order_state:state:";
         String REPAYMENT_STATE = "repayment_state:state:";
         String ROLE_NAME = "role_name:role:";
+        String LOG_OPERATION_STATE = "log:operation:state:";
+
     }
 
     interface Order {

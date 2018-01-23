@@ -29,7 +29,7 @@ public class BaseServiceApplication {
 
 //    @Autowired
 //    RedisTemplate redisTemplate;
-        //迁移到TranslationCacheServiceImpl中
+        //-----------迁移到TranslationCacheServiceImpl中
 //    @Bean
 //    protected Integer redisInit() {
 //        CacheService.setString(redisTemplate, Cachekey.Translation.ORDER_STATE + Constants.ORDER_STATE.NOT_LOAN, "未申请");
