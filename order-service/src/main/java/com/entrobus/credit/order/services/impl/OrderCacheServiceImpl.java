@@ -48,19 +48,19 @@ public class OrderCacheServiceImpl implements OrderCacheService {
         String id = CacheService.getString(redisTemplate,key);
         if (id == null) return null;
         String idKey = Cachekey.BsStatics.ID_OBJ + id ;
-        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, idKey, BsStaticVo.class);
+        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, key, BsStaticVo.class);
         return cacheObj;
     }
     /**
-     * 静态数据
-     *  根据codeType和codeValue查找 codeName
-     * @param codeType
-     * @param codeValue
+     * 翻译
+     * 实际查询静态数据缓存
+     * @param type
+     * @param value
      * @return
      */
     @Override
-    public<T> String getCodeName(String codeType, T codeValue) {
-        String key = Cachekey.BsStatics.TYPE_VALUE_NAME + codeType + codeValue;
+    public<T> String translate(String type, T value) {
+        String key = Cachekey.BsStatics.TYPE_VALUE_NAME + type + value;
         return CacheService.getString(redisTemplate,key);
     }
     @Override

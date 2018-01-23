@@ -14,8 +14,14 @@ public interface OrderCacheService {
 
     <T> BsStaticVo getBsStatic(String codeType, T codeValue);
 
-
-    <T> String getCodeName(String codeType, T codeValue);
+    /**
+     * 翻译
+     * 实际查询静态数据缓存
+     * @param type
+     * @param value
+     * @return
+     */
+    <T> String translate(String type, T value);
 
     String getOrderApplyNo();
 }
