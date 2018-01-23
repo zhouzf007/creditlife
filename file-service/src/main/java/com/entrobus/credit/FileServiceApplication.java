@@ -4,6 +4,7 @@ import com.entrobus.credit.file.service.FileService;
 import com.entrobus.credit.file.service.FileServiceFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 
 @EnableDiscoveryClient
 @EnableFeignClients
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})//忽略数据源
 @EnableCircuitBreaker
 public class FileServiceApplication {
 

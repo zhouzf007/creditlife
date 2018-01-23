@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    hostname: 119.29.97.133:8761
+    hostname: 10.135.106.153:8761
     prefer-ip-address: true
     metadata-map:
       user.name: ${security.user.name}
@@ -35,7 +35,7 @@ spring:
 
 # 测试环境rabbitmq服务器地址
   rabbitmq:
-    host: 139.199.161.144
+    host: 10.104.78.27
     port: 5672
     username: newseax-test
     password: 123

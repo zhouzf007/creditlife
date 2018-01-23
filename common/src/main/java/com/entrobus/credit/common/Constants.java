@@ -58,6 +58,7 @@ public interface Constants {
         String ORDER_STATE = "ORDER_STATE";//订单状态
         String REPAYMENT_STATE = "REPAYMENT_STATE";//还款状态
         String OPERATION_STATE = "OPERATION_STATE";//操作状态
+        String PLATFORM = "PLATFORM";//平台
     }
 
     interface JOB_DATA_KEY {
@@ -110,6 +111,15 @@ public interface Constants {
         int PASS = 3;//使用中
         int OVERDUE = 4;//已逾期
         int FINISHED = 5;//已完成
+    }
+
+    /**
+     * 贷款管理驳回原因类型
+     */
+    interface REJECT_TYPE{
+        int BLACK_LIST = 0;//黑名单
+        int TOO_MUCH = 1;//申请提现金额过高
+        int OTHER = 2;//其他原因
     }
     //还款状态
     interface REPAYMENT_ORDER_STATE {

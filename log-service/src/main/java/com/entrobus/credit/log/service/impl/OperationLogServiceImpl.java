@@ -193,6 +193,7 @@ public class OperationLogServiceImpl implements OperationLogService {
     }
 
     private String obj2String(Object obj){
+        if (obj == null) return null;
         if(obj instanceof String)
             return obj.toString();
         else

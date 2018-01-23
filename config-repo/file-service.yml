@@ -9,6 +9,18 @@ eureka:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
 
+spring:
+#测试环境redis
+  redis:
+    cluster:
+      nodes:
+        - 10.104.70.51:7000
+        - 10.104.70.51:7001
+        - 10.104.70.51:7002
+        - 10.104.70.51:7003
+        - 10.104.70.51:7004
+        - 10.104.70.51:7005
+
 security:
   user:
     name: user

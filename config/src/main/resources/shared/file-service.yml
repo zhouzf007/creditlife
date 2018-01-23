@@ -9,6 +9,17 @@ eureka:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
 
+spring:
+  redis:
+    cluster:
+      nodes:
+        - 10.1.1.241:7000
+        - 10.1.1.241:7001
+        - 10.1.1.241:7002
+        - 10.1.1.241:7003
+        - 10.1.1.241:7004
+        - 10.1.1.241:7005
+
 security:
   user:
     name: user

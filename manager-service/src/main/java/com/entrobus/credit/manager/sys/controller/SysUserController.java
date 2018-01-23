@@ -214,7 +214,7 @@ public class SysUserController extends ManagerBaseController {
      * @return
      */
     @GetMapping("/org/userNameMap")
-    public Map<String,String> userNameMapByOrg(@RequestParam String orgId){
+    public Map<String,String> userNameMapByOrg(String orgId){
         return sysUserService.getUserNameMapByOrgId(orgId);
     }
 }
