@@ -239,10 +239,6 @@ public class OrdersServiceImpl implements OrdersService {
             criteria.andOrgIdEqualTo(orgId);
         }
         example.setOrderByClause(" create_time desc ");
-        if (limit != null && offset != null) {
-            example.setLimitStart(offset);
-            example.setLimitEnd(limit);
-        }
         PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<OrderListVo> rsList = new ArrayList<>();
