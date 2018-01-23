@@ -76,7 +76,7 @@ public class RepaymentPlanInstanceServiceImpl implements RepaymentPlanInstanceSe
         RepaymentPlanInstance repaymentPlan = new RepaymentPlanInstance();
         repaymentPlan.setOrderId(record.getOrderId());
         repaymentPlan.setRepaymentPlanId(record.getId());
-        repaymentPlan.setRepaymentMoney(record.getMoney());
+        repaymentPlan.setRepaymentMoney(record.getPrincipal());
         repaymentPlan.setRepaymentTime(record.getPlanTime());
         repaymentPlan.setAccount(record.getAccount());
         repaymentPlan.setCreateOperator(record.getUpdateOperator());

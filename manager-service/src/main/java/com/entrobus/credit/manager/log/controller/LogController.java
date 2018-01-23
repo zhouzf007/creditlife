@@ -34,20 +34,6 @@ public class LogController extends ManagerBaseController{
         SysLoginUserInfo loginUser = getCurrLoginUser();
 //        vo.setOrgId(loginUser.getOrgId());
         WebResult result = logClient.bankOperationLogList(loginUser.getOrgId(), offset, limit);
-        //暂时这样吧
-        Object rows = result.get("rows");
-        if (rows != null){
-            List<JSONObject> list = (List<JSONObject>) rows;
-            List<SysUser> sysUserList = sysUserService.getByOrgId(loginUser.getOrgId());
-            Map<String ,String> userNameMap = new HashMap<>();
-            for (SysUser user : sysUserList) {
-                userNameMap.put(String.valueOf(user.getId()),user.getUsername());
-            }
-            for (JSONObject logVo : list) {
-                String userName = userNameMap.getOrDefault(logVo.getString("operatorId"), "");
-                logVo.put("operatorName",userName);
-            }
-        }
         return result;
     }
 }

@@ -1,0 +1,19 @@
+# 测试环境
+spring:
+  application:
+    name: zipkin
+# 测试环境rabbitmq服务器地址
+  rabbitmq:
+    host: 10.104.78.27
+    port: 5672
+    username: newseax-test
+    password: 123
+    virtual-host: newseax-test
+
+server:
+  port: 9411
+
+security:
+  user:
+    name: admin
+    password: ${ZIPKIN_SERVER_PASSWORD:admin}

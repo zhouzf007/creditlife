@@ -16,6 +16,7 @@ import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.order.OrdersExample;
+import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.vo.order.ApplyVo;
 import com.entrobus.credit.vo.order.OrderListVo;
 import com.entrobus.credit.vo.order.UserOrderListVo;
@@ -271,16 +272,18 @@ public class OrdersServiceImpl implements OrdersService {
         for (int i = 0; i < list.size(); i++) {
             Orders order = list.get(i);
             UserOrdersVo vo = new UserOrdersVo();
-//            paymentClient.getOrderRepaymentPlan()
-//
-//            vo.setId(order.getId());
-//            vo.setApplyMoney(order.getApplyMoney());
-//            vo.setDueTime();
-//            vo.setLoanTime();
-//            vo.setState();
-//            vo.setStateName();
-//            vo.setTerm();
-//            vo.setPrincipalAndInterest();
+            vo.setId(order.getId());
+            vo.setState(order.getState());
+            vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
+            vo.setLoanTime(order.getLoanTime()==null?order.getApplyTime():order.getLoanTime());
+            vo.setMoney(order.getActualMoney());
+            if (order.getState()==Constants.ORDER_STATE.PASS||order.getState()==Constants.ORDER_STATE.OVERDUE){
+                RepaymentPlan plan =paymentClient.getPresentRepaymentPlan(order.getId());
+                vo.setDueTime(plan.getPlanTime());
+                vo.setTerm(plan.getSortId()+"/"+order.getRepaymentTerm());
+                vo.setPrincipalAndInterest(1000L);
+                vo.setBalance(1000L);
+            }
             rsList.add(vo);
         }
         return rsList;

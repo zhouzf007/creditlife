@@ -1,3 +1,5 @@
+## 配置文件仓库
+
 # 关于启用配置项加密
 ## 前置条件
 需要替换{}/jre/lib/security 目录（windows有两个jre）下的local_policy.jar和US_export_policy.jar。可在jdk官网下载。

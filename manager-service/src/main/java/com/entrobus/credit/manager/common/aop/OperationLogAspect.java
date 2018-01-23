@@ -116,7 +116,7 @@ public class OperationLogAspect {
                     String name = argNames[i];
                     argMap.put(name, arg);
                     if (Objects.equals(logAnnotation.relId(), name)) {
-                        msg.setRelId(name);//关联id,如orderId
+                        msg.setRelId(arg == null ? null : arg.toString());//关联id,如orderId
                     }
                 }
                 msg.setOperationData(argMap);//请求参数，Object

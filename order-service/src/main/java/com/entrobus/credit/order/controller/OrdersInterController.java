@@ -112,7 +112,7 @@ public class OrdersInterController {
                 RepaymentPlan plan = list.get(i);
                 RepaymentPlanVo vo = new RepaymentPlanVo();
                 vo.setId(plan.getId());
-                vo.setMoney(AmountUtil.changeF2Y(plan.getMoney()));
+                vo.setMoney(AmountUtil.changeF2Y(plan.getPrincipal()));
                 vo.setRepayTime(plan.getPlanTime());
                 vo.setUpdateTime(plan.getUpdateTime());
                 vo.setOperator(plan.getUpdateOperator());

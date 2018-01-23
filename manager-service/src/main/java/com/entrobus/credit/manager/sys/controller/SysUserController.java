@@ -21,9 +21,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -208,5 +206,15 @@ public class SysUserController extends ManagerBaseController {
         //根据用户id删除
         sysUserService.delete(getLoginUserId(),idList);
         return WebResult.ok();
+    }
+
+    /**
+     * 获取同一机构下所有用户的id,用户名
+     * @param orgId
+     * @return
+     */
+    @GetMapping("/org/userNameMap")
+    public Map<String,String> userNameMapByOrg(@RequestParam String orgId){
+        return sysUserService.getUserNameMapByOrgId(orgId);
     }
 }

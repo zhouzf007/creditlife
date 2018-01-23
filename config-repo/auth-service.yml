@@ -54,9 +54,17 @@ spring:
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
 #    配置mybatis mapper.xml
-
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:
 #    show-sql: true
 
+redis:
+  host: 10.1.1.241
+  port: 6379
+  # password:
+  pool:
+    max-active: 8
+    max-idle: 8
+    min-idle: 0
+    max-wait: 10000

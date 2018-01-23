@@ -13,13 +13,19 @@ security:
   user:
     name: user
     password: password
-#  oauth2:
-#    client:
-#      clientId: order-service
-#      clientSecret: ${security.user.password}
-#      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
-#      grant-type: client_credentials
-#      scope: server
+  oauth2:
+    client:
+      clientId: order-service
+      clientSecret: ${security.user.password}
+      accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
+      grant-type: client_credentials
+      scope: server
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false
 
 spring:
   datasource:
@@ -62,15 +68,16 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
   resources: # 指定静态资源的路径
         static-locations: classpath:/templates/,classpath:/views/
+#测试环境redis
   redis:
     cluster:
       nodes:
-        - 10.1.1.241:7000
-        - 10.1.1.241:7001
-        - 10.1.1.241:7002
-        - 10.1.1.241:7003
-        - 10.1.1.241:7004
-        - 10.1.1.241:7005
+        - 10.104.70.51:7000
+        - 10.104.70.51:7001
+        - 10.104.70.51:7002
+        - 10.104.70.51:7003
+        - 10.104.70.51:7004
+        - 10.104.70.51:7005
 
 #配置generate-sub-order topic 订阅者
   cloud:

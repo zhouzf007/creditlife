@@ -1,0 +1,17 @@
+## 开发环境
+spring:
+  application:
+    name: zipkin
+  rabbitmq:
+    host: 10.1.1.241
+    port: 5672
+    username: admin
+    password: admin
+
+server:
+  port: 9411
+
+security:
+  user:
+    name: admin
+    password: ${ZIPKIN_SERVER_PASSWORD:admin}

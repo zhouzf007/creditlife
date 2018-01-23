@@ -62,7 +62,7 @@ public class GenSubOrderHandler {
             plan.setSystemState(Constants.REPAYMENT_ORDER_STATE.PASS);
             plan.setRepaymentId(repaymentId);
             plan.setAccount(account);
-            plan.setMoney(rsMoney);
+            plan.setPrincipal(rsMoney);
             plan.setPlanTime(rsDate);
             plan.setCreateOperator(createOp);
             repaymentPlanService.insertSelective(plan);

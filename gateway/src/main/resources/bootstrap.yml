@@ -3,7 +3,8 @@ spring:
     name: gateway
   cloud:
     config:
-      uri: http://localhost:8888
+      #uri: http://localhost:8888
+      uri: http://10.135.106.153:8888 #测试环境
       label: dev
       fail-fast: true
       username: user

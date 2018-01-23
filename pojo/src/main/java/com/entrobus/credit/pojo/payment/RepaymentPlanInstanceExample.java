@@ -810,63 +810,183 @@ public class RepaymentPlanInstanceExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyIsNull() {
-            addCriterion("plan_money is null");
+        public Criteria andPrincipalIsNull() {
+            addCriterion("principal is null");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyIsNotNull() {
-            addCriterion("plan_money is not null");
+        public Criteria andPrincipalIsNotNull() {
+            addCriterion("principal is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyEqualTo(Long value) {
-            addCriterion("plan_money =", value, "planMoney");
+        public Criteria andPrincipalEqualTo(Long value) {
+            addCriterion("principal =", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyNotEqualTo(Long value) {
-            addCriterion("plan_money <>", value, "planMoney");
+        public Criteria andPrincipalNotEqualTo(Long value) {
+            addCriterion("principal <>", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyGreaterThan(Long value) {
-            addCriterion("plan_money >", value, "planMoney");
+        public Criteria andPrincipalGreaterThan(Long value) {
+            addCriterion("principal >", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyGreaterThanOrEqualTo(Long value) {
-            addCriterion("plan_money >=", value, "planMoney");
+        public Criteria andPrincipalGreaterThanOrEqualTo(Long value) {
+            addCriterion("principal >=", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyLessThan(Long value) {
-            addCriterion("plan_money <", value, "planMoney");
+        public Criteria andPrincipalLessThan(Long value) {
+            addCriterion("principal <", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyLessThanOrEqualTo(Long value) {
-            addCriterion("plan_money <=", value, "planMoney");
+        public Criteria andPrincipalLessThanOrEqualTo(Long value) {
+            addCriterion("principal <=", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyIn(List<Long> values) {
-            addCriterion("plan_money in", values, "planMoney");
+        public Criteria andPrincipalIn(List<Long> values) {
+            addCriterion("principal in", values, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyNotIn(List<Long> values) {
-            addCriterion("plan_money not in", values, "planMoney");
+        public Criteria andPrincipalNotIn(List<Long> values) {
+            addCriterion("principal not in", values, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyBetween(Long value1, Long value2) {
-            addCriterion("plan_money between", value1, value2, "planMoney");
+        public Criteria andPrincipalBetween(Long value1, Long value2) {
+            addCriterion("principal between", value1, value2, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPlanMoneyNotBetween(Long value1, Long value2) {
-            addCriterion("plan_money not between", value1, value2, "planMoney");
+        public Criteria andPrincipalNotBetween(Long value1, Long value2) {
+            addCriterion("principal not between", value1, value2, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestIsNull() {
+            addCriterion("interest is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestIsNotNull() {
+            addCriterion("interest is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestEqualTo(Long value) {
+            addCriterion("interest =", value, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestNotEqualTo(Long value) {
+            addCriterion("interest <>", value, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestGreaterThan(Long value) {
+            addCriterion("interest >", value, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestGreaterThanOrEqualTo(Long value) {
+            addCriterion("interest >=", value, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestLessThan(Long value) {
+            addCriterion("interest <", value, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestLessThanOrEqualTo(Long value) {
+            addCriterion("interest <=", value, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestIn(List<Long> values) {
+            addCriterion("interest in", values, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestNotIn(List<Long> values) {
+            addCriterion("interest not in", values, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestBetween(Long value1, Long value2) {
+            addCriterion("interest between", value1, value2, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestNotBetween(Long value1, Long value2) {
+            addCriterion("interest not between", value1, value2, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyIsNull() {
+            addCriterion("penalty is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyIsNotNull() {
+            addCriterion("penalty is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyEqualTo(Long value) {
+            addCriterion("penalty =", value, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyNotEqualTo(Long value) {
+            addCriterion("penalty <>", value, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyGreaterThan(Long value) {
+            addCriterion("penalty >", value, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyGreaterThanOrEqualTo(Long value) {
+            addCriterion("penalty >=", value, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyLessThan(Long value) {
+            addCriterion("penalty <", value, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyLessThanOrEqualTo(Long value) {
+            addCriterion("penalty <=", value, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyIn(List<Long> values) {
+            addCriterion("penalty in", values, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyNotIn(List<Long> values) {
+            addCriterion("penalty not in", values, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyBetween(Long value1, Long value2) {
+            addCriterion("penalty between", value1, value2, "penalty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPenaltyNotBetween(Long value1, Long value2) {
+            addCriterion("penalty not between", value1, value2, "penalty");
             return (Criteria) this;
         }
 
