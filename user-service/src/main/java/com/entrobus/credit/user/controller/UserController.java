@@ -6,9 +6,11 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
+import com.entrobus.credit.user.services.CreditReportService;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
@@ -18,13 +20,13 @@ import com.entrobus.credit.user.services.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import utils.ShiroUtils;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import com.entrobus.credit.user.utils.ShiroUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mozl on 2018/1/09.
@@ -46,10 +48,13 @@ public class UserController extends BaseController {
     MsgClient msgClient;
 
     @Autowired
+    CreditReportService creditReportService;
+
+    @Autowired
     private RedisTemplate redisTemplate;
 
-    @RequestMapping("/login")
-    public WebResult login(String cellphone, String pwd) {
+    @PostMapping("/login")
+    public WebResult login(@RequestParam("cellphone") String cellphone, @RequestParam("pwd") String pwd) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
@@ -74,8 +79,8 @@ public class UserController extends BaseController {
         return WebResult.ok().put("token", token).put(WebResult.DATA, loginUserInfo);
     }
 
-    @RequestMapping("/register")
-    public WebResult register(String cellphone, String pwd, String code, String unionId) {
+    @PostMapping("/register")
+    public WebResult register(@RequestParam("cellphone") String cellphone, @RequestParam("pwd") String pwd, @RequestParam("code") String code, @RequestParam("unionId") String unionId) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
@@ -102,8 +107,8 @@ public class UserController extends BaseController {
         return WebResult.ok().put("token", token).put(WebResult.DATA, loginUserInfo);
     }
 
-    @RequestMapping("/reset")
-    public WebResult reset(String cellphone, String pwd, String code) {
+    @PostMapping("/reset")
+    public WebResult reset(@RequestParam("cellphone") String cellphone, @RequestParam("pwd") String pwd, @RequestParam("code") String code) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
@@ -127,29 +132,47 @@ public class UserController extends BaseController {
         return WebResult.ok();
     }
 
-    @RequestMapping("/identification")
-    public WebResult identification(String token, String name, String idCard) {
+    @PostMapping("/identification")
+    public WebResult identification(@RequestParam("token") String token) {
         CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
-        if (userInfo != null) {
-            boolean flag = false;
-            //@TODO  调用第三方校验身份
-            if (flag) {
-                String realName = "";
-                String idCardNo = "";
-                UserInfo info = userInfoService.selectByPrimaryKey(userInfo.getId());
-                info.setRealName(realName);
-                info.setIdCard(idCardNo);
-                userInfoService.updateByPrimaryKeySelective(info);
-                return WebResult.ok();
-            } else {
-                return WebResult.fail(WebResult.CODE_OPERATION, "身份认证失败");
-            }
+        if (userInfo == null) {
+            return WebResult.fail(WebResult.CODE_TOKEN);
         }
-        return WebResult.fail(WebResult.CODE_NOT_LOGIN);
+        Map map = userInfoService.isOwner(userInfo.getCellphone());
+        if(map == null || StringUtils.isBlank((String) map.get("name")) || StringUtils.isBlank((String) map.get("id_numb"))){
+            return WebResult.fail(WebResult.CODE_OPERATION).put(WebResult.DATA, map);
+        }
+        return WebResult.ok().put(WebResult.DATA, map);
     }
 
-    @RequestMapping("/sendCode")
-    public WebResult sendCode(String cellphone, Integer type) {
+    @PostMapping("/subCardInfo")
+    public WebResult subCardInfo(@RequestParam("token") String token, @RequestParam("name") String name, @RequestParam("idCard") String idCard) {
+        CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
+        if (userInfo == null) {
+            return WebResult.fail(WebResult.CODE_TOKEN);
+        }
+        if(StringUtils.isBlank(name) || StringUtils.isBlank(idCard)){
+            return WebResult.fail(WebResult.CODE_PARAMETERS);
+        }
+        Map map = userInfoService.isOwner(userInfo.getCellphone());
+        if(map == null){
+            return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
+        }
+        String name1 = (String) map.get("name");
+        String idCard1 = (String) map.get("id_numb");
+        if(StringUtils.isBlank(name1) || StringUtils.isBlank(idCard1) || idCard1.length() != 18 || !name.equals(name1) || idCard.equals(idCard1)){
+            return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
+        }
+        UserInfo info = userInfoService.selectByPrimaryKey(userInfo.getId());
+        info.setRealName(name);
+        info.setIdCard(idCard);
+        info.setRole(Constants.USER_ROLE.OWNER);
+        userInfoService.updateByPrimaryKeySelective(info);
+        return WebResult.ok();
+    }
+
+    @PostMapping("/sendCode")
+    public WebResult sendCode(@RequestParam("cellphone") String cellphone, @RequestParam("type") Integer type) {
         if (StringUtils.isEmpty(cellphone) || type == null) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
@@ -166,6 +189,10 @@ public class UserController extends BaseController {
                     return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
                 }
             }
+            Map map = userInfoService.isOwner(cellphone);
+            if(map == null || StringUtils.isBlank((String) map.get("name"))){
+                return WebResult.fail(WebResult.CODE_OPERATION, "抱歉，您非越秀地产业主。暂时不提供此服务");
+            }
         }
         msgClient.sendVerificationCode(cellphone, "");
         return WebResult.ok();
@@ -174,8 +201,8 @@ public class UserController extends BaseController {
     /*
     * 获取登录用户信息，刷新缓存
     * */
-    @RequestMapping("/info")
-    public WebResult info(String token) {
+    @PostMapping("/info")
+    public WebResult info(@RequestParam("token") String token) {
         if (ConversionUtil.isContainEmptyParam(token)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
@@ -191,7 +218,7 @@ public class UserController extends BaseController {
     /*
    * 判断用户的贷款状态
    * */
-    @RequestMapping("/userLoanState/{id}")
+    @GetMapping("/userLoanState/{id}")
     public WebResult getUserLoanState(@PathVariable("id") String id) {
         if (StringUtils.isEmpty(id)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
@@ -203,21 +230,20 @@ public class UserController extends BaseController {
     /*
     * 添加银行卡
     * */
-    @RequestMapping("/addAccount")
-    public WebResult addAccount(UserAccount userAccount) {
-        CacheUserInfo loginUser = getCurrLoginUser();
-        if (ConversionUtil.isContainEmptyParam(loginUser)) {
+    @PostMapping(value = "/addAccount", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResult addAccount(@RequestBody UserAccount userAccount, @RequestParam("token") String token) {
+        CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
+        if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
-
         //保存
         userAccount.setId(GUIDUtil.genRandomGUID());
         userAccount.setCreateTime(new Date());
-        userAccount.setUserId(loginUser.getId());
+        userAccount.setUserId(userInfo.getId());
         userAccount.setState(Constants.ACCOUNT_STATUS.WAIT);
         userAccount.setDeleteFlag(Constants.DELETE_FLAG.NO);
-        userAccount.setCreateOperator(loginUser.getId());
+        userAccount.setCreateOperator(userInfo.getId());
         userAccountService.insertSelective(userAccount);
         return WebResult.ok().put(WebResult.DATA, userAccount.getId());
     }
@@ -225,8 +251,8 @@ public class UserController extends BaseController {
     /*
     * 添加银行卡验证手机号
     * */
-    @RequestMapping("/accountVerifyCode")
-    public WebResult accountVerifyCode(String code, String cellphone, String id) {
+    @PostMapping("/accountVerifyCode")
+    public WebResult accountVerifyCode(@RequestParam("code") String code, @RequestParam("cellphone") String cellphone, @RequestParam("id") String id) {
         CacheUserInfo loginUser = getCurrLoginUser();
         if (ConversionUtil.isContainEmptyParam(loginUser)) {
             return WebResult.fail(WebResult.CODE_TOKEN);
@@ -243,5 +269,29 @@ public class UserController extends BaseController {
         userAccountService.updateByPrimaryKeySelective(userAccount);
         return WebResult.ok();
     }
+
+
+    @GetMapping(value = "/userCreditReport")
+    public CreditReport getUserCrediReport(@RequestParam("userId") String userId) {
+        CreditReport creditReport = creditReportService.getCreditReportByUid(userId);
+        return creditReport;
+    }
+
+    @GetMapping(value = "/creditReport/{id}")
+    public CreditReport getCrediReport(@PathVariable("id") String id) {
+        CreditReport creditReport = creditReportService.selectByPrimaryKey(id);
+        return creditReport;
+    }
+
+    @PutMapping(value = "/userState")
+    public void updateUserState(@RequestParam("userId") String userId, @RequestParam("state") Integer state) {
+        UserInfo userInfo = userInfoService.selectByPrimaryKey(userId);
+        if (userInfo != null) {
+            userInfo.setState(state);
+            userInfoService.updateByPrimaryKey(userInfo);
+            userInfoService.initUserCache(userInfo);
+        }
+    }
+
 
 }

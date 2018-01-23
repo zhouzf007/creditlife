@@ -5,15 +5,26 @@ import java.util.List;
 public class UserOrderDtlVo {
 
     private String userId;
-    private String role;//角色
+    private Integer role;//角色
+    private String roleName;//角色
     private String idCard;//身份证号
     private String name;//真实姓名
     private String mobile;// 手机号码
     private Integer score;//熵商信用分
     private String account;//银行卡信息
-    private String userState;//用户状态
+    private Integer userState;//用户状态
     private String quota;//额度
     private List<OrderListVo> orderList;
+    private Integer state;
+
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
     public String getQuota() {
         return quota;
@@ -27,17 +38,26 @@ public class UserOrderDtlVo {
         return userId;
     }
 
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getIdCard() {
         return idCard;
@@ -79,11 +99,11 @@ public class UserOrderDtlVo {
         this.account = account;
     }
 
-    public String getUserState() {
+    public Integer getUserState() {
         return userState;
     }
 
-    public void setUserState(String userState) {
+    public void setUserState(Integer userState) {
         this.userState = userState;
     }
 

@@ -1,12 +1,20 @@
 package com.entrobus.credit.user.controller;
 
+import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.user.channel.MsgPublishChannel;
 import com.entrobus.credit.user.client.MsgClient;
-import com.entrobus.credit.user.client.ServiceBClient;
+import com.entrobus.credit.vo.user.UserInfoCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.Message;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RefreshScope
 @RestController
@@ -21,8 +29,6 @@ public class UserServiceController {
     @Autowired
     MsgClient msgClient;
 
-//    @Autowired
-
 //    @GetMapping(path = "/current")
 //    public Principal getCurrentAccount(Principal principal) {
 //        return principal;
@@ -31,9 +37,9 @@ public class UserServiceController {
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 //    public WebResult getUserById(@PathVariable("id") String id) {
 //        WebResult result = new WebResult();
-//        UserInfoCache userCache = userCacheService.getUserCache(id);
+////        UserInfoCache userCache = userCacheService.getUserCache(id);
 //        Map rs = new HashMap<>();
-//        rs.put("data", userCache);
+////        rs.put("data", userCache);
 //        return result.ok(rs);
 //    }
 //
@@ -42,7 +48,7 @@ public class UserServiceController {
 //        WebResult result = new WebResult();
 //        user.setId(id);
 //        user.setName(name);
-//        userCacheService.setUserCache(user);
+////        userCacheService.setUserCache(user);
 //        msgClient.sendMessage(user.getMobile(), "welcome");
 //        return result.ok();
 //    }
@@ -50,17 +56,12 @@ public class UserServiceController {
 //    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 //    WebResult deleteUser(@PathVariable("id") String id) {
 //        WebResult result = new WebResult();
-//        UserInfoCache userCache = userCacheService.getUserCache(id);
-//        userCacheService.removeUserCache(id);
-//        msgClient.sendMessage(userCache.getMobile(), "good bye");
+////        UserInfoCache userCache = userCacheService.getUserCache(id);
+////        userCacheService.removeUserCache(id);
+////        msgClient.sendMessage(userCache.getMobile(), "good bye");
 //        return result.ok();
 //    }
 //
-//    @GetMapping(value = "/test")
-//    WebResult test() {
-//        String test = serviceBClient.test();
-//        return WebResult.ok(test);
-//    }
 //
 //
 //    @Autowired
@@ -71,8 +72,6 @@ public class UserServiceController {
 //        Message<Map<String, Object>> msgs = MessageBuilder.withPayload(msg).build();
 //        msgChannel.sendMsg().send(msgs);
 //    }
-//
-//    @Autowired
-//    private UserCacheService userCacheService;
+
 
 }

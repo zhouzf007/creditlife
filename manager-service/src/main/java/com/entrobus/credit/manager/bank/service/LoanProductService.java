@@ -38,4 +38,6 @@ public interface LoanProductService {
     LoanProductVo getInfoById(String id);
 
     LoanProductVo getInfoByOrgId(String orgId);
+
+    boolean checkProd(String prodId, Integer repaymentType, Integer repaymentTerm, Long rate);
 }

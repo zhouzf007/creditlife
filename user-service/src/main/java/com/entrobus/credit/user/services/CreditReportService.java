@@ -1,4 +1,4 @@
-package com.entrobus.credit.order.services;
+package com.entrobus.credit.user.services;
 
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.CreditReportExample;

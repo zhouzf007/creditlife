@@ -82,4 +82,6 @@ public interface SysUserService {
      * @return
      */
     SysUser getUserByUserName(String username);
+
+    List<SysUser> getByOrgId(String orgId);
 }

@@ -153,9 +153,9 @@ public class SysUserController extends ManagerBaseController {
      * 退出
      */
     @RequestMapping(value = "/logout")
-    public WebResult logout(String token) {
+    public WebResult logout() {
         //删除缓存中的用户信息
-        managerCacheService.logout(token);
+        managerCacheService.logout();
         return WebResult.ok();
     }
 
@@ -167,7 +167,7 @@ public class SysUserController extends ManagerBaseController {
     @PostMapping("/update")
     public WebResult update(SysUserExt sysUser,CommonParameter commonParameter){
         if(StringUtils.isBlank(sysUser.getUsername())){
-            return WebResult.error("用户名不能为空");
+            return WebResult.fail("用户名不能为空");
         }
         sysUser.setPlatform(commonParameter.getPlatform());
         sysUser.setUpdateUser(getLoginUserId());
@@ -183,7 +183,7 @@ public class SysUserController extends ManagerBaseController {
     @PostMapping("/bank/update")
     public WebResult updateBankUser(SysUserExt sysUser,CommonParameter commonParameter){
         if(StringUtils.isBlank(sysUser.getCellphone())){
-            return WebResult.error("手机号码不能为空");
+            return WebResult.fail("手机号码不能为空");
         }
         sysUser.setUsername(sysUser.getCellphone());
         sysUser.setPlatform(commonParameter.getPlatform());
@@ -203,7 +203,7 @@ public class SysUserController extends ManagerBaseController {
             idList = JSONArray.parseArray(ids,Long.class);
         }
         if(idList.contains(getLoginUserId())){
-            return WebResult.error("当前登录用户不能删除");
+            return WebResult.fail("当前登录用户不能删除");
         }
         //根据用户id删除
         sysUserService.delete(getLoginUserId(),idList);

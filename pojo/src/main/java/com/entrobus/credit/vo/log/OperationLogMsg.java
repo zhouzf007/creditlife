@@ -55,7 +55,29 @@ public class OperationLogMsg implements Serializable {
     /**
      * 相关被操作表信息
      */
-    public List<Table> tables;
+    private List<Table> tables;
+    /**
+     * 操作返回信息
+     */
+    private Object result;
+
+    private String orgId;
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public Object getResult() {
+        return result;
+    }
+
+    public void setResult(Object result) {
+        this.result = result;
+    }
 
     /**
      * 添加新的被操作表

@@ -1,6 +1,12 @@
 package com.entrobus.credit.common;
 
 public interface Constants {
+
+    interface YES_OR_NO {
+        int YES = 0;
+        int NO = 1;
+    }
+
     /**
      * 数据库删除标记 0-未删除，1-已删除
      */
@@ -121,6 +127,15 @@ public interface Constants {
         int NORMAL = 0;//正常
         int FROZEN = 1;//冻结
     }
+
+    /**
+     * 用户角色
+     */
+    interface USER_ROLE {
+        int ORDINARY = 0;//普通用户
+        int OWNER = 1;//业主
+    }
+
     /**
      * 数据库性别字段
      */

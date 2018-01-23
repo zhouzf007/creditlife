@@ -5,6 +5,7 @@ import com.entrobus.credit.pojo.user.UserInfoExample;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserInfoService {
     int countByExample(UserInfoExample example);
@@ -32,4 +33,8 @@ public interface UserInfoService {
     CacheUserInfo getLoginUserInfo(UserInfo record, String token);
 
     int addUserInfo(UserInfo record);
+
+    CacheUserInfo initUserCache(UserInfo record);
+
+    Map isOwner(String cellphone);
 }

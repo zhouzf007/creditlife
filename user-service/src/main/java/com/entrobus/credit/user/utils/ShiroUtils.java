@@ -1,4 +1,4 @@
-package utils;
+package com.entrobus.credit.user.utils;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 

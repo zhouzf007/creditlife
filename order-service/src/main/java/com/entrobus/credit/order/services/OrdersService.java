@@ -1,7 +1,13 @@
 package com.entrobus.credit.order.services;
 
+import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.order.OrdersExample;
+import com.entrobus.credit.vo.order.ApplyVo;
+import com.entrobus.credit.vo.order.UserOrderListVo;
+import com.entrobus.credit.vo.order.OrderListVo;
+import com.entrobus.credit.vo.order.UserOrdersVo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 
 import java.util.List;
 
@@ -28,7 +34,17 @@ public interface OrdersService {
 
     int insertSelective(Orders record);
 
+    WebResult applyOrder(ApplyVo vo, CacheUserInfo userInfo);
+
     List<Orders> getUserOrders(String userId);
 
     Orders getUserLastOrder(String userId);
+
+    WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception;
+
+    WebResult getOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception;
+
+    //接口使用
+    List<UserOrdersVo> getUserOrderList(String id, Integer offset, Integer limit);
+
 }

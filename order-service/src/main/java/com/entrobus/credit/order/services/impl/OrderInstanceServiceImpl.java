@@ -1,16 +1,19 @@
 package com.entrobus.credit.order.services.impl;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.order.client.UserClient;
 import com.entrobus.credit.order.dao.OrderInstanceMapper;
 import com.entrobus.credit.order.services.ContractService;
-import com.entrobus.credit.order.services.CreditReportService;
 import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.pojo.order.*;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +25,7 @@ public class OrderInstanceServiceImpl implements OrderInstanceService {
     private ContractService contractService;
 
     @Autowired
-    private CreditReportService creditReportService;
+    private UserClient userClient;
 
     private static final Logger logger = LoggerFactory.getLogger(OrderInstanceServiceImpl.class);
 
@@ -45,10 +48,12 @@ public class OrderInstanceServiceImpl implements OrderInstanceService {
     }
 
     public int updateByPrimaryKeySelective(OrderInstance record) {
+        record.setUpdateTime(new Date());
         return this.orderInstanceMapper.updateByPrimaryKeySelective(record);
     }
 
     public int updateByPrimaryKey(OrderInstance record) {
+        record.setUpdateTime(new Date());
         return this.orderInstanceMapper.updateByPrimaryKey(record);
     }
 
@@ -57,24 +62,35 @@ public class OrderInstanceServiceImpl implements OrderInstanceService {
     }
 
     public int updateByExampleSelective(OrderInstance record, OrderInstanceExample example) {
+        record.setUpdateTime(new Date());
         return this.orderInstanceMapper.updateByExampleSelective(record, example);
     }
 
     public int updateByExample(OrderInstance record, OrderInstanceExample example) {
+        record.setUpdateTime(new Date());
         return this.orderInstanceMapper.updateByExample(record, example);
     }
 
     public int insert(OrderInstance record) {
+        defaultValue(record);
         return this.orderInstanceMapper.insert(record);
     }
 
     public int insertSelective(OrderInstance record) {
+        defaultValue(record);
         return this.orderInstanceMapper.insertSelective(record);
+    }
+
+    protected void defaultValue(OrderInstance record) {
+        if (StringUtils.isEmpty(record.getId())) {
+            record.setId(GUIDUtil.genRandomGUID());
+        }
+        record.setUpdateTime(new Date());
     }
 
     @Override
     public int saveOrderInstance(Orders order) {
-        OrderInstance instance=new  OrderInstance();
+        OrderInstance instance = new OrderInstance();
         instance.setOrderId(order.getId());
         //申请信息
         instance.setActualMoney(order.getActualMoney());
@@ -88,15 +104,15 @@ public class OrderInstanceServiceImpl implements OrderInstanceService {
         instance.setReason(order.getReason());
         //合同信息
         instance.setContractId(order.getContractId());
-        Contract contract=contractService.selectByPrimaryKey(order.getContractId());
-        if (contract!=null){
+        Contract contract = contractService.selectByPrimaryKey(order.getContractId());
+        if (contract != null) {
 //          instance.setContractContent(contract.get);
             instance.setContractUrl(contract.getContractUrl());
         }
 
         //信用报告
-        CreditReport report =creditReportService.selectByPrimaryKey(order.getCreditReportId());
-        if (report!=null){
+        CreditReport report = userClient.getCreditReport(order.getCreditReportId());
+        if (report != null) {
 //          instance.setCreditContent();
             instance.setCreditUrl(report.getReportUrl());
             instance.setCreditScore(order.getCreditScore());

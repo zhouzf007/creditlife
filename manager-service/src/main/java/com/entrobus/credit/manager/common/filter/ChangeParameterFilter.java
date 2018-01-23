@@ -4,7 +4,6 @@ import com.entrobus.credit.manager.common.bean.CommonParameter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.web.firewall.FirewalledRequest;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

@@ -163,7 +163,7 @@ public class BsStaticsController extends ManagerBaseController{
         logService.operation(msg);
 
         if (Objects.equals("0",str)) return WebResult.ok("操作成功");
-        if (Objects.equals("1",str)) return WebResult.error("操作失败");
+        if (Objects.equals("1",str)) return WebResult.fail("操作失败");
         return WebResult.error("异常");
     }
 }

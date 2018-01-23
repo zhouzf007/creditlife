@@ -94,15 +94,15 @@ public class OrganizationServiceImpl implements OrganizationService {
     public WebResult add(OrganizationExt organizationExt) {
         //查询是否已经存在该资金方
         if(checkName(organizationExt.getName())){
-            return WebResult.error("已经存在该资金方");
+            return WebResult.fail("已经存在该资金方");
         }
         //查询手机号是否已经被注册
         if(checkContractMobile(organizationExt.getContractMobile())){
-            return WebResult.error("手机号码已被绑定其他资金方");
+            return WebResult.fail("手机号码已被绑定其他资金方");
         }
         //查询手机号是否已注册社区贷资金平台
         if(sysUserService.checkUserName(organizationExt.getContractMobile())){
-            return WebResult.error("手机号码已注册社区贷资金平台，请更换手机重试");
+            return WebResult.fail("手机号码已注册社区贷资金平台，请更换手机重试");
         }
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
         organizationExt.setCreateTime(new Date());
@@ -155,7 +155,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             this.updateByPrimaryKeySelective(organization);
             return WebResult.ok("添加成功");
         }else{
-            return WebResult.error("添加失败");
+            return WebResult.fail("添加失败");
         }
     }
 
@@ -166,15 +166,15 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = this.selectByPrimaryKey(organizationExt.getId());
         //查询是否已经存在该资金方
         if(checkName(organizationExt.getName(), organizationExt.getId())){
-            return WebResult.error("已经存在该资金方");
+            return WebResult.fail("已经存在该资金方");
         }
         //查询手机号是否已经被注册
         if(checkContractMobile(organizationExt.getContractMobile(), organizationExt.getId())){
-            return WebResult.error("手机号码已被绑定其他资金方");
+            return WebResult.fail("手机号码已被绑定其他资金方");
         }
         //查询手机号是否已注册社区贷资金平台
         if(sysUserService.checkUserName(organizationExt.getContractMobile(),organization.getSysUserId())){
-            return WebResult.error("手机号码已注册社区贷资金平台，请更换手机重试");
+            return WebResult.fail("手机号码已注册社区贷资金平台，请更换手机重试");
         }
         //修改资金方
         organizationExt.setUpdateTime(new Date());

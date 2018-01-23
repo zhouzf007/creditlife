@@ -39,7 +39,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         try {
             GroupMatcher<JobKey> matcher = null;
             if (StringUtils.isNotBlank(vo.getGroupName())) {
-                matcher =  GroupMatcher.groupEquals(vo.getGroupName());
+                matcher =  GroupMatcher.jobGroupContains(vo.getGroupName());
             }else {
                 matcher =  GroupMatcher.anyJobGroup();
             }
@@ -49,7 +49,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             if (jobKeys == null){
                 return new ArrayList<>();
             }
-            if (StringUtils.isNotBlank(vo.getGroupName())) {//根据名称查询
+            if (StringUtils.isNotBlank(vo.getJobName())) {//根据名称查询
                 jobKeys =  jobKeys.stream().filter(jobKey -> Objects.equals(jobKey.getName(),vo.getJobName())).collect(Collectors.toSet());
             }
             for (JobKey jobKey : jobKeys) {
@@ -135,7 +135,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         if(groupName == null) groupName = Constants.JOB_GROUP_NAME.DEFAULT;
         JobKey jobKey = JobKey.jobKey(jobName,groupName);
         if (remove(jobKey)){
-            return WebResult.error("任务不存在");
+            return WebResult.fail("任务不存在");
         }
         return WebResult.ok("操作成功");
     }
@@ -160,14 +160,14 @@ public class ScheduleServiceImpl implements ScheduleService {
         Class<? extends Job> jobClass = jobClassManager.getJobClass(vo.getJobName());
         if (jobClass == null){
             String msg = String.format("找不到%s对应的Java类，请确认jobName是否正确", vo.getJobName());
-            return WebResult.error(msg);
+            return WebResult.fail(msg);
         }
         try {
 //            if (scheduler.checkExists(jobKey)){
-//                return WebResult.error("任务已存在，请勿重复添加");
+//                return WebResult.fail("任务已存在，请勿重复添加");
 //            }
             if (checkExistsJobName(vo.getJobName())){
-                return WebResult.error("任务名称已存在，请勿重复添加");
+                return WebResult.fail("任务名称已存在，请勿重复添加");
             }
             // 任务名，任务组，任务执行类
             JobBuilder jobBuilder = JobBuilder.newJob(jobClass).withIdentity(vo.getJobName(), vo.getGroupName());
@@ -203,7 +203,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             return WebResult.ok("添加成功！");
         } catch (Exception e) {
             logger.error("schedule添加任务失败!",e);
-            return WebResult.error("操作失败");
+            return WebResult.fail("操作失败");
         }
     }
 //
@@ -222,7 +222,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 //
 //            CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 //            if (trigger == null) {
-//                return WebResult.error("任务不存在");
+//                return WebResult.fail("任务不存在");
 //            }
 //
 //            String oldTime = trigger.getCronExpression();
@@ -251,7 +251,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 //            return WebResult.ok("操作成功！");
 //        } catch (Exception e) {
 //            logger.error("schedule修改任务时间失败！",e);
-//            return WebResult.error("操作失败！");
+//            return WebResult.fail("操作失败！");
 //        }
 //    }
     /**
@@ -335,11 +335,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, groupName);
             if (!scheduler.checkExists(triggerKey)){
-                return WebResult.error("任务不存在");
+                return WebResult.fail("任务不存在");
             }
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
             if (trigger == null) {
-                return WebResult.error("任务不存在");
+                return WebResult.fail("任务不存在");
             }
 
             String oldTime = trigger.getCronExpression();
@@ -360,7 +360,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             return WebResult.ok("操作成功");
         } catch (Exception e) {
             logger.error("schedule修改任务时间失败！",e);
-            return WebResult.error("操作失败！");
+            return WebResult.fail("操作失败！");
         }
 //       return modifyJobTime(jobName,groupName,jobName+TRIGGER_SUFFIX,groupName,cron);
     }
