@@ -11,11 +11,16 @@ import org.springframework.stereotype.Service;
 
 /**
  * 翻译
+ * 程序启动完成后会自动刷新缓存
  */
 @Service
 public class TranslationCacheServiceImpl implements TranslationCacheService,CommandLineRunner {
     @Autowired
     private RedisTemplate redisTemplate;
+
+    /**
+     * 初始化翻译
+     */
     @Override
     public void init() {
         addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.NOT_LOAN, "未申请");
@@ -29,6 +34,12 @@ public class TranslationCacheServiceImpl implements TranslationCacheService,Comm
         addTranslation(Cachekey.Translation.REPAYMENT_STATE , Constants.REPAYMENT_ORDER_STATE.PASS, "使用中");
         addTranslation(Cachekey.Translation.REPAYMENT_STATE , Constants.REPAYMENT_ORDER_STATE.OVERDUE, "已逾期");
         addTranslation(Cachekey.Translation.REPAYMENT_STATE , Constants.REPAYMENT_ORDER_STATE.FINISHED, "已结清");
+
+        //操作状态
+        addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.FAIL, "操作失败");
+        addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.ERROR, "异常");
+        addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.ERROR, "操作成功");
+
     }
 
     public void  cache(String key,String value){
@@ -42,7 +53,7 @@ public class TranslationCacheServiceImpl implements TranslationCacheService,Comm
     private <T> String getKey(String prefix, T value) {
         return prefix + value;
     }
-
+    @Override
     public<T> String translation(String prefix, T value){
         return CacheService.getString(redisTemplate,getKey(prefix,value));
     }

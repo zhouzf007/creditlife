@@ -61,6 +61,16 @@ public class OperationLogMsg implements Serializable {
      */
     private Object result;
 
+    private String orgId;
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
     public Object getResult() {
         return result;
     }
