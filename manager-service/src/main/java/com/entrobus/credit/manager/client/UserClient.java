@@ -24,7 +24,7 @@ public interface UserClient {
     CreditReport getCrediReport(@PathVariable("id") String id);
 
 
-    @PutMapping(value = "/userState")
+    @PutMapping(value = "/user/userState")
     void updateUserState(@RequestParam("userId") String userId, @RequestParam("state") Integer state);
 
     @Component
