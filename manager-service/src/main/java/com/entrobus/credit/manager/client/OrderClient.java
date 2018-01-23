@@ -9,15 +9,17 @@ import com.entrobus.credit.vo.order.UserOrderListVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 @FeignClient(name = "order-service", fallback = OrderClient.OrderClientFallback.class)
 public interface OrderClient {
 
-    @PutMapping(value = "/order")
+    @PutMapping(value = "/order",consumes = MediaType.APPLICATION_JSON_VALUE)
     void updateOrder(@RequestBody Orders order);
 
     @GetMapping(path = "/order/{id}")

@@ -106,6 +106,15 @@ public interface Constants {
         int FINISHED = 5;//已完成
     }
 
+    /**
+     * 贷款管理驳回原因类型
+     */
+    interface REJECT_TYPE{
+        int BLACK_LIST = 0;//黑名单
+        int TOO_MUCH = 1;//申请提现金额过高
+        int OTHER = 2;//其他原因
+    }
+
     interface REPAYMENT_ORDER_STATE {
         int PASS = 3;//使用中
         int OVERDUE = 4;//已逾期
