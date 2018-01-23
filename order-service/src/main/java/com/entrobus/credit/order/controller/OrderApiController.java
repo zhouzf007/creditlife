@@ -118,23 +118,22 @@ public class OrderApiController {
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
         }
-        UserRepaymentPlanVo rsVo=new UserRepaymentPlanVo();
+        UserRepaymentPlanVo rsVo = new UserRepaymentPlanVo();
         rsVo.setBalance("");
-        List<PlanVo> plist=new ArrayList<>();
-        List<RepaymentPlan> list=paymentClient.getOrderRepaymentPlan(orderId);
+        List<PlanVo> plist = new ArrayList<>();
+        List<RepaymentPlan> list = paymentClient.getOrderRepaymentPlan(orderId);
         for (int i = 0; i < list.size(); i++) {
-            RepaymentPlan plan=list.get(i);
-            PlanVo vo=new PlanVo();
+            RepaymentPlan plan = list.get(i);
+            PlanVo vo = new PlanVo();
             vo.setState(plan.getState());
             vo.setStateName("");
             vo.setDueTime(plan.getPlanTime());
-//            vo.setPrincipalAndInterest();
-//            vo.setCapital();
+            vo.setPrincipalAndInterest(plan.getInterest() + plan.getPrincipal());
+            vo.setCapital(plan.getPrincipal());
             plist.add(vo);
         }
-        Map rsMap = new HashMap<>();
-        rsMap.put("list", list);
-        return WebResult.ok(rsMap);
+        rsVo.setPlanList(plist);
+        return WebResult.ok(rsVo);
     }
 
 }

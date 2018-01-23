@@ -22,6 +22,7 @@ import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
@@ -180,7 +181,7 @@ public class OrdersInterController {
      *
      * @param order
      */
-    @PutMapping("/order")
+    @PutMapping(value = "/order",consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResult updateOrder(@RequestBody Orders order) {
         Orders loanOrder = ordersService.selectByPrimaryKey(order.getId());
         if (loanOrder != null) {
