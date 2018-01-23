@@ -35,9 +35,9 @@ public class ProductApiController extends ManagerBaseController {
     public WebResult getProductInfo() {
         BsStaticVo defualtSp = bsStaticsClient.getByTypeAndValue(Constants.CODE_TYPE.SUPPLIER, "defualt");
         ProductVo productVo = new ProductVo();
-        String orgId="08AF5B53B9BF0299076AF64C65E26189";
+        String orgId = "08AF5B53B9BF0299076AF64C65E26189";
         if (defualtSp != null) {
-            orgId= defualtSp.getCodeName();
+            orgId = defualtSp.getCodeName();
         }
         LoanProductVo vo = loanProductService.getInfoByOrgId(orgId);
         List<LoanPeriodsRateVo> termList = vo.getLoanPeriodsRateVoList();
@@ -45,22 +45,31 @@ public class ProductApiController extends ManagerBaseController {
         productVo.setProdId(vo.getId());
         productVo.setDesc(vo.getRemark());
         List<String> terms = new ArrayList<>();
+        List<Map> repayType = new ArrayList<>();
         List<String> usages = new ArrayList<>();
         List<Map> repaymentTerms = new ArrayList<>();
         for (int i = 0; i < termList.size(); i++) {
             LoanPeriodsRateVo term = termList.get(i);
-            Map rm= new HashMap<>();
+            Map rm = new HashMap<>();
             terms.add(term.getPeriods() + "");
-            rm.put("term",term.getPeriods());
-            rm.put("0",term.getInterestCapitalRate());
-            rm.put("1",term.getMonthEqualRate());
-          // 0=先息后本 1=等额还款
+            rm.put("term", term.getPeriods());
+            rm.put("0", term.getInterestCapitalRate());
+            rm.put("1", term.getMonthEqualRate());
+            // 0=先息后本 1=等额还款
             repaymentTerms.add(rm);
         }
         productVo.setTerms(terms);
         productVo.setRepaymentTerm(repaymentTerms);
         productVo.setMin(1000l);
         productVo.setMax(3000l);
+        Map typeMap0 = new HashMap<>();
+        typeMap0.put("type", "0");
+        typeMap0.put("name", "先息后本");
+        Map typeMap1 = new HashMap<>();
+        typeMap1.put("type", "1");
+        typeMap1.put("name", "等额还款");
+        repayType.add(typeMap0);
+        repayType.add(typeMap1);// 0=先息后本 1=等额还款
         usages.add("个人消费");
         usages.add("装修");
         usages.add("旅游");

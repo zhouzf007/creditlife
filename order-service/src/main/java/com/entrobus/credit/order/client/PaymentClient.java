@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -23,6 +24,15 @@ public interface PaymentClient {
     @GetMapping(value = "/orderRepaymentPlan/{orderId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     List<RepaymentPlan> getOrderRepaymentPlan(@PathVariable("orderId") String orderId);
 
+    /**
+     * 订单的当前还款计划
+     *
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/presentRepaymentPlan")
+    RepaymentPlan getPresentRepaymentPlan(@RequestParam("orderId") String orderId);
+
     @Component
     class PaymentClientFallback implements PaymentClient {
 
@@ -35,6 +45,11 @@ public interface PaymentClient {
         @Override
         public List<RepaymentPlan> getOrderRepaymentPlan(String orderId) {
             LOGGER.info("异常发生，进入fallback方法");
+            return null;
+        }
+
+        @Override
+        public RepaymentPlan getPresentRepaymentPlan(String orderId) {
             return null;
         }
 

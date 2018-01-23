@@ -11,16 +11,33 @@ public class UserOrdersVo {
     private Date loanTime;//放款日期
     private String term;//当期
     private Date dueTime;//本期还款时间
-    private Long applyMoney;//贷款金额
-    private String principalAndInterest;//本息
+    private Long money;//贷款金额
+    private Long principalAndInterest;//本息
+    private Long balance;//借款余额
     private Integer state;
 
-    public Long getApplyMoney() {
-        return applyMoney;
+    public Long getPrincipalAndInterest() {
+        return principalAndInterest;
     }
 
-    public void setApplyMoney(Long applyMoney) {
-        this.applyMoney = applyMoney;
+    public void setPrincipalAndInterest(Long principalAndInterest) {
+        this.principalAndInterest = principalAndInterest;
+    }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
+    }
+
+    public Long getMoney() {
+        return money;
+    }
+
+    public void setMoney(Long money) {
+        this.money = money;
     }
 
     private String stateName;
@@ -50,13 +67,6 @@ public class UserOrdersVo {
     }
 
 
-    public String getPrincipalAndInterest() {
-        return principalAndInterest;
-    }
-
-    public void setPrincipalAndInterest(String principalAndInterest) {
-        this.principalAndInterest = principalAndInterest;
-    }
 
     public Integer getState() {
         return state;

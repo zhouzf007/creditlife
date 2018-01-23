@@ -4,6 +4,9 @@ import java.util.Date;
 
 public class RepaymentPlanVo {
 
+    /**
+     * 供后台使用
+     */
     private String id;
     private Date repayTime;
     private String money;

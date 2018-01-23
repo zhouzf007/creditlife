@@ -12,8 +12,11 @@ import com.entrobus.credit.order.services.OrderCacheService;
 import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.order.services.OrdersService;
 import com.entrobus.credit.pojo.order.Orders;
+import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.vo.order.ApplyVo;
+import com.entrobus.credit.vo.order.PlanVo;
 import com.entrobus.credit.vo.order.UserOrdersVo;
+import com.entrobus.credit.vo.order.UserRepaymentPlanVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -21,6 +24,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +32,7 @@ import java.util.Map;
 @RefreshScope
 @RestController
 @RequestMapping("/api")
-public class OrdersController {
+public class OrderApiController {
 
     @Autowired
     OrdersService ordersService;
@@ -38,6 +42,10 @@ public class OrdersController {
 
     @Autowired
     ProductionClient productionClient;
+
+
+    @Autowired
+    PaymentClient paymentClient;
 
     @Autowired
     BsStaticsClient bsStaticsClient;
@@ -53,7 +61,7 @@ public class OrdersController {
     public WebResult getUserLoanState(@RequestParam("token") String token) {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(token);
         if (userInfo == null) {
-            return WebResult.fail(WebResult.CODE_NOT_LOGIN,"用户未登陆");
+            return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登陆");
         }
         Orders lastOrder = ordersService.getUserLastOrder(userInfo.getId());
         Map rsMap = new HashMap<>();
@@ -90,9 +98,40 @@ public class OrdersController {
     public WebResult getUserOrderList(@RequestParam("token") String token, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(token);
         if (userInfo == null) {
-            return WebResult.fail(WebResult.CODE_NOT_LOGIN,"用户未登录");
+            return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
         }
         List<UserOrdersVo> list = ordersService.getUserOrderList(userInfo.getId(), offset, limit);
+        Map rsMap = new HashMap<>();
+        rsMap.put("list", list);
+        return WebResult.ok(rsMap);
+    }
+
+    /**
+     * 还款计划
+     *
+     * @param
+     * @return
+     */
+    @GetMapping(path = "/repaymentPlan")
+    public WebResult getRepaymentPlan(@RequestParam("token") String token, @RequestParam("orderId") String orderId) throws Exception {
+        CacheUserInfo userInfo = cacheService.getUserCacheBySid(token);
+        if (userInfo == null) {
+            return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
+        }
+        UserRepaymentPlanVo rsVo=new UserRepaymentPlanVo();
+        rsVo.setBalance("");
+        List<PlanVo> plist=new ArrayList<>();
+        List<RepaymentPlan> list=paymentClient.getOrderRepaymentPlan(orderId);
+        for (int i = 0; i < list.size(); i++) {
+            RepaymentPlan plan=list.get(i);
+            PlanVo vo=new PlanVo();
+            vo.setState(plan.getState());
+            vo.setStateName("");
+            vo.setDueTime(plan.getPlanTime());
+//            vo.setPrincipalAndInterest();
+//            vo.setCapital();
+            plist.add(vo);
+        }
         Map rsMap = new HashMap<>();
         rsMap.put("list", list);
         return WebResult.ok(rsMap);

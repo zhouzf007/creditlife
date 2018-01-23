@@ -790,63 +790,123 @@ public class RepaymentExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andMoneyIsNull() {
-            addCriterion("money is null");
+        public Criteria andInterestIsNull() {
+            addCriterion("interest is null");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyIsNotNull() {
-            addCriterion("money is not null");
+        public Criteria andInterestIsNotNull() {
+            addCriterion("interest is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyEqualTo(Long value) {
-            addCriterion("money =", value, "money");
+        public Criteria andInterestEqualTo(Long value) {
+            addCriterion("interest =", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotEqualTo(Long value) {
-            addCriterion("money <>", value, "money");
+        public Criteria andInterestNotEqualTo(Long value) {
+            addCriterion("interest <>", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyGreaterThan(Long value) {
-            addCriterion("money >", value, "money");
+        public Criteria andInterestGreaterThan(Long value) {
+            addCriterion("interest >", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyGreaterThanOrEqualTo(Long value) {
-            addCriterion("money >=", value, "money");
+        public Criteria andInterestGreaterThanOrEqualTo(Long value) {
+            addCriterion("interest >=", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyLessThan(Long value) {
-            addCriterion("money <", value, "money");
+        public Criteria andInterestLessThan(Long value) {
+            addCriterion("interest <", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyLessThanOrEqualTo(Long value) {
-            addCriterion("money <=", value, "money");
+        public Criteria andInterestLessThanOrEqualTo(Long value) {
+            addCriterion("interest <=", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyIn(List<Long> values) {
-            addCriterion("money in", values, "money");
+        public Criteria andInterestIn(List<Long> values) {
+            addCriterion("interest in", values, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotIn(List<Long> values) {
-            addCriterion("money not in", values, "money");
+        public Criteria andInterestNotIn(List<Long> values) {
+            addCriterion("interest not in", values, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyBetween(Long value1, Long value2) {
-            addCriterion("money between", value1, value2, "money");
+        public Criteria andInterestBetween(Long value1, Long value2) {
+            addCriterion("interest between", value1, value2, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotBetween(Long value1, Long value2) {
-            addCriterion("money not between", value1, value2, "money");
+        public Criteria andInterestNotBetween(Long value1, Long value2) {
+            addCriterion("interest not between", value1, value2, "interest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalIsNull() {
+            addCriterion("principal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalIsNotNull() {
+            addCriterion("principal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalEqualTo(Long value) {
+            addCriterion("principal =", value, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalNotEqualTo(Long value) {
+            addCriterion("principal <>", value, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalGreaterThan(Long value) {
+            addCriterion("principal >", value, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalGreaterThanOrEqualTo(Long value) {
+            addCriterion("principal >=", value, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalLessThan(Long value) {
+            addCriterion("principal <", value, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalLessThanOrEqualTo(Long value) {
+            addCriterion("principal <=", value, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalIn(List<Long> values) {
+            addCriterion("principal in", values, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalNotIn(List<Long> values) {
+            addCriterion("principal not in", values, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalBetween(Long value1, Long value2) {
+            addCriterion("principal between", value1, value2, "principal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalNotBetween(Long value1, Long value2) {
+            addCriterion("principal not between", value1, value2, "principal");
             return (Criteria) this;
         }
 

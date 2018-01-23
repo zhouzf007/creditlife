@@ -1430,6 +1430,66 @@ public class OrdersExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andPrincipalInterestIsNull() {
+            addCriterion("principal_interest is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestIsNotNull() {
+            addCriterion("principal_interest is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestEqualTo(Long value) {
+            addCriterion("principal_interest =", value, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestNotEqualTo(Long value) {
+            addCriterion("principal_interest <>", value, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestGreaterThan(Long value) {
+            addCriterion("principal_interest >", value, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestGreaterThanOrEqualTo(Long value) {
+            addCriterion("principal_interest >=", value, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestLessThan(Long value) {
+            addCriterion("principal_interest <", value, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestLessThanOrEqualTo(Long value) {
+            addCriterion("principal_interest <=", value, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestIn(List<Long> values) {
+            addCriterion("principal_interest in", values, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestNotIn(List<Long> values) {
+            addCriterion("principal_interest not in", values, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestBetween(Long value1, Long value2) {
+            addCriterion("principal_interest between", value1, value2, "principalInterest");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrincipalInterestNotBetween(Long value1, Long value2) {
+            addCriterion("principal_interest not between", value1, value2, "principalInterest");
+            return (Criteria) this;
+        }
+
         public Criteria andStateIsNull() {
             addCriterion("`state` is null");
             return (Criteria) this;

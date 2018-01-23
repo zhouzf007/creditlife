@@ -57,6 +57,7 @@ public interface Constants {
         String SUPPLIER = "SUPPLIER";//
         String ORDER_STATE = "ORDER_STATE";//订单状态
         String REPAYMENT_STATE = "REPAYMENT_STATE";//还款状态
+        String OPERATION_STATE = "OPERATION_STATE";//操作状态
     }
 
     interface JOB_DATA_KEY {

@@ -13,7 +13,7 @@ import com.entrobus.credit.vo.user.UserInfoCache;
 public interface UserCacheService {
 
 
-    <T> String getCodeName(String codeType, T codeValue);
+    <T> String translate(String type, T value);
 
     <T> BsStaticVo getBsStatic(String codeType, T codeValue);
 

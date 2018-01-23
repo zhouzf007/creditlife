@@ -20,6 +20,7 @@
     <result column="credit_url" property="creditUrl" jdbcType="VARCHAR" />
     <result column="credit_content" property="creditContent" jdbcType="VARCHAR" />
     <result column="apply_money" property="applyMoney" jdbcType="BIGINT" />
+    <result column="principal_interest" property="principalInterest" jdbcType="BIGINT" />
     <result column="actual_money" property="actualMoney" jdbcType="BIGINT" />
     <result column="repayment_term" property="repaymentTerm" jdbcType="INTEGER" />
     <result column="repayment_type" property="repaymentType" jdbcType="INTEGER" />
@@ -35,6 +36,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
     <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <!--
@@ -109,9 +111,9 @@
     -->
     id, order_id, apply_no, prod_id, apply_time, user_id, credit_report_id, contract_id, 
     contract_url, contract_content, credit_score, credit_url, credit_content, apply_money, 
-    actual_money, repayment_term, repayment_type, loan_usage, interest_rate, `state`, 
-    auditor, audit_time, reason, loan_time, loan_operator, loan_user_time, update_time, 
-    delete_time, delete_flag
+    principal_interest, actual_money, repayment_term, repayment_type, loan_usage, interest_rate, 
+    `state`, auditor, audit_time, reason, loan_time, loan_operator, loan_user_time, update_time, 
+    delete_time, delete_flag, create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.entrobus.credit.pojo.order.OrderInstanceExample" >
     <!--
@@ -172,22 +174,24 @@
       prod_id, apply_time, user_id, 
       credit_report_id, contract_id, contract_url, 
       contract_content, credit_score, credit_url, 
-      credit_content, apply_money, actual_money, 
-      repayment_term, repayment_type, loan_usage, 
-      interest_rate, `state`, auditor, 
-      audit_time, reason, loan_time, 
-      loan_operator, loan_user_time, update_time, 
-      delete_time, delete_flag)
+      credit_content, apply_money, principal_interest, 
+      actual_money, repayment_term, repayment_type, 
+      loan_usage, interest_rate, `state`, 
+      auditor, audit_time, reason, 
+      loan_time, loan_operator, loan_user_time, 
+      update_time, delete_time, delete_flag, 
+      create_time)
     values (#{id,jdbcType=CHAR}, #{orderId,jdbcType=CHAR}, #{applyNo,jdbcType=VARCHAR}, 
       #{prodId,jdbcType=CHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=CHAR}, 
       #{creditReportId,jdbcType=CHAR}, #{contractId,jdbcType=CHAR}, #{contractUrl,jdbcType=VARCHAR}, 
       #{contractContent,jdbcType=VARCHAR}, #{creditScore,jdbcType=INTEGER}, #{creditUrl,jdbcType=VARCHAR}, 
-      #{creditContent,jdbcType=VARCHAR}, #{applyMoney,jdbcType=BIGINT}, #{actualMoney,jdbcType=BIGINT}, 
-      #{repaymentTerm,jdbcType=INTEGER}, #{repaymentType,jdbcType=INTEGER}, #{loanUsage,jdbcType=VARCHAR}, 
-      #{interestRate,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{auditor,jdbcType=VARCHAR}, 
-      #{auditTime,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, #{loanTime,jdbcType=TIMESTAMP}, 
-      #{loanOperator,jdbcType=VARCHAR}, #{loanUserTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{deleteTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER})
+      #{creditContent,jdbcType=VARCHAR}, #{applyMoney,jdbcType=BIGINT}, #{principalInterest,jdbcType=BIGINT}, 
+      #{actualMoney,jdbcType=BIGINT}, #{repaymentTerm,jdbcType=INTEGER}, #{repaymentType,jdbcType=INTEGER}, 
+      #{loanUsage,jdbcType=VARCHAR}, #{interestRate,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{auditor,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, 
+      #{loanTime,jdbcType=TIMESTAMP}, #{loanOperator,jdbcType=VARCHAR}, #{loanUserTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.entrobus.credit.pojo.order.OrderInstance" >
     <!--
@@ -238,6 +242,9 @@
       <if test="applyMoney != null" >
         apply_money,
       </if>
+      <if test="principalInterest != null" >
+        principal_interest,
+      </if>
       <if test="actualMoney != null" >
         actual_money,
       </if>
@@ -283,6 +290,9 @@
       <if test="deleteFlag != null" >
         delete_flag,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -326,6 +336,9 @@
       </if>
       <if test="applyMoney != null" >
         #{applyMoney,jdbcType=BIGINT},
+      </if>
+      <if test="principalInterest != null" >
+        #{principalInterest,jdbcType=BIGINT},
       </if>
       <if test="actualMoney != null" >
         #{actualMoney,jdbcType=BIGINT},
@@ -371,6 +384,9 @@
       </if>
       <if test="deleteFlag != null" >
         #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -433,6 +449,9 @@
       <if test="record.applyMoney != null" >
         apply_money = #{record.applyMoney,jdbcType=BIGINT},
       </if>
+      <if test="record.principalInterest != null" >
+        principal_interest = #{record.principalInterest,jdbcType=BIGINT},
+      </if>
       <if test="record.actualMoney != null" >
         actual_money = #{record.actualMoney,jdbcType=BIGINT},
       </if>
@@ -478,6 +497,9 @@
       <if test="record.deleteFlag != null" >
         delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
       </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -503,6 +525,7 @@
       credit_url = #{record.creditUrl,jdbcType=VARCHAR},
       credit_content = #{record.creditContent,jdbcType=VARCHAR},
       apply_money = #{record.applyMoney,jdbcType=BIGINT},
+      principal_interest = #{record.principalInterest,jdbcType=BIGINT},
       actual_money = #{record.actualMoney,jdbcType=BIGINT},
       repayment_term = #{record.repaymentTerm,jdbcType=INTEGER},
       repayment_type = #{record.repaymentType,jdbcType=INTEGER},
@@ -517,7 +540,8 @@
       loan_user_time = #{record.loanUserTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
-      delete_flag = #{record.deleteFlag,jdbcType=INTEGER}
+      delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -568,6 +592,9 @@
       <if test="applyMoney != null" >
         apply_money = #{applyMoney,jdbcType=BIGINT},
       </if>
+      <if test="principalInterest != null" >
+        principal_interest = #{principalInterest,jdbcType=BIGINT},
+      </if>
       <if test="actualMoney != null" >
         actual_money = #{actualMoney,jdbcType=BIGINT},
       </if>
@@ -613,6 +640,9 @@
       <if test="deleteFlag != null" >
         delete_flag = #{deleteFlag,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
@@ -635,6 +665,7 @@
       credit_url = #{creditUrl,jdbcType=VARCHAR},
       credit_content = #{creditContent,jdbcType=VARCHAR},
       apply_money = #{applyMoney,jdbcType=BIGINT},
+      principal_interest = #{principalInterest,jdbcType=BIGINT},
       actual_money = #{actualMoney,jdbcType=BIGINT},
       repayment_term = #{repaymentTerm,jdbcType=INTEGER},
       repayment_type = #{repaymentType,jdbcType=INTEGER},
@@ -649,7 +680,8 @@
       loan_user_time = #{loanUserTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       delete_time = #{deleteTime,jdbcType=TIMESTAMP},
-      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=CHAR}
   </update>
   <insert id="insertBatchSelective" parameterType="java.util.List" >
@@ -701,6 +733,9 @@
       <if test="list[0].applyMoney!=null" >
         apply_money,
       </if>
+      <if test="list[0].principalInterest!=null" >
+        principal_interest,
+      </if>
       <if test="list[0].actualMoney!=null" >
         actual_money,
       </if>
@@ -745,6 +780,9 @@
       </if>
       <if test="list[0].deleteFlag!=null" >
         delete_flag,
+      </if>
+      <if test="list[0].createTime!=null" >
+        create_time,
       </if>
     </trim>
      values 
@@ -792,6 +830,9 @@
         <if test="item.applyMoney!=null" >
           #{item.applyMoney,jdbcType=BIGINT},
         </if>
+        <if test="item.principalInterest!=null" >
+          #{item.principalInterest,jdbcType=BIGINT},
+        </if>
         <if test="item.actualMoney!=null" >
           #{item.actualMoney,jdbcType=BIGINT},
         </if>
@@ -836,6 +877,9 @@
         </if>
         <if test="item.deleteFlag!=null" >
           #{item.deleteFlag,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null" >
+          #{item.createTime,jdbcType=TIMESTAMP},
         </if>
       </trim>
     </foreach>
@@ -887,6 +931,9 @@
         <if test="item.applyMoney!=null" >
           apply_money=#{item.applyMoney,jdbcType=BIGINT},
         </if>
+        <if test="item.principalInterest!=null" >
+          principal_interest=#{item.principalInterest,jdbcType=BIGINT},
+        </if>
         <if test="item.actualMoney!=null" >
           actual_money=#{item.actualMoney,jdbcType=BIGINT},
         </if>
@@ -931,6 +978,9 @@
         </if>
         <if test="item.deleteFlag!=null" >
           delete_flag=#{item.deleteFlag,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null" >
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
         </if>
       </set>
       where 
