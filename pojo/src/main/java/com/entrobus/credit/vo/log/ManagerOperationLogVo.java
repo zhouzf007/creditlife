@@ -1,9 +1,9 @@
 package com.entrobus.credit.vo.log;
 
 /**
- * 资金方操作日志
+ * 管理后台（熵商）操作日志
  */
-public class BankOperationLogVo {
+public class ManagerOperationLogVo {
     private String id;
     private String desc;
     private String time;
@@ -11,8 +11,16 @@ public class BankOperationLogVo {
     private String remark;
     private Integer operationState;
     private String operationStateName;
-    private String resultMsg;
+    private String result;
     private String operatorName;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public String getOperatorName() {
         return operatorName;
@@ -78,11 +86,4 @@ public class BankOperationLogVo {
         this.operationStateName = operationStateName;
     }
 
-    public String getResultMsg() {
-        return resultMsg;
-    }
-
-    public void setResultMsg(String resultMsg) {
-        this.resultMsg = resultMsg;
-    }
 }
