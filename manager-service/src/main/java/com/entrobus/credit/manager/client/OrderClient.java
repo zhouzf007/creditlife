@@ -17,8 +17,8 @@ import java.util.List;
 @FeignClient(name = "order-service", fallback = OrderClient.OrderClientFallback.class)
 public interface OrderClient {
 
-    @PutMapping(value = "/order/{id}")
-    void updateOrder(@PathVariable("id") String id, @RequestBody Orders order);
+    @PutMapping(value = "/order")
+    void updateOrder(@RequestBody Orders order);
 
     @GetMapping(path = "/order/{id}")
     Orders getOrder(@PathVariable("id") String id);
@@ -57,7 +57,7 @@ public interface OrderClient {
         private static final Logger LOGGER = LoggerFactory.getLogger(OrderClientFallback.class);
 
         @Override
-        public void updateOrder(String id, Orders order) {
+        public void updateOrder(Orders order) {
             LOGGER.info("异常发生，进入fallback方法");
         }
 

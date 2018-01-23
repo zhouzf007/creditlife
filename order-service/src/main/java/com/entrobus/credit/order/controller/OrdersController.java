@@ -1,7 +1,9 @@
 package com.entrobus.credit.order.controller;
 
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.order.channel.GenSubOrderPublishChannel;
+import com.entrobus.credit.order.client.BsStaticsClient;
 import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
 import com.entrobus.credit.order.client.UserClient;
@@ -33,6 +35,12 @@ public class OrdersController {
 
     @Autowired
     OrderCacheService cacheService;
+
+    @Autowired
+    ProductionClient productionClient;
+
+    @Autowired
+    BsStaticsClient bsStaticsClient;
 
     /**
      * 用户的贷款状态
