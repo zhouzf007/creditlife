@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.bean.CommonParameter;
@@ -33,6 +34,7 @@ public class SysResourceController extends ManagerBaseController {
     private SysResourceService sysResourceService;
 
     @RequestMapping("/add")
+    @RecordLog(desc = "新增资源")
     public WebResult add(SysResource sysResource,CommonParameter commonParameter){
         sysResource.setCreateUser(getLoginUserId());
         sysResource.setUpdateUser(getLoginUserId());
@@ -48,6 +50,7 @@ public class SysResourceController extends ManagerBaseController {
     }
 
     @RequestMapping("/update")
+    @RecordLog(desc = "编辑资源",relId = "id")
     public WebResult update(SysResource sysResource,CommonParameter commonParameter){
         sysResource.setUpdateUser(getLoginUserId());
         sysResource.setUpdateTime(new Date());
@@ -65,6 +68,7 @@ public class SysResourceController extends ManagerBaseController {
      * @return
      */
     @RequestMapping(value = "/delete")
+    @RecordLog(desc = "根据资源id批量删除资源")
     public WebResult delete(String ids){
         List<Long> idList = new ArrayList<>();
         if(ConversionUtil.isNotEmptyParameter(ids)){

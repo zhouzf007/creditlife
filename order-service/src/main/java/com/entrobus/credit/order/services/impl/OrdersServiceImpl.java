@@ -5,6 +5,7 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
 import com.entrobus.credit.order.client.UserClient;
 import com.entrobus.credit.order.dao.OrdersMapper;
@@ -38,6 +39,9 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Autowired
     private UserClient userClient;
+
+    @Autowired
+    private PaymentClient paymentClient;
 
     @Autowired
     private ProductionClient productionClient;
@@ -267,6 +271,16 @@ public class OrdersServiceImpl implements OrdersService {
         for (int i = 0; i < list.size(); i++) {
             Orders order = list.get(i);
             UserOrdersVo vo = new UserOrdersVo();
+//            paymentClient.getOrderRepaymentPlan()
+//
+//            vo.setId(order.getId());
+//            vo.setApplyMoney(order.getApplyMoney());
+//            vo.setDueTime();
+//            vo.setLoanTime();
+//            vo.setState();
+//            vo.setStateName();
+//            vo.setTerm();
+//            vo.setPrincipalAndInterest();
             rsList.add(vo);
         }
         return rsList;

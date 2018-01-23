@@ -1,6 +1,7 @@
 package com.entrobus.credit.manager.bank.controller;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.bank.service.OrganizationService;
 import com.entrobus.credit.manager.common.bean.OrganizationExt;
@@ -31,6 +32,7 @@ public class OrganizationController extends ManagerBaseController{
      * @return
      */
     @PostMapping("")
+    @RecordLog(desc = "新增资金方")
     public WebResult add(OrganizationExt organizationExt){
         return organizationService.add(organizationExt);
     }
@@ -41,6 +43,7 @@ public class OrganizationController extends ManagerBaseController{
      * @return
      */
     @PutMapping("/{id}")
+    @RecordLog(desc = "编辑资金方")
     public WebResult edit(OrganizationExt organizationExt){
         return organizationService.edit(organizationExt);
     }
@@ -52,6 +55,7 @@ public class OrganizationController extends ManagerBaseController{
      * @return
      */
     @DeleteMapping("/{id}")
+    @RecordLog(desc = "物理删除资金方及下属账号")
     public WebResult delete(@PathVariable String id){
         return organizationService.delete(id);
     }

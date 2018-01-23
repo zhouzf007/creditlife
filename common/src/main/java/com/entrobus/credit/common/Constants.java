@@ -54,6 +54,7 @@ public interface Constants {
     interface CODE_TYPE {
         String CODE_TYPE = "CODE_TYPE";
         String STATUS = "STATUS";
+        String SUPPLIER = "SUPPLIER";
     }
 
     interface JOB_DATA_KEY {

@@ -11,9 +11,18 @@ public class UserOrdersVo {
     private Date loanTime;//放款日期
     private String term;//当期
     private Date dueTime;//本期还款时间
-    private String applyMoney;//贷款金额
+    private Long applyMoney;//贷款金额
     private String principalAndInterest;//本息
     private Integer state;
+
+    public Long getApplyMoney() {
+        return applyMoney;
+    }
+
+    public void setApplyMoney(Long applyMoney) {
+        this.applyMoney = applyMoney;
+    }
+
     private String stateName;
 
     public Date getLoanTime() {
@@ -40,13 +49,6 @@ public class UserOrdersVo {
         this.dueTime = dueTime;
     }
 
-    public String getApplyMoney() {
-        return applyMoney;
-    }
-
-    public void setApplyMoney(String applyMoney) {
-        this.applyMoney = applyMoney;
-    }
 
     public String getPrincipalAndInterest() {
         return principalAndInterest;
@@ -63,7 +65,6 @@ public class UserOrdersVo {
     public void setState(Integer state) {
         this.state = state;
     }
-
 
 
     public String getId() {
