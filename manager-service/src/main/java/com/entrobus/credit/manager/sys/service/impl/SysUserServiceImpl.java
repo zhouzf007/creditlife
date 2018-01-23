@@ -34,7 +34,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -322,5 +324,17 @@ public class SysUserServiceImpl implements SysUserService {
                 .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<SysUser> sysUsers = this.selectByExample(example);
         return sysUsers;
+    }
+
+    /**
+     *
+     * @param orgId
+     * @return key:id,  value:userName
+     */
+    @Override
+    public Map<String, String> getUserNameMapByOrgId(String orgId){
+        List<SysUser> userList = getByOrgId(orgId);
+        //list转map
+        return userList.stream().collect(Collectors.toMap(o -> String.valueOf(o.getId()),SysUser::getUsername));
     }
 }

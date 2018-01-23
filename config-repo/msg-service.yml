@@ -1,7 +1,9 @@
 server:
   port: 8083
   
-msg: Hello
+sms:
+  apikey: a56575f23e62f90992d9c22ebb17efa9
+  postUrl: http://sms.yunpian.com/v2/sms/single_send.json
 
 eureka:
   instance:
@@ -24,7 +26,7 @@ spring:
           slow-sql-millis: 1000
           log-slow-sql: true
           merge-sql: true
-        log4j:
+        slf4j:
           statement-executable-sql-log-enable: true
           enabled: true
         wall:
@@ -57,7 +59,7 @@ spring:
         - 10.1.1.241:7003
         - 10.1.1.241:7004
         - 10.1.1.241:7005
-#配置msg-stream topic 订阅者
+
   cloud:
     stream:
       bindings:
@@ -74,8 +76,14 @@ security:
     password: password
   oauth2:
     client:
-      clientId: msg-service
+      clientId: order-service
       clientSecret: ${security.user.password}
       accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
       grant-type: client_credentials
       scope: server
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false

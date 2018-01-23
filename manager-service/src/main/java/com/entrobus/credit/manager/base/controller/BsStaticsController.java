@@ -65,7 +65,7 @@ public class BsStaticsController extends ManagerBaseController{
      * @return
      */
     @PutMapping("/{id}")
-    @RecordLog(desc = "编辑静态数据",remark = "单个删除")
+    @RecordLog(desc = "编辑静态数据")
     public WebResult update(@PathVariable Long id,   BsStaticVo vo){
         WebResult result = bsStaticsClient.update(id, vo);
         return result;

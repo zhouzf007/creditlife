@@ -1,7 +1,7 @@
 server:
   port: 8091
 
-name: 周镇峰
+name: 张三峰
 
 eureka:
   instance:
@@ -20,6 +20,8 @@ security:
       accessTokenUri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/oauth/token
       grant-type: client_credentials
       scope: server
+  basic:
+    enabled: false
 
 #{cipher}前缀声明 加密数据 ,需要替换{}/jre/lib/security 目录（windows有两个jre）下的local_policy.jar和US_export_policy.jar
 # RSA
@@ -65,24 +67,29 @@ spring:
 #      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
+#测试环境redis
   redis:
     cluster:
       nodes:
-        - 10.1.1.241:7000
-        - 10.1.1.241:7001
-        - 10.1.1.241:7002
-        - 10.1.1.241:7003
-        - 10.1.1.241:7004
-        - 10.1.1.241:7005
-#配置msg-stream topic 消费者
+        - 10.104.70.51:7000
+        - 10.104.70.51:7001
+        - 10.104.70.51:7002
+        - 10.104.70.51:7003
+        - 10.104.70.51:7004
+        - 10.104.70.51:7005
   cloud:
     stream:
       bindings:
         sms:
           destination: msg-stream
-
 #    配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:
 #    show-sql: true
+
+
+management:
+  security:
+    enabled: false
+

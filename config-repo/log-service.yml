@@ -1,10 +1,6 @@
 server:
   port: 8094
 
-base:
-  test:
-    name: test27
-    password: password27
 
 eureka:
   instance:
@@ -68,16 +64,37 @@ spring:
 #      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
+#测试环境redis
   redis:
     cluster:
       nodes:
-        - 10.1.1.241:7000
-        - 10.1.1.241:7001
-        - 10.1.1.241:7002
-        - 10.1.1.241:7003
-        - 10.1.1.241:7004
-        - 10.1.1.241:7005
-
+        - 10.104.70.51:7000
+        - 10.104.70.51:7001
+        - 10.104.70.51:7002
+        - 10.104.70.51:7003
+        - 10.104.70.51:7004
+        - 10.104.70.51:7005
+  cloud:
+    stream:
+      bindings:
+        order_operation_log_subscribe:
+          destination: order-operation-log-stream
+          content-type: application/json
+          group: ${spring.application.name}
+          consumer:
+            durableSubscription: true
+        sys_lonin_log_subscribe:
+          destination: sys-lonin-log-stream
+          content-type: application/json
+          group: ${spring.application.name}
+          consumer:
+            durableSubscription: true
+        creditlife_operation_log_subscribe:
+          destination: creditlife-operation-log-stream
+          content-type: application/json
+          group: ${spring.application.name}
+          consumer:
+            durableSubscription: true
 #    配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml

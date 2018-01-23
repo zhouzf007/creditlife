@@ -12,10 +12,10 @@ public interface Cachekey {
     }
 
     interface BsStatics {
-        String ID_OBJ = "bs_statics_id:obj:";//根据id 获取缓存对象
-        String TYPE_VALUE_ID = "bs_statics:type:value:id:";//根据codeType和codeValue 缓存id
-        String TYPE_VALUE_NAME = "bs_statics:type:value:name:";//根据codeType和codeValue 缓存codeName
-        String TYPE_LIST = "bs_statics_type:list:";//根据codeType缓存list
+        String ID_OBJ = "creditlife:bs_statics_id:obj:";//根据id 获取缓存对象
+        String TYPE_VALUE_ID = "creditlife:bs_statics:type:value:id:";//根据codeType和codeValue 缓存id
+        String TYPE_VALUE_NAME = "creditlife:bs_statics:type:value:name:";//根据codeType和codeValue 缓存codeName
+        String TYPE_LIST = "creditlife:bs_statics_type:list:";//根据codeType缓存list
     }
 
     interface Sms {

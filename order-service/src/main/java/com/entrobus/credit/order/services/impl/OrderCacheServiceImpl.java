@@ -43,13 +43,25 @@ public class OrderCacheServiceImpl implements OrderCacheService {
      * @return
      */
     @Override
-    public BsStaticVo getBsStatic(String codeType, String codeValue) {
+    public<T> BsStaticVo getBsStatic(String codeType, T codeValue) {
         String key = Cachekey.BsStatics.TYPE_VALUE_ID + codeType + codeValue;
         String id = CacheService.getString(redisTemplate,key);
         if (id == null) return null;
         String idKey = Cachekey.BsStatics.ID_OBJ + id ;
         BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, key, BsStaticVo.class);
         return cacheObj;
+    }
+    /**
+     * 翻译
+     * 实际查询静态数据缓存
+     * @param type
+     * @param value
+     * @return
+     */
+    @Override
+    public<T> String translate(String type, T value) {
+        String key = Cachekey.BsStatics.TYPE_VALUE_NAME + type + value;
+        return CacheService.getString(redisTemplate,key);
     }
     @Override
     public String getOrderApplyNo() {
