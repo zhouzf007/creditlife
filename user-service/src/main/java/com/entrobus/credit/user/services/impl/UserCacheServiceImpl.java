@@ -5,6 +5,7 @@ import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.user.services.UserInfoService;
+import com.entrobus.credit.vo.base.BsStaticVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserInfoCache;
 import org.apache.commons.lang.StringUtils;
@@ -52,7 +53,33 @@ public class UserCacheServiceImpl implements UserCacheService {
     public String translate(String key) {
         return CacheService.getString(redisTemplate, key);
     }
-
+    /**
+     *  根据codeType和codeValue查找
+     * @param codeType
+     * @param codeValue
+     * @return
+     */
+    @Override
+    public<T> BsStaticVo getBsStatic(String codeType, T codeValue) {
+        String key = Cachekey.BsStatics.TYPE_VALUE_ID + codeType + codeValue;
+        String id = CacheService.getString(redisTemplate,key);
+        if (id == null) return null;
+        String idKey = Cachekey.BsStatics.ID_OBJ + id ;
+        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, idKey, BsStaticVo.class);
+        return cacheObj;
+    }
+    /**
+     * 静态数据
+     *  根据codeType和codeValue查找 codeName
+     * @param codeType
+     * @param codeValue
+     * @return
+     */
+    @Override
+    public<T> String getCodeName(String codeType, T codeValue) {
+        String key = Cachekey.BsStatics.TYPE_VALUE_NAME + codeType + codeValue;
+        return CacheService.getString(redisTemplate,key);
+    }
     @Override
     public UserInfoCache getUserCache(String userId) {
         Object o = CacheService.getObject(redisTemplate, Cachekey.User.UID_PREFIX + userId);

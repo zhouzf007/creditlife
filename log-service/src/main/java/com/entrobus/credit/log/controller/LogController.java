@@ -41,14 +41,15 @@ public class LogController {
     }
 
     @PostMapping(value = "/client")
-    public void clientLog(@RequestParam String form, CommonParameter parameter, HttpServletRequest request){
-        if (StringUtils.isBlank(form)) return;
+    public WebResult clientLog(@RequestParam String form, CommonParameter parameter, HttpServletRequest request){
+        if (StringUtils.isBlank(form)) return WebResult.fail(WebResult.CODE_PARAMETERS);
         ClientLog log = new ClientLog();
         log.setAddress(ServletUtil.getIpAddr(request));
         log.setContent(form);
         if (StringUtils.isNotBlank(parameter.getClient()))
             log.setClient(Integer.valueOf(parameter.getClient()));
         clientLogService.insertSelective(log);
+        return WebResult.ok();
     }
     @GetMapping("/bank/operationLog")
     public WebResult bankOperationLogList( LogQueryVo queryVo,
