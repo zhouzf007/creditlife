@@ -3,14 +3,14 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: 119.29.97.133:8761
     prefer-ip-address: true
     metadata-map:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
   client:
     service-url:
-      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@${eureka.instance.hostname}/eureka/
 
 
 # 启用配置加密
