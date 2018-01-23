@@ -11,7 +11,11 @@ public interface OrderCacheService {
 
     String translate(String key);
 
-    BsStaticVo getBsStatic(String codeType, String codeValue);
+
+    <T> BsStaticVo getBsStatic(String codeType, T codeValue);
+
+
+    <T> String getCodeName(String codeType, T codeValue);
 
     String getOrderApplyNo();
 }

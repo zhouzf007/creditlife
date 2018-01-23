@@ -101,6 +101,7 @@ public class BsStaticsServiceImpl implements BsStaticsService {
     public List<BsStatics> getByCodeType(String codeType){
         if (StringUtils.isBlank(codeType)) return new ArrayList<>();
         BsStaticsExample example = new BsStaticsExample();
+        example.setOrderByClause("sort_id ASC");
         example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andCodeTypeEqualTo(codeType);
         return selectByExample(example);
     }
@@ -116,6 +117,7 @@ public class BsStaticsServiceImpl implements BsStaticsService {
     @Override
     public List<BsStatics> getByAll(){
         BsStaticsExample example = new BsStaticsExample();
+        example.setOrderByClause("sort_id ASC");
         example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         return selectByExample(example);
     }

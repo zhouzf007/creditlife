@@ -54,7 +54,9 @@ public interface Constants {
     interface CODE_TYPE {
         String CODE_TYPE = "CODE_TYPE";
         String STATUS = "STATUS";
-        String SUPPLIER = "SUPPLIER";
+        String SUPPLIER = "SUPPLIER";//
+        String ORDER_STATE = "ORDER_STATE";//订单状态
+        String REPAYMENT_STATE = "REPAYMENT_STATE";//还款状态
     }
 
     interface JOB_DATA_KEY {
@@ -96,6 +98,9 @@ public interface Constants {
         int FROZEN = 1;
     }
 
+    /**
+     * 订单状态
+     */
     interface ORDER_STATE {
         int NOT_LOAN = -1;//未借款
         int AUIDT_PENGDING = 0;//待审核
@@ -105,7 +110,7 @@ public interface Constants {
         int OVERDUE = 4;//已逾期
         int FINISHED = 5;//已完成
     }
-
+    //还款状态
     interface REPAYMENT_ORDER_STATE {
         int PASS = 3;//使用中
         int OVERDUE = 4;//已逾期
