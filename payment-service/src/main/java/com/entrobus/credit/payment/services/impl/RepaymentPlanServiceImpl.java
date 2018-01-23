@@ -1,6 +1,7 @@
 package com.entrobus.credit.payment.services.impl;
 
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.payment.dao.RepaymentPlanMapper;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
@@ -108,6 +109,20 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
         RepaymentPlanExample example = new RepaymentPlanExample();
         example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
         return this.selectByExample(example);
+    }
+
+    @Override
+    public RepaymentPlan getPresentRepaymentPlan(String orderId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
+                andPlanTimeLessThan(DateUtils.getEndDateTimeOfMonth(new Date()))
+        .andPlanTimeGreaterThan(DateUtils.getStartOfMonth(new Date()));
+        example.setOrderByClause(" plan_time desc ");
+        List<RepaymentPlan> list = this.selectByExample(example);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
     }
 
     protected void defaultValue(RepaymentPlan record) {

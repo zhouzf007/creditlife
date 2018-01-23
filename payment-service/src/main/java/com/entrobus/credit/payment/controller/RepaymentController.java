@@ -18,7 +18,7 @@ import java.util.List;
 
 @RefreshScope
 @RestController
-public class RepaymentController extends PaymentBaseController{
+public class RepaymentController extends PaymentBaseController {
 
     @Autowired
     private RepaymentService repaymentService;
@@ -41,6 +41,18 @@ public class RepaymentController extends PaymentBaseController{
     public List<RepaymentPlan> getOrderRepaymentPlan(@PathVariable("orderId") String orderId) {
         List<RepaymentPlan> list = repaymentPlanService.getRepaymentPlanByOrderId(orderId);
         return list;
+    }
+
+    /**
+     * 订单的当前还款计划
+     *
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/presentRepaymentPlan")
+    public RepaymentPlan getPresentRepaymentPlan(@RequestParam("orderId") String orderId) {
+        RepaymentPlan plan = repaymentPlanService.getPresentRepaymentPlan(orderId);
+        return plan;
     }
 
     /**
