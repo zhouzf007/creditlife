@@ -1,6 +1,7 @@
 package com.entrobus.credit.vo.product;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProductVo {
 
@@ -20,17 +21,17 @@ public class ProductVo {
         this.terms = terms;
     }
 
-    private List<InterestVo> repaymentTerm;//期数
+    private List<Map> repaymentTerm;//期数
 
     public String getProdId() {
         return prodId;
     }
 
-    public List<InterestVo> getRepaymentTerm() {
+    public List<Map> getRepaymentTerm() {
         return repaymentTerm;
     }
 
-    public void setRepaymentTerm(List<InterestVo> repaymentTerm) {
+    public void setRepaymentTerm(List<Map> repaymentTerm) {
         this.repaymentTerm = repaymentTerm;
     }
 
