@@ -56,7 +56,7 @@ public class ManagerCacheService  {
         String id = CacheService.getString(redisTemplate,key);
         if (id == null) return null;
         String idKey = Cachekey.BsStatics.ID_OBJ + id ;
-        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, key, BsStaticVo.class);
+        BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, idKey, BsStaticVo.class);
         return cacheObj;
     }
     /**
