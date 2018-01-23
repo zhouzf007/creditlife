@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.common.util.ServletUtil;
 import com.entrobus.credit.log.service.ClientLogService;
 import com.entrobus.credit.log.service.LogCacheService;
@@ -67,7 +68,7 @@ public class LogController {
         vo.setOperationState(log.getOperationState());
         vo.setOperatorId(log.getOperatorId());
         vo.setRemark(log.getRemark());
-        vo.setTime(log.getOperationTime());
+        vo.setTime(DateUtils.formatDateTime(log.getOperationTime()));
         String stateName = logCacheService.translation(Cachekey.Translation.LOG_OPERATION_STATE, log.getOperationState());
         vo.setOperationStateName(stateName);
         if (StringUtils.isNotBlank(log.getResult())) {

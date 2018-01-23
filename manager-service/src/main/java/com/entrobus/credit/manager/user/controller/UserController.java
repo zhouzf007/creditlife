@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.user.controller;
 
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
@@ -39,6 +40,7 @@ public class UserController extends ManagerBaseController {
     }
 
     @PutMapping(value = "/userState")
+    @RecordLog(desc = "修改用户状态")
     public WebResult updateUserState(String userId,Integer userState){
         userClient.updateUserState(userId,userState);
         return WebResult.ok();

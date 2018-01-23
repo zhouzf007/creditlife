@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.schedule.controller;
 
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.client.ScheduleClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
@@ -26,6 +27,7 @@ public class ScheduleController extends ManagerBaseController{
      * @return
      */
     @PostMapping("/job")
+    @RecordLog(desc = "添加任务")
     public WebResult addJob( QuartzJobVo vo) {
         return scheduleClient.addJob(vo);
     }
@@ -37,6 +39,7 @@ public class ScheduleController extends ManagerBaseController{
      * @return
      */
     @PutMapping("/job/{jobName}")
+    @RecordLog(desc = "编辑任务",relId = "jobName")
     public WebResult editJob(@PathVariable String jobName, QuartzJobVo vo) {
         return scheduleClient.editJob(jobName,vo);
     }
@@ -73,6 +76,7 @@ public class ScheduleController extends ManagerBaseController{
      * @return
      */
     @DeleteMapping("/job/{jobName}")
+    @RecordLog(desc = "删除任务",relId = "jobName")
     public WebResult removeJob(@PathVariable String jobName){
         return scheduleClient.removeJob(jobName);
     }
@@ -84,6 +88,7 @@ public class ScheduleController extends ManagerBaseController{
      * @return
      */
     @PostMapping("/pauseJob")
+    @RecordLog(desc = "暂停任务",relId = "jobName")
     public WebResult pauseJob(@RequestParam String jobName,@RequestParam(required = false) String groupName) {
         return scheduleClient.pauseJob(jobName,groupName);
     }
@@ -95,16 +100,18 @@ public class ScheduleController extends ManagerBaseController{
      * @return
      */
     @PostMapping("/resumeJob")
+    @RecordLog(desc = "恢复任务",relId = "jobName")
     public WebResult resumeJob(@RequestParam String jobName,@RequestParam(required = false) String groupName){
         return scheduleClient.resumeJob(jobName,groupName);
     }
     /**
-     * 恢复任务
+     * 触发（执行）任务
      * @param jobName
      * @param groupName
      * @return
      */
     @PostMapping("/triggerJob")
+    @RecordLog(desc = "触发（执行）任务",relId = "jobName")
     public WebResult triggerJob(@RequestParam String jobName,@RequestParam(required = false) String groupName){
         return scheduleClient.triggerJob(jobName,groupName);
     }
