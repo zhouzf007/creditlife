@@ -1620,6 +1620,66 @@ public class OrdersExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andRejectTypeIsNull() {
+            addCriterion("reject_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeIsNotNull() {
+            addCriterion("reject_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeEqualTo(Integer value) {
+            addCriterion("reject_type =", value, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeNotEqualTo(Integer value) {
+            addCriterion("reject_type <>", value, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeGreaterThan(Integer value) {
+            addCriterion("reject_type >", value, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("reject_type >=", value, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeLessThan(Integer value) {
+            addCriterion("reject_type <", value, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("reject_type <=", value, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeIn(List<Integer> values) {
+            addCriterion("reject_type in", values, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeNotIn(List<Integer> values) {
+            addCriterion("reject_type not in", values, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeBetween(Integer value1, Integer value2) {
+            addCriterion("reject_type between", value1, value2, "rejectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRejectTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("reject_type not between", value1, value2, "rejectType");
+            return (Criteria) this;
+        }
+
         public Criteria andReasonIsNull() {
             addCriterion("reason is null");
             return (Criteria) this;

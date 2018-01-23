@@ -46,7 +46,7 @@ public class OrderController extends ManagerBaseController {
      * 驳回，通过，放款
      */
     @PutMapping("/orderState")
-    public WebResult updateOrderState(String id, Integer state, String reason, Date loanTime, Long money) {
+    public WebResult updateOrderState(String id, Integer state, String reason,Integer rejectType, Date loanTime, Long money) {
         if (StringUtils.isEmpty(id) || state == null) {
             return WebResult.error(WebResult.CODE_PARAMETERS, "参数有误");
         }
@@ -55,6 +55,7 @@ public class OrderController extends ManagerBaseController {
         order.setState(state);
         order.setReason(reason);
         order.setLoanTime(loanTime);
+        order.setRejectType(rejectType);
         order.setActualMoney(money);
         orderClient.updateOrder(order);
         return WebResult.ok();
