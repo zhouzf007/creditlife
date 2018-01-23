@@ -8,7 +8,7 @@ import java.util.Date;
 public class BankOperationLogVo {
     private String id;
     private String desc;
-    private Date time;
+    private String time;
     private String operatorId;
     private String remark;
     private Integer operationState;
@@ -40,11 +40,11 @@ public class BankOperationLogVo {
         this.desc = desc;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

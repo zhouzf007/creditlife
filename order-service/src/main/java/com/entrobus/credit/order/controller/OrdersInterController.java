@@ -14,7 +14,10 @@ import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.order.services.OrdersService;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
-import com.entrobus.credit.vo.order.*;
+import com.entrobus.credit.vo.order.OrderDtlVo;
+import com.entrobus.credit.vo.order.OrderListVo;
+import com.entrobus.credit.vo.order.RepaymentPlanVo;
+import com.entrobus.credit.vo.order.UserOrderDtlVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -23,7 +26,9 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RefreshScope
 @RestController
@@ -92,6 +97,7 @@ public class OrdersInterController {
         dtl.setRate(AmountUtil.change2Percent(order.getInterestRate()));
         dtl.setRepaymentTerm(order.getRepaymentTerm() + "");
         dtl.setRepaymentType(order.getRepaymentType() + "");
+        dtl.setRepaymentTypeName(cacheService.translate(Cachekey.Translation.REPAYMENT_TYPE + order.getRepaymentType()));
         dtl.setUsage(order.getLoanUsage());
         dtl.setScore(order.getCreditScore());
         dtl.setContractId(order.getContractId());
@@ -172,12 +178,11 @@ public class OrdersInterController {
      * 订单状态更新
      * 审核，放款，驳回，逾期，结清
      *
-     * @param id
      * @param order
      */
-    @PutMapping("/order/{id}")
-    public WebResult updateOrder(@PathVariable("id") String id, @RequestBody Orders order) {
-        Orders loanOrder = ordersService.selectByPrimaryKey(id);
+    @PutMapping("/order")
+    public WebResult updateOrder(@RequestBody Orders order) {
+        Orders loanOrder = ordersService.selectByPrimaryKey(order.getId());
         if (loanOrder != null) {
             if (loanOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING && order.getState() == Constants.ORDER_STATE.LOAN_PENGDING) {
                 //审核
@@ -200,6 +205,7 @@ public class OrdersInterController {
                 loanOrder.setState(Constants.ORDER_STATE.REJECTION);
                 loanOrder.setAuditor(order.getAuditor());
                 loanOrder.setAuditTime(new Date());
+                loanOrder.setRejectType(order.getRejectType());
                 loanOrder.setReason(order.getReason());//原因
                 loanOrder.setActualMoney(order.getActualMoney());//授信额度
                 ordersService.updateByPrimaryKeySelective(loanOrder);
@@ -215,6 +221,8 @@ public class OrdersInterController {
                 ordersService.updateByPrimaryKeySelective(loanOrder);
                 //生成订单实例
                 orderInstanceService.saveOrderInstance(loanOrder);
+            }else {
+                return WebResult.error(WebResult.CODE_BUSI_DISPERMIT,"订单状态异常");
             }
         }
         return WebResult.ok();

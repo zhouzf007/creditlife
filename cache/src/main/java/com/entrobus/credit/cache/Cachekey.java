@@ -27,6 +27,7 @@ public interface Cachekey {
         String REPAYMENT_STATE = "repayment_state:state:";
         String ROLE_NAME = "role_name:role:";
         String LOG_OPERATION_STATE = "log:operation:state:";
+        String REPAYMENT_TYPE = "repayment_type:type:";
 
     }
 
