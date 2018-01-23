@@ -1,5 +1,5 @@
 package com.entrobus.credit.log.service;
 
 public interface LogCacheService {
-    <T> String translation(String prefix, T value);
+    <T> String translate(String type, T value);
 }

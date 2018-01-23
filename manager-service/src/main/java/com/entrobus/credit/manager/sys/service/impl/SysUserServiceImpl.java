@@ -326,9 +326,15 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUsers;
     }
 
-    public Map<Long,String> getUserNameMapByOrgId(String orgId){
+    /**
+     *
+     * @param orgId
+     * @return key:id,  value:userName
+     */
+    @Override
+    public Map<String, String> getUserNameMapByOrgId(String orgId){
         List<SysUser> userList = getByOrgId(orgId);
         //list转map
-        return userList.stream().collect(Collectors.toMap(SysUser::getId,SysUser::getUsername));
+        return userList.stream().collect(Collectors.toMap(o -> String.valueOf(o.getId()),SysUser::getUsername));
     }
 }

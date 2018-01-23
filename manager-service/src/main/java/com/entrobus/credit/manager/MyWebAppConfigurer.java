@@ -35,6 +35,7 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
                 .excludePathPatterns(
                         "/sys/user/login",
                         "/sys/user/logout",
+                        "/sys/user/org/userNameMap",
                         "/sys/tool/createSuperAdmin",
                         "/loan/rate/**",
                         "/api/**"
