@@ -1,10 +1,11 @@
+## eureka注册中心（测试环境）
 eureka:
   instance:
-    hostname: localhost
+    hostname: 119.29.97.133:8761
     prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@localhost:8761/eureka/
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@${eureka.instance.hostname}/eureka/
 
 hystrix:
   command:
@@ -19,8 +20,13 @@ ribbon:
   ConnectTimeout: 5000
 
 spring:
+# 测试环境rabbitmq服务器地址
   rabbitmq:
-    host: localhost
+    host: 139.199.161.144
+    port: 5672
+    username: newseax-test
+    password: 123
+    virtual-host: newseax-test
   sleuth:
     sampler:
       percentage: 1
@@ -30,7 +36,7 @@ spring:
       skip-pattern: "^org.*HystrixStreamTask$"
 
 authserver:
-    hostname: localhost
+    hostname: 119.29.97.133
     port: 5000
     contextPath: /uaa
 
@@ -38,11 +44,6 @@ security:
   oauth2:
     resource:
       user-info-uri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/current
-
-
-sms:
-  apikey: a56575f23e62f90992d9c22ebb17efa9
-  posturl: http://sms.yunpian.com/v2/sms/single_send.json
 
 
 
