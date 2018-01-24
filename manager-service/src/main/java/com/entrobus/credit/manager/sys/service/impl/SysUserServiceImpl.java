@@ -319,9 +319,11 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public List<SysUser> getByOrgId(String orgId){
         SysUserExample example = new SysUserExample();
-        example.createCriteria()
-                .andOrgIdEqualTo(orgId)
-                .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        SysUserExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        if (StringUtils.isNotBlank(orgId)){
+            criteria.andOrgIdEqualTo(orgId);
+        }
         List<SysUser> sysUsers = this.selectByExample(example);
         return sysUsers;
     }

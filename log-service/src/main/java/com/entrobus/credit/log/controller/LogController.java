@@ -14,6 +14,8 @@ import com.entrobus.credit.pojo.log.OperationLog;
 import com.entrobus.credit.vo.common.CommonParameter;
 import com.entrobus.credit.vo.log.BankOperationLogVo;
 import com.entrobus.credit.vo.log.LogQueryVo;
+import com.entrobus.credit.vo.log.ManagerOperationLogDetail;
+import com.entrobus.credit.vo.log.ManagerOperationLogVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -57,6 +59,7 @@ public class LogController {
                                                          @RequestParam(defaultValue = "1")int pageNum,
                                                          @RequestParam(defaultValue = "20") int pageSize){
         PageHelper.startPage(pageNum,pageSize);
+        queryVo.setPlatform(Constants.PLATFORM.BANK);//资金方
         List<OperationLog> list = operationLogService.getByQueryVo(queryVo);
         Map<String, String> longStringMap = managerClient.userNameMapByOrg(queryVo.getOrgId());
 //        List<BankOperationLogVo> voList = list.stream().map(this::toBankOperationLogVo).collect(Collectors.toList());
@@ -89,5 +92,55 @@ public class LogController {
             }
         }
         return vo;
+    }
+
+
+    @GetMapping("/manager/operationLog")
+    public WebResult managerOperationLogList( LogQueryVo queryVo,
+                                           @RequestParam(defaultValue = "1")int pageNum,
+                                           @RequestParam(defaultValue = "20") int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+//        queryVo.setPlatform(Constants.PLATFORM.BANK);//资金方
+        List<OperationLog> list = operationLogService.getByQueryVo(queryVo);
+        Map<String, String> longStringMap = managerClient.userNameMapByOrg(queryVo.getOrgId());
+//        List<BankOperationLogVo> voList = list.stream().map(this::toBankOperationLogVo).collect(Collectors.toList());
+        List<ManagerOperationLogVo> voList = new ArrayList<>();
+        for (OperationLog log : list) {
+            ManagerOperationLogVo logVo = new ManagerOperationLogVo();
+            toManagerOperationLogVo(log,logVo);
+            String operatorName = longStringMap.getOrDefault(log.getOperatorId(), "");
+            logVo.setOperatorName(operatorName);
+            voList.add(logVo);
+        }
+        PageInfo<OperationLog> pageInfo = new PageInfo<>(list);
+        return WebResult.ok("操作成功").put("total",pageInfo.getTotal()).put("rows",voList);
+    }
+
+    private void toManagerOperationLogVo(OperationLog log, ManagerOperationLogVo vo ) {
+        vo.setId(log.getId());
+        vo.setDesc(log.getOperationDesc());
+        vo.setOperationState(log.getOperationState());
+        vo.setOperatorId(log.getOperatorId());
+        vo.setRemark(log.getRemark());
+        vo.setTime(DateUtils.formatDateTime(log.getOperationTime()));
+        String stateName = logCacheService.translate(Constants.CODE_TYPE.OPERATION_STATE, log.getOperationState());
+        vo.setOperationStateName(stateName);
+        vo.setResult(log.getResult());
+    }
+
+
+    @GetMapping("/manager/operationLog/detail")
+    public ManagerOperationLogDetail managerOperationLogDetail(String id){
+        if (StringUtils.isBlank(id)) return null;
+        OperationLog log = operationLogService.selectByPrimaryKey(id);
+        if (log == null) return null;
+        ManagerOperationLogDetail detail = new ManagerOperationLogDetail();
+        toManagerOperationLogVo(log,detail);
+        detail.setExtData(log.getExtData());
+        detail.setCreateTime(DateUtils.formatDateTime(log.getCreateTime()));
+        detail.setPlatformName(logCacheService.translate(Constants.CODE_TYPE.PLATFORM,log.getOperatorType()));
+        detail.setOperationData(log.getOperationData());
+        detail.setApplicationName(log.getApplicationName());
+        return detail;
     }
 }
