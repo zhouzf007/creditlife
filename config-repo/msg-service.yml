@@ -50,15 +50,17 @@ spring:
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
 #    配置mybatis mapper.xml
+
+#测试环境redis
   redis:
     cluster:
       nodes:
-        - 10.1.1.241:7000
-        - 10.1.1.241:7001
-        - 10.1.1.241:7002
-        - 10.1.1.241:7003
-        - 10.1.1.241:7004
-        - 10.1.1.241:7005
+        - 10.104.70.51:7000
+        - 10.104.70.51:7001
+        - 10.104.70.51:7002
+        - 10.104.70.51:7003
+        - 10.104.70.51:7004
+        - 10.104.70.51:7005
 
   cloud:
     stream:
