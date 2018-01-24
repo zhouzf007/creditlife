@@ -126,6 +126,7 @@ public class LogController {
         String stateName = logCacheService.translate(Constants.CODE_TYPE.OPERATION_STATE, log.getOperationState());
         vo.setOperationStateName(stateName);
         vo.setResult(log.getResult());
+        vo.setRelId(log.getRelId());
     }
 
 

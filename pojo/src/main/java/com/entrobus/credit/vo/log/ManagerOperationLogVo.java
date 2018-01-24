@@ -13,6 +13,15 @@ public class ManagerOperationLogVo {
     private String operationStateName;
     private String result;
     private String operatorName;
+    private String relId;
+
+    public String getRelId() {
+        return relId;
+    }
+
+    public void setRelId(String relId) {
+        this.relId = relId;
+    }
 
     public String getResult() {
         return result;
