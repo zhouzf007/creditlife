@@ -56,6 +56,7 @@ public class OrderController extends ManagerBaseController {
         if (StringUtils.isEmpty(id) || state == null) {
             return WebResult.error(WebResult.CODE_PARAMETERS, "参数有误");
         }
+        SysLoginUserInfo sys=getCurrLoginUser();
         OrderExt order = new OrderExt();
         order.setId(id);
         order.setState(state);
@@ -63,8 +64,11 @@ public class OrderController extends ManagerBaseController {
         order.setRejectType(rejectType);
         order.setLoanTimeStr(loanTime);
         order.setActualMoney(money);
-        orderClient.updateOrder(order);
-        return WebResult.ok();
+        order.setOrgId(sys.getOrgId());
+        order.setAuditor(sys.getUsername());
+        order.setUpdateOperator(sys.getUsername());
+        order.setLoanOperator(sys.getUsername());
+        return orderClient.updateOrder(order);
     }
 
 
