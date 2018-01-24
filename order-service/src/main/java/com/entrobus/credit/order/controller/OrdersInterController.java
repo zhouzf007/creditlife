@@ -208,6 +208,8 @@ public class OrdersInterController {
                 ordersService.updateByPrimaryKeySelective(loanOrder);
             } else if ((loanOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING || loanOrder.getState() == Constants.ORDER_STATE.LOAN_PENGDING) && order.getState() == Constants.ORDER_STATE.PASS) {
                 //放款
+                if (loanOrder.getAuditTime()==null)loanOrder.setAuditTime(new Date());
+                if (StringUtils.isEmpty(loanOrder.getAuditor())) loanOrder.setAuditor(order.getAuditor());
                 loanOrder.setState(Constants.ORDER_STATE.PASS);
                 loanOrder.setLoanOperator(order.getLoanOperator());
                 if (StringUtils.isNotEmpty(order.getLoanTimeStr())) {
