@@ -3,6 +3,7 @@ package com.entrobus.credit.user.services;
 
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
+import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.vo.base.BsStaticVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserInfoCache;
@@ -28,4 +29,8 @@ public interface UserCacheService {
     CacheUserInfo getUserCacheBySid(String sid);
 
     String translate(String key);
+
+    void refreshUserCache(String id);
+
+    void refreshUserCache(UserInfo record);
 }

@@ -99,4 +99,15 @@ public class UserCacheServiceImpl implements UserCacheService {
         CacheService.delete(redisTemplate, Cachekey.User.UID_PREFIX + userId);
         return true;
     }
+
+    @Override
+    public void refreshUserCache(String id) {
+        UserInfo record = userInfoService.selectByPrimaryKey(id);
+        userInfoService.initUserCache(record);
+    }
+
+    @Override
+    public void refreshUserCache(UserInfo record) {
+        userInfoService.initUserCache(record);
+    }
 }
