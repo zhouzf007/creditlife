@@ -8,6 +8,7 @@ import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.user.UserAccount;
+import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
 import com.entrobus.credit.user.services.CreditReportService;
@@ -53,8 +54,8 @@ public class UserController extends BaseController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @PostMapping("/login")
-    public WebResult login(@RequestParam("cellphone") String cellphone, @RequestParam("pwd") String pwd) {
+    @GetMapping(value = "/login")
+    public WebResult login(String cellphone, String pwd) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
@@ -79,8 +80,8 @@ public class UserController extends BaseController {
         return WebResult.ok().put("token", token).put(WebResult.DATA, loginUserInfo);
     }
 
-    @PostMapping("/register")
-    public WebResult register(@RequestParam("cellphone") String cellphone, @RequestParam("pwd") String pwd, @RequestParam("code") String code, @RequestParam("unionId") String unionId) {
+    @GetMapping("/register")
+    public WebResult register(String cellphone, String pwd, String code, String unionId) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
@@ -107,8 +108,8 @@ public class UserController extends BaseController {
         return WebResult.ok().put("token", token).put(WebResult.DATA, loginUserInfo);
     }
 
-    @PostMapping("/reset")
-    public WebResult reset(@RequestParam("cellphone") String cellphone, @RequestParam("pwd") String pwd, @RequestParam("code") String code) {
+    @GetMapping("/reset")
+    public WebResult reset(String cellphone, String pwd, String code) {
         if (ConversionUtil.isContainEmptyParam(cellphone, pwd)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "请输入账号密码");
         }
@@ -132,8 +133,8 @@ public class UserController extends BaseController {
         return WebResult.ok();
     }
 
-    @PostMapping("/identification")
-    public WebResult identification(@RequestParam("token") String token) {
+    @GetMapping("/identification")
+    public WebResult identification(String token) {
         CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
@@ -145,8 +146,8 @@ public class UserController extends BaseController {
         return WebResult.ok().put(WebResult.DATA, map);
     }
 
-    @PostMapping("/subCardInfo")
-    public WebResult subCardInfo(@RequestParam("token") String token, @RequestParam("name") String name, @RequestParam("idCard") String idCard) {
+    @GetMapping("/subCardInfo")
+    public WebResult subCardInfo(String token, String name, String idCard) {
         CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
@@ -171,8 +172,8 @@ public class UserController extends BaseController {
         return WebResult.ok();
     }
 
-    @PostMapping("/sendCode")
-    public WebResult sendCode(@RequestParam("cellphone") String cellphone, @RequestParam("type") Integer type) {
+    @GetMapping("/sendCode")
+    public WebResult sendCode(String cellphone, Integer type) {
         if (StringUtils.isEmpty(cellphone) || type == null) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
@@ -201,8 +202,8 @@ public class UserController extends BaseController {
     /*
     * 获取登录用户信息，刷新缓存
     * */
-    @PostMapping("/info")
-    public WebResult info(@RequestParam("token") String token) {
+    @GetMapping(value = "/info")
+    public WebResult info(String token) {
         if (ConversionUtil.isContainEmptyParam(token)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
@@ -230,13 +231,20 @@ public class UserController extends BaseController {
     /*
     * 添加银行卡
     * */
-    @PostMapping(value = "/addAccount", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/addAccount",produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResult addAccount(@RequestBody UserAccount userAccount, @RequestParam("token") String token) {
         CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
+        //已添加
+        UserAccountExample example = new UserAccountExample();
+        example.createCriteria().andUserIdEqualTo(userInfo.getId()).andAccountEqualTo(userAccount.getAccount()).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        List<UserAccount> userAccounts = userAccountService.selectByExample(example);
+        if(userAccounts != null && userAccounts.size() > 0){
+            return WebResult.fail(WebResult.CODE_OPERATION, "该银行卡已添加");
+        }
         //保存
         userAccount.setId(GUIDUtil.genRandomGUID());
         userAccount.setCreateTime(new Date());
@@ -251,8 +259,8 @@ public class UserController extends BaseController {
     /*
     * 添加银行卡验证手机号
     * */
-    @PostMapping("/accountVerifyCode")
-    public WebResult accountVerifyCode(@RequestParam("code") String code, @RequestParam("cellphone") String cellphone, @RequestParam("id") String id) {
+    @GetMapping("/accountVerifyCode")
+    public WebResult accountVerifyCode(String code, String cellphone, String id) {
         CacheUserInfo loginUser = getCurrLoginUser();
         if (ConversionUtil.isContainEmptyParam(loginUser)) {
             return WebResult.fail(WebResult.CODE_TOKEN);
