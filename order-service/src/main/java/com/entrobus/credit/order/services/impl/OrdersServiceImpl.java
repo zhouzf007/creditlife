@@ -203,7 +203,8 @@ public class OrdersServiceImpl implements OrdersService {
             criteria.andOrgIdEqualTo(orgId);
         }
         example.setOrderByClause(" create_time desc ");
-        PageHelper.startPage(offset, limit);
+        if (offset != null && limit != null)
+            PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<UserOrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -239,7 +240,8 @@ public class OrdersServiceImpl implements OrdersService {
             criteria.andOrgIdEqualTo(orgId);
         }
         example.setOrderByClause(" create_time desc ");
-        PageHelper.startPage(offset, limit);
+        if (offset != null && limit != null)
+            PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<OrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
