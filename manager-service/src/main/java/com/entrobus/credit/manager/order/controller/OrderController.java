@@ -66,7 +66,6 @@ public class OrderController extends ManagerBaseController {
         order.setActualMoney(money);
         order.setOrgId(sys.getOrgId());
         order.setAuditor(sys.getUsername());
-        order.setAuditTime(new Date());
         order.setUpdateOperator(sys.getUsername());
         order.setLoanOperator(sys.getUsername());
         return orderClient.updateOrder(order);
