@@ -19,6 +19,7 @@ import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
 import com.entrobus.credit.user.services.UserAccountService;
 import com.entrobus.credit.user.services.UserInfoService;
+import com.entrobus.credit.vo.user.UserAccountVo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +109,7 @@ public class UserController extends BaseController {
         userInfoService.addUserInfo(userInfo);
         String token = GUIDUtil.genRandomGUID();
         CacheUserInfo loginUserInfo = userInfoService.getLoginUserInfo(userInfo, token);
+        CacheService.delete(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
         return WebResult.ok().put("token", token).put(WebResult.DATA, loginUserInfo);
     }
 
@@ -133,6 +135,7 @@ public class UserController extends BaseController {
         userInfo.setPwd(ShiroUtils.sha256(pwd, userInfo.getSalt()));
         userInfo.setUpdateTime(new Date());
         userInfoService.updateByPrimaryKeySelective(userInfo);
+        CacheService.delete(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
         return WebResult.ok();
     }
 
@@ -236,20 +239,26 @@ public class UserController extends BaseController {
     * 添加银行卡
     * */
     @PostMapping(value = "/addAccount",produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResult addAccount(@RequestBody UserAccount userAccount, @RequestParam("token") String token) {
-        CacheUserInfo userInfo = userCacheService.getUserCacheBySid(token);
+    public WebResult addAccount(@RequestBody UserAccountVo vo) {
+        CacheUserInfo userInfo = userCacheService.getUserCacheBySid(vo.getToken());
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
         //已添加
         UserAccountExample example = new UserAccountExample();
-        example.createCriteria().andUserIdEqualTo(userInfo.getId()).andAccountEqualTo(userAccount.getAccount()).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        example.createCriteria().andUserIdEqualTo(userInfo.getId()).andAccountEqualTo(vo.getAccount()).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<UserAccount> userAccounts = userAccountService.selectByExample(example);
         if(userAccounts != null && userAccounts.size() > 0){
             return WebResult.fail(WebResult.CODE_OPERATION, "该银行卡已添加");
         }
         //保存
+        UserAccount userAccount = new UserAccount();
+        try {
+            BeanUtils.copyProperties(userAccount, vo);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
         userAccount.setId(GUIDUtil.genRandomGUID());
         userAccount.setCreateTime(new Date());
         userAccount.setUserId(userInfo.getId());
@@ -281,6 +290,7 @@ public class UserController extends BaseController {
         userAccount.setUpdateOperator(loginUser.getId());
         userAccountService.updateByPrimaryKeySelective(userAccount);
         userCacheService.refreshUserCache(loginUser.getId());
+        CacheService.delete(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
         return WebResult.ok();
     }
 

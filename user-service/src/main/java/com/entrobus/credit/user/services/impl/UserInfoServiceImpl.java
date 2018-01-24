@@ -103,6 +103,8 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         List<UserAccountInfo> userAccountInfos = getUserAccountInfos(record, loginUserInfo);
         loginUserInfo.setUserAccountInfos(userAccountInfos);
+        String oldToken = CacheService.getString(redisTemplate, Cachekey.User.UID_SID_PREFIX + loginUserInfo.getId());
+        CacheService.delete(redisTemplate, Cachekey.User.SID_PREFIX + oldToken);
         CacheService.setString(redisTemplate, Cachekey.User.SID_PREFIX + token, loginUserInfo.getId());
         CacheService.setString(redisTemplate, Cachekey.User.UID_SID_PREFIX + loginUserInfo.getId(), token);
         CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + loginUserInfo.getId(), loginUserInfo);
