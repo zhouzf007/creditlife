@@ -1,9 +1,9 @@
 spring:
   application:
-    name: wechat-service
+    name: base-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://10.135.106.153:8888 #测试环境配置中心
       label: dev
       fail-fast: true
       username: user
@@ -21,9 +21,8 @@ security:
   basic:
     enabled: false
 
-management:
-  security:
-  enabled: false
+
+
 
 
 
