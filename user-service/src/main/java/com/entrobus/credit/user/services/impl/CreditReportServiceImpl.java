@@ -133,6 +133,7 @@ public class CreditReportServiceImpl implements CreditReportService {
                             userInfo.setUpdateTime(new Date());
                             userInfo.setUpdateOperator(userInfo.getId());
                             userInfoService.updateByPrimaryKeySelective(userInfo);
+                            userInfoService.initUserCache(userInfo);
                             return cr;
                         }
                     }

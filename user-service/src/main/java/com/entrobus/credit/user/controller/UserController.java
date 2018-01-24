@@ -172,6 +172,7 @@ public class UserController extends BaseController {
         info.setIdCard(idCard);
         info.setRole(Constants.USER_ROLE.OWNER);
         userInfoService.updateByPrimaryKeySelective(info);
+        userCacheService.refreshUserCache(info);
         return WebResult.ok();
     }
 
@@ -256,6 +257,7 @@ public class UserController extends BaseController {
         userAccount.setDeleteFlag(Constants.DELETE_FLAG.NO);
         userAccount.setCreateOperator(userInfo.getId());
         userAccountService.insertSelective(userAccount);
+        userCacheService.refreshUserCache(userInfo.getId());
         return WebResult.ok().put(WebResult.DATA, userAccount.getId());
     }
 
@@ -278,6 +280,7 @@ public class UserController extends BaseController {
         userAccount.setUpdateTime(new Date());
         userAccount.setUpdateOperator(loginUser.getId());
         userAccountService.updateByPrimaryKeySelective(userAccount);
+        userCacheService.refreshUserCache(loginUser.getId());
         return WebResult.ok();
     }
 
