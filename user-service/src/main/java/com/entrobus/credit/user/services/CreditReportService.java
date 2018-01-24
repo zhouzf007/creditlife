@@ -2,6 +2,7 @@ package com.entrobus.credit.user.services;
 
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.CreditReportExample;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 
 import java.util.List;
 
@@ -28,5 +29,5 @@ public interface CreditReportService {
 
     int insertSelective(CreditReport record);
 
-    CreditReport getCreditReportByUid(String userId);
+    CreditReport getCreditReportByUid(CacheUserInfo loginUser);
 }

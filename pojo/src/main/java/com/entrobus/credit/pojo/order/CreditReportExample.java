@@ -470,6 +470,66 @@ public class CreditReportExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andQuotaIsNull() {
+            addCriterion("quota is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaIsNotNull() {
+            addCriterion("quota is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaEqualTo(Long value) {
+            addCriterion("quota =", value, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaNotEqualTo(Long value) {
+            addCriterion("quota <>", value, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaGreaterThan(Long value) {
+            addCriterion("quota >", value, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaGreaterThanOrEqualTo(Long value) {
+            addCriterion("quota >=", value, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaLessThan(Long value) {
+            addCriterion("quota <", value, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaLessThanOrEqualTo(Long value) {
+            addCriterion("quota <=", value, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaIn(List<Long> values) {
+            addCriterion("quota in", values, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaNotIn(List<Long> values) {
+            addCriterion("quota not in", values, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaBetween(Long value1, Long value2) {
+            addCriterion("quota between", value1, value2, "quota");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuotaNotBetween(Long value1, Long value2) {
+            addCriterion("quota not between", value1, value2, "quota");
+            return (Criteria) this;
+        }
+
         public Criteria andCreditScoreIsNull() {
             addCriterion("credit_score is null");
             return (Criteria) this;

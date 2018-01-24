@@ -1,11 +1,16 @@
 package com.entrobus.credit.user.services.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.CreditReportExample;
+import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.user.dao.CreditReportMapper;
 import com.entrobus.credit.user.services.CreditReportService;
+import com.entrobus.credit.user.services.UserInfoService;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +19,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CreditReportServiceImpl implements CreditReportService {
+
     @Autowired
     private CreditReportMapper creditReportMapper;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     private static final Logger logger = LoggerFactory.getLogger(CreditReportServiceImpl.class);
 
@@ -83,24 +93,52 @@ public class CreditReportServiceImpl implements CreditReportService {
     }
 
     @Override
-    public CreditReport getCreditReportByUid(String userId) {
+    public CreditReport getCreditReportByUid(CacheUserInfo loginUser) {
         CreditReportExample example = new CreditReportExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andUserIdEqualTo(userId);
+        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andUserIdEqualTo(loginUser.getId());
         example.setOrderByClause(" create_time desc ");
         List<CreditReport> list = selectByExample(example);
         if (!list.isEmpty()) {
-            return list.get(0);
+            CreditReport creditReport = list.get(0);
+            long time = new Date().getTime() - creditReport.getCreateTime().getTime();
+            if(time/(1000*60*60*24) < 30){
+                return creditReport;
+            }
         }
-        //@TODO 获取信用报告
-        String url="";
-        int score=10000;
-        CreditReport cr=new CreditReport();
-        cr.setUserId(userId);
-        cr.setId(GUIDUtil.genRandomGUID());
-        cr.setCreditScore(score);
-        cr.setReportUrl(url);
-        cr.setCreateTime(new Date());
-        this.insertSelective(cr);
-        return cr;
+        if(StringUtils.isNotBlank(loginUser.getIdCard())){
+            //@TODO 获取信用报告
+            String json = HttpClientUtil.doGet("http://creditlife.entrobus.com/api/get_report_and_score?idnumb=" + loginUser.getIdCard());
+            if(StringUtils.isNotBlank(json)){
+                Map map = (Map) JSONArray.parse(json);
+                if(map != null){
+                    String msg = (String) map.get("msg");
+                    if(StringUtils.isNotBlank(msg) && msg.equals("success")){
+                        Map rmap = (Map) map.get("result");
+                        if(rmap != null){
+                            Integer creditScore = (Integer) rmap.get("score");
+                            String reportUrl = (String) rmap.get("url_report");
+                            Long quota = (Long) rmap.get("max_loan");
+                            CreditReport cr=new CreditReport();
+                            cr.setUserId(loginUser.getId());
+                            cr.setId(GUIDUtil.genRandomGUID());
+                            cr.setCreditScore(creditScore);
+                            cr.setQuota(quota);
+                            cr.setReportUrl(reportUrl);
+                            cr.setCreateTime(new Date());
+                            this.insertSelective(cr);
+                            UserInfo userInfo = new UserInfo();
+                            userInfo.setId(loginUser.getId());
+                            userInfo.setCreditScore(creditScore);
+                            userInfo.setQuota(quota);
+                            userInfo.setUpdateTime(new Date());
+                            userInfo.setUpdateOperator(userInfo.getId());
+                            userInfoService.updateByPrimaryKeySelective(userInfo);
+                            return cr;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 }
