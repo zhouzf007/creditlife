@@ -192,18 +192,19 @@ public class OrdersServiceImpl implements OrdersService {
         return WebResult.ok(rsMap);
     }
 
-    public WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getUserOrderList(List<Integer> states, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
-        if (state != null) {
-            criteria.andStateEqualTo(state);
+        if (states != null && states.size() > 0) {
+            criteria.andStateIn(states);
         }
         if (StringUtils.isNotEmpty(orgId)) {
             criteria.andOrgIdEqualTo(orgId);
         }
         example.setOrderByClause(" create_time desc ");
-        PageHelper.startPage(offset, limit);
+        if (offset != null && limit != null)
+            PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<UserOrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -228,18 +229,19 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public WebResult getOrderList(Integer state, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getOrderList(List<Integer> states, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
-        if (state != null) {
-            criteria.andStateEqualTo(state);
+        if (states != null && states.size() > 0) {
+            criteria.andStateIn(states);
         }
         if (StringUtils.isNotEmpty(orgId)) {
             criteria.andOrgIdEqualTo(orgId);
         }
         example.setOrderByClause(" create_time desc ");
-        PageHelper.startPage(offset, limit);
+        if (offset != null && limit != null)
+            PageHelper.startPage(offset, limit);
         List<Orders> list = this.selectByExample(example);
         List<OrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -275,14 +277,16 @@ public class OrdersServiceImpl implements OrdersService {
             vo.setId(order.getId());
             vo.setState(order.getState());
             vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
-            vo.setLoanTime(order.getLoanTime()==null?order.getApplyTime():order.getLoanTime());
+            vo.setLoanTime(order.getLoanTime() == null ? order.getApplyTime() : order.getLoanTime());
             vo.setMoney(order.getActualMoney());
-            if (order.getState()==Constants.ORDER_STATE.PASS||order.getState()==Constants.ORDER_STATE.OVERDUE){
-                RepaymentPlan plan =paymentClient.getPresentRepaymentPlan(order.getId());
-                vo.setDueTime(plan.getPlanTime());
-                vo.setTerm(plan.getSortId()+"/"+order.getRepaymentTerm());
-                vo.setPrincipalAndInterest(1000L);
-                vo.setBalance(1000L);
+            if (order.getState() == Constants.ORDER_STATE.PASS || order.getState() == Constants.ORDER_STATE.OVERDUE) {
+                RepaymentPlan plan = paymentClient.getPresentRepaymentPlan(order.getId());
+                if (plan != null) {
+                    vo.setDueTime(plan.getPlanTime());
+                    vo.setTerm(plan.getSortId() + "/" + order.getRepaymentTerm());
+                    vo.setPrincipalAndInterest(1000L);
+                    vo.setBalance(1000L);
+                }
             }
             rsList.add(vo);
         }
