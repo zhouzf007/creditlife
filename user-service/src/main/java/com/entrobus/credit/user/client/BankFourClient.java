@@ -11,8 +11,20 @@ import java.util.Map;
 @RefreshScope
 @FeignClient(url = "${bsApi.server.url}",name = "BankFour",fallback = BankFourClient.BankFourClientFallBack.class)
 public interface BankFourClient {
+    /**
+     * 登录
+     * @param userName
+     * @param password
+     * @return
+     */
     @RequestMapping("/api/user/login")
     Map<String,Object> login(@RequestParam("userName") String userName,@RequestParam("password") String password);
+
+    /**
+     * 查询
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "/api/query/TrinityForce")
     Map<String,Object> verify(@RequestParam Map<String,String> map) ;
     class BankFourClientFallBack implements BankFourClient{
