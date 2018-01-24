@@ -13,11 +13,13 @@ import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
 import com.entrobus.credit.user.services.CreditReportService;
 import com.entrobus.credit.user.services.UserCacheService;
+import com.entrobus.credit.vo.order.CreditReportVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
 import com.entrobus.credit.user.services.UserAccountService;
 import com.entrobus.credit.user.services.UserInfoService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -25,6 +27,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.entrobus.credit.user.utils.ShiroUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -207,7 +210,7 @@ public class UserController extends BaseController {
         if (ConversionUtil.isContainEmptyParam(token)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
-        CacheUserInfo loginUser = getCurrLoginUser();
+        CacheUserInfo loginUser = userCacheService.getUserCacheBySid(token);
         if (ConversionUtil.isContainEmptyParam(loginUser)) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
@@ -260,8 +263,8 @@ public class UserController extends BaseController {
     * 添加银行卡验证手机号
     * */
     @GetMapping("/accountVerifyCode")
-    public WebResult accountVerifyCode(String code, String cellphone, String id) {
-        CacheUserInfo loginUser = getCurrLoginUser();
+    public WebResult accountVerifyCode(String code, String cellphone, String id, String token) {
+        CacheUserInfo loginUser = userCacheService.getUserCacheBySid(token);
         if (ConversionUtil.isContainEmptyParam(loginUser)) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
@@ -278,11 +281,23 @@ public class UserController extends BaseController {
         return WebResult.ok();
     }
 
-
+    /**
+     * 预估额度
+     * */
     @GetMapping(value = "/userCreditReport")
-    public CreditReport getUserCrediReport(@RequestParam("userId") String userId) {
-        CreditReport creditReport = creditReportService.getCreditReportByUid(userId);
-        return creditReport;
+    public WebResult getUserCrediReport(String token) {
+        CacheUserInfo loginUser = userCacheService.getUserCacheBySid(token);
+        if (ConversionUtil.isContainEmptyParam(loginUser)) {
+            return WebResult.fail(WebResult.CODE_TOKEN);
+        }
+        CreditReport creditReport = creditReportService.getCreditReportByUid(loginUser);
+        CreditReportVo vo = new CreditReportVo();
+        try {
+            BeanUtils.copyProperties(vo, creditReport);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return WebResult.ok().put(WebResult.DATA, vo);
     }
 
     @GetMapping(value = "/creditReport/{id}")
@@ -300,6 +315,5 @@ public class UserController extends BaseController {
             userInfoService.initUserCache(userInfo);
         }
     }
-
 
 }
