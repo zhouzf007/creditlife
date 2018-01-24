@@ -3,8 +3,7 @@ spring:
     name: schedule
   cloud:
     config:
-      #uri: http://localhost:8888
-      uri: http://10.135.106.153:8888 #测试环境
+      uri: http://localhost:8888
       label: dev
       fail-fast: true
       username: user
