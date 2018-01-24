@@ -1,9 +1,9 @@
 spring:
   application:
-    name: base-service
+    name: auth-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://10.135.106.153:8888 #测试环境配置中心
       label: dev
       fail-fast: true
       username: user
@@ -13,17 +13,3 @@ spring:
         max-interval: 10000
         multiplier: 2
         max-attempts: 10
-feign:
-  httpclient:
-    enabled: true
-
-security:
-  basic:
-    enabled: false
-
-
-
-
-
-
-
