@@ -180,6 +180,7 @@ public class WebResult extends HashMap<String, Object> {
 	}
 
 	public WebResult data(Object data) {
-		return put(DATA,data);
+		put(DATA,data);
+		return this;
 	}
 }
