@@ -95,12 +95,12 @@ public class OrderApiController {
      * @return
      */
     @GetMapping(path = "/userOrderList")
-    public WebResult getUserOrderList(@RequestParam("token") String token, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) throws Exception {
+    public WebResult getUserOrderList(@RequestParam("token") String token) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(token);
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
         }
-        List<UserOrdersVo> list = ordersService.getUserOrderList(userInfo.getId(), offset, limit);
+        List<UserOrdersVo> list = ordersService.getUserOrderList(userInfo.getId(), null, null);
         Map rsMap = new HashMap<>();
         rsMap.put("list", list);
         return WebResult.ok(rsMap);
@@ -119,7 +119,7 @@ public class OrderApiController {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
         }
         UserRepaymentPlanVo rsVo = new UserRepaymentPlanVo();
-        rsVo.setBalance("");
+        rsVo.setBalance(10000L);
         List<PlanVo> plist = new ArrayList<>();
         List<RepaymentPlan> list = paymentClient.getOrderRepaymentPlan(orderId);
         for (int i = 0; i < list.size(); i++) {

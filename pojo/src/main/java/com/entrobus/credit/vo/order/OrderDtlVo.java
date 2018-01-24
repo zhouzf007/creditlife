@@ -20,6 +20,16 @@ public class OrderDtlVo {
     private String repaymentTerm;
     private String repaymentType;
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    private String reason;
+
     public String getRepaymentTypeName() {
         return repaymentTypeName;
     }
