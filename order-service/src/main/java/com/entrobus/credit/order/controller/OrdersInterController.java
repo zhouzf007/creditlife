@@ -111,6 +111,7 @@ public class OrdersInterController {
         dtl.setContractId(order.getContractId());
         dtl.setCreditReportId(order.getCreditReportId());
         dtl.setUserState(userInfo.getState());
+        dtl.setReason(order.getReason());
         dtl.setState(order.getState());
         dtl.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
         List<RepaymentPlanVo> planList = new ArrayList<>();

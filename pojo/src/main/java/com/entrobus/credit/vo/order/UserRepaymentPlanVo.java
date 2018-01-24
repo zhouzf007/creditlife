@@ -7,14 +7,14 @@ public class UserRepaymentPlanVo {
     /**
      * 供接口使用
      */
-    private String balance;//余款总额
+    private Long balance;//余款总额
     private List<PlanVo> planList;
 
-    public String getBalance() {
+    public Long getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(Long balance) {
         this.balance = balance;
     }
 

@@ -115,7 +115,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     public RepaymentPlan getPresentRepaymentPlan(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
         example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
-                andPlanTimeLessThan(DateUtils.getEndDateTimeOfMonth(new Date()))
+                andPlanTimeLessThan(DateUtils.getEndDateTimeOfMonth(DateUtils.addMonths(new Date(),1)))
         .andPlanTimeGreaterThan(DateUtils.getStartOfMonth(new Date()));
         example.setOrderByClause(" plan_time desc ");
         List<RepaymentPlan> list = this.selectByExample(example);
