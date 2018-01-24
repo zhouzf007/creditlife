@@ -12,13 +12,13 @@ public class ProductVo {
     private String desc;
     private List<String> usages;//用途
     private List<String> terms;//期数
-    private List<String> repayType;//还款方式
+    private List<Map> repayType;//还款方式
 
-    public List<String> getRepayType() {
+    public List<Map> getRepayType() {
         return repayType;
     }
 
-    public void setRepayType(List<String> repayType) {
+    public void setRepayType(List<Map> repayType) {
         this.repayType = repayType;
     }
 

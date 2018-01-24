@@ -4,7 +4,7 @@ spring:
   cloud:
     config:
       uri: http://10.135.106.153:8888 #测试环境
-      profile: dev
+      label: dev
       fail-fast: true
       username: user
       password: ${CONFIG_SERVER_PASSWORD:password}

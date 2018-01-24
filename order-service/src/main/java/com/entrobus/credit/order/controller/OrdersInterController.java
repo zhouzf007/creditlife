@@ -4,6 +4,7 @@ import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
+import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.order.channel.GenSubOrderPublishChannel;
 import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
@@ -14,11 +15,9 @@ import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.order.services.OrdersService;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
-import com.entrobus.credit.vo.order.OrderDtlVo;
-import com.entrobus.credit.vo.order.OrderListVo;
-import com.entrobus.credit.vo.order.RepaymentPlanVo;
-import com.entrobus.credit.vo.order.UserOrderDtlVo;
+import com.entrobus.credit.vo.order.*;
 import com.entrobus.credit.vo.user.CacheUserInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -28,6 +27,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -70,8 +70,15 @@ public class OrdersInterController {
      * @return
      */
     @GetMapping(path = "/orderList")
-    public WebResult getOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
-        return ordersService.getOrderList(state, orgId, offset, limit);
+    public WebResult getOrderList(String states, String key, String orgId, Integer offset, Integer limit) throws Exception {
+        List<Integer> stateList = new ArrayList<>();
+        if (StringUtils.isNotEmpty(states)) {
+            String[] ss = states.split(",");
+            for (String s : ss) {
+                stateList.add(Integer.parseInt(s));
+            }
+        }
+        return ordersService.getOrderList(stateList, orgId, offset, limit);
     }
 
     /**
@@ -133,8 +140,15 @@ public class OrdersInterController {
      * @return
      */
     @GetMapping(path = "/userOrderList")
-    public WebResult getUserOrderList(Integer state, String key, String orgId, Integer offset, Integer limit) throws Exception {
-        return ordersService.getUserOrderList(state, orgId, offset, limit);
+    public WebResult getUserOrderList(String states, String key, String orgId, Integer offset, Integer limit) throws Exception {
+        List<Integer> stateList = new ArrayList<>();
+        if (StringUtils.isNotEmpty(states)) {
+            String[] ss = states.split(",");
+            for (String s : ss) {
+                stateList.add(Integer.parseInt(s));
+            }
+        }
+        return ordersService.getUserOrderList(stateList, orgId, offset, limit);
     }
 
     /**
@@ -181,8 +195,8 @@ public class OrdersInterController {
      *
      * @param order
      */
-    @PutMapping(value = "/order",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResult updateOrder(@RequestBody Orders order) {
+    @PutMapping(value = "/order", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public WebResult updateOrder(@RequestBody OrderExt order) {
         Orders loanOrder = ordersService.selectByPrimaryKey(order.getId());
         if (loanOrder != null) {
             if (loanOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING && order.getState() == Constants.ORDER_STATE.LOAN_PENGDING) {
@@ -195,7 +209,11 @@ public class OrdersInterController {
                 //放款
                 loanOrder.setState(Constants.ORDER_STATE.PASS);
                 loanOrder.setLoanOperator(order.getLoanOperator());
-                loanOrder.setLoanTime(new Date());
+                if (StringUtils.isNotEmpty(order.getLoanTimeStr())) {
+                    loanOrder.setLoanTime(DateUtils.parseDate(order.getLoanTimeStr()));
+                } else {
+                    loanOrder.setLoanTime(new Date());
+                }
                 loanOrder.setActualMoney(order.getActualMoney() == null ? loanOrder.getApplyMoney() : order.getActualMoney());
                 ordersService.updateByPrimaryKeySelective(loanOrder);
                 //还款计划
@@ -222,8 +240,8 @@ public class OrdersInterController {
                 ordersService.updateByPrimaryKeySelective(loanOrder);
                 //生成订单实例
                 orderInstanceService.saveOrderInstance(loanOrder);
-            }else {
-                return WebResult.error(WebResult.CODE_BUSI_DISPERMIT,"订单状态异常");
+            } else {
+                return WebResult.error(WebResult.CODE_BUSI_DISPERMIT, "订单状态异常");
             }
         }
         return WebResult.ok();

@@ -9,6 +9,7 @@ import com.entrobus.credit.vo.base.BsStaticVo;
 import com.entrobus.credit.vo.loan.LoanPeriodsRateVo;
 import com.entrobus.credit.vo.loan.LoanProductVo;
 import com.entrobus.credit.vo.product.ProductVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,8 +54,8 @@ public class ProductApiController extends ManagerBaseController {
             Map rm = new HashMap<>();
             terms.add(term.getPeriods() + "");
             rm.put("term", term.getPeriods());
-            rm.put("0", term.getInterestCapitalRate());
-            rm.put("1", term.getMonthEqualRate());
+            rm.put("0", StringUtils.isEmpty(term.getInterestCapitalRate())?"":term.getInterestCapitalRate());
+            rm.put("1", StringUtils.isEmpty(term.getMonthEqualRate())?"":term.getMonthEqualRate());
             // 0=先息后本 1=等额还款
             repaymentTerms.add(rm);
         }
@@ -64,10 +65,10 @@ public class ProductApiController extends ManagerBaseController {
         productVo.setMax(3000l);
         Map typeMap0 = new HashMap<>();
         typeMap0.put("type", "0");
-        typeMap0.put("name", "先息后本");
+        typeMap0.put("text", "先息后本");
         Map typeMap1 = new HashMap<>();
         typeMap1.put("type", "1");
-        typeMap1.put("name", "等额还款");
+        typeMap1.put("text", "等额还款");
         repayType.add(typeMap0);
         repayType.add(typeMap1);// 0=先息后本 1=等额还款
         usages.add("个人消费");
@@ -75,6 +76,7 @@ public class ProductApiController extends ManagerBaseController {
         usages.add("旅游");
         usages.add("教育");
         usages.add("医疗");
+        productVo.setRepayType(repayType);
         productVo.setUsages(usages);
         return WebResult.ok(productVo);
     }

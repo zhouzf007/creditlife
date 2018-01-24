@@ -2,11 +2,13 @@ package com.entrobus.credit.manager.order.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
+import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.pojo.order.Orders;
+import com.entrobus.credit.pojo.order.OrdersExample;
 import com.entrobus.credit.vo.order.*;
 import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.github.pagehelper.PageHelper;
@@ -32,8 +34,8 @@ public class OrderController extends ManagerBaseController {
      * 订单列表
      */
     @GetMapping("/orderList")
-    public WebResult getOrderList(Integer offset, Integer limit, Integer state, String orgId) {
-        return orderClient.getOrderList(state, orgId, offset, limit);
+    public WebResult getOrderList(Integer offset, Integer limit, String states, String orgId) {
+        return orderClient.getOrderList(states, orgId, offset, limit);
     }
 
     /**
@@ -54,15 +56,12 @@ public class OrderController extends ManagerBaseController {
         if (StringUtils.isEmpty(id) || state == null) {
             return WebResult.error(WebResult.CODE_PARAMETERS, "参数有误");
         }
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Orders order = new Orders();
+        OrderExt order = new OrderExt();
         order.setId(id);
         order.setState(state);
         order.setReason(reason);
-        if(ConversionUtil.isNotEmptyParameter(loanTime)){
-            order.setLoanTime(format.parse(loanTime));
-        }
         order.setRejectType(rejectType);
+        order.setLoanTimeStr(loanTime);
         order.setActualMoney(money);
         orderClient.updateOrder(order);
         return WebResult.ok();
@@ -75,8 +74,8 @@ public class OrderController extends ManagerBaseController {
      * @return
      */
     @GetMapping("/repayment/list")
-    public WebResult getRepaymentList(Integer offset, Integer limit, Integer state, String orgId) {
-        return orderClient.getOrderList(state, orgId, offset, limit);
+    public WebResult getRepaymentList(Integer offset, Integer limit, String states, String orgId) {
+        return orderClient.getOrderList(states, orgId, offset, limit);
     }
 
     /**

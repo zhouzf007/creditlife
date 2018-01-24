@@ -2,10 +2,7 @@ package com.entrobus.credit.manager.client;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.order.Orders;
-import com.entrobus.credit.vo.order.OrderDtlVo;
-import com.entrobus.credit.vo.order.OrderListVo;
-import com.entrobus.credit.vo.order.UserOrderDtlVo;
-import com.entrobus.credit.vo.order.UserOrderListVo;
+import com.entrobus.credit.vo.order.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -19,8 +16,8 @@ import java.util.List;
 @FeignClient(name = "order-service", fallback = OrderClient.OrderClientFallback.class)
 public interface OrderClient {
 
-    @PutMapping(value = "/order",consumes = MediaType.APPLICATION_JSON_VALUE)
-    void updateOrder(@RequestBody Orders order);
+    @PutMapping(value = "/order", consumes = MediaType.APPLICATION_JSON_VALUE)
+    WebResult updateOrder(@RequestBody OrderExt order);
 
     @GetMapping(path = "/order/{id}")
     Orders getOrder(@PathVariable("id") String id);
@@ -31,7 +28,7 @@ public interface OrderClient {
      * @return
      */
     @GetMapping(path = "/orderList")
-    WebResult getOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
+    WebResult getOrderList(@RequestParam("states") String states, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
     /**
      * 订单详情
@@ -59,8 +56,9 @@ public interface OrderClient {
         private static final Logger LOGGER = LoggerFactory.getLogger(OrderClientFallback.class);
 
         @Override
-        public void updateOrder(Orders order) {
+        public WebResult updateOrder(OrderExt order) {
             LOGGER.info("异常发生，进入fallback方法");
+            return null;
         }
 
         @Override
@@ -70,7 +68,7 @@ public interface OrderClient {
         }
 
         @Override
-        public WebResult getOrderList(Integer state, String orgId, Integer offset, Integer limit) {
+        public WebResult getOrderList(String states, String orgId, Integer offset, Integer limit) {
             return null;
         }
 
