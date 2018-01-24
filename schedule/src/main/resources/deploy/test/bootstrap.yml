@@ -1,9 +1,9 @@
 spring:
   application:
-    name: wechat-service
+    name: schedule
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://10.135.106.153:8888 #测试环境
       label: dev
       fail-fast: true
       username: user
@@ -21,9 +21,15 @@ security:
   basic:
     enabled: false
 
-management:
-  security:
-  enabled: false
+
+creditlife:
+  schedule:
+    jobDetail:
+      basePackage: com.entrobus.credit.schedule.job
+
+
+
+
 
 
 

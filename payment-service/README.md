@@ -52,3 +52,9 @@ https://pay.weixin.qq.com/wiki/doc/api/index.html
 ## maven 单独构建多模块项目中的单个模块
 ### 单独构建模块 payment-service，同时会构建 payment-service 模块依赖的其他模块
 mvn install -pl payment-service -am
+
+#打测试包
+clean package -Ptest -pl payment-service -am
+
+#打生产包
+clean package -Pprod -pl payment-service -am

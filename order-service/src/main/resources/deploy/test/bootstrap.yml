@@ -1,9 +1,9 @@
 spring:
   application:
-    name: wechat-service
+    name: order-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://10.135.106.153:8888 #测试环境
       label: dev
       fail-fast: true
       username: user
@@ -13,9 +13,6 @@ spring:
         max-interval: 10000
         multiplier: 2
         max-attempts: 10
-feign:
-  httpclient:
-    enabled: true
 
 security:
   basic:
@@ -24,7 +21,3 @@ security:
 management:
   security:
   enabled: false
-
-
-
-
