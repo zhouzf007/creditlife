@@ -68,11 +68,12 @@ public class CreditlifeExceptionHandler {
 		return WebResult.fail(WebResult.CODE_PARAMETERS);
 	}
 	private String getValidationMsg(BindingResult result) {
-		StringBuilder sb = new StringBuilder("您提交的请求中包含如下不满足条件的参数：");
+		StringBuilder sb = new StringBuilder();
 		for (ObjectError error : result.getAllErrors()) {
-			if (sb.length() > 0 ) sb.append(",");
+			if (sb.length() > 0 ) sb.append("，");
 			sb.append(error.getDefaultMessage());
 		}
+		sb.insert(0,"如下参数不符合规范：");
 		return sb.toString();
 	}
 
