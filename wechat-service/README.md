@@ -53,5 +53,11 @@ https://pay.weixin.qq.com/wiki/doc/api/index.html
 ### 单独构建模块 wechat-service，同时会构建 wechat-service 模块依赖的其他模块
 mvn install -pl wechat-service -am
 
+#打测试包
+clean package -Ptest -pl wechat-service -am
+
+#打生产包
+clean package -Pprod -pl wechat-service -am
+
 ##公众号入口URL
- http://entrobus.tunnel.qydev.com/view/index
+ http://creditlife-test.entrobus.com/wechat/view/index

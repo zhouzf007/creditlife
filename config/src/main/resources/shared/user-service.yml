@@ -92,3 +92,12 @@ management:
   security:
     enabled: false
 
+# 调用白融项目的api
+bsApi:
+  server:
+#  测试环境
+    url: http://139.199.161.144:8660
+#  正式，未开通
+#    url: http://dig.entrobus.com
+    userName: creditlife
+    password: creditlife2018
