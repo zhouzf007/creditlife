@@ -142,3 +142,34 @@ curl -X POST -vu client:secret http://localhost:8060/uaa/oauth/token -H "Accept:
 ```
 curl -X POST -vu user:password http://localhost:8888/bus/refresh
 ```
+#测试环境启动
+启动注册中心
+nohup java -jar registry.jar > logs/registry/catalina.out 2>&1 &
+启动应用服务监控中心
+nohup java -jar monitor.jar --spring.profiles.active=test > logs/monitor/catalina.out 2>&1 &
+启动分布式链路调用监控系统
+nohup java -jar zipkin.jar --spring.profiles.active=test > logs/zipkin/catalina.out 2>&1 &
+启动配置中心
+nohup java -jar config.jar --spring.profiles.active=test > logs/config/catalina.out 2>&1 &
+启动网关
+nohup java -jar gateway.jar > logs/gateway/catalina.out 2>&1 &
+启动后台管理服务
+nohup java -jar manager-service.jar > logs/manager-service/catalina.out 2>&1 &
+启动文件服务
+nohup java -jar file-service.jar > logs/file-service/catalina.out 2>&1 &
+启动定时任务服务
+nohup java -jar schedule.jar > logs/schedule/catalina.out 2>&1 &
+启动用户服务
+nohup java -jar user-service.jar > logs/user-service/catalina.out 2>&1 &
+启动消息服务
+nohup java -jar msg-service.jar > logs/msg-service/catalina.out 2>&1 &
+启动基础数据服务
+nohup java -jar base-service.jar > logs/base-service/catalina.out 2>&1 &
+启动日志服务
+nohup java -jar log-service.jar > logs/log-service/catalina.out 2>&1 &
+启动订单服务
+nohup java -jar order-service.jar > logs/order-service/catalina.out 2>&1 &
+启动支付服务
+nohup java -jar payment-service.jar > logs/payment-service/catalina.out 2>&1 &
+启动微信服务
+nohup java -jar wechat-service.jar > logs/wechat-service/catalina.out 2>&1 &
