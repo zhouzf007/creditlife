@@ -3,6 +3,7 @@ package com.entrobus.credit.manager.order.controller;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
+import com.entrobus.credit.manager.client.PaymentClient;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.vo.order.*;
@@ -24,6 +25,9 @@ public class OrderController extends ManagerBaseController {
 
     @Autowired
     private OrderClient orderClient;
+
+    @Autowired
+    private PaymentClient paymentClient;
 
     /**
      * 订单列表
@@ -79,6 +83,16 @@ public class OrderController extends ManagerBaseController {
 
     /**
      * 还款订单详情
+     *
+     * @return
+     */
+    @PutMapping("/repaymentPlan")
+    public WebResult updatePaymentState(String id, Integer state) {
+        return paymentClient.updateRepaymentPlan(id,state);
+    }
+
+    /**
+     * 还款计划状态更新
      *
      * @return
      */
