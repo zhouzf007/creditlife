@@ -84,8 +84,7 @@ public class OrderController extends ManagerBaseController {
     }
 
     /**
-     * 还款订单详情
-     *
+     * 还款计划状态更新
      * @return
      */
     @PutMapping("/repaymentPlan")
@@ -94,7 +93,7 @@ public class OrderController extends ManagerBaseController {
     }
 
     /**
-     * 还款计划状态更新
+     * 还款订单详情
      *
      * @return
      */
