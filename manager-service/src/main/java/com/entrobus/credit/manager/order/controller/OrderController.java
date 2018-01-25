@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.order.controller;
 
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
@@ -51,6 +52,7 @@ public class OrderController extends ManagerBaseController {
      * 驳回，通过，放款
      */
     @PutMapping("/orderState")
+    @RecordLog(desc = "订单审核")
     public WebResult updateOrderState(String id, Integer state, String reason, Integer rejectType, String loanTime, Long money) throws ParseException {
         if (StringUtils.isEmpty(id) || state == null) {
             return WebResult.error(WebResult.CODE_PARAMETERS, "参数有误");

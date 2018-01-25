@@ -10,7 +10,7 @@ public interface OrderCacheService {
     CacheUserInfo getUserCacheBySid(String sid);
     /**
      * 翻译
-     * 自定义key值
+     * 自行拼装key值
      * @return
      */
     String translate(String key);
@@ -20,7 +20,7 @@ public interface OrderCacheService {
 
     /**
      * 翻译
-     * 实际查询静态数据缓存
+     * 实际查询静态数据缓存codeName
      * @param type 静态数据codeType值
      * @param value 静态数据codeValue值
      * @return
