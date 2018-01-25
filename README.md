@@ -173,3 +173,9 @@ nohup java -jar order-service.jar > logs/order-service/catalina.out 2>&1 &
 nohup java -jar payment-service.jar > logs/payment-service/catalina.out 2>&1 &
 ## 启动微信服务
 nohup java -jar wechat-service.jar > logs/wechat-service/catalina.out 2>&1 &
+
+#测试环境域名访问
+## 后台管理系统
+http://creditlife-manager-test.entrobus.com/
+## API接口
+http://creditlife-test.entrobus.com/
