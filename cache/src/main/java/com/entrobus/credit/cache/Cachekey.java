@@ -22,12 +22,16 @@ public interface Cachekey {
         String VERIFICATION_CODE = "verification_code:mobile:";
     }
 
+    /**
+     * 如果需要跟静态数据同步
+     * BsStatics.TYPE_VALUE_NAME 加上 静态数据的codeType值
+     */
     interface Translation {
-        String ORDER_STATE = "order_state:state:";
-        String REPAYMENT_STATE = "repayment_state:state:";
-        String ROLE_NAME = "role_name:role:";
-        String LOG_OPERATION_STATE = "log:operation:state:";
-        String REPAYMENT_TYPE = "repayment_type:type:";
+        String ORDER_STATE = BsStatics.TYPE_VALUE_NAME  + "ORDER_STATE";
+        String REPAYMENT_STATE = BsStatics.TYPE_VALUE_NAME  + "REPAYMENT_STATE";
+        String ROLE_NAME = BsStatics.TYPE_VALUE_NAME + "ORDER_STATE";
+        String LOG_OPERATION_STATE =  BsStatics.TYPE_VALUE_NAME + "OPERATION_STATE";
+        String REPAYMENT_TYPE =  BsStatics.TYPE_VALUE_NAME + "REPAYMENT_TYPE";
 
     }
 
