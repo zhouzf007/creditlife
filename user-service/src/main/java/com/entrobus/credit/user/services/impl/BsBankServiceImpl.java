@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by mozl on 2018/1/18.
@@ -55,7 +56,7 @@ public class BsBankServiceImpl implements BsBankService {
 
     private String login(){
         Map<String,Object> result = bankFourClient.login(userName,password);
-        if (result != null && result.get("code").equals("00")) {
+        if (result != null && Objects.equals(result.get("code"),"00")) {
             Map dataMap = (Map) result.get("data");
             String token = (String) dataMap.get("token");
             CacheService.setCacheObj(redisTemplate, Cachekey.BSBANK_TOKEN, token);
