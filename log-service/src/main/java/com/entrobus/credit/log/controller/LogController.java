@@ -43,6 +43,13 @@ public class LogController {
         return operationLogService.clear();
     }
 
+    /**
+     * 客户端上传日志
+     * @param form
+     * @param parameter
+     * @param request
+     * @return
+     */
     @PostMapping(value = "/client")
     public WebResult clientLog(@RequestParam String form, CommonParameter parameter, HttpServletRequest request){
         if (StringUtils.isBlank(form)) return WebResult.fail(WebResult.CODE_PARAMETERS);
@@ -54,6 +61,14 @@ public class LogController {
         clientLogService.insertSelective(log);
         return WebResult.ok();
     }
+
+    /**
+     * 资金方平台 操作日志列表
+     * @param queryVo
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/bank/operationLog")
     public WebResult bankOperationLogList( LogQueryVo queryVo,
                                                          @RequestParam(defaultValue = "1")int pageNum,
@@ -74,6 +89,11 @@ public class LogController {
         return WebResult.ok("操作成功").put("total",pageInfo.getTotal()).put("rows",voList);
     }
 
+    /**
+     * toBankOperationLogVo
+     * @param log
+     * @return
+     */
     private BankOperationLogVo toBankOperationLogVo(OperationLog log) {
         BankOperationLogVo vo = new BankOperationLogVo();
         vo.setId(log.getId());
@@ -94,7 +114,13 @@ public class LogController {
         return vo;
     }
 
-
+    /**
+     * 熵商后台操作日志列表
+     * @param queryVo
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/manager/operationLog")
     public WebResult managerOperationLogList( LogQueryVo queryVo,
                                            @RequestParam(defaultValue = "1")int pageNum,
@@ -129,7 +155,11 @@ public class LogController {
         vo.setRelId(log.getRelId());
     }
 
-
+    /**
+     * 操作日志详情
+     * @param id
+     * @return
+     */
     @GetMapping("/manager/operationLog/detail")
     public ManagerOperationLogDetail managerOperationLogDetail(String id){
         if (StringUtils.isBlank(id)) return null;

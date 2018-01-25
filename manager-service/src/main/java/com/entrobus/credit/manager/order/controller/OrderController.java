@@ -88,6 +88,7 @@ public class OrderController extends ManagerBaseController {
      * @return
      */
     @PutMapping("/repaymentPlan")
+    @RecordLog(desc = "修改还款状态")
     public WebResult updatePaymentState(String id, Integer state) {
         return paymentClient.updateRepaymentPlan(id,state);
     }
