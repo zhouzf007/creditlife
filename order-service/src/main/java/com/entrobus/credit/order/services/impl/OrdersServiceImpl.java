@@ -5,6 +5,7 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.common.util.PurseUtil;
 import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
 import com.entrobus.credit.order.client.UserClient;
@@ -30,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import sun.net.www.ParseUtil;
 
 import java.util.*;
 
@@ -270,6 +272,7 @@ public class OrdersServiceImpl implements OrdersService {
             orderVo.setApplyTime(order.getApplyTime());
             orderVo.setApplyNo(order.getApplyNo());
             orderVo.setState(order.getState());
+            orderVo.setMoney(PurseUtil.toYuanString(order.getApplyMoney()));
             orderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(orderVo);
         }

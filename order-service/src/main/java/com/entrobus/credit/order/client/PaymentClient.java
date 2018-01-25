@@ -18,10 +18,10 @@ import java.util.List;
 @FeignClient(name = "payment-service", fallback = PaymentClient.PaymentClientFallback.class)
 public interface PaymentClient {
 
-    @GetMapping(value = "/orderRepaymentState", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/api/orderRepaymentState", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     int getOrderRepaymentState(@RequestParam("orderId") String orderId);
 
-    @GetMapping(value = "/orderRepaymentPlan", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/api/orderRepaymentPlan", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     List<RepaymentPlan> getOrderRepaymentPlan(@RequestParam("orderId") String orderId);
 
     /**
@@ -30,7 +30,7 @@ public interface PaymentClient {
      * @param orderId
      * @return
      */
-    @GetMapping("/presentRepaymentPlan")
+    @GetMapping("/api/presentRepaymentPlan")
     RepaymentPlan getPresentRepaymentPlan(@RequestParam("orderId") String orderId);
 
     @Component
