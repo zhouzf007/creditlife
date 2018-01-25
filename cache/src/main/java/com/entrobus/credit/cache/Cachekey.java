@@ -29,7 +29,7 @@ public interface Cachekey {
     interface Translation {
         String ORDER_STATE = BsStatics.TYPE_VALUE_NAME  + "ORDER_STATE";
         String REPAYMENT_STATE = BsStatics.TYPE_VALUE_NAME  + "REPAYMENT_STATE";
-        String ROLE_NAME = BsStatics.TYPE_VALUE_NAME + "ORDER_STATE";
+        String ROLE_NAME = BsStatics.TYPE_VALUE_NAME + "USER_ROLE";
         String LOG_OPERATION_STATE =  BsStatics.TYPE_VALUE_NAME + "OPERATION_STATE";
         String REPAYMENT_TYPE =  BsStatics.TYPE_VALUE_NAME + "REPAYMENT_TYPE";
 
