@@ -1,6 +1,7 @@
 package com.entrobus.credit.user.services.impl;
 
 import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.user.client.BankFourClient;
 import com.entrobus.credit.user.services.BsBankService;
@@ -25,14 +26,14 @@ public class BsBankServiceImpl implements BsBankService {
     @Autowired
     private BankFourClient bankFourClient;
 
-    private final String TOKENKEY = "bank:bsapi:login:token";
+//    private final String TOKENKEY = "bank:bsapi:login:token";
     @Value("${bsApi.server.userName}")
     private String userName ;
     @Value("${bsApi.server.password}")
     private String password ;
     @Override
     public WebResult verify(Map<String, String> map) {
-        String token = CacheService.getString(redisTemplate, TOKENKEY);
+        String token = CacheService.getString(redisTemplate, Cachekey.BSBANK_TOKEN);
         if(StringUtils.isBlank(token)){
             token = login();
         }
@@ -57,7 +58,7 @@ public class BsBankServiceImpl implements BsBankService {
         if (result != null && result.get("code").equals("00")) {
             Map dataMap = (Map) result.get("data");
             String token = (String) dataMap.get("token");
-            CacheService.setCacheObj(redisTemplate, TOKENKEY, token);
+            CacheService.setCacheObj(redisTemplate, Cachekey.BSBANK_TOKEN, token);
             return token;
         }
         return "";

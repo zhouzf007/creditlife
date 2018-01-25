@@ -39,15 +39,21 @@ public class GenSubOrderHandler {
         String userId = order.getUserId();
         String createOp = order.getCreateOperator();
         repayment.setApplyNo(order.getApplyNo());
+        repayment.setPrincipal(order.getActualMoney());
         repayment.setOrderId(orderId);
         repayment.setApplyTime(order.getApplyTime());
         repayment.setAccount(order.getAccount());
         repayment.setRepaymentTerm(term);
-        repayment.setRepaymentType(order.getRepaymentType());
         repayment.setState(Constants.REPAYMENT_ORDER_STATE.PASS);
         repayment.setSystemState(Constants.REPAYMENT_ORDER_STATE.PASS);
         repayment.setCreateOperator(createOp);
         repayment.setUserId(userId);
+        repayment.setRepaymentType(order.getRepaymentType());
+        if (order.getRepaymentType()==Constants.REPAYMENT_TYPE.INTEREST_CAPITAL){
+//            repayment.setInterest();
+        }else if (order.getRepaymentType()==Constants.REPAYMENT_TYPE.MONTH_EQUAL){
+//            repayment.setInterest();
+        }
         repaymentService.insertSelective(repayment);
         String repaymentId = repayment.getId();
         //@TODO 计算每期的金额 以及 每期还款日期

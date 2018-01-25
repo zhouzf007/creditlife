@@ -1,14 +1,10 @@
 package com.entrobus.credit.manager.order.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.common.util.ConversionUtil;
-import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
-import com.entrobus.credit.pojo.order.Orders;
-import com.entrobus.credit.pojo.order.OrdersExample;
 import com.entrobus.credit.vo.order.*;
 import com.entrobus.credit.vo.order.UserOrderListVo;
 import com.github.pagehelper.PageHelper;
@@ -19,7 +15,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RefreshScope
@@ -52,12 +47,12 @@ public class OrderController extends ManagerBaseController {
      * 驳回，通过，放款
      */
     @PutMapping("/orderState")
-    public WebResult updateOrderState(String id, Integer state, String reason,Integer rejectType, String loanTime, Long money) throws ParseException {
+    public WebResult updateOrderState(String id, Integer state, String reason, Integer rejectType, String loanTime, Long money) throws ParseException {
         if (StringUtils.isEmpty(id) || state == null) {
             return WebResult.error(WebResult.CODE_PARAMETERS, "参数有误");
         }
-        SysLoginUserInfo sys=getCurrLoginUser();
-        OrderExt order = new OrderExt();
+        SysLoginUserInfo sys = getCurrLoginUser();
+        OrderUpdateVo order = new OrderUpdateVo();
         order.setId(id);
         order.setState(state);
         order.setReason(reason);

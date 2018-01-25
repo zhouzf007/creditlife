@@ -10,14 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
-import java.util.List;
-
 @FeignClient(name = "order-service", fallback = OrderClient.OrderClientFallback.class)
 public interface OrderClient {
 
     @PutMapping(value = "/order", consumes = MediaType.APPLICATION_JSON_VALUE)
-    WebResult updateOrder(@RequestBody OrderExt order);
+    WebResult updateOrder(@RequestBody OrderUpdateVo order);
 
     @GetMapping(path = "/order/{id}")
     Orders getOrder(@PathVariable("id") String id);
@@ -56,7 +53,7 @@ public interface OrderClient {
         private static final Logger LOGGER = LoggerFactory.getLogger(OrderClientFallback.class);
 
         @Override
-        public WebResult updateOrder(OrderExt order) {
+        public WebResult updateOrder(OrderUpdateVo order) {
             LOGGER.info("异常发生，进入fallback方法");
             return null;
         }

@@ -35,5 +35,5 @@ public interface Cachekey {
         String apply_no = "order:apply_no:";
     }
 
-
+    String BSBANK_TOKEN = "bank:bsapi:login:token";
 }
