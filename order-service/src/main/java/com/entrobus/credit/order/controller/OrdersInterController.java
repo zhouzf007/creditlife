@@ -27,7 +27,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -197,7 +196,7 @@ public class OrdersInterController {
      * @param order
      */
     @PutMapping(value = "/order", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResult updateOrder(@RequestBody OrderExt order) {
+    public WebResult updateOrder(@RequestBody OrderUpdateVo order) {
         Orders loanOrder = ordersService.selectByPrimaryKey(order.getId());
         if (loanOrder != null) {
             if (loanOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING && order.getState() == Constants.ORDER_STATE.LOAN_PENGDING) {
@@ -208,7 +207,7 @@ public class OrdersInterController {
                 ordersService.updateByPrimaryKeySelective(loanOrder);
             } else if ((loanOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING || loanOrder.getState() == Constants.ORDER_STATE.LOAN_PENGDING) && order.getState() == Constants.ORDER_STATE.PASS) {
                 //放款
-                if (loanOrder.getAuditTime()==null)loanOrder.setAuditTime(new Date());
+                if (loanOrder.getAuditTime() == null) loanOrder.setAuditTime(new Date());
                 if (StringUtils.isEmpty(loanOrder.getAuditor())) loanOrder.setAuditor(order.getAuditor());
                 loanOrder.setState(Constants.ORDER_STATE.PASS);
                 loanOrder.setLoanOperator(order.getLoanOperator());

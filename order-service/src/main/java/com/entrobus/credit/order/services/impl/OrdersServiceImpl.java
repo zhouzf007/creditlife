@@ -140,8 +140,23 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public WebResult applyOrder(@RequestBody ApplyVo vo, CacheUserInfo userInfo) {
         Orders order = new Orders();
-        //@TODO 检验是否可以贷款
-        //当前申请情况
+        //1.当前角色是否可以贷款
+        if (userInfo.getRole() == 0) {
+            return WebResult.fail(WebResult.CODE_NO_PERMISSION, "目前该用户角色不可申请贷款");
+        }
+        //2.当前贷款状态
+        Orders lastOrder = this.getUserLastOrder(userInfo.getId());
+        if (lastOrder != null) {
+            if (lastOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING) {
+                return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您已提交申请，正在审核中，请耐心等候");
+            }
+            if (lastOrder.getState() == Constants.ORDER_STATE.PASS || lastOrder.getState() == Constants.ORDER_STATE.OVERDUE) {
+                return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您有贷款正在使用中，暂不支持重新申请");
+            }
+            if (lastOrder.getState() == Constants.ORDER_STATE.LOAN_PENGDING) {
+                return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您的申请已经审核通过，请耐心等待放款");
+            }
+        }
         //信用报告信息
         Contract contract = new Contract();
         CreditReport creditReport = userClient.getCreditReport(userInfo.getId());
@@ -150,6 +165,9 @@ public class OrdersServiceImpl implements OrdersService {
             order.setCreditScore(creditReport.getCreditScore());
             contract.setCreditReportId(creditReport.getId());
             contract.setCreditScore(creditReport.getCreditScore());
+            if (vo.getMoney() > creditReport.getQuota()) {
+                return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您申请的额度过高，请重新提交申请");
+            }
         } else {
             return WebResult.fail("无法获取信用报告，暂时无法申请贷款");
         }
@@ -169,16 +187,15 @@ public class OrdersServiceImpl implements OrdersService {
             order.setInterestRate(vo.getRate());
             order.setOrgId(vo.getOrgId());
         } else {
-            return WebResult.fail("贷款产品不合法");
+            return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您申请的贷款产品不存在");
         }
         order.setLoanUsage(vo.getUsage());
         order.setApplyMoney(vo.getMoney());
+        order.setActualMoney(vo.getMoney());
         order.setApplyTime(new Date());
-
         //加入用户信息
         order.setRole(userInfo.getRole());
         order.setAccount(userInfo.getDefualtAccount());
-
         //生成合同信息
         contract.setId(GUIDUtil.genRandomGUID());
         contract.setOrderId(order.getId());

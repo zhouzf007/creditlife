@@ -8,8 +8,7 @@ import com.entrobus.credit.payment.services.RepaymentService;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.payment.Repayment;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
-import com.sun.corba.se.spi.ior.IdentifiableFactory;
-import org.apache.tomcat.util.bcel.Const;
+import com.entrobus.credit.vo.order.OrderUpdateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,7 @@ import java.util.List;
 
 @RefreshScope
 @RestController
+@RequestMapping("/api")
 public class RepaymentController extends PaymentBaseController {
 
     @Autowired
@@ -30,15 +30,15 @@ public class RepaymentController extends PaymentBaseController {
     private RepaymentPlanService repaymentPlanService;
 
 
-    @GetMapping("/orderRepaymentState/{orderId}")
-    public int getOrderRepaymentState(@PathVariable("orderId") String orderId) {
+    @GetMapping("/orderRepaymentState")
+    public int getOrderRepaymentState(@RequestParam("orderId") String orderId) {
         Repayment repayment = repaymentService.getRepaymentByOrderId(orderId);
         if (repayment == null) return -1;
         else return repayment.getState();
     }
 
-    @GetMapping("/orderRepaymentPlan/{orderId}")
-    public List<RepaymentPlan> getOrderRepaymentPlan(@PathVariable("orderId") String orderId) {
+    @GetMapping("/orderRepaymentPlan")
+    public List<RepaymentPlan> getOrderRepaymentPlan(@RequestParam("orderId") String orderId) {
         List<RepaymentPlan> list = repaymentPlanService.getRepaymentPlanByOrderId(orderId);
         return list;
     }
@@ -64,9 +64,11 @@ public class RepaymentController extends PaymentBaseController {
      * @param repaymentPlan
      * @return
      */
-    @PutMapping("/repaymentPlan/{id}")
-    public WebResult updateRepaymentPlan(@PathVariable("id") String id, @RequestBody RepaymentPlan repaymentPlan) {
+    @PutMapping("/repaymentPlan")
+    public WebResult updateRepaymentPlan(@RequestParam("id") String id, @RequestBody RepaymentPlan repaymentPlan) {
         RepaymentPlan plan = repaymentPlanService.selectByPrimaryKey(id);
+        OrderUpdateVo updateOrder = new OrderUpdateVo();
+        updateOrder.setId(id);
         if (plan != null) {
             //使用中 变更为 逾期
             if (plan.getState() == Constants.REPAYMENT_ORDER_STATE.PASS && repaymentPlan.getState() == Constants.REPAYMENT_ORDER_STATE.OVERDUE) {
@@ -74,9 +76,8 @@ public class RepaymentController extends PaymentBaseController {
                 plan.setSystemState(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
                 repaymentPlanService.updateByPrimaryKeySelective(plan);
                 //变更订单状态
-                Orders order = new Orders();
-                order.setState(Constants.ORDER_STATE.OVERDUE);
-                orderClient.updateOrder(plan.getOrderId(), order);
+                updateOrder.setState(Constants.ORDER_STATE.OVERDUE);
+                orderClient.updateOrder(plan.getOrderId(), updateOrder);
 
             } else if (plan.getState() == Constants.REPAYMENT_ORDER_STATE.PASS && repaymentPlan.getState() == Constants.REPAYMENT_ORDER_STATE.FINISHED) {
                 //使用中 变更为 已结清
@@ -90,22 +91,20 @@ public class RepaymentController extends PaymentBaseController {
                 if (order != null) {
                     if (order.getRepaymentTerm() == finishedPlan.size()) {
                         //整个订单完成
-                        Orders updateOrder = new Orders();
                         updateOrder.setState(Constants.ORDER_STATE.FINISHED);
                         orderClient.updateOrder(plan.getOrderId(), updateOrder);
                     } else if (overDuePlan.size() == 0 && order.getState() == Constants.ORDER_STATE.OVERDUE) {
                         //不存在逾期
-                        Orders updateOrder = new Orders();
                         updateOrder.setState(Constants.ORDER_STATE.PASS);
                         orderClient.updateOrder(plan.getOrderId(), updateOrder);
                     }
                 }
             } else {
-                return WebResult.fail("订单状态有误，操作失败");
+                return WebResult.fail(WebResult.CODE_NO_PERMISSION, "订单状态有误，操作失败");
             }
             return WebResult.ok("");
         } else {
-            return WebResult.fail("找不到还款计划单，操作失败");
+            return WebResult.fail(WebResult.CODE_NO_PERMISSION, "找不到还款计划单，操作失败");
         }
     }
 }
