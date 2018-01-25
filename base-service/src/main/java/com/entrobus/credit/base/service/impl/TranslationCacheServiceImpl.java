@@ -23,25 +23,9 @@ public class TranslationCacheServiceImpl implements TranslationCacheService,Comm
      */
     @Override
     public void init() {
-        addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.NOT_LOAN, "未申请");
-        addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.AUIDT_PENGDING, "待审核");
-        addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.LOAN_PENGDING, "待放款");
-        addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.REJECTION, "已驳回");
-        addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.PASS, "使用中");
-        addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.OVERDUE, "已逾期");
-        addTranslation(Cachekey.Translation.ORDER_STATE , Constants.ORDER_STATE.FINISHED, "已完成");
-
-        addTranslation(Cachekey.Translation.REPAYMENT_STATE , Constants.REPAYMENT_ORDER_STATE.PASS, "使用中");
-        addTranslation(Cachekey.Translation.REPAYMENT_STATE , Constants.REPAYMENT_ORDER_STATE.OVERDUE, "已逾期");
-        addTranslation(Cachekey.Translation.REPAYMENT_STATE , Constants.REPAYMENT_ORDER_STATE.FINISHED, "已结清");
-
-        //操作状态
-        addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.FAIL, "操作失败");
-        addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.ERROR, "异常");
-        addTranslation(Cachekey.Translation.LOG_OPERATION_STATE , Constants.OPERATION_STATE.ERROR, "操作成功");
-
-        addTranslation(Cachekey.Translation.REPAYMENT_TYPE , Constants.REPAYMENT_TYPE.INTEREST_CAPITAL, "先息后本");
-        addTranslation(Cachekey.Translation.REPAYMENT_TYPE , Constants.REPAYMENT_TYPE.MONTH_EQUAL, "等额本息");
+//         //已改为同步静态数据
+//        addTranslation(Cachekey.Translation.REPAYMENT_TYPE , Constants.REPAYMENT_TYPE.INTEREST_CAPITAL, "先息后本");
+//        addTranslation(Cachekey.Translation.REPAYMENT_TYPE , Constants.REPAYMENT_TYPE.MONTH_EQUAL, "等额本息");
 
     }
 
