@@ -61,9 +61,9 @@ public class ManagerCacheService  {
     }
     /**
      * 翻译
-     * 实际查询静态数据缓存
-     * @param type
-     * @param value
+     * 实际查询静态数据缓存codeName
+     * @param type 静态数据codeType值
+     * @param value 静态数据codeValue值
      * @return
      */
 //    @Override

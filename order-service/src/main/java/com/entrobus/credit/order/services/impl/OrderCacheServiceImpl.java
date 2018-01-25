@@ -16,7 +16,7 @@ import java.util.Date;
 public class OrderCacheServiceImpl implements OrderCacheService {
 
     @Autowired
-    RedisTemplate redisTemplate;
+    private RedisTemplate redisTemplate;
 
     @Override
     public CacheUserInfo getUserCacheByUid(String userId) {
@@ -30,7 +30,11 @@ public class OrderCacheServiceImpl implements OrderCacheService {
         Object o = CacheService.getObject(redisTemplate, Cachekey.User.UID_PREFIX + uid);
         return o instanceof CacheUserInfo ? (CacheUserInfo) o : null;
     }
-
+    /**
+     * 翻译
+     * 自行拼装key值
+     * @return
+     */
     @Override
     public String translate(String key) {
         return CacheService.getString(redisTemplate, key);
@@ -53,7 +57,7 @@ public class OrderCacheServiceImpl implements OrderCacheService {
     }
     /**
      * 翻译
-     * 实际查询静态数据缓存
+     * 实际查询静态数据缓存codeName
      * @param type 静态数据codeType值
      * @param value 静态数据codeValue值
      * @return
