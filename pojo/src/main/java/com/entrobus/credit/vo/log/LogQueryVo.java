@@ -9,6 +9,24 @@ public class LogQueryVo implements Serializable {
     private Integer operationState;
     private Integer platform;
     private String orgId;
+    private String desc;
+    private String relId;
+
+    public String getRelId() {
+        return relId;
+    }
+
+    public void setRelId(String relId) {
+        this.relId = relId;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public String getOrgId() {
         return orgId;
