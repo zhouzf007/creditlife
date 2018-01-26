@@ -2,7 +2,10 @@ package com.entrobus.credit.manager.product;
 
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.BIAPPUtils;
+import com.entrobus.credit.common.util.CPMUtils;
 import com.entrobus.credit.common.util.DateUtils;
+import com.entrobus.credit.common.util.MoneyUtils;
 import com.entrobus.credit.manager.bank.service.LoanProductService;
 import com.entrobus.credit.manager.client.BsStaticsClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @RefreshScope
@@ -82,20 +86,42 @@ public class ProductApiController extends ManagerBaseController {
     }
 
     @GetMapping(value = "/repaymentPlan")
-    public WebResult getRepaymentPlan(String prodId, Integer type, Integer term) {
+    public WebResult getRepaymentPlan(String prodId, String rate, String principal, Integer type, Integer term) {
         UserRepaymentPlanVo vo = new UserRepaymentPlanVo();
+        if (type==null||term==null){
+            return WebResult.error(WebResult.CODE_PARAMETERS,"参数不正确");
+        }
         List<PlanVo> planList = new ArrayList<>();
         //计算还款总额
-        vo.setBalance(10000L);
-        vo.setBalance(888L);
+        BigDecimal princl = MoneyUtils.divide(principal, "100");
+        BigDecimal monthRate = MoneyUtils.divide(rate, "120000");
+        BigDecimal totaLInterest = new BigDecimal(0);
+        if ( type == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
+            totaLInterest = BIAPPUtils.interest(princl, monthRate, term).multiply(new BigDecimal(100));
+        } else if (type == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
+            totaLInterest = CPMUtils.interest(princl, monthRate, term).multiply(new BigDecimal(100));
+        }
+        vo.setBalance(princl.longValue() + totaLInterest.longValue());
+        vo.setInterest(totaLInterest.longValue());
+        Date repayDate = DateUtils.addMonths(new Date(), 1);//默认按照一月一还
+        if (DateUtils.getDay(repayDate) > 28) {
+            repayDate = DateUtils.setDays(repayDate, 28);//当月大于28号按28号算
+        }
         for (int i = 0; i < term; i++) {
             PlanVo plan = new PlanVo();
             //计算还款日期
-            plan.setDueTime(DateUtils.addMonths(new Date(), i + 1));
-            plan.setPrincipalAndInterest(833L);
+            plan.setDueTime(repayDate);
+            if (type == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
+                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(princl, monthRate, term, i + 1).multiply(new BigDecimal(100));
+                plan.setPrincipalAndInterest(monthlyRepayment.longValue());
+                plan.setCapital(princl.longValue());
+            } else if (type == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
+                BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(princl, monthRate, term).multiply(new BigDecimal(100));
+                plan.setPrincipalAndInterest(monthlyRepayment.longValue());
+            }
             //计算本息
-            plan.setCapital(1000l);
             planList.add(plan);
+            repayDate=DateUtils.addMonths(repayDate,1);
         }
         vo.setPlanList(planList);
         return WebResult.ok(vo);

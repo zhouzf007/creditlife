@@ -1,7 +1,7 @@
 package com.entrobus.credit.payment.channel.handler;
 
 import com.entrobus.credit.common.Constants;
-import com.entrobus.credit.common.util.DateUtils;
+import com.entrobus.credit.common.util.*;
 import com.entrobus.credit.payment.channel.GenSubOrderSubscribeChannel;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
 import com.entrobus.credit.payment.services.RepaymentService;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -38,6 +39,7 @@ public class GenSubOrderHandler {
         String account = order.getAccount();
         String userId = order.getUserId();
         String createOp = order.getCreateOperator();
+        repayment.setId(GUIDUtil.genRandomGUID());
         repayment.setApplyNo(order.getApplyNo());
         repayment.setPrincipal(order.getActualMoney());
         repayment.setOrderId(orderId);
@@ -49,16 +51,22 @@ public class GenSubOrderHandler {
         repayment.setCreateOperator(createOp);
         repayment.setUserId(userId);
         repayment.setRepaymentType(order.getRepaymentType());
-        if (order.getRepaymentType()==Constants.REPAYMENT_TYPE.INTEREST_CAPITAL){
-//            repayment.setInterest();
-        }else if (order.getRepaymentType()==Constants.REPAYMENT_TYPE.MONTH_EQUAL){
-//            repayment.setInterest();
+        BigDecimal principal = MoneyUtils.divide(order.getActualMoney().toString(), "100");
+        BigDecimal monthRate = MoneyUtils.divide(order.getInterestRate().toString(), "120000");
+        BigDecimal totaLInterest = new BigDecimal(0);
+        if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
+            totaLInterest = BIAPPUtils.interest(principal, monthRate, term).multiply(new BigDecimal(100));
+        } else if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
+            totaLInterest = CPMUtils.interest(principal, monthRate, term).multiply(new BigDecimal(100));
         }
+        repayment.setInterest(totaLInterest.longValue());
         repaymentService.insertSelective(repayment);
         String repaymentId = repayment.getId();
         //@TODO 计算每期的金额 以及 每期还款日期
-        long rsMoney = order.getActualMoney() / term;//这里先简单写一个
-        Date rsDate = DateUtils.addMonths(new Date(), 1);//默认按照一月一还
+        Date repayDate = DateUtils.addMonths(new Date(), 1);//默认按照一月一还
+        if (DateUtils.getDay(repayDate) > 28) {
+            repayDate = DateUtils.setDays(repayDate, 28);//当月大于28号按28号算
+        }
         for (int i = 0; i < term; i++) {
             RepaymentPlan plan = new RepaymentPlan();
             plan.setOrderId(orderId);
@@ -68,11 +76,24 @@ public class GenSubOrderHandler {
             plan.setSystemState(Constants.REPAYMENT_ORDER_STATE.PASS);
             plan.setRepaymentId(repaymentId);
             plan.setAccount(account);
-            plan.setPrincipal(rsMoney);
-            plan.setPlanTime(rsDate);
+            if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
+                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(principal, monthRate, term, i + 1).multiply(new BigDecimal(100));
+                BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(principal, monthRate).multiply(new BigDecimal(100));
+                plan.setInterest(monthlyInterest.longValue());
+                plan.setRepayment(monthlyRepayment.longValue());
+                plan.setPrincipal(i==term-1?principal.longValue():0);
+            } else if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
+                BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(principal, monthRate, term).multiply(new BigDecimal(100));
+                BigDecimal monthlyInterest = CPMUtils.monthlyInterest(principal, monthRate, monthlyRepayment, i + 1).multiply(new BigDecimal(100));
+                BigDecimal monthlyPrincipal = CPMUtils.monthPrincipal(monthlyRepayment, monthlyInterest);
+                plan.setInterest(monthlyInterest.longValue());
+                plan.setRepayment(monthlyRepayment.longValue());
+                plan.setPrincipal(monthlyPrincipal.longValue());
+            }
+            plan.setPlanTime(repayDate);
             plan.setCreateOperator(createOp);
             repaymentPlanService.insertSelective(plan);
-            rsDate = DateUtils.addMonths(rsDate, 1);
+            repayDate = DateUtils.addMonths(repayDate, 1);
         }
     }
 
