@@ -58,14 +58,13 @@ public class OrderApiController {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登陆");
         }
         Orders lastOrder = ordersService.getUserLastOrder(userInfo.getId());
-        Map rsMap = new HashMap<>();
         UserStateVo vo = new UserStateVo();
         if (lastOrder == null) {
             vo.setState(-1);
         } else {
             vo.setState(lastOrder.getState());
         }
-        return WebResult.ok(rsMap);
+        return WebResult.ok(vo);
     }
 
     /**
