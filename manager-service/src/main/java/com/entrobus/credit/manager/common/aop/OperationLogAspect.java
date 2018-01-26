@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.manager.common.bean.CommonParameter;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.manager.sys.service.LogService;
@@ -113,6 +114,7 @@ public class OperationLogAspect {
                     }
                     if (arg instanceof ServletRequest) continue;
                     if (arg instanceof ServletResponse) continue;
+                    if (arg instanceof CommonParameter) continue;
                     String name = argNames[i];
                     argMap.put(name, arg);
                     if (Objects.equals(logAnnotation.relId(), name)) {
