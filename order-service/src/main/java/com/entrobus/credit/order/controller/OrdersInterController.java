@@ -259,8 +259,8 @@ public class OrdersInterController {
      * @param id
      * @return
      */
-    @GetMapping(path = "/order/{id}")
-    public Orders getOrder(@PathVariable("id") String id) {
+    @GetMapping(path = "/order")
+    public Orders getOrder(@RequestParam("id") String id) {
         return ordersService.selectByPrimaryKey(id);
     }
 
