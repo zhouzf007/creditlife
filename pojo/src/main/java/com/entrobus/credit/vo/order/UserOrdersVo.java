@@ -9,7 +9,25 @@ public class UserOrdersVo {
      */
     private String id;
     private Date loanTime;//放款日期
-    private String term;//当期
+
+    public Integer getTerm() {
+        return term;
+    }
+
+    public void setTerm(Integer term) {
+        this.term = term;
+    }
+
+    public Integer getTotalTerm() {
+        return totalTerm;
+    }
+
+    public void setTotalTerm(Integer totalTerm) {
+        this.totalTerm = totalTerm;
+    }
+
+    private Integer term;//当期
+    private Integer totalTerm;//总期
     private Date dueTime;//本期还款时间
     private Long money;//贷款金额
     private Long principalAndInterest;//本息
@@ -48,14 +66,6 @@ public class UserOrdersVo {
 
     public void setLoanTime(Date loanTime) {
         this.loanTime = loanTime;
-    }
-
-    public String getTerm() {
-        return term;
-    }
-
-    public void setTerm(String term) {
-        this.term = term;
     }
 
     public Date getDueTime() {

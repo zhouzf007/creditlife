@@ -111,7 +111,37 @@
          <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />//无论字段是什么类型，生成的类属性都是varchar。  -->
          <!--用的通配符匹配全部的表 -->
         <!--<table tableName="%"-->
-        <table tableName="credit_report" domainObjectName="CreditReport"
+        <!--<table tableName="operation_log" domainObjectName="OperationLog"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+
+            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table tableName="orders" domainObjectName="Orders"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+
+            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table tableName="order_instance" domainObjectName="OrderInstance"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true">-->
+
+            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+        <!--</table>-->
+        <table tableName="repayment_plan" domainObjectName="RepaymentPlan"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"
@@ -121,36 +151,16 @@
             <!--  配置自动返回主键 -->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         </table>
-        <!--<table tableName="sys_role" domainObjectName="SysRole"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
+        <table tableName="repayment_plan_instance" domainObjectName="RepaymentPlanInstance"
+               enableCountByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true"
+               selectByExampleQueryId="true">
 
-            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
+            <!--  配置自动返回主键 -->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table tableName="sys_role_resource" domainObjectName="SysRoleResource"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-
-            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table tableName="sys_user_role" domainObjectName="SysUserRole"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true">-->
-
-            <!--&lt;!&ndash;  配置自动返回主键 &ndash;&gt;-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        </table>
     </context>
 
 </generatorConfiguration>

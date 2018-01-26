@@ -870,6 +870,66 @@ public class RepaymentPlanInstanceExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andRepaymentIsNull() {
+            addCriterion("repayment is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentIsNotNull() {
+            addCriterion("repayment is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentEqualTo(Long value) {
+            addCriterion("repayment =", value, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentNotEqualTo(Long value) {
+            addCriterion("repayment <>", value, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentGreaterThan(Long value) {
+            addCriterion("repayment >", value, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentGreaterThanOrEqualTo(Long value) {
+            addCriterion("repayment >=", value, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentLessThan(Long value) {
+            addCriterion("repayment <", value, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentLessThanOrEqualTo(Long value) {
+            addCriterion("repayment <=", value, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentIn(List<Long> values) {
+            addCriterion("repayment in", values, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentNotIn(List<Long> values) {
+            addCriterion("repayment not in", values, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentBetween(Long value1, Long value2) {
+            addCriterion("repayment between", value1, value2, "repayment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepaymentNotBetween(Long value1, Long value2) {
+            addCriterion("repayment not between", value1, value2, "repayment");
+            return (Criteria) this;
+        }
+
         public Criteria andInterestIsNull() {
             addCriterion("interest is null");
             return (Criteria) this;

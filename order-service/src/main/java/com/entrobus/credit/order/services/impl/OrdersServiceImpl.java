@@ -303,7 +303,8 @@ public class OrdersServiceImpl implements OrdersService {
                 RepaymentPlan plan = paymentClient.getPresentRepaymentPlan(order.getId());
                 if (plan != null) {
                     vo.setDueTime(plan.getPlanTime());
-                    vo.setTerm(plan.getSortId() + "/" + order.getRepaymentTerm());
+                    vo.setTerm(plan.getSortId());
+                    vo.setTotalTerm(order.getRepaymentTerm());
                     vo.setPrincipalAndInterest(1000L);
                     vo.setBalance(1000L);
                 }

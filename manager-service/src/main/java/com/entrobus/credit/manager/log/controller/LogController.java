@@ -1,14 +1,13 @@
 package com.entrobus.credit.manager.log.controller;
 
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.bank.service.OrganizationService;
 import com.entrobus.credit.manager.client.LogClient;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
 import com.entrobus.credit.manager.sys.service.SysUserService;
 import com.entrobus.credit.pojo.manager.Organization;
-import com.entrobus.credit.vo.log.LogQueryVo;
+import com.entrobus.credit.pojo.manager.SysUser;
 import com.entrobus.credit.vo.log.ManagerOperationLogDetail;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -31,13 +32,32 @@ public class LogController extends ManagerBaseController{
     private OrganizationService organizationService;
 
     /**
+     * 后台登陆日志
+     * @param offset
+     * @param limit
+     * @return
+     */
+    @GetMapping("/loginLog")
+    public WebResult sysLoginLogList(String userName ,Integer offset, Integer limit){
+//        SysLoginUserInfo loginUser = getCurrLoginUser();
+//        vo.setOrgId(loginUser.getOrgId());
+        String sysUserId = null;
+        if (StringUtils.isNotBlank(userName)) {
+            SysUser operator = sysUserService.getUserByUserName(userName);
+            sysUserId = operator == null ? null : String.valueOf(operator.getId());
+        }
+
+        WebResult result = logClient.sysLoginLogList(sysUserId, offset, limit);
+        return result;
+    }
+    /**
      * 资金方操作日志列表
      * @param offset
      * @param limit
      * @return
      */
     @GetMapping("/bankOperationLog")
-    public WebResult bankOperationLogList(int offset, int limit){
+    public WebResult bankOperationLogList(Integer offset, Integer limit){
         SysLoginUserInfo loginUser = getCurrLoginUser();
 //        vo.setOrgId(loginUser.getOrgId());
         WebResult result = logClient.bankOperationLogList(loginUser.getOrgId(), offset, limit);
@@ -46,17 +66,26 @@ public class LogController extends ManagerBaseController{
 
     /**
      * 熵商后台操作日志列表
-     * @param vo
      * @param offset
      * @param limit
      * @return
      */
     @GetMapping("/managerOperationLog")
-    public WebResult managerOperationLogList(LogQueryVo vo ,int offset, int limit){
+    public WebResult managerOperationLogList(String desc,String relId, String operatorName,Integer offset, Integer limit){
+//    public WebResult managerOperationLogList(@RequestParam Map<String, Object> map, int offset, int limit){
         SysLoginUserInfo loginUser = getCurrLoginUser();
-//        vo.setOrgId(loginUser.getOrgId());
-        vo.setOrgId(loginUser.getOrgId());
-        Map<String, Object> map = ConversionUtil.beanToMap(vo);
+        Map<String,Object> map = new HashMap<>();
+        if (StringUtils.isNotBlank(operatorName)){
+            SysUser operator = sysUserService.getUserByUserName(operatorName);
+            if (operator == null){
+                return WebResult.ok().put("total",0).put("rows",new ArrayList<>(0));
+            }
+            map.put("operatorId",operator.getId());
+        }
+
+        map.put("desc",desc);
+        map.put("relId",relId);
+//        map.put("operatorName",operatorName);
         WebResult result = logClient.managerOperationLogList(map, offset, limit);
         return result;
     }

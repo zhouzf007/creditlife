@@ -72,9 +72,9 @@ public class OrderDtlVo {
 
     private String stateName;
     private String auditor;// 审核人
-    private String auditTime;// 审核日期
+    private Date auditTime;// 审核日期
     private String loanOperator;//放款人
-    private String loanTime;//操作放款日期/实际放款日期
+    private Date loanTime;//操作放款日期/实际放款日期
     private Integer state;
 
     public Integer getState() {
@@ -93,11 +93,11 @@ public class OrderDtlVo {
         this.auditor = auditor;
     }
 
-    public String getAuditTime() {
+    public Date getAuditTime() {
         return auditTime;
     }
 
-    public void setAuditTime(String auditTime) {
+    public void setAuditTime(Date auditTime) {
         this.auditTime = auditTime;
     }
 
@@ -109,11 +109,11 @@ public class OrderDtlVo {
         this.loanOperator = loanOperator;
     }
 
-    public String getLoanTime() {
+    public Date getLoanTime() {
         return loanTime;
     }
 
-    public void setLoanTime(String loanTime) {
+    public void setLoanTime(Date loanTime) {
         this.loanTime = loanTime;
     }
 

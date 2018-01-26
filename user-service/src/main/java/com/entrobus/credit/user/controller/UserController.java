@@ -11,14 +11,15 @@ import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
-import com.entrobus.credit.user.services.CreditReportService;
-import com.entrobus.credit.user.services.UserCacheService;
-import com.entrobus.credit.vo.order.CreditReportVo;
-import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
+import com.entrobus.credit.user.services.CreditReportService;
 import com.entrobus.credit.user.services.UserAccountService;
+import com.entrobus.credit.user.services.UserCacheService;
 import com.entrobus.credit.user.services.UserInfoService;
+import com.entrobus.credit.user.utils.ShiroUtils;
+import com.entrobus.credit.vo.order.CreditReportVo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserAccountVo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,10 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import com.entrobus.credit.user.utils.ShiroUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -267,7 +267,9 @@ public class UserController extends BaseController {
         userAccount.setCreateOperator(userInfo.getId());
         userAccountService.insertSelective(userAccount);
         userCacheService.refreshUserCache(userInfo.getId());
-        return WebResult.ok().put(WebResult.DATA, userAccount.getId());
+        Map<String, String> map = new HashMap<>();
+        map.put("id", userAccount.getId());
+        return WebResult.ok().put(WebResult.DATA, map);
     }
 
     /*
@@ -306,7 +308,9 @@ public class UserController extends BaseController {
         CreditReport creditReport = creditReportService.getCreditReportByUid(loginUser);
         CreditReportVo vo = new CreditReportVo();
         try {
-            BeanUtils.copyProperties(vo, creditReport);
+            if(creditReport != null){
+                BeanUtils.copyProperties(vo, creditReport);
+            }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

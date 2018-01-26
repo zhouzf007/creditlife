@@ -109,6 +109,10 @@ public class OrdersInterController {
         dtl.setScore(order.getCreditScore());
         dtl.setContractId(order.getContractId());
         dtl.setCreditReportId(order.getCreditReportId());
+        dtl.setAuditor(order.getAuditor());
+        dtl.setAuditTime(order.getAuditTime());
+        dtl.setLoanOperator(order.getLoanOperator());
+        dtl.setLoanTime(order.getLoanTime());
         dtl.setUserState(userInfo.getState());
         dtl.setReason(order.getReason());
         dtl.setState(order.getState());
@@ -255,8 +259,8 @@ public class OrdersInterController {
      * @param id
      * @return
      */
-    @GetMapping(path = "/order/{id}")
-    public Orders getOrder(@PathVariable("id") String id) {
+    @GetMapping(path = "/order")
+    public Orders getOrder(@RequestParam("id") String id) {
         return ordersService.selectByPrimaryKey(id);
     }
 

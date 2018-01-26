@@ -59,6 +59,7 @@ public interface Constants {
         String REPAYMENT_STATE = "REPAYMENT_STATE";//还款状态
         String OPERATION_STATE = "OPERATION_STATE";//操作状态
         String PLATFORM = "PLATFORM";//平台
+        String THREE_URL = "THREE_URL";//第三方连接
     }
 
     interface JOB_DATA_KEY {
@@ -84,6 +85,7 @@ public interface Constants {
         int BANK = 1;//资金方后台
         int USER = 2;//用户（贷款方）
     }
+
     /**
      * 客户端类型
      */
@@ -116,11 +118,12 @@ public interface Constants {
     /**
      * 贷款管理驳回原因类型
      */
-    interface REJECT_TYPE{
+    interface REJECT_TYPE {
         int BLACK_LIST = 0;//黑名单
         int TOO_MUCH = 1;//申请提现金额过高
         int OTHER = 2;//其他原因
     }
+
     //还款状态
     interface REPAYMENT_ORDER_STATE {
         int PASS = 3;//使用中
@@ -131,7 +134,7 @@ public interface Constants {
     /**
      * 还款方式类型
      */
-    interface REPAYMENT_TYPE{
+    interface REPAYMENT_TYPE {
         int INTEREST_CAPITAL = 0;//先息后本
         int MONTH_EQUAL = 1;//每月等额
     }
@@ -144,6 +147,17 @@ public interface Constants {
         int NORMAL = 0;//正常
         int FROZEN = 1;//冻结
     }
+
+    /**
+     * 用户状态
+     * 0：正常   1：禁用
+     */
+    interface PLAN_STATUS {
+        int FEATURE = 0;//未到期
+        int PRESENT = 1;//当期
+        int PAST = 1;//往期
+    }
+
 
     /**
      * 用户角色
@@ -171,6 +185,7 @@ public interface Constants {
          */
         int SECRECY = 0;
     }
+
     /**
      * 登录状态
      */

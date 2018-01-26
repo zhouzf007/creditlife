@@ -9,13 +9,13 @@ import com.entrobus.credit.log.client.ManagerClient;
 import com.entrobus.credit.log.service.ClientLogService;
 import com.entrobus.credit.log.service.LogCacheService;
 import com.entrobus.credit.log.service.OperationLogService;
+import com.entrobus.credit.log.service.SysLoginLogService;
 import com.entrobus.credit.pojo.log.ClientLog;
 import com.entrobus.credit.pojo.log.OperationLog;
+import com.entrobus.credit.pojo.log.SysLoginLog;
+import com.entrobus.credit.pojo.log.SysLoginLogExample;
 import com.entrobus.credit.vo.common.CommonParameter;
-import com.entrobus.credit.vo.log.BankOperationLogVo;
-import com.entrobus.credit.vo.log.LogQueryVo;
-import com.entrobus.credit.vo.log.ManagerOperationLogDetail;
-import com.entrobus.credit.vo.log.ManagerOperationLogVo;
+import com.entrobus.credit.vo.log.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class LogController {
@@ -37,6 +38,8 @@ public class LogController {
     private LogCacheService logCacheService;
     @Autowired
     private ManagerClient managerClient;
+    @Autowired
+    private SysLoginLogService sysLoginLogService;
 
     @PostMapping(value = "/garbage")
     public int clear(){
@@ -173,5 +176,46 @@ public class LogController {
         detail.setOperationData(log.getOperationData());
         detail.setApplicationName(log.getApplicationName());
         return detail;
+    }
+    /**
+     * 后台登陆日志
+     * @return
+     */
+    @GetMapping("/manager/loginLog")
+    public WebResult sysLoginLogList(String sysUserId,@RequestParam(defaultValue = "1")int pageNum,
+                                     @RequestParam(defaultValue = "20") int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+//        queryVo.setPlatform(Constants.PLATFORM.BANK);//资金方
+        SysLoginLogExample example = new SysLoginLogExample();
+        example.setOrderByClause("login_time DESC");
+        SysLoginLogExample.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotBlank(sysUserId)){
+            criteria.andSysUserIdEqualTo(sysUserId);
+        }
+        List< SysLoginLog> list = sysLoginLogService.selectByExample(example);
+
+        Map<String, String> longStringMap = managerClient.userNameMapByOrg(null);
+//        List<SysLoginLogVo> voList = list.stream().map(this::toSysLoginLogVo).collect(Collectors.toList());
+        List<SysLoginLogVo> voList = new ArrayList<>();
+        for (SysLoginLog log : list) {
+            SysLoginLogVo vo = toSysLoginLogVo(log);
+            String operatorName = longStringMap.getOrDefault(log.getSysUserId(), "");
+            vo.setSysUserName(operatorName);
+            voList.add(vo);
+        }
+        PageInfo<SysLoginLog> pageInfo = new PageInfo<>(list);
+        return WebResult.ok("操作成功").put("total",pageInfo.getTotal()).put("rows",voList);
+    }
+
+    private SysLoginLogVo toSysLoginLogVo(SysLoginLog log) {
+        SysLoginLogVo vo = new SysLoginLogVo();
+        vo.setId(log.getId());
+        vo.setAddress(log.getAddress());
+        vo.setBrowser(log.getBrowser());
+        vo.setLoginTime(DateUtils.formatDateTime(log.getLoginTime()));
+        vo.setOperationSystem(log.getOperationSystem());
+        vo.setPlatform(logCacheService.translate(Constants.CODE_TYPE.PLATFORM,log.getPlatform()));
+        vo.setSysUserId(log.getSysUserId());
+        return vo;
     }
 }
