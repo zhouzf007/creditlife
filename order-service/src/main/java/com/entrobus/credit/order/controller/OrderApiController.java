@@ -2,14 +2,11 @@ package com.entrobus.credit.order.controller;
 
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.order.channel.GenSubOrderPublishChannel;
+import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.order.client.BsStaticsClient;
 import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
-import com.entrobus.credit.order.client.UserClient;
-import com.entrobus.credit.order.services.ContractService;
 import com.entrobus.credit.order.services.OrderCacheService;
-import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.order.services.OrdersService;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
@@ -18,16 +15,13 @@ import com.entrobus.credit.vo.order.PlanVo;
 import com.entrobus.credit.vo.order.UserOrdersVo;
 import com.entrobus.credit.vo.order.UserRepaymentPlanVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
+import com.entrobus.credit.vo.user.UserStateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RefreshScope
 @RestController
@@ -65,10 +59,11 @@ public class OrderApiController {
         }
         Orders lastOrder = ordersService.getUserLastOrder(userInfo.getId());
         Map rsMap = new HashMap<>();
+        UserStateVo vo = new UserStateVo();
         if (lastOrder == null) {
-            rsMap.put("state", -1);
+            vo.setState(-1);
         } else {
-            rsMap.put("state", lastOrder.getState());
+            vo.setState(lastOrder.getState());
         }
         return WebResult.ok(rsMap);
     }
@@ -103,7 +98,7 @@ public class OrderApiController {
         List<UserOrdersVo> list = ordersService.getUserOrderList(userInfo.getId(), null, null);
         Map rsMap = new HashMap<>();
         rsMap.put("list", list);
-        return WebResult.ok(rsMap);
+        return WebResult.ok((Object) rsMap);
     }
 
     /**
@@ -125,6 +120,14 @@ public class OrderApiController {
         for (int i = 0; i < list.size(); i++) {
             RepaymentPlan plan = list.get(i);
             PlanVo vo = new PlanVo();
+            //阶段 0 未到期，1 当期，2 往期
+            Date dueTime = plan.getPlanTime();
+            if (DateUtils.getStartOfMonth(new Date()).after(dueTime)) {
+                vo.setStatus(Constants.PLAN_STATUS.PAST);
+            }
+            if (DateUtils.getStartOfMonth(new Date()).before(dueTime) && DateUtils.getEndDateTimeOfMonth(new Date()).after(dueTime)) {
+                vo.setStatus(Constants.PLAN_STATUS.PAST);
+            }
             vo.setState(plan.getState());
             vo.setStateName("");
             vo.setDueTime(plan.getPlanTime());
