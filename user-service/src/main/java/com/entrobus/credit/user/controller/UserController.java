@@ -30,6 +30,7 @@ import com.entrobus.credit.user.utils.ShiroUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -267,7 +268,9 @@ public class UserController extends BaseController {
         userAccount.setCreateOperator(userInfo.getId());
         userAccountService.insertSelective(userAccount);
         userCacheService.refreshUserCache(userInfo.getId());
-        return WebResult.ok().put(WebResult.DATA, userAccount.getId());
+        Map<String, String> map = new HashMap<>();
+        map.put("id", userAccount.getId());
+        return WebResult.ok().put(WebResult.DATA, map);
     }
 
     /*
