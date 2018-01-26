@@ -70,7 +70,7 @@ public class RepaymentController extends PaymentBaseController {
         updateOrder.setId(id);
         if (plan != null) {
             //使用中 变更为 逾期
-            if (plan.getState() == Constants.REPAYMENT_ORDER_STATE.PASS && state == Constants.REPAYMENT_ORDER_STATE.OVERDUE) {
+            if (state == Constants.REPAYMENT_ORDER_STATE.OVERDUE) {
                 plan.setState(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
                 plan.setSystemState(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
                 repaymentPlanService.updateByPrimaryKeySelective(plan);
@@ -78,7 +78,7 @@ public class RepaymentController extends PaymentBaseController {
                 updateOrder.setState(Constants.ORDER_STATE.OVERDUE);
                 orderClient.updateOrder(plan.getOrderId(), updateOrder);
 
-            } else if (plan.getState() == Constants.REPAYMENT_ORDER_STATE.PASS && state == Constants.REPAYMENT_ORDER_STATE.FINISHED) {
+            } else if (state == Constants.REPAYMENT_ORDER_STATE.FINISHED) {
                 //使用中 变更为 已结清
                 plan.setState(Constants.REPAYMENT_ORDER_STATE.FINISHED);
                 plan.setSystemState(Constants.REPAYMENT_ORDER_STATE.FINISHED);
