@@ -23,8 +23,8 @@ public interface LogClient {
      */
     @GetMapping(value = "/bank/operationLog",consumes = "application/json")
     WebResult bankOperationLogList( @RequestParam(value = "orgId")String orgId,
-                                   @RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                                   @RequestParam(value = "pageSize",defaultValue = "20") int pageSize);
+                                   @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+                                   @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize);
 
     /**
      * 熵商后台操作日志列表
@@ -35,8 +35,17 @@ public interface LogClient {
      */
     @GetMapping(value = "/manager/operationLog",consumes = "application/json")
     WebResult managerOperationLogList(@RequestParam Map<String,Object> map,
-                                      @RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                                      @RequestParam(value = "pageSize",defaultValue = "20") int pageSize);
+                                      @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+                                      @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize);
+
+    /**
+     * 操作日志详情
+     * @return
+     */
+    @GetMapping("/manager/loginLog")
+    WebResult sysLoginLogList(@RequestParam("sysUserId") String sysUserId,
+                                     @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+                                     @RequestParam(value = "pageSize",defaultValue = "20") Integer pageSize);
     /**
      * 操作日志详情
      * @param id
@@ -47,14 +56,28 @@ public interface LogClient {
     class LogClientFallBack implements LogClient {
         private static final Logger LOGGER = LoggerFactory.getLogger( LogClient.LogClientFallBack.class);
         @Override
-        public WebResult bankOperationLogList(String orgId, int pageNum, int pageSize) {
+        public WebResult bankOperationLogList(String orgId, Integer pageNum, Integer pageSize) {
             LOGGER.info("bankOperationLogList异常发生，进入fallback方法");
             return null;
         }
 
         @Override
-        public WebResult managerOperationLogList(Map<String,Object> map, int pageNum, int pageSize) {
+        public WebResult managerOperationLogList(Map<String,Object> map, Integer pageNum, Integer pageSize) {
             LOGGER.info("managerOperationLogList异常发生，进入fallback方法");
+            return null;
+        }
+
+        /**
+         * 操作日志详情
+         *
+         * @param sysUserId
+         * @param pageNum
+         * @param pageSize
+         * @return
+         */
+        @Override
+        public WebResult sysLoginLogList(String sysUserId, Integer pageNum, Integer pageSize) {
+            LOGGER.info("sysLoginLogList异常发生，进入fallback方法");
             return null;
         }
 
