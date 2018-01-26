@@ -109,6 +109,10 @@ public class OrdersInterController {
         dtl.setScore(order.getCreditScore());
         dtl.setContractId(order.getContractId());
         dtl.setCreditReportId(order.getCreditReportId());
+        dtl.setAuditor(order.getAuditor());
+        dtl.setAuditTime(order.getAuditTime());
+        dtl.setLoanOperator(order.getLoanOperator());
+        dtl.setLoanTime(order.getLoanTime());
         dtl.setUserState(userInfo.getState());
         dtl.setReason(order.getReason());
         dtl.setState(order.getState());

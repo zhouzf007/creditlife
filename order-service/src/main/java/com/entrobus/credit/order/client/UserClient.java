@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "user-service", fallback = UserClient.UserClientFallback.class)
 public interface UserClient {
 
-    @GetMapping(value = "/user/userCreditReport", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/userCreditReport")
     CreditReport getCreditReport(@RequestParam("userId") String userId);
 
-    @GetMapping(value = "/user/creditReport/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    CreditReport getCrediReport(@PathVariable("id") String id);
+    @GetMapping(value = "/user/creditReport")
+    CreditReport getCrediReport(@RequestParam("id") String id);
 
 
     @Component
