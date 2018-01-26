@@ -309,7 +309,9 @@ public class UserController extends BaseController {
         CreditReport creditReport = creditReportService.getCreditReportByUid(loginUser);
         CreditReportVo vo = new CreditReportVo();
         try {
-            BeanUtils.copyProperties(vo, creditReport);
+            if(creditReport != null){
+                BeanUtils.copyProperties(vo, creditReport);
+            }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
