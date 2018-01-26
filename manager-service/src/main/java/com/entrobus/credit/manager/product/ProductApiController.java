@@ -88,15 +88,15 @@ public class ProductApiController extends ManagerBaseController {
     @GetMapping(value = "/repaymentPlan")
     public WebResult getRepaymentPlan(String prodId, String rate, String principal, Integer type, Integer term) {
         UserRepaymentPlanVo vo = new UserRepaymentPlanVo();
-        if (type==null||term==null){
-            return WebResult.error(WebResult.CODE_PARAMETERS,"参数不正确");
+        if (type == null || term == null) {
+            return WebResult.error(WebResult.CODE_PARAMETERS, "参数不正确");
         }
         List<PlanVo> planList = new ArrayList<>();
         //计算还款总额
-        BigDecimal princl = MoneyUtils.divide(principal, "100");
-        BigDecimal monthRate = MoneyUtils.divide(rate, "120000");
+        BigDecimal princl = MoneyUtils.newBigDecimal(principal);
+        BigDecimal monthRate = MoneyUtils.divide(rate, "12");
         BigDecimal totaLInterest = new BigDecimal(0);
-        if ( type == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
+        if (type == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
             totaLInterest = BIAPPUtils.interest(princl, monthRate, term).multiply(new BigDecimal(100));
         } else if (type == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
             totaLInterest = CPMUtils.interest(princl, monthRate, term).multiply(new BigDecimal(100));
@@ -112,16 +112,21 @@ public class ProductApiController extends ManagerBaseController {
             //计算还款日期
             plan.setDueTime(repayDate);
             if (type == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
-                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(princl, monthRate, term, i + 1).multiply(new BigDecimal(100));
-                plan.setPrincipalAndInterest(monthlyRepayment.longValue());
+//                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(princl, monthRate, term, i + 1).multiply(new BigDecimal(100));
+                BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(princl, monthRate);
+                plan.setInterest(monthlyInterest.longValue());
+                plan.setPrincipal(i == term - 1 ? princl.longValue() : 0);
                 plan.setCapital(princl.longValue());
             } else if (type == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
                 BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(princl, monthRate, term).multiply(new BigDecimal(100));
-                plan.setPrincipalAndInterest(monthlyRepayment.longValue());
+                BigDecimal monthlyInterest = CPMUtils.monthlyInterest(princl, monthRate, monthlyRepayment, term);
+                plan.setInterest(monthlyInterest.longValue());
+                BigDecimal monthlyPrincipal = CPMUtils.monthPrincipal(monthlyRepayment, monthlyInterest);
+                plan.setPrincipal(monthlyPrincipal.longValue());
             }
             //计算本息
             planList.add(plan);
-            repayDate=DateUtils.addMonths(repayDate,1);
+            repayDate = DateUtils.addMonths(repayDate, 1);
         }
         vo.setPlanList(planList);
         return WebResult.ok(vo);
