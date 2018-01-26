@@ -1,5 +1,7 @@
 package com.entrobus.credit.order.controller;
 
+import com.entrobus.credit.cache.CacheService;
+import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.DateUtils;
@@ -128,9 +130,10 @@ public class OrderApiController {
                 vo.setStatus(Constants.PLAN_STATUS.PAST);
             }
             vo.setState(plan.getState());
-            vo.setStateName("");
+            vo.setStateName(cacheService.translate(Cachekey.Translation.REPAYMENT_STATE + plan.getState()));
             vo.setDueTime(plan.getPlanTime());
-            vo.setPrincipalAndInterest(plan.getInterest() + plan.getPrincipal());
+            vo.setInterest(plan.getInterest());
+            vo.setPrincipal(plan.getPrincipal());
             vo.setCapital(plan.getPrincipal());
             plist.add(vo);
         }
