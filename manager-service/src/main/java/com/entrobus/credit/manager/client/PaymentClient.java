@@ -35,8 +35,8 @@ public interface PaymentClient {
     @GetMapping("/api/presentRepaymentPlan")
     RepaymentPlan getPresentRepaymentPlan(@RequestParam("orderId") String orderId);
 
-    @PutMapping("/repaymentPlan")
-    WebResult updateRepaymentPlan(@RequestParam("id") String id, @RequestParam("Integer") Integer state);
+    @PutMapping("/api/repaymentPlan")
+    WebResult updateRepaymentPlan(@RequestParam("id") String id, @RequestParam("state") Integer state);
 
     @Component
     class PaymentClientFallback implements PaymentClient {

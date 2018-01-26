@@ -10,16 +10,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Map;
+
 @FeignClient(name = "log-service",fallback = LogClient.LogClientFallBack.class)
 public interface LogClient {
+
+    /**
+     * 资金方平台 操作日志列表
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @GetMapping(value = "/bank/operationLog",consumes = "application/json")
     WebResult bankOperationLogList( @RequestParam(value = "orgId")String orgId,
                                    @RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
                                    @RequestParam(value = "pageSize",defaultValue = "20") int pageSize);
+
+    /**
+     * 熵商后台操作日志列表
+     * @param map
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @GetMapping(value = "/manager/operationLog",consumes = "application/json")
-    WebResult managerOperationLogList( @RequestParam(value = "orgId")String orgId,
-                                   @RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                                   @RequestParam(value = "pageSize",defaultValue = "20") int pageSize);
+    WebResult managerOperationLogList(@RequestParam Map<String,Object> map,
+                                      @RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
+                                      @RequestParam(value = "pageSize",defaultValue = "20") int pageSize);
+    /**
+     * 操作日志详情
+     * @param id
+     * @return
+     */
     @GetMapping("/manager/operationLog/detail")
     ManagerOperationLogDetail managerOperationLogDetail(@RequestParam("id") String id);
     class LogClientFallBack implements LogClient {
@@ -31,7 +53,7 @@ public interface LogClient {
         }
 
         @Override
-        public WebResult managerOperationLogList(String orgId, int pageNum, int pageSize) {
+        public WebResult managerOperationLogList(Map<String,Object> map, int pageNum, int pageSize) {
             LOGGER.info("managerOperationLogList异常发生，进入fallback方法");
             return null;
         }

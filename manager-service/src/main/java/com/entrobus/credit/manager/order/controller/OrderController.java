@@ -84,17 +84,17 @@ public class OrderController extends ManagerBaseController {
     }
 
     /**
-     * 还款订单详情
-     *
+     * 还款计划状态更新
      * @return
      */
     @PutMapping("/repaymentPlan")
+    @RecordLog(desc = "修改还款状态")
     public WebResult updatePaymentState(String id, Integer state) {
         return paymentClient.updateRepaymentPlan(id,state);
     }
 
     /**
-     * 还款计划状态更新
+     * 还款订单详情
      *
      * @return
      */
