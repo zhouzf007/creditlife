@@ -37,13 +37,13 @@ public class RedisClusterConfig {
 
 //    @Bean
 //    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-//        RedisTemplate<String, Object> template = new RedisTemplate();
-//        template.setConnectionFactory(factory);
-//        template.setKeySerializer(new StringRedisSerializer());
-//        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-//        template.setHashKeySerializer(new StringRedisSerializer());
-//        template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
-//        return template;
+//        RedisTemplate<String, Object> templates = new RedisTemplate();
+//        templates.setConnectionFactory(factory);
+//        templates.setKeySerializer(new StringRedisSerializer());
+//        templates.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+//        templates.setHashKeySerializer(new StringRedisSerializer());
+//        templates.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
+//        return templates;
 //    }
 
     //redis Cluster 模式

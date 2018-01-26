@@ -15,7 +15,7 @@ public class FreemarkUtil {
     public static String getTemplate(String templateName,Map model) throws IOException, TemplateException {
         Configuration configuration = new Configuration();
 
-        TemplateLoader c1 = new ClassTemplateLoader(TemplateLoader.class,"/template/");
+        TemplateLoader c1 = new ClassTemplateLoader(TemplateLoader.class,"/templates/");
 
         configuration.setTemplateLoader(c1);
 
