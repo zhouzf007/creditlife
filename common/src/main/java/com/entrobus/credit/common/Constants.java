@@ -59,6 +59,7 @@ public interface Constants {
         String REPAYMENT_STATE = "REPAYMENT_STATE";//还款状态
         String OPERATION_STATE = "OPERATION_STATE";//操作状态
         String PLATFORM = "PLATFORM";//平台
+        String THREE_URL = "THREE_URL";//第三方连接
     }
 
     interface JOB_DATA_KEY {
