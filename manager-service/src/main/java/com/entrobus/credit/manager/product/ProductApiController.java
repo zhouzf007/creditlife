@@ -94,7 +94,7 @@ public class ProductApiController extends ManagerBaseController {
         List<PlanVo> planList = new ArrayList<>();
         //计算还款总额
         BigDecimal princl = MoneyUtils.newBigDecimal(principal);
-        BigDecimal monthRate = MoneyUtils.divide(rate, "12");
+        BigDecimal monthRate = MoneyUtils.multiply(rate, "10000").divide(new BigDecimal(12));
         BigDecimal totaLInterest = new BigDecimal(0);
         if (type == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
             totaLInterest = BIAPPUtils.interest(princl, monthRate, term).multiply(new BigDecimal(100));
