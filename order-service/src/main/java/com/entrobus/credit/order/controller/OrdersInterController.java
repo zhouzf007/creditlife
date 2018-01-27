@@ -246,6 +246,11 @@ public class OrdersInterController {
                 ordersService.updateByPrimaryKeySelective(loanOrder);
                 //生成订单实例
                 orderInstanceService.saveOrderInstance(loanOrder);
+            } else if (loanOrder.getState() == Constants.ORDER_STATE.OVERDUE && order.getState() == Constants.ORDER_STATE.PASS) {//
+                //当期结清，订单恢复正常状态
+                loanOrder.setState(Constants.ORDER_STATE.PASS);
+                loanOrder.setUpdateOperator(order.getUpdateOperator());
+                ordersService.updateByPrimaryKeySelective(loanOrder);
             } else {
                 return WebResult.error(WebResult.CODE_BUSI_DISPERMIT, "订单状态异常");
             }

@@ -96,12 +96,17 @@ public class OrderController extends ManagerBaseController {
 
     /**
      * 还款计划状态更新
+     *
      * @return
      */
     @PutMapping("/repaymentPlan")
     @RecordLog(desc = "修改还款状态")
     public WebResult updatePaymentState(String id, Integer state) {
-        return paymentClient.updateRepaymentPlan(id,state);
+        SysLoginUserInfo sys = getCurrLoginUser();
+        OrderUpdateVo vo = new OrderUpdateVo();
+        vo.setState(state);
+        vo.setUpdateOperator(sys.getUsername());
+        return paymentClient.updateRepaymentPlan(id, vo);
     }
 
 }
