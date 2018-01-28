@@ -4,6 +4,7 @@ import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
+import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.common.util.PurseUtil;
 import com.entrobus.credit.order.client.PaymentClient;
@@ -269,7 +270,7 @@ public class OrdersServiceImpl implements OrdersService {
             CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
             orderVo.setId(order.getId());
             orderVo.setUserName(userInfo.getRealName());
-            orderVo.setApplyTime(order.getApplyTime());
+            orderVo.setApplyTime(DateUtils.formatDate(order.getApplyTime()));
             orderVo.setApplyNo(order.getApplyNo());
             orderVo.setState(order.getState());
             orderVo.setMoney(PurseUtil.toYuanString(order.getApplyMoney()));

@@ -125,7 +125,7 @@ public class OrdersInterController {
                 RepaymentPlanVo vo = new RepaymentPlanVo();
                 vo.setId(plan.getId());
                 vo.setMoney(AmountUtil.changeF2Y(plan.getPrincipal()));
-                vo.setRepayTime(plan.getPlanTime());
+                vo.setRepayTime(DateUtils.formatDate(plan.getPlanTime(),"yyyy-MM-dd"));
                 vo.setUpdateTime(plan.getUpdateTime());
                 vo.setOperator(plan.getUpdateOperator());
                 vo.setState(plan.getState());
@@ -183,7 +183,7 @@ public class OrdersInterController {
             vo.setState(order.getState());
             vo.setApplyNo(order.getApplyNo());
             vo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
-            vo.setApplyTime(order.getApplyTime());
+            vo.setApplyTime(DateUtils.formatDate(order.getApplyTime()));
             vo.setUpdateTime(order.getUpdateTime());
             vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsOrderList.add(vo);

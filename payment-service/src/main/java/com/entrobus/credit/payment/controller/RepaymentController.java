@@ -70,6 +70,7 @@ public class RepaymentController extends PaymentBaseController {
         OrderUpdateVo updateOrder = new OrderUpdateVo();
         updateOrder.setId(plan.getOrderId());
         updateOrder.setUpdateOperator(vo.getUpdateOperator());
+        plan.setUpdateOperator(vo.getUpdateOperator());
         if (plan != null) {
             Orders order = orderClient.getOrder(plan.getOrderId());
             if (order.getState()==Constants.ORDER_STATE.FINISHED){
