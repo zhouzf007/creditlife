@@ -4,6 +4,7 @@ import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.order.client.BsStaticsClient;
 import com.entrobus.credit.order.client.PaymentClient;
@@ -18,6 +19,7 @@ import com.entrobus.credit.vo.order.UserOrdersVo;
 import com.entrobus.credit.vo.order.UserRepaymentPlanVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserStateVo;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
@@ -114,8 +116,8 @@ public class OrderApiController {
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
         }
+        long total = 0;
         UserRepaymentPlanVo rsVo = new UserRepaymentPlanVo();
-        rsVo.setBalance(10000L);
         List<PlanVo> plist = new ArrayList<>();
         List<RepaymentPlan> list = paymentClient.getOrderRepaymentPlan(orderId);
         for (int i = 0; i < list.size(); i++) {
@@ -137,11 +139,15 @@ public class OrderApiController {
             vo.setState(plan.getState());
             vo.setStateName(cacheService.translate(Cachekey.Translation.REPAYMENT_STATE + plan.getState()));
             vo.setDueTime(plan.getPlanTime());
-            vo.setInterest(plan.getInterest());
-            vo.setPrincipal(plan.getPrincipal());
+            vo.setInterest(AmountUtil.changeF2Y(plan.getInterest()));
+            vo.setPrincipal(AmountUtil.changeF2Y(plan.getPrincipal()));
             vo.setCapital(plan.getPrincipal());
             plist.add(vo);
+            if (plan.getState() == Constants.REPAYMENT_ORDER_STATE.PASS || plan.getState() == Constants.REPAYMENT_ORDER_STATE.OVERDUE) {
+                total += plan.getPrincipal() + plan.getInterest();
+            }
         }
+        rsVo.setBalance(AmountUtil.changeF2Y(total));
         rsVo.setPlanList(plist);
         return WebResult.ok(rsVo);
     }

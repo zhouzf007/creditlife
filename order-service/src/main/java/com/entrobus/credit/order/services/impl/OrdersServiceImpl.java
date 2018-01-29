@@ -200,6 +200,9 @@ public class OrdersServiceImpl implements OrdersService {
         order.setRole(userInfo.getRole());
         order.setAccount(userInfo.getDefualtAccount());
         //生成合同信息
+        if (StringUtils.isNotEmpty(vo.getSignature())){
+
+        }
         contract.setId(GUIDUtil.genRandomGUID());
         contract.setOrderId(order.getId());
         contract.setUserId(order.getUserId());
