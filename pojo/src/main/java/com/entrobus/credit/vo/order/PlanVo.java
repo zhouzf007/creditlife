@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class PlanVo {
 
-    private Long principal;//应还本
-    private Long interest;//应还息
+    private String principal;//应还本
+    private String interest;//应还息
     private String stateName;//
     private Integer state;//还款状态
     private Integer status;//阶段 0 未到期，1 当期，2 往期
@@ -21,19 +21,19 @@ public class PlanVo {
     private Integer overdue;//逾期天数
     private Long capital;//本金
 
-    public Long getPrincipal() {
+    public String getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(Long principal) {
+    public void setPrincipal(String principal) {
         this.principal = principal;
     }
 
-    public Long getInterest() {
+    public String getInterest() {
         return interest;
     }
 
-    public void setInterest(Long interest) {
+    public void setInterest(String interest) {
         this.interest = interest;
     }
 

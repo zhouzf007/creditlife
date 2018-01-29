@@ -51,13 +51,13 @@ public class GenSubOrderHandler {
         repayment.setCreateOperator(createOp);
         repayment.setUserId(userId);
         repayment.setRepaymentType(order.getRepaymentType());
-        BigDecimal principal = MoneyUtils.divide(order.getActualMoney().toString(), "100");
+        BigDecimal principal = MoneyUtils.divide(order.getActualMoney().toString(),"100");
         BigDecimal monthRate = MoneyUtils.divide(order.getInterestRate().toString(), "120000");
         BigDecimal totaLInterest = new BigDecimal(0);
         if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
-            totaLInterest = BIAPPUtils.interest(principal, monthRate, term).multiply(new BigDecimal(100));
+            totaLInterest = BIAPPUtils.interest(principal, monthRate, term);
         } else if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
-            totaLInterest = CPMUtils.interest(principal, monthRate, term).multiply(new BigDecimal(100));
+            totaLInterest = CPMUtils.interest(principal, monthRate, term);
         }
         repayment.setInterest(totaLInterest.longValue());
         repaymentService.insertSelective(repayment);
@@ -77,14 +77,14 @@ public class GenSubOrderHandler {
             plan.setRepaymentId(repaymentId);
             plan.setAccount(account);
             if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
-                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(principal, monthRate, term, i + 1).multiply(new BigDecimal(100));
-                BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(principal, monthRate).multiply(new BigDecimal(100));
+                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(principal, monthRate, term, i + 1);
+                BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(principal, monthRate);
                 plan.setInterest(monthlyInterest.longValue());
                 plan.setRepayment(monthlyRepayment.longValue());
                 plan.setPrincipal(i==term-1?principal.longValue():0);
             } else if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
-                BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(principal, monthRate, term).multiply(new BigDecimal(100));
-                BigDecimal monthlyInterest = CPMUtils.monthlyInterest(principal, monthRate, monthlyRepayment, i + 1).multiply(new BigDecimal(100));
+                BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(principal, monthRate, term);
+                BigDecimal monthlyInterest = CPMUtils.monthlyInterest(principal, monthRate, monthlyRepayment, i + 1);
                 BigDecimal monthlyPrincipal = CPMUtils.monthPrincipal(monthlyRepayment, monthlyInterest);
                 plan.setInterest(monthlyInterest.longValue());
                 plan.setRepayment(monthlyRepayment.longValue());
