@@ -39,9 +39,10 @@ public class FileServiceController {
     @RequestMapping("/uploadFile")
     public WebResult uploadFile(@RequestParam(value = "file", required = false) MultipartFile file) {
         UploadResult uploadResult = fileService.uploadFile(file);
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("uploadResult", uploadResult);
-        return WebResult.ok(dataMap);
+//        Map<String, Object> dataMap = new HashMap<>();
+//        dataMap.put("uploadResult", uploadResult);
+//        return WebResult.ok(dataMap);
+        return WebResult.ok(uploadResult);
     }
 
     /**
@@ -75,24 +76,26 @@ public class FileServiceController {
             }
             //保存上传文件
             List<UploadResult> uploadFileList = fileService.uploadFile(multipartFileList);
-            dataMap.put("uploadResult", uploadFileList);
+//            dataMap.put("uploadResult", uploadFileList);
+            dataMap.put("list", uploadFileList);
         }
-        return WebResult.ok(dataMap);
+        return WebResult.ok((Object) dataMap);
     }
 
     /**
      * 上传网络文件
+     *
      * @param fileUrl 文件URL
      * @return FileUploadResult 文件上传结果
      */
     @RequestMapping("/uploadNetworkFile")
-    public FileUploadResult uploadNetworkFile(String fileUrl){
+    public FileUploadResult uploadNetworkFile(String fileUrl) {
         FileUploadResult fileUploadResult = new FileUploadResult();
         try {
             UploadResult uploadResult = fileService.uploadNetworkFile(fileUrl);
-            BeanUtils.copyProperties(fileUploadResult,uploadResult);
+            BeanUtils.copyProperties(fileUploadResult, uploadResult);
         } catch (Exception e) {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
             fileUploadResult.setUploadSuccess(false);
         }
         return fileUploadResult;
@@ -100,18 +103,19 @@ public class FileServiceController {
 
     /**
      * 上传网络文件
+     *
      * @param fileUrl 文件URL
      * @param fileExt 文件后缀
      * @return FileUploadResult 文件上传结果
      */
     @RequestMapping("/uploadNetworkFile2")
-    public FileUploadResult uploadNetworkFile2(String fileUrl,String fileExt){
+    public FileUploadResult uploadNetworkFile2(String fileUrl, String fileExt) {
         FileUploadResult fileUploadResult = new FileUploadResult();
         try {
-            UploadResult uploadResult = fileService.uploadNetworkFile(fileUrl,fileExt);
-            BeanUtils.copyProperties(fileUploadResult,uploadResult);
+            UploadResult uploadResult = fileService.uploadNetworkFile(fileUrl, fileExt);
+            BeanUtils.copyProperties(fileUploadResult, uploadResult);
         } catch (Exception e) {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
             fileUploadResult.setUploadSuccess(false);
         }
         return fileUploadResult;
@@ -119,18 +123,19 @@ public class FileServiceController {
 
     /**
      * 上传文件输入流
+     *
      * @param inputStream 文件输入流
-     * @param fileName 原始文件名(带后缀,如1.png,2.jpg)
+     * @param fileName    原始文件名(带后缀,如1.png,2.jpg)
      * @return FileUploadResult 文件上传结果
      */
     @RequestMapping("/uploadFileInputStream")
-    public FileUploadResult uploadFile(InputStream inputStream, String fileName){
+    public FileUploadResult uploadFile(InputStream inputStream, String fileName) {
         FileUploadResult fileUploadResult = new FileUploadResult();
         try {
-            UploadResult uploadResult = fileService.uploadFile(inputStream,fileName);
-            BeanUtils.copyProperties(fileUploadResult,uploadResult);
+            UploadResult uploadResult = fileService.uploadFile(inputStream, fileName);
+            BeanUtils.copyProperties(fileUploadResult, uploadResult);
         } catch (Exception e) {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
             fileUploadResult.setUploadSuccess(false);
         }
         return fileUploadResult;

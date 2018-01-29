@@ -7,24 +7,24 @@ public class UserRepaymentPlanVo {
     /**
      * 供接口使用
      */
-    private Long balance;//余款总额
-    private Long interest;//总利息
+    private String balance;//余款总额
+    private String interest;//总利息
 
-    public Long getInterest() {
+    public String getInterest() {
         return interest;
     }
 
-    public void setInterest(Long interest) {
+    public void setInterest(String interest) {
         this.interest = interest;
     }
 
     private List<PlanVo> planList;
 
-    public Long getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 
