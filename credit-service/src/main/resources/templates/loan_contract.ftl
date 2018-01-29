@@ -1,2666 +1,1061 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<?mso-application progid="Word.Document"?>
-<pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part pkg:name="/_rels/.rels" pkg:contentType="application/vnd.openxmlformats-package.relationships+xml"
-              pkg:padding="512">
-        <pkg:xmlData>
-            <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-                <Relationship Id="rId3"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties"
-                              Target="docProps/app.xml"/>
-                <Relationship Id="rId2"
-                              Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties"
-                              Target="docProps/core.xml"/>
-                <Relationship Id="rId1"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
-                              Target="word/document.xml"/>
-                <Relationship Id="rId4"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties"
-                              Target="docProps/custom.xml"/>
-            </Relationships>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/_rels/document.xml.rels"
-              pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:padding="256">
-        <pkg:xmlData>
-            <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-                <Relationship Id="rId3"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings"
-                              Target="settings.xml"/>
-                <Relationship Id="rId2"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
-                              Target="styles.xml"/>
-                <Relationship Id="rId1"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml"
-                              Target="../customXml/item1.xml"/>
-                <Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme"
-                              Target="theme/theme1.xml"/>
-                <Relationship Id="rId5"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable"
-                              Target="fontTable.xml"/>
-                <Relationship Id="rId4"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings"
-                              Target="webSettings.xml"/>
-            </Relationships>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/document.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml">
-        <pkg:xmlData>
-            <w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
-                        xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex"
-                        xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex"
-                        xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex"
-                        xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex"
-                        xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex"
-                        xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex"
-                        xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex"
-                        xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex"
-                        xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex"
-                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                        xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink"
-                        xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d"
-                        xmlns:o="urn:schemas-microsoft-com:office:office"
-                        xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-                        xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
-                        xmlns:v="urn:schemas-microsoft-com:vml"
-                        xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"
-                        xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
-                        xmlns:w10="urn:schemas-microsoft-com:office:word"
-                        xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                        xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                        xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                        xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                        xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex"
-                        xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
-                        xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk"
-                        xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"
-                        xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"
-                        mc:Ignorable="w14 w15 w16se w16cid wp14">
-                <w:body>
-                    <w:p w14:paraId="5682B60F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:pPr>
-                            <w:jc w:val="center"/>
-                        </w:pPr>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>借款合同</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="6F8F5003" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>用户您好：</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="67FD78E0" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>您的本次借款信息如下，请您在阅读和签署本合同之前进行确认，如有任何异议，请及时与客服联系。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="021317E6" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:tbl>
-                        <w:tblPr>
-                            <w:tblStyle w:val="a3"/>
-                            <w:tblW w:w="8522" w:type="dxa"/>
-                            <w:tblLayout w:type="fixed"/>
-                            <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0"
-                                       w:noHBand="0" w:noVBand="1"/>
-                        </w:tblPr>
-                        <w:tblGrid>
-                            <w:gridCol w:w="2673"/>
-                            <w:gridCol w:w="5849"/>
-                        </w:tblGrid>
-                        <w:tr w:rsidR="007770D8" w14:paraId="03AAD2A5" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="318882F6" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:pPr>
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                    </w:pPr>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>借款人</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="5D14D7E2" w14:textId="5D20BDD4" w:rsidR="007770D8"
-                                     w:rsidRDefault="00F7280B">
-                                    <w:pPr>
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                    </w:pPr>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>${fullName}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="78C1617E" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="4B5FB9BD" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>手机号</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="32657189" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:pPr>
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                    </w:pPr>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>${cellphone}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="09CA510A" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="2DC61EFA" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>身份证号</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="249F2E92" w14:textId="238C9291" w:rsidR="007770D8"
-                                     w:rsidRDefault="00F7280B">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>${idCard}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="4B1311D2" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="31939060" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>借款金额</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="05167F02" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:pPr>
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                    </w:pPr>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>${money} 元</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="37C0DC93" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="359F7191" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>借款期限</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="40D49E12" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:pPr>
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                    </w:pPr>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>${term}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="3C8194A4" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="7CDACA8A" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>起息日</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="709919D9" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>${interestStartDay}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="27472112" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="52302654" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>还款方式</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="1C3B3AB0" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>${repaymentMethod}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="3EDF9AFC" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="6ECC6CAE" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>指定收款账户</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="33723171" w14:textId="0FC70401" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>${payee}</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>*</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00642B1E">
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>${payeeAccount}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="58D696D7" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="234994B5" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>年化利率</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="58DAB174" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:pPr>
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                    </w:pPr>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>${annualInterestRate}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                        <w:tr w:rsidR="007770D8" w14:paraId="3A68F604" w14:textId="77777777" w:rsidTr="00F7280B">
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="2673" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="3B659EEE" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                        </w:rPr>
-                                        <w:t>贷款人</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                            <w:tc>
-                                <w:tcPr>
-                                    <w:tcW w:w="5849" w:type="dxa"/>
-                                </w:tcPr>
-                                <w:p w14:paraId="448EEEB9" w14:textId="77777777" w:rsidR="007770D8"
-                                     w:rsidRDefault="00065F9A">
-                                    <w:pPr>
-                                        <w:rPr>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                    </w:pPr>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:lang w:val="en-US"/>
-                                        </w:rPr>
-                                        <w:t>${payeeFullName}</w:t>
-                                    </w:r>
-                                </w:p>
-                            </w:tc>
-                        </w:tr>
-                    </w:tbl>
-                    <w:p w14:paraId="67B2C3E1" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>特别提醒：</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>银行</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>有限公司及其辖属机构
-                                (以下简称为“货款人”）将为您（亦称“用户”、“本人”）提供本合同项下的个人信用货款服务。您在此确认并同意您与货款人形成“借款合同”（以下简称“本合同”）项下的借货关系，受本合同约束。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="50117311" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>为了保障您的合法权益，您应当阅读并遵守本合同，请您务必审慎阅读、充分理解各条款内容，特别是免除或者限制责任的条款。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="48783555" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>除非您已阅读并接受本合同所有条款，否则您无权使用货款服务。您的使用、登录等行为即视为您已阅读并同意接受本合同的约束，本合同即时生效。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="46A2D5C5" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>本合同由您和货款人共同签署。您与货款人一致同意本合同利用互联网信息技术以数据电文形式订立并认同其效力。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="6FEFC2E0" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="5C14032F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第一条术语定义</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="06CB0D00" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>1.1</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>线上服务平台：以下简称“平台”，指</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>为您提供的、供您向货款人提出货款 审批、查看额度、申请借款等操作的平台，该平台的运营主体为</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XXXXXXXXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="36BE7432" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>1.2授信额度有效期：指在授信额度内，您可向货款人申请货款的期限。本合同初始授信额度有效期为三个月，但货款人有权随时调整授信额度有效期。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="437C68AC" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>1.3授信额度：是指</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>经</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XXXX和XXXX评估</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>您</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>可以使用的额度。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="16C86567" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>1.4提款申请：您应向货款人发出提款的支付指令，逐笔向货款人申请提取货款资金。货款人有权根据您的风险状况或经营情况调整您使用贷款的提款限额
-                                (包括但不限于当日可发放总规模限额、单笔限额、每日限额和每月限额）及提款笔数。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="20E6EEDF" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="56669B4E" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第二条申请及信息授权</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="3960E550" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2.1您须亲自通过</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>XXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>线上服务平台向货款人提出借款申请，同时务必通过</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>登录</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>密码、手机短信校验码</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>、业主身份确认</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>等方式校验验证您的身份。凡校验通过的，方视为您本人申请。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="554A1011" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2.2您应妥善保管您的常用手机设备（含手机号码）、</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>登录</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>账号及密码、与</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>绑定银行卡</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>账号</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>相匹配的</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                手机号码、手机校验码等信息，您应确保不向任何人泄露您以上信息。对于因账号、密码泄露、丟失或被冒用等所致的损失，由您自行承担。如您发现有他人冒用或盗用您的账号及密码申请本货款业务的，您应立即以有效方式通知货款人，要求货款人暂停本服务。同时，您理解货款人对您的请求采取行动需要合理期限，在此之前，货款人对已执行的指令及（或）所导致的您的损失不承担任何责任。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="15574C7F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2.3您保证向货款人和平台提供的所有申请信息是真实、完整、准确、合法、有效的，并授权货款人和平台向有关机构或单位（包括但不限于</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>及其关联 公司、其他货款人、网银在线、第三方支付机构组织、
-                                中国人民银行信用信息基础数据库、合法的征信机构、公安机关、公积金、社保、税务、民政等）查询或确认与您借款申请的相关信息（包括不良信息）。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="511E6254" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2.4货款人承诺根据监管要求对客户资料承担保密义务，不得将收集到的用户相关信息提供给货款人以外的无关的第三方，但</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00AB2B16">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>XXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>及其关联公司之间、货款人之间就用户相关信息的分享除外。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="15AF0137" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                2.5货款人有权依据您的资信情况综合自主决定是否受理您的借款申请及核定您的授信额度，且在核定您的授信额度后，货款人有权根据掌握的您的信用情况或认定的风险控管因素或其他正当理由，随时调整您的授信额度（包括但不限于调低、调高或者中止、终止）。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="75CE6681" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2.6货款人核定的您的授信额度并不构成货款人对您的放款承诺，授信额度项下具体提款业务，您应逐笔在授信额度有效期内及可使用授信额度内向货款人申请
-                                提款，货款人有权根据您的当期信用及货款人当期可货款资金规模自主决定是否向您发放额度项下单笔货款以及具体货款金额。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="0A3F66AA" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="3D524EB7" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第三条额度的使用、提款</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="19A29CD9" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>3.1您应保证在安全环境下通过各种媒介使用本授信额度，否则您须对非安全环境下本授信额度在各种媒介上使用所导致的风险和损失自行负责。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="0E67E68F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>3.2您知悉货款人通过</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00E630AF">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>登录密码</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>、手机短信校验码方式对使用本额度的交易进行身份验证，并同意任何通过身份验证成功产生的交易均为其本人交易，并由
-                                您承担相应的交易后果。您电子确认的交易凭证以及依据交易密码等电子数据信息办理的各类结算交易和授信额度提取、还款交易所产生的电子信息记录，均视为该项交易的有效凭证。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="4304B87E" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>3.3本额度项下单笔货款金额以您确认的借款合同所载信息为准。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="27268A9F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                3.4本授信额度项下单笔货款应按选定的借款用途，用于日常消费、教育、旅游或装修，不能用于个人购买住房、购买汽车、进行证券投资或用于股本权益投资货款资金、不得用于期货等投机经营或从事其他违法、违规交易，否则视同违约。货款人有权通过账户分析、凭证查验、现场调查等方式核查您的货款用途。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="0CA0CF3B" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>3.5货款人根据您的提款申请将货款资金直接发放到您的银行账户上，单笔提款金额必须</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00A9290B">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>&gt;10</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>00元，且为100的整数倍。货款人有权变更您对授信额度的提款金额上限与下限。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="103AB944" w14:textId="1D2B74BD" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>3.6您不得利用本授信额度进行偷逃税款、逃废债务、洗钱及其他违法犯罪活动，若您在使用本授信额度过程中出现监管机关规定的或货款人依其判断认定的风
-                                险特征时，货款人有权不经任何形式的事先通知或事先确认而随时中止或终止您对本授信额度的使用，您有义务积极协助货款人识别相关风险，并承担因此所产生的损失。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="37E22D56" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="7AF20897" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第四条利率</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="32408C95" w14:textId="0F700DE1" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>4.1本额度项下货款采用日固定利率。货款人在借款人授信额度内依据借款人提款申请已发放货款的执行利率固定不变，不受人民银行基准利率调整的影响。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="715DF031" w14:textId="58D12F4D" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>4.2您使用本额度项下货款时，货款人将自您每笔提款的提款申请之日起计收该笔货款利息至清偿日止，单笔货款利率将在您的提款过程中经您确认的借款合同 为准。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="3BD46D41" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                4.3货款人有权修改或新增利息收取标准，标准修改或新增后将在货款人提供的电子服务平台进行公告，若您不同意修改或新增费用项目或标准，可停止申请新的货款，您之前申请的货款利息标准不受影响。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="5F702E5A" w14:textId="5284CEE0" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>4.4</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00D00D40">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>单笔货款期限自您提款</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>成功日起开始计算，到期日期、还款日以您确认的借款合同和电子信息记录为准。由于每笔货款的提款日期不同，借款期限可能并非一个整自然月。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="6DAF276E" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="7388A703" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第五条对账和还款</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="5C7C0843" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                5.1您应主动查询您账户授信额度的交易明细以确认交易内容。货款人所保存的本授信额度项下的交易记录，均为本额度使用的真实凭据，对您具有约束力。您不得以未收到对账单或未看到交易明细为由否认额度资金使用行为或交易款项。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="1D55DB04" w14:textId="5E5B0FFF" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>5.2本额度项下单笔货款的还款方式为下述方式</w:t>
-                        </w:r>
-                        <w:r w:rsidR="0059158A">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>（</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>具体以用户前端展示为准）：</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="17D4E089" w14:textId="14D00C2C" w:rsidR="0059158A" w:rsidRDefault="0059158A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                按月计息到期还本：每日偿还固定金额贷款息，每月偿付当月实际占用资金天数而产生的利息，用户须在每月到期付款日前支付全部到期应还款息费。借款总期限分为1、3、6、12期（月），最长期限12个月。借款总期限到期付款日前支付全部到期应还息费和本金。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="646BB1B0" w14:textId="3DC69DC6" w:rsidR="0059158A" w:rsidRDefault="0046553D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>违约金=应还未还全部金额*违约金比例*违约天数。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="7F89FB5C" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>5. 3您应在每期货款的还款日前归还当期应还款金额，还款日期以您提款过程中经您确认的日期为准，也可提前还款，还款日的规则如下：</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="6B7CF3C0" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(1) 每笔货款每月有一个固定还款日，该固定还款日为该笔货款提款申请之日对应的还款月的自然日，如还款月无对应自然日的，则为该月最后一个自然日，同 时您也可提前还款；
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="33A00C5B" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(2) 举例</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="1E06BF6D" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2015年7月31日申请借款的（期限：3个月），还款日分别为：8月31日，9月30日，10月31日。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="03EA6D34" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>5.4您已充分理解并确认为实现您的统一还款日便利而可能出现的单笔货款每期实际计息不足三十天或超过三十天的情况。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="536C04A2" w14:textId="641DA8EB" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>5.5</w:t>
-                        </w:r>
-                        <w:r w:rsidR="001A0C12">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>还款约定</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>为自动还款</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="3751E303" w14:textId="2E23B77C" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                自动还款（代扣还款服务）：指为偿还本合同项下应付款项的目的，您需在约定的还款日前一天将应还款项足额存入您的已绑定自动还款的银行卡账户，您无条件不可撤销地同意并授权货款人代您持续向已绑定自动还款的银行卡开户行发送代扣指令，直接将款项从您的银行卡
-                            </w:t>
-                        </w:r>
-                        <w:r w:rsidR="001A0C12">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>账户划扣除</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                ，用于偿还您在货款人处的全部债务直至清偿完毕，且货款人有权将多笔贷款应还款额合为一笔或分成特定金额、分笔、分批发出交易委托指令。您承诺前述交易委托指令视同您本人做出。代扣时间、金额等指令以货款人通知为准，代扣的全部责任由您承担。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2AAAC210" w14:textId="72223013" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(3)您在此确认和授权，当您的账户余额不足时，货款人有权降低代扣额度以及多次分笔通过已绑定的自动还款银行卡开户行发出代扣指令。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="73E3B24E" w14:textId="06CA66EE" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(5)若因各种原因（包括但不限于已绑定的银行卡</w:t>
-                        </w:r>
-                        <w:r w:rsidR="001A0C12">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>账户</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>余额不足）造成自动扣款失败，逾期未清偿任何款项将影响您的征信记录。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="013C5A05" w14:textId="1AA103C2" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>5.6还款顺序：</w:t>
-                        </w:r>
-                        <w:r w:rsidR="001A0C12">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>逾期违约金（如有）、逾期利息（如有）、当期利息、本金</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>，货款人有权根据您的信用状况和货款人的风险政策单方面变更前述扣款顺序，而无需另行通知您。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="18189FFF" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="03BEAA60" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第六条合同变更、解除、权利义务的转让</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="449AE9F1" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>6.1合同变更与解除</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="060D9003" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(1)
-                                贷款人有权随时单方面修改本合同中与您相关的权利义务，但相关修改不得加重您在货款金额和利(费）率方面的责任。一旦合同条款变更，贷款人将在电子服务平台进行公示，除法律法规或监管规定另有强制性规定外，经修订的内容一经公示，立即生效。若您不同意修改本合同，则应当自该等告示之日起立即停止
-                                使用本服务并全额还清本合同项下应付款项；否则，视为您同意并接受修改后的合同。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="515A7764" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(2) 本合同生效后，除本合同另有约定外，您不得要求单方擅自变更或解除本合同。货款人有权基于自身经营考虑，随时宣布中断、终止本合同或其任何部分</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="16A308EE" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(包括不限于取消您在本协议项下的授信额度、停止发放货款等），并要求您在制定期限内偿还本合同项下应付款项。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="079A3E86" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="435D46AA" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>6.2合同权利义务的转让</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="6C6CB322" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                未经货款人书面同意，您不得将本合同项下的权利和义务转让给任何第三方。货款人有权将其在本合同项下的权利和义务全部或部分转让给第三方，且转让行为无须征得您的同意，货款人将通知您该等转让行为。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="21211537" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="0D37AE2F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第七条违约条款</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2C21F454" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>7.1下列任一事件均构成本条款所称违约事件：</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2DA6F749" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(1) 您违反本合同3.4条约定或将资金用于禁止领域；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="79696AE8" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(2) 您存在任何一笔本金或利息逾期达15日以上的；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="5C3739BF" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(3) 您在履行与货款人签订的其他合同时有违约行为；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="4DAF2AC7" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(4) 您未履行本合同下任何义务的行为；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="5408FEB1" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(5) 您向货款人提供虚假的信息或隐瞒、遗漏重要信息或向货款人提供误导性陈述；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="781FA370" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(6) 您转移资产以逃避债务的；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="70CE0967" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(7) 其他货款人有正当理由认为您可能发生严重影响偿债能力的情形。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2B4BAF3A" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>7.2有违约事件发生时，货款人有权采取下列一项或多项措施：</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="118E12D3" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(1) 要求您限期纠正违约行为；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="1274D876" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(2) 取消您尚未提款的授信额度和/或停止发放您尚未使用的货款；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="27A0D600" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(3) 要求您提前归还已发放的全部货款本金并结清利息；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="603E7B24" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(4) 根据货款风险状况调整货款金额、期限与利率；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="5806F64F" w14:textId="23A72CE0" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(5) 宣布本合同项下您未偿还的货款提前到期，您应立即归还所有货款本金、所有利息、逾期违约金、实现债权的费用等，货款人可委托您已绑定自动还款的银
-                                行卡开户行中扣除相应金额以收回相关方费用、违约金、利息、本金以及所有其他应付费用；
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="1E241390" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(6) 对您的违约行为，可以公开披露；</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="690F2D23" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(7) 采取法律、法规规定的其他救济措施。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="06438FE7" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>7.3您未在还款日之前足额归还当期借款本息即视为逾期，自逾期之日起计算违约天数，直至清偿逾期本息为止；如您存在两期以上逾期的，则各期的逾期违约
-                                金需累加计算；逾期违约金数额以四舍五入方式计算至小数点后两位。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="68F451E1" w14:textId="5F716411" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>7.4您同意货款人有权在进行催收和追索债务等工作时，将您的身份信息、联络信息及您拖欠本合同项下债务的相关信息提供给第三方（包括而不限于律师事务
-                                所和第三方催收机构）；且货款人将督促该等第三方妥善保管、保密和谨慎使用前述信息，不得用作委托催收和追索债务以外的其他用途，以及不得以任何违法的方式进行催收和追索债务。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="7FF61115" w14:textId="1C18C016" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>7.5货款人因向您催收欠款及实现债权所产生的一切费用（即实现债权的费用，包括但不限于公证费、诉讼费、律师费、差旅费、催收费），均由您承担。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="1DFA457F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>7.6货款人软（硬）件系统出现下列任一状况而无法正常运作，致使无法向您提供本服务，货款人均不承担任何违约或赔偿责任，该状况包括但不限于：</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2548DE26" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(1) 在本服务网站维护期间。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="777F1671" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(2) 电信设备出现故障不能进行数据传输的。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="618CE78F" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(3) 因台风、地震、海啸、洪水、停电、战争、怖袭击等不可抗力之因素，造成本服务运行系统障碍不能执行业务等。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="759C3230" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(4) 由于黑客攻击、电信部门、银行卡开户行和其他第三方支付机构组织有信息技术依赖的相关部门、企事业单位技术调整或故障、网站升级等原因而造成的服 务中断或者延迟。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="7C8DD2A5" w14:textId="77777777" w:rsidR="00065F9A" w:rsidRDefault="00065F9A"/>
-                    <w:p w14:paraId="043E4218" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>第八条附则</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="637A4080" w14:textId="406D5E41" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>8.1</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>线上服务平台所公布的服务收费标准、附件是本合同不可分割的部分，与本合同具有同等法律效力。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="640947AA" w14:textId="64205C60" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                8.2向货款人提供的资料及信息（包括但不限于姓名、国籍、住所地、工作单位、联系电话、身份证件或者身份证明文件的号码、有效期等身份信息）发生变更的，应在信息发生变更之日起7日内通过
-                            </w:t>
-                        </w:r>
-                        <w:r>
-                            <w:t>XXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                线上服务平台更新相关信息；货款人就本合同给予您的任何通知、要求或其它函件，一经发送到您向货款人提供的信息中所示的地址或以短信形式发送至您的手机号码或以站内信形式发送至您的京东账户，即视为已送达，因您不及时变更信息而引起的责任及产生的损失，甶您自行承担。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="530F2471" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                8.3您同意，货款人可以向中国人民银行金融信用信息基础数据库、互联网金融征信系统、其他依法设立的征信服务机构（包括但不限于算话、鹏元、聚信立等）、关联公司以及其他本协议约定的第三方上传您使用本服务所形成的个人身份信息及信用信息（包括不良信息）。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="06F5DB2C" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>8.4管辖及法律适用</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="20E5CB7A" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(1) 本合同的成立、生效、履行、解释及纠纷解决，适用中华人民共和国大陆地区法律（不包括冲突法）。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2ABBCC68" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(2) 若您和贷款人之间发生任何纠纷或争议，首应友好协商解决；协商不成的，您同意将纠纷或争议提交京东金融所在地的人民法院管辖。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="019D7765" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(3)
-                                您确认并同意，对于本合同签署、履行、终止过程中所形成的任何电子合同、电子信息记录或数据(如有）以及相关信息系统中所提取的数据等均具有法律效力，认可其证据的有效性真实性。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="10FA075B" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>(4) 本合同条款无论因何种原因部分无效或不可执行，其余条款仍有效，对双方具有约束力。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="62F8E13C" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>借款人（签字）：</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:lang w:val="en-US"/>
-                            </w:rPr>
-                            <w:t>XXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t xml:space="preserve"> </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="00E5A277" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2017年12月29日</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="04965AFE" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:p w14:paraId="172D78C0" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>附件：《法律文书送达地址确认书》</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="467E1EBF" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>1.
-                                本人同意与货款人在线订立《借款合同》（以下简称“合同”），对于因合同争议引起的任何纠纷，本人声明法院或仲裁机构可以手机短信或电子邮件等现代通讯方式或邮寄方式向本人送达法律文书（包括诉讼文书）。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="6F6E5A69" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>2. 本人指定接收法律文书的手机号码或电子邮箱为协议约定的收款账户绑定的手机号码或电子邮箱，法院向前述码址发出法律文书即视为送达，发送当日即为送达之日。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="778F5611" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>3. 本人指定邮寄地址为本人的户籍地址。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="50E5C7FB" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>4. 本人同意法院可采取以上一种或多种送达方式向本人送达法律文书，法院采取多种方式向本人送达法律文书，送达时间以上述送达方式中最先送达的为准。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="1A35C120" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>5. 本人确认的上述送达方式适用于各个司法阶段，包括但不限于仲裁、一审、二审、再审、执行以及督促 程序（含支付令送达）。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="1B3EB368" w14:textId="5AD88839" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>6. 若本人上述送达地址有变更，本人应当及时通过</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:t>XXXX</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>
-                                线上服务平台更新相关信息；在仲裁及民事诉讼程序时送达地址变更，亦应及时通知法院或仲裁机构。若本人未履行告知义务的，前述本人指定的送协议约定的收款账户绑定地址仍视为有效送达地址。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="4F755AE5" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>7. 本人已阅读本确认书所有条款，并保证上述送达地址是准确、有效的；如果因提供的送达地址不确切，
-                                或不及时告知变更后的地址，或本人拒绝签收等原因，导致法律文书未能被本人实际接收的，邮寄送达的，以文书退回之日视为送达之日；直接送达的，送达人当场在送达回证上记明情况之日视为送达之日；履行送达地址变更通知义务的，以变更后的送达地址为有效送达地址。对于上述本人指定的地址，法院或仲裁机构进行送达时可直接邮寄送达，即使本人未能收到法院或仲裁机构邮寄送达的文书，由于前述约定，也应当视为送达。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="642CF348" w14:textId="3FEED1DE" w:rsidR="007770D8" w:rsidRDefault="00065F9A">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>8.
-                                纠纷进入仲裁、民事诉讼程序后，如本人应诉并直接向仲裁机构、法院提交送达地址确认书，该确认地址与诉前确认的送达地址不一致的，以向仲裁机构、法院提交确认的送达地址为准（该送达地址适用上述约定的送达方式及送达的法律后果）。
-                            </w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2B7E072B" w14:textId="77777777" w:rsidR="007770D8" w:rsidRDefault="007770D8"/>
-                    <w:sectPr w:rsidR="007770D8">
-                        <w:pgSz w:w="11906" w:h="16838"/>
-                        <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="851" w:footer="992"
-                                 w:gutter="0"/>
-                        <w:cols w:space="425"/>
-                        <w:docGrid w:type="lines" w:linePitch="312"/>
-                    </w:sectPr>
-                </w:body>
-            </w:document>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/theme/theme1.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml">
-        <pkg:xmlData>
-            <a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Office 主题">
-                <a:themeElements>
-                    <a:clrScheme name="Office">
-                        <a:dk1>
-                            <a:sysClr val="windowText" lastClr="000000"/>
-                        </a:dk1>
-                        <a:lt1>
-                            <a:sysClr val="window" lastClr="FFFFFF"/>
-                        </a:lt1>
-                        <a:dk2>
-                            <a:srgbClr val="44546A"/>
-                        </a:dk2>
-                        <a:lt2>
-                            <a:srgbClr val="E7E6E6"/>
-                        </a:lt2>
-                        <a:accent1>
-                            <a:srgbClr val="5B9BD5"/>
-                        </a:accent1>
-                        <a:accent2>
-                            <a:srgbClr val="ED7D31"/>
-                        </a:accent2>
-                        <a:accent3>
-                            <a:srgbClr val="A5A5A5"/>
-                        </a:accent3>
-                        <a:accent4>
-                            <a:srgbClr val="FFC000"/>
-                        </a:accent4>
-                        <a:accent5>
-                            <a:srgbClr val="4472C4"/>
-                        </a:accent5>
-                        <a:accent6>
-                            <a:srgbClr val="70AD47"/>
-                        </a:accent6>
-                        <a:hlink>
-                            <a:srgbClr val="0563C1"/>
-                        </a:hlink>
-                        <a:folHlink>
-                            <a:srgbClr val="954F72"/>
-                        </a:folHlink>
-                    </a:clrScheme>
-                    <a:fontScheme name="Office">
-                        <a:majorFont>
-                            <a:latin typeface="Calibri Light"/>
-                            <a:ea typeface=""/>
-                            <a:cs typeface=""/>
-                            <a:font script="Jpan" typeface="ＭＳ ゴシック"/>
-                            <a:font script="Hang" typeface="맑은 고딕"/>
-                            <a:font script="Hans" typeface="宋体"/>
-                            <a:font script="Hant" typeface="新細明體"/>
-                            <a:font script="Arab" typeface="Times New Roman"/>
-                            <a:font script="Hebr" typeface="Times New Roman"/>
-                            <a:font script="Thai" typeface="Angsana New"/>
-                            <a:font script="Ethi" typeface="Nyala"/>
-                            <a:font script="Beng" typeface="Vrinda"/>
-                            <a:font script="Gujr" typeface="Shruti"/>
-                            <a:font script="Khmr" typeface="MoolBoran"/>
-                            <a:font script="Knda" typeface="Tunga"/>
-                            <a:font script="Guru" typeface="Raavi"/>
-                            <a:font script="Cans" typeface="Euphemia"/>
-                            <a:font script="Cher" typeface="Plantagenet Cherokee"/>
-                            <a:font script="Yiii" typeface="Microsoft Yi Baiti"/>
-                            <a:font script="Tibt" typeface="Microsoft Himalaya"/>
-                            <a:font script="Thaa" typeface="MV Boli"/>
-                            <a:font script="Deva" typeface="Mangal"/>
-                            <a:font script="Telu" typeface="Gautami"/>
-                            <a:font script="Taml" typeface="Latha"/>
-                            <a:font script="Syrc" typeface="Estrangelo Edessa"/>
-                            <a:font script="Orya" typeface="Kalinga"/>
-                            <a:font script="Mlym" typeface="Kartika"/>
-                            <a:font script="Laoo" typeface="DokChampa"/>
-                            <a:font script="Sinh" typeface="Iskoola Pota"/>
-                            <a:font script="Mong" typeface="Mongolian Baiti"/>
-                            <a:font script="Viet" typeface="Times New Roman"/>
-                            <a:font script="Uigh" typeface="Microsoft Uighur"/>
-                            <a:font script="Geor" typeface="Sylfaen"/>
-                        </a:majorFont>
-                        <a:minorFont>
-                            <a:latin typeface="Calibri"/>
-                            <a:ea typeface=""/>
-                            <a:cs typeface=""/>
-                            <a:font script="Jpan" typeface="ＭＳ 明朝"/>
-                            <a:font script="Hang" typeface="맑은 고딕"/>
-                            <a:font script="Hans" typeface="宋体"/>
-                            <a:font script="Hant" typeface="新細明體"/>
-                            <a:font script="Arab" typeface="Arial"/>
-                            <a:font script="Hebr" typeface="Arial"/>
-                            <a:font script="Thai" typeface="Cordia New"/>
-                            <a:font script="Ethi" typeface="Nyala"/>
-                            <a:font script="Beng" typeface="Vrinda"/>
-                            <a:font script="Gujr" typeface="Shruti"/>
-                            <a:font script="Khmr" typeface="DaunPenh"/>
-                            <a:font script="Knda" typeface="Tunga"/>
-                            <a:font script="Guru" typeface="Raavi"/>
-                            <a:font script="Cans" typeface="Euphemia"/>
-                            <a:font script="Cher" typeface="Plantagenet Cherokee"/>
-                            <a:font script="Yiii" typeface="Microsoft Yi Baiti"/>
-                            <a:font script="Tibt" typeface="Microsoft Himalaya"/>
-                            <a:font script="Thaa" typeface="MV Boli"/>
-                            <a:font script="Deva" typeface="Mangal"/>
-                            <a:font script="Telu" typeface="Gautami"/>
-                            <a:font script="Taml" typeface="Latha"/>
-                            <a:font script="Syrc" typeface="Estrangelo Edessa"/>
-                            <a:font script="Orya" typeface="Kalinga"/>
-                            <a:font script="Mlym" typeface="Kartika"/>
-                            <a:font script="Laoo" typeface="DokChampa"/>
-                            <a:font script="Sinh" typeface="Iskoola Pota"/>
-                            <a:font script="Mong" typeface="Mongolian Baiti"/>
-                            <a:font script="Viet" typeface="Arial"/>
-                            <a:font script="Uigh" typeface="Microsoft Uighur"/>
-                            <a:font script="Geor" typeface="Sylfaen"/>
-                        </a:minorFont>
-                    </a:fontScheme>
-                    <a:fmtScheme name="Office">
-                        <a:fillStyleLst>
-                            <a:solidFill>
-                                <a:schemeClr val="phClr"/>
-                            </a:solidFill>
-                            <a:gradFill rotWithShape="1">
-                                <a:gsLst>
-                                    <a:gs pos="0">
-                                        <a:schemeClr val="phClr">
-                                            <a:lumMod val="110000"/>
-                                            <a:satMod val="105000"/>
-                                            <a:tint val="67000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                    <a:gs pos="50000">
-                                        <a:schemeClr val="phClr">
-                                            <a:lumMod val="105000"/>
-                                            <a:satMod val="103000"/>
-                                            <a:tint val="73000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                    <a:gs pos="100000">
-                                        <a:schemeClr val="phClr">
-                                            <a:lumMod val="105000"/>
-                                            <a:satMod val="109000"/>
-                                            <a:tint val="81000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                </a:gsLst>
-                                <a:lin ang="5400000" scaled="0"/>
-                            </a:gradFill>
-                            <a:gradFill rotWithShape="1">
-                                <a:gsLst>
-                                    <a:gs pos="0">
-                                        <a:schemeClr val="phClr">
-                                            <a:satMod val="103000"/>
-                                            <a:lumMod val="102000"/>
-                                            <a:tint val="94000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                    <a:gs pos="50000">
-                                        <a:schemeClr val="phClr">
-                                            <a:satMod val="110000"/>
-                                            <a:lumMod val="100000"/>
-                                            <a:shade val="100000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                    <a:gs pos="100000">
-                                        <a:schemeClr val="phClr">
-                                            <a:lumMod val="99000"/>
-                                            <a:satMod val="120000"/>
-                                            <a:shade val="78000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                </a:gsLst>
-                                <a:lin ang="5400000" scaled="0"/>
-                            </a:gradFill>
-                        </a:fillStyleLst>
-                        <a:lnStyleLst>
-                            <a:ln w="6350" cap="flat" cmpd="sng" algn="ctr">
-                                <a:solidFill>
-                                    <a:schemeClr val="phClr"/>
-                                </a:solidFill>
-                                <a:prstDash val="solid"/>
-                                <a:miter lim="800000"/>
-                            </a:ln>
-                            <a:ln w="12700" cap="flat" cmpd="sng" algn="ctr">
-                                <a:solidFill>
-                                    <a:schemeClr val="phClr"/>
-                                </a:solidFill>
-                                <a:prstDash val="solid"/>
-                                <a:miter lim="800000"/>
-                            </a:ln>
-                            <a:ln w="19050" cap="flat" cmpd="sng" algn="ctr">
-                                <a:solidFill>
-                                    <a:schemeClr val="phClr"/>
-                                </a:solidFill>
-                                <a:prstDash val="solid"/>
-                                <a:miter lim="800000"/>
-                            </a:ln>
-                        </a:lnStyleLst>
-                        <a:effectStyleLst>
-                            <a:effectStyle>
-                                <a:effectLst/>
-                            </a:effectStyle>
-                            <a:effectStyle>
-                                <a:effectLst/>
-                            </a:effectStyle>
-                            <a:effectStyle>
-                                <a:effectLst>
-                                    <a:outerShdw blurRad="57150" dist="19050" dir="5400000" algn="ctr" rotWithShape="0">
-                                        <a:srgbClr val="000000">
-                                            <a:alpha val="63000"/>
-                                        </a:srgbClr>
-                                    </a:outerShdw>
-                                </a:effectLst>
-                            </a:effectStyle>
-                        </a:effectStyleLst>
-                        <a:bgFillStyleLst>
-                            <a:solidFill>
-                                <a:schemeClr val="phClr"/>
-                            </a:solidFill>
-                            <a:solidFill>
-                                <a:schemeClr val="phClr">
-                                    <a:tint val="95000"/>
-                                    <a:satMod val="170000"/>
-                                </a:schemeClr>
-                            </a:solidFill>
-                            <a:gradFill rotWithShape="1">
-                                <a:gsLst>
-                                    <a:gs pos="0">
-                                        <a:schemeClr val="phClr">
-                                            <a:tint val="93000"/>
-                                            <a:satMod val="150000"/>
-                                            <a:shade val="98000"/>
-                                            <a:lumMod val="102000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                    <a:gs pos="50000">
-                                        <a:schemeClr val="phClr">
-                                            <a:tint val="98000"/>
-                                            <a:satMod val="130000"/>
-                                            <a:shade val="90000"/>
-                                            <a:lumMod val="103000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                    <a:gs pos="100000">
-                                        <a:schemeClr val="phClr">
-                                            <a:shade val="63000"/>
-                                            <a:satMod val="120000"/>
-                                        </a:schemeClr>
-                                    </a:gs>
-                                </a:gsLst>
-                                <a:lin ang="5400000" scaled="0"/>
-                            </a:gradFill>
-                        </a:bgFillStyleLst>
-                    </a:fmtScheme>
-                </a:themeElements>
-                <a:objectDefaults/>
-                <a:extraClrSchemeLst/>
-            </a:theme>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/settings.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml">
-        <pkg:xmlData>
-            <w:settings xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                        xmlns:o="urn:schemas-microsoft-com:office:office"
-                        xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-                        xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
-                        xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w10="urn:schemas-microsoft-com:office:word"
-                        xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                        xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                        xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                        xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                        xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex"
-                        xmlns:sl="http://schemas.openxmlformats.org/schemaLibrary/2006/main"
-                        mc:Ignorable="w14 w15 w16se w16cid">
-                <w:view w:val="web"/>
-                <w:zoom w:percent="100"/>
-                <w:bordersDoNotSurroundHeader/>
-                <w:bordersDoNotSurroundFooter/>
-                <w:proofState w:spelling="clean" w:grammar="clean"/>
-                <w:defaultTabStop w:val="420"/>
-                <w:drawingGridVerticalSpacing w:val="156"/>
-                <w:displayHorizontalDrawingGridEvery w:val="0"/>
-                <w:displayVerticalDrawingGridEvery w:val="2"/>
-                <w:characterSpacingControl w:val="compressPunctuation"/>
-                <w:compat>
-                    <w:spaceForUL/>
-                    <w:balanceSingleByteDoubleByteWidth/>
-                    <w:doNotLeaveBackslashAlone/>
-                    <w:ulTrailSpace/>
-                    <w:doNotExpandShiftReturn/>
-                    <w:adjustLineHeightInTable/>
-                    <w:useFELayout/>
-                    <w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word"
-                                     w:val="15"/>
-                    <w:compatSetting w:name="overrideTableStyleFontSizeAndJustification"
-                                     w:uri="http://schemas.microsoft.com/office/word" w:val="1"/>
-                    <w:compatSetting w:name="enableOpenTypeFeatures" w:uri="http://schemas.microsoft.com/office/word"
-                                     w:val="1"/>
-                    <w:compatSetting w:name="doNotFlipMirrorIndents" w:uri="http://schemas.microsoft.com/office/word"
-                                     w:val="1"/>
-                    <w:compatSetting w:name="differentiateMultirowTableHeaders"
-                                     w:uri="http://schemas.microsoft.com/office/word" w:val="1"/>
-                    <w:compatSetting w:name="useWord2013TrackBottomHyphenation"
-                                     w:uri="http://schemas.microsoft.com/office/word" w:val="0"/>
-                </w:compat>
-                <w:rsids>
-                    <w:rsidRoot w:val="00172A27"/>
-                    <w:rsid w:val="00065F9A"/>
-                    <w:rsid w:val="00172A27"/>
-                    <w:rsid w:val="001A0C12"/>
-                    <w:rsid w:val="002D29BF"/>
-                    <w:rsid w:val="0046553D"/>
-                    <w:rsid w:val="0059158A"/>
-                    <w:rsid w:val="00642B1E"/>
-                    <w:rsid w:val="007770D8"/>
-                    <w:rsid w:val="00794E6A"/>
-                    <w:rsid w:val="009A7829"/>
-                    <w:rsid w:val="00A23C2F"/>
-                    <w:rsid w:val="00A9290B"/>
-                    <w:rsid w:val="00AB2B16"/>
-                    <w:rsid w:val="00D00D40"/>
-                    <w:rsid w:val="00D1147E"/>
-                    <w:rsid w:val="00E477B3"/>
-                    <w:rsid w:val="00E630AF"/>
-                    <w:rsid w:val="00F7280B"/>
-                    <w:rsid w:val="09AF67C4"/>
-                    <w:rsid w:val="13041ED4"/>
-                    <w:rsid w:val="20666ADF"/>
-                    <w:rsid w:val="28130D73"/>
-                    <w:rsid w:val="2A902E29"/>
-                    <w:rsid w:val="2C46067A"/>
-                    <w:rsid w:val="2F7A5578"/>
-                    <w:rsid w:val="319078B3"/>
-                    <w:rsid w:val="45E41666"/>
-                    <w:rsid w:val="4683194F"/>
-                    <w:rsid w:val="4FFC4FA2"/>
-                    <w:rsid w:val="51A2450B"/>
-                    <w:rsid w:val="5BFB7892"/>
-                    <w:rsid w:val="5E7860A7"/>
-                    <w:rsid w:val="68172882"/>
-                    <w:rsid w:val="737E7791"/>
-                </w:rsids>
-                <m:mathPr>
-                    <m:mathFont m:val="Cambria Math"/>
-                    <m:brkBin m:val="before"/>
-                    <m:brkBinSub m:val="--"/>
-                    <m:smallFrac m:val="0"/>
-                    <m:dispDef/>
-                    <m:lMargin m:val="0"/>
-                    <m:rMargin m:val="0"/>
-                    <m:defJc m:val="centerGroup"/>
-                    <m:wrapIndent m:val="1440"/>
-                    <m:intLim m:val="subSup"/>
-                    <m:naryLim m:val="undOvr"/>
-                </m:mathPr>
-                <w:themeFontLang w:val="en-US" w:eastAsia="zh-CN"/>
-                <w:clrSchemeMapping w:bg1="light1" w:t1="dark1" w:bg2="light2" w:t2="dark2" w:accent1="accent1"
-                                    w:accent2="accent2" w:accent3="accent3" w:accent4="accent4" w:accent5="accent5"
-                                    w:accent6="accent6" w:hyperlink="hyperlink"
-                                    w:followedHyperlink="followedHyperlink"/>
-                <w:doNotIncludeSubdocsInStats/>
-                <w:shapeDefaults>
-                    <o:shapedefaults v:ext="edit" spidmax="1026"/>
-                    <o:shapelayout v:ext="edit">
-                        <o:idmap v:ext="edit" data="1"/>
-                    </o:shapelayout>
-                </w:shapeDefaults>
-                <w:decimalSymbol w:val="."/>
-                <w:listSeparator w:val=","/>
-                <w14:docId w14:val="68060BE6"/>
-                <w15:docId w15:val="{FFFFF82B-A1D2-465B-82CE-BF2A1CA965C2}"/>
-            </w:settings>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/styles.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml">
-        <pkg:xmlData>
-            <w:styles xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-                      xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                      xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                      xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                      xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                      xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex"
-                      mc:Ignorable="w14 w15 w16se w16cid">
-                <w:docDefaults>
-                    <w:rPrDefault>
-                        <w:rPr>
-                            <w:rFonts w:asciiTheme="minorHAnsi" w:eastAsiaTheme="minorEastAsia"
-                                      w:hAnsiTheme="minorHAnsi" w:cstheme="minorBidi"/>
-                            <w:lang w:val="en-US" w:eastAsia="zh-CN" w:bidi="ar-SA"/>
-                        </w:rPr>
-                    </w:rPrDefault>
-                    <w:pPrDefault/>
-                </w:docDefaults>
-                <w:latentStyles w:defLockedState="0" w:defUIPriority="0" w:defSemiHidden="0" w:defUnhideWhenUsed="0"
-                                w:defQFormat="0" w:count="375">
-                    <w:lsdException w:name="Normal" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 2" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 3" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 4" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 5" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 6" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 7" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 8" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="heading 9" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="caption" w:semiHidden="1" w:unhideWhenUsed="1" w:qFormat="1"/>
-                    <w:lsdException w:name="Title" w:qFormat="1"/>
-                    <w:lsdException w:name="Default Paragraph Font" w:semiHidden="1" w:qFormat="1"/>
-                    <w:lsdException w:name="Subtitle" w:qFormat="1"/>
-                    <w:lsdException w:name="Strong" w:qFormat="1"/>
-                    <w:lsdException w:name="Emphasis" w:qFormat="1"/>
-                    <w:lsdException w:name="HTML Top of Form" w:semiHidden="1" w:uiPriority="99" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="HTML Bottom of Form" w:semiHidden="1" w:uiPriority="99"
-                                    w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Normal Table" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="No List" w:semiHidden="1" w:uiPriority="99" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Outline List 1" w:semiHidden="1" w:uiPriority="99" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Outline List 2" w:semiHidden="1" w:uiPriority="99" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Outline List 3" w:semiHidden="1" w:uiPriority="99" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Simple 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Simple 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Simple 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Classic 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Classic 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Classic 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Classic 4" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Colorful 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Colorful 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Colorful 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Columns 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Columns 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Columns 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Columns 4" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Columns 5" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 4" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 5" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 6" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 7" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Grid 8" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 4" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 5" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 6" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 7" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table List 8" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table 3D effects 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table 3D effects 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table 3D effects 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Contemporary" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Elegant" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Professional" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Subtle 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Subtle 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Web 1" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Web 2" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Web 3" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Table Theme" w:semiHidden="1" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="Placeholder Text" w:semiHidden="1" w:uiPriority="99"/>
-                    <w:lsdException w:name="No Spacing" w:uiPriority="99"/>
-                    <w:lsdException w:name="Light Shading" w:uiPriority="60"/>
-                    <w:lsdException w:name="Light List" w:uiPriority="61"/>
-                    <w:lsdException w:name="Light Grid" w:uiPriority="62"/>
-                    <w:lsdException w:name="Medium Shading 1" w:uiPriority="63"/>
-                    <w:lsdException w:name="Medium Shading 2" w:uiPriority="64"/>
-                    <w:lsdException w:name="Medium List 1" w:uiPriority="65"/>
-                    <w:lsdException w:name="Medium List 2" w:uiPriority="66"/>
-                    <w:lsdException w:name="Medium Grid 1" w:uiPriority="67"/>
-                    <w:lsdException w:name="Medium Grid 2" w:uiPriority="68"/>
-                    <w:lsdException w:name="Medium Grid 3" w:uiPriority="69"/>
-                    <w:lsdException w:name="Dark List" w:uiPriority="70"/>
-                    <w:lsdException w:name="Colorful Shading" w:uiPriority="71"/>
-                    <w:lsdException w:name="Colorful List" w:uiPriority="72"/>
-                    <w:lsdException w:name="Colorful Grid" w:uiPriority="73"/>
-                    <w:lsdException w:name="Light Shading Accent 1" w:uiPriority="60"/>
-                    <w:lsdException w:name="Light List Accent 1" w:uiPriority="61"/>
-                    <w:lsdException w:name="Light Grid Accent 1" w:uiPriority="62"/>
-                    <w:lsdException w:name="Medium Shading 1 Accent 1" w:uiPriority="63"/>
-                    <w:lsdException w:name="Medium Shading 2 Accent 1" w:uiPriority="64"/>
-                    <w:lsdException w:name="Medium List 1 Accent 1" w:uiPriority="65"/>
-                    <w:lsdException w:name="Revision" w:semiHidden="1" w:uiPriority="99"/>
-                    <w:lsdException w:name="List Paragraph" w:uiPriority="99"/>
-                    <w:lsdException w:name="Quote" w:uiPriority="99"/>
-                    <w:lsdException w:name="Intense Quote" w:uiPriority="99"/>
-                    <w:lsdException w:name="Medium List 2 Accent 1" w:uiPriority="66"/>
-                    <w:lsdException w:name="Medium Grid 1 Accent 1" w:uiPriority="67"/>
-                    <w:lsdException w:name="Medium Grid 2 Accent 1" w:uiPriority="68"/>
-                    <w:lsdException w:name="Medium Grid 3 Accent 1" w:uiPriority="69"/>
-                    <w:lsdException w:name="Dark List Accent 1" w:uiPriority="70"/>
-                    <w:lsdException w:name="Colorful Shading Accent 1" w:uiPriority="71"/>
-                    <w:lsdException w:name="Colorful List Accent 1" w:uiPriority="72"/>
-                    <w:lsdException w:name="Colorful Grid Accent 1" w:uiPriority="73"/>
-                    <w:lsdException w:name="Light Shading Accent 2" w:uiPriority="60"/>
-                    <w:lsdException w:name="Light List Accent 2" w:uiPriority="61"/>
-                    <w:lsdException w:name="Light Grid Accent 2" w:uiPriority="62"/>
-                    <w:lsdException w:name="Medium Shading 1 Accent 2" w:uiPriority="63"/>
-                    <w:lsdException w:name="Medium Shading 2 Accent 2" w:uiPriority="64"/>
-                    <w:lsdException w:name="Medium List 1 Accent 2" w:uiPriority="65"/>
-                    <w:lsdException w:name="Medium List 2 Accent 2" w:uiPriority="66"/>
-                    <w:lsdException w:name="Medium Grid 1 Accent 2" w:uiPriority="67"/>
-                    <w:lsdException w:name="Medium Grid 2 Accent 2" w:uiPriority="68"/>
-                    <w:lsdException w:name="Medium Grid 3 Accent 2" w:uiPriority="69"/>
-                    <w:lsdException w:name="Dark List Accent 2" w:uiPriority="70"/>
-                    <w:lsdException w:name="Colorful Shading Accent 2" w:uiPriority="71"/>
-                    <w:lsdException w:name="Colorful List Accent 2" w:uiPriority="72"/>
-                    <w:lsdException w:name="Colorful Grid Accent 2" w:uiPriority="73"/>
-                    <w:lsdException w:name="Light Shading Accent 3" w:uiPriority="60"/>
-                    <w:lsdException w:name="Light List Accent 3" w:uiPriority="61"/>
-                    <w:lsdException w:name="Light Grid Accent 3" w:uiPriority="62"/>
-                    <w:lsdException w:name="Medium Shading 1 Accent 3" w:uiPriority="63"/>
-                    <w:lsdException w:name="Medium Shading 2 Accent 3" w:uiPriority="64"/>
-                    <w:lsdException w:name="Medium List 1 Accent 3" w:uiPriority="65"/>
-                    <w:lsdException w:name="Medium List 2 Accent 3" w:uiPriority="66"/>
-                    <w:lsdException w:name="Medium Grid 1 Accent 3" w:uiPriority="67"/>
-                    <w:lsdException w:name="Medium Grid 2 Accent 3" w:uiPriority="68"/>
-                    <w:lsdException w:name="Medium Grid 3 Accent 3" w:uiPriority="69"/>
-                    <w:lsdException w:name="Dark List Accent 3" w:uiPriority="70"/>
-                    <w:lsdException w:name="Colorful Shading Accent 3" w:uiPriority="71"/>
-                    <w:lsdException w:name="Colorful List Accent 3" w:uiPriority="72"/>
-                    <w:lsdException w:name="Colorful Grid Accent 3" w:uiPriority="73"/>
-                    <w:lsdException w:name="Light Shading Accent 4" w:uiPriority="60"/>
-                    <w:lsdException w:name="Light List Accent 4" w:uiPriority="61"/>
-                    <w:lsdException w:name="Light Grid Accent 4" w:uiPriority="62"/>
-                    <w:lsdException w:name="Medium Shading 1 Accent 4" w:uiPriority="63"/>
-                    <w:lsdException w:name="Medium Shading 2 Accent 4" w:uiPriority="64"/>
-                    <w:lsdException w:name="Medium List 1 Accent 4" w:uiPriority="65"/>
-                    <w:lsdException w:name="Medium List 2 Accent 4" w:uiPriority="66"/>
-                    <w:lsdException w:name="Medium Grid 1 Accent 4" w:uiPriority="67"/>
-                    <w:lsdException w:name="Medium Grid 2 Accent 4" w:uiPriority="68"/>
-                    <w:lsdException w:name="Medium Grid 3 Accent 4" w:uiPriority="69"/>
-                    <w:lsdException w:name="Dark List Accent 4" w:uiPriority="70"/>
-                    <w:lsdException w:name="Colorful Shading Accent 4" w:uiPriority="71"/>
-                    <w:lsdException w:name="Colorful List Accent 4" w:uiPriority="72"/>
-                    <w:lsdException w:name="Colorful Grid Accent 4" w:uiPriority="73"/>
-                    <w:lsdException w:name="Light Shading Accent 5" w:uiPriority="60"/>
-                    <w:lsdException w:name="Light List Accent 5" w:uiPriority="61"/>
-                    <w:lsdException w:name="Light Grid Accent 5" w:uiPriority="62"/>
-                    <w:lsdException w:name="Medium Shading 1 Accent 5" w:uiPriority="63"/>
-                    <w:lsdException w:name="Medium Shading 2 Accent 5" w:uiPriority="64"/>
-                    <w:lsdException w:name="Medium List 1 Accent 5" w:uiPriority="65"/>
-                    <w:lsdException w:name="Medium List 2 Accent 5" w:uiPriority="66"/>
-                    <w:lsdException w:name="Medium Grid 1 Accent 5" w:uiPriority="67"/>
-                    <w:lsdException w:name="Medium Grid 2 Accent 5" w:uiPriority="68"/>
-                    <w:lsdException w:name="Medium Grid 3 Accent 5" w:uiPriority="69"/>
-                    <w:lsdException w:name="Dark List Accent 5" w:uiPriority="70"/>
-                    <w:lsdException w:name="Colorful Shading Accent 5" w:uiPriority="71"/>
-                    <w:lsdException w:name="Colorful List Accent 5" w:uiPriority="72"/>
-                    <w:lsdException w:name="Colorful Grid Accent 5" w:uiPriority="73"/>
-                    <w:lsdException w:name="Light Shading Accent 6" w:uiPriority="60"/>
-                    <w:lsdException w:name="Light List Accent 6" w:uiPriority="61"/>
-                    <w:lsdException w:name="Light Grid Accent 6" w:uiPriority="62"/>
-                    <w:lsdException w:name="Medium Shading 1 Accent 6" w:uiPriority="63"/>
-                    <w:lsdException w:name="Medium Shading 2 Accent 6" w:uiPriority="64"/>
-                    <w:lsdException w:name="Medium List 1 Accent 6" w:uiPriority="65"/>
-                    <w:lsdException w:name="Medium List 2 Accent 6" w:uiPriority="66"/>
-                    <w:lsdException w:name="Medium Grid 1 Accent 6" w:uiPriority="67"/>
-                    <w:lsdException w:name="Medium Grid 2 Accent 6" w:uiPriority="68"/>
-                    <w:lsdException w:name="Medium Grid 3 Accent 6" w:uiPriority="69"/>
-                    <w:lsdException w:name="Dark List Accent 6" w:uiPriority="70"/>
-                    <w:lsdException w:name="Colorful Shading Accent 6" w:uiPriority="71"/>
-                    <w:lsdException w:name="Colorful List Accent 6" w:uiPriority="72"/>
-                    <w:lsdException w:name="Colorful Grid Accent 6" w:uiPriority="73"/>
-                    <w:lsdException w:name="Subtle Emphasis" w:uiPriority="19" w:qFormat="1"/>
-                    <w:lsdException w:name="Intense Emphasis" w:uiPriority="21" w:qFormat="1"/>
-                    <w:lsdException w:name="Subtle Reference" w:uiPriority="31" w:qFormat="1"/>
-                    <w:lsdException w:name="Intense Reference" w:uiPriority="32" w:qFormat="1"/>
-                    <w:lsdException w:name="Book Title" w:uiPriority="33" w:qFormat="1"/>
-                    <w:lsdException w:name="Bibliography" w:semiHidden="1" w:uiPriority="37" w:unhideWhenUsed="1"/>
-                    <w:lsdException w:name="TOC Heading" w:semiHidden="1" w:uiPriority="39" w:unhideWhenUsed="1"
-                                    w:qFormat="1"/>
-                    <w:lsdException w:name="Plain Table 1" w:uiPriority="41"/>
-                    <w:lsdException w:name="Plain Table 2" w:uiPriority="42"/>
-                    <w:lsdException w:name="Plain Table 3" w:uiPriority="43"/>
-                    <w:lsdException w:name="Plain Table 4" w:uiPriority="44"/>
-                    <w:lsdException w:name="Plain Table 5" w:uiPriority="45"/>
-                    <w:lsdException w:name="Grid Table Light" w:uiPriority="40"/>
-                    <w:lsdException w:name="Grid Table 1 Light" w:uiPriority="46"/>
-                    <w:lsdException w:name="Grid Table 2" w:uiPriority="47"/>
-                    <w:lsdException w:name="Grid Table 3" w:uiPriority="48"/>
-                    <w:lsdException w:name="Grid Table 4" w:uiPriority="49"/>
-                    <w:lsdException w:name="Grid Table 5 Dark" w:uiPriority="50"/>
-                    <w:lsdException w:name="Grid Table 6 Colorful" w:uiPriority="51"/>
-                    <w:lsdException w:name="Grid Table 7 Colorful" w:uiPriority="52"/>
-                    <w:lsdException w:name="Grid Table 1 Light Accent 1" w:uiPriority="46"/>
-                    <w:lsdException w:name="Grid Table 2 Accent 1" w:uiPriority="47"/>
-                    <w:lsdException w:name="Grid Table 3 Accent 1" w:uiPriority="48"/>
-                    <w:lsdException w:name="Grid Table 4 Accent 1" w:uiPriority="49"/>
-                    <w:lsdException w:name="Grid Table 5 Dark Accent 1" w:uiPriority="50"/>
-                    <w:lsdException w:name="Grid Table 6 Colorful Accent 1" w:uiPriority="51"/>
-                    <w:lsdException w:name="Grid Table 7 Colorful Accent 1" w:uiPriority="52"/>
-                    <w:lsdException w:name="Grid Table 1 Light Accent 2" w:uiPriority="46"/>
-                    <w:lsdException w:name="Grid Table 2 Accent 2" w:uiPriority="47"/>
-                    <w:lsdException w:name="Grid Table 3 Accent 2" w:uiPriority="48"/>
-                    <w:lsdException w:name="Grid Table 4 Accent 2" w:uiPriority="49"/>
-                    <w:lsdException w:name="Grid Table 5 Dark Accent 2" w:uiPriority="50"/>
-                    <w:lsdException w:name="Grid Table 6 Colorful Accent 2" w:uiPriority="51"/>
-                    <w:lsdException w:name="Grid Table 7 Colorful Accent 2" w:uiPriority="52"/>
-                    <w:lsdException w:name="Grid Table 1 Light Accent 3" w:uiPriority="46"/>
-                    <w:lsdException w:name="Grid Table 2 Accent 3" w:uiPriority="47"/>
-                    <w:lsdException w:name="Grid Table 3 Accent 3" w:uiPriority="48"/>
-                    <w:lsdException w:name="Grid Table 4 Accent 3" w:uiPriority="49"/>
-                    <w:lsdException w:name="Grid Table 5 Dark Accent 3" w:uiPriority="50"/>
-                    <w:lsdException w:name="Grid Table 6 Colorful Accent 3" w:uiPriority="51"/>
-                    <w:lsdException w:name="Grid Table 7 Colorful Accent 3" w:uiPriority="52"/>
-                    <w:lsdException w:name="Grid Table 1 Light Accent 4" w:uiPriority="46"/>
-                    <w:lsdException w:name="Grid Table 2 Accent 4" w:uiPriority="47"/>
-                    <w:lsdException w:name="Grid Table 3 Accent 4" w:uiPriority="48"/>
-                    <w:lsdException w:name="Grid Table 4 Accent 4" w:uiPriority="49"/>
-                    <w:lsdException w:name="Grid Table 5 Dark Accent 4" w:uiPriority="50"/>
-                    <w:lsdException w:name="Grid Table 6 Colorful Accent 4" w:uiPriority="51"/>
-                    <w:lsdException w:name="Grid Table 7 Colorful Accent 4" w:uiPriority="52"/>
-                    <w:lsdException w:name="Grid Table 1 Light Accent 5" w:uiPriority="46"/>
-                    <w:lsdException w:name="Grid Table 2 Accent 5" w:uiPriority="47"/>
-                    <w:lsdException w:name="Grid Table 3 Accent 5" w:uiPriority="48"/>
-                    <w:lsdException w:name="Grid Table 4 Accent 5" w:uiPriority="49"/>
-                    <w:lsdException w:name="Grid Table 5 Dark Accent 5" w:uiPriority="50"/>
-                    <w:lsdException w:name="Grid Table 6 Colorful Accent 5" w:uiPriority="51"/>
-                    <w:lsdException w:name="Grid Table 7 Colorful Accent 5" w:uiPriority="52"/>
-                    <w:lsdException w:name="Grid Table 1 Light Accent 6" w:uiPriority="46"/>
-                    <w:lsdException w:name="Grid Table 2 Accent 6" w:uiPriority="47"/>
-                    <w:lsdException w:name="Grid Table 3 Accent 6" w:uiPriority="48"/>
-                    <w:lsdException w:name="Grid Table 4 Accent 6" w:uiPriority="49"/>
-                    <w:lsdException w:name="Grid Table 5 Dark Accent 6" w:uiPriority="50"/>
-                    <w:lsdException w:name="Grid Table 6 Colorful Accent 6" w:uiPriority="51"/>
-                    <w:lsdException w:name="Grid Table 7 Colorful Accent 6" w:uiPriority="52"/>
-                    <w:lsdException w:name="List Table 1 Light" w:uiPriority="46"/>
-                    <w:lsdException w:name="List Table 2" w:uiPriority="47"/>
-                    <w:lsdException w:name="List Table 3" w:uiPriority="48"/>
-                    <w:lsdException w:name="List Table 4" w:uiPriority="49"/>
-                    <w:lsdException w:name="List Table 5 Dark" w:uiPriority="50"/>
-                    <w:lsdException w:name="List Table 6 Colorful" w:uiPriority="51"/>
-                    <w:lsdException w:name="List Table 7 Colorful" w:uiPriority="52"/>
-                    <w:lsdException w:name="List Table 1 Light Accent 1" w:uiPriority="46"/>
-                    <w:lsdException w:name="List Table 2 Accent 1" w:uiPriority="47"/>
-                    <w:lsdException w:name="List Table 3 Accent 1" w:uiPriority="48"/>
-                    <w:lsdException w:name="List Table 4 Accent 1" w:uiPriority="49"/>
-                    <w:lsdException w:name="List Table 5 Dark Accent 1" w:uiPriority="50"/>
-                    <w:lsdException w:name="List Table 6 Colorful Accent 1" w:uiPriority="51"/>
-                    <w:lsdException w:name="List Table 7 Colorful Accent 1" w:uiPriority="52"/>
-                    <w:lsdException w:name="List Table 1 Light Accent 2" w:uiPriority="46"/>
-                    <w:lsdException w:name="List Table 2 Accent 2" w:uiPriority="47"/>
-                    <w:lsdException w:name="List Table 3 Accent 2" w:uiPriority="48"/>
-                    <w:lsdException w:name="List Table 4 Accent 2" w:uiPriority="49"/>
-                    <w:lsdException w:name="List Table 5 Dark Accent 2" w:uiPriority="50"/>
-                    <w:lsdException w:name="List Table 6 Colorful Accent 2" w:uiPriority="51"/>
-                    <w:lsdException w:name="List Table 7 Colorful Accent 2" w:uiPriority="52"/>
-                    <w:lsdException w:name="List Table 1 Light Accent 3" w:uiPriority="46"/>
-                    <w:lsdException w:name="List Table 2 Accent 3" w:uiPriority="47"/>
-                    <w:lsdException w:name="List Table 3 Accent 3" w:uiPriority="48"/>
-                    <w:lsdException w:name="List Table 4 Accent 3" w:uiPriority="49"/>
-                    <w:lsdException w:name="List Table 5 Dark Accent 3" w:uiPriority="50"/>
-                    <w:lsdException w:name="List Table 6 Colorful Accent 3" w:uiPriority="51"/>
-                    <w:lsdException w:name="List Table 7 Colorful Accent 3" w:uiPriority="52"/>
-                    <w:lsdException w:name="List Table 1 Light Accent 4" w:uiPriority="46"/>
-                    <w:lsdException w:name="List Table 2 Accent 4" w:uiPriority="47"/>
-                    <w:lsdException w:name="List Table 3 Accent 4" w:uiPriority="48"/>
-                    <w:lsdException w:name="List Table 4 Accent 4" w:uiPriority="49"/>
-                    <w:lsdException w:name="List Table 5 Dark Accent 4" w:uiPriority="50"/>
-                    <w:lsdException w:name="List Table 6 Colorful Accent 4" w:uiPriority="51"/>
-                    <w:lsdException w:name="List Table 7 Colorful Accent 4" w:uiPriority="52"/>
-                    <w:lsdException w:name="List Table 1 Light Accent 5" w:uiPriority="46"/>
-                    <w:lsdException w:name="List Table 2 Accent 5" w:uiPriority="47"/>
-                    <w:lsdException w:name="List Table 3 Accent 5" w:uiPriority="48"/>
-                    <w:lsdException w:name="List Table 4 Accent 5" w:uiPriority="49"/>
-                    <w:lsdException w:name="List Table 5 Dark Accent 5" w:uiPriority="50"/>
-                    <w:lsdException w:name="List Table 6 Colorful Accent 5" w:uiPriority="51"/>
-                    <w:lsdException w:name="List Table 7 Colorful Accent 5" w:uiPriority="52"/>
-                    <w:lsdException w:name="List Table 1 Light Accent 6" w:uiPriority="46"/>
-                    <w:lsdException w:name="List Table 2 Accent 6" w:uiPriority="47"/>
-                    <w:lsdException w:name="List Table 3 Accent 6" w:uiPriority="48"/>
-                    <w:lsdException w:name="List Table 4 Accent 6" w:uiPriority="49"/>
-                    <w:lsdException w:name="List Table 5 Dark Accent 6" w:uiPriority="50"/>
-                    <w:lsdException w:name="List Table 6 Colorful Accent 6" w:uiPriority="51"/>
-                    <w:lsdException w:name="List Table 7 Colorful Accent 6" w:uiPriority="52"/>
-                </w:latentStyles>
-                <w:style w:type="paragraph" w:default="1" w:styleId="a">
-                    <w:name w:val="Normal"/>
-                    <w:qFormat/>
-                    <w:pPr>
-                        <w:widowControl w:val="0"/>
-                    </w:pPr>
-                    <w:rPr>
-                        <w:rFonts w:ascii="宋体" w:eastAsia="宋体" w:hAnsi="宋体"/>
-                        <w:color w:val="000000"/>
-                        <w:sz w:val="24"/>
-                        <w:szCs w:val="22"/>
-                        <w:lang w:val="zh-CN"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="character" w:default="1" w:styleId="a0">
-                    <w:name w:val="Default Paragraph Font"/>
-                    <w:uiPriority w:val="1"/>
-                    <w:semiHidden/>
-                    <w:unhideWhenUsed/>
-                </w:style>
-                <w:style w:type="table" w:default="1" w:styleId="a1">
-                    <w:name w:val="Normal Table"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:semiHidden/>
-                    <w:unhideWhenUsed/>
-                    <w:tblPr>
-                        <w:tblInd w:w="0" w:type="dxa"/>
-                        <w:tblCellMar>
-                            <w:top w:w="0" w:type="dxa"/>
-                            <w:left w:w="108" w:type="dxa"/>
-                            <w:bottom w:w="0" w:type="dxa"/>
-                            <w:right w:w="108" w:type="dxa"/>
-                        </w:tblCellMar>
-                    </w:tblPr>
-                </w:style>
-                <w:style w:type="numbering" w:default="1" w:styleId="a2">
-                    <w:name w:val="No List"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:semiHidden/>
-                    <w:unhideWhenUsed/>
-                </w:style>
-                <w:style w:type="table" w:styleId="a3">
-                    <w:name w:val="Table Grid"/>
-                    <w:basedOn w:val="a1"/>
-                    <w:pPr>
-                        <w:widowControl w:val="0"/>
-                        <w:jc w:val="both"/>
-                    </w:pPr>
-                    <w:tblPr>
-                        <w:tblBorders>
-                            <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
-                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
-                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
-                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
-                            <w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>
-                            <w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>
-                        </w:tblBorders>
-                    </w:tblPr>
-                </w:style>
-                <w:style w:type="paragraph" w:customStyle="1" w:styleId="3">
-                    <w:name w:val="正文文本 (3)"/>
-                    <w:basedOn w:val="a"/>
-                    <w:link w:val="30"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:qFormat/>
-                    <w:pPr>
-                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                        <w:spacing w:after="180" w:line="240" w:lineRule="atLeast"/>
-                        <w:jc w:val="distribute"/>
-                    </w:pPr>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:sz w:val="11"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="character" w:customStyle="1" w:styleId="30">
-                    <w:name w:val="正文文本 (3)_"/>
-                    <w:basedOn w:val="a0"/>
-                    <w:link w:val="3"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:sz w:val="11"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="paragraph" w:customStyle="1" w:styleId="4">
-                    <w:name w:val="正文文本 (4)"/>
-                    <w:basedOn w:val="a"/>
-                    <w:link w:val="40"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:pPr>
-                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                        <w:spacing w:before="180" w:after="300" w:line="240" w:lineRule="atLeast"/>
-                        <w:jc w:val="distribute"/>
-                    </w:pPr>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:spacing w:val="10"/>
-                        <w:sz w:val="16"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="character" w:customStyle="1" w:styleId="40">
-                    <w:name w:val="正文文本 (4)_"/>
-                    <w:basedOn w:val="a0"/>
-                    <w:link w:val="4"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:spacing w:val="10"/>
-                        <w:sz w:val="16"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="paragraph" w:customStyle="1" w:styleId="1">
-                    <w:name w:val="标题 #1"/>
-                    <w:basedOn w:val="a"/>
-                    <w:link w:val="10"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:pPr>
-                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                        <w:spacing w:before="300" w:line="207" w:lineRule="exact"/>
-                        <w:jc w:val="center"/>
-                        <w:outlineLvl w:val="0"/>
-                    </w:pPr>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:spacing w:val="10"/>
-                        <w:sz w:val="18"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="character" w:customStyle="1" w:styleId="10">
-                    <w:name w:val="标题 #1_"/>
-                    <w:basedOn w:val="a0"/>
-                    <w:link w:val="1"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:spacing w:val="10"/>
-                        <w:sz w:val="18"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="paragraph" w:customStyle="1" w:styleId="2">
-                    <w:name w:val="正文文本 (2)"/>
-                    <w:basedOn w:val="a"/>
-                    <w:link w:val="20"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:pPr>
-                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                        <w:spacing w:line="207" w:lineRule="exact"/>
-                        <w:jc w:val="distribute"/>
-                    </w:pPr>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:sz w:val="14"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="character" w:customStyle="1" w:styleId="20">
-                    <w:name w:val="正文文本 (2)_"/>
-                    <w:basedOn w:val="a0"/>
-                    <w:link w:val="2"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:sz w:val="14"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="character" w:customStyle="1" w:styleId="255pt">
-                    <w:name w:val="正文文本 (2) + 5.5 pt"/>
-                    <w:basedOn w:val="20"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="eastAsia"/>
-                        <w:sz w:val="11"/>
-                    </w:rPr>
-                </w:style>
-                <w:style w:type="character" w:customStyle="1" w:styleId="25pt">
-                    <w:name w:val="正文文本 (2) + 5 pt"/>
-                    <w:basedOn w:val="20"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:unhideWhenUsed/>
-                    <w:rPr>
-                        <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:hint="default"/>
-                        <w:sz w:val="10"/>
-                        <w:lang w:val="en-US" w:eastAsia="en-US"/>
-                    </w:rPr>
-                </w:style>
-            </w:styles>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/customXml/itemProps1.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.customXmlProperties+xml" pkg:padding="32">
-        <pkg:xmlData pkg:originalXmlStandalone="no">
-            <ds:datastoreItem ds:itemID="{B1977F7D-205B-4081-913C-38D41E755F92}"
-                              xmlns:ds="http://schemas.openxmlformats.org/officeDocument/2006/customXml">
-                <ds:schemaRefs>
-                    <ds:schemaRef ds:uri="http://www.wps.cn/officeDocument/2013/wpsCustomData"/>
-                </ds:schemaRefs>
-            </ds:datastoreItem>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/customXml/_rels/item1.xml.rels"
-              pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:padding="256">
-        <pkg:xmlData>
-            <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-                <Relationship Id="rId1"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXmlProps"
-                              Target="itemProps1.xml"/>
-            </Relationships>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/docProps/custom.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.custom-properties+xml" pkg:padding="256">
-        <pkg:xmlData>
-            <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/custom-properties"
-                        xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
-                <property fmtid="{D5CDD505-2E9C-101B-9397-08002B2CF9AE}" pid="2" name="KSOProductBuildVer">
-                    <vt:lpwstr>2052-10.1.0.7023</vt:lpwstr>
-                </property>
-            </Properties>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/docProps/app.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" pkg:padding="256">
-        <pkg:xmlData>
-            <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
-                        xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
-                <Template>Normal.dotm</Template>
-                <TotalTime>1</TotalTime>
-                <Pages>1</Pages>
-                <Words>989</Words>
-                <Characters>5642</Characters>
-                <Application>Microsoft Office Word</Application>
-                <DocSecurity>0</DocSecurity>
-                <Lines>47</Lines>
-                <Paragraphs>13</Paragraphs>
-                <ScaleCrop>false</ScaleCrop>
-                <Company/>
-                <LinksUpToDate>false</LinksUpToDate>
-                <CharactersWithSpaces>6618</CharactersWithSpaces>
-                <SharedDoc>false</SharedDoc>
-                <HyperlinksChanged>false</HyperlinksChanged>
-                <AppVersion>16.0000</AppVersion>
-            </Properties>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/docProps/core.xml" pkg:contentType="application/vnd.openxmlformats-package.core-properties+xml"
-              pkg:padding="256">
-        <pkg:xmlData>
-            <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
-                               xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
-                               xmlns:dcmitype="http://purl.org/dc/dcmitype/"
-                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <dc:creator>sony</dc:creator>
-                <cp:lastModifiedBy>laotou</cp:lastModifiedBy>
-                <cp:revision>2</cp:revision>
-                <dcterms:created xsi:type="dcterms:W3CDTF">2018-01-29T01:33:00Z</dcterms:created>
-                <dcterms:modified xsi:type="dcterms:W3CDTF">2018-01-29T01:33:00Z</dcterms:modified>
-            </cp:coreProperties>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/fontTable.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml">
-        <pkg:xmlData>
-            <w:fonts xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-                     xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                     xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                     xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                     xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                     xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex"
-                     mc:Ignorable="w14 w15 w16se w16cid">
-                <w:font w:name="Calibri">
-                    <w:panose1 w:val="020F0502020204030204"/>
-                    <w:charset w:val="00"/>
-                    <w:family w:val="swiss"/>
-                    <w:pitch w:val="variable"/>
-                    <w:sig w:usb0="E0002AFF" w:usb1="C000247B" w:usb2="00000009" w:usb3="00000000" w:csb0="000001FF"
-                           w:csb1="00000000"/>
-                </w:font>
-                <w:font w:name="宋体">
-                    <w:altName w:val="SimSun"/>
-                    <w:panose1 w:val="02010600030101010101"/>
-                    <w:charset w:val="86"/>
-                    <w:family w:val="auto"/>
-                    <w:pitch w:val="variable"/>
-                    <w:sig w:usb0="00000003" w:usb1="288F0000" w:usb2="00000016" w:usb3="00000000" w:csb0="00040001"
-                           w:csb1="00000000"/>
-                </w:font>
-                <w:font w:name="Times New Roman">
-                    <w:panose1 w:val="02020603050405020304"/>
-                    <w:charset w:val="00"/>
-                    <w:family w:val="roman"/>
-                    <w:pitch w:val="variable"/>
-                    <w:sig w:usb0="E0002EFF" w:usb1="C000785B" w:usb2="00000009" w:usb3="00000000" w:csb0="000001FF"
-                           w:csb1="00000000"/>
-                </w:font>
-                <w:font w:name="微软雅黑">
-                    <w:panose1 w:val="020B0503020204020204"/>
-                    <w:charset w:val="86"/>
-                    <w:family w:val="swiss"/>
-                    <w:pitch w:val="variable"/>
-                    <w:sig w:usb0="80000287" w:usb1="2ACF3C50" w:usb2="00000016" w:usb3="00000000" w:csb0="0004001F"
-                           w:csb1="00000000"/>
-                </w:font>
-                <w:font w:name="Calibri Light">
-                    <w:panose1 w:val="020F0302020204030204"/>
-                    <w:charset w:val="00"/>
-                    <w:family w:val="swiss"/>
-                    <w:pitch w:val="variable"/>
-                    <w:sig w:usb0="E0002AFF" w:usb1="C000247B" w:usb2="00000009" w:usb3="00000000" w:csb0="000001FF"
-                           w:csb1="00000000"/>
-                </w:font>
-            </w:fonts>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/webSettings.xml"
-              pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml">
-        <pkg:xmlData>
-            <w:webSettings xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                           xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-                           xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                           xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                           xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                           xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                           xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex"
-                           mc:Ignorable="w14 w15 w16se w16cid"/>
-        </pkg:xmlData>
-    </pkg:part>
-    <pkg:part pkg:name="/customXml/item1.xml" pkg:contentType="application/xml" pkg:padding="32">
-        <pkg:xmlData>
-            <s:customData xmlns="http://www.wps.cn/officeDocument/2013/wpsCustomData"
-                          xmlns:s="http://www.wps.cn/officeDocument/2013/wpsCustomData">
-                <customSectProps>
-                    <customSectPr/>
-                </customSectProps>
-            </s:customData>
-        </pkg:xmlData>
-    </pkg:part>
-</pkg:package>
+<!-- saved from url=(0056)http://docpe.com/Download/012916205242/012916205242.html -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <meta http-equiv="Content-Style-Type" content="text/css"></meta>
+    <meta name="generator" content="Aspose.Words for .NET 15.1.0.0"></meta>
+    <title></title></head>
+<body>
+<div><p style="margin:0pt; text-align:center"><a name="_Hlk505005809"></a><span
+        style=" font-size:12pt">个人消费额度借款合同</span>
+</p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">合同编号：</span><span
+            style="font-family:宋体; font-size:12pt">${contractNumber}</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">借款人：</span><span
+            style="font-family:宋体; font-size:12pt">${fullName}</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">贷款人：</span><span
+            style="font-family:宋体; font-size:12pt">${lenderFullName}</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方(借款人)</span><span
+            style="font-family:宋体; font-size:12pt">：</span><span
+            style="font-family:宋体; font-size:12pt">见本合同“立约人信息”条款的约定</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">乙方(贷款人)</span><span
+            style="font-family:宋体; font-size:12pt">：</span><span
+            style="font-family:宋体; font-size:12pt">见本合同“立约人信息”条款的约定</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方向乙方申请个人消费额度借款</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">乙方同意提供个人消费额度借款。根据有关法律法规和规章</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">甲乙双方经协商一致</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">订立本合同</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">以便共同遵守执行。</span>
+    </p>
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt; width:426.85pt">
+        <tbody>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">手机号</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${cellphone}</span>
+                </p></td>
+        </tr>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">身份证号</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${idCard}</span>
+                </p></td>
+        </tr>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">借款金额</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${money}</span></p></td>
+        </tr>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">借款期限</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${term}</span></p></td>
+        </tr>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">起息日</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${interestStartDay}</span></p></td>
+        </tr>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">还款方式</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${repaymentMethod}</span></p></td>
+        </tr>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">指定收款账户</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${appointPayeeAccount}</span></p></td>
+        </tr>
+        <tr>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">年化利率</span></p></td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+                <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+                        style="font-family:等线; font-size:12pt">${annualInterestRate}</span></p></td>
+        </tr>
+        </tbody>
+    </table>
+    <p style="margin:0pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第一条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">借款额度</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">乙方向甲方提供的借款额度见本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt">一</span><span style="font-family:宋体; font-size:12pt">条的约定。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">本合同所称借款额度</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">系指乙方根据对甲方的信用评价而确定的</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">甲方在</span><span
+            style="font-family:宋体; font-size:12pt">一</span><span style="font-family:宋体; font-size:12pt">定条件下</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">可以申请支用的最高可用借款本金限额。在借款额度有效期间内</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">甲方可以循环使用借款</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">但在任何时点甲方申请支用的借款本金与甲方在本合同项下未全部清偿的借款发放本金之和不得超过借款额度。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第二条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">借款额度有效期间</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、</span><span
+            style="font-family:宋体; font-size:12pt">借款额度有效期间见本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt">二</span><span style="font-family:宋体; font-size:12pt">条的约定</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、</span><span
+            style="font-family:宋体; font-size:12pt">下列情况发生时</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">借款额度失效</span><span style="font-family:宋体; font-size:12pt">：</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (一)借款额度审批通过之日起</span><span
+            style="font-family:宋体; font-size:12pt">3</span><a name="_cmntref12"><span
+            style="font-family:宋体; font-size:12pt">个月</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt12">[莫璐因12]</a><span
+            style="font-family:宋体; font-size:12pt">内未申请支用</span><span style="font-family:宋体; font-size:12pt">；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (二)借款人已支用借款出现逾期60天</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">或者借款人出现乙方认定的不良信用记录</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (三)借款人未按合同约定用途使用借款</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt"> (四)借款人发生足以影响其还款能力的事件</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (五)借款人出现死亡、丧失民事行为能力或经人民法院宣告失踪、死亡</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (六)其他约定或乙方认定借款额度失效的情形。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">若借款额度失效</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">甲方不可继续支用本合同项下的借款</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">乙方有权采取本合同第十一条第二项所列的违约救济措施。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第三条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span style="font-family:宋体; font-size:12pt">借款额度的使用与可用借款额度</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、</span><span
+            style="font-family:宋体; font-size:12pt">在额度有效期间和借款额度内</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">甲方可以根据需要申请借款</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">经乙方同意后双方办理相应的手续。具体使用借款的额度根据可用借款额度确定</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、可用借款额度是指乙方核定的甲方可以申请支用的最高借款金额。在额度有效期间内</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">某一时点甲方的可用借款额度根据借款额度及已使用借款的情况确定。每次支用的可用借款额度以</span><a
+            name="_cmntref13"><span style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt13">[s13]</a><span
+            style="font-family:宋体; font-size:12pt">中的约定为准。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">可用借款额度=核定的借款额度一当前合同项下其他未全部清偿的各笔借款</span><span
+            style="font-family:宋体; font-size:12pt">本金总和。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">三、本合同中所称“借款额度”、“可用借款额度”或其计算方法</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">系为方便甲方估算中请借款的可能性而设计的</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">：</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">约定的“借款额度”、“可用借款额度”为非质诺性的</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">乙方可单方面调整、取消相关额度</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">同时上述额度不构成乙方必然的放款义务</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第四条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">借款支用</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、申请支用借款额度时</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">甲方应</span><span
+            style="font-family:宋体; font-size:12pt">提交</span><a name="_cmntref14"><span
+            style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单</span><span
+            style="font-family:宋体; font-size:12pt">》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt14">[s14]</a><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">经乙方审核同意并经甲方确认后</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">乙方按约定发放借款。借款金额、用途、期限、利率、支用方式、支付方式、还款方法等按本合同约定及</span><a
+            name="_cmntref15"><span style="font-family:宋体; font-size:12pt">《中国</span><span
+            style="font-family:宋体; font-size:12pt">建设银行个人消费</span><span
+            style="font-family:宋体; font-size:12pt">借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt15">[s15]</a><span
+            style="font-family:宋体; font-size:12pt">中约定内容确定。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、乙方放款时</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">将所发放的贷款直接划入双方在</span><a name="_cmntref16"><span
+            style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt16">[s16]</a><span
+            style="font-family:宋体; font-size:12pt">中约定的账户</span><span style="font-family:宋体; font-size:12pt">。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">对于每一笔借款</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">以乙方首次将款项划入上述约定账户之日为起息日。借款期限自起息日起算</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">贷款的到期日根据借款期限长度相应推算</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">但任何情况下不得超过借款额度有效期间的截止日</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第五条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">借款支付</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、</span><span
+            style="font-family:宋体; font-size:12pt">本合同项下借款均采用乙方受托支付方式支付(即支付时由乙方根据甲方提出的支付申请</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">将借款资金支付给符合合同约定用途的甲方交易对象)</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">但若借款符合法律法规或国家银行业监管部门规定的情形</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">且经乙方同意的</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">借款可以以甲方自主支付方式进行支付(即支付时由乙方根据甲方申请将借款资金直接发放至甲方账户</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">由甲方自主支付给符合合同约定用途的甲方交易对象)</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">二、甲方有义务根据本合同项下借款所应适用的借款支付方式</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">向乙方提供符合要求的收款账户</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">以便乙方划付借款资金。如借款采用乙方受托支付方式支付的</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">甲方同意授权乙方按照合同约定方式支付借款资金。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">三、若本合同项下借款采用甲方自主支付方式进行支付的</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">且借款发放前</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">甲方</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">未能提供用途证明材料的</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">甲方应当在单笔借款发放到双方约定账户之日起的规定时限内(不超过3个月</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">具体时限要求按本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">三</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">条约定执行)向乙方提交本合同项下自主支付的单笔借款的用途证明材料。采用自主支付方式的</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">甲方应当定期向乙方报告或告知借款资金支付情况</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">乙方有权通过账户分析、凭证查验或现场调查等方式</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">核查借款资金支付是否符合约定用途</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">甲方应当予以配合。甲方违反此约定的</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">构成甲方违约</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">，</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">乙方有权采取本合同第十</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">二</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">条第二项</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">所列的违约救济措施。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第六条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span style="font-family:宋体; font-size:12pt">额度项下借款发放的前提条件</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">对于甲方的支款申请</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">除乙方全部或部分放弃外</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">只有满足下列前提条件且经过乙方审查同意后</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">乙方才有义务发放借款</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">1.甲方已按照有关法律法规规章规定</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">办妥与本合同项下贷款有关的批准</span><span
+            style="font-family:宋体; font-size:12pt">、</span><span
+            style="font-family:宋体; font-size:12pt">登记、交付及其他法定手续</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">2.甲方没有发生本合同所约定的任一违约事项</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">3.法律、法规、规章或有权部门不禁止且不限制乙方发放本合同项下的借款</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">4.双方约定的其他发放借款的前提条件。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第七条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span style="font-family:宋体; font-size:12pt">贷款利率、罚息利率和计息、结息</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、贷款利率</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">本合同项下的单笔贷款利率可采用固定利率、浮动利率或其他利率方式</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">以</span><a
+            name="_cmntref17"><span style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt17">[s17]</a><span
+            style="font-family:宋体; font-size:12pt">中约定为准。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、</span><span
+            style="font-family:宋体; font-size:12pt">罚息利率</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt"> (一)若甲方未按合同约定用途使用单笔借款</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">挪用借款的</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">罚息利率以该笔贷款所对应的</span><a name="_cmntref18"><span
+            style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt18">[s18]</a><span
+            style="font-family:宋体; font-size:12pt">约定为准。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (二)若本合同项下单笔借款发生逾期</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span
+            style="font-family:宋体; font-size:12pt">逾期罚息利率以该笔贷款所对应的</span><a name="_cmntref19"><span
+            style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt19">[s19]</a><span
+            style="font-family:宋体; font-size:12pt">约定为准。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">本合同及其附件中所称基准利率</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">是指中国人民银行公布施行的同期同档次贷款利率</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">如果中国人民银行不再公布同期同档次贷款利率</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">基准利率是指银行同业公认的同期同档次货款利率</span><span
+            style="font-family:宋体; font-size:12pt">；</span><span
+            style="font-family:宋体; font-size:12pt">如无此银行同业公认的贷款利率</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">则基准利率是指乙方公布的同期同档次贷款利率</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">双方另有约定的除外</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">本合同项下单笔借款首次发放时</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">基准利率按借款起息日的基准利率确定</span><span
+            style="font-family:宋体; font-size:12pt">；</span><span style="font-family:宋体; font-size:12pt">本合同项下单笔贷款利率或罚息利率依合同约定调整时</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">基准利率按利率调整日当日的基准利率确定。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">在确定“同档次贷款利率”时</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">应按照单笔借款的期限长短确定所对应的贷款利率期限档次</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">如按照中国人民银行调整后的新利率政策</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">对于贷款利率商业银行在一定幅度内可自行决定适用标准的</span><span
+            style="font-family:宋体; font-size:12pt">，</span><span style="font-family:宋体; font-size:12pt">乙方有权在该规定幅度内选择某一利率标准适用于本合同项下的单笔贷款，甲方同意遵守该标准，按该标准履行义务。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">三、计息和结息</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(一)借款利息自单笔贷款发放到双方约定账户之日起计算，按日计息，在计息时，每月的计息天数按本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt">四</span><span
+            style="font-family:宋体; font-size:12pt">条约定执行，日利率、年利率</span><span
+            style="font-family:宋体; font-size:12pt">、月利率</span><span
+            style="font-family:宋体; font-size:12pt">三者之间的关系为</span><span
+            style="font-family:宋体; font-size:12pt">：</span><span style="font-family:宋体; font-size:12pt">日利率=年利率/360=月利率/30，但甲乙双方另有</span><span
+            style="font-family:宋体; font-size:12pt">特殊约定</span><span style="font-family:宋体; font-size:12pt">的除外。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">对于本合同项下单笔借款，乙方将依照约定的还款法及当期应执行的利率在每期约定还款日的前一日结计甲方当期应还本金、利息及罚息(如有)。甲方应当在每期还款时限前足额偿还当期应还本息。借款到期后如仍有未偿清的本金、利息或罚息的，乙方将按照与借款到期前相同的结息频率，在每个约定还款日的前一日结计甲方当期应还本金、利息及罚息，直至全部应还本金、利息及罚息清偿完毕。但对于到期一次还本付息的借款，借款到期后如仍有未偿清的本金、利息或罚息的，乙方将按照每月一次的结息频率，于约定还款日的前一日在每月的对日结计甲方当期应还本金、利息及罚息</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt"> (二)关于本合同项下借款的约定还款日，依该笔借款所对应的</span><a name="_cmntref20"><span
+            style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt20">[s20]</a><span
+            style="font-family:宋体; font-size:12pt">确定。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第八条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; 申请及信息授权</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方须亲自通过</span><a
+            name="_cmntref21"><span style="font-family:宋体; font-size:12pt">业主贷</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt21">[莫璐因21]</a><span
+            style="font-family:宋体; font-size:12pt">线上服务平台向货款人提出借款申请，同时务必通过登录密码、手机短信校验码、业主身份确认等方式校验验证身份。凡校验通过的，方视为</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">本人申请。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">应妥善保管</span><span
+            style="font-family:宋体; font-size:12pt">自己的</span><span style="font-family:宋体; font-size:12pt">常用手机设备（含手机号码）、登录账号及密码、与绑定银行卡账号相匹配的手机号码、手机校验码等信息，应确保不向任何人泄露以上信息。对于因账号、密码泄露、丟失或被冒用等所致的损失，由</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">自行承担。如</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">发现有他人冒用或盗用</span><span
+            style="font-family:宋体; font-size:12pt">自己</span><span style="font-family:宋体; font-size:12pt">的账号及密码申请本货款业务的，应立即以有效方式通知</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span style="font-family:宋体; font-size:12pt">，要求</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span
+            style="font-family:宋体; font-size:12pt">暂停本服务。同时，您理解</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span style="font-family:宋体; font-size:12pt">对您的请求采取行动需要合理期限，在此之前，</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span
+            style="font-family:宋体; font-size:12pt">对已执行的指令及（或）所导致的</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">的损失不承担任何责任。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">保证向</span><span style="font-family:宋体; font-size:12pt">乙方</span><span
+            style="font-family:宋体; font-size:12pt">和平台提供的所有申请信息是真实、完整、准确、合法、有效的，并授权</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span style="font-family:宋体; font-size:12pt">和平台向有关机构或单位（包括但不限于</span><span
+            style="font-family:宋体; font-size:12pt">其他货款人、网银在线、第三方支付机构组织、 中国人民银行信用信息基础数据库、合法的征信机构、公安机关、公积金、社保、税务、民政等）查询或确认与</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">借款申请的相关信息（包括不良信息）。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">乙方</span><span
+            style="font-family:宋体; font-size:12pt">核定的您的授信额度并不构成货款人对您的放款承诺，授信额度项下具体提款业务，</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">应逐笔在授信额度有效期内及可使用授信额度内向</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span style="font-family:宋体; font-size:12pt">申请</span><span
+            style="font-family:宋体; font-size:12pt">提款，</span><span style="font-family:宋体; font-size:12pt">乙方</span><span
+            style="font-family:宋体; font-size:12pt">有权根据</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">的当期信用及</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span style="font-family:宋体; font-size:12pt">当期可货款资金规模自主决定是否向</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">发放额度项下单笔货款以及具体货款金额。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt; font-weight:bold">第</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">九</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">还款</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、</span><span
+            style="font-family:宋体; font-size:12pt">还款原则</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">本合同项下甲方的还款首先用于偿还本合同约定应由甲方承担而由乙方垫付的各项费用以及乙方实现债权的费用，剩余款项按照下列原则偿还</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(一)对于本金逾期超过九十天仍未收回的贷款，或者利息逾期超过九十天仍未收回的贷款，或者法律、法规或规章另有规定的贷款，按照先还本后还息的原则偿还</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (二)对于除上述(一)以外情形的贷款，按照先还息后还本、息随本清的原则偿还。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、</span><span
+            style="font-family:宋体; font-size:12pt">还款方法</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">本合同项下的借款可以使用以下还款方法中的一种，单笔借款的还款方法在</span><a
+            name="_cmntref22"><span style="font-family:宋体; font-size:12pt">《中国建设银行个人消费借款支用单》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt22">[s22]</a><span
+            style="font-family:宋体; font-size:12pt">中约定</span><span style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">1.</span><span
+            style="font-family:宋体; font-size:12pt">等额本金还款法</span><span style="font-family:宋体; font-size:12pt">。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">2.</span><span
+            style="font-family:宋体; font-size:12pt">等额本息还款法</span><span style="font-family:宋体; font-size:12pt">。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">3.一次还本付息还款法。即指甲方在借款到期日一次性偿还所有贷款利息和在本金的还款方法</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">4.按期付息任意还本法。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">5.其他乙方同意的还款法。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">三、还款方式</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (一)委托扣款方式</span><span
+            style="font-family:宋体; font-size:12pt">：</span><span style="font-family:宋体; font-size:12pt">甲方授权乙方直接从甲方在乙方系统开立的个人结算账户扣收应还款项。如该委托扣款账户为甲方之外的第三人名下账户，则该第三人应签发授权书，授权乙方从该账户中扣收甲方应还款项。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">委托扣款方式下，甲方最迟应在每期约定还款日的前一日柜面营业终了前将当期应还款项足额存入指定委托扣款账户内。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方未能在约定还款日的前一日柜面营业终了前将应还款项足额存入指定委托扣款账户造成借款拖欠的，乙方有权自约定还款日开始计收逾期罚息和复利，并有权在该期约定还款日及此后的任意时间直接从甲方在</span><a
+            name="_cmntref23"><span style="font-family:宋体; font-size:12pt">中国建设银行</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt23">[s23]</a><span
+            style="font-family:宋体; font-size:12pt">系统开立的任何账户中扣划应还款项，但该扣划并不构成乙方的义务。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">储蓄存折、借记卡扣款结果通过甲方到乙方指定的营业柜台补登存折方式或打印对账单方式反映，每期不再另行寄发对账凭证。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (二)柜台或自助渠道还款方式</span><span
+            style="font-family:宋体; font-size:12pt">：</span><span style="font-family:宋体; font-size:12pt">甲方直接到乙方指定的营业柜台或甲方设立的自助渠道以现金、支票、银行卡等办理还款。该还款方式下，对每期应还款项，甲方须最迟于约定还款日到乙方上述渠道办理还款手续。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方未能在约定还款日足额偿还应还款项的，乙方有权自约定还款日开始计收逾期罚息和复利。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">若甲方在约定还款日之前，到乙方指定营业柜台或自助渠道足额偿还当期应还款项，乙方将按照“按日计息”原则将甲方因提前偿还当期款项而多还的利息结转至下期(但乙方对该部分多还的利息不计付存款息)，用于抵扣甲方下期应还款项中相同数额的利息</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">对本合同项下借款的还款，双方其他约定见本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt">五</span><span style="font-family:宋体; font-size:12pt">条约定。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">四、提前还本甲方可以申请提前还本。甲方提前还本，需事先向乙方提出申请，经乙方同意后，方可提前偿还部分或全部贷款本金。甲方提前还本的，须到乙方指定的营业柜台办理还本手续。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方提前还本时，应首先偿清拖欠本息(如有)。甲方提前部分还本的，还须先结清当期应还本息。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">甲方申请部分或全部提前偿还贷款本金的，乙方按照提前还本时本合同</span><span
+            style="font-family:宋体; font-size:12pt">执行</span><span style="font-family:宋体; font-size:12pt">的贷款利率、提前还本的金额以及当期的实际用款天数计收利息，此前已计收的借款利息不再调整。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方提前偿还部分或全部本金的，乙方有权收取提前还本违约金。甲方申请提前还本时，可同时根据本合同第</span><span
+            style="font-family:宋体; font-size:12pt">十</span><span style="font-family:宋体; font-size:12pt">条第一项约定申请缩短借款期限。申请经乙方书面同意后方生效，乙方有权要求甲方因此支付一定数额的缩短借款期限违约金。具体按照本合同第</span><span
+            style="font-family:宋体; font-size:12pt">二十</span><span style="font-family:宋体; font-size:12pt">五</span><span
+            style="font-family:宋体; font-size:12pt">条约定执行。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt; font-weight:bold">第</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span style="font-family:宋体; font-size:12pt">借款期限、借款还款方法的变更</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、</span><span
+            style="font-family:宋体; font-size:12pt">对于本合同项下单笔借款，甲方可以向乙方申请缩短借款期限，但应事先提出申请，经乙方批准后，双方签订借款期限变更协议并办理相关手续。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">借款期限变更后达到新的利率期限档次时，从变更之日起，贷款利息、罚息利率根据新档次的基准利率和本合同约定的规则确定(甲乙双方另有约定的除外)。已计收的利息不再调整。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、对于本合同项下单笔借款，甲方在借款期限内可以申请变更还款方法，但应事先向乙方提出申请，经乙方批准后，双方签订还款方法变更的相关协议并办理相关手续。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方申请变更借款期限或还款方法的，乙方可以因此要求甲方缴纳一定的费用。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">一</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span style="font-family:宋体; font-size:12pt">甲乙双方主要权利和义务</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一</span><span
+            style="font-family:宋体; font-size:12pt">、甲方主要权利和义务</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(</span><span style="font-family:宋体; font-size:12pt">一</span><span
+            style="font-family:宋体; font-size:12pt">)甲方有权要求乙方按合同约定发放借款</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(二)甲方有权要求乙方对甲方提供的有关家庭资产、财务资料、生产经营方面的个人资料予以保密，但法律法规和规章另有规定及本合同另有约定的除外</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (三)甲方应按乙方要求提供有关个人身份、还款能力及个人信用的资料。甲方应保证其向乙方提供的有关资料、文件和信息的真实性、淮确性、合法性、完整性和有效</span><span
+            style="font-family:宋体; font-size:12pt">性；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (四)甲方应按合同约定按期足额归还借款本息、缴纳合同约定的各类费用</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (五)甲方应按约定用途使用借款。未经乙方书面同意，甲方不得将借款挪作他用</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (六)甲方如要为他人债务提供担保，应当书面通知乙方并征得乙方书面同意</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">(七)甲方应接受乙方及其授权代理人通过合理方式对借款使用情况进行检查</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">(八)采用委托扣款方式还款的，甲方应按以下要求确保乙方有效扣款；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">1.提供真实合法的委托扣款账户资料</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">2.按约定将每期还款额足额存入委托扣款账户中；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">3.甲方如变更委托扣款账户的，应在约定还款日之前十五个工作日到乙方指定的柜面办理变更手续</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">4.如委托扣款账户出现冻结、扣划、变更、余额不足等情况而造成乙方无法全额扣收本息的，甲方应及时向乙方提供新的合法有效还款账户，或及时补足账户余额并向乙方申请扣款，或及时到乙方指定的营业柜台还款。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (九)甲方应在知悉下列事项发生或可能发生之日起十个工作日内以书面形式通知乙方</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">1.对甲方履行还款义务产生或可能产生重大不利影响的诉讼、仲裁或行政措施等的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">2.在借款全部清偿前，甲方个人及家庭经济状况发生变化，可能对其债务清偿能力造成不利影响的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">3.甲方作为控股股东或实际控制人的企业发生合并、分立、股权变动、增减资本、合资、联营等情形的；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">4.发生其他对甲方履行还款义务产生或可能产生重大不利影响的事件。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt"> (十)甲方不得将借款用于以下用途</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">1.从事股本权益性投资；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">2.购买股票、基金、理财产品、金融衍生产品、彩票等</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">3.从事非法借贷</span><span
+            style="font-family:宋体; font-size:12pt">、</span><span style="font-family:宋体; font-size:12pt">非法集资</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">4.</span><span
+            style="font-family:宋体; font-size:12pt">生产经营性用途</span><span style="font-family:宋体; font-size:12pt">；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">5.国家有关法律、法规和规章禁止的其他用途。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">(十一)如本合同有两个以上(含两个)借款人，则各借款人应就本合同项下全部合同义务承担连带责任，即乙方有权要求任何一个借款人履行全部合同义务。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、乙</span><span
+            style="font-family:宋体; font-size:12pt">方的主要权利和义务</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(</span><span style="font-family:宋体; font-size:12pt">一</span><span
+            style="font-family:宋体; font-size:12pt">)应按合同约定及时足额发放贷款，但因甲方原因造成迟延的除外；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt"> (二)应对甲方提供的有关个人资料予以保密，但</span><a name="_cmntref24"><span
+            style="font-family:宋体; font-size:12pt">中国建设银行</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt24">[s24]</a><span
+            style="font-family:宋体; font-size:12pt">业务需要使用、个人征信使用或法律法规和规章另有规定的除外；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(三)有权了解、核实有关甲方及其家庭成员身份、还款能力、个人信用</span><span
+            style="font-family:宋体; font-size:12pt">和</span><span style="font-family:宋体; font-size:12pt">家庭财务状况；有权要求甲方提供与借款申请和借款额度使用有关的资料</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(四)有权对甲方提供的资料、文件的合法性、真实性、有效性、</span><span
+            style="font-family:宋体; font-size:12pt">准</span><span
+            style="font-family:宋体; font-size:12pt">确性以及借款的使用情况进行调查；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(五)甲方的资信情况发生变化，可能或已经对其偿债能力造成不利影响时， 乙方有权调低、暂停直至取消甲方借款额度；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(六)有权要求甲方按期偿还贷款本金、利息和费用，有权行使本合同定的其他各项权利，要求甲方履行其在本合同项下的其他各项义务</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(七)有权将甲方的个人信用信息提供给中国人民银行个人信用信息基础数据库及信贷征信主管部门批准建立的个人信用数据库，并有权向上述个人信用</span><span
+            style="font-family:宋体; font-size:12pt">数</span><span style="font-family:宋体; font-size:12pt">据库或有关单位、部门及个人查询甲方的信用状况，查询获得的信用报告限用</span><span
+            style="font-family:宋体; font-size:12pt">于</span><span style="font-family:宋体; font-size:12pt">中国人民银行颁布的《个人信用信息基础数据库管理暂行办法》规定用途范围内；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">(八)甲方未按期足额偿还其在本合同项下任何应付款项的，乙方有权从甲方在</span><a name="_cmntref25"><span
+            style="font-family:宋体; font-size:12pt">中国建设银行</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt25">[s25]</a><span
+            style="font-family:宋体; font-size:12pt">系统开立的任一账户中划收人民币或其他币种的相应款项，且无须提前通知甲方。如扣划款项为外币，乙方有权按扣收时</span><a
+            name="_cmntref26"><span style="font-family:宋体; font-size:12pt">中国建设银行</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt26">[s26]</a><span
+            style="font-family:宋体; font-size:12pt">公布外汇牌价的银行买入价折算成人民币清偿甲方应付款项。如甲方对乙方还负有本合同项下债务以外的其他到期债务的，乙方有权决定将前述扣收款项首先用于清偿其他任一笔到期债务。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">二</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">违约及违约处理</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、</span><span
+            style="font-family:宋体; font-size:12pt">违约情形</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">(</span><span
+            style="font-family:宋体; font-size:12pt">一</span><span style="font-family:宋体; font-size:12pt">)甲方发生下列任一情况，均构成违约；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">1.甲方不按本合同约定按时足额偿还借款本息或其他应付款项的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">2.甲方未按合同约定用途使用贷款的；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">3.甲方向乙方提供虚假的、无效的或不完整的信息、文件或资料的；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">4.甲方自主支付方式下，甲方未在合同约定的期限内向乙方提交借款用途证明材料的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">5.甲方拒绝或阻碍乙方对其收入或信用情况进行检查的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">6.甲方死亡或被宣告死亡而其财产合法继承人不继续履行本合同的；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">7.甲方被宣告失踪，而其财产代管人不继续履行本合同的；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">8.甲方丧失民事行为能力，而其监护人不继续履行本合同的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">9.甲方或其财产合法继承人受到行政或刑事处罚、卷入或即将卷入重大的诉讼或仲裁程序及其他法律纠纷，乙方认为可能或已经对其偿债能力造成不利影响的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">10.甲方低价转让、无偿转让或隐藏财产、减免第三方债务、怠于行使债权或其他权利，乙方认为可能危及本合同项下债权安全的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">11.甲方未履行对</span><a
+            name="_cmntref27"><span style="font-family:宋体; font-size:12pt">中国建设银行</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt27">[s27]</a><span
+            style="font-family:宋体; font-size:12pt">负有的其它到期债务，或乙方发现甲方有其他拖欠债务的行为的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">12.甲方的个人及资信情况或还贷能力出现其他重大变化(包括但不限于国籍变更、住所地变更、婚姻情况变动、家庭财务状况恶化、收入降低、失业、重</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">12</span><span
+            style="width:6pt; text-indent:0pt; display:inline-block"></span><span
+            style="font-family:宋体; font-size:12pt">大疾病、拖欠其他债务等)，乙方认为可能或已经对其偿债能力造成不利影响且甲方未追加乙方认可的担保的</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">13.甲方发生其他足以对其偿还债务能力造成不利影响的事件，或甲方明确表示或以其行为表明将不履行本合同项下的义务；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">14.甲方违反合同约定的其他义务</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、</span><span
+            style="font-family:宋体; font-size:12pt">违约救济措施</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">出现上述任一违约情形，乙方有权行使下述一项或几项权利</span><span
+            style="font-family:宋体; font-size:12pt">：</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">1.停止发放本合同及个人消费借款支用单项下的借款；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">2.调低、暂停直至取消甲方借款额度</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">3.宣布各笔或单笔贷款立即到期，要求甲方立即清偿借款本息及相关费用；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">4.甲方未按合同约定用途使用借款的，对甲方挪用的部分，自未按合同约定用途使用借款之日起至本息全部清偿之日止，按合同约定规则计算出的罚息利率和本合同约定的结息方式计收罚息和复利。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方未在合同约定的期限内向乙方提交符合乙方要求的借款用途证明材料的，乙方除按照本条约定采取救济措施外，还有权向甲方收取违约金。具体按照本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt">六</span><span style="font-family:宋体; font-size:12pt">条约定执行。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">对于甲方未按时还清的任意一期借款本金和利息(包括被乙方宣布全部或部分到期的借款本金和利息)，自逾期之日起至拖欠本息全部清偿之日止，按合同约定规则计算出的逾期罚息利率和本合同约定的结息方式计收罚息和复利。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">对于既逾期又未按本合同约定用途使用借款的，择较重者计收罚息和复利，不予并处。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">5.从甲方在</span><a
+            name="_cmntref28"><span style="font-family:宋体; font-size:12pt">中国建设银行</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt28">[s28]</a><span
+            style="font-family:宋体; font-size:12pt">系统开立的任一账户上划收任何币种款项用以</span><span
+            style="font-family:宋体; font-size:12pt">抵</span></p>
+    <p style="margin:0pt"><span style="font-family:宋体; font-size:12pt">偿甲方应付款项</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">6.要求甲方限期纠正违约行为并赔偿乙方相应损失；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">7.要求甲方对本合同项下所有债务提供符合乙方要求的担保；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">8.合同项下执行浮动利率的借款，如甲方存在不按时足额还款情形的，乙方有权对甲方尚未归还的全部借款上浮贷款利率、罚息利率，具体按乙方确定并通知甲方的标准执行；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">9.委托第三方或通过任何公众媒体发布公告等方式进行催收或追偿</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">1</span><span
+            style="font-family:宋体; font-size:12pt">0</span><span style="font-family:宋体; font-size:12pt">.以法律手段催收或追偿借款本息及由此产生的一切费用；</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">11.解除合同</span><span
+            style="font-family:宋体; font-size:12pt">；</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">12.有权采取的其他救济措施。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">三</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span style="font-family:宋体; font-size:12pt">合同的变更、解除和权利义务的转让</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt">本合同生效后，甲乙双方不得单方擅自变更或解除本合同。</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">甲方如将本合同项下的权利和义务转让给第三方，应事先经乙方书面同意。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">四</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">杂项约定</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">一、费用承担</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">本合同项下与借款有关的费用及为实现债权发生费用的承担，具体约定见本合同第二十六条。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">二、公告催收</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">对甲方从事违法违规行为，拖欠借款本息或发生其他违约情形，乙方有权向有关部门或单位予以通报，有权通过新闻媒体进行公告催收。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">三、乙方记录的证据效力</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">除非有可靠、确定的相反证据，乙方有关本金、利息、费用和还款记录等内容的内部账务记载，乙方制作或保留的甲方办理提款、还款、付利息等业务过程中发生的单据、凭证及乙方催收贷款的记录、凭证，均构成有效证明甲乙双方之间债权关系的确定证据。甲方不能仅因为上述记录、记载、单据、凭证由乙方单方制作或保留，而提出异议。</span>
+    </p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">四、权利保留</span></p>
+    <p style="margin:0pt; text-indent:24pt"><span style="font-family:宋体; font-size:12pt">乙方在本合同项下的权利并不影响和排除其根据法律、法规和其它合同所</span><span
+            style="font-family:宋体; font-size:12pt">享</span><span style="font-family:宋体; font-size:12pt">有的任何权利。任何对违约或延误行为施以任何宽容、宽限、优惠或延缓行使本合同项下的任何权利，均不能视为对本合同项下权利、权益的放弃或对任何违反本合同行为的许可或认可，也不限制、阻止和妨碍对该权利的继续行使或对其任何其它权利的行使，也不因此导致乙方对甲方承担义务和责任。</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">五、双方间其他约定见本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt">七</span><span style="font-family:宋体; font-size:12pt">条。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">五</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span style="font-family:宋体; font-size:12pt">合同的适用法律及争议解决方式</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">见本合同第二十</span><span
+            style="font-family:宋体; font-size:12pt">八</span><span style="font-family:宋体; font-size:12pt">条的约定</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">六</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">合同的生效</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">为了保障</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">的合法权益，</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">应当阅读并遵守本合同，审慎阅读、充分理解各条款内容，特别是免除或者限制责任的条款。</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">除非</span><span style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">已阅读并接受本合同所有条款，否则</span><span style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">无权使用货款服务。</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span
+            style="font-family:宋体; font-size:12pt">的使用、登录等行为即视为</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">已阅读并同意接受本合同的约束，本合同即时生效。</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本合同由</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">和</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span
+            style="font-family:宋体; font-size:12pt">共同签署。</span><span
+            style="font-family:宋体; font-size:12pt">甲方</span><span style="font-family:宋体; font-size:12pt">与</span><span
+            style="font-family:宋体; font-size:12pt">乙方</span><span style="font-family:宋体; font-size:12pt">一致同意本合同利用互联网信息技术以数据电文形式订立并认同其效力。</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">七</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">通知</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本合同任何一方当事人传递给其他方的通知，须按本合同所列的通讯地址、联系电话或其他联系方式进行</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">甲方通讯地址或其他联系方式如发生变动，应于发生变动之日起五个工作日内以书面形式通知乙方，因未及时通知而造成的损失由变动方承担。乙方发生需通知甲方的事项时，也可采用在乙方网点张贴公告、网上银行、电话银行、手机银行等方式通知</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">八</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">合同附件</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本合同项下业务办理过程中使用的</span><a name="_cmntref29"><span
+            style="font-family:宋体; font-size:12pt">个人消费借款支用单、贷款支付凭证、提前还本申请书</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt29">[s29]</a><span
+            style="font-family:宋体; font-size:12pt">等文件或材料均作为本合同的附件，是本合同的有效组成部分。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">第十</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">九</span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">甲方陈述与保证</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">一、</span><span style="font-family:宋体; font-size:12pt">甲方清楚地知悉乙方的经营范围、授权权限</span><span
+            style="font-family:宋体; font-size:12pt">。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">二、甲方有权签署本合同。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">三、甲方已阅读本合同所有条款，并已特别注意</span><a
+            name="_cmntref30"><span style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">《中国建设银行个人消费额度借款合同》</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt30">[s30]</a><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">第二至十</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">二</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">条、第十</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">四</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">条以及第十</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">七</span><span
+            style="font-family:宋体; font-size:12pt; font-style:italic; font-weight:bold">条等内容。乙方已应甲方要求对相关条款予以详细说明。甲方对所有条款的含义及相应的法律后果已全部通晓并充分理解，甲方同意遵守所有条款，自愿承担可能出现的相关风险。</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">四、甲方声明在订立本合同时其自身及重要关联方不存在任何违反环境和社会风险管理法律、法规与规章的行为或情形，并且承诺本合同订立后加强自身及其重要关联方的环境和社会风险管理，严格遵守有关环境和社会风险管理的法</span><span
+            style="font-family:宋体; font-size:12pt">律、法规与规章，杜绝在建设、生产、经营活动中给环境和社会带来危害及相关风险（包括但不限于与耗能、污染、土地、健康、安全、移民安置、生态保护、节能减排、气候变化等有关的环境与社会问题）。甲方认可，乙方有权对甲方的环境和社会风险管理情况予以监督，并有权要求甲方提交环境和社会风险报告。如果甲方上述声明虚假或者上述承诺未被履行，或者甲方可能造成环境和社会风险，乙方有权停止对甲方的授信（包括但不限于拒绝发放贷款、提供融资、开立保函后信用证或延缓承兑票等），或者宣布债权（包括但不限于贷款、融资、已经或可能发生的垫款等）本息提前到期，或者采取本合同约定或法律允许的其他救济措施。</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本条款为编号</span><a name="_cmntref31"><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">440667358-9420-20174024546</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt31">[s31]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> </span><span
+            style="font-family:宋体; font-size:12pt">《个人消费额度借款合同》不可分割的组成部分</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第</span><span style="font-family:宋体; font-size:12pt">二十</span><span
+            style="font-family:宋体; font-size:12pt">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">立约人信息</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">甲方(借款人)信息：</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">借款人姓名：</span><a name="_cmntref32"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt32">[s32]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">张三</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">身份证件名称及号码：居民身份证</span><a name="_cmntref33"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt33">[s33]</a><span
+            style="font-family:宋体; font-size:12pt"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">身份证号</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">住所：</span><a name="_cmntref34"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt34">[s34]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">借款人住址</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">通讯地址及邮政编码：</span><a name="_cmntref35"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt35">[s35]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">通讯地址</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">/</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">邮政编码</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">联系电话及传真：</span><a name="_cmntref36"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt36">[s36]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">1</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">2345678910</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">其他信息：</span><span style="font-family:宋体; font-size:12pt"> </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">2</span><span style="font-family:宋体; font-size:12pt">.</span><span
+            style="font-family:宋体; font-size:12pt">乙方(贷款人)信息：</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">贷款人：</span><a name="_cmntref37"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt37">[s37]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">中国建设银行</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">住所：</span><a name="_cmntref38"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt38">[s38]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">广东省佛山市佛山大道南</span><span
+            style="font-family:等线; font-size:12pt; text-decoration:underline">327</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">号</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">通讯地址及邮政编码：</span><a name="_cmntref39"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt39">[s39]</a><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">广东省佛山市佛山大道南</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">327号/528000</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">联系电话：</span><a name="_cmntref40"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt40">[s40]</a><span
+            style="font-family:宋体; font-size:9pt; text-decoration:underline">0757-82781212</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">其他信息：</span><span style="font-family:宋体; font-size:12pt"> </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第</span><span style="font-family:宋体; font-size:12pt">二十</span><span
+            style="font-family:宋体; font-size:12pt">一</span><span style="font-family:宋体; font-size:12pt">条</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt">对第一条的约定</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">乙方向甲方提供借款额度人民币(大写)</span><a name="_cmntref41"><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">叁拾万元整</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt41">[s41]</a><span
+            style="font-family:宋体; font-size:12pt">元。本借款额度为非承诺性额度，甲方申请使用借款应经乙方审查同意，乙方有权对借款额度进行重新确定。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第</span><span style="font-family:宋体; font-size:12pt">二十</span><span
+            style="font-family:宋体; font-size:12pt">二</span><span style="font-family:宋体; font-size:12pt">条</span><span
+            style="font-family:宋体; font-size:12pt"> </span><span style="font-family:宋体; font-size:12pt"> 对第二条的约定</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">借款额度有效期间为</span><a name="_cmntref42"><span
+            style="font-family:宋体; font-size:12pt">2018年3月24日至2019年3月24日</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt42">[s42]</a><span
+            style="font-family:宋体; font-size:12pt">。本合同项下的第一笔借款实际放款的日期在本条约定的借款额度有效期的起始日期之后的，借款额度有效期间的起始日为第一笔借款实际放款之日，到期日相应向后顺延。 </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">在借款额度有效期间终止时，未使用的借款额度自动失效。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第二十</span><span style="font-family:宋体; font-size:12pt">三</span><span
+            style="font-family:宋体; font-size:12pt">条&amp;nbsp; 对第五条的约定 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本合同项下单笔借款采用自主支付方式的，且借款发放前甲方未能提供用 途证明材料的，甲方应当在借款发放到双方约定账户之日起的</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> 30 </span><span
+            style="font-family:宋体; font-size:12pt">日内向乙方提交本合同项下借款的用途证明材料。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第二十</span><span style="font-family:宋体; font-size:12pt">四</span><span
+            style="font-family:宋体; font-size:12pt">条&amp;nbsp; 对第七条的约定 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本合同项下借款支用期限在一年以内(含)的，每月计息天数按实际天数计算。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第二十</span><span style="font-family:宋体; font-size:12pt">五</span><span
+            style="font-family:宋体; font-size:12pt">条 </span><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold"> </span><span
+            style="font-family:宋体; font-size:12pt">对第八条的约定 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">一</span><span style="font-family:宋体; font-size:12pt">、</span><span
+            style="font-family:宋体; font-size:12pt">甲方选取下列第</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> 壹 </span><span
+            style="font-family:宋体; font-size:12pt">种还款方式归还应付本息 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">壹：委托扣款方式。乙方从下述约定的委托扣款账户中直接扣划还款。扣款账户一：户名</span><a
+            name="_cmntref43"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt43">[s43]</a><span
+            style="font-family:宋体; font-size:12pt"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">借款人姓名</span><span
+            style="font-family:宋体; font-size:12pt"> </span><span style="font-family:宋体; font-size:12pt">账号</span><a
+            name="_cmntref44"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt44">[s44]</a><span
+            style="font-family:宋体; font-size:12pt"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">4</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">56123</span><span
+            style="font-family:宋体; font-size:12pt">。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">贰：柜台或自助渠道还款方式。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">二</span><span style="font-family:宋体; font-size:12pt">、</span><span
+            style="font-family:宋体; font-size:12pt">关于提前还本违约金的约定。甲方提前还本的，按照下列第</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> 贰 </span><span
+            style="font-family:宋体; font-size:12pt">项约定办理： </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">壹：无须支付提前还本违约金。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">贰：应支付提前还本违约金。提前还本违约金计算方法为：</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">违约金=提前还贷金额×违约金率，违约金率为1‰ 。</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">三、关于缩短借款期限违约金的约定为：</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">贷款人对借款人缩短借款期限不收取违约金</span><span
+            style="font-family:宋体; font-size:12pt">。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第二十</span><span style="font-family:宋体; font-size:12pt">六</span><span
+            style="font-family:宋体; font-size:12pt">条&amp;nbsp; 对第十一条的约定 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">关于甲方未在合同约定的期限内向乙方提交借款用途证明材料的约定。对于未在合同约定期限内提交用途证明材料的单笔借款，甲方应支付违约金，违约金计算方法为：</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">此栏空自</span><span
+            style="font-family:宋体; font-size:12pt">。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt; font-weight:bold">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第二十</span><span style="font-family:宋体; font-size:12pt">七</span><span
+            style="font-family:宋体; font-size:12pt">条&amp;nbsp; 双方间的其他约定 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">一、甲方与乙方关于费用承担的约定为：</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">乙方为实现债权而实际发生的全部费用(包括但不限于诉讼费、仲裁费、财产保全费、差旅费、执行费、评估费、拍卖费、公证费、送达费、公告费、律师费等)，由甲方承担</span><span
+            style="font-family:宋体; font-size:12pt">。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">二、甲方与乙方约定的其他条款为：</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">当借款人离开所在单位时，应及时通知货款人，并提前结清贷款或者增加贷款人认可的风险缓释措施</span><span
+            style="font-family:宋体; font-size:12pt">。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第二十</span><span style="font-family:宋体; font-size:12pt">八</span><span
+            style="font-family:宋体; font-size:12pt">条&amp;nbsp; 对第十四条的约定 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本合同适用中华人民共和国法律。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">凡因本合同引起的或与本合同有关的任何争议，可以通过协商解决，协商不成，按以下第</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> 壹 </span><span
+            style="font-family:宋体; font-size:12pt">种方式解决； </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">壹：向乙方住所地人民法院起诉。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">贰：提交</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> </span><span
+            style="font-family:宋体; font-size:12pt">仲裁委员会(仲裁地点为</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">&amp;nbsp;</span><span
+            style="font-family:宋体; font-size:12pt">)，按照申请仲裁时该会现行有效的仲裁规则进行仲裁。仲裁裁决是终局的，对双方均有约束力。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">在诉讼或仲裁期间，本合同不涉及争议部分的条款仍须履行。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第二十</span><span style="font-family:宋体; font-size:12pt">九</span><span
+            style="font-family:宋体; font-size:12pt">条&amp;nbsp; 合同份数的约定 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">本合同一式</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> 叁 </span><span
+            style="font-family:宋体; font-size:12pt">份，具同等法律效力。 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">第</span><span style="font-family:宋体; font-size:12pt">三十</span><span
+            style="font-family:宋体; font-size:12pt">条&amp;nbsp; 其他约定事项 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">一、甲方确认下列邮寄地址、收件人、电子邮箱、电话号码、传真号码等信 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span style="font-family:宋体; font-size:12pt">息(以下统称“送达地址”)为乙方、人民法院(或仲裁机构)发送各类纸质或电子数据通知、信函、法律文书(以下统称“文书”)的送达地址： </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">邮寄地址</span><a name="_cmntref45"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt45">[s45]</a><span
+            style="font-family:宋体; font-size:12pt"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">地址</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">收件人</span><a name="_cmntref46"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt46">[s46]</a><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp; </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">收件人</span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; </span><span
+            style="width:18pt; text-indent:0pt; display:inline-block"></span><span
+            style="width:21pt; text-indent:0pt; display:inline-block"></span><span
+            style="font-family:宋体; font-size:12pt">联系电话</span><a name="_cmntref47"></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt47">[s47]</a><span
+            style="font-family:宋体; font-size:12pt"> </span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline">12345678910</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">电子邮箱</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> 此栏空自 </span><span
+            style="font-family:宋体; font-size:12pt">&amp;nbsp;&amp;nbsp; 微信号</span><span
+            style="font-family:宋体; font-size:12pt; text-decoration:underline"> 此栏空白 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">二、上述送达地址持续适用于合同履行期间、履行本合同发生争议进入民事诉讼程序(包括一审、二审、再审、执行程序和特别程序)或仲裁阶段后，人民法院或仲裁机构向甲方送达各类法律文书。在合同履行期间，乙方向甲方送达催收债务函、宣布贷款提前到期通知等文书同样适用该送达地址。 </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">三、甲方对其送达地址作出变更的，应自变更之日起五个工作日内将变更后的送达地址书面告知乙方，否则送达地址仍以本合同载明为准。 </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">四、因甲方确认的送达地址不准确、送达地址变更后未及时依约告知乙方、甲方本人或指定的接收人拒绝签收等情形，导致文书未能被甲方实际接收的，甲 </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span style="font-family:宋体; font-size:12pt">方应自行承担有效送达的法律后果。邮寄送达的，以文书退回之日视为送达之日； </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span style="font-family:宋体; font-size:12pt">直接送达的，送达人当场在送达回证上记明情况之日为送达之日。 </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:宋体; font-size:12pt">五、甲方确认：上述送达地址均系其真实填写，并明确知晓乙方或人民法院 </span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span style="font-family:宋体; font-size:12pt">(仲裁机构)按上述地址送达文书的法律后果。乙方已对相关条款进行了充分的 提示和说明。 </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+            style="font-family:等线; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+            style="font-family:等线; font-size:12pt">甲方</span><span style="font-family:等线; font-size:12pt">（签字）： </span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><img
+            src="./012916205242_files/cb9b1096-8925-48e5-9d6b-51f4a60c1f10.001.png" width="271" height="350" alt=""
+            style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline"></img>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span style="font-family:等线; font-size:12pt">2018年1月29</span><a
+            name="_cmntref48"><span style="font-family:等线; font-size:12pt">日</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt48">[莫璐因48]</a></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
+            style="font-family:等线; font-size:12pt">&amp;nbsp;</span></p>
+    <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span style="font-family:等线; font-size:12pt">乙方（公章或负责人签字）：</span>
+    </p>
+    <p style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"><span
+            style="font-family:等线; font-size:12pt">年</span><span style="font-family:等线; font-size:12pt"> </span><span
+            style="font-family:等线; font-size:12pt">&amp;nbsp;</span><span
+            style="font-family:等线; font-size:12pt">月</span><span style="font-family:等线; font-size:12pt"> </span><span
+            style="font-family:等线; font-size:12pt">&amp;nbsp;</span><a name="_cmntref49"><span
+            style="font-family:等线; font-size:12pt">日</span></a><a
+            href="http://docpe.com/Download/012916205242/012916205242.html#_cmnt49">[莫璐因49]</a></p>
+
+</div>
+
+</body>
+</html>

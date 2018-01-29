@@ -28,12 +28,12 @@ public class FreemarkUtil {
         return txt;
     }
 
-    public final static boolean write(OutputStream os, Map dataMap, String templateName) {
+    public  static boolean write(OutputStream os, Map dataMap, String templateName) {
         try {
             Configuration configuration = new Configuration();
             configuration.setDefaultEncoding("UTF-8");
-//            configuration.setClassForTemplateLoading(TemplateLoader.class, "/templates/");//这里是指放在classes下
-            configuration.setClassForTemplateLoading(WordUtils.class, "/templates/");//这里是指放在classes下
+            configuration.setClassForTemplateLoading(TemplateLoader.class, "/templates/");//这里是指放在classes下
+//            configuration.setClassForTemplateLoading(WordUtils.class, "/templates/");//这里是指放在classes下
             // 获取模板
             Template template = configuration.getTemplate(templateName);
             // 将模板和数据模型合并生成文件
