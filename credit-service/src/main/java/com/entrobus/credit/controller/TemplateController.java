@@ -65,16 +65,16 @@ public class TemplateController {
         map.put("borrowerFullName", name);//借款人全名
         map.put("lenderFullName", "中国建设银行股份有限公司佛山分行");//贷款人全称，将来可配置，目前“中国建设银行股份有限公司佛山分行”
 
-        map.put("borrowerCellphone", "12345678910");
-        map.put("borrowerIdCard", "4521553269482156132");
+        map.put("borrowerCellphone", "12345678910");//借款人手机号
+        map.put("borrowerIdCard", "4521553269482156132");//借款人证件号（身份证）
         map.put("money", "6000,000 元"); //借款金额
         map.put("capitalMoney", "叁拾万元整"); //中文大写金额，如：叁拾万元整
         map.put("term", "12个月");//借款期限
-        map.put("interestStartDay", "现在");
-        map.put("repaymentMethod", "按月付息");
+        map.put("interestStartDay", "自您提款成功 日起计收利息");//起息日
+        map.put("repaymentMethod", "按月付息");//还款方式
 
         map.put("appointPayeeAccount", "建设银行  4524");//指定收款账户，借款人的银行卡所属银行和卡号最后四位，例如：建设银行 2678
-        map.put("annualInterestRate", "年化利率");
+        map.put("annualInterestRate", "6%");//年化利率
         map.put("noOperationInvalidTime", "3个月");//无操作失效时间
 
         map.put("borrowerAddress", "借款人住址");//借款人住址
@@ -90,7 +90,7 @@ public class TemplateController {
         map.put("lenderPhone", "0757-82781212");//贷款人联系电话，将来可配置，目前“0757-82781212”
 
         //这里跟通讯地址有什么区别暂时不知道，但是注明了 从个人信用报告接口中返回
-        map.put("borrowerMailingAddress", "通讯地址");//乙方（借款人）邮寄地址，从个人信用报告接口中返回
+        map.put("borrowerMailingAddress", "邮寄地址");//乙方（借款人）邮寄地址，从个人信用报告接口中返回
 
         map.put("loanValidityPeriodStart", "2018年3月24日");//借款额度有效期开始日期，用户提交申请的当日日期
         map.put("loanValidityPeriodEnd", "2019年3月24日");//借款额度有效期结束日期，借款额度有效期开始日期 一年后
