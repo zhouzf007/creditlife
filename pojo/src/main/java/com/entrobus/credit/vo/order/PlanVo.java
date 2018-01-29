@@ -9,6 +9,16 @@ public class PlanVo {
     private String stateName;//
     private Integer state;//还款状态
     private Integer status;//阶段 0 未到期，1 当期，2 往期
+
+    public Integer getOverdue() {
+        return overdue;
+    }
+
+    public void setOverdue(Integer overdue) {
+        this.overdue = overdue;
+    }
+
+    private Integer overdue;//逾期天数
     private Long capital;//本金
 
     public Long getPrincipal() {
