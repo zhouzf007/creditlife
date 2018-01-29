@@ -200,7 +200,7 @@ public class OrdersServiceImpl implements OrdersService {
         order.setRole(userInfo.getRole());
         order.setAccount(userInfo.getDefualtAccount());
         //生成合同信息
-        if (StringUtils.isNotEmpty(vo.getSignature())){
+        if (StringUtils.isNotEmpty(vo.getSignature())) {
 
         }
         contract.setId(GUIDUtil.genRandomGUID());
@@ -212,7 +212,7 @@ public class OrdersServiceImpl implements OrdersService {
         this.insertSelective(order);
         Map rsMap = new HashMap<>();
         rsMap.put("applyNo", order.getApplyNo());
-        return WebResult.ok(rsMap);
+        return WebResult.ok((Object) rsMap);
     }
 
     public WebResult getUserOrderList(List<Integer> states, String orgId, Integer offset, Integer limit) throws Exception {
