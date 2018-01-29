@@ -8,6 +8,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +17,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.InputStream;
 import java.util.*;
 
+@RefreshScope
 @RestController
 public class FileServiceController {
 
@@ -125,6 +128,24 @@ public class FileServiceController {
         FileUploadResult fileUploadResult = new FileUploadResult();
         try {
             UploadResult uploadResult = fileService.uploadFile(inputStream,fileName);
+            BeanUtils.copyProperties(fileUploadResult,uploadResult);
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e);
+            fileUploadResult.setUploadSuccess(false);
+        }
+        return fileUploadResult;
+    }
+
+    /**
+     * 上传文件到文件服务器
+     * @param file
+     * @return
+     */
+    @RequestMapping("/uploadFile2FileServer")
+    public FileUploadResult uploadFile2FileServer(File file){
+        FileUploadResult fileUploadResult = new FileUploadResult();
+        try {
+            UploadResult uploadResult = fileService.uploadFile(file,"");
             BeanUtils.copyProperties(fileUploadResult,uploadResult);
         } catch (Exception e) {
             logger.error(e.getMessage(),e);
