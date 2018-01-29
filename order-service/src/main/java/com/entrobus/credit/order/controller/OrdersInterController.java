@@ -109,6 +109,10 @@ public class OrdersInterController {
         dtl.setScore(order.getCreditScore());
         dtl.setContractId(order.getContractId());
         dtl.setCreditReportId(order.getCreditReportId());
+        dtl.setAuditor(order.getAuditor());
+        dtl.setAuditTime(order.getAuditTime());
+        dtl.setLoanOperator(order.getLoanOperator());
+        dtl.setLoanTime(order.getLoanTime());
         dtl.setUserState(userInfo.getState());
         dtl.setReason(order.getReason());
         dtl.setState(order.getState());
@@ -121,7 +125,7 @@ public class OrdersInterController {
                 RepaymentPlanVo vo = new RepaymentPlanVo();
                 vo.setId(plan.getId());
                 vo.setMoney(AmountUtil.changeF2Y(plan.getPrincipal()));
-                vo.setRepayTime(plan.getPlanTime());
+                vo.setRepayTime(DateUtils.formatDate(plan.getPlanTime(),"yyyy-MM-dd"));
                 vo.setUpdateTime(plan.getUpdateTime());
                 vo.setOperator(plan.getUpdateOperator());
                 vo.setState(plan.getState());
@@ -179,7 +183,7 @@ public class OrdersInterController {
             vo.setState(order.getState());
             vo.setApplyNo(order.getApplyNo());
             vo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
-            vo.setApplyTime(order.getApplyTime());
+            vo.setApplyTime(DateUtils.formatDate(order.getApplyTime()));
             vo.setUpdateTime(order.getUpdateTime());
             vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsOrderList.add(vo);
@@ -242,6 +246,11 @@ public class OrdersInterController {
                 ordersService.updateByPrimaryKeySelective(loanOrder);
                 //生成订单实例
                 orderInstanceService.saveOrderInstance(loanOrder);
+            } else if (loanOrder.getState() == Constants.ORDER_STATE.OVERDUE && order.getState() == Constants.ORDER_STATE.PASS) {//
+                //当期结清，订单恢复正常状态
+                loanOrder.setState(Constants.ORDER_STATE.PASS);
+                loanOrder.setUpdateOperator(order.getUpdateOperator());
+                ordersService.updateByPrimaryKeySelective(loanOrder);
             } else {
                 return WebResult.error(WebResult.CODE_BUSI_DISPERMIT, "订单状态异常");
             }
@@ -255,8 +264,8 @@ public class OrdersInterController {
      * @param id
      * @return
      */
-    @GetMapping(path = "/order/{id}")
-    public Orders getOrder(@PathVariable("id") String id) {
+    @GetMapping(path = "/order")
+    public Orders getOrder(@RequestParam("id") String id) {
         return ordersService.selectByPrimaryKey(id);
     }
 

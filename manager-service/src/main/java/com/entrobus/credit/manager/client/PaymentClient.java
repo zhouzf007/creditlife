@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.client;
 
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
+import com.entrobus.credit.vo.order.OrderUpdateVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -35,8 +36,8 @@ public interface PaymentClient {
     @GetMapping("/api/presentRepaymentPlan")
     RepaymentPlan getPresentRepaymentPlan(@RequestParam("orderId") String orderId);
 
-    @PutMapping("/api/repaymentPlan")
-    WebResult updateRepaymentPlan(@RequestParam("id") String id, @RequestParam("state") Integer state);
+    @PutMapping(value = "/api/repaymentPlan",consumes = MediaType.APPLICATION_JSON_VALUE)
+    WebResult updateRepaymentPlan(@RequestParam("id") String id, @RequestBody OrderUpdateVo orderUpdateVo);
 
     @Component
     class PaymentClientFallback implements PaymentClient {
@@ -59,7 +60,7 @@ public interface PaymentClient {
         }
 
         @Override
-        public WebResult updateRepaymentPlan(String id, Integer state) {
+        public WebResult updateRepaymentPlan(String id, @RequestBody OrderUpdateVo orderUpdateVo) {
             return null;
         }
 

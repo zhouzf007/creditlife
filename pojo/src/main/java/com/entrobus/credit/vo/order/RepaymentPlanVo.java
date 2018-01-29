@@ -8,7 +8,7 @@ public class RepaymentPlanVo {
      * 供后台使用
      */
     private String id;
-    private Date repayTime;
+    private String repayTime;
     private String money;
     private String stateName;
     private Date updateTime;
@@ -32,11 +32,11 @@ public class RepaymentPlanVo {
         this.id = id;
     }
 
-    public Date getRepayTime() {
+    public String getRepayTime() {
         return repayTime;
     }
 
-    public void setRepayTime(Date repayTime) {
+    public void setRepayTime(String repayTime) {
         this.repayTime = repayTime;
     }
 

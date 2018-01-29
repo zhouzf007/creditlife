@@ -13,7 +13,7 @@ public interface OrderClient {
 
 
     @PutMapping(value = "/order")
-    void updateOrder(@RequestParam("id") String id, @RequestBody OrderUpdateVo order);
+    void updateOrder(@RequestBody OrderUpdateVo order);
 
     @GetMapping(path = "/order")
     Orders getOrder(@RequestParam("id") String id);
@@ -22,7 +22,7 @@ public interface OrderClient {
     class OrderClientFallback implements OrderClient {
 
         @Override
-        public void updateOrder(String id, OrderUpdateVo order) {
+        public void updateOrder(OrderUpdateVo order) {
             LOGGER.info("异常发生，进入fallback方法");
         }
 

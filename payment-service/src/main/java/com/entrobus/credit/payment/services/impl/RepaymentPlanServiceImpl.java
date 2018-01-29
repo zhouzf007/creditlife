@@ -107,7 +107,8 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public List<RepaymentPlan> getFinishedRepaymentPlans(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
+//        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
         return this.selectByExample(example);
     }
 

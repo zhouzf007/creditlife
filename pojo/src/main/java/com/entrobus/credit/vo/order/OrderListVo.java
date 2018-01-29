@@ -5,7 +5,7 @@ import java.util.Date;
 public class OrderListVo {
 
     private String id;
-    private Date applyTime;
+    private String applyTime;
     private String applyNo;
     private String money;
     private String userName;
@@ -30,11 +30,11 @@ public class OrderListVo {
         this.id = id;
     }
 
-    public Date getApplyTime() {
+    public String getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(Date applyTime) {
+    public void setApplyTime(String applyTime) {
         this.applyTime = applyTime;
     }
 

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 import java.util.*;
 
 @RestController
@@ -105,6 +106,25 @@ public class FileServiceController {
         FileUploadResult fileUploadResult = new FileUploadResult();
         try {
             UploadResult uploadResult = fileService.uploadNetworkFile(fileUrl,fileExt);
+            BeanUtils.copyProperties(fileUploadResult,uploadResult);
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e);
+            fileUploadResult.setUploadSuccess(false);
+        }
+        return fileUploadResult;
+    }
+
+    /**
+     * 上传文件输入流
+     * @param inputStream 文件输入流
+     * @param fileName 原始文件名(带后缀,如1.png,2.jpg)
+     * @return FileUploadResult 文件上传结果
+     */
+    @RequestMapping("/uploadFileInputStream")
+    public FileUploadResult uploadFile(InputStream inputStream, String fileName){
+        FileUploadResult fileUploadResult = new FileUploadResult();
+        try {
+            UploadResult uploadResult = fileService.uploadFile(inputStream,fileName);
             BeanUtils.copyProperties(fileUploadResult,uploadResult);
         } catch (Exception e) {
             logger.error(e.getMessage(),e);

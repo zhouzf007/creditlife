@@ -7,6 +7,7 @@ import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.CreditReportExample;
 import com.entrobus.credit.pojo.user.UserInfo;
+import com.entrobus.credit.user.client.BsStaticsClient;
 import com.entrobus.credit.user.dao.CreditReportMapper;
 import com.entrobus.credit.user.services.CreditReportService;
 import com.entrobus.credit.user.services.UserInfoService;
@@ -29,6 +30,9 @@ public class CreditReportServiceImpl implements CreditReportService {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private BsStaticsClient bsStaticsClient;
 
     private static final Logger logger = LoggerFactory.getLogger(CreditReportServiceImpl.class);
 
@@ -107,7 +111,8 @@ public class CreditReportServiceImpl implements CreditReportService {
         }
         if(StringUtils.isNotBlank(loginUser.getIdCard())){
             //@TODO 获取信用报告
-            String json = HttpClientUtil.doGet("http://creditlife.entrobus.com/api/get_report_and_score?idnumb=" + loginUser.getIdCard());
+            String url = bsStaticsClient.getCodeName(Constants.CODE_TYPE.THREE_URL, "CREDIT_REPORT");
+            String json = HttpClientUtil.doGet(url + loginUser.getIdCard());
             if(StringUtils.isNotBlank(json)){
                 Map map = (Map) JSONArray.parse(json);
                 if(map != null){

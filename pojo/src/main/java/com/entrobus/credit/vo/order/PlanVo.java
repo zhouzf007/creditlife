@@ -4,11 +4,29 @@ import java.util.Date;
 
 public class PlanVo {
 
-    private Long principalAndInterest;//应还本息
+    private Long principal;//应还本
+    private Long interest;//应还息
     private String stateName;//
     private Integer state;//还款状态
     private Integer status;//阶段 0 未到期，1 当期，2 往期
     private Long capital;//本金
+
+    public Long getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(Long principal) {
+        this.principal = principal;
+    }
+
+    public Long getInterest() {
+        return interest;
+    }
+
+    public void setInterest(Long interest) {
+        this.interest = interest;
+    }
+
     private Date dueTime;//应还日期
 
     public Integer getStatus() {
@@ -27,14 +45,6 @@ public class PlanVo {
         this.dueTime = dueTime;
     }
 
-
-    public Long getPrincipalAndInterest() {
-        return principalAndInterest;
-    }
-
-    public void setPrincipalAndInterest(Long principalAndInterest) {
-        this.principalAndInterest = principalAndInterest;
-    }
 
     public String getStateName() {
         return stateName;

@@ -84,16 +84,6 @@ public class OrderController extends ManagerBaseController {
     }
 
     /**
-     * 还款计划状态更新
-     * @return
-     */
-    @PutMapping("/repaymentPlan")
-    @RecordLog(desc = "修改还款状态")
-    public WebResult updatePaymentState(String id, Integer state) {
-        return paymentClient.updateRepaymentPlan(id,state);
-    }
-
-    /**
      * 还款订单详情
      *
      * @return
@@ -102,6 +92,21 @@ public class OrderController extends ManagerBaseController {
     public WebResult getRepaymentDetail(String id) {
         OrderDtlVo vo = orderClient.getOrderDtl(id);
         return WebResult.ok(vo);
+    }
+
+    /**
+     * 还款计划状态更新
+     *
+     * @return
+     */
+    @PutMapping("/repaymentPlan")
+    @RecordLog(desc = "修改还款状态")
+    public WebResult updatePaymentState(String id, Integer state) {
+        SysLoginUserInfo sys = getCurrLoginUser();
+        OrderUpdateVo vo = new OrderUpdateVo();
+        vo.setState(state);
+        vo.setUpdateOperator(sys.getUsername());
+        return paymentClient.updateRepaymentPlan(id, vo);
     }
 
 }
