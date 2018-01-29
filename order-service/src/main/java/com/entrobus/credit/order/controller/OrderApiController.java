@@ -125,9 +125,10 @@ public class OrderApiController {
             Date dueTime = plan.getPlanTime();
             if (DateUtils.getStartOfMonth(new Date()).after(dueTime)) {
                 vo.setStatus(Constants.PLAN_STATUS.PAST);
-            }
-            if (DateUtils.getStartOfMonth(new Date()).before(dueTime) && DateUtils.getEndDateTimeOfMonth(new Date()).after(dueTime)) {
-                vo.setStatus(Constants.PLAN_STATUS.PAST);
+            } else if (DateUtils.getStartOfMonth(new Date()).before(dueTime) && DateUtils.getEndDateTimeOfMonth(new Date()).after(dueTime)) {
+                vo.setStatus(Constants.PLAN_STATUS.PRESENT);
+            } else if (DateUtils.getMonth(new Date()) == DateUtils.getMonth(dueTime)) {
+                vo.setStatus(Constants.PLAN_STATUS.FEATURE);
             }
             vo.setState(plan.getState());
             vo.setStateName(cacheService.translate(Cachekey.Translation.REPAYMENT_STATE + plan.getState()));

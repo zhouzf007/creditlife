@@ -53,13 +53,21 @@ public class ProductApiController extends ManagerBaseController {
         List<Map> repayType = new ArrayList<>();
         List<String> usages = new ArrayList<>();
         List<Map> repaymentTerms = new ArrayList<>();
+        boolean type0flag = false;
+        boolean type1flag = false;
         for (int i = 0; i < termList.size(); i++) {
             LoanPeriodsRateVo term = termList.get(i);
             Map rm = new HashMap<>();
             terms.add(term.getPeriods() + "");
             rm.put("term", term.getPeriods());
-            rm.put("0", StringUtils.isEmpty(term.getInterestCapitalRate()) ? "" : term.getInterestCapitalRate());
-            rm.put("1", StringUtils.isEmpty(term.getMonthEqualRate()) ? "" : term.getMonthEqualRate());
+            if (StringUtils.isEmpty(term.getInterestCapitalRate())) {
+                rm.put("0", MoneyUtils.multiply(term.getInterestCapitalRate(), "10000").toString());
+                type0flag = true;
+            }
+            if (StringUtils.isEmpty(term.getMonthEqualRate())) {
+                rm.put("0", MoneyUtils.multiply(term.getMonthEqualRate(), "10000").toString());
+                type1flag = true;
+            }
             // 0=先息后本 1=等额还款
             repaymentTerms.add(rm);
         }
@@ -67,14 +75,19 @@ public class ProductApiController extends ManagerBaseController {
         productVo.setRepaymentTerm(repaymentTerms);
         productVo.setMin(1000l);
         productVo.setMax(3000l);
-        Map typeMap0 = new HashMap<>();
-        typeMap0.put("type", "0");
-        typeMap0.put("text", "先息后本");
-        Map typeMap1 = new HashMap<>();
-        typeMap1.put("type", "1");
-        typeMap1.put("text", "等额还款");
-        repayType.add(typeMap0);
-        repayType.add(typeMap1);// 0=先息后本 1=等额还款
+        // 0=先息后本 1=等额还款
+        if (type0flag) {
+            Map typeMap0 = new HashMap<>();
+            typeMap0.put("type", "0");
+            typeMap0.put("text", "先息后本");
+            repayType.add(typeMap0);
+        }
+        if (type1flag) {
+            Map typeMap1 = new HashMap<>();
+            typeMap1.put("type", "1");
+            typeMap1.put("text", "等额还款");
+            repayType.add(typeMap1);
+        }
         usages.add("个人消费");
         usages.add("装修");
         usages.add("旅游");
