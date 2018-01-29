@@ -28,10 +28,11 @@ public class FreemarkUtil {
         return txt;
     }
 
-    public final static boolean createWord(OutputStream os, Map dataMap, String templateName) {
+    public final static boolean write(OutputStream os, Map dataMap, String templateName) {
         try {
             Configuration configuration = new Configuration();
             configuration.setDefaultEncoding("UTF-8");
+//            configuration.setClassForTemplateLoading(TemplateLoader.class, "/templates/");//这里是指放在classes下
             configuration.setClassForTemplateLoading(WordUtils.class, "/templates/");//这里是指放在classes下
             // 获取模板
             Template template = configuration.getTemplate(templateName);

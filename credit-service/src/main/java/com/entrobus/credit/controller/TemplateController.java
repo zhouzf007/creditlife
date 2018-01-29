@@ -34,7 +34,7 @@ public class TemplateController {
             response.setContentType("application/msword");
             response.setHeader("Content-disposition", "attachment; filename=" + new String("借款合同.doc".getBytes("GB2312"), "ISO8859-1"));
             OutputStream os = response.getOutputStream();
-            FreemarkUtil.createWord(os,map,"loan_contract.ftl");
+            FreemarkUtil.write(os,map,"loan_contract.ftl");
         } catch (Exception e) {
             e.printStackTrace();
         }
