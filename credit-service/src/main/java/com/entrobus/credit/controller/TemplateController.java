@@ -87,7 +87,7 @@ public class TemplateController {
         map.put("lenderAddress", "广东省佛山市佛山大道南327号");//贷款人住址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalAddress", "广东省佛山市佛山大道南327号");//贷款人通讯地址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalCode", "528000");//贷款人通讯地址，将来可配置，目前“528000”
-        map.put("lenderPhone", "0757-82781212");//贷款人通讯地址，将来可配置，目前“528000”
+        map.put("lenderPhone", "0757-82781212");//贷款人联系电话，将来可配置，目前“0757-82781212”
 
         //这里跟通讯地址有什么区别暂时不知道，但是注明了 从个人信用报告接口中返回
         map.put("borrowerMailingAddress", "通讯地址");//乙方（借款人）邮寄地址，从个人信用报告接口中返回
