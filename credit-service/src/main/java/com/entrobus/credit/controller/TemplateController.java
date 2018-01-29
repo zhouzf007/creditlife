@@ -90,7 +90,7 @@ public class TemplateController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConversionUtil.deletedirectory(pdfVo.getDirectory());
+//            ConversionUtil.deletedirectory(pdfVo.getDirectory());
         }
         return uploadResult;
     }
