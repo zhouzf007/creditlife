@@ -167,7 +167,7 @@ public class UserController extends BaseController {
         }
         String name1 = (String) map.get("name");
         String idCard1 = (String) map.get("id_numb");
-        if(StringUtils.isBlank(name1) || StringUtils.isBlank(idCard1) || idCard1.length() != 18 || !name.equals(name1) || idCard.equals(idCard1)){
+        if(StringUtils.isBlank(name1) || StringUtils.isBlank(idCard1) || idCard1.length() != 18 || !name.equals(name1) || !idCard.equals(idCard1)){
             return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
         }
         UserInfo info = userInfoService.selectByPrimaryKey(userInfo.getId());
