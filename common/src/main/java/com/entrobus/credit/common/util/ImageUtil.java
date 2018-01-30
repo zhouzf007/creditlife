@@ -2,9 +2,12 @@ package com.entrobus.credit.common.util;
 
 import sun.misc.BASE64Encoder;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ImageUtil {
     /**
@@ -17,8 +20,12 @@ public class ImageUtil {
         InputStream inputStream = null;
         byte[] data = null;
         try {
-            inputStream = new FileInputStream(imgFile);
-            data = new byte[inputStream.available()];
+            URL url = new URL(imgFile);
+            HttpURLConnection httpUrl = (HttpURLConnection) url.openConnection();
+            httpUrl.connect();
+            BufferedInputStream bis = new BufferedInputStream(httpUrl.getInputStream());
+//            inputStream = new UR(imgFile);
+            data = new byte[bis.available()];
             inputStream.read(data);
             inputStream.close();
         } catch (IOException e) {

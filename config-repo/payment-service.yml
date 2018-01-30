@@ -1,5 +1,5 @@
 server:
-    port: 8193
+    port: 8293
 
 msg: payment-service
 
