@@ -14,7 +14,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableCircuitBreaker
 //@EnableBinding(MsgSubscribeChannel.class)
-@MapperScan(basePackages="com.entrobus.credit.contract.dao",sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages="com.entrobus.credit.contract.dao")
 public class CreditServiceApplication {
 
     public static void main(String[] args) {
