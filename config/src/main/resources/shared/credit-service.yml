@@ -8,7 +8,46 @@ eureka:
     metadata-map:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
-
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://119.29.177.249:3306/creditlife?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: phoenix
+    password: shangshangABCD123456
+    driver-class-name: com.mysql.jdbc.Driver
+#    druid 配置
+    druid:
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql
+          slow-sql-millis: 1000
+          log-slow-sql: true
+          merge-sql: true
+        slf4j:
+          statement-executable-sql-log-enable: true
+          enabled: true
+        wall:
+          enabled: true
+          config:
+            multi-statement-allow: true
+#     配置初始化大小、最小、最大
+      initial-size: 1
+      min-idle: 2
+      max-active: 5
+#      配置获取连接等待超时的时间
+      max-wait: 60000
+#     配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis:  60000
+      min-evictable-idle-time-millis: 120000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+#      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+#    配置mybatis mapper.xml
 security:
   user:
     name: user
