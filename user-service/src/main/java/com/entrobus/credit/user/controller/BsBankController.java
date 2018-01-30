@@ -29,8 +29,7 @@ public class BsBankController {
         map.put("cellphone", cellphone);
         map.put("idCard", idCard);
         map.put("bankId", bankId);
-        bsBankService.verify(map);
-        return WebResult.ok();
+        return bsBankService.verify(map);
     }
 
 }
