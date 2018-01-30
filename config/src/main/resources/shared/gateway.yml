@@ -61,3 +61,6 @@ zuul:
     payment-service:
       path: /payment/**
       sensitiveHeaders:
+    credit-service:
+      path: /credit/**
+      sensitiveHeaders:
