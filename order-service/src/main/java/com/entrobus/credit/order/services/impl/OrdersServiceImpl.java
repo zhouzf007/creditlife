@@ -1,5 +1,6 @@
 package com.entrobus.credit.order.services.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
@@ -203,7 +204,7 @@ public class OrdersServiceImpl implements OrdersService {
             contract.setUserId(order.getUserId());
             contract.setSignature(vo.getSignature());
             Map<String, String> map = createContract(vo, order, userInfo);
-            creditClient.saveContract(contract, map);
+            creditClient.saveContract(JSON.toJSONString(map),contract);
         } else {
             return WebResult.fail(WebResult.CODE_BUSI_DISPERMIT, "无效签名");
         }

@@ -4,7 +4,6 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.order.client.UserClient;
 import com.entrobus.credit.order.dao.OrderInstanceMapper;
-import com.entrobus.credit.order.services.ContractService;
 import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.pojo.order.*;
 import org.apache.commons.lang3.StringUtils;
@@ -20,9 +19,6 @@ import java.util.List;
 public class OrderInstanceServiceImpl implements OrderInstanceService {
     @Autowired
     private OrderInstanceMapper orderInstanceMapper;
-
-    @Autowired
-    private ContractService contractService;
 
     @Autowired
     private UserClient userClient;
@@ -104,11 +100,11 @@ public class OrderInstanceServiceImpl implements OrderInstanceService {
         instance.setReason(order.getReason());
         //合同信息
         instance.setContractId(order.getContractId());
-        Contract contract = contractService.selectByPrimaryKey(order.getContractId());
-        if (contract != null) {
-//          instance.setContractContent(contract.get);
-            instance.setContractUrl(contract.getContractUrl());
-        }
+//        Contract contract = contractService.selectByPrimaryKey(order.getContractId());
+//        if (contract != null) {
+////          instance.setContractContent(contract.get);
+//            instance.setContractUrl(contract.getContractUrl());
+//        }
 
         //信用报告
         CreditReport report = userClient.getCreditReport(order.getCreditReportId());

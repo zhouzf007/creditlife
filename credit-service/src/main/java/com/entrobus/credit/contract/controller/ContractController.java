@@ -1,5 +1,6 @@
 package com.entrobus.credit.contract.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.bean.FileUploadResult;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
@@ -26,8 +27,9 @@ public class ContractController {
     private FileServiceClient fileServiceClient;
 
     @PostMapping(path = "/contract")
-    public WebResult saveContract(Contract contract, Map<String, String> vo) {
-        FileUploadResult uploadResult = createPdf("loan_contract.ftl", "pdf/img", vo);
+    public WebResult saveContract(String vo, Contract contract) {
+        Map rs = JSON.parseObject(vo);
+        FileUploadResult uploadResult = createPdf("loan_contract.ftl", "pdf/img", rs);
         if (uploadResult.isUploadSuccess()) {
             contract.setContractUrl(uploadResult.getFileUrl());
         }
