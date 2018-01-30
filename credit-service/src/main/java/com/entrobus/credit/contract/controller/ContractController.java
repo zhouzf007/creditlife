@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Map;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/api")
 public class ContractController {
 
     @Autowired
@@ -42,7 +42,6 @@ public class ContractController {
         PdfVo pdfVo = null;
         try {
             pdfVo = PDFUtil.generateToFile(templateName, imageDiskPath, data);
-            ;
             uploadResult = fileServiceClient.uploadFile2FileServer(pdfVo.getFile());
         } catch (Exception e) {
             e.printStackTrace();

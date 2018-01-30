@@ -55,8 +55,12 @@
             -aw-top-pos: 0pt;
             -aw-wrap-type: inline;
         }
-        p{
-            margin-right: 2.54cm;
+        p.autograph_text{
+            margin: 0pt;
+            orphans: 0;
+            text-align: justify;
+            text-indent: 48pt;
+            widows: 0;
         }
     </style>
 </head>
@@ -389,21 +393,36 @@
     <p class="main_text">直接送达的，送达人当场在送达回证上记明情况之日为送达之日。</p>
     <p class="main_text">五、甲方确认：上述送达地址均系其真实填写，并明确知晓乙方或人民法院</p>
     <p class="main_text">(仲裁机构)按上述地址送达文书的法律后果。乙方已对相关条款进行了充分的 提示和说明。</p>
-    <p class="main_text"></p>
-    <p class="main_text"></p>
-    <p class="main_text"></p>
-    <p class="main_text"></p>
-    <p class="main_text"></p>
-    <p class="main_text"></p>
-    <p class="main_text"></p>
-    <p class="main_text"></p>
-    <p class="td_text">甲方（签字）：</p>
-    <p class="td_text">
-        <img  src="${borrowerAutograph}" width="271" height="350" alt=""  class="autograph"/>
-    </p>
-    <p class="main_text">&#160;</p>
-    <p class="td_text">乙方（公章或负责人签字）：</p>
-    <p class="main_text" style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0"> 年 &#160; 月 &#160; 日</p>
+    <p class="autograph_text">&#160;</p>
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt">
+        <tbody>
+        <tr>
+            <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
+                <p class="autograph_text">甲方（签字）：</p>
+            </td>
+            <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
+                <p class="autograph_text">乙方（公章或负责人签字）：</p>
+            </td>
+        </tr>
+        <tr style="height:124.75pt">
+            <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
+                <img src="${borrowerAutograph}" width="129" height="167" alt="" style=""/>
+            </td>
+            <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
+                <p  class="autograph_text"> </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
+                <p class="autograph_text">&#160;&#160;&#160;&#160;年&#160;月&#160;日 </p>
+            </td>
+            <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
+                <p class="autograph_text">&#160;&#160;&#160;&#160;年&#160;月&#160;日 </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="autograph_text"> &#160;</p>
 </div>
 
 </body>
