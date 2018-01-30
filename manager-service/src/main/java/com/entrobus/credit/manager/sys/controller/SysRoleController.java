@@ -45,6 +45,7 @@ public class SysRoleController extends ManagerBaseController {
     public WebResult add(SysRoleExt role,CommonParameter commonParameter){
         role.setCreateUser(getLoginUserId());
         role.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
+        role.setOrgId(getCurrLoginUser().getOrgId());//关联组织ID
         role.setPlatform(commonParameter.getPlatform());
         sysRoleService.save(role);
         return WebResult.ok("添加成功");
