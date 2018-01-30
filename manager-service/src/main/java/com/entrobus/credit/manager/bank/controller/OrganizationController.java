@@ -3,6 +3,7 @@ package com.entrobus.credit.manager.bank.controller;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.bank.service.OrganizationService;
 import com.entrobus.credit.manager.common.bean.OrganizationExt;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
@@ -67,9 +68,13 @@ public class OrganizationController extends ManagerBaseController{
      * @return
      */
     @GetMapping("")
-    public WebResult list(Integer offset, Integer limit) {
+    public WebResult list(Integer offset, Integer limit, String name) {
         OrganizationExample example = new OrganizationExample();
-        example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        OrganizationExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        if(ConversionUtil.isNotEmptyParameter(name)){
+            criteria.andNameLike("%"+ name +"%");
+        }
         example.setOrderByClause(" create_time desc ");
         PageHelper.startPage(offset,limit);
         List<Organization> organizationList = organizationService.selectByExample(example);
