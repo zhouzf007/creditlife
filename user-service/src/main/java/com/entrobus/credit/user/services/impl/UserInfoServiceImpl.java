@@ -167,7 +167,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     public Map isOwner(String cellphone) {
         Map<String, String> m = new HashMap<>();
         m.put("cellphone", cellphone);
-        String json = HttpClientUtil.doPost("http://creditlife.entrobus.com/api/v0.1/owner_query/match_or_not", m);
+        String json = HttpClientUtil.doPost("http://creditlife-test.entrobus.com/api/v0.1/owner_query/match_or_not", m);
         if(StringUtils.isNotBlank(json)){
             Map map = (Map) JSONArray.parse(json);
             return (Map) map.get("result");

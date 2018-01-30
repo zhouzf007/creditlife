@@ -1,14 +1,12 @@
-package com.entrobus.credit.util;
+package com.entrobus.credit.contract.util;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.apache.commons.lang.WordUtils;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Map;
 

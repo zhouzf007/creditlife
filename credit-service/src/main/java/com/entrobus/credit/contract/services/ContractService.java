@@ -1,4 +1,4 @@
-package com.entrobus.credit.order.services;
+package com.entrobus.credit.contract.services;
 
 import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.pojo.order.ContractExample;

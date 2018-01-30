@@ -197,10 +197,10 @@ public class UserController extends BaseController {
                     return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
                 }
             }
-            Map map = userInfoService.isOwner(cellphone);
-            if(map == null || StringUtils.isBlank((String) map.get("name"))){
-                return WebResult.fail(WebResult.CODE_OPERATION, "抱歉，您非越秀地产业主。暂时不提供此服务");
-            }
+//            Map map = userInfoService.isOwner(cellphone);
+//            if(map == null || StringUtils.isBlank((String) map.get("name"))){
+//                return WebResult.fail(WebResult.CODE_OPERATION, "抱歉，您非越秀地产业主。暂时不提供此服务");
+//            }
         }
         msgClient.sendVerificationCode(cellphone, "");
         return WebResult.ok();
@@ -289,7 +289,7 @@ public class UserController extends BaseController {
         userAccount.setId(id);
         userAccount.setState(Constants.ACCOUNT_STATUS.NORMAL);
         userAccount.setUpdateTime(new Date());
-        userAccount.setUpdateOperator(loginUser.getId());
+        userAccount.setUpdateOperator(loginUser.getRealName());
         userAccountService.updateByPrimaryKeySelective(userAccount);
         userCacheService.refreshUserCache(loginUser.getId());
         CacheService.delete(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);

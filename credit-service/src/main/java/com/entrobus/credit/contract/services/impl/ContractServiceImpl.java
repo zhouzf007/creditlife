@@ -1,8 +1,8 @@
-package com.entrobus.credit.order.services.impl;
+package com.entrobus.credit.contract.services.impl;
 
 import com.entrobus.credit.common.util.GUIDUtil;
-import com.entrobus.credit.order.dao.ContractMapper;
-import com.entrobus.credit.order.services.ContractService;
+import com.entrobus.credit.contract.dao.ContractMapper;
+import com.entrobus.credit.contract.services.ContractService;
 import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.pojo.order.ContractExample;
 import org.apache.commons.lang3.StringUtils;

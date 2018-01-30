@@ -1,4 +1,4 @@
-package com.entrobus.credit.client;
+package com.entrobus.credit.contract.client;
 
 import com.entrobus.credit.common.bean.FileUploadResult;
 import org.slf4j.Logger;

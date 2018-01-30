@@ -34,7 +34,7 @@ public interface OrdersService {
 
     int insertSelective(Orders record);
 
-    WebResult applyOrder(ApplyVo vo, CacheUserInfo userInfo);
+    WebResult applyOrder(ApplyVo vo, CacheUserInfo userInfo) throws Exception;
 
     List<Orders> getUserOrders(String userId);
 

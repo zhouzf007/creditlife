@@ -1,13 +1,9 @@
-package com.entrobus.credit.util;
+package com.entrobus.credit.contract.util;
 
-import com.entrobus.credit.client.FileServiceClient;
-import com.entrobus.credit.common.bean.FileUploadResult;
-import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.lowagie.text.DocumentException;
 import freemarker.template.TemplateException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.File;
@@ -15,9 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -5,12 +5,10 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.DateUtils;
-import com.entrobus.credit.common.util.MoneyUtils;
 import com.entrobus.credit.order.channel.GenSubOrderPublishChannel;
 import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
 import com.entrobus.credit.order.client.UserClient;
-import com.entrobus.credit.order.services.ContractService;
 import com.entrobus.credit.order.services.OrderCacheService;
 import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.order.services.OrdersService;
@@ -46,9 +44,6 @@ public class OrdersInterController {
 
     @Autowired
     UserClient userClient;
-
-    @Autowired
-    ContractService contractService;
 
     @Autowired
     PaymentClient paymentClient;

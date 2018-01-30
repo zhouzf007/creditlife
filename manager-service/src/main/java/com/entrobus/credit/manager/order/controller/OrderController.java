@@ -105,7 +105,7 @@ public class OrderController extends ManagerBaseController {
         SysLoginUserInfo sys = getCurrLoginUser();
         OrderUpdateVo vo = new OrderUpdateVo();
         vo.setState(state);
-        vo.setUpdateOperator(sys.getUsername());
+        vo.setUpdateOperator(sys.getRealName());
         return paymentClient.updateRepaymentPlan(id, vo);
     }
 

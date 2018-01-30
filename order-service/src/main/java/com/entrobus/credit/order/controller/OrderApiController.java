@@ -78,7 +78,7 @@ public class OrderApiController {
      * @return
      */
     @PostMapping(value = "/order", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResult apply(@RequestBody ApplyVo vo) {
+    public WebResult apply(@RequestBody ApplyVo vo) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(vo.getToken());
         if (userInfo == null) {
             return WebResult.fail("用户未登录");

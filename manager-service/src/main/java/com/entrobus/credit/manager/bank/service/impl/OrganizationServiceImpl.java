@@ -178,7 +178,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
         //修改资金方
         organizationExt.setUpdateTime(new Date());
-        organizationExt.setUpdateOperator(userInfo.getId()+"");
+        organizationExt.setUpdateOperator(userInfo.getRealName());
         this.updateByPrimaryKeySelective(organizationExt);
         //修改对应账号
         SysUser sysUser = new SysUser();

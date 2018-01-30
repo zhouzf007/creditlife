@@ -1,4 +1,4 @@
-package com.entrobus.credit.util;
+package com.entrobus.credit.contract.util;
 
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.lowagie.text.DocumentException;
