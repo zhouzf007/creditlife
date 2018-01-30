@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import java.util.Map;
 public interface CreditClient {
 
     @PostMapping(value = "/api/contract", consumes = MediaType.APPLICATION_JSON_VALUE)
-    Contract saveContract(@RequestBody Contract contract, @RequestBody Map<String, String> vo);
+    Contract saveContract(@RequestParam("vo") String vo, @RequestBody Contract contract);
 
 
     @Component
@@ -27,7 +28,7 @@ public interface CreditClient {
         private static final Logger LOGGER = LoggerFactory.getLogger(CreditClientFallback.class);
 
         @Override
-        public Contract saveContract(Contract contract, Map<String, String> vo) {
+        public Contract saveContract(String voJString, Contract contract) {
             return null;
         }
 
