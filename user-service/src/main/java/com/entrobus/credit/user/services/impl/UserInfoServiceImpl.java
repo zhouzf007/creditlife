@@ -10,6 +10,7 @@ import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
+import com.entrobus.credit.user.client.BsStaticsClient;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserAccountInfo;
 import com.entrobus.credit.user.dao.UserInfoMapper;
@@ -39,6 +40,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private BsStaticsClient bsStaticsClient;
 
     private static final Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
@@ -167,7 +171,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     public Map isOwner(String cellphone) {
         Map<String, String> m = new HashMap<>();
         m.put("cellphone", cellphone);
-        String json = HttpClientUtil.doPost("http://creditlife-test.entrobus.com/api/v0.1/owner_query/match_or_not", m);
+        String url = bsStaticsClient.getCodeName(Constants.CODE_TYPE.THREE_URL, "OWNER_QUERY_URL");
+        String json = HttpClientUtil.doPost(url, m);
         if(StringUtils.isNotBlank(json)){
             Map map = (Map) JSONArray.parse(json);
             return (Map) map.get("result");

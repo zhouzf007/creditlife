@@ -13,10 +13,7 @@ import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
-import com.entrobus.credit.user.services.CreditReportService;
-import com.entrobus.credit.user.services.UserAccountService;
-import com.entrobus.credit.user.services.UserCacheService;
-import com.entrobus.credit.user.services.UserInfoService;
+import com.entrobus.credit.user.services.*;
 import com.entrobus.credit.user.utils.ShiroUtils;
 import com.entrobus.credit.vo.order.CreditReportVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
@@ -57,6 +54,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private BsBankService bsBankService;
 
     @GetMapping(value = "/login")
     public WebResult login(String cellphone, String pwd) {
@@ -245,6 +245,15 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
+        Map<String, String> m = new HashMap<>();
+        m.put("name", vo.getName());
+        m.put("cellphone", vo.getCellphone());
+        m.put("idCard", userInfo.getIdCard());
+        m.put("bankId", vo.getAccount());
+        WebResult w = bsBankService.verify(m);
+        if(!w.get(WebResult.CODE).equals("0")){
+            return WebResult.fail(WebResult.CODE_OPERATION, "请使用您本人的银行卡");
+        }
         //已添加
         UserAccountExample example = new UserAccountExample();
         example.createCriteria().andUserIdEqualTo(userInfo.getId()).andAccountEqualTo(vo.getAccount()).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
