@@ -43,7 +43,21 @@ public class BsBankServiceImpl implements BsBankService {
         Map<String,Object> rmap = bankFourClient.verify(map);
         if(rmap!= null){
             if(rmap.get("code").equals("00")){
-                return WebResult.ok();
+                if (rmap.get("data") != null){
+                    Map<String,Object> data = (Map<String, Object>) rmap.get("data");
+                    Map<String, Object> product = data == null ? null : (Map<String, Object>)data.get("product");
+                    String result = product == null ? null : (String) product.get("result");
+                    if (Objects.equals(result,"00")){
+                        return WebResult.ok("验证成功");
+                    }else if (Objects.equals(result,"01")){
+                        return WebResult.fail("验证失败，可能原因：您输入的信息与银行卡预留信息不符。");
+                    }else if (Objects.equals(result,"11")){
+                        return WebResult.fail("验证失败，可能原因：卡挂失、卡冻结或银行卡未开通相关支付功能，请咨询发卡行确认。");
+                    }else {
+                        return WebResult.fail("验证失败，可能原因：信息输入格式错误。");
+                    }
+
+                }
             }else if(rmap.get("code").equals("9000")){
                 token = login();
                 if(StringUtils.isNotBlank(token)){

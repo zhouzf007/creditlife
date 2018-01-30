@@ -987,7 +987,7 @@
             style=" font-size:12pt">甲方</span><span style=" font-size:12pt">（签字）： </span>
     </p>
     <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><img
-            src="data:image/png;base64,${borrowerAutograph}" width="271" height="350" alt=""
+            src="${borrowerAutograph}" width="271" height="350" alt=""
             style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline"></img>
     </p>
     <p style="margin:0pt; orphans:0; text-align:justify; widows:0"><span
