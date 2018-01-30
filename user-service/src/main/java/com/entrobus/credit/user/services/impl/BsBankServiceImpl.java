@@ -49,12 +49,12 @@ public class BsBankServiceImpl implements BsBankService {
                     String result = product == null ? null : (String) product.get("result");
                     if (Objects.equals(result,"00")){
                         return WebResult.ok("验证成功");
-                    }else if (Objects.equals(result,"01")){
-                        return WebResult.fail("验证失败，可能原因：您输入的信息与银行卡预留信息不符。");
+                    }else if (Objects.equals(result,"10")){
+                        return WebResult.fail("验证失败，可能原因：信息输入格式错误。");
                     }else if (Objects.equals(result,"11")){
                         return WebResult.fail("验证失败，可能原因：卡挂失、卡冻结或银行卡未开通相关支付功能，请咨询发卡行确认。");
                     }else {
-                        return WebResult.fail("验证失败，可能原因：信息输入格式错误。");
+                        return WebResult.fail("验证失败，可能原因：您输入的信息与银行卡预留信息不符。");
                     }
 
                 }
