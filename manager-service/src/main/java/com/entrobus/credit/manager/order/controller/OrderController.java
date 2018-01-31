@@ -34,8 +34,9 @@ public class OrderController extends ManagerBaseController {
      * 订单列表
      */
     @GetMapping("/orderList")
-    public WebResult getOrderList(Integer offset, Integer limit, String states, String orgId) {
-        return orderClient.getOrderList(states, orgId, offset, limit);
+    public WebResult getOrderList(Integer offset, Integer limit, String states) {
+        SysLoginUserInfo sys=getCurrLoginUser();
+        return orderClient.getOrderList(states, sys.getOrgId(), offset, limit);
     }
 
     /**
@@ -79,8 +80,9 @@ public class OrderController extends ManagerBaseController {
      * @return
      */
     @GetMapping("/repayment/list")
-    public WebResult getRepaymentList(Integer offset, Integer limit, String states, String orgId) {
-        return orderClient.getOrderList(states, orgId, offset, limit);
+    public WebResult getRepaymentList(Integer offset, Integer limit, String states) {
+        SysLoginUserInfo sys=getCurrLoginUser();
+        return orderClient.getOrderList(states, sys.getOrgId(), offset, limit);
     }
 
     /**

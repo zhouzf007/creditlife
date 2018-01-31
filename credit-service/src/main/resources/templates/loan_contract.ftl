@@ -5,35 +5,40 @@
     <meta name="generator" content="Aspose.Words for .NET 15.1.0.0"></meta>
     <title></title>
     <style type="text/css">
+        <#--页面属性，纸张大小、页边距-->
         @page {
             size: a4;
-            /*margin:0;*/
-            /*padding: 3.18cm  2.54cm;*/
+            margin: 3.18cm  2.54cm;
         }
         body {
             font-family: SimSun;
         }
-        /*div.page_body{*/
-            /*!*width: 210mm;*!*/
+        div.page_body{
+            /*width: 210mm;*/
             /*margin: 3.18cm  2.54cm;*/
-        /*}*/
-
+            padding: 0;
+            border: 0;
+        }
+        p{
+            line-height: 1;
+        }
         .main_title {
-            margin: 0pt;
+            margin: 0;
             text-align: center;
             font-size: 12pt;
         }
         .main_text {
-            margin: 0pt;
+            margin: 0;
             text-indent: 24pt;
             font-size: 12pt;
         }
         .td_text {
-            margin: 0pt;
+            margin: 0;
             orphans: 0;
             text-align: justify;
             widows: 0;
             font-size: 12pt;
+            /*font-family: Arial;*/
         }
         .emphasize_text {
             font-size: 12pt;
@@ -59,7 +64,8 @@
             margin: 0pt;
             orphans: 0;
             text-align: justify;
-            text-indent: 48pt;
+            /*text-indent: 48pt;*/
+            text-indent: 0;
             widows: 0;
         }
     </style>
@@ -324,7 +330,7 @@
     <p class="main_text">二、甲方有权签署本合同。</p>
     <p class="main_text  emphasize_text">三、甲方已阅读本合同所有条款，并已特别注意《中国建设银行个人消费额度借款合同》第二至十二条、第十四条以及第十七条等内容。乙方已应甲方要求对相关条款予以详细说明。甲方对所有条款的含义及相应的法律后果已全部通晓并充分理解，甲方同意遵守所有条款，自愿承担可能出现的相关风险。</p>
     <p class="main_text">四、甲方声明在订立本合同时其自身及重要关联方不存在任何违反环境和社会风险管理法律、法规与规章的行为或情形，并且承诺本合同订立后加强自身及其重要关联方的环境和社会风险管理，严格遵守有关环境和社会风险管理的法律、法规与规章，杜绝在建设、生产、经营活动中给环境和社会带来危害及相关风险（包括但不限于与耗能、污染、土地、健康、安全、移民安置、生态保护、节能减排、气候变化等有关的环境与社会问题）。甲方认可，乙方有权对甲方的环境和社会风险管理情况予以监督，并有权要求甲方提交环境和社会风险报告。如果甲方上述声明虚假或者上述承诺未被履行，或者甲方可能造成环境和社会风险，乙方有权停止对甲方的授信（包括但不限于拒绝发放贷款、提供融资、开立保函后信用证或延缓承兑票等），或者宣布债权（包括但不限于贷款、融资、已经或可能发生的垫款等）本息提前到期，或者采取本合同约定或法律允许的其他救济措施。</p>
-    <p class="main_text">本条款为编号<span class="fill_in_text">440667358-9420-20174024546</span>《个人消费额度借款合同》不可分割的组成部分</p>
+    <p class="main_text">本条款为编号<span class="fill_in_text">${contractNumber}</span>《个人消费额度借款合同》不可分割的组成部分</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十条</span>&#160; 立约人信息 </p>
     <p class="main_text">甲方(借款人)信息：</p>
@@ -343,7 +349,7 @@
     <p class="main_text">其他信息：<span class="fill_in_text"></span></p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十一条</span>&#160; 对第一条的约定  </p>
-    <p class="main_text">乙方向甲方提供借款额度人民币(大写)叁拾万元整元。本借款额度为非承诺性额度，甲方申请使用借款应经乙方审查同意，乙方有权对借款额度进行重新确定。</p>
+    <p class="main_text">乙方向甲方提供借款额度人民币(大写)<span class="fill_in_text">${capitalMoney}</span>元。本借款额度为非承诺性额度，甲方申请使用借款应经乙方审查同意，乙方有权对借款额度进行重新确定。</p>
     <p class="main_text"><span class="clauses_text">第二十二条</span>&#160; 对第二条的约定  </p>
     <p class="main_text">借款额度有效期间为${loanValidityPeriodStart}至${loanValidityPeriodEnd}。本合同项下的第一笔借款实际放款的日期在本条约定的借款额度有效期的起始日期之后的，借款额度有效期间的起始日为第一笔借款实际放款之日，到期日相应向后顺延。</p>
     <p class="main_text">在借款额度有效期间终止时，未使用的借款额度自动失效。</p>
@@ -360,19 +366,19 @@
     <p class="main_text">贰：柜台或自助渠道还款方式。</p>
     <p class="main_text">二、关于提前还本违约金的约定。甲方提前还本的，按照下列第 贰 项约定办理：</p>
     <p class="main_text">壹：无须支付提前还本违约金。</p>
-    <p class="main_text">贰：应支付提前还本违约金。提前还本违约金计算方法为：违约金=提前还贷金额×违约金率，违约金率为1‰ 。</p>
-    <p class="main_text">三、关于缩短借款期限违约金的约定为：贷款人对借款人缩短借款期限不收取违约金。</p>
+    <p class="main_text">贰：应支付提前还本违约金。提前还本违约金计算方法为：<span class="fill_in_text">违约金=提前还贷金额×违约金率，违约金率为1‰ </span>。 </p>
+    <p class="main_text">三、关于缩短借款期限违约金的约定为：<span class="fill_in_text">贷款人对借款人缩短借款期限不收取违约金</span>。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十六条</span>&#160; 对第十一条的约定 </p>
-    <p class="main_text">关于甲方未在合同约定的期限内向乙方提交借款用途证明材料的约定。对于未在合同约定期限内提交用途证明材料的单笔借款，甲方应支付违约金，违约金计算方法为：此栏空自。</p>
+    <p class="main_text">关于甲方未在合同约定的期限内向乙方提交借款用途证明材料的约定。对于未在合同约定期限内提交用途证明材料的单笔借款，甲方应支付违约金，违约金计算方法为：<span class="fill_in_text">&#160;&#160;</span>。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十七条</span>&#160; 双方间的其他约定 </p>
-    <p class="main_text">一、甲方与乙方关于费用承担的约定为：乙方为实现债权而实际发生的全部费用(包括但不限于诉讼费、仲裁费、财产保全费、差旅费、执行费、评估费、拍卖费、公证费、送达费、公告费、律师费等)，由甲方承担。</p>
-    <p class="main_text">二、甲方与乙方约定的其他条款为：当借款人离开所在单位时，应及时通知货款人，并提前结清贷款或者增加贷款人认可的风险缓释措施。</p>
+    <p class="main_text">一、甲方与乙方关于费用承担的约定为：<span class="fill_in_text">乙方为实现债权而实际发生的全部费用(包括但不限于诉讼费、仲裁费、财产保全费、差旅费、执行费、评估费、拍卖费、公证费、送达费、公告费、律师费等)，由甲方承担</span>。</p>
+    <p class="main_text">二、甲方与乙方约定的其他条款为：<span class="fill_in_text">当借款人离开所在单位时，应及时通知货款人，并提前结清贷款或者增加贷款人认可的风险缓释措施</span>。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十八条</span>&#160; 对第十四条的约定 </p>
     <p class="main_text">本合同适用中华人民共和国法律。</p>
-    <p class="main_text">凡因本合同引起的或与本合同有关的任何争议，可以通过协商解决，协商不成，按以下第 壹 种方式解决；</p>
+    <p class="main_text">凡因本合同引起的或与本合同有关的任何争议，可以通过协商解决，协商不成，按以下第<span class="fill_in_text"> 壹 </span>种方式解决；</p>
     <p class="main_text">壹：向乙方住所地人民法院起诉。</p>
     <p class="main_text">贰：提交<span class="fill_in_text">&#160;&#160;</span>仲裁委员会(仲裁地点为<span class="fill_in_text">&#160;&#160;</span>)，按照申请仲裁时该会现行有效的仲裁规则进行仲裁。仲裁裁决是终局的，对双方均有约束力。</p>
     <p class="main_text">在诉讼或仲裁期间，本合同不涉及争议部分的条款仍须履行。</p>
@@ -388,12 +394,11 @@
     <p class="main_text">电子邮箱 <span class="fill_in_text"></span>&#160;&#160;微信号 <span class="fill_in_text"></span></p>
     <p class="main_text">二、上述送达地址持续适用于合同履行期间、履行本合同发生争议进入民事诉讼程序(包括一审、二审、再审、执行程序和特别程序)或仲裁阶段后，人民法院或仲裁机构向甲方送达各类法律文书。在合同履行期间，乙方向甲方送达催收债务函、宣布贷款提前到期通知等文书同样适用该送达地址。</p>
     <p class="main_text">三、甲方对其送达地址作出变更的，应自变更之日起五个工作日内将变更后的送达地址书面告知乙方，否则送达地址仍以本合同载明为准。</p>
-    <p class="main_text">四、因甲方确认的送达地址不准确、送达地址变更后未及时依约告知乙方、甲方本人或指定的接收人拒绝签收等情形，导致文书未能被甲方实际接收的，甲</p>
-    <p class="main_text">方应自行承担有效送达的法律后果。邮寄送达的，以文书退回之日视为送达之日；</p>
-    <p class="main_text">直接送达的，送达人当场在送达回证上记明情况之日为送达之日。</p>
-    <p class="main_text">五、甲方确认：上述送达地址均系其真实填写，并明确知晓乙方或人民法院</p>
-    <p class="main_text">(仲裁机构)按上述地址送达文书的法律后果。乙方已对相关条款进行了充分的 提示和说明。</p>
+    <p class="main_text">四、因甲方确认的送达地址不准确、送达地址变更后未及时依约告知乙方、甲方本人或指定的接收人拒绝签收等情形，导致文书未能被甲方实际接收的，甲方应自行承担有效送达的法律后果。邮寄送达的，以文书退回之日视为送达之日；直接送达的，送达人当场在送达回证上记明情况之日为送达之日。</p>
+    <p class="main_text">五、甲方确认：上述送达地址均系其真实填写，并明确知晓乙方或人民法院(仲裁机构)按上述地址送达文书的法律后果。乙方已对相关条款进行了充分的提示和说明。</p>
     <p class="autograph_text">&#160;</p>
+    <#-- 甲乙方签字区左右分布 start -->
+<#--
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt">
         <tbody>
         <tr>
@@ -422,7 +427,20 @@
         </tr>
         </tbody>
     </table>
-    <p class="autograph_text"> &#160;</p>
+     <p class="autograph_text"> &#160;</p>
+-->
+    <#-- 甲乙方签字区左右分布 end -->
+
+    <#-- 甲乙方签字区 上下 分布 start -->
+    <p class="td_text">甲方（签字）：</p>
+    <p class="td_text">
+        <img  src="${borrowerAutograph}" width="129" height="167" alt=""  class="autograph"/>
+    </p>
+    <p class="main_text">&#160;</p>
+    <p class="td_text">乙方（公章或负责人签字）：</p>
+    <img  src="" width="129" height="100" alt=""  class="autograph"/>
+    <p class="main_text" style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0">&#160;&#160;&#160;&#160;年 &#160;&#160;月 &#160;&#160;日</p>
+    <#-- 甲乙方签字区 上下 分布 end -->
 </div>
 
 </body>

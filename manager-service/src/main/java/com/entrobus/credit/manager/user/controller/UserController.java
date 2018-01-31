@@ -29,7 +29,7 @@ public class UserController extends ManagerBaseController {
 
 
     @GetMapping("/userOrderList")
-    public WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) {
+    public WebResult getUserOrderList(Integer state,Integer offset, Integer limit) {
         return orderClient.getUserOrderList(state, getCurrLoginUser().getOrgId(), offset, limit);
     }
 
