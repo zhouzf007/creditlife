@@ -960,52 +960,52 @@ public class OrderInstanceExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreEqualTo(Integer value) {
+        public Criteria andCreditScoreEqualTo(Double value) {
             addCriterion("credit_score =", value, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreNotEqualTo(Integer value) {
+        public Criteria andCreditScoreNotEqualTo(Double value) {
             addCriterion("credit_score <>", value, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreGreaterThan(Integer value) {
+        public Criteria andCreditScoreGreaterThan(Double value) {
             addCriterion("credit_score >", value, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCreditScoreGreaterThanOrEqualTo(Double value) {
             addCriterion("credit_score >=", value, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreLessThan(Integer value) {
+        public Criteria andCreditScoreLessThan(Double value) {
             addCriterion("credit_score <", value, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreLessThanOrEqualTo(Integer value) {
+        public Criteria andCreditScoreLessThanOrEqualTo(Double value) {
             addCriterion("credit_score <=", value, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreIn(List<Integer> values) {
+        public Criteria andCreditScoreIn(List<Double> values) {
             addCriterion("credit_score in", values, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreNotIn(List<Integer> values) {
+        public Criteria andCreditScoreNotIn(List<Double> values) {
             addCriterion("credit_score not in", values, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreBetween(Integer value1, Integer value2) {
+        public Criteria andCreditScoreBetween(Double value1, Double value2) {
             addCriterion("credit_score between", value1, value2, "creditScore");
             return (Criteria) this;
         }
 
-        public Criteria andCreditScoreNotBetween(Integer value1, Integer value2) {
+        public Criteria andCreditScoreNotBetween(Double value1, Double value2) {
             addCriterion("credit_score not between", value1, value2, "creditScore");
             return (Criteria) this;
         }
