@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -120,9 +121,19 @@ public class CreditReportServiceImpl implements CreditReportService {
                     if(StringUtils.isNotBlank(msg) && msg.equals("success")){
                         Map rmap = (Map) map.get("result");
                         if(rmap != null){
-                            Integer creditScore = (Integer) rmap.get("score");
+                            Double creditScore = null;
+                            try {
+                                creditScore = ((BigDecimal) rmap.get("score")).doubleValue();
+                            } catch (Exception e) {
+                                creditScore = 0d;
+                            }
                             String reportUrl = (String) rmap.get("url_report");
-                            Long quota = (Long) rmap.get("max_loan");
+                            Long quota = null;
+                            try {
+                                quota = ((Integer) rmap.get("max_loan")).longValue();
+                            } catch (Exception e) {
+                                quota = 0l;
+                            }
                             CreditReport cr=new CreditReport();
                             cr.setUserId(loginUser.getId());
                             cr.setId(GUIDUtil.genRandomGUID());
