@@ -1,6 +1,10 @@
 package com.entrobus.credit.vo.contract;
 
 public class ContractFillVo {
+
+    private String orderId;//
+    private String userId;//
+    private String creditReportId;//
     private String signature;//签名
     private String contractNumber;//合同编号，与银行管理后台显示的编号一致
     private String borrowerFullName;//借款人全名
@@ -29,6 +33,30 @@ public class ContractFillVo {
     private String loanValidityPeriodStart;//借款额度有效期开始日期，用户提交申请的当日日期
     private String loanValidityPeriodEnd;//借款额度有效期结束日期，借款额度有效期开始日期 一年后
     private String borrowerAutograph;//签名图片 使用base64编码
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getCreditReportId() {
+        return creditReportId;
+    }
+
+    public void setCreditReportId(String creditReportId) {
+        this.creditReportId = creditReportId;
+    }
 
     public String getSignature() {
         return signature;

@@ -2,22 +2,21 @@ package com.entrobus.credit.manager.order.controller;
 
 import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.manager.client.OrderClient;
 import com.entrobus.credit.manager.client.PaymentClient;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
-import com.entrobus.credit.vo.order.*;
-import com.entrobus.credit.vo.order.UserOrderListVo;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.entrobus.credit.vo.order.OrderDtlVo;
+import com.entrobus.credit.vo.order.OrderUpdateVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.util.*;
 
 @RefreshScope
 @RestController
@@ -67,9 +66,9 @@ public class OrderController extends ManagerBaseController {
         order.setLoanTimeStr(loanTime);
         order.setActualMoney(money);
         order.setOrgId(sys.getOrgId());
-        order.setAuditor(sys.getUsername());
-        order.setUpdateOperator(sys.getUsername());
-        order.setLoanOperator(sys.getUsername());
+        order.setAuditor(sys.getRealName());
+        order.setUpdateOperator(sys.getRealName());
+        order.setLoanOperator(sys.getRealName());
         return orderClient.updateOrder(order);
     }
 

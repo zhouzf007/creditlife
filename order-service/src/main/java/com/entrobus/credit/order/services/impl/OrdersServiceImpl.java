@@ -1,6 +1,7 @@
 package com.entrobus.credit.order.services.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
@@ -17,6 +18,7 @@ import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.order.OrdersExample;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
+import com.entrobus.credit.vo.contract.ContractFillVo;
 import com.entrobus.credit.vo.order.ApplyVo;
 import com.entrobus.credit.vo.order.OrderListVo;
 import com.entrobus.credit.vo.order.UserOrderListVo;
@@ -27,6 +29,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -138,7 +141,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 
     @Override
-    public WebResult applyOrder(@RequestBody ApplyVo vo, CacheUserInfo userInfo) throws Exception {
+    public WebResult applyOrder(@RequestBody ApplyVo vo, CacheUserInfo userInfo) {
         Orders order = new Orders();
         //1.当前角色是否可以贷款
         if (userInfo.getRole() == 0) {
@@ -198,13 +201,15 @@ public class OrdersServiceImpl implements OrdersService {
         order.setAccount(userInfo.getDefualtAccount());
         //生成合同信息
         if (StringUtils.isNotEmpty(vo.getSignature())) {
-            contract.setId(GUIDUtil.genRandomGUID());
-            contract.setContractNo(order.getApplyNo());
-            contract.setOrderId(order.getId());
-            contract.setUserId(order.getUserId());
-            contract.setSignature(vo.getSignature());
-            Map<String, String> map = createContract(vo, order, userInfo);
-            creditClient.saveContract(JSON.toJSONString(map),contract);
+            try {
+                ContractFillVo contractvo = createContract(vo, order, userInfo);
+                contract = creditClient.saveContract(contractvo);
+                if (contract == null) {
+                    return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
+                }
+            } catch (Exception e) {
+                return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
+            }
         } else {
             return WebResult.fail(WebResult.CODE_BUSI_DISPERMIT, "无效签名");
         }
@@ -318,8 +323,8 @@ public class OrdersServiceImpl implements OrdersService {
         return rsList;
     }
 
-    private Map<String, String> createContract(ApplyVo vo, Orders order, CacheUserInfo userInfo) throws Exception {
-        Map<String, String> map = new HashMap<>();
+    private ContractFillVo createContract(ApplyVo vo, Orders order, CacheUserInfo userInfo) throws Exception {
+        Map<String, Object> map = new HashMap<>();
         map.put("contractNumber", order.getApplyNo());//合同编号，与银行管理后台显示的编号一致
         map.put("borrowerFullName", userInfo.getRealName());//借款人全名
         map.put("lenderFullName", "中国建设银行股份有限公司佛山分行");//贷款人全称，将来可配置，目前“中国建设银行股份有限公司佛山分行”
@@ -327,7 +332,7 @@ public class OrdersServiceImpl implements OrdersService {
         map.put("borrowerCellphone", userInfo.getCellphone());//借款人手机号
         map.put("borrowerIdCard", userInfo.getIdCard());//借款人证件号（身份证）
         map.put("money", AmountUtil.changeF2Y(order.getApplyMoney()) + "元"); //借款金额
-        map.put("capitalMoney", AmountUtil.change2Upper(Double.valueOf(order.getApplyMoney()/100))); //中文大写金额，如：叁拾万元整
+        map.put("capitalMoney", AmountUtil.change2Upper(Double.valueOf(order.getApplyMoney() / 100))); //中文大写金额，如：叁拾万元整
         map.put("term", order.getRepaymentTerm() + "个月");//借款期限
         map.put("interestStartDay", "自放款成功日起计收利息");//起息日
         map.put("repaymentMethod", "");//还款方式
@@ -357,7 +362,9 @@ public class OrdersServiceImpl implements OrdersService {
         //签名图片 使用base64编码，其中png是图片格式
 //        map.put("borrowerAutograph", "data:image/png;base64," + "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");
         map.put("borrowerAutograph", ImageUtil.getImageBase64Src(vo.getSignature()));
-        return map;
+        JSON.toJSONString(map);
+        ContractFillVo contract = JSON.parseObject(JSON.toJSONString(map), ContractFillVo.class);
+        return contract;
     }
 //        rs.setAnnualInterestRate(vo.getRate()+"%");
 //        rs.setAppointPayeeAccount();

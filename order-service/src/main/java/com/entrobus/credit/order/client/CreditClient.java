@@ -1,6 +1,7 @@
 package com.entrobus.credit.order.client;
 
 import com.entrobus.credit.pojo.order.Contract;
+import com.entrobus.credit.vo.contract.ContractFillVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -19,7 +20,7 @@ import java.util.Map;
 public interface CreditClient {
 
     @PostMapping(value = "/api/contract", consumes = MediaType.APPLICATION_JSON_VALUE)
-    Contract saveContract(@RequestParam("vo") String vo, @RequestBody Contract contract);
+    Contract saveContract(@RequestBody ContractFillVo vo);
 
 
     @Component
@@ -28,7 +29,7 @@ public interface CreditClient {
         private static final Logger LOGGER = LoggerFactory.getLogger(CreditClientFallback.class);
 
         @Override
-        public Contract saveContract(String voJString, Contract contract) {
+        public Contract saveContract(ContractFillVo vo) {
             return null;
         }
 
