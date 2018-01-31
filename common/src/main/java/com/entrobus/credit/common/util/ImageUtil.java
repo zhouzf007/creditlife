@@ -42,8 +42,9 @@ public class ImageUtil {
 
 
     /**
-     * @return
-     * @Description: 根据图片地址转换为base64编码字符串
+     * @return 返回的数据可以直接在html 的img标签src上使用。
+     * @Description: 根据图片地址转换为base64编码字符串,平且拼上“data:image/png;base64,”前缀，
+     *  其中png会根据实际图片格式替换，返回的数据可以直接在html 的img标签src上使用。
      * @Author:
      * @CreateTime:
      */
