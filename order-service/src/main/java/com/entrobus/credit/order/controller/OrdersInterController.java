@@ -92,7 +92,7 @@ public class OrdersInterController {
         dtl.setIdCard(userInfo.getIdCard());
         dtl.setApplyNo(order.getApplyNo());
         dtl.setApplyTime(order.getApplyTime());
-        dtl.setAccount(order.getAccount());
+        dtl.setAccount(StringUtils.isNotEmpty(userInfo.getAccountBank()) ? userInfo.getAccountBank() + "(" + order.getAccount() + ")" : order.getAccount());
         dtl.setMobile(userInfo.getCellphone());
         dtl.setRole(order.getRole());
         dtl.setRoleName(cacheService.translate(Cachekey.Translation.ROLE_NAME + order.getRole()));
@@ -120,8 +120,7 @@ public class OrdersInterController {
                 RepaymentPlan plan = list.get(i);
                 RepaymentPlanVo vo = new RepaymentPlanVo();
                 vo.setId(plan.getId());
-//                String repay=MoneyUtils.divide(String.valueOf(plan.getRepayment() ), "100").longValue()+"";
-                    vo.setMoney(AmountUtil.changeF2Y(plan.getRepayment()));
+                vo.setMoney(AmountUtil.changeF2Y(plan.getRepayment()));
                 vo.setRepayTime(DateUtils.formatDate(plan.getPlanTime(), "yyyy-MM-dd"));
                 vo.setUpdateTime(plan.getUpdateTime());
                 vo.setOperator(plan.getUpdateOperator());
@@ -165,7 +164,7 @@ public class OrdersInterController {
         dtl.setName(userInfo.getRealName());
         dtl.setIdCard(userInfo.getIdCard());
         dtl.setQuota(AmountUtil.changeF2Y(userInfo.getQuota()));
-        dtl.setAccount(userInfo.getAccountBank() + "(" + userInfo.getDefualtAccount() + ")");
+        dtl.setAccount(StringUtils.isNotEmpty(userInfo.getAccountBank()) ? userInfo.getAccountBank() + "(" + userInfo.getDefualtAccount() + ")" : userInfo.getDefualtAccount());
         dtl.setUserState(userInfo.getState());
         dtl.setMobile(userInfo.getCellphone());
         dtl.setRole(userInfo.getRole());
