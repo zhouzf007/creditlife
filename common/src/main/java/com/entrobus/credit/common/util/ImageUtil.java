@@ -19,21 +19,18 @@ public class ImageUtil {
     public static String getImageBase64(String imgFile) throws IOException {
         InputStream in = null;
         byte[] data = null;
-        BufferedInputStream bis = null;
-        BufferedReader br = null;
         try {
             in = HttpClientUtil.getInputStream(imgFile);
             data = IOUtils.toByteArray(in);
             // 加密
             BASE64Encoder encoder = new BASE64Encoder();
             String encode = encoder.encode(data);
-            return encode.replaceAll("\r","").replaceAll("\n","");
+            return encode == null ? null : encode.replaceAll("[\r\n]","");
         } catch (IOException e) {
             e.printStackTrace();
             throw e;
         }finally {
             CloseableUtil.close(in);
-            CloseableUtil.close(bis);
         }
 //        return null;
 
