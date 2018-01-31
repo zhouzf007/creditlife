@@ -245,15 +245,15 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
-        Map<String, String> m = new HashMap<>();
-        m.put("name", vo.getName());
-        m.put("cellphone", vo.getCellphone());
-        m.put("idCard", userInfo.getIdCard());
-        m.put("bankId", vo.getAccount());
-        WebResult w = bsBankService.verify(m);
-        if(!w.isOk()){
-            return WebResult.fail(WebResult.CODE_OPERATION, "请使用您本人的银行卡");
-        }
+//        Map<String, String> m = new HashMap<>();
+//        m.put("name", vo.getName());
+//        m.put("cellphone", vo.getCellphone());
+//        m.put("idCard", userInfo.getIdCard());
+//        m.put("bankId", vo.getAccount());
+//        WebResult w = bsBankService.verify(m);
+//        if(!w.isOk()){
+//            return WebResult.fail(WebResult.CODE_OPERATION, "请使用您本人的银行卡");
+//        }
 //        if (!w.isOk()){
 //            return w;
 //        }
