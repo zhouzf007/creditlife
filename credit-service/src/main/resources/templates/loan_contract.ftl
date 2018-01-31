@@ -23,17 +23,17 @@
             line-height: 1;
         }
         .main_title {
-            margin: 0pt;
+            margin: 0;
             text-align: center;
             font-size: 12pt;
         }
         .main_text {
-            margin: 0pt;
+            margin: 0;
             text-indent: 24pt;
             font-size: 12pt;
         }
         .td_text {
-            margin: 0pt;
+            margin: 0;
             orphans: 0;
             text-align: justify;
             widows: 0;
@@ -64,7 +64,8 @@
             margin: 0pt;
             orphans: 0;
             text-align: justify;
-            text-indent: 48pt;
+            /*text-indent: 48pt;*/
+            text-indent: 0;
             widows: 0;
         }
     </style>
@@ -399,6 +400,8 @@
     <p class="main_text">五、甲方确认：上述送达地址均系其真实填写，并明确知晓乙方或人民法院</p>
     <p class="main_text">(仲裁机构)按上述地址送达文书的法律后果。乙方已对相关条款进行了充分的 提示和说明。</p>
     <p class="autograph_text">&#160;</p>
+    <#-- 甲乙方签字区左右分布 start -->
+<#--
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt">
         <tbody>
         <tr>
@@ -427,7 +430,20 @@
         </tr>
         </tbody>
     </table>
-    <p class="autograph_text"> &#160;</p>
+     <p class="autograph_text"> &#160;</p>
+-->
+    <#-- 甲乙方签字区左右分布 end -->
+
+    <#-- 甲乙方签字区 上下 分布 start -->
+    <p class="td_text">甲方（签字）：</p>
+    <p class="td_text">
+        <img  src="${borrowerAutograph}" width="129" height="167" alt=""  class="autograph"/>
+    </p>
+    <p class="main_text">&#160;</p>
+    <p class="td_text">乙方（公章或负责人签字）：</p>
+    <img  src="" width="129" height="100" alt=""  class="autograph"/>
+    <p class="main_text" style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0">&#160;&#160;&#160;&#160;年 &#160;&#160;月 &#160;&#160;日</p>
+    <#-- 甲乙方签字区 上下 分布 end -->
 </div>
 
 </body>
