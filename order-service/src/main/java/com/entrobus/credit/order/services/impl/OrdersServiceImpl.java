@@ -29,11 +29,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class OrdersServiceImpl implements OrdersService {
     @Autowired
     private OrdersMapper ordersMapper;
@@ -337,8 +339,8 @@ public class OrdersServiceImpl implements OrdersService {
         map.put("noOperationInvalidTime", "3个月");//借款额度审批通过之日起无操作失效时间
 
         map.put("borrowerAddress", "借款人住址");//借款人住址
-        map.put("borrowerPostalAddress", "通讯地址");//通讯地址
-        map.put("borrowerPostalCode", "邮政编码");//通讯地址
+        map.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址
+        map.put("borrowerPostalCode", "邮政编码");//借款人邮政编码
         map.put("borrowerCardBank", userInfo.getAccountBank());//借款人开卡银行
         map.put("borrowerCardId", userInfo.getDefualtAccount());//借款人银行卡号
 

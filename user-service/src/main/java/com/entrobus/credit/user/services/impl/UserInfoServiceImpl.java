@@ -28,8 +28,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.entrobus.credit.user.utils.ShiroUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired

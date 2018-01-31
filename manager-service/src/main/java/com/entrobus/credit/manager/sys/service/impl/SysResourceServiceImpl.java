@@ -24,6 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 @Service
+@Transactional
 public class SysResourceServiceImpl implements SysResourceService {
     @Autowired
     private SysResourceMapper sysResourceMapper;

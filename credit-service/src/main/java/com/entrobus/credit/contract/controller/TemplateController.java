@@ -80,7 +80,7 @@ public class TemplateController {
 
         map.put("borrowerAddress", "借款人住址");//借款人住址
         map.put("borrowerPostalAddress", "通讯地址");//通讯地址
-        map.put("borrowerPostalCode", "邮政编码");//通讯地址
+        map.put("borrowerPostalCode", "邮政编码");//邮政编码
         map.put("borrowerCardBank", "中国建设银行");//借款人开卡银行
         map.put("borrowerCardId", "66541646454165");//借款人银行卡号
 
