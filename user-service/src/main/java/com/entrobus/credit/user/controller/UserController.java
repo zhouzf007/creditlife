@@ -250,10 +250,13 @@ public class UserController extends BaseController {
         m.put("cellphone", vo.getCellphone());
         m.put("idCard", userInfo.getIdCard());
         m.put("bankId", vo.getAccount());
-//        WebResult w = bsBankService.verify(m);
+        WebResult w = bsBankService.verify(m);
 //        if(!w.get(WebResult.CODE).equals("0")){
 //            return WebResult.fail(WebResult.CODE_OPERATION, "请使用您本人的银行卡");
 //        }
+        if (!w.isOk()){
+            return w;
+        }
         //已添加
         UserAccountExample example = new UserAccountExample();
         example.createCriteria().andUserIdEqualTo(userInfo.getId()).andAccountEqualTo(vo.getAccount()).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);

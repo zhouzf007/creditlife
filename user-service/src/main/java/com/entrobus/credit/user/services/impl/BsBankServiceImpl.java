@@ -42,7 +42,7 @@ public class BsBankServiceImpl implements BsBankService {
         map.put("token", token);
         Map<String,Object> rmap = bankFourClient.verify(map);
         if(rmap!= null){
-            if(rmap.get("code").equals("00")){
+            if(Objects.equals(rmap.get("code"),"00")){
                 if (rmap.get("data") != null){
                     Map<String,Object> data = (Map<String, Object>) rmap.get("data");
                     Map<String, Object> product = data == null ? null : (Map<String, Object>)data.get("product");
