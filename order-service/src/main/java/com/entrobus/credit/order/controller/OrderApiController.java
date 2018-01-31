@@ -6,6 +6,7 @@ import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.DateUtils;
+import com.entrobus.credit.common.util.ImageUtil;
 import com.entrobus.credit.order.client.BsStaticsClient;
 import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
@@ -25,6 +26,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.*;
 
 @RefreshScope
@@ -150,6 +152,10 @@ public class OrderApiController {
         rsVo.setBalance(AmountUtil.changeF2Y(total));
         rsVo.setPlanList(plist);
         return WebResult.ok(rsVo);
+    }
+    @PostMapping(path = "/imgBase64")
+    public WebResult textImageBase64(String imgUrl) throws IOException {
+        return WebResult.ok().data(ImageUtil.getImageBase64Src(imgUrl));
     }
 
 }

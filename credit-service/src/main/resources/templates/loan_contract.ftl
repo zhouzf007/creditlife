@@ -5,19 +5,23 @@
     <meta name="generator" content="Aspose.Words for .NET 15.1.0.0"></meta>
     <title></title>
     <style type="text/css">
+        <#--页面属性，纸张大小、页边距-->
         @page {
             size: a4;
-            /*margin:0;*/
-            /*padding: 3.18cm  2.54cm;*/
+            margin: 3.18cm  2.54cm;
         }
         body {
             font-family: SimSun;
         }
-        /*div.page_body{*/
-            /*!*width: 210mm;*!*/
+        div.page_body{
+            /*width: 210mm;*/
             /*margin: 3.18cm  2.54cm;*/
-        /*}*/
-
+            padding: 0;
+            border: 0;
+        }
+        p{
+            line-height: 1;
+        }
         .main_title {
             margin: 0pt;
             text-align: center;
@@ -34,6 +38,7 @@
             text-align: justify;
             widows: 0;
             font-size: 12pt;
+            /*font-family: Arial;*/
         }
         .emphasize_text {
             font-size: 12pt;
