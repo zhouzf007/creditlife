@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
     private OrganizationMapper organizationMapper;

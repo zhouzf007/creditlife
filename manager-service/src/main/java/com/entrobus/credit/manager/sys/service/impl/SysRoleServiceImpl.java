@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class SysRoleServiceImpl implements SysRoleService {
     @Autowired
     private SysRoleMapper sysRoleMapper;

@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
+@Transactional
 public class LoanProductServiceImpl implements LoanProductService {
     @Autowired
     private LoanProductMapper loanProductMapper;

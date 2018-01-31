@@ -50,7 +50,7 @@ public class OrderDtlVo {
         this.userState = userState;
     }
 
-    private Integer score;
+    private Double score;
     private String account;
     private String creditReportId;
 
@@ -235,12 +235,12 @@ public class OrderDtlVo {
         this.rate = rate;
     }
 
-    public Integer getScore() {
-        return score;
+    public void setScore(Double score) {
+        this.score = score;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
+    public Double getScore() {
+        return score;
     }
 
     public String getAccount() {
