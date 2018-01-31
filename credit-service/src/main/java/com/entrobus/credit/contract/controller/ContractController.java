@@ -13,10 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class ContractController {
 
@@ -29,10 +30,10 @@ public class ContractController {
     @PostMapping(path = "/contract")
     public WebResult saveContract(String vo, Contract contract) {
         Map rs = JSON.parseObject(vo);
-        FileUploadResult uploadResult = createPdf("loan_contract.ftl", "pdf/img", rs);
-        if (uploadResult.isUploadSuccess()) {
-            contract.setContractUrl(uploadResult.getFileUrl());
-        }
+//        FileUploadResult uploadResult = createPdf("loan_contract.ftl", "pdf/img", rs);
+//        if (uploadResult != null && uploadResult.isUploadSuccess()) {
+//            contract.setContractUrl(uploadResult.getFileUrl());
+//        }
         contractService.insertSelective(contract);
         return WebResult.ok();
     }
@@ -46,7 +47,9 @@ public class ContractController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ConversionUtil.deletedirectory(pdfVo.getDirectory());
+            if (pdfVo != null) {
+                ConversionUtil.deletedirectory(pdfVo.getDirectory());
+            }
         }
         return uploadResult;
     }

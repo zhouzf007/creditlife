@@ -4,6 +4,7 @@ import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.lowagie.text.DocumentException;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang3.StringUtils;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.File;
@@ -74,6 +75,7 @@ public class PDFUtil {
                 resourceUrl = Thread.currentThread().getContextClassLoader().getResource("pdf_temp");
             }
         }
+        if (resourceUrl==null) return null;
         String directory = resourceUrl.getFile();//偶尔会空指针，待优化
         if(!directory.endsWith(File.separator)){
             directory += File.separator;
