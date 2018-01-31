@@ -163,10 +163,20 @@ public class WebResult extends HashMap<String, Object> {
 	public static  WebResult ok() {
 		return new WebResult();
 	}
+
+	/**
+	 * 判断是否成功
+	 * @return
+	 */
 	public boolean isOk(){
 		Object code = get(CODE);
 		return  Objects.equals(code ,CODE_OK);
 	}
+
+	/**
+	 * 判断是否异常
+	 * @return
+	 */
 	public boolean isError(){
 		Object code = get(CODE);
 		if(code == null) return false;
