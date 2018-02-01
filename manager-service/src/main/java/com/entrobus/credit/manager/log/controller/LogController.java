@@ -73,7 +73,7 @@ public class LogController extends ManagerBaseController{
     @GetMapping("/managerOperationLog")
     public WebResult managerOperationLogList(String desc,String relId, String operatorName,Integer offset, Integer limit){
 //    public WebResult managerOperationLogList(@RequestParam Map<String, Object> map, int offset, int limit){
-        SysLoginUserInfo loginUser = getCurrLoginUser();
+//        SysLoginUserInfo loginUser = getCurrLoginUser();
         Map<String,Object> map = new HashMap<>();
         if (StringUtils.isNotBlank(operatorName)){
             SysUser operator = sysUserService.getUserByUserName(operatorName);
@@ -98,8 +98,6 @@ public class LogController extends ManagerBaseController{
     @GetMapping("/managerOperationLog/detail")
     public WebResult managerOperationLogDetail( String id){
         if (StringUtils.isBlank(id) ) return WebResult.fail("请选择一条数据");
-        SysLoginUserInfo loginUser = getCurrLoginUser();
-//        vo.setOrgId(loginUser.getOrgId());
         ManagerOperationLogDetail detail = logClient.managerOperationLogDetail(id);
         String orgId = detail.getOrgId();
         if(StringUtils.isNotBlank(detail.getOperatorId())) {
