@@ -100,8 +100,15 @@ public class LogController extends ManagerBaseController{
         if (StringUtils.isBlank(id) ) return WebResult.fail("请选择一条数据");
         SysLoginUserInfo loginUser = getCurrLoginUser();
 //        vo.setOrgId(loginUser.getOrgId());
-        String orgId = loginUser.getOrgId();
         ManagerOperationLogDetail detail = logClient.managerOperationLogDetail(id);
+        String orgId = detail.getOrgId();
+        if(StringUtils.isNotBlank(detail.getOperatorId())) {
+            SysUser sysUser = sysUserService.selectByPrimaryKey(Long.valueOf(detail.getOperatorId()));
+            detail.setOperatorName(sysUser.getUsername());
+            if (StringUtils.isBlank(orgId))
+                orgId = sysUser.getOrgId();
+        }
+
         if (StringUtils.isBlank(orgId)){
             detail.setOrgName("熵商");
         }else {
@@ -110,7 +117,7 @@ public class LogController extends ManagerBaseController{
                 detail.setOrgName(org.getName());
             }
         }
-        detail.setOperatorName(loginUser.getUsername());
+//        detail.setOperatorName(loginUser.getUsername());
         return WebResult.ok().data(detail);
     }
 }

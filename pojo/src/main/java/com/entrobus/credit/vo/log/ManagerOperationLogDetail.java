@@ -8,6 +8,15 @@ public class ManagerOperationLogDetail extends ManagerOperationLogVo {
     private String createTime;
     private String platformName;
     private String applicationName;
+    private String orgId;
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
 
     public String getApplicationName() {
         return applicationName;
