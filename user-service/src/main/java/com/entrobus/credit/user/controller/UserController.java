@@ -99,7 +99,7 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码已注册");
         }
         String verifyCode = CacheService.getString(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
-        if (StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)) {
+        if (StringUtils.isBlank(verifyCode) || !verifyCode.equals(code)) {
             return WebResult.fail(WebResult.CODE_VERIFYCODE, "短信验证码不正确");
         }
         UserInfo userInfo = new UserInfo();
@@ -128,7 +128,7 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
         }
         String verifyCode = CacheService.getString(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
-        if (StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)) {
+        if (StringUtils.isBlank(verifyCode) || !verifyCode.equals(code)) {
             return WebResult.fail(WebResult.CODE_VERIFYCODE, "短信验证码不正确");
         }
         UserInfo userInfo = userInfos.get(0);
@@ -294,7 +294,7 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         String verifyCode = CacheService.getString(redisTemplate, Cachekey.Sms.VERIFICATION_CODE + cellphone);
-        if (StringUtils.isNotBlank(verifyCode) && !verifyCode.equals(code)) {
+        if (StringUtils.isBlank(verifyCode) || !verifyCode.equals(code)) {
             return WebResult.fail(WebResult.CODE_VERIFYCODE);
         }
         UserAccount userAccount = new UserAccount();
