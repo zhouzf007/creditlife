@@ -74,7 +74,7 @@ spring:
     stream:
       bindings:
         order_operation_log_publish:
-          destination: order-operation-log-stream
+          destination: creditlife-operation-log-stream
           content-type: application/json
         generate_sub_order_publish:
           destination: generate-sub-order

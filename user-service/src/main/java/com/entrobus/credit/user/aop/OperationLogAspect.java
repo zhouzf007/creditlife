@@ -1,14 +1,14 @@
-package com.entrobus.credit.manager.common.aop;
+package com.entrobus.credit.user.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.manager.common.bean.CommonParameter;
-import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
-import com.entrobus.credit.manager.common.service.ManagerCacheService;
-import com.entrobus.credit.manager.sys.service.LogService;
+import com.entrobus.credit.user.services.LogService;
+import com.entrobus.credit.user.services.UserCacheService;
+import com.entrobus.credit.vo.common.CommonParameter;
 import com.entrobus.credit.vo.log.OperationLogMsg;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -24,9 +24,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
@@ -55,7 +58,7 @@ public class OperationLogAspect {
     @Autowired
     private LogService logService;
     @Autowired
-    private ManagerCacheService cacheService;
+    private UserCacheService cacheService;
 
 //    @Pointcut("execution(public * com.entrobus.credit.manager.*.controller..*.*(..))")
     @Pointcut( "@annotation(com.entrobus.credit.common.annotation.RecordLog)")
@@ -81,7 +84,7 @@ public class OperationLogAspect {
     }
 
     /**
-     * 根据切面信息创建日志信息
+     * 根据切面信息
      * @param pjp
      * @return
      */
@@ -145,14 +148,32 @@ public class OperationLogAspect {
      * @param msg
      */
     protected void operatorMsg(OperationLogMsg msg) {
-        SysLoginUserInfo loginUser = cacheService.getCurrLoginUser();
-        if (loginUser != null) {
-            msg.setOperatorId(String.valueOf(loginUser.getId()));//操作人id,与operatorType对应管理员或用户id
-            msg.setPlatform(loginUser.getPlatform());//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
-            msg.setOrgId(loginUser.getOrgId());
+        CacheUserInfo userInfo = cacheService.getUserCacheBySid(getToken());
+        if (userInfo != null) {
+            msg.setOperatorId(userInfo.getId());//操作人id,与operatorType对应管理员或用户id
+            msg.setPlatform(Constants.PLATFORM.USER);//操作人类型：0：信用贷后台管理员，1：资金方后台管理员，2-用户。
+//            msg.setOrgId(userInfo.getOrgId());
+        }
+    }
+    /**
+     * 获取当前请求对象
+     *
+     * @return
+     */
+    private HttpServletRequest getRequest() {
+        try {
+            return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        } catch (Exception e) {
+            throw new RuntimeException("获取request失败", e);
         }
     }
 
+    public String getToken(){
+        HttpServletRequest request = getRequest();
+        String token = request.getParameter("token");
+        if (token == null) token = request.getHeader("token");
+        return token;
+    }
     /**
      * 获取当前方法
      * @param pjp

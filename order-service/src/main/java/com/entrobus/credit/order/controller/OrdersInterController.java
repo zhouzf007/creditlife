@@ -73,7 +73,7 @@ public class OrdersInterController {
                 stateList.add(Integer.parseInt(s));
             }
         }
-        return ordersService.getOrderList(stateList, orgId, offset, limit);
+        return ordersService.getOrderList(stateList,key, orgId, offset, limit);
     }
 
     /**

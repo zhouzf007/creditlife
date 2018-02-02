@@ -1,5 +1,7 @@
 package com.entrobus.credit.user.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
@@ -17,18 +19,16 @@ import com.entrobus.credit.user.services.*;
 import com.entrobus.credit.user.utils.ShiroUtils;
 import com.entrobus.credit.vo.order.CreditReportVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
+import com.entrobus.credit.vo.user.SearchUserInfoVo;
 import com.entrobus.credit.vo.user.UserAccountVo;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mozl on 2018/1/09.
@@ -343,6 +343,77 @@ public class UserController extends BaseController {
             userInfoService.updateByPrimaryKey(userInfo);
             userInfoService.initUserCache(userInfo);
         }
+    }
+
+    /**
+     * 搜索用户
+     * @param key
+     */
+    @GetMapping(value = "/search")
+    public List<SearchUserInfoVo> searchUser(@RequestParam("key") String key) {
+        //暂时这么搜索了。。。。。
+        List<SearchUserInfoVo> voList = new ArrayList<>();
+        if (StringUtils.isBlank(key)) return voList;
+        String realName = null;
+        String cellphone = null;
+        try {
+            JSONObject searchObj = JSON.parseObject(key);
+            realName = searchObj.getString("realName");
+            cellphone = searchObj.getString("cellphone");
+        }catch (Exception e){
+            return voList;
+        }
+        UserInfoExample example = new UserInfoExample();
+        UserInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        if (StringUtils.isNotBlank(realName)) {
+            criteria.andRealNameLike("%" + realName + "%");
+        }
+        if (StringUtils.isNotBlank(cellphone)) {
+            criteria.andCellphoneLike("%" + cellphone + "%");
+        }
+        List<UserInfo> userInfoList = userInfoService.selectByExample(example);
+        for (UserInfo userInfo : userInfoList) {
+            SearchUserInfoVo vo = new SearchUserInfoVo();
+            BeanUtils.copyProperties(vo,userInfo);
+            voList.add(vo);
+        }
+        return voList;
+    }
+    /**
+     * 搜索用户ID
+     * @param key
+     */
+    @GetMapping(value = "/searchUserIds")
+    public List<String> searchUserIds(@RequestParam("key") String key) {
+        //暂时这么搜索了。。。。。
+        List<String> idList = new ArrayList<>();
+        if (StringUtils.isBlank(key)) return idList;
+        String realName = null;
+        String cellphone = null;
+        try {
+            JSONObject searchObj = JSON.parseObject(key);
+            if (searchObj != null) {
+                realName = searchObj.getString("realName");
+                cellphone = searchObj.getString("cellphone");
+            }
+        }catch (Exception e){
+            return idList;
+        }
+        UserInfoExample example = new UserInfoExample();
+        UserInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        if (StringUtils.isNotBlank(realName)) {
+            criteria.andRealNameLike("%" + realName + "%");
+        }
+        if (StringUtils.isNotBlank(cellphone)) {
+            criteria.andCellphoneLike("%" + cellphone + "%");
+        }
+        List<UserInfo> userInfoList = userInfoService.selectByExample(example);
+        for (UserInfo userInfo : userInfoList) {
+            idList.add(userInfo.getId());
+        }
+        return idList;
     }
 
 }

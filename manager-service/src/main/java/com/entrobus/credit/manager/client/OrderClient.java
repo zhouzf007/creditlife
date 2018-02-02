@@ -25,7 +25,7 @@ public interface OrderClient {
      * @return
      */
     @GetMapping(path = "/orderList")
-    WebResult getOrderList(@RequestParam("states") String states, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
+    WebResult getOrderList(@RequestParam("states") String states,@RequestParam("key") String key, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
     /**
      * 订单详情
@@ -65,7 +65,7 @@ public interface OrderClient {
         }
 
         @Override
-        public WebResult getOrderList(String states, String orgId, Integer offset, Integer limit) {
+        public WebResult getOrderList(String states, String key, String orgId, Integer offset, Integer limit) {
             return null;
         }
 

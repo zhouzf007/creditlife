@@ -81,6 +81,9 @@ spring:
       bindings:
         sms:
           destination: msg-stream
+        user_operation_log_publish:
+          destination: creditlife-operation-log-stream
+          content-type: application/json
 #    配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml

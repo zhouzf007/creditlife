@@ -1,6 +1,7 @@
 package com.entrobus.credit.log.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.log.dao.OperationLogMapper;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -266,6 +268,13 @@ public class OperationLogServiceImpl implements OperationLogService {
         }
         if (vo.getPlatform() != null) {
             criteria.andOperatorTypeEqualTo(vo.getPlatform());
+        }else {
+            //暂时这样
+            //熵商后台，查看资金方和熵商后台用户操作日志
+            List<Integer> platformList = new ArrayList<>();
+            platformList.add(Constants.PLATFORM.CREDITLIFE);
+            platformList.add(Constants.PLATFORM.BANK);
+            criteria.andOperatorTypeIn(platformList);
         }
         if (ConversionUtil.isNotEmptyCollection(vo.getOperatorIdList())) {
             criteria.andOperatorIdIn(vo.getOperatorIdList());
