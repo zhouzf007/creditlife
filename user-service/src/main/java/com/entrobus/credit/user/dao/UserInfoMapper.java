@@ -5,6 +5,7 @@ import com.entrobus.credit.pojo.user.UserInfoExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserInfoMapper {
     /**
@@ -98,4 +99,11 @@ public interface UserInfoMapper {
     int insertBatchSelective(List<UserInfo> records);
 
     int updateBatchByPrimaryKeySelective(List<UserInfo> records);
+
+    /**
+     * 只查询用户id
+     * @param example
+     * @return
+     */
+    Set<String> getUserIdListByExample(UserInfoExample example);
 }

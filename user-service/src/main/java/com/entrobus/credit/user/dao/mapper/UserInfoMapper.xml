@@ -837,4 +837,22 @@
       id = #{item.id,jdbcType=CHAR}
     </foreach>
   </update>
+
+  <select id="getUserIdListByExample" parameterType="com.entrobus.credit.pojo.user.UserInfoExample" resultType="string">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    id
+    from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
 </mapper>

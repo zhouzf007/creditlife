@@ -385,10 +385,9 @@ public class UserController extends BaseController {
      * @param key
      */
     @GetMapping(value = "/searchUserIds")
-    public List<String> searchUserIds(@RequestParam("key") String key) {
+    public Set<String> searchUserIds(@RequestParam("key") String key) {
         //暂时这么搜索了。。。。。
-        List<String> idList = new ArrayList<>();
-        if (StringUtils.isBlank(key)) return idList;
+        if (StringUtils.isBlank(key)) return new TreeSet<>();
         String realName = null;
         String cellphone = null;
         try {
@@ -398,7 +397,7 @@ public class UserController extends BaseController {
                 cellphone = searchObj.getString("cellphone");
             }
         }catch (Exception e){
-            return idList;
+            return new TreeSet<>();
         }
         UserInfoExample example = new UserInfoExample();
         UserInfoExample.Criteria criteria = example.createCriteria();
@@ -409,11 +408,8 @@ public class UserController extends BaseController {
         if (StringUtils.isNotBlank(cellphone)) {
             criteria.andCellphoneLike("%" + cellphone + "%");
         }
-        List<UserInfo> userInfoList = userInfoService.selectByExample(example);
-        for (UserInfo userInfo : userInfoList) {
-            idList.add(userInfo.getId());
-        }
-        return idList;
+        Set<String> idSet = userInfoService.getUserIdSetByExample(example);
+        return idSet;
     }
 
 }
