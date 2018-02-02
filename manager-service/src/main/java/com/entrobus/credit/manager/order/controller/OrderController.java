@@ -76,7 +76,7 @@ public class OrderController extends ManagerBaseController {
      * @return
      */
     @GetMapping("/repayment/list")
-    public WebResult getRepaymentList(Integer offset, Integer limit, String states, @RequestParam(required = false) String key) {
+    public WebResult getRepaymentList(Integer offset, Integer limit, String states,  String key) {
         SysLoginUserInfo sys=getCurrLoginUser();
         return orderClient.getOrderList(states, key,sys.getOrgId(), offset, limit);
     }
