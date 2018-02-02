@@ -39,7 +39,11 @@ public interface OrderClient {
      * 用户列表
      */
     @GetMapping(path = "/userOrderList")
-    WebResult getUserOrderList(@RequestParam("state") Integer state, @RequestParam("orgId") String orgId, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
+    WebResult getUserOrderList(@RequestParam("state") Integer state,
+                               @RequestParam("key") String key,
+                               @RequestParam("orgId") String orgId,
+                               @RequestParam("offset") Integer offset,
+                               @RequestParam("limit") Integer limit);
 
     /**
      * 用户订单详情
@@ -75,7 +79,7 @@ public interface OrderClient {
         }
 
         @Override
-        public WebResult getUserOrderList(Integer state, String orgId, Integer offset, Integer limit) {
+        public WebResult getUserOrderList(Integer state,String key,  String orgId, Integer offset, Integer limit) {
             LOGGER.info("异常发生，进入fallback方法");
             return null;
         }
