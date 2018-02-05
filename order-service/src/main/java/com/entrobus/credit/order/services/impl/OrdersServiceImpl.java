@@ -30,7 +30,6 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -165,7 +164,7 @@ public class OrdersServiceImpl implements OrdersService {
         }
         //信用报告信息
         Contract contract = new Contract();
-        CreditReport creditReport = userClient.getCreditReport(userInfo.getId());
+        CreditReport creditReport = userClient.getUserCreditReport(userInfo.getId());
         if (creditReport != null) {
             order.setCreditReportId(creditReport.getId());
             order.setCreditScore(creditReport.getCreditScore());
@@ -196,8 +195,8 @@ public class OrdersServiceImpl implements OrdersService {
             return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您申请的贷款产品不存在");
         }
         order.setLoanUsage(vo.getUsage());
-        order.setApplyMoney(vo.getMoney());
-        order.setActualMoney(vo.getMoney());
+        order.setApplyMoney(vo.getMoney() * 100);
+        order.setActualMoney(vo.getMoney() * 100);
         order.setApplyTime(new Date());
         //加入用户信息
         order.setRole(userInfo.getRole());
@@ -208,10 +207,13 @@ public class OrdersServiceImpl implements OrdersService {
                 ContractFillVo contractvo = createContract(vo, order, userInfo);
                 contract = creditClient.saveContract(contractvo);
                 if (contract == null) {
-                    return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
+                    contract = new Contract();
+                    contract.setId(GUIDUtil.genRandomGUID());
+                    contract.setOrderId(order.getId());
+//                    return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
                 }
             } catch (Exception e) {
-                return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
+//                return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
             }
         } else {
             return WebResult.fail(WebResult.CODE_BUSI_DISPERMIT, "无效签名");
@@ -338,7 +340,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<UserOrdersVo> getUserOrderList(String id, Integer offset, Integer limit) {
+    public List<UserOrdersVo> getUserOrderList(String id, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
                 andUserIdEqualTo(id);
@@ -349,19 +351,25 @@ public class OrdersServiceImpl implements OrdersService {
             Orders order = list.get(i);
             UserOrdersVo vo = new UserOrdersVo();
             vo.setId(order.getId());
-            vo.setState(order.getState());
-            vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
+            Integer state = order.getSystemState() == Constants.ORDER_STATE.OVERDUE ? Constants.ORDER_STATE.OVERDUE : order.getState();
+            vo.setState(state);
+            vo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + state));
             vo.setLoanTime(order.getLoanTime() == null ? order.getApplyTime() : order.getLoanTime());
-            vo.setMoney(order.getActualMoney());
+            vo.setMoney(AmountUtil.changeF2Y(order.getActualMoney()));
             if (order.getState() == Constants.ORDER_STATE.PASS || order.getState() == Constants.ORDER_STATE.OVERDUE) {
                 RepaymentPlan plan = paymentClient.getPresentRepaymentPlan(order.getId());
                 if (plan != null) {
                     vo.setDueTime(plan.getPlanTime());
-                    vo.setTerm(plan.getSortId());
+                    vo.setTerm(order.getRepaymentTerm()-plan.getCurrentId());
                     vo.setTotalTerm(order.getRepaymentTerm());
-                    vo.setPrincipalAndInterest(plan.getInterest() + plan.getPrincipal());
-                    vo.setBalance(1000L);
+                    vo.setPrincipalAndInterest(AmountUtil.changeF2Y(plan.getInterest() + plan.getPrincipal()));
+                    vo.setBalance(AmountUtil.changeF2Y(plan.getPenalty()));
                 }
+            } else if (order.getState() == Constants.ORDER_STATE.FINISHED) {
+                vo.setTerm(order.getRepaymentTerm());
+                vo.setTotalTerm(order.getRepaymentTerm());
+                vo.setPrincipalAndInterest(AmountUtil.changeF2Y(order.getPrincipalInterest()));
+                vo.setBalance("0");
             }
             rsList.add(vo);
         }
@@ -370,6 +378,11 @@ public class OrdersServiceImpl implements OrdersService {
 
     private ContractFillVo createContract(ApplyVo vo, Orders order, CacheUserInfo userInfo) throws Exception {
         Map<String, Object> map = new HashMap<>();
+        map.put("orderId", order.getId());
+        map.put("userId", order.getUserId());
+        map.put("creditReportId", order.getCreditReportId());
+        map.put("signature", vo.getSignature());
+        //
         map.put("contractNumber", order.getApplyNo());//合同编号，与银行管理后台显示的编号一致
         map.put("borrowerFullName", userInfo.getRealName());//借款人全名
         map.put("lenderFullName", "中国建设银行股份有限公司佛山分行");//贷款人全称，将来可配置，目前“中国建设银行股份有限公司佛山分行”

@@ -102,14 +102,14 @@ public class OrderInstanceServiceImpl implements OrderInstanceService {
         instance.setReason(order.getReason());
         //合同信息
         instance.setContractId(order.getContractId());
-//        Contract contract = contractService.selectByPrimaryKey(order.getContractId());
+//        Contract contract = contractService.selectByPrimaryKey(order.getContract());
 //        if (contract != null) {
 ////          instance.setContractContent(contract.get);
 //            instance.setContractUrl(contract.getContractUrl());
 //        }
 
         //信用报告
-        CreditReport report = userClient.getCreditReport(order.getCreditReportId());
+        CreditReport report = userClient.getUserCreditReport(order.getCreditReportId());
         if (report != null) {
 //          instance.setCreditContent();
             instance.setCreditUrl(report.getReportUrl());

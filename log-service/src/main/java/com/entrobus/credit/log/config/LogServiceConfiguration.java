@@ -33,8 +33,8 @@ public class LogServiceConfiguration extends ResourceServerConfigurerAdapter {
 //    http.authorizeRequests()
 //            .anyRequest().permitAll()
 //        ;
-    http.authorizeRequests()
-            .antMatchers("/client").permitAll()
+        http.authorizeRequests()
+            .antMatchers("/client").denyAll()
         ;
     }
 

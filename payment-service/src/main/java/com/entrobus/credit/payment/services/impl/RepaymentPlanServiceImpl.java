@@ -99,7 +99,7 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public List<RepaymentPlan> getOverDueRepaymentPlans(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andStateEqualTo(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andPlanTimeLessThan(new Date()).andSystemStateEqualTo(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
         example.setOrderByClause(" plan_time desc ");
         return this.selectByExample(example);
     }
@@ -115,10 +115,42 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     @Override
     public RepaymentPlan getPresentRepaymentPlan(String orderId) {
         RepaymentPlanExample example = new RepaymentPlanExample();
-        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
-                andPlanTimeLessThan(DateUtils.getEndDateTimeOfMonth(DateUtils.addMonths(new Date(),1)))
-        .andPlanTimeGreaterThan(DateUtils.getStartOfMonth(new Date()));
-        example.setOrderByClause(" plan_time desc ");
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO)
+                .andPlanTimeLessThan(DateUtils.getEndDateTimeOfMonth(DateUtils.addMonths(new Date(), 1)))
+                .andPlanTimeGreaterThan(DateUtils.getStartOfMonth(new Date()));
+        example.setOrderByClause(" plan_time asc ");
+        List<RepaymentPlan> list = this.selectByExample(example);
+        long unpay = 0;
+        if (!list.isEmpty()) {
+//            //寻找当期
+//            RepaymentPlan plan=new RepaymentPlan() ;
+//            for (int i = 0; i < list.size(); i++) {
+//                if (list.get(i).getState() == Constants.REPAYMENT_ORDER_STATE.FINISHED) {
+//                    continue;
+//                } else {
+//                    plan = list.get(i);
+//                    break;
+//                }
+//            }
+            RepaymentPlanExample example2 = new RepaymentPlanExample();
+            example2.createCriteria().andOrderIdEqualTo(orderId)
+                    .andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO)
+                    .andStateNotEqualTo(Constants.REPAYMENT_ORDER_STATE.FINISHED);
+            List<RepaymentPlan> list2 = this.selectByExample(example2);
+            for (int i = 0; i < list2.size(); i++) {
+                unpay += list2.get(i).getRepayment();
+            }
+            list.get(0).setPenalty(unpay);
+            list.get(0).setCurrentId(list2.size());
+            return list.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public RepaymentPlan getPlanBySortId(String orderId, Integer sortId) {
+        RepaymentPlanExample example = new RepaymentPlanExample();
+        example.createCriteria().andOrderIdEqualTo(orderId).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).andSortIdEqualTo(sortId);
         List<RepaymentPlan> list = this.selectByExample(example);
         if (!list.isEmpty()) {
             return list.get(0);

@@ -115,6 +115,11 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .secret(new BCryptPasswordEncoder().encode("password"))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server")
+                .and()
+                .withClient("log-service")
+                .secret(new BCryptPasswordEncoder().encode("password"))
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
 
         ;
     }

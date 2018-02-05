@@ -21,10 +21,11 @@ import java.util.List;
 public interface UserClient {
 
     @GetMapping(value = "/api/userCreditReport")
-    CreditReport getCreditReport(@RequestParam("userId") String userId);
+    CreditReport getUserCreditReport(@RequestParam("userId") String userId);
 
     @GetMapping(value = "/user/creditReport")
-    CreditReport getCrediReport(@RequestParam("id") String id);
+    CreditReport getCreditReport(@RequestParam("id") String id);
+
     /**
      * 搜索用户
      * @param key
@@ -43,12 +44,12 @@ public interface UserClient {
         private static final Logger LOGGER = LoggerFactory.getLogger(UserClientFallback.class);
 
         @Override
-        public CreditReport getCreditReport(String userId) {
+        public CreditReport getUserCreditReport(String userId) {
             return null;
         }
 
         @Override
-        public CreditReport getCrediReport(String id) {
+        public CreditReport getCreditReport(String id) {
             return null;
         }
 

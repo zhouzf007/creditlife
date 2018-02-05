@@ -8,7 +8,7 @@ public class CreditReportVo {
     private String id;
     private String reportUrl;
     private Long quota;
-    private Integer creditScore;
+    private Double creditScore;
 
     public String getId() {
         return id;
@@ -34,11 +34,11 @@ public class CreditReportVo {
         this.quota = quota;
     }
 
-    public Integer getCreditScore() {
+    public Double getCreditScore() {
         return creditScore;
     }
 
-    public void setCreditScore(Integer creditScore) {
+    public void setCreditScore(Double creditScore) {
         this.creditScore = creditScore;
     }
 }

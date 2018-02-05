@@ -6,6 +6,8 @@ import com.lowagie.text.pdf.BaseFont;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.*;
@@ -16,6 +18,8 @@ import java.util.Map;
  */
 public class PDFHelper {
 
+    private final static Logger logger = LoggerFactory.getLogger(PDFHelper.class);
+
     public static ITextRenderer getRender() throws DocumentException, IOException {
         ITextRenderer render = new ITextRenderer();
         String path = getPath();
@@ -24,8 +28,9 @@ public class PDFHelper {
         //<style mce_bogus="1" type="text/css">
         //body {font-family: SimSun; background:none;margin-left: auto;margin-right: auto;}
         //</style>）
-        render.getFontResolver().addFont(path + "pdf/arialuni.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-        render.getFontResolver().addFont(path + "pdf/simsun.ttc", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+        logger.info("xxxx:"+path);
+        render.getFontResolver().addFont("pdf/arialuni.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+        render.getFontResolver().addFont("pdf/simsun.ttc", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
         return render;
     }
 
@@ -65,7 +70,8 @@ public class PDFHelper {
      * @return
      */
     public static String getPath(){
-        return PDFHelper.class.getResource("/").getPath().substring(1);
+//        return PDFHelper.class.getResource("/").getPath().substring(1);
+        return Thread.currentThread().getContextClassLoader().getResource("").getPath();
     }
 
 }

@@ -73,12 +73,12 @@ public class RepaymentController extends PaymentBaseController {
         plan.setUpdateOperator(vo.getUpdateOperator());
         if (plan != null) {
             Orders order = orderClient.getOrder(plan.getOrderId());
-            if (order.getState()==Constants.ORDER_STATE.FINISHED){
+            if (order.getState() == Constants.ORDER_STATE.FINISHED) {
                 return WebResult.fail(WebResult.CODE_NO_PERMISSION, "订单已完成，不允许变更还款计划状态");
             }
             //使用中 变更为 逾期
             if (vo.getState() == Constants.REPAYMENT_ORDER_STATE.OVERDUE) {
-                if (plan.getPlanTime().after(new Date())){
+                if (plan.getPlanTime().after(new Date())) {
                     return WebResult.fail(WebResult.CODE_NO_PERMISSION, "未到计划还款日，不能变更为逾期");
                 }
                 plan.setState(Constants.REPAYMENT_ORDER_STATE.OVERDUE);
@@ -88,6 +88,12 @@ public class RepaymentController extends PaymentBaseController {
                 updateOrder.setState(Constants.ORDER_STATE.OVERDUE);
                 orderClient.updateOrder(updateOrder);
             } else if (vo.getState() == Constants.REPAYMENT_ORDER_STATE.FINISHED) {
+                if (plan.getSortId() != 1) {
+                    RepaymentPlan lastp = repaymentPlanService.getPlanBySortId(order.getId(), plan.getSortId() - 1);
+                    if (lastp!=null&&lastp.getState() != Constants.REPAYMENT_ORDER_STATE.FINISHED) {
+                        return WebResult.fail(WebResult.CODE_NO_PERMISSION, "请优先结清上期还款");
+                    }
+                }
                 //使用中 变更为 已结清
                 plan.setState(Constants.REPAYMENT_ORDER_STATE.FINISHED);
                 plan.setSystemState(Constants.REPAYMENT_ORDER_STATE.FINISHED);
