@@ -195,4 +195,16 @@ public interface Constants {
         String LOGOUT = "1";//已退出登录
     }
 
+
+    /**
+     * 数据中心列表统计方式
+     */
+    interface DATA_CENTER_LIST_TYPE {
+        int ROLLUP = 0;//合计
+        int HOUR = 1;//按小时
+        int DAY = 2;//按天
+        int WEEK = 3;//按周
+        int MONTH = 4;//按月
+    }
+
 }
