@@ -53,18 +53,20 @@ spring:
 #      打开PSCache，并且指定每个连接上PSCache的大小 ,mysql设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
+  redis:
+    host: 10.1.1.241
+    port: 6379
+    # password:
+    pool:
+      max-active: 8
+      max-idle: 8
+      min-idle: 0
+      max-wait: 10000
+
 #    配置mybatis mapper.xml
 mybatis:
   mapper-locations: classpath*:com/entrobus/credit/*/dao/*/*.xml
 #  jpa:
 #    show-sql: true
 
-redis:
-  host: 10.1.1.241
-  port: 6379
-  # password:
-  pool:
-    max-active: 8
-    max-idle: 8
-    min-idle: 0
-    max-wait: 10000
+
