@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,9 @@ public interface CreditClient {
     Contract saveContract(@RequestBody ContractFillVo vo);
 
 
+    @GetMapping(value = "/api/contract")
+    Contract getContract(@RequestParam("id") String id);
+
     @Component
     class CreditClientFallback implements CreditClient {
 
@@ -30,6 +34,11 @@ public interface CreditClient {
 
         @Override
         public Contract saveContract(ContractFillVo vo) {
+            return null;
+        }
+
+        @Override
+        public Contract getContract(String id) {
             return null;
         }
 

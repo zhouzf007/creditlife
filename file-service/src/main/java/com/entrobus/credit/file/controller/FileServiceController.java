@@ -9,9 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -45,6 +44,14 @@ public class FileServiceController {
         return WebResult.ok(uploadResult);
     }
 
+    @PostMapping(value = "/postUploadFile",consumes =MediaType.MULTIPART_FORM_DATA_VALUE)
+    public WebResult postUploadFile(@RequestParam("file") MultipartFile file) {
+        UploadResult uploadResult = fileService.uploadFile(file);
+//        Map<String, Object> dataMap = new HashMap<>();
+//        dataMap.put("uploadResult", uploadResult);
+//        return WebResult.ok(dataMap);
+        return WebResult.ok(uploadResult);
+    }
     /**
      * 上传多文件
      *
@@ -129,7 +136,7 @@ public class FileServiceController {
      * @return FileUploadResult 文件上传结果
      */
     @RequestMapping("/uploadFileInputStream")
-    public FileUploadResult uploadFile(InputStream inputStream, String fileName) {
+    public FileUploadResult uploadFile(@RequestBody InputStream inputStream,@RequestParam("fileName") String fileName) {
         FileUploadResult fileUploadResult = new FileUploadResult();
         try {
             UploadResult uploadResult = fileService.uploadFile(inputStream, fileName);

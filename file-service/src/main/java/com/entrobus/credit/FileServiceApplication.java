@@ -1,5 +1,6 @@
 package com.entrobus.credit;
 
+import com.entrobus.credit.file.config.MultipartFileHttpMessageConverter;
 import com.entrobus.credit.file.service.FileService;
 import com.entrobus.credit.file.service.FileServiceFactory;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +20,10 @@ public class FileServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(FileServiceApplication.class, args);
     }
-
+    @Bean
+    public MultipartFileHttpMessageConverter multipartFileHttpMessageConverter() {
+        return new MultipartFileHttpMessageConverter();
+    }
     @Bean
     public FileService createInstance(){
         return FileServiceFactory.getDefualInstance();

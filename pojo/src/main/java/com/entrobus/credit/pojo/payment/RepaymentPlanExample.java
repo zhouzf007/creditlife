@@ -1409,6 +1409,66 @@ public class RepaymentPlanExample implements Serializable {
             addCriterion("sort_id not between", value1, value2, "sortId");
             return (Criteria) this;
         }
+
+        public Criteria andCurrentIdIsNull() {
+            addCriterion("current_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdIsNotNull() {
+            addCriterion("current_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdEqualTo(Integer value) {
+            addCriterion("current_id =", value, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdNotEqualTo(Integer value) {
+            addCriterion("current_id <>", value, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdGreaterThan(Integer value) {
+            addCriterion("current_id >", value, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("current_id >=", value, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdLessThan(Integer value) {
+            addCriterion("current_id <", value, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("current_id <=", value, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdIn(List<Integer> values) {
+            addCriterion("current_id in", values, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdNotIn(List<Integer> values) {
+            addCriterion("current_id not in", values, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdBetween(Integer value1, Integer value2) {
+            addCriterion("current_id between", value1, value2, "currentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("current_id not between", value1, value2, "currentId");
+            return (Criteria) this;
+        }
     }
 
     /**

@@ -45,6 +45,6 @@ public interface OrdersService {
     WebResult getOrderList(List<Integer> states, String orgId, Integer offset, Integer limit) throws Exception;
 
     //接口使用
-    List<UserOrdersVo> getUserOrderList(String id, Integer offset, Integer limit);
+    List<UserOrdersVo> getUserOrderList(String id, Integer offset, Integer limit) throws Exception;
 
 }

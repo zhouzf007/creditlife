@@ -36,4 +36,6 @@ public interface RepaymentPlanService {
     List<RepaymentPlan> getFinishedRepaymentPlans(String orderId);
 
     RepaymentPlan getPresentRepaymentPlan(String orderId);
+
+    RepaymentPlan getPlanBySortId(String orderId,Integer sortId);
 }

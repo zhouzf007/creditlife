@@ -5,6 +5,8 @@ import com.entrobus.credit.vo.common.PdfVo;
 import com.lowagie.text.DocumentException;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.File;
@@ -18,30 +20,37 @@ import java.util.Map;
  * Created by cwh on 2018/1/29.
  */
 public class PDFUtil {
+    private final static Logger logger = LoggerFactory.getLogger(PDFUtil.class);
 
     /**
      * 生成PDF文件
-     * @param templateName 模板名称
+     *
+     * @param templateName  模板名称
      * @param imageDiskPath 图片存放目录
-     * @param data freemark模板填充所需数据
+     * @param data          freemark模板填充所需数据
      * @throws Exception
      */
-    public static PdfVo generateToFile(String templateName,String imageDiskPath,Map data) throws Exception {
+    public static PdfVo generateToFile(String templateName, String imageDiskPath, Map data) throws Exception {
         String directory = null;
         String pdfName = null;
+        String mpdf="";
         try {
             directory = getTempDirectory();
             //生成的PDF文件名称
-            pdfName = directory + GUIDUtil.genRandomGUID()+System.currentTimeMillis()+".pdf";
+            pdfName = directory + GUIDUtil.genRandomGUID() + System.currentTimeMillis() + ".pdf";
             OutputStream out = new FileOutputStream(pdfName);
             //生成html文件模板
-            String html = PDFHelper.getPdfContent(templateName, data,directory);
+            String html = PDFHelper.getPdfContent(templateName, data, directory);
+            logger.info("html:"+html);
             ITextRenderer render = PDFHelper.getRender();
             render.setDocument(html);
-            if(imageDiskPath!=null&&!imageDiskPath.equals("")){
+            if (imageDiskPath != null && !imageDiskPath.equals("")) {
                 //new File(basePath).toURI().toURL().toString()
-                render.getSharedContext().setBaseURL("file:/"+imageDiskPath);
+                render.getSharedContext().setBaseURL("file:/" + imageDiskPath);
             }
+            logger.info("pdfName:"+pdfName);
+            mpdf=html.substring(0,html.lastIndexOf("/")+1)+pdfName;
+            logger.info("modifypdfName:"+mpdf.replace("file:",""));
             render.layout();
             render.createPDF(out);
             render.finishPDF();
@@ -54,20 +63,22 @@ public class PDFUtil {
             e.printStackTrace();
         }
         PdfVo vo = new PdfVo();
-        vo.setDirectory(directory);
+        vo.setDirectory(mpdf.replace("file:",""));
         vo.setPdfName(pdfName);
-        vo.setFile(new File(pdfName));
+//        File pf=new File(mpdf.replace("file:",""));
+//        logger.info("TotalSpace"+pf.length());
+//        vo.setFile(pf);
         return vo;
     }
 
 
-
     /**
      * 获取临时文件地址
+     *
      * @return
      */
     private static String getTempDirectory() {
-        //URL resourceUrl = clazz.getClassLoader().getResource("image_temp");
+//        URL resourceUrl = clazz.getClassLoader().getResource("image_temp");
         URL resourceUrl = Thread.currentThread().getContextClassLoader().getResource("pdf_temp");
         if(resourceUrl==null){
             File dir = new File(Thread.currentThread().getContextClassLoader().getResource("").getFile()+"/pdf_temp");
@@ -75,9 +86,10 @@ public class PDFUtil {
                 resourceUrl = Thread.currentThread().getContextClassLoader().getResource("pdf_temp");
             }
         }
-        if (resourceUrl==null) return null;
+        if (resourceUrl==null) return "";
         String directory = resourceUrl.getFile();//偶尔会空指针，待优化
-        if(!directory.endsWith(File.separator)){
+//        String directory = "/tmp";
+        if (!directory.endsWith(File.separator)) {
             directory += File.separator;
         }
         return directory;

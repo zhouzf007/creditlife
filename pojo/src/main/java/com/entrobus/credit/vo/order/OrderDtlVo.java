@@ -16,7 +16,7 @@ public class OrderDtlVo {
     private String name;
     private Date applyTime;
     private String mobile;
-    private String contractId;
+    private String contract;
     private String repaymentTerm;
     private String repaymentType;
 
@@ -52,7 +52,7 @@ public class OrderDtlVo {
 
     private Double score;
     private String account;
-    private String creditReportId;
+    private String creditReport;
 
     public Integer getRole() {
         return role;
@@ -203,12 +203,12 @@ public class OrderDtlVo {
         this.mobile = mobile;
     }
 
-    public String getContractId() {
-        return contractId;
+    public String getContract() {
+        return contract;
     }
 
-    public void setContractId(String contractId) {
-        this.contractId = contractId;
+    public void setContract(String contract) {
+        this.contract = contract;
     }
 
     public String getRepaymentTerm() {
@@ -251,12 +251,12 @@ public class OrderDtlVo {
         this.account = account;
     }
 
-    public String getCreditReportId() {
-        return creditReportId;
+    public String getCreditReport() {
+        return creditReport;
     }
 
-    public void setCreditReportId(String creditReportId) {
-        this.creditReportId = creditReportId;
+    public void setCreditReport(String creditReport) {
+        this.creditReport = creditReport;
     }
 
     public String getStateName() {

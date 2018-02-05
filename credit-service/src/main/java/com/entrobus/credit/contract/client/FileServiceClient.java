@@ -4,11 +4,13 @@ import com.entrobus.credit.common.bean.FileUploadResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.InputStream;
 
 /**
  * 调用文件上传服务
@@ -18,6 +20,7 @@ public interface FileServiceClient {
 
     /**
      * 上传网络文件
+     *
      * @param fileUrl 文件URL
      * @return FileUploadResult 文件上传结果
      */
@@ -25,7 +28,15 @@ public interface FileServiceClient {
     FileUploadResult uploadNetworkFile(@RequestParam(value = "fileUrl") String fileUrl);
 
     /**
+     *
+     * @return uploadFileStream 文件上传结果
+     */
+    @PostMapping(value = "/postUploadFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    FileUploadResult postUploadFile(@RequestParam("file") MultipartFile file);
+
+    /**
      * 上传网络文件
+     *
      * @param fileUrl 文件URL
      * @param fileExt 文件后缀
      * @return FileUploadResult 文件上传结果
@@ -35,6 +46,7 @@ public interface FileServiceClient {
 
     /**
      * 上传文件到文件服务器
+     *
      * @param file
      * @return
      */
@@ -46,13 +58,18 @@ public interface FileServiceClient {
      * 文件上传客户端断路器
      */
     @Component
-    class  FileServiceClientHystric implements FileServiceClient{
+    class FileServiceClientHystric implements FileServiceClient {
 
         private static final Logger logger = LoggerFactory.getLogger(FileServiceClientHystric.class);
 
         @Override
         public FileUploadResult uploadNetworkFile(String fileUrl) {
             logger.info("调用文件服务上传网络文件出错，进入fallback方法");
+            return null;
+        }
+
+        @Override
+        public FileUploadResult postUploadFile(MultipartFile file) {
             return null;
         }
 

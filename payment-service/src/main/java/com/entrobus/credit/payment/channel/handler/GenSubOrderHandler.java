@@ -63,7 +63,7 @@ public class GenSubOrderHandler {
         repaymentService.insertSelective(repayment);
         String repaymentId = repayment.getId();
         //@TODO 计算每期的金额 以及 每期还款日期
-        Date repayDate = DateUtils.addMonths(new Date(), 1);//默认按照一月一还
+        Date repayDate = DateUtils.addMonths(order.getLoanTime(), 1);//默认按照一月一还
         if (DateUtils.getDay(repayDate) > 28) {
             repayDate = DateUtils.setDays(repayDate, 28);//当月大于28号按28号算
         }
@@ -77,18 +77,18 @@ public class GenSubOrderHandler {
             plan.setRepaymentId(repaymentId);
             plan.setAccount(account);
             if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
-                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(principal, monthRate, term, i + 1);
-                BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(principal, monthRate);
+                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(principal, monthRate, term, i + 1).multiply(new BigDecimal(100));
+                BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(principal, monthRate).multiply(new BigDecimal(100));
                 plan.setInterest(monthlyInterest.longValue());
                 plan.setRepayment(monthlyRepayment.longValue());
-                plan.setPrincipal(i==term-1?principal.longValue():0);
+                plan.setPrincipal(i==term-1?principal.longValue()*100:0);
             } else if (order.getRepaymentType() == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
                 BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(principal, monthRate, term);
                 BigDecimal monthlyInterest = CPMUtils.monthlyInterest(principal, monthRate, monthlyRepayment, i + 1);
                 BigDecimal monthlyPrincipal = CPMUtils.monthPrincipal(monthlyRepayment, monthlyInterest);
-                plan.setInterest(monthlyInterest.longValue());
-                plan.setRepayment(monthlyRepayment.longValue());
-                plan.setPrincipal(monthlyPrincipal.longValue());
+                plan.setInterest(monthlyInterest.longValue()*100);
+                plan.setRepayment(monthlyRepayment.longValue()*100);
+                plan.setPrincipal(monthlyPrincipal.longValue()*100);
             }
             plan.setPlanTime(repayDate);
             plan.setCreateOperator(createOp);

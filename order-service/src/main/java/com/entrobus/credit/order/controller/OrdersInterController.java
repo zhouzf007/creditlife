@@ -6,17 +6,22 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.order.channel.GenSubOrderPublishChannel;
+import com.entrobus.credit.order.client.CreditClient;
 import com.entrobus.credit.order.client.PaymentClient;
 import com.entrobus.credit.order.client.ProductionClient;
 import com.entrobus.credit.order.client.UserClient;
 import com.entrobus.credit.order.services.OrderCacheService;
 import com.entrobus.credit.order.services.OrderInstanceService;
 import com.entrobus.credit.order.services.OrdersService;
+import com.entrobus.credit.pojo.order.Contract;
+import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.vo.order.*;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -25,6 +30,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +38,7 @@ import java.util.List;
 @RefreshScope
 @RestController
 public class OrdersInterController {
+    private static final Logger logger = LoggerFactory.getLogger(OrdersInterController.class);
 
     @Autowired
     OrdersService ordersService;
@@ -44,6 +51,10 @@ public class OrdersInterController {
 
     @Autowired
     UserClient userClient;
+
+    @Autowired
+    CreditClient creditClient;
+
 
     @Autowired
     PaymentClient paymentClient;
@@ -103,8 +114,11 @@ public class OrdersInterController {
         dtl.setRepaymentTypeName(cacheService.translate(Cachekey.Translation.REPAYMENT_TYPE + order.getRepaymentType()));
         dtl.setUsage(order.getLoanUsage());
         dtl.setScore(order.getCreditScore());
-        dtl.setContractId(order.getContractId());
-        dtl.setCreditReportId(order.getCreditReportId());
+        CreditReport report = userClient.getUserCreditReport(order.getUserId());
+        Contract contract = creditClient.getContract(order.getContractId());
+        dtl.setContract(contract != null ? contract.getContractUrl() : "");
+        logger.info("report :"+report+"report.getReportUrl()"+report.getReportUrl());
+        dtl.setCreditReport(report != null ? report.getReportUrl() : "");
         dtl.setAuditor(order.getAuditor());
         dtl.setAuditTime(order.getAuditTime());
         dtl.setLoanOperator(order.getLoanOperator());
@@ -196,7 +210,7 @@ public class OrdersInterController {
      * @param order
      */
     @PutMapping(value = "/order", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResult updateOrder(@RequestBody OrderUpdateVo order) {
+    public WebResult updateOrder(@RequestBody OrderUpdateVo order) throws ParseException {
         Orders loanOrder = ordersService.selectByPrimaryKey(order.getId());
         if (loanOrder != null) {
             if (loanOrder.getState() == Constants.ORDER_STATE.AUIDT_PENGDING && order.getState() == Constants.ORDER_STATE.LOAN_PENGDING) {
@@ -211,8 +225,9 @@ public class OrdersInterController {
                 if (StringUtils.isEmpty(loanOrder.getAuditor())) loanOrder.setAuditor(order.getAuditor());
                 loanOrder.setState(Constants.ORDER_STATE.PASS);
                 loanOrder.setLoanOperator(order.getLoanOperator());
+                logger.info("order.getLoanTimeStr():"+order.getLoanTimeStr());
                 if (StringUtils.isNotEmpty(order.getLoanTimeStr())) {
-                    loanOrder.setLoanTime(DateUtils.parseDate(order.getLoanTimeStr()));
+                    loanOrder.setLoanTime(DateUtils.parseDate(order.getLoanTimeStr(),"yyyy-MM-dd"));
                 } else {
                     loanOrder.setLoanTime(new Date());
                 }
@@ -233,6 +248,7 @@ public class OrdersInterController {
             } else if (loanOrder.getState() == Constants.ORDER_STATE.PASS && order.getState() == Constants.ORDER_STATE.OVERDUE) {
                 //逾期
                 loanOrder.setState(Constants.ORDER_STATE.OVERDUE);
+                loanOrder.setSystemState(Constants.ORDER_STATE.OVERDUE);
                 loanOrder.setUpdateOperator(order.getUpdateOperator());
                 ordersService.updateByPrimaryKeySelective(loanOrder);
             } else if (order.getState() == Constants.ORDER_STATE.FINISHED) {
@@ -245,6 +261,7 @@ public class OrdersInterController {
             } else if (loanOrder.getState() == Constants.ORDER_STATE.OVERDUE && order.getState() == Constants.ORDER_STATE.PASS) {//
                 //当期结清，订单恢复正常状态
                 loanOrder.setState(Constants.ORDER_STATE.PASS);
+                loanOrder.setSystemState(Constants.ORDER_STATE.PASS);
                 loanOrder.setUpdateOperator(order.getUpdateOperator());
                 ordersService.updateByPrimaryKeySelective(loanOrder);
             } else {

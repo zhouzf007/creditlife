@@ -20,7 +20,6 @@ import com.entrobus.credit.vo.order.UserOrdersVo;
 import com.entrobus.credit.vo.order.UserRepaymentPlanVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
 import com.entrobus.credit.vo.user.UserStateVo;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
@@ -58,7 +57,7 @@ public class OrderApiController {
      * @return
      */
     @GetMapping(path = "/userLoanState")
-    public WebResult getUserLoanState(@RequestParam("token") String token) {
+    public WebResult getUserLoanState(@RequestParam("token") String token) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(token);
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登陆");
@@ -67,8 +66,13 @@ public class OrderApiController {
         UserStateVo vo = new UserStateVo();
         if (lastOrder == null) {
             vo.setState(-1);
+            vo.setMoney(AmountUtil.changeF2Y(userInfo.getQuota()));
         } else {
             vo.setState(lastOrder.getState());
+            vo.setApplyTime(lastOrder.getApplyTime());
+            Date enterAuditTime=DateUtils.addDays(lastOrder.getApplyTime(),1);
+            vo.setAuditTime(enterAuditTime.before(new Date())?enterAuditTime:null);
+            vo.setMoney(AmountUtil.changeF2Y(lastOrder.getApplyMoney()));
         }
         return WebResult.ok(vo);
     }
@@ -83,7 +87,7 @@ public class OrderApiController {
     public WebResult apply(@RequestBody ApplyVo vo) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(vo.getToken());
         if (userInfo == null) {
-            return WebResult.fail("用户未登录");
+            return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
         }
         return ordersService.applyOrder(vo, userInfo);
     }
@@ -118,7 +122,9 @@ public class OrderApiController {
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登录");
         }
+        long dueTotal = 0;
         long total = 0;
+        long finished = 0;
         UserRepaymentPlanVo rsVo = new UserRepaymentPlanVo();
         List<PlanVo> plist = new ArrayList<>();
         List<RepaymentPlan> list = paymentClient.getOrderRepaymentPlan(orderId);
@@ -136,20 +142,30 @@ public class OrderApiController {
                     vo.setOverdue((int) DateUtils.getDaySub(DateUtils.formatDateTime(dueTime), DateUtils.formatDateTime(new Date())));
                 }
             } else if (DateUtils.getMonth(new Date()) == DateUtils.getMonth(dueTime)) {
+                vo.setStatus(Constants.PLAN_STATUS.PRESENT);
+            }else {
                 vo.setStatus(Constants.PLAN_STATUS.FEATURE);
             }
-            vo.setState(plan.getState());
-            vo.setStateName(cacheService.translate(Cachekey.Translation.REPAYMENT_STATE + plan.getState()));
+            Integer state=plan.getSystemState()==Constants.ORDER_STATE.OVERDUE?Constants.ORDER_STATE.OVERDUE:plan.getState();
+            vo.setState(state);
+            vo.setStateName(cacheService.translate(Cachekey.Translation.REPAYMENT_STATE + state));
             vo.setDueTime(plan.getPlanTime());
             vo.setInterest(AmountUtil.changeF2Y(plan.getInterest()));
             vo.setPrincipal(AmountUtil.changeF2Y(plan.getPrincipal()));
-            vo.setCapital(plan.getPrincipal());
+            vo.setCapital(AmountUtil.changeF2Y(plan.getPrincipal()));
             plist.add(vo);
             if (plan.getState() == Constants.REPAYMENT_ORDER_STATE.PASS || plan.getState() == Constants.REPAYMENT_ORDER_STATE.OVERDUE) {
-                total += plan.getPrincipal() + plan.getInterest();
+                dueTotal += plan.getPrincipal() + plan.getInterest();
+            }else {
+                total+= plan.getPrincipal() + plan.getInterest();
+                finished++;
             }
         }
-        rsVo.setBalance(AmountUtil.changeF2Y(total));
+        if (finished==list.size()){
+            rsVo.setBalance(AmountUtil.changeF2Y(total));
+        }else {
+            rsVo.setBalance(AmountUtil.changeF2Y(dueTotal));
+        }
         rsVo.setPlanList(plist);
         return WebResult.ok(rsVo);
     }

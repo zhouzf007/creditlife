@@ -19,7 +19,7 @@ public class PlanVo {
     }
 
     private Integer overdue;//逾期天数
-    private Long capital;//本金
+    private String capital;//本金
 
     public String getPrincipal() {
         return principal;
@@ -72,11 +72,11 @@ public class PlanVo {
         this.state = state;
     }
 
-    public Long getCapital() {
+    public String getCapital() {
         return capital;
     }
 
-    public void setCapital(Long capital) {
+    public void setCapital(String capital) {
         this.capital = capital;
     }
 }

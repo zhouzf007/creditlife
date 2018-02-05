@@ -29,32 +29,32 @@ public class UserOrdersVo {
     private Integer term;//当期
     private Integer totalTerm;//总期
     private Date dueTime;//本期还款时间
-    private Long money;//贷款金额
-    private Long principalAndInterest;//本息
-    private Long balance;//借款余额
+    private String money;//贷款金额
+    private String principalAndInterest;//本息
+    private String balance;//借款余额
     private Integer state;
 
-    public Long getPrincipalAndInterest() {
+    public String getPrincipalAndInterest() {
         return principalAndInterest;
     }
 
-    public void setPrincipalAndInterest(Long principalAndInterest) {
+    public void setPrincipalAndInterest(String principalAndInterest) {
         this.principalAndInterest = principalAndInterest;
     }
 
-    public Long getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 
-    public Long getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(Long money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 

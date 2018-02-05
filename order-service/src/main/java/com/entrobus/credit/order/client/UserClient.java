@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserClient {
 
     @GetMapping(value = "/api/userCreditReport")
-    CreditReport getCreditReport(@RequestParam("userId") String userId);
+    CreditReport getUserCreditReport(@RequestParam("userId") String userId);
 
     @GetMapping(value = "/user/creditReport")
-    CreditReport getCrediReport(@RequestParam("id") String id);
+    CreditReport getCreditReport(@RequestParam("id") String id);
 
 
     @Component
@@ -30,12 +30,12 @@ public interface UserClient {
         private static final Logger LOGGER = LoggerFactory.getLogger(UserClientFallback.class);
 
         @Override
-        public CreditReport getCreditReport(String userId) {
+        public CreditReport getUserCreditReport(String userId) {
             return null;
         }
 
         @Override
-        public CreditReport getCrediReport(String id) {
+        public CreditReport getCreditReport(String id) {
             return null;
         }
 
