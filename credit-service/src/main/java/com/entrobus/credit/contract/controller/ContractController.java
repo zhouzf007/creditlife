@@ -5,11 +5,16 @@ import com.entrobus.credit.common.bean.FileUploadResult;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.contract.client.FileServiceClient;
 import com.entrobus.credit.contract.services.ContractService;
+import com.entrobus.credit.contract.services.FileUploadResource;
 import com.entrobus.credit.contract.services.impl.ContractServiceImpl;
 import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.entrobus.credit.vo.contract.ContractFillVo;
+import feign.Feign;
+import feign.form.FormEncoder;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,10 +89,17 @@ public class ContractController {
     @ResponseBody
     @RequestMapping("/test")
     public FileUploadResult test2() throws IOException {
+        String BOUNDARY = "---------------------------123821742118716";
         InputStream in = new FileInputStream("D:\\123.txt");
-        MultipartFile multipartFile = new MockMultipartFile("123.text", in);
+        MultipartFile multipartFile = new MockMultipartFile("123.text","123.text", "multipart/form-data; boundary=" + BOUNDARY,in);
         long size = multipartFile.getSize();
-        FileUploadResult uploadResult = fileServiceClient.postUploadFile(multipartFile);
-        return uploadResult;
+        multipartFile.transferTo(new File("F:\\456.txt"));
+        FileUploadResource fileUploadResource = Feign.builder()
+                .encoder(new FormEncoder(new JacksonEncoder()))
+                .decoder(new JacksonDecoder())
+                .target(FileUploadResource.class, "http://localhost:8060/file");
+        FileUploadResult result= fileUploadResource.upload(new File("D:\\123.txt"));
+//       FileUploadResult uploadResult = fileServiceClient.postUploadFile(multipartFile);
+        return result;
     }
 }

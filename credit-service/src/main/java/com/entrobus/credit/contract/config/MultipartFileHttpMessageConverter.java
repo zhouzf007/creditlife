@@ -25,6 +25,7 @@ public class MultipartFileHttpMessageConverter implements HttpMessageConverter<M
 	protected ResourceHttpMessageConverter resourceHttpMessageConverter;
 
 	public MultipartFileHttpMessageConverter() {
+		supportedMediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
 		supportedMediaTypes.add(MediaType.MULTIPART_FORM_DATA);
 		resourceHttpMessageConverter = new ResourceHttpMessageConverter();
 	}
