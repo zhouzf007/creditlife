@@ -1,5 +1,7 @@
 package com.entrobus.credit.user.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
@@ -11,24 +13,23 @@ import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
+import com.entrobus.credit.user.client.BsStaticsClient;
 import com.entrobus.credit.user.client.MsgClient;
 import com.entrobus.credit.user.common.controller.BaseController;
 import com.entrobus.credit.user.services.*;
 import com.entrobus.credit.user.utils.ShiroUtils;
 import com.entrobus.credit.vo.order.CreditReportVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
+import com.entrobus.credit.vo.user.SearchUserInfoVo;
 import com.entrobus.credit.vo.user.UserAccountVo;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mozl on 2018/1/09.
@@ -57,6 +58,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private BsBankService bsBankService;
+
+    @Autowired
+    private BsStaticsClient bsStaticsClient;
 
     @GetMapping(value = "/login")
     public WebResult login(String cellphone, String pwd) {
@@ -197,10 +201,13 @@ public class UserController extends BaseController {
                     return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
                 }
             }
-//            Map map = userInfoService.isOwner(cellphone);
-//            if(map == null || StringUtils.isBlank((String) map.get("name"))){
-//                return WebResult.fail(WebResult.CODE_OPERATION, "抱歉，您非越秀地产业主。暂时不提供此服务");
-//            }
+            String off_on  = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "SENDCODE_OWNER");
+            if(off_on.equals("1")){
+                Map map = userInfoService.isOwner(cellphone);
+                if(map == null || StringUtils.isBlank((String) map.get("name"))){
+                    return WebResult.fail(WebResult.CODE_OPERATION, "抱歉，您非业主。暂时不提供此服务");
+                }
+            }
         }
         msgClient.sendVerificationCode(cellphone, "");
         return WebResult.ok();
@@ -245,18 +252,18 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
-//        Map<String, String> m = new HashMap<>();
-//        m.put("name", vo.getName());
-//        m.put("cellphone", vo.getCellphone());
-//        m.put("idCard", userInfo.getIdCard());
-//        m.put("bankId", vo.getAccount());
-//        WebResult w = bsBankService.verify(m);
-//        if(!w.isOk()){
-//            return WebResult.fail(WebResult.CODE_OPERATION, "请使用您本人的银行卡");
-//        }
-//        if (!w.isOk()){
-//            return w;
-//        }
+        String off_on  = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "ACCOUNT_ISOK");
+        if(off_on.equals("1")){
+            Map<String, String> m = new HashMap<>();
+            m.put("name", vo.getName());
+            m.put("cellphone", vo.getCellphone());
+            m.put("idCard", userInfo.getIdCard());
+            m.put("bankId", vo.getAccount());
+            WebResult w = bsBankService.verify(m);
+            if(!w.isOk()){
+                return WebResult.fail(WebResult.CODE_OPERATION, "您填写的持卡人姓名或手机号码与银行预留的不一致。请联系银行客服或前往银行柜台修改后再试");
+            }
+        }
         //已添加
         UserAccountExample example = new UserAccountExample();
         example.createCriteria().andUserIdEqualTo(userInfo.getId()).andAccountEqualTo(vo.getAccount()).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -343,6 +350,73 @@ public class UserController extends BaseController {
             userInfoService.updateByPrimaryKey(userInfo);
             userInfoService.initUserCache(userInfo);
         }
+    }
+
+    /**
+     * 搜索用户
+     * @param key
+     */
+    @GetMapping(value = "/search")
+    public List<SearchUserInfoVo> searchUser(@RequestParam("key") String key) {
+        //暂时这么搜索了。。。。。
+        List<SearchUserInfoVo> voList = new ArrayList<>();
+        if (StringUtils.isBlank(key)) return voList;
+        String realName = null;
+        String cellphone = null;
+        try {
+            JSONObject searchObj = JSON.parseObject(key);
+            realName = searchObj.getString("realName");
+            cellphone = searchObj.getString("cellphone");
+        }catch (Exception e){
+            return voList;
+        }
+        UserInfoExample example = new UserInfoExample();
+        UserInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        if (StringUtils.isNotBlank(realName)) {
+            criteria.andRealNameLike("%" + realName + "%");
+        }
+        if (StringUtils.isNotBlank(cellphone)) {
+            criteria.andCellphoneLike("%" + cellphone + "%");
+        }
+        List<UserInfo> userInfoList = userInfoService.selectByExample(example);
+        for (UserInfo userInfo : userInfoList) {
+            SearchUserInfoVo vo = new SearchUserInfoVo();
+            BeanUtils.copyProperties(vo,userInfo);
+            voList.add(vo);
+        }
+        return voList;
+    }
+    /**
+     * 搜索用户ID
+     * @param key
+     */
+    @GetMapping(value = "/searchUserIds")
+    public Set<String> searchUserIds(@RequestParam("key") String key) {
+        //暂时这么搜索了。。。。。
+        if (StringUtils.isBlank(key)) return new TreeSet<>();
+        String realName = null;
+        String cellphone = null;
+        try {
+            JSONObject searchObj = JSON.parseObject(key);
+            if (searchObj != null) {
+                realName = searchObj.getString("realName");
+                cellphone = searchObj.getString("cellphone");
+            }
+        }catch (Exception e){
+            return new TreeSet<>();
+        }
+        UserInfoExample example = new UserInfoExample();
+        UserInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
+        if (StringUtils.isNotBlank(realName)) {
+            criteria.andRealNameLike("%" + realName + "%");
+        }
+        if (StringUtils.isNotBlank(cellphone)) {
+            criteria.andCellphoneLike("%" + cellphone + "%");
+        }
+        Set<String> idSet = userInfoService.getUserIdSetByExample(example);
+        return idSet;
     }
 
 }

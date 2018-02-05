@@ -46,25 +46,7 @@ public class LogController {
         return operationLogService.clear();
     }
 
-    /**
-     * 客户端上传日志
-     * @param form
-     * @param parameter
-     * @param request
-     * @return
-     */
-    @PostMapping(value = "/client")
-    public WebResult clientLog(@RequestParam String form, CommonParameter parameter, HttpServletRequest request){
-        if (StringUtils.isBlank(form)) return WebResult.fail(WebResult.CODE_PARAMETERS);
-        ClientLog log = new ClientLog();
-        log.setAddress(ServletUtil.getIpAddr(request));
-        log.setContent(form);
-        if (StringUtils.isNotBlank(parameter.getClient()))
-            log.setClient(Integer.valueOf(parameter.getClient()));
-        clientLogService.insertSelective(log);
-        return WebResult.ok();
-    }
-
+ 
     /**
      * 资金方平台 操作日志列表
      * @param queryVo

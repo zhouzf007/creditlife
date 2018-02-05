@@ -1,6 +1,8 @@
 package com.entrobus.credit.order.services.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
@@ -223,7 +225,7 @@ public class OrdersServiceImpl implements OrdersService {
         return WebResult.ok((Object) rsMap);
     }
 
-    public WebResult getUserOrderList(List<Integer> states, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getUserOrderList(List<Integer> states,String key,  String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -233,7 +235,23 @@ public class OrdersServiceImpl implements OrdersService {
         if (StringUtils.isNotEmpty(orgId)) {
             criteria.andOrgIdEqualTo(orgId);
         }
-        example.setDistinct(true);
+        //搜索、暂时这样 start
+        if (StringUtils.isNotBlank(key)) {
+
+            JSONObject searchObj = JSON.parseObject(key);
+            if (searchObj != null  ){
+                //搜索用户
+                if (StringUtils.isNotBlank(searchObj.getString("realName")) || StringUtils.isNotBlank(searchObj.getString("cellphone")) ) {
+                    List<String> uidList = userClient.searchUserIds(key);
+                    if (ConversionUtil.isNotEmptyCollection(uidList)) {
+                        criteria.andUserIdIn(uidList);
+                    }else {
+                        return WebResult.ok().put("rows",new ArrayList<>(0)).put("total",0);
+                    }
+                }
+            }
+        }
+        //搜索、暂时这样 end
         example.setOrderByClause(" create_time desc ");
         if (offset != null && limit != null)
             PageHelper.startPage(offset, limit);
@@ -245,8 +263,10 @@ public class OrdersServiceImpl implements OrdersService {
             rsorderVo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
             CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
             rsorderVo.setId(order.getId());
-            rsorderVo.setUserName(userInfo.getRealName());
-            rsorderVo.setMobile(userInfo.getCellphone());
+            if (userInfo != null) {
+                rsorderVo.setUserName(userInfo.getRealName());
+                rsorderVo.setMobile(userInfo.getCellphone());
+            }
             rsorderVo.setScore(order.getCreditScore());
             rsorderVo.setUserId(order.getUserId());
             rsorderVo.setState(order.getState());
@@ -261,7 +281,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public WebResult getOrderList(List<Integer> states, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getOrderList(List<Integer> states,String searchKey, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -271,6 +291,29 @@ public class OrdersServiceImpl implements OrdersService {
         if (StringUtils.isNotEmpty(orgId)) {
             criteria.andOrgIdEqualTo(orgId);
         }
+        //搜索、暂时这样 start
+        if (StringUtils.isNotBlank(searchKey)) {
+
+            JSONObject searchObj = JSON.parseObject(searchKey);
+            if (searchObj != null  ){
+                String applyNo = searchObj.getString("applyNo");
+                if (StringUtils.isNotBlank(applyNo)){
+                    criteria.andApplyNoLike("%" + applyNo + "%");
+                }
+                //搜索用户
+                if (StringUtils.isNotBlank(searchObj.getString("realName")) || StringUtils.isNotBlank(searchObj.getString("cellphone")) ) {
+                    List<String> uidList = userClient.searchUserIds(searchKey);
+                    if (ConversionUtil.isNotEmptyCollection(uidList)) {
+                        criteria.andUserIdIn(uidList);
+                    }else {
+                        return WebResult.ok().put("rows",new ArrayList<>(0)).put("total",0);
+                    }
+                }
+            }
+        }
+        //搜索、暂时这样 end
+
+
         example.setOrderByClause(" create_time desc ");
         if (offset != null && limit != null)
             PageHelper.startPage(offset, limit);
@@ -281,7 +324,7 @@ public class OrdersServiceImpl implements OrdersService {
             OrderListVo orderVo = new OrderListVo();
             CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
             orderVo.setId(order.getId());
-            orderVo.setUserName(userInfo.getRealName());
+            orderVo.setUserName(userInfo == null ? "" :userInfo.getRealName());
             orderVo.setApplyTime(DateUtils.formatDate(order.getApplyTime()));
             orderVo.setApplyNo(order.getApplyNo());
             orderVo.setState(order.getState());

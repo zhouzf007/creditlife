@@ -181,4 +181,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         return null;
     }
+
+    /**
+     * 只查询用户id
+     * @param example
+     * @return
+     */
+    @Override
+    public Set<String> getUserIdSetByExample(UserInfoExample example){
+        return userInfoMapper.getUserIdListByExample(example);
+    }
 }

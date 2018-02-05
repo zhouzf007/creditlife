@@ -7,19 +7,20 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
 /**
  * Created by zhouzf on 2017/12/2.
+ * spring boot 会自动创建
  */
-@Configuration
-@ConditionalOnClass(OAuthConfiguration.class)
+//@Configuration
+//@ConditionalOnClass(OAuthConfiguration.class)
 public class RedisClusterConfig {
 
 //    @Resource
 //    private RedisClusterProperties redisClusterProperties;
 
     // redis 单节点模式
-    @Bean
-    JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory();
-    }
+//    @Bean
+//    JedisConnectionFactory jedisConnectionFactory() {
+//        return new JedisConnectionFactory();
+//    }
 //     redis Cluster 集群模式
 //     error pipeline not supported
 //    @Bean

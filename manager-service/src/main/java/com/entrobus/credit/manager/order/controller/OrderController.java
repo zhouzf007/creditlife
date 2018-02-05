@@ -11,10 +11,7 @@ import com.entrobus.credit.vo.order.OrderUpdateVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
@@ -33,9 +30,9 @@ public class OrderController extends ManagerBaseController {
      * 订单列表
      */
     @GetMapping("/orderList")
-    public WebResult getOrderList(Integer offset, Integer limit, String states) {
+    public WebResult getOrderList(Integer offset, Integer limit, String states,String key) {
         SysLoginUserInfo sys=getCurrLoginUser();
-        return orderClient.getOrderList(states, sys.getOrgId(), offset, limit);
+        return orderClient.getOrderList(states,key, sys.getOrgId(), offset, limit);
     }
 
     /**
@@ -79,9 +76,9 @@ public class OrderController extends ManagerBaseController {
      * @return
      */
     @GetMapping("/repayment/list")
-    public WebResult getRepaymentList(Integer offset, Integer limit, String states) {
+    public WebResult getRepaymentList(Integer offset, Integer limit, String states,  String key) {
         SysLoginUserInfo sys=getCurrLoginUser();
-        return orderClient.getOrderList(states, sys.getOrgId(), offset, limit);
+        return orderClient.getOrderList(states, key,sys.getOrgId(), offset, limit);
     }
 
     /**
