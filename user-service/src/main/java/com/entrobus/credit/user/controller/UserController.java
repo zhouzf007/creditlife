@@ -328,7 +328,7 @@ public class UserController extends BaseController {
         CreditReportVo vo = new CreditReportVo();
         try {
             if(creditReport != null){
-                BeanUtils.copyProperties(vo, creditReport);
+                BeanUtils.copyProperties(creditReport, vo);
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -382,7 +382,7 @@ public class UserController extends BaseController {
         List<UserInfo> userInfoList = userInfoService.selectByExample(example);
         for (UserInfo userInfo : userInfoList) {
             SearchUserInfoVo vo = new SearchUserInfoVo();
-            BeanUtils.copyProperties(vo,userInfo);
+            BeanUtils.copyProperties(userInfo, vo);
             voList.add(vo);
         }
         return voList;
