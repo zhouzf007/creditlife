@@ -26,8 +26,6 @@ public interface UserClient {
     @GetMapping(value = "/user/creditReport")
     CreditReport getCreditReport(@RequestParam("id") String id);
 
-
-    CreditReport getCrediReport(@RequestParam("id") String id);
     /**
      * 搜索用户
      * @param key
