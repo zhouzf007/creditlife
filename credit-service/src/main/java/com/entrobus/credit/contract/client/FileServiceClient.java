@@ -1,6 +1,8 @@
 package com.entrobus.credit.contract.client;
 
 import com.entrobus.credit.common.bean.FileUploadResult;
+import com.entrobus.credit.contract.config.FeignMultipartSupportConfig;
+import com.entrobus.credit.contract.config.MultipartFileHttpMessageConverter;
 import feign.Headers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +34,10 @@ public interface FileServiceClient {
      *
      * @return uploadFileStream 文件上传结果
      */
-    @PostMapping(value = "/postUploadFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Headers("Content-Type: multipart/form-data")
-    FileUploadResult postUploadFile(@RequestParam("file") MultipartFile file);
+    @RequestMapping(value = "/postUploadFile",method = RequestMethod.POST,produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @Headers("Content-Type: multipart/form-data")
+    @Deprecated//暂时不可用
+    FileUploadResult postUploadFile(@RequestPart("file") MultipartFile file);
 
     /**
      * 上传网络文件

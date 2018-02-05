@@ -3,18 +3,18 @@ package com.entrobus.credit.contract.controller;
 import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.bean.FileUploadResult;
 import com.entrobus.credit.common.util.GUIDUtil;
+import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.contract.client.FileServiceClient;
 import com.entrobus.credit.contract.services.ContractService;
-import com.entrobus.credit.contract.services.FileUploadResource;
-import com.entrobus.credit.contract.services.impl.ContractServiceImpl;
 import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.entrobus.credit.vo.contract.ContractFillVo;
-import feign.Feign;
-import feign.form.FormEncoder;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
+import com.netflix.discovery.shared.Applications;
+import org.apache.http.entity.mime.content.FileBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -36,6 +37,9 @@ public class ContractController {
 
     @Autowired
     private ContractService contractService;
+
+    @Autowired
+    private EurekaClient eurekaClient;
 
     @Autowired
     private FileServiceClient fileServiceClient;
@@ -69,12 +73,17 @@ public class ContractController {
         try {
             pdfVo = PDFUtil.generateToFile(templateName, imageDiskPath, data);
             File file = new File(pdfVo.getDirectory());
-            InputStream in = new FileInputStream(file);
-            MultipartFile multipartFile = new MockMultipartFile(pdfVo.getPdfName(), in);
-            logger.info("IS EMPTY:" + multipartFile.isEmpty());
-            logger.info(" getSize:" + multipartFile.getSize());
-            logger.info(" getContentType:" + multipartFile.getContentType());
-            uploadResult = fileServiceClient.postUploadFile(multipartFile);
+            //使用common工具包上传
+
+            String fileServiceAddr = getFileServiceAddr();
+            return HttpClientUtil.postFile(fileServiceAddr, file);
+            //通过feign上传
+//            InputStream in = new FileInputStream(file);
+//            MultipartFile multipartFile = new MockMultipartFile(pdfVo.getPdfName(), in);
+//            logger.info("IS EMPTY:" + multipartFile.isEmpty());
+//            logger.info(" getSize:" + multipartFile.getSize());
+//            logger.info(" getContentType:" + multipartFile.getContentType());
+//            uploadResult = fileServiceClient.postUploadFile(multipartFile);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -89,17 +98,41 @@ public class ContractController {
     @ResponseBody
     @RequestMapping("/test")
     public FileUploadResult test2() throws IOException {
-        String BOUNDARY = "---------------------------123821742118716";
-        InputStream in = new FileInputStream("D:\\123.txt");
-        MultipartFile multipartFile = new MockMultipartFile("123.text","123.text", "multipart/form-data; boundary=" + BOUNDARY,in);
-        long size = multipartFile.getSize();
-        multipartFile.transferTo(new File("F:\\456.txt"));
-        FileUploadResource fileUploadResource = Feign.builder()
-                .encoder(new FormEncoder(new JacksonEncoder()))
-                .decoder(new JacksonDecoder())
-                .target(FileUploadResource.class, "http://localhost:8060/file");
-        FileUploadResult result= fileUploadResource.upload(new File("D:\\123.txt"));
+//        String BOUNDARY = "---------------------------123821742118716";
+//        InputStream in = new FileInputStream("D:\\123.txt");
+//        MultipartFile multipartFile = new MockMultipartFile("123.text","123.text", "multipart/form-data" ,in);
+//        long size = multipartFile.getSize();
+//        multipartFile.transferTo(new File("E:\\456.txt"));
+//        FileUploadResource fileUploadResource = Feign.builder()
+//                .encoder(new FormEncoder(new JacksonEncoder()))
+//                .decoder(new JacksonDecoder())
+//                .target(FileUploadResource.class, "http://localhost:8060/file");
+//        FileUploadResult result= fileUploadResource.upload(new File("D:\\123.txt"));
 //       FileUploadResult uploadResult = fileServiceClient.postUploadFile(multipartFile);
-        return result;
+//        return uploadResult;
+        String fileServiceAddr = getFileServiceAddr();
+        return HttpClientUtil.postFile(fileServiceAddr, new File("D:\\123.txt"));
     }
+
+    /**
+     * 获取文件服务器可用的地址，由于feign上传文件有问题，暂时这样写
+     *
+     * @return
+     */
+    private String getFileServiceAddr() {
+        Applications applications = eurekaClient.getApplications();
+//        Application gateway = applications.getRegisteredApplications("gateway");//通过网关
+        Application gateway = applications.getRegisteredApplications("file-service");//不经过网关
+        List<InstanceInfo> instances = gateway.getInstances();
+        if (instances != null && instances.size() > 0) {
+            InstanceInfo info = instances.get(0);
+//            String url = String.format("http://%s:%d/file/postUploadFile", info.getHostName(),info.getPort()) ;//通过网关
+            String url = String.format("http://%s:%d/postUploadFile", info.getHostName(),info.getPort()) ;//不经过网关
+
+            return url;
+        }
+        return null;
+    }
+
+
 }

@@ -44,7 +44,7 @@ public class FileServiceController {
         return WebResult.ok(uploadResult);
     }
 
-    @PostMapping(value = "/postUploadFile",consumes =MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/postUploadFile")
     public WebResult postUploadFile(@RequestParam("file") MultipartFile file) {
         UploadResult uploadResult = fileService.uploadFile(file);
 //        Map<String, Object> dataMap = new HashMap<>();
