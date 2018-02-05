@@ -38,10 +38,15 @@ public class ManagerCacheService  {
         CacheService.setString(redisTemplate,sysLoginUserInfo.getId()+"",token);
     }
 
+    /**
+     * 退出登录
+     */
     public void logout(){
         String token = getRequest().getParameter("token");
         SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
-        CacheService.delete(redisTemplate,loginUser.getId()+"");
+        if(loginUser!=null){
+            CacheService.delete(redisTemplate,loginUser.getId()+"");
+        }
         CacheService.delete(redisTemplate,token);
     }
     /**
