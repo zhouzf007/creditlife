@@ -6,6 +6,7 @@ import com.entrobus.credit.vo.user.CacheUserInfo;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface UserInfoService {
     int countByExample(UserInfoExample example);
@@ -37,4 +38,6 @@ public interface UserInfoService {
     CacheUserInfo initUserCache(UserInfo record);
 
     Map isOwner(String cellphone);
+
+    Set<String> getUserIdSetByExample(UserInfoExample example);
 }

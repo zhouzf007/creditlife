@@ -60,6 +60,7 @@ public interface Constants {
         String OPERATION_STATE = "OPERATION_STATE";//操作状态
         String PLATFORM = "PLATFORM";//平台
         String THREE_URL = "THREE_URL";//第三方连接
+        String OFF_ON = "OFF_ON";//开关
     }
 
     interface JOB_DATA_KEY {

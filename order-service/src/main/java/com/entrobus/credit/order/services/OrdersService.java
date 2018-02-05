@@ -40,7 +40,7 @@ public interface OrdersService {
 
     Orders getUserLastOrder(String userId);
 
-    WebResult getUserOrderList(List<Integer> states, String orgId, Integer offset, Integer limit) throws Exception;
+    WebResult getUserOrderList(List<Integer> states,String key,  String orgId, Integer offset, Integer limit) throws Exception;
 
     WebResult getOrderList(List<Integer> states,String searchKey, String orgId, Integer offset, Integer limit) throws Exception;
 
