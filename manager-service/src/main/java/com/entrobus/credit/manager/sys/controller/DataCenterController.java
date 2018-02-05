@@ -3,6 +3,8 @@ package com.entrobus.credit.manager.sys.controller;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
+import org.joda.time.DateTime;
+import org.joda.time.Months;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,39 +34,105 @@ public class DataCenterController extends ManagerBaseController {
         List<Long> areaData = new ArrayList<>();
         //表格列表
         List<Map<String,Object>> tabList = new ArrayList<>();
-        if(listType == Constants.DATA_CENTER_LIST_TYPE.HOUR){
+        //合计
+        Long dataCount = 0L;
 
-        }
-        if(listType == Constants.DATA_CENTER_LIST_TYPE.DAY){
-            int dateCount = (int) ((endDate.getTime()-startDate.getTime())/(24*60*60*1000));
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.ROLLUP){
+            dataCount = 10000000L;
+        }else{
+            int timeCount = getTimeCount(startDate,endDate,listType);
             Long count = 0L;
             Calendar calendar=Calendar.getInstance();
-            for (int i = 0; i <= dateCount; i++) {
-                Long dayActivity = i<3 ? (i+1)*100L : (i>6 ? i*100 : i*100-200);
-                xAxisData.add(new SimpleDateFormat("MM-dd").format(startDate));
-                seriesData.add(dayActivity);
-                count += dayActivity;
+            for (int i = 0; i <= timeCount; i++) {
+                Long dayActive = i+10L;
+                xAxisData.add(getXAxisData(startDate,listType));
+                seriesData.add(dayActive);
+                count += dayActive;
                 areaData.add(count);
                 Map<String,Object> map = new HashMap<>();
-                map.put("xAxisData",new SimpleDateFormat("MM-dd").format(startDate));
-                map.put("seriesData",dayActivity);
+                map.put("xAxisData",getXAxisData(startDate,listType));
+                map.put("seriesData",dayActive);
                 tabList.add(map);
                 calendar.setTime(startDate);
-                calendar.add(Calendar.DATE, 1); //加一天
+                calendar.add(getField(listType), 1);
                 startDate = calendar.getTime();
             }
+        }
+        return WebResult.ok()
+                .put("xAxisData",xAxisData)
+                .put("seriesData",seriesData)
+                .put("areaData",areaData)
+                .put("tabList",tabList)
+                .put("dataCount",dataCount);
+    }
 
+
+    /**
+     * 时间段数
+     * @param startDate
+     * @param endDate
+     * @param listType
+     * @return
+     */
+    private int getTimeCount(Date startDate,Date endDate,Integer listType){
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.HOUR){
+            return  (int) ((endDate.getTime()-startDate.getTime())/(60*60*1000));
+        }
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.DAY){
+            return (int) ((endDate.getTime()-startDate.getTime())/(24*60*60*1000));
         }
         if(listType == Constants.DATA_CENTER_LIST_TYPE.WEEK){
-
+            return (int) ((endDate.getTime()-startDate.getTime())/(7*24*60*60*1000));
         }
         if(listType == Constants.DATA_CENTER_LIST_TYPE.MONTH){
-
+            return Months.monthsBetween(new DateTime(startDate.getTime()),new DateTime(endDate.getTime())).getMonths();
         }
-        if(listType == Constants.DATA_CENTER_LIST_TYPE.ROLLUP){
-
-        }
-        return WebResult.ok().put("xAxisData",xAxisData).put("seriesData",seriesData).put("areaData",areaData).put("tabList",tabList);
+        return 0;
     }
+
+    /**
+     * 格式化x轴数据
+     * @param startDate
+     * @param listType
+     * @return
+     */
+    private String getXAxisData(Date startDate,Integer listType){
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.HOUR){
+            return  new SimpleDateFormat("MM-dd HH:mm").format(startDate);
+        }
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.DAY){
+            return  new SimpleDateFormat("MM-dd").format(startDate);
+        }
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.WEEK){
+            return new SimpleDateFormat("MM-dd").format(startDate)+"当周";
+        }
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.MONTH){
+            return new SimpleDateFormat("MM").format(startDate)+"月";
+        }
+        return "";
+    }
+
+
+    /**
+     * 时间递增类型
+     * @param listType
+     * @return
+     */
+    private int getField(Integer listType){
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.HOUR){
+            return Calendar.HOUR;
+        }
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.DAY){
+            return Calendar.DATE;
+        }
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.WEEK){
+            return Calendar.WEEK_OF_MONTH;
+        }
+        if(listType == Constants.DATA_CENTER_LIST_TYPE.MONTH){
+            return Calendar.MONTH;
+        }
+        return 0;
+    }
+
 
 }
