@@ -3,6 +3,7 @@ package com.entrobus.credit.common.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.entrobus.credit.common.bean.FileUploadResult;
+import com.entrobus.credit.common.bean.WebResult;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
@@ -256,6 +257,7 @@ public class HttpClientUtil {
  */
 	public static FileUploadResult postFile(String url,File file)throws ParseException, IOException{
 		CloseableHttpClient httpClient = HttpClients.createDefault();
+		FileUploadResult result = null;
 		try{
 			// 要上传的文件的路径
 
@@ -292,8 +294,9 @@ public class HttpClientUtil {
 							Charset.forName("UTF-8"));
 					System.out.println(resultStr);
 					JSONObject resultJson = JSON.parseObject(resultStr);
-					FileUploadResult result = resultJson == null ? null : resultJson.getObject("data",FileUploadResult.class);
-					return result;
+					if (resultJson != null)
+						result =  resultJson.getObject(WebResult.DATA,FileUploadResult.class);
+
 				}
 				// 销毁
 				EntityUtils.consume(resEntity);
@@ -303,8 +306,10 @@ public class HttpClientUtil {
 		}finally{
 			httpClient.close();
 		}
-		FileUploadResult result = new FileUploadResult();
-		result.setUploadSuccess(false);
+		if (result == null) {
+			result = new FileUploadResult();
+			result.setUploadSuccess(false);
+		}
 		return result;
 	}
 
