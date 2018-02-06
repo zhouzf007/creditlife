@@ -21,6 +21,17 @@ public class DataCenterController extends ManagerBaseController {
 
 
 
+    @RequestMapping("/dataStatistics")
+    public WebResult dataStatistics() throws ParseException {
+        return WebResult.ok()
+                .put("userCount",8888)
+                .put("registerUserCount",8888)
+                .put("loanCount",8888)
+                .put("passFrequencyCount",8888)
+                .put("passMoneyCount",88888888);
+    }
+
+
     @RequestMapping("/h5DayActive")
     public WebResult h5DayActive(String startTime, String endTime, Integer listType) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
