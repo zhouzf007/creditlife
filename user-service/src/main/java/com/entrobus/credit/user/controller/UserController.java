@@ -420,4 +420,13 @@ public class UserController extends BaseController {
         return idSet;
     }
 
+    /**
+     * 刷新用户缓存，
+     * @param ids null标示刷新全部
+     */
+    @PostMapping(value = "/cache")
+    public WebResult initUserCache(@RequestParam(required = false) List<String> ids){
+        int n = userInfoService.initUserCache(ids);
+        return WebResult.ok().data(n);
+    }
 }

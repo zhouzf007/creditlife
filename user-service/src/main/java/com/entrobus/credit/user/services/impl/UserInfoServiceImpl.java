@@ -132,6 +132,30 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.insertSelective(record);
     }
 
+    /**
+     * 批量刷新用户缓存
+     * @param userIds 如果是null，则刷新全部
+     * @return
+     */
+    @Override
+    public int initUserCache(List<String> userIds) {
+        UserInfoExample example = new UserInfoExample();
+        UserInfoExample.Criteria criteria = example.createCriteria();
+        if(userIds != null) {
+
+            if (userIds.isEmpty()){
+                return 0;
+            }else {
+                criteria.andIdIn(userIds);
+            }
+        }
+        List<UserInfo> userInfoList = selectByExample(example);
+        for (UserInfo userInfo : userInfoList) {
+            initUserCache(userInfo);
+        }
+        return userInfoList.size();
+    }
+
     @Override
     public CacheUserInfo initUserCache(UserInfo record) {
         CacheUserInfo cacheUserInfo = new CacheUserInfo();
