@@ -262,8 +262,7 @@ public class HttpClientUtil {
 			// 要上传的文件的路径
 
 			// 把一个普通参数和文件上传给下面这个地址 是一个servlet
-			HttpPost httpPost =new HttpPost(
-					url);
+			HttpPost httpPost =new HttpPost(url);
 			// 把文件转换成流对象FileBody
 			FileBody bin =new FileBody(file);
 //			StringBody uploadFileName =new StringBody(
@@ -287,11 +286,9 @@ public class HttpClientUtil {
 				HttpEntity resEntity = response.getEntity();
 				if(resEntity !=null) {
 					// 打印响应长度
-					System.out.println("Response content length: "
-							+ resEntity.getContentLength());
+					System.out.println("Response content length: " + resEntity.getContentLength());
 					// 打印响应内容
-					String resultStr = EntityUtils.toString(resEntity,
-							Charset.forName("UTF-8"));
+					String resultStr = EntityUtils.toString(resEntity, Charset.forName("UTF-8"));
 					System.out.println(resultStr);
 					JSONObject resultJson = JSON.parseObject(resultStr);
 					if (resultJson != null)
@@ -301,10 +298,10 @@ public class HttpClientUtil {
 				// 销毁
 				EntityUtils.consume(resEntity);
 			}finally{
-				response.close();
+				close(response);
 			}
 		}finally{
-			httpClient.close();
+			close(httpClient);
 		}
 		if (result == null) {
 			result = new FileUploadResult();
