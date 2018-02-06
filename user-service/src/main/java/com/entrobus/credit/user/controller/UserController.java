@@ -325,6 +325,7 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         CreditReport creditReport = creditReportService.getCreditReportByUid(loginUser);
+        logger.info("-------------------------返回creditReport："+JSON.toJSONString(creditReport));
         CreditReportVo vo = new CreditReportVo();
         try {
             if(creditReport != null){

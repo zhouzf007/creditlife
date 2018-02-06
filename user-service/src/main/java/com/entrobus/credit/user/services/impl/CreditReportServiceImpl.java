@@ -1,5 +1,6 @@
 package com.entrobus.credit.user.services.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.GUIDUtil;
@@ -108,6 +109,7 @@ public class CreditReportServiceImpl implements CreditReportService {
         if (!list.isEmpty()) {
             CreditReport creditReport = list.get(0);
             long time = new Date().getTime() - creditReport.getCreateTime().getTime();
+            logger.info("-----------------查询到creditReport："+ JSON.toJSONString(creditReport));
             if(time/(1000*60*60*24) < 30){
                 return creditReport;
             }
@@ -116,6 +118,7 @@ public class CreditReportServiceImpl implements CreditReportService {
             //@TODO 获取信用报告
             String url = bsStaticsClient.getCodeName(Constants.CODE_TYPE.THREE_URL, "CREDIT_REPORT");
             String json = HttpClientUtil.doGet(url + loginUser.getIdCard());
+            logger.info("-----------------获取信用报告返回json："+ json);
             if(StringUtils.isNotBlank(json)){
                 Map map = (Map) JSONArray.parse(json);
                 if(map != null){
