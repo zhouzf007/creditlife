@@ -41,15 +41,13 @@ public class PDFUtil {
             OutputStream out = new FileOutputStream(pdfName);
             //生成html文件模板
             String html = PDFHelper.getPdfContent(templateName, data, directory);
-            logger.info("html:"+html);
             ITextRenderer render = PDFHelper.getRender();
             render.setDocument(html);
             if (imageDiskPath != null && !imageDiskPath.equals("")) {
                 //new File(basePath).toURI().toURL().toString()
                 render.getSharedContext().setBaseURL("file:/" + imageDiskPath);
             }
-            logger.info("pdfName:"+pdfName);
-            mpdf=html.substring(0,html.lastIndexOf("/")+1)+pdfName;
+            mpdf=html.substring(0,html.lastIndexOf("/")+1)+"/tmp/"+pdfName;
             logger.info("modifypdfName:"+mpdf.replace("file:",""));
             render.layout();
             render.createPDF(out);

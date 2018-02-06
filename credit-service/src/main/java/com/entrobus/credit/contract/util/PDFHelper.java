@@ -55,7 +55,7 @@ public class PDFHelper {
         configuration.setClassForTemplateLoading(PDFHelper.class, "/templates/");//这里是指放在classes下
         Template template = configuration.getTemplate(templateName);
         //生成html文件
-        String htmlName = directory + GUIDUtil.genRandomGUID() + System.currentTimeMillis() + ".html";
+        String htmlName = directory+"/tmp/" + GUIDUtil.genRandomGUID() + System.currentTimeMillis() + ".html";
         // 将模板和数据模型合并生成文件
         Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(htmlName), "UTF-8"));
         template.process(dataMap, writer);
