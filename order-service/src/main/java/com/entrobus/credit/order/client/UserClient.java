@@ -26,6 +26,9 @@ public interface UserClient {
     @GetMapping(value = "/user/creditReport")
     CreditReport getCreditReport(@RequestParam("id") String id);
 
+    @PutMapping(value = "/user/userState")
+    void updateUserState(@RequestParam("userId") String userId, @RequestParam("state") Integer state);
+
     /**
      * 搜索用户
      * @param key
@@ -51,6 +54,11 @@ public interface UserClient {
         @Override
         public CreditReport getCreditReport(String id) {
             return null;
+        }
+
+        @Override
+        public void updateUserState(String userId, Integer state) {
+
         }
 
         /**

@@ -47,7 +47,7 @@ public class PDFUtil {
                 //new File(basePath).toURI().toURL().toString()
                 render.getSharedContext().setBaseURL("file:/" + imageDiskPath);
             }
-            mpdf=html.substring(0,html.lastIndexOf("/")+1)+"/tmp/"+pdfName;
+            mpdf=html.substring(0,html.lastIndexOf("/")+1)+pdfName;
             logger.info("modifypdfName:"+mpdf.replace("file:",""));
             render.layout();
             render.createPDF(out);

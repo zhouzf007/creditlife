@@ -62,8 +62,11 @@ public class OrderApiController {
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_NOT_LOGIN, "用户未登陆");
         }
-        Orders lastOrder = ordersService.getUserLastOrder(userInfo.getId());
         UserStateVo vo = new UserStateVo();
+        Orders lastOrder = ordersService.getUserLastOrder(userInfo.getId());
+        if (userInfo.getState()==Constants.USER_STATUS.BLACK){
+            vo.setState(-2);
+        }
         if (lastOrder == null) {
             vo.setState(-1);
             vo.setMoney(AmountUtil.changeF2Y(userInfo.getQuota()));

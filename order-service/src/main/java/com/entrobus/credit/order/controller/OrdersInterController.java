@@ -244,12 +244,12 @@ public class OrdersInterController {
                 loanOrder.setRejectType(order.getRejectType());
                 if (order.getRejectType() == Constants.REJECT_TYPE.BLACK_LIST) {
                     loanOrder.setReason("黑名单用户");//原因
+                    userClient.updateUserState(loanOrder.getUserId(),Constants.USER_STATUS.BLACK);
                 } else if (order.getRejectType() == Constants.REJECT_TYPE.TOO_MUCH) {
                     loanOrder.setReason("申请金额过高，当前可体现金额为" + order.getActualMoney());//原因
                 } else if (order.getRejectType() == Constants.REJECT_TYPE.OTHER) {
-                    loanOrder.setReason("申请金额过高，当前可体现金额为" + order.getReason());//原因
+                    loanOrder.setReason("其他 " + order.getReason());//原因
                 }
-                loanOrder.setReason(order.getReason());//原因
                 loanOrder.setActualMoney(order.getActualMoney());//授信额度
                 ordersService.updateByPrimaryKeySelective(loanOrder);
             } else if (loanOrder.getState() == Constants.ORDER_STATE.PASS && order.getState() == Constants.ORDER_STATE.OVERDUE) {

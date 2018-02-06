@@ -1037,4 +1037,23 @@
       id = #{item.id,jdbcType=CHAR}
     </foreach>
   </update>
+
+  <select id="getDistinctUser" resultMap="BaseResultMap" parameterType="com.entrobus.credit.pojo.order.OrdersExample" >
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="groupByClause != null" >
+      group by ${orderByClause}
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
 </mapper>

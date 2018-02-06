@@ -147,6 +147,7 @@ public interface Constants {
     interface USER_STATUS {
         int NORMAL = 0;//正常
         int FROZEN = 1;//冻结
+        int BLACK = 2;//黑名单
     }
 
     /**

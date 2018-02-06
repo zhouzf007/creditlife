@@ -47,4 +47,5 @@ public interface OrdersService {
     //接口使用
     List<UserOrdersVo> getUserOrderList(String id, Integer offset, Integer limit) throws Exception;
 
+    List<Orders> getDistinctUser(OrdersExample example);
 }

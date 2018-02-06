@@ -98,4 +98,6 @@ public interface OrdersMapper {
     int insertBatchSelective(List<Orders> records);
 
     int updateBatchByPrimaryKeySelective(List<Orders> records);
+
+    List<Orders> getDistinctUser(OrdersExample example);
 }

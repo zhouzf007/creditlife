@@ -74,6 +74,10 @@ public class OrdersServiceImpl implements OrdersService {
         return this.ordersMapper.selectByExample(example);
     }
 
+    public List<Orders> getDistinctUser(OrdersExample example) {
+        return this.ordersMapper.getDistinctUser(example);
+    }
+
     public int deleteByPrimaryKey(String id) {
         return this.ordersMapper.deleteByPrimaryKey(id);
     }
@@ -207,13 +211,13 @@ public class OrdersServiceImpl implements OrdersService {
                 ContractFillVo contractvo = createContract(vo, order, userInfo);
                 contract = creditClient.saveContract(contractvo);
                 if (contract == null) {
-                    contract = new Contract();
-                    contract.setId(GUIDUtil.genRandomGUID());
-                    contract.setOrderId(order.getId());
-//                    return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
+//                    contract = new Contract();
+//                    contract.setId(GUIDUtil.genRandomGUID());
+//                    contract.setOrderId(order.getId());
+                    return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
                 }
             } catch (Exception e) {
-//                return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
+                return WebResult.fail(WebResult.CODE_OPERATION, "合同生产失败，请重试");
             }
         } else {
             return WebResult.fail(WebResult.CODE_BUSI_DISPERMIT, "无效签名");
@@ -225,7 +229,7 @@ public class OrdersServiceImpl implements OrdersService {
         return WebResult.ok((Object) rsMap);
     }
 
-    public WebResult getUserOrderList(List<Integer> states,String key,  String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getUserOrderList(List<Integer> states, String key, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -239,23 +243,24 @@ public class OrdersServiceImpl implements OrdersService {
         if (StringUtils.isNotBlank(key)) {
 
             JSONObject searchObj = JSON.parseObject(key);
-            if (searchObj != null  ){
+            if (searchObj != null) {
                 //搜索用户
-                if (StringUtils.isNotBlank(searchObj.getString("realName")) || StringUtils.isNotBlank(searchObj.getString("cellphone")) ) {
+                if (StringUtils.isNotBlank(searchObj.getString("realName")) || StringUtils.isNotBlank(searchObj.getString("cellphone"))) {
                     List<String> uidList = userClient.searchUserIds(key);
                     if (ConversionUtil.isNotEmptyCollection(uidList)) {
                         criteria.andUserIdIn(uidList);
-                    }else {
-                        return WebResult.ok().put("rows",new ArrayList<>(0)).put("total",0);
+                    } else {
+                        return WebResult.ok().put("rows", new ArrayList<>(0)).put("total", 0);
                     }
                 }
             }
         }
         //搜索、暂时这样 end
+        example.setGroupByClause(" user_id ");
         example.setOrderByClause(" create_time desc ");
         if (offset != null && limit != null)
             PageHelper.startPage(offset, limit);
-        List<Orders> list = this.selectByExample(example);
+        List<Orders> list = this.getDistinctUser(example);
         List<UserOrderListVo> rsList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             Orders order = list.get(i);
@@ -281,7 +286,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public WebResult getOrderList(List<Integer> states,String searchKey, String orgId, Integer offset, Integer limit) throws Exception {
+    public WebResult getOrderList(List<Integer> states, String searchKey, String orgId, Integer offset, Integer limit) throws Exception {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
         criteria.andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
@@ -295,18 +300,18 @@ public class OrdersServiceImpl implements OrdersService {
         if (StringUtils.isNotBlank(searchKey)) {
 
             JSONObject searchObj = JSON.parseObject(searchKey);
-            if (searchObj != null  ){
+            if (searchObj != null) {
                 String applyNo = searchObj.getString("applyNo");
-                if (StringUtils.isNotBlank(applyNo)){
+                if (StringUtils.isNotBlank(applyNo)) {
                     criteria.andApplyNoLike("%" + applyNo + "%");
                 }
                 //搜索用户
-                if (StringUtils.isNotBlank(searchObj.getString("realName")) || StringUtils.isNotBlank(searchObj.getString("cellphone")) ) {
+                if (StringUtils.isNotBlank(searchObj.getString("realName")) || StringUtils.isNotBlank(searchObj.getString("cellphone"))) {
                     List<String> uidList = userClient.searchUserIds(searchKey);
                     if (ConversionUtil.isNotEmptyCollection(uidList)) {
                         criteria.andUserIdIn(uidList);
-                    }else {
-                        return WebResult.ok().put("rows",new ArrayList<>(0)).put("total",0);
+                    } else {
+                        return WebResult.ok().put("rows", new ArrayList<>(0)).put("total", 0);
                     }
                 }
             }
@@ -324,7 +329,7 @@ public class OrdersServiceImpl implements OrdersService {
             OrderListVo orderVo = new OrderListVo();
             CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
             orderVo.setId(order.getId());
-            orderVo.setUserName(userInfo == null ? "" :userInfo.getRealName());
+            orderVo.setUserName(userInfo == null ? "" : userInfo.getRealName());
             orderVo.setApplyTime(DateUtils.formatDate(order.getApplyTime()));
             orderVo.setApplyNo(order.getApplyNo());
             orderVo.setState(order.getState());
@@ -360,7 +365,7 @@ public class OrdersServiceImpl implements OrdersService {
                 RepaymentPlan plan = paymentClient.getPresentRepaymentPlan(order.getId());
                 if (plan != null) {
                     vo.setDueTime(plan.getPlanTime());
-                    vo.setTerm(order.getRepaymentTerm()-plan.getCurrentId());
+                    vo.setTerm(order.getRepaymentTerm() - plan.getCurrentId());
                     vo.setTotalTerm(order.getRepaymentTerm());
                     vo.setPrincipalAndInterest(AmountUtil.changeF2Y(plan.getInterest() + plan.getPrincipal()));
                     vo.setBalance(AmountUtil.changeF2Y(plan.getPenalty()));
@@ -393,10 +398,10 @@ public class OrdersServiceImpl implements OrdersService {
         map.put("capitalMoney", AmountUtil.change2Upper(Double.valueOf(order.getApplyMoney() / 100))); //中文大写金额，如：叁拾万元整
         map.put("term", order.getRepaymentTerm() + "个月");//借款期限
         map.put("interestStartDay", "自放款成功日起计收利息");//起息日
-        map.put("repaymentMethod", "");//还款方式
+        map.put("repaymentMethod", cacheService.translate(Cachekey.Translation.REPAYMENT_TYPE + order.getRepaymentType()));//还款方式
 
         map.put("appointPayeeAccount", "中国建设银行  4524");//指定收款账户，借款人的银行卡所属银行和卡号最后四位，例如：中国建设银行 2678
-        map.put("annualInterestRate", order.getInterestRate() / 100 + "%");//年化利率
+        map.put("annualInterestRate", "年化利率" + order.getInterestRate() / 100 + "%");//年化利率
         map.put("noOperationInvalidTime", "3个月");//借款额度审批通过之日起无操作失效时间
 
         map.put("borrowerAddress", "借款人住址");//借款人住址

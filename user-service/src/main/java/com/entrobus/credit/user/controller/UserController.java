@@ -330,6 +330,9 @@ public class UserController extends BaseController {
         try {
             if(creditReport != null){
                 BeanUtils.copyProperties(creditReport, vo);
+                if (loginUser.getState()==Constants.USER_STATUS.BLACK){
+                    vo.setQuota(0L);
+                }
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
