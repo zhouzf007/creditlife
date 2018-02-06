@@ -129,6 +129,7 @@ public class OrdersServiceImpl implements OrdersService {
         OrdersExample example = new OrdersExample();
         example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
                 andUserIdEqualTo(userId);
+        example.setOrderByClause(" create_time desc");
         return this.ordersMapper.selectByExample(example);
     }
 
