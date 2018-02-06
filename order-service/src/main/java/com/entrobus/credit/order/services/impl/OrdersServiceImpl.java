@@ -125,11 +125,13 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<Orders> getUserOrders(String userId) {
+    public List<Orders> getUserOrders(String userId,Integer offset, Integer limit) {
         OrdersExample example = new OrdersExample();
         example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
                 andUserIdEqualTo(userId);
         example.setOrderByClause(" create_time desc");
+        example.setLimitStart(offset);
+        example.setLimitEnd(limit);
         return this.ordersMapper.selectByExample(example);
     }
 

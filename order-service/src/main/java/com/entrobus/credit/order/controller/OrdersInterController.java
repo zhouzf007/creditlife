@@ -171,7 +171,7 @@ public class OrdersInterController {
      * @param userId
      */
     @GetMapping(path = "/userOrderDtl")
-    public UserOrderDtlVo getUserOrderDtl(@RequestParam("userId") String userId) throws Exception {
+    public UserOrderDtlVo getUserOrderDtl(@RequestParam("userId") String userId,@RequestParam(defaultValue = "0") Integer offset, @RequestParam(defaultValue = "10")Integer limit) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheByUid(userId);
         UserOrderDtlVo dtl = new UserOrderDtlVo();
         dtl.setUserId(userInfo.getId());
@@ -185,7 +185,7 @@ public class OrdersInterController {
         dtl.setRoleName(cacheService.translate(Cachekey.Translation.ROLE_NAME + userInfo.getRole()));
         dtl.setScore(userInfo.getCreditScore());
         List<OrderListVo> rsOrderList = new ArrayList<>();
-        List<Orders> orderList = ordersService.getUserOrders(userId);
+        List<Orders> orderList = ordersService.getUserOrders(userId,offset,limit);
         for (int i = 0; i < orderList.size(); i++) {
             Orders order = orderList.get(i);
             OrderListVo vo = new OrderListVo();
@@ -295,8 +295,8 @@ public class OrdersInterController {
      * @param userId
      */
     @GetMapping(path = "/userOrder/{userId}")
-    public List<Orders> getUserOrder(@PathVariable("userId") String userId) {
-        return ordersService.getUserOrders(userId);
+    public List<Orders> getUserOrder(@PathVariable("userId") String userId,@RequestParam(defaultValue = "0") Integer offset, @RequestParam(defaultValue = "10")Integer limit) {
+        return ordersService.getUserOrders(userId,offset,limit);
     }
 
 }

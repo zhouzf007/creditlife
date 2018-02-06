@@ -36,7 +36,7 @@ public interface OrdersService {
 
     WebResult applyOrder(ApplyVo vo, CacheUserInfo userInfo) throws Exception;
 
-    List<Orders> getUserOrders(String userId);
+    List<Orders> getUserOrders(String userId,Integer offset, Integer limit);
 
     Orders getUserLastOrder(String userId);
 
