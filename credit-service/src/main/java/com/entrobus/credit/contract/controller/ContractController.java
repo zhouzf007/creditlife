@@ -99,8 +99,8 @@ public class ContractController {
     @RequestMapping("/test")
     public FileUploadResult test2() throws IOException {
 //        String BOUNDARY = "---------------------------123821742118716";
-//        InputStream in = new FileInputStream("D:\\123.txt");
-//        MultipartFile multipartFile = new MockMultipartFile("123.text","123.text", "multipart/form-data" ,in);
+        InputStream in = new FileInputStream("D:\\123.txt");
+        MultipartFile multipartFile = new MockMultipartFile("123.text","123.text", "multipart/form-data" ,in);
 //        long size = multipartFile.getSize();
 //        multipartFile.transferTo(new File("E:\\456.txt"));
 //        FileUploadResource fileUploadResource = Feign.builder()
@@ -108,10 +108,11 @@ public class ContractController {
 //                .decoder(new JacksonDecoder())
 //                .target(FileUploadResource.class, "http://localhost:8060/file");
 //        FileUploadResult result= fileUploadResource.upload(new File("D:\\123.txt"));
-//       FileUploadResult uploadResult = fileServiceClient.postUploadFile(multipartFile);
-//        return uploadResult;
-        String fileServiceAddr = getFileServiceAddr();
-        return HttpClientUtil.postFile(fileServiceAddr, new File("D:\\123.txt"));
+       FileUploadResult uploadResult = fileServiceClient.postUploadFile(multipartFile);
+        return uploadResult;
+
+//        String fileServiceAddr = getFileServiceAddr();
+//        return HttpClientUtil.postFile(fileServiceAddr, new File("D:\\123.txt"));
     }
 
     /**

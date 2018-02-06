@@ -35,6 +35,8 @@ public interface UserInfoService {
 
     int addUserInfo(UserInfo record);
 
+    int initUserCache(List<String> userIds);
+
     CacheUserInfo initUserCache(UserInfo record);
 
     Map isOwner(String cellphone);
