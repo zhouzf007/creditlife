@@ -334,6 +334,7 @@ public class UserController extends BaseController {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
+        logger.info("-------------------------返回vo："+JSON.toJSONString(vo));
         return WebResult.ok().put(WebResult.DATA, vo);
     }
 
