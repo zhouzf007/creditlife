@@ -1042,12 +1042,12 @@
     select
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from orders
+    from (SELECT * FROM orders ORDER BY create_time DESC) orders
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
     <if test="groupByClause != null" >
-      group by ${orderByClause}
+      group by ${groupByClause}
     </if>
     <if test="orderByClause != null" >
       order by ${orderByClause}
