@@ -139,6 +139,9 @@ public class OrderApiController {
             vo.setOverdue(0);
             if (DateUtils.getStartOfMonth(new Date()).after(dueTime)) {
                 vo.setStatus(Constants.PLAN_STATUS.PAST);
+                if (plan.getState()!=Constants.REPAYMENT_ORDER_STATE.FINISHED){
+                    vo.setOverdue((int) DateUtils.getDaySub(DateUtils.formatDateTime(dueTime), DateUtils.formatDateTime(new Date())));
+                }
             } else if (DateUtils.getStartOfMonth(new Date()).before(dueTime) && DateUtils.getEndDateTimeOfMonth(new Date()).after(dueTime)) {
                 vo.setStatus(Constants.PLAN_STATUS.PRESENT);
                 if (new Date().after(dueTime)) {
@@ -149,6 +152,7 @@ public class OrderApiController {
             }else {
                 vo.setStatus(Constants.PLAN_STATUS.FEATURE);
             }
+            if (plan.getState()==Constants.REPAYMENT_ORDER_STATE.FINISHED) vo.setOverdue(0);
             Integer state=plan.getSystemState()==Constants.ORDER_STATE.OVERDUE?Constants.ORDER_STATE.OVERDUE:plan.getState();
             vo.setState(state);
             vo.setStateName(cacheService.translate(Cachekey.Translation.REPAYMENT_STATE + state));
