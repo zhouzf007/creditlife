@@ -84,7 +84,7 @@ public class OrdersInterController {
                 stateList.add(Integer.parseInt(s));
             }
         }
-        return ordersService.getOrderList(stateList,key, orgId, offset, limit);
+        return ordersService.getOrderList(stateList, key, orgId, offset, limit);
     }
 
     /**
@@ -117,7 +117,7 @@ public class OrdersInterController {
         CreditReport report = userClient.getUserCreditReport(order.getUserId());
         Contract contract = creditClient.getContract(order.getContractId());
         dtl.setContract(contract != null ? contract.getContractUrl() : "");
-        logger.info("report :"+report+"report.getReportUrl()"+report.getReportUrl());
+        logger.info("report :" + report + "report.getReportUrl()" + report.getReportUrl());
         dtl.setCreditReport(report != null ? report.getReportUrl() : "");
         dtl.setAuditor(order.getAuditor());
         dtl.setAuditTime(order.getAuditTime());
@@ -162,7 +162,7 @@ public class OrdersInterController {
                 stateList.add(Integer.parseInt(s));
             }
         }
-        return ordersService.getUserOrderList(stateList,key, orgId, offset, limit);
+        return ordersService.getUserOrderList(stateList, key, orgId, offset, limit);
     }
 
     /**
@@ -225,9 +225,9 @@ public class OrdersInterController {
                 if (StringUtils.isEmpty(loanOrder.getAuditor())) loanOrder.setAuditor(order.getAuditor());
                 loanOrder.setState(Constants.ORDER_STATE.PASS);
                 loanOrder.setLoanOperator(order.getLoanOperator());
-                logger.info("order.getLoanTimeStr():"+order.getLoanTimeStr());
+                logger.info("order.getLoanTimeStr():" + order.getLoanTimeStr());
                 if (StringUtils.isNotEmpty(order.getLoanTimeStr())) {
-                    loanOrder.setLoanTime(DateUtils.parseDate(order.getLoanTimeStr(),"yyyy-MM-dd"));
+                    loanOrder.setLoanTime(DateUtils.parseDate(order.getLoanTimeStr(), "yyyy-MM-dd"));
                 } else {
                     loanOrder.setLoanTime(new Date());
                 }
@@ -242,6 +242,13 @@ public class OrdersInterController {
                 loanOrder.setAuditor(order.getAuditor());
                 loanOrder.setAuditTime(new Date());
                 loanOrder.setRejectType(order.getRejectType());
+                if (order.getRejectType() == Constants.REJECT_TYPE.BLACK_LIST) {
+                    loanOrder.setReason("黑名单用户");//原因
+                } else if (order.getRejectType() == Constants.REJECT_TYPE.TOO_MUCH) {
+                    loanOrder.setReason("申请金额过高，当前可体现金额为" + order.getActualMoney());//原因
+                } else if (order.getRejectType() == Constants.REJECT_TYPE.OTHER) {
+                    loanOrder.setReason("申请金额过高，当前可体现金额为" + order.getReason());//原因
+                }
                 loanOrder.setReason(order.getReason());//原因
                 loanOrder.setActualMoney(order.getActualMoney());//授信额度
                 ordersService.updateByPrimaryKeySelective(loanOrder);
