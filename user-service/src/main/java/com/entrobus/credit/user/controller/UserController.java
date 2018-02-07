@@ -346,7 +346,10 @@ public class UserController extends BaseController {
         CreditReportVo vo = new CreditReportVo();
         try {
             if (creditReport != null) {
-                BeanUtils.copyProperties(creditReport, vo);
+                vo.setQuota(AmountUtil.changeF2Y(creditReport.getQuota()));
+                vo.setCreditScore(creditReport.getCreditScore());
+                vo.setId(creditReport.getId());
+                vo.setReportUrl(creditReport.getReportUrl());
                 //如果存在订单，以当前额度为准
                 Orders o = orderClient.userOrderState(loginUser.getId());
                 if (o != null) {
