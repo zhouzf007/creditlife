@@ -261,6 +261,9 @@ public class UserController extends BaseController {
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
+        if(StringUtils.isBlank(vo.getAccount()) || StringUtils.isBlank(vo.getCellphone()) || StringUtils.isBlank(vo.getName()) || StringUtils.isBlank(vo.getBank())){
+            return WebResult.fail(WebResult.CODE_PARAMETERS);
+        }
         //请使用您本人的银行卡
         String off_on = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "ACCOUNT_ISOK");
         if (off_on.equals("1")) {
