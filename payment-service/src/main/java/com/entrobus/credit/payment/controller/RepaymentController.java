@@ -12,6 +12,7 @@ import com.entrobus.credit.pojo.payment.RepaymentPlan;
 import com.entrobus.credit.vo.order.OrderUpdateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -20,6 +21,7 @@ import java.util.List;
 @RefreshScope
 @RestController
 @RequestMapping("/api")
+@Transactional
 public class RepaymentController extends PaymentBaseController {
 
     @Autowired
@@ -121,7 +123,7 @@ public class RepaymentController extends PaymentBaseController {
             } else {
                 return WebResult.fail(WebResult.CODE_NO_PERMISSION, "订单状态有误，操作失败");
             }
-            return WebResult.ok("");
+            return WebResult.ok();
         } else {
             return WebResult.fail(WebResult.CODE_NO_PERMISSION, "找不到还款计划单，操作失败");
         }

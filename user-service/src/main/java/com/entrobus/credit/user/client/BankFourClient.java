@@ -27,6 +27,7 @@ public interface BankFourClient {
      */
     @RequestMapping(value = "/api/query/TrinityForce")
     Map<String,Object> verify(@RequestParam Map<String,String> map) ;
+
     class BankFourClientFallBack implements BankFourClient{
         private static final Logger LOGGER = LoggerFactory.getLogger(BankFourClient.BankFourClientFallBack.class);
 
