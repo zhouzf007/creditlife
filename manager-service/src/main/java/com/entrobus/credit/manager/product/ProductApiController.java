@@ -99,7 +99,7 @@ public class ProductApiController extends ManagerBaseController {
     public WebResult getRepaymentPlan(String prodId, String rate, String principal, Integer type, Integer term) throws Exception {
         UserRepaymentPlanVo vo = new UserRepaymentPlanVo();
         if (type == null || term == null) {
-            return WebResult.error(WebResult.CODE_PARAMETERS, "参数不正确");
+            return WebResult.fail(WebResult.CODE_PARAMETERS, "参数不正确");
         }
         List<PlanVo> planList = new ArrayList<>();
         //计算还款总额
