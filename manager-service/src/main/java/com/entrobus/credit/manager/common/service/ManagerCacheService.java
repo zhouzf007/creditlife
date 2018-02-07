@@ -4,6 +4,8 @@ import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.manager.common.bean.SysLoginUserInfo;
 import com.entrobus.credit.vo.base.BsStaticVo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
+import com.entrobus.credit.vo.user.UserInfoCache;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,70 +20,76 @@ import java.util.List;
  * Created by cwh on 2018/1/10.
  */
 @Service
-public class ManagerCacheService  {
+public class ManagerCacheService {
     @Autowired
     RedisTemplate redisTemplate;
 
     /**
      * 获取当前登录的系统用户
+     *
      * @return
      */
     public SysLoginUserInfo getCurrLoginUser() {
         String token = getRequest().getParameter("token");
 //        String token = getRequest().getHeader("token");
-        SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
+        SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate, token, SysLoginUserInfo.class);
         return loginUser;
     }
 
-    public void saveLoginUserInfo(String token,SysLoginUserInfo sysLoginUserInfo){
-        CacheService.setCacheObj(redisTemplate,token,sysLoginUserInfo);
-        CacheService.setString(redisTemplate,sysLoginUserInfo.getId()+"",token);
+    public void saveLoginUserInfo(String token, SysLoginUserInfo sysLoginUserInfo) {
+        CacheService.setCacheObj(redisTemplate, token, sysLoginUserInfo);
+        CacheService.setString(redisTemplate, sysLoginUserInfo.getId() + "", token);
     }
 
     /**
      * 退出登录
      */
-    public void logout(){
+    public void logout() {
         String token = getRequest().getParameter("token");
-        SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate,token,SysLoginUserInfo.class);
-        if(loginUser!=null){
-            CacheService.delete(redisTemplate,loginUser.getId()+"");
+        SysLoginUserInfo loginUser = CacheService.getCacheObj(redisTemplate, token, SysLoginUserInfo.class);
+        if (loginUser != null) {
+            CacheService.delete(redisTemplate, loginUser.getId() + "");
         }
-        CacheService.delete(redisTemplate,token);
+        CacheService.delete(redisTemplate, token);
     }
+
     /**
-     *  根据codeType和codeValue查找
+     * 根据codeType和codeValue查找
+     *
      * @param codeType
      * @param codeValue
      * @return
      */
 //    @Override
-    public<T> BsStaticVo getBsStatic(String codeType, T codeValue) {
+    public <T> BsStaticVo getBsStatic(String codeType, T codeValue) {
         String key = Cachekey.BsStatics.TYPE_VALUE_ID + codeType + codeValue;
-        String id = CacheService.getString(redisTemplate,key);
+        String id = CacheService.getString(redisTemplate, key);
         if (id == null) return null;
-        String idKey = Cachekey.BsStatics.ID_OBJ + id ;
+        String idKey = Cachekey.BsStatics.ID_OBJ + id;
         BsStaticVo cacheObj = CacheService.getCacheObj(redisTemplate, idKey, BsStaticVo.class);
         return cacheObj;
     }
+
     /**
      * 翻译
      * 实际查询静态数据缓存codeName
-     * @param type 静态数据codeType值
+     *
+     * @param type  静态数据codeType值
      * @param value 静态数据codeValue值
      * @return
      */
 //    @Override
-    public<T> String translate(String type, T value) {
+    public <T> String translate(String type, T value) {
         String key = Cachekey.BsStatics.TYPE_VALUE_NAME + type + value;
-        return CacheService.getString(redisTemplate,key);
+        return CacheService.getString(redisTemplate, key);
     }
-    public void batchLogout(List<Long> idList){
-        for(Long id:idList){
-            String token = CacheService.getString(redisTemplate,id.toString());
-            if(StringUtils.isNotEmpty(token)){
-                CacheService.delete(redisTemplate,token);
-                CacheService.delete(redisTemplate,id.toString());
+
+    public void batchLogout(List<Long> idList) {
+        for (Long id : idList) {
+            String token = CacheService.getString(redisTemplate, id.toString());
+            if (StringUtils.isNotEmpty(token)) {
+                CacheService.delete(redisTemplate, token);
+                CacheService.delete(redisTemplate, id.toString());
             }
         }
     }
@@ -97,6 +105,13 @@ public class ManagerCacheService  {
         } catch (Exception e) {
             throw new RuntimeException("获取request失败", e);
         }
+    }
+
+
+    public CacheUserInfo getUserBySid(String token) {
+        String uid = CacheService.getString(redisTemplate, Cachekey.User.SID_PREFIX + token);
+        Object o = CacheService.getObject(redisTemplate, Cachekey.User.UID_PREFIX + uid);
+        return o instanceof CacheUserInfo ? (CacheUserInfo) o : null;
     }
 
 }

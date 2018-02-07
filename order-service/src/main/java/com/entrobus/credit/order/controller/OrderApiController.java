@@ -72,8 +72,7 @@ public class OrderApiController {
         } else {
             vo.setState(lastOrder.getState());
             vo.setApplyTime(lastOrder.getApplyTime());
-            Date enterAuditTime=DateUtils.addDays(lastOrder.getApplyTime(),1);
-            vo.setAuditTime(enterAuditTime.before(new Date())?enterAuditTime:null);
+            vo.setAuditTime(lastOrder.getCheckTime());
             vo.setMoney(AmountUtil.changeF2Y(lastOrder.getApplyMoney()));
         }
         return WebResult.ok(vo);

@@ -177,7 +177,7 @@ public class OrdersServiceImpl implements OrdersService {
             order.setCreditScore(creditReport.getCreditScore());
             contract.setCreditReportId(creditReport.getId());
             contract.setCreditScore(creditReport.getCreditScore());
-            if (vo.getMoney() > creditReport.getQuota()) {
+            if (vo.getMoney()*100 > userInfo.getQuota()) {
                 return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您申请的额度过高，请重新提交申请");
             }
         } else {
@@ -259,7 +259,6 @@ public class OrdersServiceImpl implements OrdersService {
             }
         }
         //搜索、暂时这样 end
-        example.setGroupByClause(" user_id ");
         example.setOrderByClause(" create_time desc ");
         if (offset != null && limit != null)
             PageHelper.startPage(offset, limit);

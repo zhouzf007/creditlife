@@ -144,6 +144,10 @@ public class OrdersInterController {
             }
         }
         dtl.setList(planList);
+        if (order.getCheckTime()==null){
+            order.setCheckTime(new Date());
+            ordersService.updateByPrimaryKeySelective(order);
+        }
         return dtl;
     }
 

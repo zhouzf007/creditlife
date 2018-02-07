@@ -5,13 +5,16 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.*;
 import com.entrobus.credit.manager.bank.service.LoanProductService;
 import com.entrobus.credit.manager.client.BsStaticsClient;
+import com.entrobus.credit.manager.client.UserClient;
 import com.entrobus.credit.manager.common.controller.ManagerBaseController;
+import com.entrobus.credit.manager.common.service.ManagerCacheService;
 import com.entrobus.credit.vo.base.BsStaticVo;
 import com.entrobus.credit.vo.loan.LoanPeriodsRateVo;
 import com.entrobus.credit.vo.loan.LoanProductVo;
 import com.entrobus.credit.vo.order.PlanVo;
 import com.entrobus.credit.vo.order.UserRepaymentPlanVo;
 import com.entrobus.credit.vo.product.ProductVo;
+import com.entrobus.credit.vo.user.CacheUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -33,8 +36,16 @@ public class ProductApiController extends ManagerBaseController {
     @Autowired
     BsStaticsClient bsStaticsClient;
 
+
+    @Autowired
+    ManagerCacheService managerCacheService;
+
+
+    @Autowired
+    UserClient userClient;
+
     @GetMapping(value = "/productInfo")
-    public WebResult getProductInfo() {
+    public WebResult getProductInfo(String token) {
         BsStaticVo defualtSp = bsStaticsClient.getByTypeAndValue(Constants.CODE_TYPE.SUPPLIER, "defualt");
         ProductVo productVo = new ProductVo();
         String orgId = "08AF5B53B9BF0299076AF64C65E26189";
@@ -68,10 +79,15 @@ public class ProductApiController extends ManagerBaseController {
             // 0=先息后本 1=等额还款
             repaymentTerms.add(rm);
         }
+        CacheUserInfo  cacheUserInfo=managerCacheService.getUserBySid(token);
         productVo.setTerms(terms);
         productVo.setRepaymentTerm(repaymentTerms);
         productVo.setMin(1000l);
         productVo.setMax(3000l);
+        if (cacheUserInfo!=null){
+            productVo.setMin(1l);
+            productVo.setMax(cacheUserInfo.getQuota()/1000);
+        }
         // 0=先息后本 1=等额还款
         if (type0flag) {
             Map typeMap0 = new HashMap<>();
