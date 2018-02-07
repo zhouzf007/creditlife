@@ -3,6 +3,7 @@ package com.entrobus.credit.payment.controller;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.payment.client.OrderClient;
+import com.entrobus.credit.payment.client.UserClient;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
 import com.entrobus.credit.payment.services.RepaymentService;
 import com.entrobus.credit.pojo.order.Orders;
@@ -26,6 +27,9 @@ public class RepaymentController extends PaymentBaseController {
 
     @Autowired
     private OrderClient orderClient;
+
+    @Autowired
+    private UserClient userClient;
 
     @Autowired
     private RepaymentPlanService repaymentPlanService;
@@ -112,6 +116,8 @@ public class RepaymentController extends PaymentBaseController {
                         orderClient.updateOrder(updateOrder);
                     }
                 }
+                //提升额度
+                userClient.updateUserQuta(order.getUserId(),plan.getPrincipal());
             } else {
                 return WebResult.fail(WebResult.CODE_NO_PERMISSION, "订单状态有误，操作失败");
             }

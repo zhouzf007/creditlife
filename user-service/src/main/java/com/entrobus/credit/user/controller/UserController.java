@@ -9,12 +9,14 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.order.CreditReport;
+import com.entrobus.credit.pojo.order.Orders;
 import com.entrobus.credit.pojo.user.UserAccount;
 import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
 import com.entrobus.credit.user.client.BsStaticsClient;
 import com.entrobus.credit.user.client.MsgClient;
+import com.entrobus.credit.user.client.OrderClient;
 import com.entrobus.credit.user.common.controller.BaseController;
 import com.entrobus.credit.user.services.*;
 import com.entrobus.credit.user.utils.ShiroUtils;
@@ -49,6 +51,9 @@ public class UserController extends BaseController {
 
     @Autowired
     MsgClient msgClient;
+
+    @Autowired
+    OrderClient orderClient;
 
     @Autowired
     CreditReportService creditReportService;
@@ -150,7 +155,7 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         Map map = userInfoService.isOwner(userInfo.getCellphone());
-        if(map == null || StringUtils.isBlank((String) map.get("name")) || StringUtils.isBlank((String) map.get("id_numb"))){
+        if (map == null || StringUtils.isBlank((String) map.get("name")) || StringUtils.isBlank((String) map.get("id_numb"))) {
             return WebResult.fail(WebResult.CODE_OPERATION).put(WebResult.DATA, map);
         }
         CreditReport creditReport = creditReportService.getCreditReportByUid(userInfo);
@@ -163,16 +168,16 @@ public class UserController extends BaseController {
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
-        if(StringUtils.isBlank(name) || StringUtils.isBlank(idCard)){
+        if (StringUtils.isBlank(name) || StringUtils.isBlank(idCard)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
         Map map = userInfoService.isOwner(userInfo.getCellphone());
-        if(map == null){
+        if (map == null) {
             return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
         }
         String name1 = (String) map.get("name");
         String idCard1 = (String) map.get("id_numb");
-        if(StringUtils.isBlank(name1) || StringUtils.isBlank(idCard1) || idCard1.length() != 18 || !name.equals(name1) || !idCard.equals(idCard1)){
+        if (StringUtils.isBlank(name1) || StringUtils.isBlank(idCard1) || idCard1.length() != 18 || !name.equals(name1) || !idCard.equals(idCard1)) {
             return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
         }
         UserInfo info = userInfoService.selectByPrimaryKey(userInfo.getId());
@@ -202,10 +207,10 @@ public class UserController extends BaseController {
                     return WebResult.fail(WebResult.CODE_OPERATION, "该手机号码尚未注册");
                 }
             }
-            String off_on  = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "SENDCODE_OWNER");
-            if(off_on.equals("1")){
+            String off_on = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "SENDCODE_OWNER");
+            if (off_on.equals("1")) {
                 Map map = userInfoService.isOwner(cellphone);
-                if(map == null || StringUtils.isBlank((String) map.get("name"))){
+                if (map == null || StringUtils.isBlank((String) map.get("name"))) {
                     return WebResult.fail(WebResult.CODE_OPERATION, "抱歉，您非业主。暂时不提供此服务");
                 }
             }
@@ -246,22 +251,22 @@ public class UserController extends BaseController {
     /*
     * 添加银行卡
     * */
-    @PostMapping(value = "/addAccount",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/addAccount", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResult addAccount(@RequestBody UserAccountVo vo) {
         CacheUserInfo userInfo = userCacheService.getUserCacheBySid(vo.getToken());
         if (userInfo == null) {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         //请使用您本人的银行卡
-        String off_on  = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "ACCOUNT_ISOK");
-        if(off_on.equals("1")){
+        String off_on = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "ACCOUNT_ISOK");
+        if (off_on.equals("1")) {
             Map<String, String> m = new HashMap<>();
             m.put("name", vo.getName());
             m.put("cellphone", vo.getCellphone());
             m.put("idCard", userInfo.getIdCard());
             m.put("bankId", vo.getAccount());
             WebResult w = bsBankService.verify(m);
-            if(!w.isOk()){
+            if (!w.isOk()) {
                 return WebResult.fail(WebResult.CODE_OPERATION, "您填写的持卡人姓名或手机号码与银行预留的不一致。请联系银行客服或前往银行柜台修改后再试");
             }
         }
@@ -269,7 +274,7 @@ public class UserController extends BaseController {
         UserAccountExample example = new UserAccountExample();
         example.createCriteria().andUserIdEqualTo(userInfo.getId()).andAccountEqualTo(vo.getAccount()).andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO);
         List<UserAccount> userAccounts = userAccountService.selectByExample(example);
-        if(userAccounts != null && userAccounts.size() > 0){
+        if (userAccounts != null && userAccounts.size() > 0) {
             return WebResult.fail(WebResult.CODE_OPERATION, "该银行卡已添加");
         }
         //保存
@@ -318,7 +323,7 @@ public class UserController extends BaseController {
 
     /**
      * 预估额度
-     * */
+     */
     @GetMapping(value = "/userCreditReport")
     public WebResult getUserCrediReport(String token) {
         CacheUserInfo loginUser = userCacheService.getUserCacheBySid(token);
@@ -326,19 +331,26 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         CreditReport creditReport = creditReportService.getCreditReportByUid(loginUser);
-        logger.info("-------------------------返回creditReport："+JSON.toJSONString(creditReport));
+        logger.info("-------------------------返回creditReport：" + JSON.toJSONString(creditReport));
         CreditReportVo vo = new CreditReportVo();
         try {
-            if(creditReport != null){
+            if (creditReport != null) {
                 BeanUtils.copyProperties(creditReport, vo);
-                if (loginUser.getState()==Constants.USER_STATUS.BLACK){
+                //如果存在订单，以当前额度为准
+                Orders o = orderClient.userOrderState(loginUser.getId());
+                if (o != null) {
+                    CacheUserInfo u = userCacheService.getUserCacheByUid(loginUser.getId());
+                    vo.setQuota(u != null ? u.getQuota() : 0);
+                }
+                //黑名单用户额度设置为0
+                if (loginUser.getState() == Constants.USER_STATUS.BLACK) {
                     vo.setQuota(0L);
                 }
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-        logger.info("-------------------------返回vo："+JSON.toJSONString(vo));
+        logger.info("-------------------------返回vo：" + JSON.toJSONString(vo));
         return WebResult.ok().put(WebResult.DATA, vo);
     }
 
@@ -360,6 +372,7 @@ public class UserController extends BaseController {
 
     /**
      * 搜索用户
+     *
      * @param key
      */
     @GetMapping(value = "/search")
@@ -373,7 +386,7 @@ public class UserController extends BaseController {
             JSONObject searchObj = JSON.parseObject(key);
             realName = searchObj.getString("realName");
             cellphone = searchObj.getString("cellphone");
-        }catch (Exception e){
+        } catch (Exception e) {
             return voList;
         }
         UserInfoExample example = new UserInfoExample();
@@ -393,8 +406,10 @@ public class UserController extends BaseController {
         }
         return voList;
     }
+
     /**
      * 搜索用户ID
+     *
      * @param key
      */
     @GetMapping(value = "/searchUserIds")
@@ -409,7 +424,7 @@ public class UserController extends BaseController {
                 realName = searchObj.getString("realName");
                 cellphone = searchObj.getString("cellphone");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new TreeSet<>();
         }
         UserInfoExample example = new UserInfoExample();
@@ -427,10 +442,11 @@ public class UserController extends BaseController {
 
     /**
      * 刷新用户缓存，
+     *
      * @param ids null标示刷新全部
      */
     @PostMapping(value = "/cache")
-    public WebResult initUserCache(@RequestParam(required = false) List<String> ids){
+    public WebResult initUserCache(@RequestParam(required = false) List<String> ids) {
         int n = userInfoService.initUserCache(ids);
         return WebResult.ok().data(n);
     }

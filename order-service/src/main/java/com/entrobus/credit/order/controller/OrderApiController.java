@@ -1,6 +1,5 @@
 package com.entrobus.credit.order.controller;
 
-import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
@@ -80,6 +79,10 @@ public class OrderApiController {
         return WebResult.ok(vo);
     }
 
+    @GetMapping(path = "/userOrderState")
+    public Orders getuserOrderState(@RequestParam("id") String id) throws Exception {
+        return ordersService.getUserLastOrder(id);
+    }
     /**
      * 贷款申请
      *

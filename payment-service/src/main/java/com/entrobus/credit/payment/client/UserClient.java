@@ -1,14 +1,12 @@
-package com.entrobus.credit.order.client;
+package com.entrobus.credit.payment.client;
 
 import com.entrobus.credit.pojo.order.CreditReport;
 import com.entrobus.credit.vo.user.SearchUserInfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

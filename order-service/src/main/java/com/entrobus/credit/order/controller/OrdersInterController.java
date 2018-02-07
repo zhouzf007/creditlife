@@ -246,7 +246,7 @@ public class OrdersInterController {
                     loanOrder.setReason("黑名单用户");//原因
                     userClient.updateUserState(loanOrder.getUserId(),Constants.USER_STATUS.BLACK);
                 } else if (order.getRejectType() == Constants.REJECT_TYPE.TOO_MUCH) {
-                    loanOrder.setReason("申请金额过高，当前可体现金额为" + order.getActualMoney());//原因
+                    loanOrder.setReason("申请金额过高，当前可申请金额为" + order.getActualMoney()+"元");//原因
                 } else if (order.getRejectType() == Constants.REJECT_TYPE.OTHER) {
                     loanOrder.setReason("其他 " + order.getReason());//原因
                 }

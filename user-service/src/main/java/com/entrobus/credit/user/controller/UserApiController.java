@@ -44,4 +44,14 @@ public class UserApiController {
             userInfoService.initUserCache(userInfo);
         }
     }
+
+    @PutMapping(value = "/userQuta")
+    public void updateUserQuta(@RequestParam("userId") String userId, @RequestParam("quta") Long quta) {
+        UserInfo userInfo = userInfoService.selectByPrimaryKey(userId);
+        if (userInfo != null) {
+            userInfo.setQuota(userInfo.getQuota()-quta>0?userInfo.getQuota()-quta:0);
+            userInfoService.updateByPrimaryKey(userInfo);
+            userInfoService.initUserCache(userInfo);
+        }
+    }
 }

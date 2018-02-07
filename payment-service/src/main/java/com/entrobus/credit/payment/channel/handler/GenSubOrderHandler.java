@@ -3,6 +3,7 @@ package com.entrobus.credit.payment.channel.handler;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.util.*;
 import com.entrobus.credit.payment.channel.GenSubOrderSubscribeChannel;
+import com.entrobus.credit.payment.client.UserClient;
 import com.entrobus.credit.payment.services.RepaymentPlanService;
 import com.entrobus.credit.payment.services.RepaymentService;
 import com.entrobus.credit.pojo.order.Orders;
@@ -29,6 +30,9 @@ public class GenSubOrderHandler {
 
     @Autowired
     private RepaymentService repaymentService;
+
+    @Autowired
+    private UserClient userClient;
 
     @StreamListener(GenSubOrderSubscribeChannel.GENERATE_SUB_ORDER_SUBSCRIBE)
     public void generateSubOrder(Orders order) throws Exception {
@@ -95,6 +99,7 @@ public class GenSubOrderHandler {
             repaymentPlanService.insertSelective(plan);
             repayDate = DateUtils.addMonths(repayDate, 1);
         }
+        userClient.updateUserQuta(order.getUserId(),-order.getActualMoney());
     }
 
 }
