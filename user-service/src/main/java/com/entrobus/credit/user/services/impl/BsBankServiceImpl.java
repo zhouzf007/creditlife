@@ -58,7 +58,7 @@ public class BsBankServiceImpl implements BsBankService {
                     }
 
                 }
-            }else if(rmap.get("code").equals("9000")){
+            }else if(Objects.equals(rmap.get("code"),"9000")){
                 token = login();
                 if(StringUtils.isNotBlank(token)){
                     verify(map);
