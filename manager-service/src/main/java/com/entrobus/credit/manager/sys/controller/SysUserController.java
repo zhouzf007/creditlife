@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.bean.CommonParameter;
@@ -41,6 +42,7 @@ public class SysUserController extends ManagerBaseController {
     private ManagerCacheService managerCacheService;
 
     @RequestMapping("/add")
+    @RecordLog(desc = "创建管理员")
     public WebResult add(SysUserExt sysUser, CommonParameter commonParameter) {
         sysUser.setCreateUser(getLoginUserId());//创建人的用户ID
         sysUser.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
@@ -49,6 +51,7 @@ public class SysUserController extends ManagerBaseController {
     }
 
     @RequestMapping("/bank/add")
+    @RecordLog(desc = "新增资金方用户")
     public WebResult addBankUser(SysUserExt sysUser, CommonParameter commonParameter) {
         SysLoginUserInfo userInfo = getCurrLoginUser();
         sysUser.setOrgId(userInfo.getOrgId());

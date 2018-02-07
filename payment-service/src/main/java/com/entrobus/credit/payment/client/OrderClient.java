@@ -18,7 +18,7 @@ public interface OrderClient {
     @GetMapping(path = "/order")
     Orders getOrder(@RequestParam("id") String id);
 
-    @Component
+//    @Component
     class OrderClientFallback implements OrderClient {
 
         @Override
