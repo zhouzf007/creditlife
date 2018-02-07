@@ -1,5 +1,6 @@
 package com.entrobus.credit.contract.util;
 
+import com.entrobus.credit.common.util.CloseableUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.lowagie.text.DocumentException;
@@ -34,11 +35,12 @@ public class PDFUtil {
         String directory = null;
         String pdfName = null;
         String mpdf="";
+        OutputStream out = null;
         try {
             directory = getTempDirectory();
             //生成的PDF文件名称
             pdfName = directory + GUIDUtil.genRandomGUID() + System.currentTimeMillis() + ".pdf";
-            OutputStream out = new FileOutputStream(pdfName);
+            out = new FileOutputStream(pdfName);
             //生成html文件模板
             String html = PDFHelper.getPdfContent(templateName, data, directory);
             ITextRenderer render = PDFHelper.getRender();
@@ -52,13 +54,14 @@ public class PDFUtil {
             render.layout();
             render.createPDF(out);
             render.finishPDF();
-            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
             e.printStackTrace();
+        }finally {
+            CloseableUtil.close(out);
         }
         PdfVo vo = new PdfVo();
         vo.setDirectory(mpdf.replace("file:",""));
