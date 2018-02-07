@@ -272,7 +272,7 @@ public class OrdersInterController {
                 loanOrder.setUpdateOperator(order.getUpdateOperator());
                 ordersService.updateByPrimaryKeySelective(loanOrder);
             } else {
-                return WebResult.error(WebResult.CODE_BUSI_DISPERMIT, "订单状态异常");
+                return WebResult.fail(WebResult.CODE_BUSI_DISPERMIT, "订单状态异常");
             }
         }
         return WebResult.ok();

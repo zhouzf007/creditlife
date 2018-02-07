@@ -52,7 +52,7 @@ public class OrderController extends ManagerBaseController {
     @RecordLog(desc = "订单审核")
     public WebResult updateOrderState(String id, Integer state, String reason, Integer rejectType, String loanTime, Long money) throws ParseException {
         if (StringUtils.isEmpty(id) || state == null) {
-            return WebResult.error(WebResult.CODE_PARAMETERS, "参数有误");
+            return WebResult.fail(WebResult.CODE_PARAMETERS, "参数有误");
         }
         SysLoginUserInfo sys = getCurrLoginUser();
         OrderUpdateVo order = new OrderUpdateVo();
