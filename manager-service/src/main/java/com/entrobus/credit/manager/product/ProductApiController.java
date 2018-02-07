@@ -85,7 +85,7 @@ public class ProductApiController extends ManagerBaseController {
         productVo.setMin(1000l);
         productVo.setMax(3000l);
         if (cacheUserInfo!=null){
-            productVo.setMin(1l);
+            productVo.setMin(1000l);
             productVo.setMax(cacheUserInfo.getQuota()/100);
         }
         // 0=先息后本 1=等额还款
