@@ -143,14 +143,14 @@ public class CreditReportServiceImpl implements CreditReportService {
                             cr.setUserId(loginUser.getId());
                             cr.setId(GUIDUtil.genRandomGUID());
                             cr.setCreditScore(creditScore);
-                            cr.setQuota(quota);
+                            cr.setQuota(quota*100);
                             cr.setReportUrl(reportUrl);
                             cr.setCreateTime(new Date());
                             this.insertSelective(cr);
                             UserInfo userInfo = new UserInfo();
                             userInfo.setId(loginUser.getId());
                             userInfo.setCreditScore(creditScore);
-                            userInfo.setQuota(quota);
+                            userInfo.setQuota(quota*100);
                             userInfo.setUpdateTime(new Date());
                             userInfo.setUpdateOperator(userInfo.getId());
                             userInfoService.updateByPrimaryKeySelective(userInfo);
