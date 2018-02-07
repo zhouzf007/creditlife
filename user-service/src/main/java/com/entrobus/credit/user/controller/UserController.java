@@ -157,7 +157,7 @@ public class UserController extends BaseController {
         }
         Map map = userInfoService.isOwner(userInfo.getCellphone());
         if (map == null || StringUtils.isBlank((String) map.get("name")) || StringUtils.isBlank((String) map.get("id_numb"))) {
-            return WebResult.fail(WebResult.CODE_OPERATION).put(WebResult.DATA, map);
+            return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料").put(WebResult.DATA, map);
         }
         return WebResult.ok().put(WebResult.DATA, map);
     }
@@ -171,7 +171,7 @@ public class UserController extends BaseController {
         if (StringUtils.isBlank(name) || StringUtils.isBlank(idCard)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
-        String off_on = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "SENDCODE_OWNER");
+        String off_on = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "SUBIDCAED_OWNER");
         if (off_on.equals("1")) {
             Map map = userInfoService.isOwner(userInfo.getCellphone());
             if (map == null) {
