@@ -158,7 +158,6 @@ public class UserController extends BaseController {
         if (map == null || StringUtils.isBlank((String) map.get("name")) || StringUtils.isBlank((String) map.get("id_numb"))) {
             return WebResult.fail(WebResult.CODE_OPERATION).put(WebResult.DATA, map);
         }
-        CreditReport creditReport = creditReportService.getCreditReportByUid(userInfo);
         return WebResult.ok().put(WebResult.DATA, map);
     }
 
@@ -186,6 +185,8 @@ public class UserController extends BaseController {
         info.setRole(Constants.USER_ROLE.OWNER);
         userInfoService.updateByPrimaryKeySelective(info);
         userCacheService.refreshUserCache(info);
+        CacheUserInfo user = userCacheService.getUserCacheByUid(userInfo.getId());
+        CreditReport creditReport = creditReportService.getCreditReportByUid(user);
         return WebResult.ok();
     }
 

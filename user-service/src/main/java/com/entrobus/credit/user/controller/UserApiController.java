@@ -26,6 +26,9 @@ public class UserApiController {
         CacheUserInfo user = new CacheUserInfo();
         user.setId(userId);
         CreditReport creditReport = creditReportService.getCreditReportByUid(user);
+        if (creditReport==null){
+
+        }
         return creditReport;
     }
 
