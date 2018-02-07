@@ -171,14 +171,17 @@ public class UserController extends BaseController {
         if (StringUtils.isBlank(name) || StringUtils.isBlank(idCard)) {
             return WebResult.fail(WebResult.CODE_PARAMETERS);
         }
-        Map map = userInfoService.isOwner(userInfo.getCellphone());
-        if (map == null) {
-            return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
-        }
-        String name1 = (String) map.get("name");
-        String idCard1 = (String) map.get("id_numb");
-        if (StringUtils.isBlank(name1) || StringUtils.isBlank(idCard1) || idCard1.length() != 18 || !name.equals(name1) || !idCard.equals(idCard1)) {
-            return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
+        String off_on = bsStaticsClient.getCodeName(Constants.CODE_TYPE.OFF_ON, "SENDCODE_OWNER");
+        if (off_on.equals("1")) {
+            Map map = userInfoService.isOwner(userInfo.getCellphone());
+            if (map == null) {
+                return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
+            }
+            String name1 = (String) map.get("name");
+            String idCard1 = (String) map.get("id_numb");
+            if (StringUtils.isBlank(name1) || StringUtils.isBlank(idCard1) || idCard1.length() != 18 || !name.equals(name1) || !idCard.equals(idCard1)) {
+                return WebResult.fail(WebResult.CODE_OPERATION, "您在物业预留的资料不完整，无法使用该服务。请前往物业完善资料");
+            }
         }
         UserInfo info = userInfoService.selectByPrimaryKey(userInfo.getId());
         info.setRealName(name);
