@@ -7,7 +7,7 @@ public class CreditReportVo {
 
     private String id;
     private String reportUrl;
-    private Long quota;
+    private String quota;
     private Double creditScore;
 
     public String getId() {
@@ -26,11 +26,11 @@ public class CreditReportVo {
         this.reportUrl = reportUrl;
     }
 
-    public Long getQuota() {
+    public String getQuota() {
         return quota;
     }
 
-    public void setQuota(Long quota) {
+    public void setQuota(String quota) {
         this.quota = quota;
     }
 

@@ -6,6 +6,7 @@ import com.entrobus.credit.cache.CacheService;
 import com.entrobus.credit.cache.Cachekey;
 import com.entrobus.credit.common.Constants;
 import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.pojo.order.CreditReport;
@@ -350,11 +351,11 @@ public class UserController extends BaseController {
                 Orders o = orderClient.userOrderState(loginUser.getId());
                 if (o != null) {
                     CacheUserInfo u = userCacheService.getUserCacheByUid(loginUser.getId());
-                    vo.setQuota(u != null ? u.getQuota() : 0);
+                    vo.setQuota(u != null ? AmountUtil.changeF2Y(u.getQuota()) : "0");
                 }
                 //黑名单用户额度设置为0
                 if (loginUser.getState() == Constants.USER_STATUS.BLACK) {
-                    vo.setQuota(0L);
+                    vo.setQuota("0");
                 }
             }
         } catch (Exception e) {
