@@ -153,6 +153,7 @@ public class UserController extends BaseController {
         if(map == null || StringUtils.isBlank((String) map.get("name")) || StringUtils.isBlank((String) map.get("id_numb"))){
             return WebResult.fail(WebResult.CODE_OPERATION).put(WebResult.DATA, map);
         }
+        CreditReport creditReport = creditReportService.getCreditReportByUid(userInfo);
         return WebResult.ok().put(WebResult.DATA, map);
     }
 
