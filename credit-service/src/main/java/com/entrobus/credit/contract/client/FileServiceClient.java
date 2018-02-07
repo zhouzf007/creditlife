@@ -63,6 +63,7 @@ public interface FileServiceClient {
      * @return uploadFileStream 文件上传结果
      */
     @PostMapping(value = "/uploadFileStream",consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @Deprecated
     FileUploadResult uploadFileStream(@RequestBody InputStream inputStream,@RequestParam("fileName") String fileName);
     /**
      * 文件上传客户端断路器

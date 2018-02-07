@@ -248,16 +248,17 @@ public class HttpClientUtil {
 	}
 
 
-/**
- * 上传文件
- * @param url 远程服务器地址
- * @param file 要上传的文件
- * @throws  ParseException
- * @throws  IOException
- */
+	/**
+	 * 上传文件
+	 * @param url 远程服务器地址
+	 * @param file 要上传的文件
+	 * @throws  ParseException
+	 * @throws  IOException
+	 */
 	public static FileUploadResult postFile(String url,File file)throws ParseException, IOException{
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		FileUploadResult result = null;
+		CloseableHttpResponse response = null;
 		try{
 			// 要上传的文件的路径
 
@@ -277,30 +278,27 @@ public class HttpClientUtil {
 
 			System.out.println("发起请求的页面地址 "+ httpPost.getRequestLine());
 			// 发起请求 并返回请求的响应
-			CloseableHttpResponse response = httpClient.execute(httpPost);
-			try{
-				System.out.println("----------------------------------------");
-				// 打印响应状态
-				System.out.println(response.getStatusLine());
-				// 获取响应对象
-				HttpEntity resEntity = response.getEntity();
-				if(resEntity !=null) {
-					// 打印响应长度
-					System.out.println("Response content length: " + resEntity.getContentLength());
-					// 打印响应内容
-					String resultStr = EntityUtils.toString(resEntity, Charset.forName("UTF-8"));
-					System.out.println(resultStr);
-					JSONObject resultJson = JSON.parseObject(resultStr);
-					if (resultJson != null)
-						result =  resultJson.getObject(WebResult.DATA,FileUploadResult.class);
+			response = httpClient.execute(httpPost);
+			System.out.println("----------------------------------------");
+			// 打印响应状态
+			System.out.println(response.getStatusLine());
+			// 获取响应对象
+			HttpEntity resEntity = response.getEntity();
+			if (resEntity != null) {
+				// 打印响应长度
+				System.out.println("Response content length: " + resEntity.getContentLength());
+				// 打印响应内容
+				String resultStr = EntityUtils.toString(resEntity, Charset.forName("UTF-8"));
+				System.out.println(resultStr);
+				JSONObject resultJson = JSON.parseObject(resultStr);
+				if (resultJson != null)
+					result = resultJson.getObject(WebResult.DATA, FileUploadResult.class);
 
-				}
-				// 销毁
-				EntityUtils.consume(resEntity);
-			}finally{
-				close(response);
 			}
+			// 销毁
+			EntityUtils.consume(resEntity);
 		}finally{
+			close(response);
 			close(httpClient);
 		}
 		if (result == null) {

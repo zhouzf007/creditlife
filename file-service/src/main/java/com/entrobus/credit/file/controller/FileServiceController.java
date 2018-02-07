@@ -66,19 +66,14 @@ public class FileServiceController {
             //获取上传文件
             List<MultipartFile> multipartFiles = mreq.getFiles("files");
             //移除multipartFiles集合中文件size等于0的那些文件
-            Iterator<MultipartFile> it = multipartFiles.iterator();
-            while (it.hasNext()) {
-                MultipartFile tmpFile = it.next();
-                if (tmpFile.getSize() == 0) {
-                    it.remove();
-                }
-            }
+            multipartFiles.removeIf(tmpFile -> tmpFile.getSize() == 0);
 
             List<MultipartFile> multipartFileList = new ArrayList<>();
             for (MultipartFile multipartFile : multipartFiles) {
                 try {
                     multipartFileList.add(multipartFile);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
             //保存上传文件
