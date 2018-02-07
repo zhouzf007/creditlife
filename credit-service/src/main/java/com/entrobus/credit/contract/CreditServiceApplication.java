@@ -26,9 +26,9 @@ public class CreditServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(CreditServiceApplication.class, args);
     }
-    @Bean
-    public MultipartFileHttpMessageConverter multipartFileHttpMessageConverter() {
-        return new MultipartFileHttpMessageConverter();
-    }
+//    @Bean
+//    public MultipartFileHttpMessageConverter multipartFileHttpMessageConverter() {
+//        return new MultipartFileHttpMessageConverter();
+//    }
 
 }
