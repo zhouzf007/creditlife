@@ -236,6 +236,9 @@ public class UserController extends BaseController {
             return WebResult.fail(WebResult.CODE_TOKEN);
         }
         UserInfo userInfo = userInfoService.selectByPrimaryKey(loginUser.getId());
+        if (userInfo==null){
+            WebResult.error(WebResult.CODE_USER_NOT_FOUND,"用户不存在");
+        }
         loginUser = userInfoService.getLoginUserInfo(userInfo, token);
         return WebResult.ok().put(WebResult.DATA, loginUser);
     }
