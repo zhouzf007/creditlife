@@ -125,7 +125,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<Orders> getUserOrders(String userId,Integer offset, Integer limit) {
+    public List<Orders> getUserOrders(String userId, Integer offset, Integer limit) {
         OrdersExample example = new OrdersExample();
         example.createCriteria().andDeleteFlagEqualTo(Constants.DELETE_FLAG.NO).
                 andUserIdEqualTo(userId);
@@ -177,7 +177,7 @@ public class OrdersServiceImpl implements OrdersService {
             order.setCreditScore(creditReport.getCreditScore());
             contract.setCreditReportId(creditReport.getId());
             contract.setCreditScore(creditReport.getCreditScore());
-            if (vo.getMoney()*100 > userInfo.getQuota()) {
+            if (vo.getMoney() * 100 > userInfo.getQuota()) {
                 return WebResult.fail(WebResult.CODE_NO_PERMISSION, "您申请的额度过高，请重新提交申请");
             }
         } else {
@@ -267,8 +267,8 @@ public class OrdersServiceImpl implements OrdersService {
         for (int i = 0; i < list.size(); i++) {
             Orders order = list.get(i);
             UserOrderListVo rsorderVo = new UserOrderListVo();
-            rsorderVo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
             CacheUserInfo userInfo = cacheService.getUserCacheByUid(order.getUserId());
+            rsorderVo.setMoney(AmountUtil.changeF2Y(userInfo.getQuota()));
             rsorderVo.setId(order.getId());
             if (userInfo != null) {
                 rsorderVo.setUserName(userInfo.getRealName());
