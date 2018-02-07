@@ -287,7 +287,7 @@ public class UserController extends BaseController {
         //保存
         UserAccount userAccount = new UserAccount();
         try {
-            BeanUtils.copyProperties(userAccount, vo);
+            BeanUtils.copyProperties(vo, userAccount);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
