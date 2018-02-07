@@ -2,6 +2,7 @@ package com.entrobus.credit.manager.sys.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.entrobus.credit.common.Constants;
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.manager.common.bean.CommonParameter;
@@ -42,6 +43,7 @@ public class SysRoleController extends ManagerBaseController {
 
 
     @RequestMapping("/add")
+    @RecordLog(desc = "新增管理员角色")
     public WebResult add(SysRoleExt role,CommonParameter commonParameter){
         role.setCreateUser(getLoginUserId());
         role.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
@@ -53,6 +55,7 @@ public class SysRoleController extends ManagerBaseController {
 
 
     @RequestMapping("/update")
+    @RecordLog(desc = "修改管理员角色")
     public WebResult update(SysRoleExt role,CommonParameter commonParameter){
         role.setUpdateUser(getLoginUserId());//最近一次修改的用户ID
         role.setPlatform(commonParameter.getPlatform());

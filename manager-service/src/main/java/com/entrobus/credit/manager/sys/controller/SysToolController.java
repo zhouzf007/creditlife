@@ -1,5 +1,6 @@
 package com.entrobus.credit.manager.sys.controller;
 
+import com.entrobus.credit.common.annotation.RecordLog;
 import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.manager.common.SysConstants;
 import com.entrobus.credit.manager.common.bean.SysUserExt;
@@ -22,6 +23,7 @@ public class SysToolController extends ManagerBaseController {
      * @return
      */
     @RequestMapping("/createSuperAdmin")
+    @RecordLog(desc = "创建超级管理员")
     public WebResult createSuperAdmin(SysUserExt sysUser){
         sysUser.setCreateUser(1L);//创建人的用户ID
         sysUser.setUpdateUser(1L);//最近一次修改的用户ID

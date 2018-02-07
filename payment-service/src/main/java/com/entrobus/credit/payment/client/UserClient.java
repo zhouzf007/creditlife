@@ -41,7 +41,7 @@ public interface UserClient {
      */
     @GetMapping(value = "/user/searchUserIds")
      List<String> searchUserIds(@RequestParam("key") String key);
-    @Component
+//    @Component
     class UserClientFallback implements UserClient {
 
         private static final Logger LOGGER = LoggerFactory.getLogger(UserClientFallback.class);
