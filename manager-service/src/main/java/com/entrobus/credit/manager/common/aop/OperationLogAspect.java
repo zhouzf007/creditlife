@@ -24,9 +24,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
@@ -118,6 +121,9 @@ public class OperationLogAspect {
                         msg.setRelId(arg == null ? null : arg.toString());//关联id,如orderId
                     }
                 }
+                if (StringUtils.isBlank(msg.getRelId())){
+                    msg.setRelId(getRequest().getParameter(logAnnotation.relId()));
+                }
                 msg.setOperationData(argMap);//请求参数，Object
             }
 
@@ -130,7 +136,18 @@ public class OperationLogAspect {
         }
         return msg;
     }
-
+    /**
+     * 获取当前请求对象
+     *
+     * @return
+     */
+    private HttpServletRequest getRequest() {
+        try {
+            return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        } catch (Exception e) {
+            throw new RuntimeException("获取request失败", e);
+        }
+    }
     /**
      * 判断是否忽略该参数，如果不需要记录到日志里，则返回true
      * @param arg
