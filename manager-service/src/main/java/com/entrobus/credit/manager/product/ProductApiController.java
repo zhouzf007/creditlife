@@ -45,7 +45,7 @@ public class ProductApiController extends ManagerBaseController {
     UserClient userClient;
 
     @GetMapping(value = "/productInfo")
-    public WebResult getProductInfo(String token) {
+    public WebResult getProductInfo(String token) throws Exception {
         BsStaticVo defualtSp = bsStaticsClient.getByTypeAndValue(Constants.CODE_TYPE.SUPPLIER, "defualt");
         ProductVo productVo = new ProductVo();
         String orgId = "08AF5B53B9BF0299076AF64C65E26189";
@@ -82,11 +82,11 @@ public class ProductApiController extends ManagerBaseController {
         CacheUserInfo  cacheUserInfo=managerCacheService.getUserBySid(token);
         productVo.setTerms(terms);
         productVo.setRepaymentTerm(repaymentTerms);
-        productVo.setMin(1000l);
-        productVo.setMax(3000l);
+        productVo.setMin("1000");
+        productVo.setMax("30000");
         if (cacheUserInfo!=null){
-            productVo.setMin(1000l);
-            productVo.setMax(cacheUserInfo.getQuota()/100);
+            productVo.setMin("1000");
+            productVo.setMax(AmountUtil.changeF2Y(cacheUserInfo.getQuota()));
         }
         // 0=先息后本 1=等额还款
         if (type0flag) {
@@ -101,7 +101,7 @@ public class ProductApiController extends ManagerBaseController {
             typeMap1.put("text", "等额还款");
             repayType.add(typeMap1);
         }
-        usages.add("个人消费");
+        usages.add("个人日常消费");
         usages.add("装修");
         usages.add("旅游");
         usages.add("教育");

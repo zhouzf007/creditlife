@@ -7,8 +7,8 @@ public class ProductVo {
 
     private String prodId;
     private String orgId;
-    private Long min;//限额
-    private Long max;//限额
+    private String min;//限额
+    private String max;//限额
     private String desc;
     private List<String> usages;//用途
     private List<String> terms;//期数
@@ -58,19 +58,19 @@ public class ProductVo {
         this.orgId = orgId;
     }
 
-    public Long getMin() {
+    public String getMin() {
         return min;
     }
 
-    public void setMin(Long min) {
+    public void setMin(String min) {
         this.min = min;
     }
 
-    public Long getMax() {
+    public String getMax() {
         return max;
     }
 
-    public void setMax(Long max) {
+    public void setMax(String max) {
         this.max = max;
     }
 
