@@ -1068,12 +1068,13 @@
     <select id="getDistinctUser" resultMap="BaseResultMap" parameterType="com.entrobus.credit.pojo.order.OrdersExample">
         select
         <include refid="Base_Column_List"/>
-        from (SELECT  a.* FROM orders a ORDER BY a.user_id, a.create_time desc) orders
+        from (SELECT  a.* FROM orders a
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
+        ORDER BY a.user_id, a.create_time desc) orders
         group by user_id
-        ORDER by user_id
+        ORDER by create_time desc
         <if test="limitStart != null and limitStart>=0">
             limit #{limitStart} , #{limitEnd}
         </if>
