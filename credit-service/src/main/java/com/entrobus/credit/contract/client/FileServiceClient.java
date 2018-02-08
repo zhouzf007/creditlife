@@ -56,6 +56,7 @@ public interface FileServiceClient {
      * @return
      */
     @RequestMapping("/uploadFile2FileServer")
+    @Deprecated
     FileUploadResult uploadFile2FileServer(@RequestParam(value = "file") File file);
 
     /**
