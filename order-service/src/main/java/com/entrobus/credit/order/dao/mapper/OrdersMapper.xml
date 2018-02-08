@@ -1069,7 +1069,7 @@
         select
         'true' as QUERYID,
         <include refid="Base_Column_List"/>
-        from (SELECT DISTINCT(user_id) c, a.* FROM orders a ORDER BY a.create_time asc) orders
+        from (SELECT  a.* FROM orders a ORDER BY a.create_time asc) orders
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
