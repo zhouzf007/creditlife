@@ -1073,6 +1073,7 @@
             <include refid="Example_Where_Clause"/>
         </if>
         group by user_id
+        ORDER by user_id
         <if test="limitStart != null and limitStart>=0">
             limit #{limitStart} , #{limitEnd}
         </if>
