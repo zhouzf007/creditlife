@@ -121,6 +121,9 @@ public class OperationLogAspect {
                         msg.setRelId(arg == null ? null : arg.toString());//关联id,如orderId
                     }
                 }
+                if (StringUtils.isBlank(msg.getRelId())){
+                    msg.setRelId(getRequest().getParameter(logAnnotation.relId()));
+                }
                 msg.setOperationData(argMap);//请求参数，Object
             }
 
