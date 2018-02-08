@@ -266,6 +266,7 @@ public class HttpClientUtil {
 			HttpPost httpPost =new HttpPost(url);
 			// 把文件转换成流对象FileBody
 			FileBody bin =new FileBody(file);
+			//文本内容
 //			StringBody uploadFileName =new StringBody(
 //					"00", ContentType.create(
 //							"text/plain", Consts.UTF_8));
@@ -276,12 +277,12 @@ public class HttpClientUtil {
 
 			httpPost.setEntity(reqEntity);
 
-			System.out.println("发起请求的页面地址 "+ httpPost.getRequestLine());
+//			System.out.println("发起请求的页面地址 "+ httpPost.getRequestLine());
 			// 发起请求 并返回请求的响应
 			response = httpClient.execute(httpPost);
-			System.out.println("----------------------------------------");
-			// 打印响应状态
-			System.out.println(response.getStatusLine());
+//			System.out.println("----------------------------------------");
+//			// 打印响应状态
+//			System.out.println(response.getStatusLine());
 			// 获取响应对象
 			HttpEntity resEntity = response.getEntity();
 			if (resEntity != null) {
