@@ -1067,9 +1067,8 @@
 
     <select id="getDistinctUser" resultMap="BaseResultMap" parameterType="com.entrobus.credit.pojo.order.OrdersExample">
         select
-        'true' as QUERYID,MAX(apply_no) d,
         <include refid="Base_Column_List"/>
-        from (SELECT  a.* FROM orders a ORDER BY a.apply_no desc) orders
+        from (SELECT  a.* FROM orders a ORDER BY a.create_time desc) orders
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
