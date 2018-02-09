@@ -45,7 +45,7 @@ public class OrganizationController extends ManagerBaseController{
      */
     @PutMapping("/{id}")
     @RecordLog(desc = "编辑资金方")
-    public WebResult edit(OrganizationExt organizationExt){
+    public WebResult edit(@PathVariable String id, OrganizationExt organizationExt){
         return organizationService.edit(organizationExt);
     }
 

@@ -40,7 +40,7 @@ public class UserController extends ManagerBaseController {
     }
 
     @PutMapping(value = "/userState")
-    @RecordLog(desc = "修改用户状态")
+    @RecordLog(desc = "修改用户状态" ,relId = "userId")
     public WebResult updateUserState(String userId,Integer userState){
         userClient.updateUserState(userId,userState);
         return WebResult.ok();
