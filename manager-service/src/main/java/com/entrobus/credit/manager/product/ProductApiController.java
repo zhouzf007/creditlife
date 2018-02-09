@@ -66,7 +66,7 @@ public class ProductApiController extends ManagerBaseController {
         for (int i = 0; i < termList.size(); i++) {
             LoanPeriodsRateVo term = termList.get(i);
             Map rm = new HashMap<>();
-            terms.add(term.getPeriods() + "月");
+            terms.add(term.getPeriods() + "个月");
             rm.put("term", term.getPeriods());
             if (StringUtils.isNotEmpty(term.getInterestCapitalRate())) {
                 rm.put("0", MoneyUtils.multiply(term.getInterestCapitalRate(), "10000").longValue() + "");
