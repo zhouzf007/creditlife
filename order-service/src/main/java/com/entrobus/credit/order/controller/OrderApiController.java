@@ -140,11 +140,13 @@ public class OrderApiController {
             Date dueTime = plan.getPlanTime();
             vo.setOverdue(0);
             if (DateUtils.getStartOfMonth(new Date()).after(dueTime)) {
+                //2 往期
                 vo.setStatus(Constants.PLAN_STATUS.PAST);
                 if (plan.getState()!=Constants.REPAYMENT_ORDER_STATE.FINISHED){
                     vo.setOverdue((int) DateUtils.getDaySub(DateUtils.formatDateTime(dueTime), DateUtils.formatDateTime(new Date())));
                 }
             } else if (DateUtils.getStartOfMonth(new Date()).before(dueTime) && DateUtils.getEndDateTimeOfMonth(new Date()).after(dueTime)) {
+                //1 当期
                 vo.setStatus(Constants.PLAN_STATUS.PRESENT);
                 if (new Date().after(dueTime)) {
                     vo.setOverdue((int) DateUtils.getDaySub(DateUtils.formatDateTime(dueTime), DateUtils.formatDateTime(new Date())));

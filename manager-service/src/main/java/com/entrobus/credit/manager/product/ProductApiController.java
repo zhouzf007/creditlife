@@ -142,7 +142,7 @@ public class ProductApiController extends ManagerBaseController {
 //                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(princl, monthRate, term, i + 1).multiply(new BigDecimal(100));
                 BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(princl, monthRate).multiply(new BigDecimal(100));
                 plan.setInterest(AmountUtil.changeF2Y(monthlyInterest.longValue()));
-                plan.setPrincipal(i == term - 1 ? principal : "0");
+                plan.setPrincipal(i == term - 1 ? principal : "0,00");
                 plan.setCapital(AmountUtil.changeF2Y(princl00.longValue()));
             } else if (type == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
                 BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(princl, monthRate, term).multiply(new BigDecimal(100));

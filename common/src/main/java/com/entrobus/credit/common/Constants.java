@@ -151,13 +151,13 @@ public interface Constants {
     }
 
     /**
-     * 用户状态
-     * 0：正常   1：禁用
+     * 还款阶段
+     * 0：未到期   1：当期 2，往期
      */
     interface PLAN_STATUS {
         int FEATURE = 0;//未到期
         int PRESENT = 1;//当期
-        int PAST = 1;//往期
+        int PAST = 2;//往期
     }
 
 
