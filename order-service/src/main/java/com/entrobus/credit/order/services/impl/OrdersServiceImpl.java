@@ -335,7 +335,7 @@ public class OrdersServiceImpl implements OrdersService {
             orderVo.setApplyTime(DateUtils.formatDate(order.getApplyTime()));
             orderVo.setApplyNo(order.getApplyNo());
             orderVo.setState(order.getState());
-            orderVo.setMoney(PurseUtil.toYuanString(order.getApplyMoney()));
+            orderVo.setMoney(AmountUtil.changeF2Y(order.getApplyMoney()));
             orderVo.setStateName(cacheService.translate(Cachekey.Translation.ORDER_STATE + order.getState()));
             rsList.add(orderVo);
         }
