@@ -37,7 +37,7 @@ public class PlanVo {
         this.interest = interest;
     }
 
-    private Date dueTime;//应还日期
+    private String dueTime;//应还日期
 
     public Integer getStatus() {
         return status;
@@ -47,11 +47,11 @@ public class PlanVo {
         this.status = status;
     }
 
-    public Date getDueTime() {
+    public String getDueTime() {
         return dueTime;
     }
 
-    public void setDueTime(Date dueTime) {
+    public void setDueTime(String dueTime) {
         this.dueTime = dueTime;
     }
 

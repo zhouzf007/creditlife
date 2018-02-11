@@ -86,7 +86,8 @@ public class ProductApiController extends ManagerBaseController {
         productVo.setMax("30000");
         if (cacheUserInfo!=null){
             productVo.setMin("1000");
-            productVo.setMax(AmountUtil.changeF2Y(cacheUserInfo.getQuota()));
+            String quota=AmountUtil.changeF2Y(cacheUserInfo.getQuota());
+            productVo.setMax(quota.substring(0,quota.lastIndexOf(".")));
         }
         // 0=先息后本 1=等额还款
         if (type0flag) {
@@ -137,7 +138,7 @@ public class ProductApiController extends ManagerBaseController {
         for (int i = 0; i < term; i++) {
             PlanVo plan = new PlanVo();
             //计算还款日期
-            plan.setDueTime(repayDate);
+            plan.setDueTime(DateUtils.formatDate(repayDate,"yyyy-MM-dd"));
             if (type == Constants.REPAYMENT_TYPE.INTEREST_CAPITAL) {
 //                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(princl, monthRate, term, i + 1).multiply(new BigDecimal(100));
                 BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(princl, monthRate).multiply(new BigDecimal(100));
