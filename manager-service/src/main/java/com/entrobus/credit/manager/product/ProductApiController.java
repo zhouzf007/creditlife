@@ -82,10 +82,10 @@ public class ProductApiController extends ManagerBaseController {
         CacheUserInfo  cacheUserInfo=managerCacheService.getUserBySid(token);
         productVo.setTerms(terms);
         productVo.setRepaymentTerm(repaymentTerms);
-        productVo.setMin("1000");
-        productVo.setMax("30000");
+        productVo.setMin("1,000");
+        productVo.setMax("30,000");
         if (cacheUserInfo!=null){
-            productVo.setMin("1000");
+            productVo.setMin("1,000");
             String quota=AmountUtil.changeF2Y(cacheUserInfo.getQuota());
             productVo.setMax(quota.substring(0,quota.lastIndexOf(".")));
         }
@@ -143,7 +143,7 @@ public class ProductApiController extends ManagerBaseController {
 //                BigDecimal monthlyRepayment = BIAPPUtils.monthlyRepayment(princl, monthRate, term, i + 1).multiply(new BigDecimal(100));
                 BigDecimal monthlyInterest = BIAPPUtils.monthlyInterest(princl, monthRate).multiply(new BigDecimal(100));
                 plan.setInterest(AmountUtil.changeF2Y(monthlyInterest.longValue()));
-                plan.setPrincipal(i == term - 1 ? principal : "0,00");
+                plan.setPrincipal(i == term - 1 ? principal : "0.00");
                 plan.setCapital(AmountUtil.changeF2Y(princl00.longValue()));
             } else if (type == Constants.REPAYMENT_TYPE.MONTH_EQUAL) {
                 BigDecimal monthlyRepayment = CPMUtils.monthlyRepayment(princl, monthRate, term).multiply(new BigDecimal(100));
