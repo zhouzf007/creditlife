@@ -61,7 +61,6 @@ public class OrderController extends ManagerBaseController {
         order.setReason(reason);
         order.setRejectType(rejectType);
         order.setLoanTimeStr(loanTime);
-        order.setActualMoney(StringUtils.isNotEmpty(money)?Long.valueOf(money):0);
         order.setOrgId(sys.getOrgId());
         order.setAuditor(sys.getRealName());
         order.setUpdateOperator(sys.getRealName());

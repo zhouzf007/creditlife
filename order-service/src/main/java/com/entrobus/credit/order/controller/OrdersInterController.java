@@ -235,7 +235,6 @@ public class OrdersInterController {
                 } else {
                     loanOrder.setLoanTime(new Date());
                 }
-                loanOrder.setActualMoney(order.getActualMoney() == null ? loanOrder.getApplyMoney() : order.getActualMoney());
                 ordersService.updateByPrimaryKeySelective(loanOrder);
                 //还款计划
                 Message<Orders> msgs = MessageBuilder.withPayload(loanOrder).build();
