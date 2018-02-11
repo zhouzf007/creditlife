@@ -50,7 +50,7 @@ public class OrderController extends ManagerBaseController {
      */
     @PutMapping("/orderState")
     @RecordLog(desc = "订单审核")
-    public WebResult updateOrderState(String id, Integer state, String reason, Integer rejectType, String loanTime, Long money) throws ParseException {
+    public WebResult updateOrderState(String id, Integer state, String reason, Integer rejectType, String loanTime, String money) throws ParseException {
         if (StringUtils.isEmpty(id) || state == null) {
             return WebResult.fail(WebResult.CODE_PARAMETERS, "参数有误");
         }
@@ -61,7 +61,7 @@ public class OrderController extends ManagerBaseController {
         order.setReason(reason);
         order.setRejectType(rejectType);
         order.setLoanTimeStr(loanTime);
-        order.setActualMoney(money);
+        order.setActualMoney(StringUtils.isNotEmpty(money)?Long.valueOf(money):0);
         order.setOrgId(sys.getOrgId());
         order.setAuditor(sys.getRealName());
         order.setUpdateOperator(sys.getRealName());
