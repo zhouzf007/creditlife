@@ -65,6 +65,7 @@ public class OrderApiController {
         Orders lastOrder = ordersService.getUserLastOrder(userInfo.getId());
         if (userInfo.getState()==Constants.USER_STATUS.BLACK){
             vo.setState(-2);
+            return WebResult.ok(vo);
         }
         if (lastOrder == null) {
             vo.setState(-1);
@@ -160,7 +161,7 @@ public class OrderApiController {
             Integer state=plan.getSystemState()==Constants.ORDER_STATE.OVERDUE?Constants.ORDER_STATE.OVERDUE:plan.getState();
             vo.setState(state);
             vo.setStateName(cacheService.translate(Cachekey.Translation.REPAYMENT_STATE + state));
-            vo.setDueTime(plan.getPlanTime());
+            vo.setDueTime(DateUtils.formatDate(plan.getPlanTime(),"yyyy-MM-dd"));
             vo.setInterest(AmountUtil.changeF2Y(plan.getInterest()));
             vo.setPrincipal(AmountUtil.changeF2Y(plan.getPrincipal()));
             vo.setCapital(AmountUtil.changeF2Y(plan.getPrincipal()));
