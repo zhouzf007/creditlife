@@ -67,7 +67,7 @@ public class GenSubOrderHandler {
         repaymentService.insertSelective(repayment);
         String repaymentId = repayment.getId();
         //@TODO 计算每期的金额 以及 每期还款日期
-        Date repayDate = DateUtils.addMonths(order.getLoanTime(), 1);//默认按照一月一还
+        Date repayDate =DateUtils.addMinutes(DateUtils.addMonths(order.getLoanTime(), 1),1);//默认按照一月一还
         if (DateUtils.getDay(repayDate) > 28) {
             repayDate = DateUtils.setDays(repayDate, 28);//当月大于28号按28号算
         }
