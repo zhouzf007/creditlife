@@ -190,6 +190,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         sysUser.setPassword(ShiroUtils.sha256(organizationExt.getPassword(),salt));
         sysUser.setSalt(salt);
         sysUser.setStatus(organizationExt.getState());
+        sysUser.setRealName(organizationExt.getContractName());
         sysUser.setUpdateTime(new Date());
         sysUser.setUpdateUser(userInfo.getId());
         sysUserService.updateByPrimaryKeySelective(sysUser);
