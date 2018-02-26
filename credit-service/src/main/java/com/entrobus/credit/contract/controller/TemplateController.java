@@ -78,8 +78,8 @@ public class TemplateController {
         map.put("annualInterestRate", "6%");//年化利率
         map.put("noOperationInvalidTime", "3个月");//借款额度审批通过之日起无操作失效时间
 
-        map.put("borrowerAddress", "借款人住址");//借款人住址
-        map.put("borrowerPostalAddress", "通讯地址");//通讯地址
+        map.put("borrowerAddress", "借款人住址");//借款人住址，从个人信用报告接口中返回
+        map.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址，从个人信用报告接口中返回
         map.put("borrowerPostalCode", "邮政编码");//邮政编码
         map.put("borrowerCardBank", "中国建设银行");//借款人开卡银行
         map.put("borrowerCardId", "66541646454165");//借款人银行卡号
@@ -91,7 +91,8 @@ public class TemplateController {
         map.put("lenderPhone", "0757-82781212");//贷款人联系电话，将来可配置，目前“0757-82781212”
 
         //这里跟通讯地址有什么区别暂时不知道，但是注明了 从个人信用报告接口中返回
-        map.put("borrowerMailingAddress", "邮寄地址");//乙方（借款人）邮寄地址，从个人信用报告接口中返回
+        //即 借款人住址,已合并
+//        map.put("borrowerMailingAddress", "邮寄地址");//乙方（借款人）邮寄地址，即 借款人住址 ，从个人信用报告接口中返回
 
         map.put("loanValidityPeriodStart", "2018年3月24日");//借款额度有效期开始日期，用户提交申请的当日日期
         map.put("loanValidityPeriodEnd", "2019年3月24日");//借款额度有效期结束日期，借款额度有效期开始日期 一年后
