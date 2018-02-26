@@ -8,7 +8,6 @@ import com.entrobus.credit.contract.util.FreemarkUtil;
 import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.vo.common.PdfVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
