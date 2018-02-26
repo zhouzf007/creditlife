@@ -2,14 +2,23 @@ package com.entrobus.credit.vo.schedule;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-
+//
 public class QuartzJobVo implements Serializable {
     @NotBlank(message = "jobName 必填")
     private String jobName;
     private String groupName;
     @NotBlank(message = "cron 必填")
-//    @Pattern(regexp = "^[\\d/\\]$")
+//    @Pattern(regexp = "^([0-5]?\\d([,\\-/][0-5]?\\d)?|\\*)" +
+//            " +([0-5]?\\d([,\\-/][0-5]?\\d)?|\\*)" +
+//            " +(([0-1]?\\d|2[0-3])([,\\-/]([0-1]?\\d|2[0-3]))?|\\*)" +
+//            " +((0?[1-9]|[1-2]\\d|3[0-1])([,\\-/](0?[1-9]|[1-2]\\d|3[0-1]))?|\\*)" +
+//            " +((0?[1-9]|1[0-2])([,\\-/](0?[1-9]|1[0-2]))?|\\*)" +
+//            " +(([1-7])([,\\-/]([1-7]))?|\\*)" +
+//            "( +19[7-9]\\d|20\\d\\d|\\*)?$"
+//            ,message = "cron格式错误"
+//    )
     private String cron;
 
     private String param;
