@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -155,12 +156,14 @@ public class SysRoleController extends ManagerBaseController {
         //只有紧跟在 PageHelper.startPage 方法后的第一个 MyBatis 的查询(select)方法会被分页。
         List<SysRole> sysRoleList = sysRoleService.selectByExample(example);
         List<Map<String,Object>> resultList = new ArrayList<>();
+
         for (SysRole role : sysRoleList){
             Map<String,Object> map = ConversionUtil.beanToMap(role);
             SysUser sysUser = sysUserService.selectByPrimaryKey(role.getUpdateUser());
             if(ConversionUtil.isNotEmptyParameter(sysUser)){
                 map.put("updateUserName",sysUser.getRealName());
             }
+            map.put("strUpdateTime",ConversionUtil.isEmptyParameter(role.getUpdateTime()) ? "" : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(role.getUpdateTime()));
             resultList.add(map);
         }
         PageInfo pageInfo = new PageInfo<>(sysRoleList);
