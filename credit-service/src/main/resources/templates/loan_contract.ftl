@@ -339,14 +339,14 @@
     <p class="main_text">住所：<span class="fill_in_text">${borrowerAddress}</span></p>
     <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${borrowerPostalAddress}/${borrowerPostalCode}</span></p>
     <p class="main_text">联系电话及传真：<span class="fill_in_text">${borrowerCellphone}</span></p>
-    <p class="main_text">其他信息：<span class="fill_in_text"></span></p>
+    <p class="main_text">其他信息：<span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">&#160;</p>
     <p class="main_text">2.乙方(贷款人)信息：</p>
     <p class="main_text">贷款人：<span class="fill_in_text">${lenderName}</span></p>
     <p class="main_text">住所：<span class="fill_in_text">${lenderAddress}</span></p>
     <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${lenderPostalAddress}/${lenderPostalCode}</span></p>
     <p class="main_text">联系电话：<span class="fill_in_text">${lenderPhone}</span></p>
-    <p class="main_text">其他信息：<span class="fill_in_text"></span></p>
+    <p class="main_text">其他信息：<span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十一条</span>&#160; 对第一条的约定  </p>
     <p class="main_text">乙方向甲方提供借款额度人民币(大写)<span class="fill_in_text">${capitalMoney}</span>元。本借款额度为非承诺性额度，甲方申请使用借款应经乙方审查同意，乙方有权对借款额度进行重新确定。</p>
@@ -370,7 +370,7 @@
     <p class="main_text">三、关于缩短借款期限违约金的约定为：<span class="fill_in_text">贷款人对借款人缩短借款期限不收取违约金</span>。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十六条</span>&#160; 对第十一条的约定 </p>
-    <p class="main_text">关于甲方未在合同约定的期限内向乙方提交借款用途证明材料的约定。对于未在合同约定期限内提交用途证明材料的单笔借款，甲方应支付违约金，违约金计算方法为：<span class="fill_in_text">&#160;&#160;</span>。</p>
+    <p class="main_text">关于甲方未在合同约定的期限内向乙方提交借款用途证明材料的约定。对于未在合同约定期限内提交用途证明材料的单笔借款，甲方应支付违约金，违约金计算方法为：<span class="fill_in_text">&#160;此栏空白&#160;</span>。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十七条</span>&#160; 双方间的其他约定 </p>
     <p class="main_text">一、甲方与乙方关于费用承担的约定为：<span class="fill_in_text">乙方为实现债权而实际发生的全部费用(包括但不限于诉讼费、仲裁费、财产保全费、差旅费、执行费、评估费、拍卖费、公证费、送达费、公告费、律师费等)，由甲方承担</span>。</p>
@@ -380,7 +380,7 @@
     <p class="main_text">本合同适用中华人民共和国法律。</p>
     <p class="main_text">凡因本合同引起的或与本合同有关的任何争议，可以通过协商解决，协商不成，按以下第<span class="fill_in_text"> 壹 </span>种方式解决；</p>
     <p class="main_text">壹：向乙方住所地人民法院起诉。</p>
-    <p class="main_text">贰：提交<span class="fill_in_text">&#160;&#160;</span>仲裁委员会(仲裁地点为<span class="fill_in_text">&#160;&#160;</span>)，按照申请仲裁时该会现行有效的仲裁规则进行仲裁。仲裁裁决是终局的，对双方均有约束力。</p>
+    <p class="main_text">贰：提交<span class="fill_in_text">&#160;此栏空白&#160;</span>仲裁委员会(仲裁地点为<span class="fill_in_text">&#160;此栏空白&#160;</span>)，按照申请仲裁时该会现行有效的仲裁规则进行仲裁。仲裁裁决是终局的，对双方均有约束力。</p>
     <p class="main_text">在诉讼或仲裁期间，本合同不涉及争议部分的条款仍须履行。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十九条</span>&#160; 合同份数的约定 </p>
@@ -391,7 +391,7 @@
     <p class="main_text">息(以下统称“送达地址”)为乙方、人民法院(或仲裁机构)发送各类纸质或电子数据通知、信函、法律文书(以下统称“文书”)的送达地址：</p>
     <p class="main_text">邮寄地址 <span class="fill_in_text">${borrowerAddress}</span> </p>
     <p class="main_text">收件人&#160; <span class="fill_in_text">${borrowerFullName}</span>&#160;&#160;&#160;&#160;&#160;&#160; 联系电话&#160; <span class="fill_in_text">${borrowerCellphone}</span></p>
-    <p class="main_text">电子邮箱 <span class="fill_in_text"></span>&#160;&#160;微信号 <span class="fill_in_text"></span></p>
+    <p class="main_text">电子邮箱 <span class="fill_in_text"> 此栏空白 </span>&#160;&#160;微信号 <span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">二、上述送达地址持续适用于合同履行期间、履行本合同发生争议进入民事诉讼程序(包括一审、二审、再审、执行程序和特别程序)或仲裁阶段后，人民法院或仲裁机构向甲方送达各类法律文书。在合同履行期间，乙方向甲方送达催收债务函、宣布贷款提前到期通知等文书同样适用该送达地址。</p>
     <p class="main_text">三、甲方对其送达地址作出变更的，应自变更之日起五个工作日内将变更后的送达地址书面告知乙方，否则送达地址仍以本合同载明为准。</p>
     <p class="main_text">四、因甲方确认的送达地址不准确、送达地址变更后未及时依约告知乙方、甲方本人或指定的接收人拒绝签收等情形，导致文书未能被甲方实际接收的，甲方应自行承担有效送达的法律后果。邮寄送达的，以文书退回之日视为送达之日；直接送达的，送达人当场在送达回证上记明情况之日为送达之日。</p>

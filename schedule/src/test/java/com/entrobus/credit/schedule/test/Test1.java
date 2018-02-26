@@ -51,4 +51,8 @@ public class Test1 {
         System.out.println(b == c);
         System.out.println(b == null);
     }
+    @Test
+    public void testCron(){
+
+    }
 }
