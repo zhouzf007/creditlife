@@ -389,7 +389,7 @@
     <p class="main_text"><span class="clauses_text">第三十条</span>&#160; 其他约定事项 </p>
     <p class="main_text">一、甲方确认下列邮寄地址、收件人、电子邮箱、电话号码、传真号码等信</p>
     <p class="main_text">息(以下统称“送达地址”)为乙方、人民法院(或仲裁机构)发送各类纸质或电子数据通知、信函、法律文书(以下统称“文书”)的送达地址：</p>
-    <p class="main_text">邮寄地址 <span class="fill_in_text">${borrowerMailingAddress}</span> </p>
+    <p class="main_text">邮寄地址 <span class="fill_in_text">${borrowerAddress}</span> </p>
     <p class="main_text">收件人&#160; <span class="fill_in_text">${borrowerFullName}</span>&#160;&#160;&#160;&#160;&#160;&#160; 联系电话&#160; <span class="fill_in_text">${borrowerCellphone}</span></p>
     <p class="main_text">电子邮箱 <span class="fill_in_text"></span>&#160;&#160;微信号 <span class="fill_in_text"></span></p>
     <p class="main_text">二、上述送达地址持续适用于合同履行期间、履行本合同发生争议进入民事诉讼程序(包括一审、二审、再审、执行程序和特别程序)或仲裁阶段后，人民法院或仲裁机构向甲方送达各类法律文书。在合同履行期间，乙方向甲方送达催收债务函、宣布贷款提前到期通知等文书同样适用该送达地址。</p>
