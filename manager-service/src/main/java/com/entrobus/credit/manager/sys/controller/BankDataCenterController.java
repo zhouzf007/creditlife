@@ -35,9 +35,7 @@ public class BankDataCenterController extends ManagerBaseController {
         SysLoginUserInfo userInfo = managerCacheService.getCurrLoginUser();
         //资金方
         Organization organization = organizationService.selectByPrimaryKey(userInfo.getOrgId());
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("orgName", organization.getName());
-        return WebResult.ok();
+        return WebResult.ok().put("orgName",organization.getName());
     }
 
 }
