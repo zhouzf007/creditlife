@@ -41,7 +41,7 @@ public class ScheduleController {
      * 编辑任务
      * 暂时仅支持编辑任务 cron
      * @param vo
-     * @param result
+     * @param
      * @return
      */
     @PutMapping("/job/{jobName}")
