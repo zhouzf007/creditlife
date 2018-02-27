@@ -408,7 +408,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         map.put("borrowerAddress", "借款人住址");//借款人住址，从个人信用报告接口中返回
         map.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址，从个人信用报告接口中返回
-        map.put("borrowerPostalCode", "邮政编码");//借款人邮政编码
+//        map.put("borrowerPostalCode", "邮政编码");//借款人邮政编码 ,暂时没有
         map.put("borrowerCardBank", userInfo.getAccountBank());//借款人开卡银行
         map.put("borrowerCardId", userInfo.getDefualtAccount());//借款人银行卡号
 

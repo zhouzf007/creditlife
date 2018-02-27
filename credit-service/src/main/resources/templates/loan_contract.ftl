@@ -337,7 +337,11 @@
     <p class="main_text">借款人姓名：<span class="fill_in_text">${borrowerFullName}</span></p>
     <p class="main_text">身份证件名称及号码：居民身份证 <span class="fill_in_text">${borrowerIdCard}</span></p>
     <p class="main_text">住所：<span class="fill_in_text">${borrowerAddress}</span></p>
-    <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${borrowerPostalAddress}/${borrowerPostalCode}</span></p>
+    <#if borrowerPostalCode ??>
+        <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${borrowerPostalAddress}/${borrowerPostalCode}</span></p>
+    <#else>
+        <p class="main_text">通讯地址：<span class="fill_in_text">${borrowerPostalAddress}</span></p>
+    </#if>
     <p class="main_text">联系电话及传真：<span class="fill_in_text">${borrowerCellphone}</span></p>
     <p class="main_text">其他信息：<span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">&#160;</p>

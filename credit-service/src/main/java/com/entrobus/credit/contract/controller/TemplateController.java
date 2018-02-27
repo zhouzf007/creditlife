@@ -2,20 +2,27 @@ package com.entrobus.credit.contract.controller;
 
 import com.entrobus.credit.common.bean.FileUploadResult;
 import com.entrobus.credit.common.util.ConversionUtil;
+import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.common.util.ImageUtil;
 import com.entrobus.credit.contract.client.FileServiceClient;
 import com.entrobus.credit.contract.util.FreemarkUtil;
 import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.vo.common.PdfVo;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
+import com.netflix.discovery.shared.Applications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,6 +30,8 @@ import java.util.Map;
 public class TemplateController {
     @Autowired
     private FileServiceClient fileServiceClient;
+    @Autowired
+    private EurekaClient eurekaClient;
     @RequestMapping("/test")
     public void test(String name, HttpServletResponse response){
         Map map = new HashMap();
@@ -79,7 +88,7 @@ public class TemplateController {
 
         map.put("borrowerAddress", "借款人住址");//借款人住址，从个人信用报告接口中返回
         map.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址，从个人信用报告接口中返回
-        map.put("borrowerPostalCode", "邮政编码");//邮政编码
+//        map.put("borrowerPostalCode", "邮政编码");//借款人邮政编码 ,暂时没有
         map.put("borrowerCardBank", "中国建设银行");//借款人开卡银行
         map.put("borrowerCardId", "66541646454165");//借款人银行卡号
 
@@ -112,7 +121,12 @@ public class TemplateController {
         PdfVo pdfVo = null;
         try {
             pdfVo = PDFUtil.generateToFile(templateName,imageDiskPath,data);
-            uploadResult = fileServiceClient.uploadFile2FileServer(pdfVo.getFile());
+            File file = new File(pdfVo.getPdfName());
+            //使用common工具包上传
+
+            String fileServiceAddr = getFileServiceAddr();
+            return HttpClientUtil.postFile(fileServiceAddr, file);
+//            uploadResult = fileServiceClient.uploadFile2FileServer(pdfVo.getFile());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -138,5 +152,23 @@ public class TemplateController {
         FileUploadResult uploadResult = createPdf("loan_contract.ftl","pdf/img",o);
         return uploadResult;
     }
+    /**
+     * 获取文件服务器可用的地址，由于feign上传文件有问题，暂时这样写
+     *
+     * @return
+     */
+    private String getFileServiceAddr() {
+        Applications applications = eurekaClient.getApplications();
+//        Application gateway = applications.getRegisteredApplications("gateway");//通过网关
+        Application gateway = applications.getRegisteredApplications("file-service");//不经过网关
+        List<InstanceInfo> instances = gateway.getInstances();
+        if (instances != null && instances.size() > 0) {
+            InstanceInfo info = instances.get(0);
+//            String url = String.format("http://%s:%d/file/postUploadFile", info.getHostName(),info.getPort()) ;//通过网关
+            String url = String.format("http://%s:%d/postUploadFile", info.getHostName(),info.getPort()) ;//不经过网关
 
+            return url;
+        }
+        return null;
+    }
 }

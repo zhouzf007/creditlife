@@ -72,7 +72,7 @@ public class ContractController {
         PdfVo pdfVo = null;
         try {
             pdfVo = PDFUtil.generateToFile(templateName, imageDiskPath, data);
-            File file = new File(pdfVo.getDirectory());
+            File file = new File(pdfVo.getPdfName());
             //使用common工具包上传
 
             String fileServiceAddr = getFileServiceAddr();
