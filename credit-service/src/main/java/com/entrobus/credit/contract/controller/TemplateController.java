@@ -1,6 +1,7 @@
 package com.entrobus.credit.contract.controller;
 
 import com.entrobus.credit.common.bean.FileUploadResult;
+import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.common.util.ImageUtil;
@@ -139,7 +140,7 @@ public class TemplateController {
 
     @ResponseBody
     @RequestMapping("/test2")
-    public FileUploadResult test2(){
+    public WebResult test2(){
         Map<String, Object> o= createTestMap("aa");
         //存入一个集合
 //        List<String> list = new ArrayList<String>();
@@ -150,7 +151,11 @@ public class TemplateController {
 //        o.put("nameList", list);
 
         FileUploadResult uploadResult = createPdf("loan_contract.ftl","pdf/img",o);
-        return uploadResult;
+        Map<String,Object> data = new HashMap<>();
+        data.put("loan_contract",uploadResult);
+        data.put("credit_report_query_authorization",createPdf("credit_report_query_authorization.ftl","pdf/img",o));
+
+        return WebResult.ok().data(data);
     }
     /**
      * 获取文件服务器可用的地址，由于feign上传文件有问题，暂时这样写

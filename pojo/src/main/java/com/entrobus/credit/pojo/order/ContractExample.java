@@ -1319,6 +1319,76 @@ public class ContractExample implements Serializable {
             addCriterion("delete_operator not between", value1, value2, "deleteOperator");
             return (Criteria) this;
         }
+
+        public Criteria andCreditReportQueryAuthIsNull() {
+            addCriterion("credit_report_query_auth is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthIsNotNull() {
+            addCriterion("credit_report_query_auth is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthEqualTo(String value) {
+            addCriterion("credit_report_query_auth =", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthNotEqualTo(String value) {
+            addCriterion("credit_report_query_auth <>", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthGreaterThan(String value) {
+            addCriterion("credit_report_query_auth >", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthGreaterThanOrEqualTo(String value) {
+            addCriterion("credit_report_query_auth >=", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthLessThan(String value) {
+            addCriterion("credit_report_query_auth <", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthLessThanOrEqualTo(String value) {
+            addCriterion("credit_report_query_auth <=", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthLike(String value) {
+            addCriterion("credit_report_query_auth like", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthNotLike(String value) {
+            addCriterion("credit_report_query_auth not like", value, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthIn(List<String> values) {
+            addCriterion("credit_report_query_auth in", values, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthNotIn(List<String> values) {
+            addCriterion("credit_report_query_auth not in", values, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthBetween(String value1, String value2) {
+            addCriterion("credit_report_query_auth between", value1, value2, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditReportQueryAuthNotBetween(String value1, String value2) {
+            addCriterion("credit_report_query_auth not between", value1, value2, "creditReportQueryAuth");
+            return (Criteria) this;
+        }
     }
 
     /**

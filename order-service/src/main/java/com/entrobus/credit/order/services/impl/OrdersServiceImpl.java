@@ -402,17 +402,23 @@ public class OrdersServiceImpl implements OrdersService {
         map.put("interestStartDay", "自放款成功日起计收利息");//起息日
         map.put("repaymentMethod", cacheService.translate(Cachekey.Translation.REPAYMENT_TYPE + order.getRepaymentType()));//还款方式
 
-        map.put("appointPayeeAccount", "中国建设银行  4524");//指定收款账户，借款人的银行卡所属银行和卡号最后四位，例如：中国建设银行 2678
+        String defualtAccount = userInfo.getDefualtAccount();
+        defualtAccount = StringUtils.isBlank(defualtAccount) ? "" : defualtAccount;
+        String accountBank = userInfo.getAccountBank();
+        accountBank = accountBank == null ? "" : accountBank;
+        String appointPayeeAccount = String.format("%s  %s",accountBank, defualtAccount.length() > 4 ? defualtAccount.substring(defualtAccount.length() - 4) : defualtAccount);
+        //指定收款账户，借款人的银行卡所属银行和卡号最后四位，例如：中国建设银行 2678
+        map.put("appointPayeeAccount", appointPayeeAccount);//指定收款账户，借款人的银行卡所属银行和卡号最后四位，例如：中国建设银行 2678
         map.put("annualInterestRate", "年化利率" + order.getInterestRate() / 100 + "%");//年化利率
         map.put("noOperationInvalidTime", "3个月");//借款额度审批通过之日起无操作失效时间
 
-        map.put("borrowerAddress", "借款人住址");//借款人住址，从个人信用报告接口中返回
-        map.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址，从个人信用报告接口中返回
+        map.put("borrowerAddress", userInfo.getAddressHouse());//借款人住址，从个人信用报告接口中返回
+        map.put("borrowerPostalAddress", userInfo.getAddressHouse());//借款人通讯地址，从个人信用报告接口中返回
 //        map.put("borrowerPostalCode", "邮政编码");//借款人邮政编码 ,暂时没有
-        map.put("borrowerCardBank", userInfo.getAccountBank());//借款人开卡银行
-        map.put("borrowerCardId", userInfo.getDefualtAccount());//借款人银行卡号
+        map.put("borrowerCardBank", accountBank);//借款人开卡银行
+        map.put("borrowerCardId", defualtAccount);//借款人银行卡号
 
-        map.put("lenderName", userInfo.getAccountBank());//贷款人名称，暂填 中国建设银行
+        map.put("lenderName", accountBank);//贷款人名称，暂填 中国建设银行
         map.put("lenderAddress", "广东省佛山市佛山大道南327号");//贷款人住址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalAddress", "广东省佛山市佛山大道南327号");//贷款人通讯地址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalCode", "528000");//贷款人通讯地址，将来可配置，目前“528000”

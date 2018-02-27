@@ -2,6 +2,7 @@ package com.entrobus.credit.contract.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.bean.FileUploadResult;
+import com.entrobus.credit.common.util.ConversionUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.contract.client.FileServiceClient;
@@ -45,15 +46,18 @@ public class ContractController {
     private FileServiceClient fileServiceClient;
 
     @GetMapping(value = "/contract")
-    Contract getContract(@RequestParam("id") String id) {
+    public Contract getContract(@RequestParam("id") String id) {
         return contractService.selectByPrimaryKey(id);
     }
 
     @PostMapping(path = "/contract", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Contract saveContract(@RequestBody ContractFillVo vo) {
         Map v = JSON.parseObject(JSON.toJSONString(vo));
+        //
         FileUploadResult uploadResult = createPdf("loan_contract.ftl", "pdf/img", v);
-        if (uploadResult != null && uploadResult.isUploadSuccess()) {
+        //个人信用报告查询授权书,个人消费额度借款合同
+        FileUploadResult crqaUploadResult = createPdf("credit_report_query_authorization.ftl", "pdf/img", v);
+        if (uploadResult != null && uploadResult.isUploadSuccess() && crqaUploadResult != null && crqaUploadResult.isUploadSuccess()) {
             Contract contract = new Contract();
             contract.setId(GUIDUtil.genRandomGUID());
             contract.setOrderId(vo.getOrderId());
@@ -61,6 +65,7 @@ public class ContractController {
             contract.setUserId(vo.getUserId());
             contract.setContractNo(vo.getContractNumber());
             contract.setContractUrl(uploadResult.getFileUrl());
+            contract.setCreditReportQueryAuth(crqaUploadResult.getFileUrl());
             contractService.insertSelective(contract);
             return contract;
         }
@@ -88,7 +93,7 @@ public class ContractController {
             e.printStackTrace();
         } finally {
             if (pdfVo != null) {
-//                ConversionUtil.de(pdfVo.getDirectory());
+                ConversionUtil.deletedirectory(pdfVo.getDirectory());
             }
         }
         return uploadResult;

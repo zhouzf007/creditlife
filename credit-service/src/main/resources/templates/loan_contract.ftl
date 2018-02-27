@@ -438,7 +438,11 @@
     <#-- 甲乙方签字区 上下 分布 start -->
     <p class="td_text">甲方（签字）：</p>
     <p class="td_text">
-        <img  src="${borrowerAutograph!}" width="129" height="167" alt=""  class="autograph"/>
+        <#if borrowerAutograph ??>
+            <img  src="${borrowerAutograph!}" width="129" height="167" alt=""  class="autograph"/>
+        <#else >
+            <div class="autograph" style="width: 129px;height: 167px"></div>
+        </#if>
     </p>
     <p class="main_text">&#160;</p>
     <p class="td_text">乙方（公章或负责人签字）：</p>

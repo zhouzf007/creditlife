@@ -1,9 +1,9 @@
 package com.entrobus.credit.contract.controller;
 
 import com.entrobus.credit.cache.Cachekey;
+import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.DateUtils;
-import com.entrobus.credit.common.util.ImageUtil;
 import com.entrobus.credit.contract.services.CreditCacheService;
 import com.entrobus.credit.vo.order.ApplyVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
@@ -11,14 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,10 +25,10 @@ public class PreviewController {
 
     @Autowired
     private CreditCacheService cacheService;
-    @PostMapping("loan_contract")
+    @PostMapping("/loan_contract")
     public String previewLoanContract(Map<String,Object> model,@Validated @RequestBody ApplyVo vo){
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(vo.getToken());
-
+        if (userInfo == null) return null;
         model.put("orderId", "123456789");
         model.put("userId", userInfo.getId());
 //        model.put("creditReportId", vo.getc());
@@ -88,50 +83,14 @@ public class PreviewController {
         return "loan_contract";
     }
 
-    private Map<String,Object> createTestMap(String name) {
-        Map map = new HashMap();
-        map.put("contractNumber", "123456789");//合同编号，与银行管理后台显示的编号一致
-        map.put("borrowerFullName", name);//借款人全名
-        map.put("lenderFullName", "中国建设银行股份有限公司佛山分行");//贷款人全称，将来可配置，目前“中国建设银行股份有限公司佛山分行”
-
-        map.put("borrowerCellphone", "12345678910");//借款人手机号
-        map.put("borrowerIdCard", "4521553269482156132");//借款人证件号（身份证）
-        map.put("money", "6000,000 元"); //借款金额
-        map.put("capitalMoney", "叁拾万元整"); //中文大写金额，如：叁拾万元整
-        map.put("term", "12个月");//借款期限
-        map.put("interestStartDay", "自您提款成功日起计收利息");//起息日
-        map.put("repaymentMethod", "按月付息");//还款方式
-
-        map.put("appointPayeeAccount", "中国建设银行  4524");//指定收款账户，借款人的银行卡所属银行和卡号最后四位，例如：中国建设银行 2678
-        map.put("annualInterestRate", "6%");//年化利率
-        map.put("noOperationInvalidTime", "3个月");//借款额度审批通过之日起无操作失效时间
-
-        map.put("borrowerAddress", "借款人住址");//借款人住址，从个人信用报告接口中返回
-        map.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址，从个人信用报告接口中返回
-//        map.put("borrowerPostalCode", "邮政编码");//借款人邮政编码 ,暂时没有
-        map.put("borrowerCardBank", "中国建设银行");//借款人开卡银行
-        map.put("borrowerCardId", "66541646454165");//借款人银行卡号
-
-        map.put("lenderName", "中国建设银行");//贷款人名称，暂填 中国建设银行
-        map.put("lenderAddress", "广东省佛山市佛山大道南327号");//贷款人住址，将来可配置，目前“广东省佛山市佛山大道南327号”
-        map.put("lenderPostalAddress", "广东省佛山市佛山大道南327号");//贷款人通讯地址，将来可配置，目前“广东省佛山市佛山大道南327号”
-        map.put("lenderPostalCode", "528000");//贷款人通讯地址，将来可配置，目前“528000”
-        map.put("lenderPhone", "0757-82781212");//贷款人联系电话，将来可配置，目前“0757-82781212”
-
-        //这里跟通讯地址有什么区别暂时不知道，但是注明了 从个人信用报告接口中返回
-        //即 借款人住址,已合并
-//        map.put("borrowerMailingAddress", "邮寄地址");//乙方（借款人）邮寄地址，即 借款人住址 ，从个人信用报告接口中返回
-
-        map.put("loanValidityPeriodStart", "2018年3月24日");//借款额度有效期开始日期，用户提交申请的当日日期
-        map.put("loanValidityPeriodEnd", "2019年3月24日");//借款额度有效期结束日期，借款额度有效期开始日期 一年后
-
-        //签名图片 使用base64编码，其中png是图片格式
-//        map.put("borrowerAutograph", "data:image/png;base64,"+"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");
-        try {
-            map.put("borrowerAutograph", ImageUtil.getImageBase64Src("http://fdfs-test.newseax.com/group1/M00/03/23/CmhqV1pxNLuAekCzAAAe6LzLBXM649.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return map;
+    /**
+     * 预览模板
+     * @param model
+     * @return
+     */
+    @GetMapping("/{ftlName}")
+    public String previewCreditReportQueryAuthorization(Map<String,Object> model, @PathVariable("ftlName") String ftlName){
+        return ftlName;
     }
+
 }
