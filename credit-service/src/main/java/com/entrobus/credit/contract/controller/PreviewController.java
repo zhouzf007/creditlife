@@ -56,8 +56,8 @@ public class PreviewController {
         model.put("annualInterestRate", "年化利率" + vo.getRate() / 100 + "%");//年化利率
         model.put("noOperationInvalidTime", "3个月");//借款额度审批通过之日起无操作失效时间
 
-        model.put("borrowerAddress", "借款人住址");//借款人住址，从个人信用报告接口中返回
-        model.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址，从个人信用报告接口中返回
+        model.put("borrowerAddress", userInfo.getAddressHouse());//借款人住址，从个人信用报告接口中返回
+        model.put("borrowerPostalAddress", userInfo.getAddressHouse());//借款人通讯地址，从个人信用报告接口中返回
 //        model.put("borrowerPostalCode", "邮政编码");//借款人邮政编码 ,暂时没有
 
         model.put("borrowerCardBank", accountBank);//借款人开卡银行
