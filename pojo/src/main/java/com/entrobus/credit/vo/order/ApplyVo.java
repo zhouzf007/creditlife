@@ -1,10 +1,16 @@
 package com.entrobus.credit.vo.order;
 
-public class ApplyVo {
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
+
+public class ApplyVo {
+    @NotBlank(message = "token")
     private String token;
+//    @NotBlank(message = "userId")
     private String userId;
     private long money;
+    @NotBlank(message = "usage")
     private String usage;
 
     public String getOrgId() {
@@ -14,12 +20,17 @@ public class ApplyVo {
     public void setOrgId(String orgId) {
         this.orgId = orgId;
     }
-
+    @NotNull(message = "repaymentTerm")
     private Integer repaymentTerm;
+    @NotNull(message = "repaymentType")
     private Integer repaymentType;
+    @NotNull(message = "rate")
     private Integer rate;
+    @NotBlank(message = "prodId")
     private String prodId;
+    @NotBlank(message = "orgId")
     private String orgId;
+
     private String signature;
 
     public String getSignature() {

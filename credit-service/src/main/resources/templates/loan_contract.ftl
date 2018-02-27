@@ -74,9 +74,9 @@
 <body>
 <div class="page_body">
     <p class="main_title">个人消费额度借款合同</p>
-    <p class="main_text">合同编号：${contractNumber}</p>
-    <p class="main_text">借款人：${borrowerFullName}</p>
-    <p class="main_text">贷款人：${lenderFullName}</p>
+    <p class="main_text">合同编号：${contractNumber!}</p>
+    <p class="main_text">借款人：${borrowerFullName!}</p>
+    <p class="main_text">贷款人：${lenderFullName!}</p>
     <p class="main_text">&#160;</p>
     <p class="main_text">甲方(借款人)：见本合同“立约人信息”条款的约定</p>
     <p class="main_text">乙方(贷款人)：见本合同“立约人信息”条款的约定</p>
@@ -88,7 +88,7 @@
                 <p class="td_text">手机号</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${borrowerCellphone}</p>
+                <p class="td_text">${borrowerCellphone!}</p>
             </td>
         </tr>
         <tr>
@@ -96,7 +96,7 @@
                 <p class="td_text">身份证号</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${borrowerIdCard}</p>
+                <p class="td_text">${borrowerIdCard!}</p>
             </td>
         </tr>
         <tr>
@@ -104,7 +104,7 @@
                 <p class="td_text">借款金额</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${money}</p>
+                <p class="td_text">${money!}</p>
             </td>
         </tr>
         <tr>
@@ -112,7 +112,7 @@
                 <p class="td_text">借款期限</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${term}</p>
+                <p class="td_text">${term!}</p>
             </td>
         </tr>
         <tr>
@@ -120,7 +120,7 @@
                 <p class="td_text">起息日</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${interestStartDay}</p>
+                <p class="td_text">${interestStartDay!}</p>
             </td>
         </tr>
         <tr>
@@ -128,7 +128,7 @@
                 <p class="td_text">还款方式</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${repaymentMethod}</p>
+                <p class="td_text">${repaymentMethod!}</p>
             </td>
         </tr>
         <tr>
@@ -136,7 +136,7 @@
                 <p class="td_text">指定收款账户</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${appointPayeeAccount}</p>
+                <p class="td_text">${appointPayeeAccount!}</p>
             </td>
         </tr>
         <tr>
@@ -144,7 +144,7 @@
                 <p class="td_text">年化利率</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${annualInterestRate}</p>
+                <p class="td_text">${annualInterestRate!}</p>
             </td>
         </tr>
         </tbody>
@@ -216,7 +216,7 @@
     <p class="main_text">三、还款方式</p>
     <p class="main_text"> (一)委托扣款方式：甲方授权乙方直接从甲方在乙方系统开立的个人结算账户扣收应还款项。如该委托扣款账户为甲方之外的第三人名下账户，则该第三人应签发授权书，授权乙方从该账户中扣收甲方应还款项。</p>
     <p class="main_text">委托扣款方式下，甲方最迟应在每期约定还款日的前一日柜面营业终了前将当期应还款项足额存入指定委托扣款账户内。</p>
-    <p class="main_text">甲方未能在约定还款日的前一日柜面营业终了前将应还款项足额存入指定委托扣款账户造成借款拖欠的，乙方有权自约定还款日开始计收逾期罚息和复利，并有权在该期约定还款日及此后的任意时间直接从甲方在${lenderName}系统开立的任何账户中扣划应还款项，但该扣划并不构成乙方的义务。</p>
+    <p class="main_text">甲方未能在约定还款日的前一日柜面营业终了前将应还款项足额存入指定委托扣款账户造成借款拖欠的，乙方有权自约定还款日开始计收逾期罚息和复利，并有权在该期约定还款日及此后的任意时间直接从甲方在${lenderName!}系统开立的任何账户中扣划应还款项，但该扣划并不构成乙方的义务。</p>
     <p class="main_text">储蓄存折、借记卡扣款结果通过甲方到乙方指定的营业柜台补登存折方式或打印对账单方式反映，每期不再另行寄发对账凭证。</p>
     <p class="main_text"> (二)柜台或自助渠道还款方式：甲方直接到乙方指定的营业柜台或甲方设立的自助渠道以现金、支票、银行卡等办理还款。该还款方式下，对每期应还款项，甲方须最迟于约定还款日到乙方上述渠道办理还款手续。</p>
     <p class="main_text">甲方未能在约定还款日足额偿还应还款项的，乙方有权自约定还款日开始计收逾期罚息和复利。</p>
@@ -259,13 +259,13 @@
     <p class="main_text">(十一)如本合同有两个以上(含两个)借款人，则各借款人应就本合同项下全部合同义务承担连带责任，即乙方有权要求任何一个借款人履行全部合同义务。</p>
     <p class="main_text">二、乙方的主要权利和义务</p>
     <p class="main_text"> (一)应按合同约定及时足额发放贷款，但因甲方原因造成迟延的除外；</p>
-    <p class="main_text"> (二)应对甲方提供的有关个人资料予以保密，但${lenderName}业务需要使用、个人征信使用或法律法规和规章另有规定的除外；</p>
+    <p class="main_text"> (二)应对甲方提供的有关个人资料予以保密，但${lenderName!}业务需要使用、个人征信使用或法律法规和规章另有规定的除外；</p>
     <p class="main_text"> (三)有权了解、核实有关甲方及其家庭成员身份、还款能力、个人信用和家庭财务状况；有权要求甲方提供与借款申请和借款额度使用有关的资料；</p>
     <p class="main_text"> (四)有权对甲方提供的资料、文件的合法性、真实性、有效性、准确性以及借款的使用情况进行调查；</p>
     <p class="main_text"> (五)甲方的资信情况发生变化，可能或已经对其偿债能力造成不利影响时， 乙方有权调低、暂停直至取消甲方借款额度；</p>
     <p class="main_text"> (六)有权要求甲方按期偿还贷款本金、利息和费用，有权行使本合同定的其他各项权利，要求甲方履行其在本合同项下的其他各项义务；</p>
     <p class="main_text"> (七)有权将甲方的个人信用信息提供给中国人民银行个人信用信息基础数据库及信贷征信主管部门批准建立的个人信用数据库，并有权向上述个人信用数据库或有关单位、部门及个人查询甲方的信用状况，查询获得的信用报告限用于中国人民银行颁布的《个人信用信息基础数据库管理暂行办法》规定用途范围内；</p>
-    <p class="main_text"> (八)甲方未按期足额偿还其在本合同项下任何应付款项的，乙方有权从甲方在${lenderName}系统开立的任一账户中划收人民币或其他币种的相应款项，且无须提前通知甲方。如扣划款项为外币，乙方有权按扣收时${lenderName}公布外汇牌价的银行买入价折算成人民币清偿甲方应付款项。如甲方对乙方还负有本合同项下债务以外的其他到期债务的，乙方有权决定将前述扣收款项首先用于清偿其他任一笔到期债务。</p>
+    <p class="main_text"> (八)甲方未按期足额偿还其在本合同项下任何应付款项的，乙方有权从甲方在${lenderName!}系统开立的任一账户中划收人民币或其他币种的相应款项，且无须提前通知甲方。如扣划款项为外币，乙方有权按扣收时${lenderName!}公布外汇牌价的银行买入价折算成人民币清偿甲方应付款项。如甲方对乙方还负有本合同项下债务以外的其他到期债务的，乙方有权决定将前述扣收款项首先用于清偿其他任一笔到期债务。</p>
     <p class="main_text"><span class="clauses_text">第十二条</span>&#160; 违约及违约处理</p>
     <p class="main_text">一、违约情形</p>
     <p class="main_text">(一)甲方发生下列任一情况，均构成违约；</p>
@@ -279,7 +279,7 @@
     <p class="main_text">8.甲方丧失民事行为能力，而其监护人不继续履行本合同的；</p>
     <p class="main_text">9.甲方或其财产合法继承人受到行政或刑事处罚、卷入或即将卷入重大的诉讼或仲裁程序及其他法律纠纷，乙方认为可能或已经对其偿债能力造成不利影响的；</p>
     <p class="main_text">10.甲方低价转让、无偿转让或隐藏财产、减免第三方债务、怠于行使债权或其他权利，乙方认为可能危及本合同项下债权安全的；</p>
-    <p class="main_text">11.甲方未履行对${lenderName}负有的其它到期债务，或乙方发现甲方有其他拖欠债务的行为的；</p>
+    <p class="main_text">11.甲方未履行对${lenderName!}负有的其它到期债务，或乙方发现甲方有其他拖欠债务的行为的；</p>
     <p class="main_text">12.甲方的个人及资信情况或还贷能力出现其他重大变化(包括但不限于国籍变更、住所地变更、婚姻情况变动、家庭财务状况恶化、收入降低、失业、重大疾病、拖欠其他债务等)，乙方认为可能或已经对其偿债能力造成不利影响且甲方未追加乙方认可的担保的；</p>
     <p class="main_text">13.甲方发生其他足以对其偿还债务能力造成不利影响的事件，或甲方明确表示或以其行为表明将不履行本合同项下的义务；</p>
     <p class="main_text">14.甲方违反合同约定的其他义务。</p>
@@ -292,7 +292,7 @@
     <p class="main_text">甲方未在合同约定的期限内向乙方提交符合乙方要求的借款用途证明材料的，乙方除按照本条约定采取救济措施外，还有权向甲方收取违约金。具体按照本合同第二十六条约定执行。</p>
     <p class="main_text">对于甲方未按时还清的任意一期借款本金和利息(包括被乙方宣布全部或部分到期的借款本金和利息)，自逾期之日起至拖欠本息全部清偿之日止，按合同约定规则计算出的逾期罚息利率和本合同约定的结息方式计收罚息和复利。</p>
     <p class="main_text">对于既逾期又未按本合同约定用途使用借款的，择较重者计收罚息和复利，不予并处。</p>
-    <p class="main_text">5.从甲方在${lenderName}系统开立的任一账户上划收任何币种款项用以抵</p>
+    <p class="main_text">5.从甲方在${lenderName!}系统开立的任一账户上划收任何币种款项用以抵</p>
     <p class="main_text">偿甲方应付款项；</p>
     <p class="main_text">6.要求甲方限期纠正违约行为并赔偿乙方相应损失；</p>
     <p class="main_text">7.要求甲方对本合同项下所有债务提供符合乙方要求的担保；</p>
@@ -330,32 +330,32 @@
     <p class="main_text">二、甲方有权签署本合同。</p>
     <p class="main_text  emphasize_text">三、甲方已阅读本合同所有条款，并已特别注意《中国建设银行个人消费额度借款合同》第二至十二条、第十四条以及第十七条等内容。乙方已应甲方要求对相关条款予以详细说明。甲方对所有条款的含义及相应的法律后果已全部通晓并充分理解，甲方同意遵守所有条款，自愿承担可能出现的相关风险。</p>
     <p class="main_text">四、甲方声明在订立本合同时其自身及重要关联方不存在任何违反环境和社会风险管理法律、法规与规章的行为或情形，并且承诺本合同订立后加强自身及其重要关联方的环境和社会风险管理，严格遵守有关环境和社会风险管理的法律、法规与规章，杜绝在建设、生产、经营活动中给环境和社会带来危害及相关风险（包括但不限于与耗能、污染、土地、健康、安全、移民安置、生态保护、节能减排、气候变化等有关的环境与社会问题）。甲方认可，乙方有权对甲方的环境和社会风险管理情况予以监督，并有权要求甲方提交环境和社会风险报告。如果甲方上述声明虚假或者上述承诺未被履行，或者甲方可能造成环境和社会风险，乙方有权停止对甲方的授信（包括但不限于拒绝发放贷款、提供融资、开立保函后信用证或延缓承兑票等），或者宣布债权（包括但不限于贷款、融资、已经或可能发生的垫款等）本息提前到期，或者采取本合同约定或法律允许的其他救济措施。</p>
-    <p class="main_text">本条款为编号<span class="fill_in_text">${contractNumber}</span>《个人消费额度借款合同》不可分割的组成部分</p>
+    <p class="main_text">本条款为编号<span class="fill_in_text">${contractNumber!}</span>《个人消费额度借款合同》不可分割的组成部分</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十条</span>&#160; 立约人信息 </p>
     <p class="main_text">甲方(借款人)信息：</p>
-    <p class="main_text">借款人姓名：<span class="fill_in_text">${borrowerFullName}</span></p>
-    <p class="main_text">身份证件名称及号码：居民身份证 <span class="fill_in_text">${borrowerIdCard}</span></p>
-    <p class="main_text">住所：<span class="fill_in_text">${borrowerAddress}</span></p>
+    <p class="main_text">借款人姓名：<span class="fill_in_text">${borrowerFullName!}</span></p>
+    <p class="main_text">身份证件名称及号码：居民身份证 <span class="fill_in_text">${borrowerIdCard!}</span></p>
+    <p class="main_text">住所：<span class="fill_in_text">${borrowerAddress!}</span></p>
     <#if borrowerPostalCode ??>
-        <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${borrowerPostalAddress}/${borrowerPostalCode}</span></p>
+        <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${borrowerPostalAddress!}/${borrowerPostalCode!}</span></p>
     <#else>
-        <p class="main_text">通讯地址：<span class="fill_in_text">${borrowerPostalAddress}</span></p>
+        <p class="main_text">通讯地址：<span class="fill_in_text">${borrowerPostalAddress!}</span></p>
     </#if>
-    <p class="main_text">联系电话及传真：<span class="fill_in_text">${borrowerCellphone}</span></p>
+    <p class="main_text">联系电话及传真：<span class="fill_in_text">${borrowerCellphone!}</span></p>
     <p class="main_text">其他信息：<span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">&#160;</p>
     <p class="main_text">2.乙方(贷款人)信息：</p>
-    <p class="main_text">贷款人：<span class="fill_in_text">${lenderName}</span></p>
-    <p class="main_text">住所：<span class="fill_in_text">${lenderAddress}</span></p>
-    <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${lenderPostalAddress}/${lenderPostalCode}</span></p>
-    <p class="main_text">联系电话：<span class="fill_in_text">${lenderPhone}</span></p>
+    <p class="main_text">贷款人：<span class="fill_in_text">${lenderName!}</span></p>
+    <p class="main_text">住所：<span class="fill_in_text">${lenderAddress!}</span></p>
+    <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${lenderPostalAddress!}/${lenderPostalCode!}</span></p>
+    <p class="main_text">联系电话：<span class="fill_in_text">${lenderPhone!}</span></p>
     <p class="main_text">其他信息：<span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十一条</span>&#160; 对第一条的约定  </p>
-    <p class="main_text">乙方向甲方提供借款额度人民币(大写)<span class="fill_in_text">${capitalMoney}</span>元。本借款额度为非承诺性额度，甲方申请使用借款应经乙方审查同意，乙方有权对借款额度进行重新确定。</p>
+    <p class="main_text">乙方向甲方提供借款额度人民币(大写)<span class="fill_in_text">${capitalMoney!}</span>元。本借款额度为非承诺性额度，甲方申请使用借款应经乙方审查同意，乙方有权对借款额度进行重新确定。</p>
     <p class="main_text"><span class="clauses_text">第二十二条</span>&#160; 对第二条的约定  </p>
-    <p class="main_text">借款额度有效期间为${loanValidityPeriodStart}至${loanValidityPeriodEnd}。本合同项下的第一笔借款实际放款的日期在本条约定的借款额度有效期的起始日期之后的，借款额度有效期间的起始日为第一笔借款实际放款之日，到期日相应向后顺延。</p>
+    <p class="main_text">借款额度有效期间为${loanValidityPeriodStart!}至${loanValidityPeriodEnd!}。本合同项下的第一笔借款实际放款的日期在本条约定的借款额度有效期的起始日期之后的，借款额度有效期间的起始日为第一笔借款实际放款之日，到期日相应向后顺延。</p>
     <p class="main_text">在借款额度有效期间终止时，未使用的借款额度自动失效。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十三条</span>&#160; 对第五条的约定 </p>
@@ -366,7 +366,7 @@
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十五条</span>&#160; 对第八条的约定 </p>
     <p class="main_text">一、甲方选取下列第 壹 种还款方式归还应付本息</p>
-    <p class="main_text">壹：委托扣款方式。乙方从下述约定的委托扣款账户中直接扣划还款。扣款账户一：户名 <span class="fill_in_text">${borrowerFullName}</span> 账号 <span class="fill_in_text">${borrowerCardId}</span>。</p>
+    <p class="main_text">壹：委托扣款方式。乙方从下述约定的委托扣款账户中直接扣划还款。扣款账户一：户名 <span class="fill_in_text">${borrowerFullName!}</span> 账号 <span class="fill_in_text">${borrowerCardId!}</span>。</p>
     <p class="main_text">贰：柜台或自助渠道还款方式。</p>
     <p class="main_text">二、关于提前还本违约金的约定。甲方提前还本的，按照下列第 贰 项约定办理：</p>
     <p class="main_text">壹：无须支付提前还本违约金。</p>
@@ -393,8 +393,8 @@
     <p class="main_text"><span class="clauses_text">第三十条</span>&#160; 其他约定事项 </p>
     <p class="main_text">一、甲方确认下列邮寄地址、收件人、电子邮箱、电话号码、传真号码等信</p>
     <p class="main_text">息(以下统称“送达地址”)为乙方、人民法院(或仲裁机构)发送各类纸质或电子数据通知、信函、法律文书(以下统称“文书”)的送达地址：</p>
-    <p class="main_text">邮寄地址 <span class="fill_in_text">${borrowerAddress}</span> </p>
-    <p class="main_text">收件人&#160; <span class="fill_in_text">${borrowerFullName}</span>&#160;&#160;&#160;&#160;&#160;&#160; 联系电话&#160; <span class="fill_in_text">${borrowerCellphone}</span></p>
+    <p class="main_text">邮寄地址 <span class="fill_in_text">${borrowerAddress!}</span> </p>
+    <p class="main_text">收件人&#160; <span class="fill_in_text">${borrowerFullName!}</span>&#160;&#160;&#160;&#160;&#160;&#160; 联系电话&#160; <span class="fill_in_text">${borrowerCellphone!}</span></p>
     <p class="main_text">电子邮箱 <span class="fill_in_text"> 此栏空白 </span>&#160;&#160;微信号 <span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">二、上述送达地址持续适用于合同履行期间、履行本合同发生争议进入民事诉讼程序(包括一审、二审、再审、执行程序和特别程序)或仲裁阶段后，人民法院或仲裁机构向甲方送达各类法律文书。在合同履行期间，乙方向甲方送达催收债务函、宣布贷款提前到期通知等文书同样适用该送达地址。</p>
     <p class="main_text">三、甲方对其送达地址作出变更的，应自变更之日起五个工作日内将变更后的送达地址书面告知乙方，否则送达地址仍以本合同载明为准。</p>
@@ -415,7 +415,7 @@
         </tr>
         <tr style="height:124.75pt">
             <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
-                <img src="${borrowerAutograph}" width="129" height="167" alt="" style=""/>
+                <img src="${borrowerAutograph!}" width="129" height="167" alt="" style=""/>
             </td>
             <td style="padding-left:5.4pt; padding-right:5.4pt; vertical-align:top; width:196.45pt">
                 <p  class="autograph_text"> </p>
@@ -438,11 +438,15 @@
     <#-- 甲乙方签字区 上下 分布 start -->
     <p class="td_text">甲方（签字）：</p>
     <p class="td_text">
-        <img  src="${borrowerAutograph}" width="129" height="167" alt=""  class="autograph"/>
+        <img  src="${borrowerAutograph!}" width="129" height="167" alt=""  class="autograph"/>
     </p>
     <p class="main_text">&#160;</p>
     <p class="td_text">乙方（公章或负责人签字）：</p>
-    <img  src="" width="129" height="100" alt=""  class="autograph"/>
+    <p class="td_text">
+        <div class="autograph" style="width: 129px;height: 100px"></div>
+        <#--<img  src="" width="129" height="100" alt=""  class="autograph"/>-->
+    </p>
+    <#--<img  src="data:image/png;base64,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" width="129" height="100" alt=""  class="autograph"/>-->
     <p class="main_text" style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0">&#160;&#160;&#160;&#160;年 &#160;&#160;月 &#160;&#160;日</p>
     <#-- 甲乙方签字区 上下 分布 end -->
 </div>
