@@ -365,10 +365,10 @@
     <p class="main_text">本合同项下借款支用期限在一年以内(含)的，每月计息天数按实际天数计算。</p>
     <p class="main_text">&#160;</p>
     <p class="main_text"><span class="clauses_text">第二十五条</span>&#160; 对第八条的约定 </p>
-    <p class="main_text">一、甲方选取下列第 壹 种还款方式归还应付本息</p>
+    <p class="main_text">一、甲方选取下列第<span class="fill_in_text"> 壹 </span>种还款方式归还应付本息</p>
     <p class="main_text">壹：委托扣款方式。乙方从下述约定的委托扣款账户中直接扣划还款。扣款账户一：户名 <span class="fill_in_text">${borrowerFullName!}</span> 账号 <span class="fill_in_text">${borrowerCardId!}</span>。</p>
     <p class="main_text">贰：柜台或自助渠道还款方式。</p>
-    <p class="main_text">二、关于提前还本违约金的约定。甲方提前还本的，按照下列第 贰 项约定办理：</p>
+    <p class="main_text">二、关于提前还本违约金的约定。甲方提前还本的，按照下列第<span class="fill_in_text">  贰 </span>项约定办理：</p>
     <p class="main_text">壹：无须支付提前还本违约金。</p>
     <p class="main_text">贰：应支付提前还本违约金。提前还本违约金计算方法为：<span class="fill_in_text">违约金=提前还贷金额×违约金率，违约金率为1‰ </span>。 </p>
     <p class="main_text">三、关于缩短借款期限违约金的约定为：<span class="fill_in_text">贷款人对借款人缩短借款期限不收取违约金</span>。</p>

@@ -41,7 +41,7 @@ public class PreviewController {
         model.put("borrowerCellphone", userInfo.getCellphone());//借款人手机号
         model.put("borrowerIdCard", userInfo.getIdCard());//借款人证件号（身份证）
         model.put("money", vo.getMoney() + "元"); //借款金额
-        model.put("capitalMoney", AmountUtil.change2Upper(vo.getMoney())); //中文大写金额，如：叁拾万元整
+        model.put("capitalMoney", String.format("%s整",AmountUtil.change2Upper(vo.getMoney()))); //中文大写金额，如：叁拾万元整
         model.put("term", vo.getRepaymentTerm() + "个月");//借款期限
         model.put("interestStartDay", "自您提款成功日起计收利息");//起息日
         model.put("repaymentMethod", cacheService.translate(Cachekey.Translation.REPAYMENT_TYPE + vo.getRepaymentType()));//还款方式

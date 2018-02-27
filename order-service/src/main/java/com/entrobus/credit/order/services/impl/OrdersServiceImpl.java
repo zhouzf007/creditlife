@@ -397,7 +397,7 @@ public class OrdersServiceImpl implements OrdersService {
         map.put("borrowerCellphone", userInfo.getCellphone());//借款人手机号
         map.put("borrowerIdCard", userInfo.getIdCard());//借款人证件号（身份证）
         map.put("money", AmountUtil.changeF2Y(order.getApplyMoney()) + "元"); //借款金额
-        map.put("capitalMoney", AmountUtil.change2Upper(Double.valueOf(order.getApplyMoney() / 100))); //中文大写金额，如：叁拾万元整
+        map.put("capitalMoney", String.format("%s整",AmountUtil.change2Upper(Double.valueOf(order.getApplyMoney() / 100)))); //中文大写金额，如：叁拾万元整
         map.put("term", order.getRepaymentTerm() + "个月");//借款期限
         map.put("interestStartDay", "自您提款成功日起计收利息");//起息日
         map.put("repaymentMethod", cacheService.translate(Cachekey.Translation.REPAYMENT_TYPE + order.getRepaymentType()));//还款方式
