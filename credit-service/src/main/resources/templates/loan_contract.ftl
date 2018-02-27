@@ -104,7 +104,7 @@
                 <p class="td_text">借款金额</p>
             </td>
             <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
-                <p class="td_text">${money!}</p>
+                <p class="td_text">${capitalMoney!}</p>
             </td>
         </tr>
         <tr>

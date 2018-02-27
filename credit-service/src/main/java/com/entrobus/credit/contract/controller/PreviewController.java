@@ -64,6 +64,7 @@ public class PreviewController {
         model.put("borrowerCardId", defualtAccount);//借款人银行卡号
 
         model.put("lenderName", accountBank);//贷款人名称，暂填 中国建设银行
+        model.put("lenderHeadquartersName", "中国建设银行股份有限公司");//总公司名称，暂填 中国建设银行股份有限公司
         model.put("lenderAddress", "广东省佛山市佛山大道南327号");//贷款人住址，将来可配置，目前“广东省佛山市佛山大道南327号”
         model.put("lenderPostalAddress", "广东省佛山市佛山大道南327号");//贷款人通讯地址，将来可配置，目前“广东省佛山市佛山大道南327号”
         model.put("lenderPostalCode", "528000");//贷款人通讯地址，将来可配置，目前“528000”
@@ -90,6 +91,8 @@ public class PreviewController {
      */
     @GetMapping("/{ftlName}")
     public String previewCreditReportQueryAuthorization(Map<String,Object> model, @PathVariable("ftlName") String ftlName){
+        model.put("lenderHeadquartersName", "中国建设银行股份有限公司");//总公司名称，暂填 中国建设银行股份有限公司
+        model.put("lenderName", "中国建设银行");//贷款人名称，暂填 中国建设银行
         return ftlName;
     }
 

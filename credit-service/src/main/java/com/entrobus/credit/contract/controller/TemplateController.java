@@ -94,6 +94,7 @@ public class TemplateController {
         map.put("borrowerCardId", "66541646454165");//借款人银行卡号
 
         map.put("lenderName", "中国建设银行");//贷款人名称，暂填 中国建设银行
+        map.put("lenderHeadquartersName", "中国建设银行股份有限公司");//总公司名称，暂填 中国建设银行股份有限公司
         map.put("lenderAddress", "广东省佛山市佛山大道南327号");//贷款人住址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalAddress", "广东省佛山市佛山大道南327号");//贷款人通讯地址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalCode", "528000");//贷款人通讯地址，将来可配置，目前“528000”
