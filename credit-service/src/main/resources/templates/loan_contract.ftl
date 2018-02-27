@@ -346,7 +346,7 @@
     <p class="main_text">其他信息：<span class="fill_in_text"> 此栏空白 </span></p>
     <p class="main_text">&#160;</p>
     <p class="main_text">2.乙方(贷款人)信息：</p>
-    <p class="main_text">贷款人：<span class="fill_in_text">${lenderName!}</span></p>
+    <p class="main_text">贷款人：<span class="fill_in_text">${lenderFullName!}</span></p>
     <p class="main_text">住所：<span class="fill_in_text">${lenderAddress!}</span></p>
     <p class="main_text">通讯地址及邮政编码：<span class="fill_in_text">${lenderPostalAddress!}/${lenderPostalCode!}</span></p>
     <p class="main_text">联系电话：<span class="fill_in_text">${lenderPhone!}</span></p>
