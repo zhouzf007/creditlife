@@ -84,5 +84,6 @@
 <body>
 <div class="page_body">
     ${content!}
+</div>
 </body>
 </html>
