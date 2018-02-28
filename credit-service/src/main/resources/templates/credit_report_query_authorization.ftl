@@ -5,7 +5,7 @@
     <meta name="generator" content="Aspose.Words for .NET 15.1.0.0"></meta>
     <title></title>
     <style type="text/css">
-        <#--页面属性，纸张大小、页边距-->
+        /*页面属性，纸张大小、页边距*/
         @page {
             size: a4;
             margin: 3.18cm  2.54cm;
