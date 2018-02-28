@@ -96,4 +96,27 @@ public class PreviewController {
         return ftlName;
     }
 
+    /**
+     * 预览模板
+     * @param model
+     * @return
+     */
+    @PostMapping("/transformation")
+    public String transformation(Map<String,Object> model, @RequestBody String content){
+        StringBuffer sb = new StringBuffer();
+        if (content != null){
+            String[] split = content.replaceAll(" ","&#160;").split("\n");
+            for (String line : split) {
+                if (StringUtils.isNotBlank(line)) {
+                    sb.append("\t<p class='main_text'>").append(line).append("</p>");
+                }else {
+                    sb.append(line);
+                }
+                sb.append("\n");
+            }
+        }
+
+        model.put("content",sb.toString());
+        return "transformation";
+    }
 }
