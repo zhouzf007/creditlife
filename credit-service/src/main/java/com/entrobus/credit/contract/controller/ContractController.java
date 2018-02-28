@@ -11,14 +11,11 @@ import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.entrobus.credit.vo.contract.ContractFillVo;
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
-import com.netflix.discovery.shared.Application;
-import com.netflix.discovery.shared.Applications;
-import org.apache.http.entity.mime.content.FileBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.ServiceInstanceChooser;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +25,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,10 +36,10 @@ public class ContractController {
     private ContractService contractService;
 
     @Autowired
-    private EurekaClient eurekaClient;
+    private FileServiceClient fileServiceClient;
 
     @Autowired
-    private FileServiceClient fileServiceClient;
+    private ServiceInstanceChooser serviceInstanceChooser;//用于Ribbon的负载均衡选择器
 
     @GetMapping(value = "/contract")
     public Contract getContract(@RequestParam("id") String id) {
@@ -126,15 +122,10 @@ public class ContractController {
      * @return
      */
     private String getFileServiceAddr() {
-        Applications applications = eurekaClient.getApplications();
-//        Application gateway = applications.getRegisteredApplications("gateway");//通过网关
-        Application gateway = applications.getRegisteredApplications("file-service");//不经过网关
-        List<InstanceInfo> instances = gateway.getInstances();
-        if (instances != null && instances.size() > 0) {
-            InstanceInfo info = instances.get(0);
-//            String url = String.format("http://%s:%d/file/postUploadFile", info.getHostName(),info.getPort()) ;//通过网关
-            String url = String.format("http://%s:%d/postUploadFile", info.getHostName(),info.getPort()) ;//不经过网关
-
+        ServiceInstance instance = serviceInstanceChooser.choose("file-service");
+        if (instance != null){
+//            String url = String.format("http://%s:%d/postUploadFile", instance.getPort(),instance.getPort()) ;//不经过网关
+            String url = String.format("%s/postUploadFile", instance.getUri()) ;//不经过网关
             return url;
         }
         return null;

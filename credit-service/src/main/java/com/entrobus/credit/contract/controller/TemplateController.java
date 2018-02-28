@@ -9,11 +9,9 @@ import com.entrobus.credit.contract.client.FileServiceClient;
 import com.entrobus.credit.contract.util.FreemarkUtil;
 import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.vo.common.PdfVo;
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
-import com.netflix.discovery.shared.Application;
-import com.netflix.discovery.shared.Applications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.ServiceInstanceChooser;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -32,7 +29,7 @@ public class TemplateController {
     @Autowired
     private FileServiceClient fileServiceClient;
     @Autowired
-    private EurekaClient eurekaClient;
+    private ServiceInstanceChooser serviceInstanceChooser;//用于Ribbon的负载均衡选择器
     @RequestMapping("/test")
     public void test(String name, HttpServletResponse response){
         Map map = new HashMap();
@@ -164,15 +161,10 @@ public class TemplateController {
      * @return
      */
     private String getFileServiceAddr() {
-        Applications applications = eurekaClient.getApplications();
-//        Application gateway = applications.getRegisteredApplications("gateway");//通过网关
-        Application gateway = applications.getRegisteredApplications("file-service");//不经过网关
-        List<InstanceInfo> instances = gateway.getInstances();
-        if (instances != null && instances.size() > 0) {
-            InstanceInfo info = instances.get(0);
-//            String url = String.format("http://%s:%d/file/postUploadFile", info.getHostName(),info.getPort()) ;//通过网关
-            String url = String.format("http://%s:%d/postUploadFile", info.getHostName(),info.getPort()) ;//不经过网关
-
+        ServiceInstance instance = serviceInstanceChooser.choose("file-service");
+        if (instance != null){
+//            String url = String.format("http://%s:%d/postUploadFile", instance.getPort(),instance.getPort()) ;//不经过网关
+            String url = String.format("%s/postUploadFile", instance.getUri()) ;//不经过网关
             return url;
         }
         return null;
