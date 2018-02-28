@@ -23,13 +23,14 @@ import java.util.Map;
 /**
  * 合同等文件合成预览
  */
-@RestController
+@Controller
 @RequestMapping("/preview")
 public class PreviewController {
 
     @Autowired
     private CreditCacheService cacheService;
     @PostMapping("/loan_contract")
+    @ResponseBody
     public WebResult previewLoanContract(Map<String,Object> model,@Validated @RequestBody ApplyVo vo) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(vo.getToken());
         if (userInfo == null) return null;
@@ -95,11 +96,10 @@ public class PreviewController {
      * @return
      */
     @GetMapping("/{ftlName}")
-    public WebResult previewCreditReportQueryAuthorization(Map<String,Object> model, @PathVariable("ftlName") String ftlName) throws IOException, TemplateException {
+    public String previewCreditReportQueryAuthorization(Map<String,Object> model, @PathVariable("ftlName") String ftlName)  {
         model.put("lenderHeadquartersName", "中国建设银行股份有限公司");//总公司名称，暂填 中国建设银行股份有限公司
         model.put("lenderName", "中国建设银行");//贷款人名称，暂填 中国建设银行
-        Map<String, Object> data = getDataMap(model, String.format("%s.ftl", ftlName));
-        return WebResult.ok().data(data);
+        return ftlName;
     }
 
     /**
@@ -108,7 +108,7 @@ public class PreviewController {
      * @return
      */
     @PostMapping("/transformation")
-    public WebResult transformation(Map<String,Object> model, @RequestBody String content) throws IOException, TemplateException {
+    public String transformation(Map<String,Object> model, @RequestBody String content)  {
         StringBuffer sb = new StringBuffer();
         if (content != null){
             String[] split = content.replaceAll(" ","&#160;").split("\n");
@@ -123,8 +123,7 @@ public class PreviewController {
         }
 
         model.put("content",sb.toString());
-        Map<String, Object> data = getDataMap(model, "transformation.ftl");
-        return WebResult.ok().data(data);
+        return "transformation";
     }
 
     private Map<String, Object> getDataMap(Map<String, Object> model, String templateName) throws IOException, TemplateException {

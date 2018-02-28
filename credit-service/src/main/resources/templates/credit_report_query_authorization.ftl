@@ -99,9 +99,9 @@
     <p class="main_text">借款申请人签名：</p>
     <p class="td_text">
         <#if borrowerAutograph ??>
-            <img  src="${borrowerAutograph!}" width="129" height="167" alt=""  class="autograph"/>
+            <img  src="${borrowerAutograph!}" width="129pt" height="167pt" alt=""  class="autograph"/>
         <#else >
-            <div class="autograph" style="width: 129px;height: 167px"></div>
+            <div class="autograph" style="width: 129pt;height: 167pt"></div>
         </#if>
     </p>
 </div>

@@ -68,6 +68,47 @@
             text-indent: 0;
             widows: 0;
         }
+        .autograph{
+            width: 129pt;
+            height: 167pt;
+        }
+        td.tdA {
+            border-bottom-color: #000000;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            border-left-color: #000000;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-right-color: #000000;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-top-color: #000000;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            padding-left: 5.03pt;
+            padding-right: 5.03pt;
+            vertical-align: top;
+            width: 122.85pt
+        }
+
+        td.tdB {
+            border-bottom-color: #000000;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            border-left-color: #000000;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-right-color: #000000;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-top-color: #000000;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            padding-left: 5.03pt;
+            padding-right: 5.03pt;
+            vertical-align: top;
+            width: 281.65pt
+        }
     </style>
 </head>
 
@@ -84,66 +125,66 @@
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt; width:426.85pt">
         <tbody>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">手机号</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${borrowerCellphone!}</p>
             </td>
         </tr>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">身份证号</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${borrowerIdCard!}</p>
             </td>
         </tr>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">借款金额</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${capitalMoney!}</p>
             </td>
         </tr>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">借款期限</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${term!}</p>
             </td>
         </tr>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">起息日</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${interestStartDay!}</p>
             </td>
         </tr>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">还款方式</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${repaymentMethod!}</p>
             </td>
         </tr>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">指定收款账户</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${appointPayeeAccount!}</p>
             </td>
         </tr>
         <tr>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:122.85pt">
+            <td class="tdA">
                 <p class="td_text">年化利率</p>
             </td>
-            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:281.65pt">
+            <td class="tdB">
                 <p class="td_text">${annualInterestRate!}</p>
             </td>
         </tr>
@@ -439,18 +480,18 @@
     <p class="td_text">甲方（签字）：</p>
     <p class="td_text">
         <#if borrowerAutograph ??>
-            <img  src="${borrowerAutograph!}" width="129" height="167" alt=""  class="autograph"/>
+            <img  src="${borrowerAutograph!}" alt=""  class="autograph"/>
         <#else >
-            <div class="autograph" style="width: 129px;height: 167px"></div>
+            <div class="autograph" ></div>
+            <p class="main_text" style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0">&#160;&#160;&#160;&#160;年 &#160;&#160;月 &#160;&#160;日</p>
         </#if>
     </p>
     <p class="main_text">&#160;</p>
     <p class="td_text">乙方（公章或负责人签字）：</p>
     <p class="td_text">
-        <div class="autograph" style="width: 129px;height: 100px"></div>
-        <#--<img  src="" width="129" height="100" alt=""  class="autograph"/>-->
+        <div class="autograph" style="width:129pt;height: 80pt"></div>
+        <#--<img  src="" width="129pt" height="100pt" alt=""  class="autograph"/>-->
     </p>
-    <#--<img  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ8AAAFeCAYAAAHs+qr6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAdqSURBVHhe7dxBap3XFoRRNTO3TENNT08TkgdhgxDK/RUrT6mnOoZqOAYtwQJb143DzpcicYLvrq9v37493bz8hx5+h0e8uh7y4Qe/mockD0kekjwkeUjykOQhyUOShyQPSR6SPCR5SPKQ5CHJQ5KHJA9JHpI8JF0Puc9v/hfuXl5e/vjog1/p7T8IfPjhr+YhyUOShyQPSR6SPCR5SPKQ5CHJQ5KHJA9JHpI8JHlI8pDkIclDkockD0kekn6L34v/nfw2f2V+Fw4SHCQ4SHCQ4CDBQYKDBAcJDhIcJDhIcJDgIMFBgoMEBwkOEhwkOEhwkOAgwUGCgwQHCQ4SHCQ4SHCQ4CDBQYKDBAcJDhIcJDhIcJDgIMFBgoMEBwkOEt7+hJPH/OAzej3G9XX7yUN++Mk8Xf/P/9sxPvoFn9LrUT764BN7cpDgIMFBgoMEBwkOEhwkOEhwkOAgwUGCgwQHCQ4SHCQ4SHCQ4CDBQYKDBAcJDhIcJDhIcJDgIMFBgoMEBwkOEhwkOEhwkOAgwUGCgwQHCQ4SHCQ4SHCQ4CDBQYKDBAcJDhIcJDhIcJDgIMFBgoMEBwkOEhwkOEhwkOAgwUGCgwQHCQ4SHCQ4SHCQ4CDBQYKDBAcJDhIcJDhIcJDgIMFBgoMEBwkOEhwkOEhwkOAgwUGCg/zbvT+5+38eX49xfd1+8iU+hC9vcXz2P/Sf7sGcciQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTCkUA4EghHAuFIIBwJhCOBcCQQjgTC0RXI1/wm/PD17vq6/eA5PoDn1zjevm7fuL+xJp/b9df//kcSf3/dvmE9eO/v5bj94DE+gMvjFcdHH4B/raUTB5U4qMRBJQ4qcVCJg0ocVOKgEgeVOKjEQSUOKnFQiYNKHFTioBIHlTioxEElDipxUImDShxU4qASB5U4qMRBJQ4qcVCJg0ocVOKgEgeVOKjEQSUOKnFQiYNKHFTioBIHlTioxEElDipxUImDShxU4qASB5U4qMRBJQ4qcVCJg0ocVOKgEgeVOKjEQSUOKnFQiYNKHFTioBIHlTioxEElDipxUImDShxU4qASB5U4qMRBJQ4qcVCJg0ocVOKgEgeVOKjEQSUOKnFQiYNKHFTioBIHlTioxEElDipxUImDShxU4qASB5U4qMRBJQ4qcVCJg0ocVOKgEgeVOKjEQSUOKnFQiYNKHFTioBIHlTioxEElDipxUImDShxU4qASB5U4qMRBJQ4qcVCJg0ocVOKgEgeVOKjEQSUOKnFQiYNKHFTioBIHlTioxEElDipxUImDShxU4qASB5U4qMRBJQ4qcVCJg0ocVOKgEgeVOKjEQSUOKnFQiYNKHFTioBIHlTioxEElDipxUImDShxU4qC6+/79+58ffcDndnVxd30JhPf+CeP9149IHvMXA5/e42k0nuMXA6Tnf0bk9pP7+BDgZ+6v8fga3wT4ma9+Kx2YGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2BiPICJ8QAmxgOYGA9gYjyAifEAJsYDmBgPYGI8gInxACbGA5gYD2ByjcdTfhPgJ56u8XiIbwL8zMPdy8vLH7cfPMYHAM3jtRt3b1+3b3y5eX73CwDeu/bhy4/J+P+vH/8kcn9z/evM1xu/JwKfz/X3/fX3/7UD9//6J43Xr7u7vwAFKSKs56/XuwAAAABJRU5ErkJggg==" width="129" height="100" alt=""  class="autograph"/>-->
     <p class="main_text" style="margin:0pt; orphans:0; text-align:justify; text-indent:24pt; widows:0">&#160;&#160;&#160;&#160;年 &#160;&#160;月 &#160;&#160;日</p>
     <#-- 甲乙方签字区 上下 分布 end -->
 </div>
