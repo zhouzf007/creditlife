@@ -5,28 +5,32 @@ import com.entrobus.credit.common.bean.WebResult;
 import com.entrobus.credit.common.util.AmountUtil;
 import com.entrobus.credit.common.util.DateUtils;
 import com.entrobus.credit.contract.services.CreditCacheService;
+import com.entrobus.credit.contract.util.FreemarkUtil;
 import com.entrobus.credit.vo.order.ApplyVo;
 import com.entrobus.credit.vo.user.CacheUserInfo;
+import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 合同等文件合成预览
  */
-@Controller
+@RestController
 @RequestMapping("/preview")
 public class PreviewController {
 
     @Autowired
     private CreditCacheService cacheService;
     @PostMapping("/loan_contract")
-    public String previewLoanContract(Map<String,Object> model,@Validated @RequestBody ApplyVo vo){
+    public WebResult previewLoanContract(Map<String,Object> model,@Validated @RequestBody ApplyVo vo) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(vo.getToken());
         if (userInfo == null) return null;
         model.put("orderId", "123456789");
@@ -81,7 +85,8 @@ public class PreviewController {
 //        model.put("borrowerAutograph", "data:image/png;base64," + "iVBORw0KGgoAAAANSUhEUgAAAQ8AAAFeCAYAAACb/ZpsAAAAAXNSR0IArs4c6QAADDVJREFUeAHt2jFqnWcahuEckUJLSOM2pTcSGHDvDQQGspxsIL0hkI24TOvGSxCMieb7jRQ0d+E8bseXQTnnPXpU6ALdHNm5fZc/j4+P9w8PD29vt9ub8/z1efzhPH6fmZMAgf9jgfNz/+n83H88j+/P47v7+/vfzvOHl9/y7eVxovHTGf56Xnv18nXPCRD45gU+nHj8fCLyx7PE3fOTE45/n+e/nw/heEbxSIDAs8DVhd+fOvH5tc/vPK53HNcnzruOv2Py/BUeCRAg8Cxw3n38dZ7/63oHcjvBuP6O48/zgnccz0IeCRD4ksCHE48f70443p6VcHyJyucIEHgp8Orqxt15G/Lm5aueEyBA4J8Erm7cnV9bXv/T0OcJECDwUuDqxu28/fjPeeL/43gp4zkBAl8UOO88Pl3vPITji0w+SYBABa5u+KfZqrgJEJgExGNiMiJAoALiURE3AQKTgHhMTEYECFRAPCriJkBgEhCPicmIAIEKiEdF3AQITALiMTEZESBQAfGoiJsAgUlAPCYmIwIEKiAeFXETIDAJiMfEZESAQAXEoyJuAgQmAfGYmIwIEKiAeFTETYDAJCAeE5MRAQIVEI+KuAkQmATEY2IyIkCgAuJRETcBApOAeExMRgQIVEA8KuImQGASEI+JyYgAgQqIR0XcBAhMAuIxMRkRIFAB8aiImwCBSUA8JiYjAgQqIB4VcRMgMAmIx8RkRIBABcSjIm4CBCYB8ZiYjAgQqIB4VMRNgMAkIB4TkxEBAhUQj4q4CRCYBMRjYjIiQKAC4lERNwECk4B4TExGBAhUQDwq4iZAYBIQj4nJiACBCohHRdwECEwC4jExGREgUAHxqIibAIFJQDwmJiMCBCogHhVxEyAwCYjHxGREgEAFxKMibgIEJgHxmJiMCBCogHhUxE2AwCQgHhOTEQECFRCPirgJEJgExGNiMiJAoALiURE3AQKTgHhMTEYECFRAPCriJkBgEhCPicmIAIEKiEdF3AQITALiMTEZESBQAfGoiJsAgUlAPCYmIwIEKiAeFXETIDAJiMfEZESAQAXEoyJuAgQmAfGYmIwIEKiAeFTETYDAJCAeE5MRAQIVEI+KuAkQmATEY2IyIkCgAuJRETcBApOAeExMRgQIVEA8KuImQGASEI+JyYgAgQqIR0XcBAhMAuIxMRkRIFAB8aiImwCBSUA8JiYjAgQqIB4VcRMgMAmIx8RkRIBABcSjIm4CBCYB8ZiYjAgQqIB4VMRNgMAkIB4TkxEBAhUQj4q4CRCYBMRjYjIiQKAC4lERNwECk4B4TExGBAhUQDwq4iZAYBIQj4nJiACBCohHRdwECEwC4jExGREgUAHxqIibAIFJQDwmJiMCBCogHhVxEyAwCYjHxGREgEAFxKMibgIEJgHxmJiMCBCogHhUxE2AwCQgHhOTEQECFRCPirgJEJgExGNiMiJAoALiURE3AQKTgHhMTEYECFRAPCriJkBgEhCPicmIAIEKiEdF3AQITALiMTEZESBQAfGoiJsAgUlAPCYmIwIEKiAeFXETIDAJiMfEZESAQAXEoyJuAgQmAfGYmIwIEKiAeFTETYDAJCAeE5MRAQIVEI+KuAkQmATEY2IyIkCgAuJRETcBApOAeExMRgQIVEA8KuImQGASEI+JyYgAgQqIR0XcBAhMAuIxMRkRIFAB8aiImwCBSUA8JiYjAgQqIB4VcRMgMAmIx8RkRIBABcSjIm4CBCYB8ZiYjAgQqIB4VMRNgMAkIB4TkxEBAhUQj4q4CRCYBMRjYjIiQKAC4lERNwECk4B4TExGBAhUQDwq4iZAYBIQj4nJiACBCohHRdwECEwC4jExGREgUAHxqIibAIFJQDwmJiMCBCogHhVxEyAwCYjHxGREgEAFxKMibgIEJgHxmJiMCBCogHhUxE2AwCQgHhOTEQECFRCPirgJEJgExGNiMiJAoALiURE3AQKTgHhMTEYECFRAPCriJkBgEhCPicmIAIEKiEdF3AQITALiMTEZESBQAfGoiJsAgUlAPCYmIwIEKiAeFXETIDAJiMfEZESAQAXEoyJuAgQmAfGYmIwIEKiAeFTETYDAJCAeE5MRAQIVEI+KuAkQmATEY2IyIkCgAuJRETcBApOAeExMRgQIVEA8KuImQGASEI+JyYgAgQqIR0XcBAhMAuIxMRkRIFAB8aiImwCBSUA8JiYjAgQqIB4VcRMgMAmIx8RkRIBABcSjIm4CBCYB8ZiYjAgQqIB4VMRNgMAkIB4TkxEBAhUQj4q4CRCYBMRjYjIiQKAC4lERNwECk4B4TExGBAhUQDwq4iZAYBIQj4nJiACBCohHRdwECEwC4jExGREgUAHxqIibAIFJQDwmJiMCBCogHhVxEyAwCYjHxGREgEAFxKMibgIEJgHxmJiMCBCogHhUxE2AwCQgHhOTEQECFRCPirgJEJgExGNiMiJAoALiURE3AQKTgHhMTEYECFRAPCriJkBgEhCPicmIAIEKiEdF3AQITALiMTEZESBQAfGoiJsAgUlAPCYmIwIEKiAeFXETIDAJiMfEZESAQAXEoyJuAgQmAfGYmIwIEKiAeFTETYDAJCAeE5MRAQIVEI+KuAkQmATEY2IyIkCgAuJRETcBApOAeExMRgQIVEA8KuImQGASEI+JyYgAgQqIR0XcBAhMAuIxMRkRIFAB8aiImwCBSUA8JiYjAgQqIB4VcRMgMAmIx8RkRIBABcSjIm4CBCYB8ZiYjAgQqIB4VMRNgMAkIB4TkxEBAhUQj4q4CRCYBMRjYjIiQKAC4lERNwECk4B4TExGBAhUQDwq4iZAYBIQj4nJiACBCohHRdwECEwC4jExGREgUAHxqIibAIFJQDwmJiMCBCogHhVxEyAwCYjHxGREgEAFxKMibgIEJgHxmJiMCBCogHhUxE2AwCQgHhOTEQECFRCPirgJEJgExGNiMiJAoALiURE3AQKTgHhMTEYECFRAPCriJkBgEhCPicmIAIEKiEdF3AQITALiMTEZESBQAfGoiJsAgUlAPCYmIwIEKiAeFXETIDAJiMfEZESAQAXEoyJuAgQmAfGYmIwIEKiAeFTETYDAJCAeE5MRAQIVEI+KuAkQmATEY2IyIkCgAuJRETcBApOAeExMRgQIVEA8KuImQGASEI+JyYgAgQqIR0XcBAhMAuIxMRkRIFAB8aiImwCBSUA8JiYjAgQqIB4VcRMgMAmIx8RkRIBABcSjIm4CBCYB8ZiYjAgQqIB4VMRNgMAkIB4TkxEBAhUQj4q4CRCYBMRjYjIiQKAC4lERNwECk4B4TExGBAhUQDwq4iZAYBIQj4nJiACBCohHRdwECEwC4jExGREgUAHxqIibAIFJQDwmJiMCBCogHhVxEyAwCYjHxGREgEAFxKMibgIEJgHxmJiMCBCogHhUxE2AwCQgHhOTEQECFRCPirgJEJgExGNiMiJAoALiURE3AQKTgHhMTEYECFRAPCriJkBgEhCPicmIAIEKiEdF3AQITALiMTEZESBQAfGoiJsAgUlAPCYmIwIEKiAeFXETIDAJiMfEZESAQAXEoyJuAgQmAfGYmIwIEKiAeFTETYDAJCAeE5MRAQIVEI+KuAkQmATEY2IyIkCgAuJRETcBApOAeExMRgQIVEA8KuImQGASEI+JyYgAgQqIR0XcBAhMAuIxMRkRIFAB8aiImwCBSUA8JiYjAgQqIB4VcRMgMAmIx8RkRIBABcSjIm4CBCYB8ZiYjAgQqIB4VMRNgMAkIB4TkxEBAhUQj4q4CRCYBMRjYjIiQKAC4lERNwECk4B4TExGBAhUQDwq4iZAYBIQj4nJiACBCohHRdwECEwC4jExGREgUAHxqIibAIFJQDwmJiMCBCogHhVxEyAwCdzdbrdP09KIAAECTwJXN+4eHx8/EiFAgMDXCFzduN55vP+aL7IlQIDA1Y3rncc7FAQIEPgagasbt/Of+4eHhz/PF776mi+2JUDgmxX4cH9//+P1a8vD+fj5fPz1zVL4xgkQmASuTjz14uHzP9WeivxxvvIXAZn8jAh8kwJPffjlqRff3V4qnF9ffjq/xvx6XvMrzEsYzwkQ+HC943gOx8XxP/G4Xnj6O5C3Z/jmPH99Hn84j99fn/OHAIFvQ+D83H86P/cfz+P78/juROO38/zh5Xf/XwSvnb5zq5r2AAAAAElFTkSuQmCC");
 //        model.put("borrowerAutograph", "data:image/png;base64,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");
 //        model.put("borrowerAutograph", ImageUtil.getImageBase64Src(vo.getSignature()));
-        return "loan_contract";
+        Map<String, Object> data = getDataMap(model, "loan_contract.ftl");
+        return WebResult.ok().data(data);
     }
 
     /**
@@ -90,10 +95,11 @@ public class PreviewController {
      * @return
      */
     @GetMapping("/{ftlName}")
-    public String previewCreditReportQueryAuthorization(Map<String,Object> model, @PathVariable("ftlName") String ftlName){
+    public WebResult previewCreditReportQueryAuthorization(Map<String,Object> model, @PathVariable("ftlName") String ftlName) throws IOException, TemplateException {
         model.put("lenderHeadquartersName", "中国建设银行股份有限公司");//总公司名称，暂填 中国建设银行股份有限公司
         model.put("lenderName", "中国建设银行");//贷款人名称，暂填 中国建设银行
-        return ftlName;
+        Map<String, Object> data = getDataMap(model, String.format("%s.ftl", ftlName));
+        return WebResult.ok().data(data);
     }
 
     /**
@@ -102,7 +108,7 @@ public class PreviewController {
      * @return
      */
     @PostMapping("/transformation")
-    public String transformation(Map<String,Object> model, @RequestBody String content){
+    public WebResult transformation(Map<String,Object> model, @RequestBody String content) throws IOException, TemplateException {
         StringBuffer sb = new StringBuffer();
         if (content != null){
             String[] split = content.replaceAll(" ","&#160;").split("\n");
@@ -117,6 +123,14 @@ public class PreviewController {
         }
 
         model.put("content",sb.toString());
-        return "transformation";
+        Map<String, Object> data = getDataMap(model, "transformation.ftl");
+        return WebResult.ok().data(data);
+    }
+
+    private Map<String, Object> getDataMap(Map<String, Object> model, String templateName) throws IOException, TemplateException {
+        String template = FreemarkUtil.getTemplate(templateName, model);
+        Map<String, Object> data = new HashMap<>();
+        data.put("template", template);
+        return data;
     }
 }
