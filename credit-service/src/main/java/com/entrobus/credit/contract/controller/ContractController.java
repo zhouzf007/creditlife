@@ -122,6 +122,7 @@ public class ContractController {
      * @return
      */
     private String getFileServiceAddr() {
+        //根据serviceId 从Ribbon负载均衡中选择一个服务实体
         ServiceInstance instance = serviceInstanceChooser.choose("file-service");
         if (instance != null){
 //            String url = String.format("http://%s:%d/postUploadFile", instance.getPort(),instance.getPort()) ;//不经过网关
