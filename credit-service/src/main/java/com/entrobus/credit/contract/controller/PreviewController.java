@@ -33,13 +33,9 @@ public class PreviewController {
     @ResponseBody
     public WebResult previewLoanContract(Map<String,Object> model,@Validated @RequestBody ApplyVo vo) throws Exception {
         CacheUserInfo userInfo = cacheService.getUserCacheBySid(vo.getToken());
-        if (userInfo == null) return null;
-        model.put("orderId", "123456789");
-        model.put("userId", userInfo.getId());
-//        model.put("creditReportId", vo.getc());
-        model.put("signature", vo.getSignature());
-        //
-        model.put("contractNumber", "123456789");//合同编号，与银行管理后台显示的编号一致
+        if (userInfo == null) return WebResult.fail(WebResult.CODE_NOT_LOGIN);
+        //预览不需要显示编号
+//        model.put("contractNumber", "123456789");//合同编号，与银行管理后台显示的编号一致
         model.put("borrowerFullName", userInfo.getRealName() == null ? "" : userInfo.getRealName());//借款人全名
         model.put("lenderFullName", "中国建设银行股份有限公司佛山分行");//贷款人全称，将来可配置，目前“中国建设银行股份有限公司佛山分行”
 
