@@ -35,6 +35,8 @@
     .main_title {
         margin: 0;
         text-align: center;
+        padding-top: 20px;
+        font-weight: bold;
         /*font-size: 12px;*/
     }
 

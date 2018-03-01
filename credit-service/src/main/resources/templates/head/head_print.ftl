@@ -33,6 +33,7 @@
         margin: 0;
         text-align: center;
         font-size: 12pt;
+        font-weight: bold;
     }
 
     /*正文文本样式*/
