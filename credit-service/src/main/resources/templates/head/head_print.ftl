@@ -25,7 +25,7 @@
 
     /*行间距*/
     p {
-        line-height: 1;
+        line-height: 2;
     }
 
     /*主标题样式*/
@@ -103,18 +103,7 @@
     }
     /*表格列*/
     td{
-        border-bottom-color: #000000;
-        border-bottom-style: solid;
-        border-bottom-width: 0.75pt;
-        border-left-color: #000000;
-        border-left-style: solid;
-        border-left-width: 0.75pt;
-        border-right-color: #000000;
-        border-right-style: solid;
-        border-right-width: 0.75pt;
-        border-top-color: #000000;
-        border-top-style: solid;
-        border-top-width: 0.75pt;
+        border: 0.75pt solid #000000;
         padding-left: 5.03pt;
         padding-right: 5.03pt;
         vertical-align: top;

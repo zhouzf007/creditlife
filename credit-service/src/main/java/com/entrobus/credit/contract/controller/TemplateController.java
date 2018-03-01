@@ -129,10 +129,7 @@ public class TemplateController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (pdfVo != null) {
-                FileUtil.forceDelete(pdfVo.getHtmlURI());
-                FileUtil.forceDelete(pdfVo.getPdfURI());
-            }
+           PDFUtil.deleteTemp(pdfVo);
         }
         return uploadResult;
     }

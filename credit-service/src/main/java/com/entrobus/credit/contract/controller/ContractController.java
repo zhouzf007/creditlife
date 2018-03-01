@@ -49,9 +49,9 @@ public class ContractController {
     @PostMapping(path = "/contract", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Contract saveContract(@RequestBody ContractFillVo vo) {
         Map v = JSON.parseObject(JSON.toJSONString(vo));
-        //
+        //个人消费额度借款合同
         FileUploadResult uploadResult = createPdf("loan_contract.ftl", "pdf/img", v);
-        //个人信用报告查询授权书,个人消费额度借款合同
+        //个人信用报告查询授权书
         FileUploadResult crqaUploadResult = createPdf("credit_report_query_authorization.ftl", "pdf/img", v);
         if (uploadResult != null && uploadResult.isUploadSuccess() && crqaUploadResult != null && crqaUploadResult.isUploadSuccess()) {
             Contract contract = new Contract();
@@ -88,10 +88,7 @@ public class ContractController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (pdfVo != null) {
-                FileUtil.forceDelete(pdfVo.getHtmlURI());
-                FileUtil.forceDelete(pdfVo.getPdfURI());
-            }
+            PDFUtil.deleteTemp(pdfVo);
         }
         return uploadResult;
     }

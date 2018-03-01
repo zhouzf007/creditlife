@@ -14,6 +14,7 @@
 
     /*字体 宋体*/
     body {
+        /*margin: 0;*/
         font-family: SimSun;
     }
 
@@ -27,6 +28,7 @@
     /*行间距*/
     p {
         /*line-height: 1;*/
+        line-height: 22px;
     }
 
     /*主标题样式*/
@@ -39,7 +41,8 @@
     /*正文文本样式*/
     .main_text {
         margin: 0;
-        text-indent: 24px;
+        text-indent: 26px;
+        padding: 2px 4px;
         /*font-size: 12px;*/
     }
 
@@ -104,20 +107,9 @@
     }
     /*表格列*/
     td{
-        border-bottom-color: #000000;
-        border-bottom-style: solid;
-        border-bottom-width: 0.75px;
-        border-left-color: #000000;
-        border-left-style: solid;
-        border-left-width: 0.75px;
-        border-right-color: #000000;
-        border-right-style: solid;
-        border-right-width: 0.75px;
-        border-top-color: #000000;
-        border-top-style: solid;
-        border-top-width: 0.75px;
-        padding-left: 5.03px;
-        padding-right: 5.03px;
+        border: 1px solid #000000;
+        padding-left: 5px;
+        padding-right: 5px;
         vertical-align: top;
     }
 

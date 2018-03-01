@@ -72,29 +72,7 @@ public class PDFUtil {
         return vo;
     }
 
-//
-//    /**
-//     * 获取临时文件地址
-//     *
-//     * @return
-//     */
-//    private static String getTempDirectory() {
-////        URL resourceUrl = clazz.getClassLoader().getResource("image_temp");
-//        URL resourceUrl = Thread.currentThread().getContextClassLoader().getResource("pdf_temp");
-//        if(resourceUrl==null){
-//            File dir = new File(Thread.currentThread().getContextClassLoader().getResource("").getFile()+"/pdf_temp");
-//            if(dir.mkdir()){
-//                resourceUrl = Thread.currentThread().getContextClassLoader().getResource("pdf_temp");
-//            }
-//        }
-//        if (resourceUrl==null) return "";
-//        String directory = resourceUrl.getFile();//偶尔会空指针，待优化
-////        String directory = "/tmp";
-//        if (!directory.endsWith(File.separator)) {
-//            directory += File.separator;
-//        }
-//        return directory;
-//    }
+
     /**
      * 获取临时文件地址
      *
@@ -102,5 +80,12 @@ public class PDFUtil {
      */
     private static String getTempDirectory() throws FileNotFoundException {
         return FileUtil.getTempDirectory("pdf_tem/");
+    }
+
+    public static void deleteTemp(PdfVo vo){
+        if (vo != null){
+            FileUtil.forceDelete(vo.getHtmlURI());
+            FileUtil.forceDelete(vo.getPdfURI());
+        }
     }
 }
