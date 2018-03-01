@@ -46,7 +46,7 @@ public class FileUtil {
         File upload = new File(projectPath,child);
         if(!upload.exists()) upload.mkdirs();
         String tempPath = upload.getAbsolutePath();
-        logger.info("upload url:"+ tempPath);
+        logger.info("tempPath url:"+ tempPath);
         //在开发测试模式时，得到的地址为：{项目跟目录}/target/static/images/upload/
         //在打包成jar正式发布时，得到的地址为：{发布jar包目录}/static/images/upload/
         return tempPath;
@@ -61,7 +61,7 @@ public class FileUtil {
         File path = new File(ResourceUtils.getURL("classpath:").getPath());
         if(!path.exists()) path = new File("");
         String projectPath = path.getAbsolutePath();
-        logger.info("path:"+ projectPath);
+        logger.info("projectPath:"+ projectPath);
         return projectPath;
     }
 }
