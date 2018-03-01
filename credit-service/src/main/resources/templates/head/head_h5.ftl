@@ -48,91 +48,91 @@
         orphans: 0;
         text-align: justify;
         widows: 0;
-        font-size: 12pt;
+        font-size: 12px;
         /*font-family: Arial;*/
     }
 
     /*重点、强调 文本样式*/
     .emphasize_text {
-        font-size: 12pt;
+        font-size: 12px;
         font-style: italic;
         font-weight: bold
     }
 
     /*填写文本样式（下划线）*/
     .fill_in_text {
-        font-size: 12pt;
+        font-size: 12px;
         text-decoration: underline;
     }
 
     /*条目文本样式*/
     .clauses_text {
-        font-size: 12pt;
+        font-size: 12px;
         font-weight: bold;
     }
 
     /*签名图片样式*/
     img.autograph {
-        -aw-left-pos: 0pt;
+        -aw-left-pos: 0px;
         -aw-rel-hpos: column;
         -aw-rel-vpos: paragraph;
-        -aw-top-pos: 0pt;
+        -aw-top-pos: 0px;
         -aw-wrap-type: inline;
     }
 
     /*签名处文字样式*/
     p.autograph_text {
-        margin: 0pt;
+        margin: 0px;
         orphans: 0;
         text-align: justify;
-        /*text-indent: 48pt;*/
+        /*text-indent: 48px;*/
         text-indent: 0;
         widows: 0;
     }
 
     /*签名图片或占位div样式*/
     .autograph {
-        width: 129pt;
-        height: 167pt;
+        width: 129px;
+        height: 167px;
     }
 
     /*表格第一列样式*/
     td.tdA {
         border-bottom-color: #000000;
         border-bottom-style: solid;
-        border-bottom-width: 0.75pt;
+        border-bottom-width: 0.75px;
         border-left-color: #000000;
         border-left-style: solid;
-        border-left-width: 0.75pt;
+        border-left-width: 0.75px;
         border-right-color: #000000;
         border-right-style: solid;
-        border-right-width: 0.75pt;
+        border-right-width: 0.75px;
         border-top-color: #000000;
         border-top-style: solid;
-        border-top-width: 0.75pt;
-        padding-left: 5.03pt;
-        padding-right: 5.03pt;
+        border-top-width: 0.75px;
+        padding-left: 5.03px;
+        padding-right: 5.03px;
         vertical-align: top;
-        width: 122.85pt
+        width: 122.85px
     }
 
     /*表格第二列样式*/
     td.tdB {
         border-bottom-color: #000000;
         border-bottom-style: solid;
-        border-bottom-width: 0.75pt;
+        border-bottom-width: 0.75px;
         border-left-color: #000000;
         border-left-style: solid;
-        border-left-width: 0.75pt;
+        border-left-width: 0.75px;
         border-right-color: #000000;
         border-right-style: solid;
-        border-right-width: 0.75pt;
+        border-right-width: 0.75px;
         border-top-color: #000000;
         border-top-style: solid;
-        border-top-width: 0.75pt;
-        padding-left: 5.03pt;
-        padding-right: 5.03pt;
+        border-top-width: 0.75px;
+        padding-left: 5.03px;
+        padding-right: 5.03px;
         vertical-align: top;
-        width: 281.65pt
+        width: 281.65px
     }
 </style>
