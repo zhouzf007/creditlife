@@ -39,7 +39,7 @@
     /*正文文本样式*/
     .main_text {
         margin: 0;
-        /*text-indent: 24px;*/
+        text-indent: 24px;
         /*font-size: 12px;*/
     }
 
