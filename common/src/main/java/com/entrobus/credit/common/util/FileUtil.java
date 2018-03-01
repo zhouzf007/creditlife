@@ -25,7 +25,7 @@ public class FileUtil {
      * @param fileUri
      */
     public static void forceDelete(String fileUri) {
-        if (fileUri == null || "".equals(fileUri) || "/".equals(fileUri)) return;
+        if (fileUri == null || "".equals(fileUri) || File.separator.equals(fileUri)) return;
         try {
             FileUtils.forceDelete(new File(fileUri));
         } catch (IOException e) {
