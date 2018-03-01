@@ -13,6 +13,7 @@
 <body>
 <div class="page_body">
     <p class="main_title">个人消费额度借款合同</p>
+    <p class="main_text">&#160;</p>
     <p class="main_text">合同编号：${contractNumber!}</p>
     <p class="main_text">借款人：${borrowerFullName!}</p>
     <p class="main_text">贷款人：${lenderFullName!}</p>
