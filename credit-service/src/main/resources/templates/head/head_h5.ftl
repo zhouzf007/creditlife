@@ -113,7 +113,7 @@
         padding-left: 5.03px;
         padding-right: 5.03px;
         vertical-align: top;
-        width: 122.85px
+        width: 30%
     }
 
     /*表格第二列样式*/
@@ -133,6 +133,6 @@
         padding-left: 5.03px;
         padding-right: 5.03px;
         vertical-align: top;
-        width: 281.65px
+        width: 70%
     }
 </style>
