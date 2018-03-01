@@ -62,7 +62,8 @@ public class PDFHelper {
         // 关闭流
         writer.flush();
         writer.close();
-        return new File(htmlName).toURI().toURL().toString();
+        return htmlName;
+//        return new File(htmlName).toURI().toURL().toString();
     }
 
     /**

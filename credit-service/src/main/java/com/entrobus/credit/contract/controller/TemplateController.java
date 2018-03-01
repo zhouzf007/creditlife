@@ -2,7 +2,7 @@ package com.entrobus.credit.contract.controller;
 
 import com.entrobus.credit.common.bean.FileUploadResult;
 import com.entrobus.credit.common.bean.WebResult;
-import com.entrobus.credit.common.util.ConversionUtil;
+import com.entrobus.credit.common.util.FileUtil;
 import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.common.util.ImageUtil;
 import com.entrobus.credit.contract.client.FileServiceClient;
@@ -120,7 +120,7 @@ public class TemplateController {
         PdfVo pdfVo = null;
         try {
             pdfVo = PDFUtil.generateToFile(templateName,imageDiskPath,data);
-            File file = new File(pdfVo.getPdfName());
+            File file = new File(pdfVo.getPdfURI());
             //使用common工具包上传
 
             String fileServiceAddr = getFileServiceAddr();
@@ -130,7 +130,8 @@ public class TemplateController {
             e.printStackTrace();
         } finally {
             if (pdfVo != null) {
-                ConversionUtil.deletedirectory(pdfVo.getDirectory());
+                FileUtil.forceDelete(pdfVo.getHtmlURI());
+                FileUtil.forceDelete(pdfVo.getPdfURI());
             }
         }
         return uploadResult;
