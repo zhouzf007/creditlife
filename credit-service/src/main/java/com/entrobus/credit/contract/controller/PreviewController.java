@@ -95,6 +95,8 @@ public class PreviewController {
     public String previewCreditReportQueryAuthorization(Map<String,Object> model, @PathVariable("ftlName") String ftlName)  {
         model.put("lenderHeadquartersName", "中国建设银行股份有限公司");//总公司名称，暂填 中国建设银行股份有限公司
         model.put("lenderName", "中国建设银行");//贷款人名称，暂填 中国建设银行
+//        针对移动端使用h5头部，需传headType == h5,缺省使用打印体
+        model.put("headType","h5");
         return ftlName;
     }
 
