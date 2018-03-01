@@ -95,9 +95,14 @@
         width: 129pt;
         height: 167pt;
     }
-
-    /*表格第一列样式*/
-    td.tdA {
+    /*表格*/
+    table{
+        border-collapse: collapse;
+        margin-left: 0pt;
+        width: 426.85pt
+    }
+    /*表格列*/
+    td{
         border-bottom-color: #000000;
         border-bottom-style: solid;
         border-bottom-width: 0.75pt;
@@ -113,26 +118,15 @@
         padding-left: 5.03pt;
         padding-right: 5.03pt;
         vertical-align: top;
+    }
+    /*表格第一列样式*/
+    td.tdA {
         width: 122.85pt
     }
 
     /*表格第二列样式*/
     td.tdB {
-        border-bottom-color: #000000;
-        border-bottom-style: solid;
-        border-bottom-width: 0.75pt;
-        border-left-color: #000000;
-        border-left-style: solid;
-        border-left-width: 0.75pt;
-        border-right-color: #000000;
-        border-right-style: solid;
-        border-right-width: 0.75pt;
-        border-top-color: #000000;
-        border-top-style: solid;
-        border-top-width: 0.75pt;
-        padding-left: 5.03pt;
-        padding-right: 5.03pt;
-        vertical-align: top;
         width: 281.65pt
     }
+
 </style>

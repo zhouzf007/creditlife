@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <meta http-equiv="Content-Style-Type" content="text/css"></meta>
 <meta name="generator" content="Aspose.Words for .NET 15.1.0.0"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.5,  user-scalable=yes;" name="viewport" />
 <title></title>
 <style type="text/css">
     /*页面属性，纸张大小、页边距*/
@@ -32,14 +33,14 @@
     .main_title {
         margin: 0;
         text-align: center;
-        font-size: 12pt;
+        font-size: 12px;
     }
 
     /*正文文本样式*/
     .main_text {
         margin: 0;
-        text-indent: 24pt;
-        font-size: 12pt;
+        text-indent: 24px;
+        font-size: 12px;
     }
 
     /*表格中文本样式*/
@@ -95,9 +96,14 @@
         width: 129px;
         height: 167px;
     }
-
-    /*表格第一列样式*/
-    td.tdA {
+    /*表格*/
+    table{
+        border-collapse: collapse;
+        margin-left: 0;
+        width: 100%;
+    }
+    /*表格列*/
+    td{
         border-bottom-color: #000000;
         border-bottom-style: solid;
         border-bottom-width: 0.75px;
@@ -113,26 +119,16 @@
         padding-left: 5.03px;
         padding-right: 5.03px;
         vertical-align: top;
-        width: 30%
+    }
+
+    /*表格第一列样式*/
+    td.tdA {
+        width: 30%;
     }
 
     /*表格第二列样式*/
     td.tdB {
-        border-bottom-color: #000000;
-        border-bottom-style: solid;
-        border-bottom-width: 0.75px;
-        border-left-color: #000000;
-        border-left-style: solid;
-        border-left-width: 0.75px;
-        border-right-color: #000000;
-        border-right-style: solid;
-        border-right-width: 0.75px;
-        border-top-color: #000000;
-        border-top-style: solid;
-        border-top-width: 0.75px;
-        padding-left: 5.03px;
-        padding-right: 5.03px;
-        vertical-align: top;
-        width: 70%
+        width: 70%;
     }
+
 </style>

@@ -20,7 +20,7 @@
     <p class="main_text">甲方(借款人)：见本合同“立约人信息”条款的约定</p>
     <p class="main_text">乙方(贷款人)：见本合同“立约人信息”条款的约定</p>
     <p class="main_text">甲方向乙方申请个人消费额度借款，乙方同意提供个人消费额度借款。根据有关法律法规和规章，甲乙双方经协商一致，订立本合同，以便共同遵守执行。</p>
-    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt; width:426.85pt">
+    <table cellspacing="0" cellpadding="0" >
         <tbody>
         <tr>
             <td class="tdA">
