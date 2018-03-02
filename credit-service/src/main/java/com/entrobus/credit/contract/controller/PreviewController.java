@@ -85,7 +85,9 @@ public class PreviewController {
         //        针对移动端使用h5头部，需传headType == h5,缺省使用打印体
         model.put("headType","h5");
 
-        Map<String, Object> data = getDataMap(model, "loan_contract.ftl");
+        String template = FreemarkUtil.getTemplate("loan_contract.ftl", model);
+        Map<String, Object> data = new HashMap<>();
+        data.put("template", template.replaceAll("[\r\n]",""));
         return WebResult.ok().data(data);
     }
 
@@ -127,10 +129,5 @@ public class PreviewController {
         return "transformation";
     }
 
-    private Map<String, Object> getDataMap(Map<String, Object> model, String templateName) throws IOException, TemplateException {
-        String template = FreemarkUtil.getTemplate(templateName, model);
-        Map<String, Object> data = new HashMap<>();
-        data.put("template", template.replaceAll("[\r\n]",""));
-        return data;
-    }
+
 }
