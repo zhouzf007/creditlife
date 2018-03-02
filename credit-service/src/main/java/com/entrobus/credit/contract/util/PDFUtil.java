@@ -79,7 +79,7 @@ public class PDFUtil {
      * @return
      */
     private static String getTempDirectory() throws FileNotFoundException {
-        return FileUtil.getTempDirectory("pdf_tem/");
+        return FileUtil.getTempDirectory("pdf_temp/");
     }
 
     public static void deleteTemp(PdfVo vo){
