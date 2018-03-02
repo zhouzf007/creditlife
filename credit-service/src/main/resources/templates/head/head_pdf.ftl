@@ -25,7 +25,7 @@
 
     /*行间距*/
     p {
-        line-height: 2;
+        line-height: 1;
     }
 
     /*主标题样式*/

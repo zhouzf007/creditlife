@@ -6,7 +6,7 @@
         <#include "head/head_h5.ftl">
     <#else >
     <#--默认使用打印体头部，用于转换PDF-->
-        <#include "head/head_print.ftl">
+        <#include "head/head_pdf.ftl">
     </#if>
 </head>
 
