@@ -1,11 +1,11 @@
 <#--针对打印、转换PDF的头部-->
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-<meta http-equiv="Content-Style-Type" content="text/css"></meta>
-<meta name="generator" content="Aspose.Words for .NET 15.1.0.0"></meta>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.5,  user-scalable=yes;" name="viewport" />
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></meta>
+<meta http-equiv='Content-Style-Type' content='text/css'></meta>
+<meta name='generator' content='Aspose.Words for .NET 15.1.0.0'></meta>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.5,  user-scalable=yes;' name='viewport' />
 <title></title>
-<style type="text/css">
+<style type='text/css'>
     /*页面属性，纸张大小、页边距*/
     @page {
         /*size: a4;*/

@@ -130,7 +130,7 @@ public class PreviewController {
     private Map<String, Object> getDataMap(Map<String, Object> model, String templateName) throws IOException, TemplateException {
         String template = FreemarkUtil.getTemplate(templateName, model);
         Map<String, Object> data = new HashMap<>();
-        data.put("template", template);
+        data.put("template", template.replaceAll("[\r\n]",""));
         return data;
     }
 }
