@@ -5,10 +5,14 @@
 #    mv /tmp/artifacts/* $HOME/.
 # fi
 
+
+ls /tmp/
+echo "tmp-----------------------------------"
+ls $HOME/src/
 # move the application source
-#mv /tmp/s2i/src $HOME/src
+# mv /tmp/s2i/src $HOME/src
 
 # build application artifacts
-mvn clean package
+mvn clean package -pl  registry -amd
 
 # install the artifacts
