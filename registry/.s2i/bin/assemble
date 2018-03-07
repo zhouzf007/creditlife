@@ -6,12 +6,8 @@
 # fi
 
 
-ls /tmp/
+ls /tmp/src/*
 echo "tmp-----------------------------------"
-ls $HOME/
-echo "HOME-----------------------------------"
-find / -name creditlife
-echo "build-----------------------------------"
 # move the application source
 # mv /tmp/s2i/src $HOME/src
 
