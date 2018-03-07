@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# run the application
+nohup java -jar registry.jar > logs/registry/catalina.out 2>&1 &
