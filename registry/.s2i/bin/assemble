@@ -10,7 +10,7 @@ ls /tmp/
 echo "tmp-----------------------------------"
 ls $HOME/
 echo "HOME-----------------------------------"
-ls /tmp/build/
+find / -name creditlife
 echo "build-----------------------------------"
 # move the application source
 # mv /tmp/s2i/src $HOME/src
