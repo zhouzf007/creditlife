@@ -1,15 +1,14 @@
 #!/bin/bash
 
 # restore build artifacts
-if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
-    mv /tmp/artifacts/* $HOME/.
-fi
+# if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+#    mv /tmp/artifacts/* $HOME/.
+# fi
 
 # move the application source
 mv /tmp/s2i/src $HOME/src
 
 # build application artifacts
-pushd ${HOME}
-clean package -Ptest -pl file-service -am
+mvn clean package -Ptest -pl file-service -am
 
 # install the artifacts
