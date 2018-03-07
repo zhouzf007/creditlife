@@ -8,7 +8,10 @@
 
 ls /tmp/
 echo "tmp-----------------------------------"
-ls $HOME/src/
+ls $HOME/
+echo "HOME-----------------------------------"
+ls /tmp/build/
+echo "build-----------------------------------"
 # move the application source
 # mv /tmp/s2i/src $HOME/src
 
