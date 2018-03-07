@@ -9,6 +9,6 @@
 #mv /tmp/s2i/src $HOME/src
 
 # build application artifacts
-mvn clean package -Ptest -pl registry -am
+mvn clean package -pl registry -am
 
 # install the artifacts
