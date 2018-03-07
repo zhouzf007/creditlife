@@ -146,6 +146,7 @@ public class CreditReportServiceImpl implements CreditReportService {
                             cr.setQuota(quota*100);
                             cr.setReportUrl(reportUrl);
                             cr.setCreateTime(new Date());
+                            cr.setAddressHouse((String) rmap.get("address_house"));
                             this.insertSelective(cr);
                             UserInfo userInfo = new UserInfo();
                             userInfo.setId(loginUser.getId());
@@ -153,6 +154,7 @@ public class CreditReportServiceImpl implements CreditReportService {
                             userInfo.setQuota(quota*100);
                             userInfo.setUpdateTime(new Date());
                             userInfo.setUpdateOperator(userInfo.getId());
+                            userInfo.setAddressHouse(cr.getAddressHouse());
                             userInfoService.updateByPrimaryKeySelective(userInfo);
                             userInfoService.initUserCache(userInfo);
                             return cr;

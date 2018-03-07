@@ -11,24 +11,23 @@ import com.entrobus.credit.pojo.user.UserAccountExample;
 import com.entrobus.credit.pojo.user.UserInfo;
 import com.entrobus.credit.pojo.user.UserInfoExample;
 import com.entrobus.credit.user.client.BsStaticsClient;
-import com.entrobus.credit.vo.user.CacheUserInfo;
-import com.entrobus.credit.vo.user.UserAccountInfo;
 import com.entrobus.credit.user.dao.UserInfoMapper;
 import com.entrobus.credit.user.services.UserAccountService;
 import com.entrobus.credit.user.services.UserInfoService;
-
-import java.util.*;
-
-import org.apache.commons.beanutils.BeanUtils;
+import com.entrobus.credit.user.utils.ShiroUtils;
+import com.entrobus.credit.vo.user.CacheUserInfo;
+import com.entrobus.credit.vo.user.UserAccountInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import com.entrobus.credit.user.utils.ShiroUtils;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 @Service
 @Transactional
@@ -97,11 +96,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public CacheUserInfo getLoginUserInfo(UserInfo record, String token) {
         CacheUserInfo loginUserInfo = new CacheUserInfo();
-        try {
-            BeanUtils.copyProperties(loginUserInfo, record);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
+        BeanUtils.copyProperties(record,loginUserInfo);
         if(loginUserInfo.getRole() == Constants.USER_ROLE.ORDINARY){
             loginUserInfo.setRoleName("普通用户");
         }else  if(loginUserInfo.getRole() == Constants.USER_ROLE.OWNER){
@@ -159,11 +154,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public CacheUserInfo initUserCache(UserInfo record) {
         CacheUserInfo cacheUserInfo = new CacheUserInfo();
-        try {
-            BeanUtils.copyProperties(cacheUserInfo, record);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
+        BeanUtils.copyProperties(record, cacheUserInfo);
         List<UserAccountInfo> userAccountInfos = getUserAccountInfos(record, cacheUserInfo);
         cacheUserInfo.setUserAccountInfos(userAccountInfos);
         CacheService.setCacheObj(redisTemplate, Cachekey.User.UID_PREFIX + record.getId(), cacheUserInfo);
@@ -178,11 +169,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         List<UserAccountInfo> userAccountInfos = new ArrayList<>();
         for (UserAccount userAccount : userAccounts) {
             UserAccountInfo userAccountInfo = new UserAccountInfo();
-            try {
-                BeanUtils.copyProperties(userAccountInfo, userAccount);
-            } catch (Exception e) {
-                logger.error(e.getMessage(), e);
-            }
+                BeanUtils.copyProperties(userAccount, userAccountInfo);
             if (userAccountInfo.getIsDefualt() == Constants.YES_OR_NO.YES) {
                 cacheUserInfo.setDefualtAccount(userAccountInfo.getAccount());
                 cacheUserInfo.setDefualtAccountId(userAccountInfo.getId());

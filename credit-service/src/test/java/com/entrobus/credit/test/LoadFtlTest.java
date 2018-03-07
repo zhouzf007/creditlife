@@ -2,6 +2,7 @@ package com.entrobus.credit.test;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.springframework.util.ResourceUtils;
 
 import java.io.*;
 
@@ -47,5 +48,17 @@ public class LoadFtlTest {
                 }
             }
         }
+    }
+    @Test
+    public void tempTest() throws FileNotFoundException {
+        //获取跟目录
+        File path = new File(ResourceUtils.getURL("classpath:").getPath());
+        if(!path.exists()) path = new File("");
+        System.out.println("path:"+path.getAbsolutePath());
+
+        //如果上传目录为/static/images/upload/，则可以如下获取：
+        File upload = new File(path.getAbsolutePath(),"pdf_temp");
+        if(!upload.exists()) upload.mkdirs();
+        System.out.println("upload url:"+upload.getAbsolutePath());
     }
 }

@@ -26,6 +26,16 @@ public class CacheUserInfo {
     private String roleName;//角色
     private String defualtAccount;//默认账户
 
+    private String addressHouse;//住址
+
+    public String getAddressHouse() {
+        return addressHouse;
+    }
+
+    public void setAddressHouse(String addressHouse) {
+        this.addressHouse = addressHouse;
+    }
+
     public Integer getState() {
         return state;
     }

@@ -111,7 +111,7 @@
          <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />//无论字段是什么类型，生成的类属性都是varchar。  -->
          <!--用的通配符匹配全部的表 -->
         <!--<table tableName="%"-->
-        <table tableName="client_log" domainObjectName="ClientLog"
+        <table tableName="credit_report" domainObjectName="CreditReport"
                enableCountByExample="true"
                enableUpdateByExample="true"
                enableDeleteByExample="true"

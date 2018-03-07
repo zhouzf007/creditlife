@@ -2,6 +2,7 @@ package com.entrobus.credit.contract.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.entrobus.credit.common.bean.FileUploadResult;
+import com.entrobus.credit.common.util.FileUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.contract.client.FileServiceClient;
@@ -10,14 +11,11 @@ import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.pojo.order.Contract;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.entrobus.credit.vo.contract.ContractFillVo;
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
-import com.netflix.discovery.shared.Application;
-import com.netflix.discovery.shared.Applications;
-import org.apache.http.entity.mime.content.FileBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.ServiceInstanceChooser;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +25,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -39,21 +36,24 @@ public class ContractController {
     private ContractService contractService;
 
     @Autowired
-    private EurekaClient eurekaClient;
-
-    @Autowired
     private FileServiceClient fileServiceClient;
 
+    @Autowired
+    private ServiceInstanceChooser serviceInstanceChooser;//用于Ribbon的负载均衡选择器
+
     @GetMapping(value = "/contract")
-    Contract getContract(@RequestParam("id") String id) {
+    public Contract getContract(@RequestParam("id") String id) {
         return contractService.selectByPrimaryKey(id);
     }
 
     @PostMapping(path = "/contract", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Contract saveContract(@RequestBody ContractFillVo vo) {
         Map v = JSON.parseObject(JSON.toJSONString(vo));
+        //个人消费额度借款合同
         FileUploadResult uploadResult = createPdf("loan_contract.ftl", "pdf/img", v);
-        if (uploadResult != null && uploadResult.isUploadSuccess()) {
+        //个人信用报告查询授权书
+        FileUploadResult crqaUploadResult = createPdf("credit_report_query_authorization.ftl", "pdf/img", v);
+        if (uploadResult != null && uploadResult.isUploadSuccess() && crqaUploadResult != null && crqaUploadResult.isUploadSuccess()) {
             Contract contract = new Contract();
             contract.setId(GUIDUtil.genRandomGUID());
             contract.setOrderId(vo.getOrderId());
@@ -61,6 +61,7 @@ public class ContractController {
             contract.setUserId(vo.getUserId());
             contract.setContractNo(vo.getContractNumber());
             contract.setContractUrl(uploadResult.getFileUrl());
+            contract.setCreditReportQueryAuth(crqaUploadResult.getFileUrl());
             contractService.insertSelective(contract);
             return contract;
         }
@@ -72,7 +73,7 @@ public class ContractController {
         PdfVo pdfVo = null;
         try {
             pdfVo = PDFUtil.generateToFile(templateName, imageDiskPath, data);
-            File file = new File(pdfVo.getDirectory());
+            File file = new File(pdfVo.getPdfURI());
             //使用common工具包上传
 
             String fileServiceAddr = getFileServiceAddr();
@@ -87,9 +88,7 @@ public class ContractController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (pdfVo != null) {
-//                ConversionUtil.de(pdfVo.getDirectory());
-            }
+            PDFUtil.deleteTemp(pdfVo);
         }
         return uploadResult;
     }
@@ -121,15 +120,11 @@ public class ContractController {
      * @return
      */
     private String getFileServiceAddr() {
-        Applications applications = eurekaClient.getApplications();
-//        Application gateway = applications.getRegisteredApplications("gateway");//通过网关
-        Application gateway = applications.getRegisteredApplications("file-service");//不经过网关
-        List<InstanceInfo> instances = gateway.getInstances();
-        if (instances != null && instances.size() > 0) {
-            InstanceInfo info = instances.get(0);
-//            String url = String.format("http://%s:%d/file/postUploadFile", info.getHostName(),info.getPort()) ;//通过网关
-            String url = String.format("http://%s:%d/postUploadFile", info.getHostName(),info.getPort()) ;//不经过网关
-
+        //根据serviceId 从Ribbon负载均衡中选择一个服务实体
+        ServiceInstance instance = serviceInstanceChooser.choose("file-service");
+        if (instance != null){
+//            String url = String.format("http://%s:%d/postUploadFile", instance.getPort(),instance.getPort()) ;//不经过网关
+            String url = String.format("%s/postUploadFile", instance.getUri()) ;//不经过网关
             return url;
         }
         return null;

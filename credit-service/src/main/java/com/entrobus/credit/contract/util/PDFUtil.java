@@ -1,6 +1,7 @@
 package com.entrobus.credit.contract.util;
 
 import com.entrobus.credit.common.util.CloseableUtil;
+import com.entrobus.credit.common.util.FileUtil;
 import com.entrobus.credit.common.util.GUIDUtil;
 import com.entrobus.credit.vo.common.PdfVo;
 import com.lowagie.text.DocumentException;
@@ -8,12 +9,10 @@ import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ResourceUtils;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.Map;
 
@@ -32,28 +31,35 @@ public class PDFUtil {
      * @throws Exception
      */
     public static PdfVo generateToFile(String templateName, String imageDiskPath, Map data) throws Exception {
-        String directory = null;
-        String pdfName = null;
-        String mpdf="";
+        PdfVo vo = new PdfVo();
         OutputStream out = null;
         try {
-            directory = getTempDirectory();
+            String directory = getTempDirectory() + File.separator;
+
             //生成的PDF文件名称
-            pdfName = directory + GUIDUtil.genRandomGUID() + System.currentTimeMillis() + ".pdf";
-            out = new FileOutputStream(pdfName);
+//            String pdfName = directory + GUIDUtil.genRandomGUID() + System.currentTimeMillis() + ".pdf";
+            String pdfName = String.format("%s%d.pdf",  GUIDUtil.genRandomGUID(),System.currentTimeMillis());
+            String pdfURI = directory + pdfName ;
+            out = new FileOutputStream(pdfURI);
             //生成html文件模板
             String html = PDFHelper.getPdfContent(templateName, data, directory);
+
             ITextRenderer render = PDFHelper.getRender();
-            render.setDocument(html);
+            render.setDocument(new File(html).toURI().toURL().toString());
             if (imageDiskPath != null && !imageDiskPath.equals("")) {
                 //new File(basePath).toURI().toURL().toString()
                 render.getSharedContext().setBaseURL("file:/" + imageDiskPath);
             }
-            mpdf=html.substring(0,html.lastIndexOf("/")+1)+pdfName;
-            logger.info("modifypdfName:"+mpdf.replace("file:",""));
+            logger.info("modifypdfName:"+pdfURI.replace("file:",""));
             render.layout();
             render.createPDF(out);
             render.finishPDF();
+
+            vo.setDirectory(directory);
+            vo.setPdfName(pdfName);
+            vo.setPdfURI(pdfURI);
+            vo.setHtmlURI(html);
+            vo.setHtmlName(html.substring(html.lastIndexOf(File.separator) + 1));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
@@ -63,12 +69,6 @@ public class PDFUtil {
         }finally {
             CloseableUtil.close(out);
         }
-        PdfVo vo = new PdfVo();
-        vo.setDirectory(mpdf.replace("file:",""));
-        vo.setPdfName(pdfName);
-//        File pf=new File(mpdf.replace("file:",""));
-//        logger.info("TotalSpace"+pf.length());
-//        vo.setFile(pf);
         return vo;
     }
 
@@ -78,21 +78,14 @@ public class PDFUtil {
      *
      * @return
      */
-    private static String getTempDirectory() {
-//        URL resourceUrl = clazz.getClassLoader().getResource("image_temp");
-        URL resourceUrl = Thread.currentThread().getContextClassLoader().getResource("pdf_temp");
-        if(resourceUrl==null){
-            File dir = new File(Thread.currentThread().getContextClassLoader().getResource("").getFile()+"/pdf_temp");
-            if(dir.mkdir()){
-                resourceUrl = Thread.currentThread().getContextClassLoader().getResource("pdf_temp");
-            }
+    private static String getTempDirectory() throws FileNotFoundException {
+        return FileUtil.getTempDirectory("pdf_temp/");
+    }
+
+    public static void deleteTemp(PdfVo vo){
+        if (vo != null){
+            FileUtil.forceDelete(vo.getHtmlURI());
+            FileUtil.forceDelete(vo.getPdfURI());
         }
-        if (resourceUrl==null) return "";
-        String directory = resourceUrl.getFile();//偶尔会空指针，待优化
-//        String directory = "/tmp";
-        if (!directory.endsWith(File.separator)) {
-            directory += File.separator;
-        }
-        return directory;
     }
 }

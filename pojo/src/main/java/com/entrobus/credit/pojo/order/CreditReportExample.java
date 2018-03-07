@@ -1039,6 +1039,76 @@ public class CreditReportExample implements Serializable {
             addCriterion("delete_operator not between", value1, value2, "deleteOperator");
             return (Criteria) this;
         }
+
+        public Criteria andAddressHouseIsNull() {
+            addCriterion("address_house is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseIsNotNull() {
+            addCriterion("address_house is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseEqualTo(String value) {
+            addCriterion("address_house =", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseNotEqualTo(String value) {
+            addCriterion("address_house <>", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseGreaterThan(String value) {
+            addCriterion("address_house >", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseGreaterThanOrEqualTo(String value) {
+            addCriterion("address_house >=", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseLessThan(String value) {
+            addCriterion("address_house <", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseLessThanOrEqualTo(String value) {
+            addCriterion("address_house <=", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseLike(String value) {
+            addCriterion("address_house like", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseNotLike(String value) {
+            addCriterion("address_house not like", value, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseIn(List<String> values) {
+            addCriterion("address_house in", values, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseNotIn(List<String> values) {
+            addCriterion("address_house not in", values, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseBetween(String value1, String value2) {
+            addCriterion("address_house between", value1, value2, "addressHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressHouseNotBetween(String value1, String value2) {
+            addCriterion("address_house not between", value1, value2, "addressHouse");
+            return (Criteria) this;
+        }
     }
 
     /**

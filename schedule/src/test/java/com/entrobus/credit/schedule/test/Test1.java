@@ -51,4 +51,27 @@ public class Test1 {
         System.out.println(b == c);
         System.out.println(b == null);
     }
+    @Test
+    public void testCron(){
+        String seconds = "[0-5]?\\d([,\\-/][0-5]?\\d)?|\\*";
+        System.out.println("59/59".matches(seconds));
+        String minutes = "[0-5]?\\d([,\\-/][0-5]?\\d)?|\\*";
+        System.out.println("59/59".matches(minutes));
+        //
+        String hours = "([0-1]?\\d|2[0-3])([,\\-/]([0-1]?\\d|2[0-3]))?|\\*";
+        System.out.println("*".matches(hours));
+
+        String dayOfMonth = "(0?[1-9]|[1-2]\\d|3[0-1])([,\\-/](0?[1-9]|[1-2]\\d|3[0-1]))?|\\*";
+        System.out.println("31/31".matches(dayOfMonth));
+
+        String month = "(0?[1-9]|1[0-2])([,\\-/](0?[1-9]|1[0-2]))?|\\*";
+        System.out.println("12/12".matches(month));
+
+        String dayOfWeek = "([1-7])([,\\-/]([1-7]))?|\\*";
+        System.out.println("1".matches(dayOfWeek));
+
+        String year = "19[7-9]\\d|20\\d\\d|\\*";
+        System.out.println("1".matches(year));
+
+    }
 }

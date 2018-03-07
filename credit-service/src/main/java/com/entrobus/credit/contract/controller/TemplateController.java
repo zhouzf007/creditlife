@@ -1,19 +1,23 @@
 package com.entrobus.credit.contract.controller;
 
 import com.entrobus.credit.common.bean.FileUploadResult;
-import com.entrobus.credit.common.util.ConversionUtil;
+import com.entrobus.credit.common.bean.WebResult;
+import com.entrobus.credit.common.util.FileUtil;
+import com.entrobus.credit.common.util.HttpClientUtil;
 import com.entrobus.credit.common.util.ImageUtil;
 import com.entrobus.credit.contract.client.FileServiceClient;
 import com.entrobus.credit.contract.util.FreemarkUtil;
 import com.entrobus.credit.contract.util.PDFUtil;
 import com.entrobus.credit.vo.common.PdfVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.ServiceInstanceChooser;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -24,6 +28,8 @@ import java.util.Map;
 public class TemplateController {
     @Autowired
     private FileServiceClient fileServiceClient;
+    @Autowired
+    private ServiceInstanceChooser serviceInstanceChooser;//用于Ribbon的负载均衡选择器
     @RequestMapping("/test")
     public void test(String name, HttpServletResponse response){
         Map map = new HashMap();
@@ -78,20 +84,22 @@ public class TemplateController {
         map.put("annualInterestRate", "6%");//年化利率
         map.put("noOperationInvalidTime", "3个月");//借款额度审批通过之日起无操作失效时间
 
-        map.put("borrowerAddress", "借款人住址");//借款人住址
-        map.put("borrowerPostalAddress", "通讯地址");//通讯地址
-        map.put("borrowerPostalCode", "邮政编码");//邮政编码
+        map.put("borrowerAddress", "借款人住址");//借款人住址，从个人信用报告接口中返回
+        map.put("borrowerPostalAddress", "通讯地址");//借款人通讯地址，从个人信用报告接口中返回
+//        map.put("borrowerPostalCode", "邮政编码");//借款人邮政编码 ,暂时没有
         map.put("borrowerCardBank", "中国建设银行");//借款人开卡银行
         map.put("borrowerCardId", "66541646454165");//借款人银行卡号
 
         map.put("lenderName", "中国建设银行");//贷款人名称，暂填 中国建设银行
+        map.put("lenderHeadquartersName", "中国建设银行股份有限公司");//总公司名称，暂填 中国建设银行股份有限公司
         map.put("lenderAddress", "广东省佛山市佛山大道南327号");//贷款人住址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalAddress", "广东省佛山市佛山大道南327号");//贷款人通讯地址，将来可配置，目前“广东省佛山市佛山大道南327号”
         map.put("lenderPostalCode", "528000");//贷款人通讯地址，将来可配置，目前“528000”
         map.put("lenderPhone", "0757-82781212");//贷款人联系电话，将来可配置，目前“0757-82781212”
 
         //这里跟通讯地址有什么区别暂时不知道，但是注明了 从个人信用报告接口中返回
-        map.put("borrowerMailingAddress", "邮寄地址");//乙方（借款人）邮寄地址，从个人信用报告接口中返回
+        //即 借款人住址,已合并
+//        map.put("borrowerMailingAddress", "邮寄地址");//乙方（借款人）邮寄地址，即 借款人住址 ，从个人信用报告接口中返回
 
         map.put("loanValidityPeriodStart", "2018年3月24日");//借款额度有效期开始日期，用户提交申请的当日日期
         map.put("loanValidityPeriodEnd", "2019年3月24日");//借款额度有效期结束日期，借款额度有效期开始日期 一年后
@@ -112,20 +120,23 @@ public class TemplateController {
         PdfVo pdfVo = null;
         try {
             pdfVo = PDFUtil.generateToFile(templateName,imageDiskPath,data);
-            uploadResult = fileServiceClient.uploadFile2FileServer(pdfVo.getFile());
+            File file = new File(pdfVo.getPdfURI());
+            //使用common工具包上传
+
+            String fileServiceAddr = getFileServiceAddr();
+            return HttpClientUtil.postFile(fileServiceAddr, file);
+//            uploadResult = fileServiceClient.uploadFile2FileServer(pdfVo.getFile());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (pdfVo != null) {
-                ConversionUtil.deletedirectory(pdfVo.getDirectory());
-            }
+           PDFUtil.deleteTemp(pdfVo);
         }
         return uploadResult;
     }
 
     @ResponseBody
     @RequestMapping("/test2")
-    public FileUploadResult test2(){
+    public WebResult test2(){
         Map<String, Object> o= createTestMap("aa");
         //存入一个集合
 //        List<String> list = new ArrayList<String>();
@@ -136,7 +147,25 @@ public class TemplateController {
 //        o.put("nameList", list);
 
         FileUploadResult uploadResult = createPdf("loan_contract.ftl","pdf/img",o);
-        return uploadResult;
-    }
+        Map<String,Object> data = new HashMap<>();
+        data.put("loan_contract",uploadResult);
+        data.put("credit_report_query_authorization",createPdf("credit_report_query_authorization.ftl","pdf/img",o));
 
+        return WebResult.ok().data(data);
+    }
+    /**
+     * 获取文件服务器可用的地址，由于feign上传文件有问题，暂时这样写
+     *
+     * @return
+     */
+    private String getFileServiceAddr() {
+        //根据serviceId 从Ribbon负载均衡中选择一个服务实体
+        ServiceInstance instance = serviceInstanceChooser.choose("file-service");
+        if (instance != null){
+//            String url = String.format("http://%s:%d/postUploadFile", instance.getPort(),instance.getPort()) ;//不经过网关
+            String url = String.format("%s/postUploadFile", instance.getUri()) ;//不经过网关
+            return url;
+        }
+        return null;
+    }
 }

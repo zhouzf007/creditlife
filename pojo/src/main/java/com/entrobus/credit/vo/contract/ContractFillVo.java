@@ -25,6 +25,7 @@ public class ContractFillVo {
     private String borrowerCardBank;//借款人开卡银行
     private String borrowerCardId;//借款人银行卡号
     private String lenderName;//贷款人名称，暂填 中国建设银行
+    private String lenderHeadquartersName;//总公司名称，暂填 中国建设银行股份有限公司
     private String lenderAddress;//贷款人住址，将来可配置，目前“广东省佛山市佛山大道南327号”
     private String lenderPostalAddress;//贷款人通讯地址，将来可配置，目前“广东省佛山市佛山大道南327号”
     private String lenderPostalCode;//贷款人通讯地址，将来可配置，目前“528000”
@@ -33,6 +34,14 @@ public class ContractFillVo {
     private String loanValidityPeriodStart;//借款额度有效期开始日期，用户提交申请的当日日期
     private String loanValidityPeriodEnd;//借款额度有效期结束日期，借款额度有效期开始日期 一年后
     private String borrowerAutograph;//签名图片 使用base64编码
+
+    public String getLenderHeadquartersName() {
+        return lenderHeadquartersName;
+    }
+
+    public void setLenderHeadquartersName(String lenderHeadquartersName) {
+        this.lenderHeadquartersName = lenderHeadquartersName;
+    }
 
     public String getOrderId() {
         return orderId;

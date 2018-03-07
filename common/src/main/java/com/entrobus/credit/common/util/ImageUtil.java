@@ -3,11 +3,8 @@ package com.entrobus.credit.common.util;
 import org.apache.commons.io.IOUtils;
 import sun.misc.BASE64Encoder;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 
 public class ImageUtil {
     /**
