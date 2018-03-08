@@ -1,4 +1,6 @@
 #!/bin/bash
 
 # run the application
+mkdir -p /wildfly/standalone/deployments/logs/registry
+cd /wildfly/standalone/deployments
 nohup java -jar registry.jar > logs/registry/catalina.out 2>&1 &
