@@ -28,7 +28,6 @@
         <module>order-service</module>
         <module>user-service</module>
         <module>zipkin</module>
-        <module>file-service</module>
 
     </modules>
 
