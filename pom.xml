@@ -42,17 +42,17 @@
         <commons-lang3.version>3.7</commons-lang3.version>
         <druid.starter.version>1.1.6</druid.starter.version>
         <!-- Maven私服Url地址-->
-        <nexus.url>http://10.1.1.89:8081</nexus.url>
+        <!--<nexus.url>http://10.1.1.89:8081</nexus.url>-->
     </properties>
 
     <!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
     <repositories>
         <!--本地nexus私服仓库-->
-        <repository>
-            <id>nexus</id>
-            <name>Team Nexus Repository</name>
-            <url>${nexus.url}/nexus/content/groups/public</url>
-        </repository>
+        <!--<repository>-->
+            <!--<id>nexus</id>-->
+            <!--<name>Team Nexus Repository</name>-->
+            <!--<url>${nexus.url}/nexus/content/groups/public</url>-->
+        <!--</repository>-->
         <!--阿里云中央仓库-->
         <repository>
             <id>alimaven</id>
@@ -73,17 +73,17 @@
     </repositories>
 
     <pluginRepositories>
-        <pluginRepository>
-            <id>nexus</id>
-            <name>Team Nexus Repository</name>
-            <url>${nexus.url}/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
+        <!--<pluginRepository>-->
+            <!--<id>nexus</id>-->
+            <!--<name>Team Nexus Repository</name>-->
+            <!--<url>${nexus.url}/nexus/content/groups/public</url>-->
+            <!--<releases>-->
+                <!--<enabled>true</enabled>-->
+            <!--</releases>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</pluginRepository>-->
         <pluginRepository>
             <id>public</id>
             <name>aliyun nexus</name>
